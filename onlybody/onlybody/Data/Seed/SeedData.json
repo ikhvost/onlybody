@@ -1,0 +1,266 @@
+[
+  {
+    "name": "Push-Ups",
+    "primaryMuscle": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders"],
+    "equipment": ["None"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Archer Push-Ups",
+    "primaryMuscle": "Chest",
+    "secondaryMuscles": ["Shoulders", "Triceps"],
+    "equipment": ["None"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Wide Push-Ups",
+    "primaryMuscle": "Chest",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": ["None"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Diamond Push-Ups",
+    "primaryMuscle": "Chest",
+    "secondaryMuscles": ["Triceps", "Shoulders"],
+    "equipment": ["None"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Pull-Ups",
+    "primaryMuscle": "Back",
+    "secondaryMuscles": ["Biceps"],
+    "equipment": ["Pull-up Bar"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Chin-Ups",
+    "primaryMuscle": "Back",
+    "secondaryMuscles": ["Biceps"],
+    "equipment": ["Pull-up Bar"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Inverted Rows",
+    "primaryMuscle": "Back",
+    "secondaryMuscles": ["Biceps", "Rear Delts"],
+    "equipment": ["Pull-up Bar"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Muscle-Ups",
+    "primaryMuscle": "Back",
+    "secondaryMuscles": ["Chest", "Triceps"],
+    "equipment": ["Pull-up Bar"],
+    "frequencyPreference": "less",
+    "isCustom": false
+  },
+  {
+    "name": "Pike Push-Ups",
+    "primaryMuscle": "Shoulders",
+    "secondaryMuscles": ["Triceps"],
+    "equipment": ["None"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Wall Handstand Push-Ups",
+    "primaryMuscle": "Shoulders",
+    "secondaryMuscles": ["Triceps", "Core"],
+    "equipment": ["None"],
+    "frequencyPreference": "less",
+    "isCustom": false
+  },
+  {
+    "name": "Shoulder Taps",
+    "primaryMuscle": "Shoulders",
+    "secondaryMuscles": ["Core"],
+    "equipment": ["None"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Lateral Raises",
+    "primaryMuscle": "Shoulders",
+    "secondaryMuscles": ["Upper Traps"],
+    "equipment": ["Dumbbells"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Dips",
+    "primaryMuscle": "Arms",
+    "secondaryMuscles": ["Chest", "Shoulders"],
+    "equipment": ["None"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Tricep Dips",
+    "primaryMuscle": "Arms",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": ["None"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Biceps Curls",
+    "primaryMuscle": "Arms",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": ["Dumbbells"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Hammer Curls",
+    "primaryMuscle": "Arms",
+    "secondaryMuscles": ["Forearms"],
+    "equipment": ["Dumbbells"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Plank",
+    "primaryMuscle": "Core",
+    "secondaryMuscles": ["Shoulders"],
+    "equipment": ["None"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Hollow Body Hold",
+    "primaryMuscle": "Core",
+    "secondaryMuscles": ["Hip Flexors"],
+    "equipment": ["None"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Leg Raises",
+    "primaryMuscle": "Core",
+    "secondaryMuscles": ["Hip Flexors"],
+    "equipment": ["None"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Bicycle Crunches",
+    "primaryMuscle": "Core",
+    "secondaryMuscles": ["Obliques"],
+    "equipment": ["None"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Squats",
+    "primaryMuscle": "Quads",
+    "secondaryMuscles": ["Glutes", "Hamstrings"],
+    "equipment": ["None"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Lunges",
+    "primaryMuscle": "Quads",
+    "secondaryMuscles": ["Glutes"],
+    "equipment": ["None"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Bulgarian Split Squats",
+    "primaryMuscle": "Quads",
+    "secondaryMuscles": ["Glutes"],
+    "equipment": ["None"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Jump Squats",
+    "primaryMuscle": "Quads",
+    "secondaryMuscles": ["Calves", "Glutes"],
+    "equipment": ["None"],
+    "frequencyPreference": "less",
+    "isCustom": false
+  },
+  {
+    "name": "Glute Bridge",
+    "primaryMuscle": "Glutes",
+    "secondaryMuscles": ["Hamstrings"],
+    "equipment": ["None"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Hip Thrusts",
+    "primaryMuscle": "Glutes",
+    "secondaryMuscles": ["Hamstrings"],
+    "equipment": ["Barbell"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Donkey Kicks",
+    "primaryMuscle": "Glutes",
+    "secondaryMuscles": ["Core"],
+    "equipment": ["None"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Nordic Curls",
+    "primaryMuscle": "Hamstrings",
+    "secondaryMuscles": ["Glutes"],
+    "equipment": ["None"],
+    "frequencyPreference": "less",
+    "isCustom": false
+  },
+  {
+    "name": "Single-Leg Romanian Deadlift",
+    "primaryMuscle": "Hamstrings",
+    "secondaryMuscles": ["Glutes", "Core"],
+    "equipment": ["Dumbbells"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Calf Raises",
+    "primaryMuscle": "Calves",
+    "secondaryMuscles": [],
+    "equipment": ["None"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Single-Leg Calf Raises",
+    "primaryMuscle": "Calves",
+    "secondaryMuscles": [],
+    "equipment": ["None"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  },
+  {
+    "name": "Burpees",
+    "primaryMuscle": "Full Body",
+    "secondaryMuscles": ["Chest", "Quads", "Core"],
+    "equipment": ["None"],
+    "frequencyPreference": "less",
+    "isCustom": false
+  },
+  {
+    "name": "Mountain Climbers",
+    "primaryMuscle": "Full Body",
+    "secondaryMuscles": ["Core", "Shoulders"],
+    "equipment": ["None"],
+    "frequencyPreference": "normal",
+    "isCustom": false
+  }
+]

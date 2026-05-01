@@ -1,10 +1,18 @@
 import SwiftUI
 
 struct AppTabView: View {
+    private let repositories: Repositories
+
     @State private var tabViewModel = AppTabViewModel()
+    @State private var libraryViewModel: LibraryViewModel
     @State private var trainPath = NavigationPath()
     @State private var logPath = NavigationPath()
     @State private var libraryPath = NavigationPath()
+
+    init(repositories: Repositories) {
+        self.repositories = repositories
+        _libraryViewModel = State(initialValue: LibraryViewModel(exercises: repositories.exercises))
+    }
 
     private var showsBottomNav: Bool {
         switch tabViewModel.selectedTab {
@@ -45,7 +53,39 @@ struct AppTabView: View {
             }
 
             tabStack(.library, path: $libraryPath) {
-                LibraryView()
+                LibraryView(
+                    viewModel: libraryViewModel,
+                    makeCustomExerciseViewModel: {
+                        CustomExerciseViewModel(exercises: repositories.exercises)
+                    },
+                    showMovement: {
+                        libraryPath.append(LibraryRoute.movementDetail($0.id))
+                    }
+                )
+                .navigationDestination(for: LibraryRoute.self) { route in
+                    switch route {
+                    case .movementDetail(let exerciseID):
+                        if let exercise = libraryViewModel.exercise(id: exerciseID) {
+                            MovementDetailView(
+                                viewModel: MovementDetailViewModel(
+                                    exercise: exercise,
+                                    exercises: repositories.exercises
+                                )
+                            )
+                        } else {
+                            ZStack {
+                                Theme.bg.ignoresSafeArea()
+
+                                MonoLabel(
+                                    text: "Movement unavailable",
+                                    size: 10,
+                                    color: Theme.text2,
+                                    tracking: 0.4
+                                )
+                            }
+                        }
+                    }
+                }
             }
         }
     }
