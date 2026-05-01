@@ -16,22 +16,22 @@ Build the SwiftUI app target with iOS 26.0+, Swift 6.2, strict concurrency, dark
 
 ## Acceptance criteria
 
-- [ ] App launches on iOS 26.0+.
-- [ ] Swift 6.2 strict concurrency is enabled.
-- [ ] `Info.plist` forces dark-only appearance with `UIUserInterfaceStyle = Dark`.
-- [ ] DM Sans and DM Mono font files are bundled in the app target.
-- [ ] `Info.plist` registers bundled fonts with `UIAppFonts`.
-- [ ] `Theme.swift` contains the approved OnlyBody colors, font helpers, horizontal padding, corner radius, and chip corner radius from `docs/plans/2026-05-01-bodyweight-training-design.md`.
-- [ ] Views use `Theme.fontSans` and `Theme.fontMono` rather than SwiftUI dynamic type text styles.
-- [ ] `AppIcons.swift` includes all 13 approved custom icons: Train, Log, Library, Back, Forward, Plus, Play, Edit, Remove, Check, Search, Chevron, and Drag.
-- [ ] Icons are custom SwiftUI path/canvas views and do not use SF Symbols.
-- [ ] Icon stroke style matches the prototype: width 1.8, square line caps, miter joins, except CheckIcon where the approved stroke width is 2.5.
-- [ ] `AppTabView` uses a custom bottom navigation and does not use SwiftUI `TabView`, `Tab`, `tabItem`, or `NavigationLink`.
-- [ ] Bottom navigation switches between Train, Log, and Library placeholder roots.
-- [ ] Bottom navigation active state uses amber icon, amber mono label, and 16x2 indicator bar.
-- [ ] Bottom navigation inactive state uses dim icon and tertiary text label.
-- [ ] Placeholder roots have the correct dark background and no standard SwiftUI chrome that conflicts with the custom design.
-- [ ] Build succeeds with zero warnings.
+- [x] App launches on iOS 26.0+.
+- [x] Swift 6.2 strict concurrency is enabled.
+- [x] `Info.plist` forces dark-only appearance with `UIUserInterfaceStyle = Dark`.
+- [x] DM Sans and DM Mono font files are bundled in the app target.
+- [x] `Info.plist` registers bundled fonts with `UIAppFonts`.
+- [x] `Theme.swift` contains the approved OnlyBody colors, font helpers, horizontal padding, corner radius, and chip corner radius from `docs/plans/2026-05-01-bodyweight-training-design.md`.
+- [x] Views use `Theme.fontSans` and `Theme.fontMono` rather than SwiftUI dynamic type text styles.
+- [x] `AppIcons.swift` includes all 13 approved custom icons: Train, Log, Library, Back, Forward, Plus, Play, Edit, Remove, Check, Search, Chevron, and Drag.
+- [x] Icons are custom SwiftUI path/canvas views and do not use SF Symbols.
+- [x] Icon stroke style matches the prototype: width 1.8, square line caps, miter joins, except CheckIcon where the approved stroke width is 2.5.
+- [x] `AppTabView` uses a custom bottom navigation and does not use SwiftUI `TabView`, `Tab`, `tabItem`, or `NavigationLink`.
+- [x] Bottom navigation switches between Train, Log, and Library placeholder roots.
+- [x] Bottom navigation active state uses amber icon, amber mono label, and 16x2 indicator bar.
+- [x] Bottom navigation inactive state uses dim icon and tertiary text label.
+- [x] Placeholder roots have the correct dark background and no standard SwiftUI chrome that conflicts with the custom design.
+- [x] Build succeeds with zero warnings.
 
 ## Blocked by
 
