@@ -16,22 +16,22 @@ Implement `LogViewModel` and `LogView`. Sessions should load from the repository
 
 ## Acceptance criteria
 
-- [ ] `LogViewModel` is `@Observable` and `@MainActor`.
-- [ ] `LogViewModel` depends on `SessionRepository` protocol.
-- [ ] `LogViewModel.load()` fetches sessions and exposes loading/error state.
-- [ ] Sessions are displayed most recent first.
-- [ ] Sessions are grouped by month.
-- [ ] Month headers use uppercase month labels.
-- [ ] Current-year month headers omit year if following the approved spec.
-- [ ] Log header matches design: mono `TRAINING HISTORY`, title `Log`.
-- [ ] Empty state appears when no sessions exist.
-- [ ] Session rows show date square, workout name, weekday, duration, calories, and custom chevron icon.
-- [ ] Duration display uses `MM:SS`.
-- [ ] Calories display gracefully handles nil values.
-- [ ] Tapping a row routes to Session Detail.
-- [ ] Routing uses `navigationDestination(for:)`.
-- [ ] `LogView` does not import SwiftData, use `@Query`, or access `ModelContext`.
-- [ ] `LogViewModel` tests cover loading, error state, sorting, and month grouping.
+- [x] `LogViewModel` is `@Observable` and `@MainActor`.
+- [x] `LogViewModel` depends on `SessionRepository` protocol.
+- [x] `LogViewModel.load()` fetches sessions and exposes loading/error state.
+- [x] Sessions are displayed most recent first.
+- [x] Sessions are grouped by month.
+- [x] Month headers use uppercase month labels.
+- [x] Current-year month headers omit year if following the approved spec.
+- [x] Log header matches design: mono `TRAINING HISTORY`, title `Log`.
+- [x] Empty state appears when no sessions exist.
+- [x] Session rows show date square, workout name, weekday, duration, calories, and custom chevron icon.
+- [x] Duration display uses `MM:SS`.
+- [x] Calories display gracefully handles nil values.
+- [x] Tapping a row routes to Session Detail.
+- [x] Routing uses `navigationDestination(for:)`.
+- [x] `LogView` does not import SwiftData, use `@Query`, or access `ModelContext`.
+- [x] `LogViewModel` tests cover loading, error state, sorting, and month grouping.
 
 ## Blocked by
 

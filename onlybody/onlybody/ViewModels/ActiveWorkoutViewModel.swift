@@ -25,7 +25,7 @@ final class ActiveWorkoutViewModel {
     let restTimer = RestTimer()
 
     private var elapsedTask: Task<Void, Never>?
-    private var saveTask: Task<Void, Never>?
+    var saveTask: Task<Void, Never>?
     var elapsedSeconds: Int = 0
 
     var exerciseCount: Int { items.count }
@@ -189,6 +189,7 @@ final class ActiveWorkoutViewModel {
     func cleanup() {
         elapsedTask?.cancel()
         restTimer.skip()
+        // saveTask intentionally not cancelled — in-flight save must complete.
     }
 
     func endSession() async {

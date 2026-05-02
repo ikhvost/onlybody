@@ -5,6 +5,7 @@ struct AppTabView: View {
 
     @State private var tabViewModel = AppTabViewModel()
     @State private var trainViewModel: TrainViewModel
+    @State private var logViewModel: LogViewModel
     @State private var libraryViewModel: LibraryViewModel
     @State private var trainPath = NavigationPath()
     @State private var logPath = NavigationPath()
@@ -14,6 +15,7 @@ struct AppTabView: View {
     init(repositories: Repositories) {
         self.repositories = repositories
         _trainViewModel = State(initialValue: TrainViewModel(workouts: repositories.workouts))
+        _logViewModel = State(initialValue: LogViewModel(sessions: repositories.sessions))
         _libraryViewModel = State(initialValue: LibraryViewModel(exercises: repositories.exercises))
     }
 
@@ -119,7 +121,35 @@ struct AppTabView: View {
             }
 
             tabStack(.log, path: $logPath) {
-                LogView()
+                LogView(
+                    viewModel: logViewModel,
+                    showSessionDetail: { sessionID in
+                        logPath.append(LogRoute.sessionDetail(sessionID: sessionID))
+                    }
+                )
+                .navigationDestination(for: LogRoute.self) { route in
+                    switch route {
+                    case .sessionDetail(let sessionID):
+                        if let session = logViewModel.sessions.first(where: { $0.id == sessionID }) {
+                            SessionDetailView(session: session)
+                        } else {
+                            ZStack {
+                                Theme.bg.ignoresSafeArea()
+                                MonoLabel(
+                                    text: "Session unavailable",
+                                    size: 10,
+                                    color: Theme.text2,
+                                    tracking: 0.4
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+            .onChange(of: logPath) { _, _ in
+                if logPath.isEmpty {
+                    Task { await logViewModel.load() }
+                }
             }
 
             tabStack(.library, path: $libraryPath) {

@@ -488,7 +488,7 @@ struct ActiveWorkoutViewModelTests {
 
         #expect(viewModel.isComplete)
 
-        await Task.yield()
+        await viewModel.saveTask?.value
 
         #expect(sessionRepo.savedSessions.count == 1)
         let saved = try #require(sessionRepo.savedSessions.first)
@@ -506,7 +506,7 @@ struct ActiveWorkoutViewModelTests {
 
         await viewModel.load()
         viewModel.markSetDone()
-        await Task.yield()
+        await viewModel.saveTask?.value
 
         let saved = try #require(sessionRepo.savedSessions.first)
         #expect(saved.workoutName == "Snapshot Name")
@@ -529,7 +529,7 @@ struct ActiveWorkoutViewModelTests {
         viewModel.markSetDone()
         viewModel.skipExercise()
         viewModel.markSetDone()
-        await Task.yield()
+        await viewModel.saveTask?.value
 
         let saved = try #require(sessionRepo.savedSessions.first)
         let sortedItems = saved.items?.sorted { $0.order < $1.order }
@@ -555,9 +555,10 @@ struct ActiveWorkoutViewModelTests {
         viewModel.markSetDone()
         viewModel.skipExercise()
         viewModel.markSetDone()
-        await Task.yield()
+        await viewModel.saveTask?.value
 
         let saved = try #require(sessionRepo.savedSessions.first)
+        #expect(saved.workoutName == "Test")
         let sortedItems = saved.items?.sorted { $0.order < $1.order }
         #expect(sortedItems?[0].order == 0)
         #expect(sortedItems?[1].order == 1)
@@ -574,7 +575,7 @@ struct ActiveWorkoutViewModelTests {
         viewModel.markSetDone()
         viewModel.markSetDone()
         viewModel.markSetDone()
-        await Task.yield()
+        await viewModel.saveTask?.value
 
         let saved = try #require(sessionRepo.savedSessions.first)
         let sessionItems = saved.items?.sorted { $0.order < $1.order }
@@ -592,7 +593,7 @@ struct ActiveWorkoutViewModelTests {
         viewModel.incrementWeight()
         viewModel.incrementWeight()
         viewModel.markSetDone()
-        await Task.yield()
+        await viewModel.saveTask?.value
 
         let saved = try #require(sessionRepo.savedSessions.first)
         let sessionItems = saved.items?.sorted { $0.order < $1.order }
@@ -609,7 +610,7 @@ struct ActiveWorkoutViewModelTests {
         await viewModel.load()
         viewModel.elapsedSeconds = 1450
         viewModel.markSetDone()
-        await Task.yield()
+        await viewModel.saveTask?.value
 
         let saved = try #require(sessionRepo.savedSessions.first)
         let expectedCalories = Int(Double(1450) / 60.0 * 8.0)
@@ -634,7 +635,7 @@ struct ActiveWorkoutViewModelTests {
 
         await viewModel.load()
         viewModel.markSetDone()
-        await Task.yield()
+        await viewModel.saveTask?.value
 
         #expect(viewModel.errorMessage == "Could not save session.")
         #expect(viewModel.isComplete)
