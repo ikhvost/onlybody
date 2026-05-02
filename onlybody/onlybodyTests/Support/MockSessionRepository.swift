@@ -14,13 +14,6 @@ final class MockSessionRepository: SessionRepository {
         return stubbedSessions
     }
 
-    func recentSessions(limit: Int) async throws -> [Session] {
-        if shouldThrow {
-            throw TestError.expectedFailure
-        }
-        return Array(stubbedSessions.prefix(limit))
-    }
-
     func save(_ session: Session) async throws {
         if shouldThrow {
             throw TestError.expectedFailure

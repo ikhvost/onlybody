@@ -20,14 +20,14 @@ struct ActiveWorkoutView: View {
             } else if viewModel.isComplete {
                 ActiveWorkoutCompletionView(
                     elapsedString: formatTime(viewModel.elapsedSeconds),
-                    exerciseCount: viewModel.exerciseCount,
+                    exerciseCount: viewModel.items.count,
                     errorMessage: viewModel.errorMessage,
                     onEnd: onEnd
                 )
             } else if !viewModel.items.isEmpty {
                 ActiveWorkoutBody(
                     currentIndex: viewModel.currentExerciseIndex,
-                    totalCount: viewModel.exerciseCount,
+                    totalCount: viewModel.items.count,
                     elapsedString: formatTime(viewModel.elapsedSeconds),
                     exerciseName: viewModel.currentExerciseName,
                     setLabel: setLabel,
@@ -83,15 +83,11 @@ struct ActiveWorkoutView: View {
     private func formatTime(_ seconds: Int) -> String {
         Duration.seconds(seconds).formatted(.time(pattern: .minuteSecond(padMinuteToLength: 2)))
     }
-
-    private func formatWeight(_ value: Double) -> String {
-        value.formatted(.number.precision(.fractionLength(0...1)).grouping(.never))
-    }
 }
 
 private struct ActiveWorkoutLoadingView: View {
     var body: some View {
-        VStack(spacing: Theme.space10) {
+        VStack(spacing: 10) {
             ProgressView()
                 .tint(Theme.accent)
             MonoLabel(text: "Preparing workout", size: 10, color: Theme.text3, tracking: 1)
@@ -104,7 +100,7 @@ private struct ActiveWorkoutErrorView: View {
     let onEnd: () -> Void
 
     var body: some View {
-        VStack(spacing: Theme.space10) {
+        VStack(spacing: 10) {
             MonoLabel(text: "Workout unavailable", size: 10, color: Theme.text2, tracking: 0.4)
             if let error = errorMessage {
                 MonoLabel(text: error, size: 9, color: Theme.text3, tracking: 0.4)
@@ -274,7 +270,7 @@ private struct ActiveWorkoutTopBar: View {
             GhostButton(title: "End", action: onEnd)
         }
         .padding(.horizontal, Theme.horizontalPadding)
-        .padding(.vertical, Theme.space8)
+        .padding(.vertical, 8)
         .overlay(alignment: .bottom) {
             Rectangle()
                 .fill(Theme.border)
@@ -459,7 +455,7 @@ private struct ActiveWorkoutWeightCard: View {
     let onDecrement: () -> Void
 
     var body: some View {
-        VStack(spacing: Theme.space6) {
+        VStack(spacing: 6) {
             MonoLabel(text: "Added kg", size: 9, color: Theme.text3, tracking: 0.5)
 
             HStack(spacing: 4) {

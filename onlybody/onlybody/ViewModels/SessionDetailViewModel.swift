@@ -6,10 +6,6 @@ import Observation
 final class SessionDetailViewModel {
     let session: Session
 
-    var workoutName: String {
-        session.workoutName
-    }
-
     var dateLabel: String {
         session.date.formatted(
             .dateTime

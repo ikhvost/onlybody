@@ -3,7 +3,7 @@ import SwiftUI
 struct AppTabView: View {
     private let repositories: Repositories
 
-    @State private var tabViewModel = AppTabViewModel()
+    @State private var selectedTab: AppTab = .train
     @State private var trainViewModel: TrainViewModel
     @State private var logViewModel: LogViewModel
     @State private var libraryViewModel: LibraryViewModel
@@ -20,7 +20,7 @@ struct AppTabView: View {
     }
 
     private var showsBottomNav: Bool {
-        switch tabViewModel.selectedTab {
+        switch selectedTab {
         case .train:
             trainPath.isEmpty
         case .log:
@@ -37,8 +37,8 @@ struct AppTabView: View {
 
             if showsBottomNav {
                 BottomNav(
-                    selectedTab: tabViewModel.selectedTab,
-                    setTab: { tabViewModel.selectedTab = $0 }
+                    selectedTab: selectedTab,
+                    setTab: { selectedTab = $0 }
                 )
             }
         }
@@ -124,26 +124,23 @@ struct AppTabView: View {
                 LogView(
                     viewModel: logViewModel,
                     showSessionDetail: { sessionID in
-                        logPath.append(LogRoute.sessionDetail(sessionID: sessionID))
+                        logPath.append(sessionID)
                     }
                 )
-                .navigationDestination(for: LogRoute.self) { route in
-                    switch route {
-                    case .sessionDetail(let sessionID):
-                        if let session = logViewModel.sessions.first(where: { $0.id == sessionID }) {
-                            SessionDetailView(
-                                viewModel: SessionDetailViewModel(session: session)
+                .navigationDestination(for: UUID.self) { sessionID in
+                    if let session = logViewModel.sessions.first(where: { $0.id == sessionID }) {
+                        SessionDetailView(
+                            viewModel: SessionDetailViewModel(session: session)
+                        )
+                    } else {
+                        ZStack {
+                            Theme.bg.ignoresSafeArea()
+                            MonoLabel(
+                                text: "Session unavailable",
+                                size: 10,
+                                color: Theme.text2,
+                                tracking: 0.4
                             )
-                        } else {
-                            ZStack {
-                                Theme.bg.ignoresSafeArea()
-                                MonoLabel(
-                                    text: "Session unavailable",
-                                    size: 10,
-                                    color: Theme.text2,
-                                    tracking: 0.4
-                                )
-                            }
                         }
                     }
                 }
@@ -161,30 +158,27 @@ struct AppTabView: View {
                         CustomExerciseViewModel(exercises: repositories.exercises)
                     },
                     showMovement: {
-                        libraryPath.append(LibraryRoute.movementDetail($0.id))
+                        libraryPath.append($0.id)
                     }
                 )
-                .navigationDestination(for: LibraryRoute.self) { route in
-                    switch route {
-                    case .movementDetail(let exerciseID):
-                        if let exercise = libraryViewModel.exercise(id: exerciseID) {
-                            MovementDetailView(
-                                viewModel: MovementDetailViewModel(
-                                    exercise: exercise,
-                                    exercises: repositories.exercises
-                                )
+                .navigationDestination(for: UUID.self) { exerciseID in
+                    if let exercise = libraryViewModel.exercise(id: exerciseID) {
+                        MovementDetailView(
+                            viewModel: MovementDetailViewModel(
+                                exercise: exercise,
+                                exercises: repositories.exercises
                             )
-                        } else {
-                            ZStack {
-                                Theme.bg.ignoresSafeArea()
+                        )
+                    } else {
+                        ZStack {
+                            Theme.bg.ignoresSafeArea()
 
-                                MonoLabel(
-                                    text: "Movement unavailable",
-                                    size: 10,
-                                    color: Theme.text2,
-                                    tracking: 0.4
-                                )
-                            }
+                            MonoLabel(
+                                text: "Movement unavailable",
+                                size: 10,
+                                color: Theme.text2,
+                                tracking: 0.4
+                            )
                         }
                     }
                 }
@@ -207,8 +201,8 @@ struct AppTabView: View {
             content()
                 .toolbar(.hidden, for: .navigationBar)
         }
-        .opacity(tabViewModel.selectedTab == tab ? 1 : 0)
-        .allowsHitTesting(tabViewModel.selectedTab == tab)
-        .accessibilityHidden(tabViewModel.selectedTab != tab)
+        .opacity(selectedTab == tab ? 1 : 0)
+        .allowsHitTesting(selectedTab == tab)
+        .accessibilityHidden(selectedTab != tab)
     }
 }

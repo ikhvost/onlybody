@@ -14,7 +14,7 @@ struct StepperView: View {
     }
 
     var body: some View {
-        VStack(spacing: Theme.space6) {
+        VStack(spacing: 6) {
             MonoLabel(text: label, size: 9, color: Theme.text3, tracking: 0.5)
 
             HStack(spacing: 4) {

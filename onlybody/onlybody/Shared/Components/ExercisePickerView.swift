@@ -32,11 +32,11 @@ struct ExercisePickerView: View {
                 }
                 .buttonStyle(.plain)
             } trailing: {
-                Color.clear.frame(width: 60)
+                EmptyView()
             }
 
-            VStack(spacing: Theme.space8) {
-                HStack(spacing: Theme.space8) {
+            VStack(spacing: 8) {
+                HStack(spacing: 8) {
                     SearchIcon(color: Theme.text3, size: 15)
 
                     TextField("Search movements...", text: $searchText)
@@ -45,8 +45,8 @@ struct ExercisePickerView: View {
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
                 }
-                .padding(.horizontal, Theme.space10)
-                .padding(.vertical, Theme.space9)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 9)
                 .background(Theme.surface)
                 .overlay {
                     RoundedRectangle(cornerRadius: Theme.cornerRadius)
@@ -55,7 +55,7 @@ struct ExercisePickerView: View {
                 .clipShape(.rect(cornerRadius: Theme.cornerRadius))
 
                 ScrollView(.horizontal) {
-                    HStack(spacing: Theme.space6) {
+                    HStack(spacing: 6) {
                         ForEach(filters, id: \.self) { filter in
                             ChipView(
                                 label: filter,
@@ -71,14 +71,14 @@ struct ExercisePickerView: View {
                 .scrollIndicators(.hidden)
             }
             .padding(.horizontal, Theme.horizontalPadding)
-            .padding(.vertical, Theme.space10)
+            .padding(.vertical, 10)
 
             Rectangle()
                 .fill(Theme.border)
                 .frame(height: 1)
 
             if filteredExercises.isEmpty {
-                VStack(spacing: Theme.space8) {
+                VStack(spacing: 8) {
                     Spacer()
                     MonoLabel(
                         text: "No movements found",
@@ -97,7 +97,7 @@ struct ExercisePickerView: View {
                                 onAdd(exercise)
                                 dismiss()
                             } label: {
-                                HStack(spacing: Theme.space10) {
+                                HStack(spacing: 10) {
                                     VStack(alignment: .leading, spacing: 2) {
                                         Text(exercise.name)
                                             .font(Theme.fontSans(15, .bold))
@@ -129,7 +129,7 @@ struct ExercisePickerView: View {
 
                                     PlusIcon(color: Theme.accent, size: 16)
                                 }
-                                .padding(.vertical, Theme.space13)
+                                .padding(.vertical, 13)
                                 .padding(.horizontal, Theme.horizontalPadding)
                             }
                             .buttonStyle(.plain)

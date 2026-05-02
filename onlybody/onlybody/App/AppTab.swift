@@ -1,4 +1,4 @@
-enum AppTab: String, CaseIterable {
+enum AppTab {
     case train
     case log
     case library

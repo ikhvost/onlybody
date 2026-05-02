@@ -32,26 +32,26 @@ struct StreakView: View {
                     Spacer()
                 } else {
                     ScrollView {
-                        VStack(spacing: Theme.space24) {
-                            HStack(spacing: Theme.space8) {
-                                StatCardView(
+                        VStack(spacing: 24) {
+                            HStack(spacing: 8) {
+                                StatCard(
                                     label: "CURRENT",
                                     value: "\(viewModel.stats.current)",
                                     isAccent: false
                                 )
-                                StatCardView(
+                                StatCard(
                                     label: "LONGEST",
                                     value: "\(viewModel.stats.longest)",
                                     isAccent: true
                                 )
-                                StatCardView(
+                                StatCard(
                                     label: "TOTAL",
                                     value: "\(viewModel.stats.total)",
                                     isAccent: true
                                 )
                             }
 
-                            VStack(alignment: .leading, spacing: Theme.space10) {
+                            VStack(alignment: .leading, spacing: 10) {
                                 MonoLabel(text: "Activity — Last 20 weeks", size: 10, color: Theme.text3, tracking: 1)
 
                                 VStack(spacing: 3) {
@@ -66,7 +66,7 @@ struct StreakView: View {
                                         }
                                     }
                                 }
-                                .padding(Theme.space10)
+                                .padding(10)
                                 .background(Theme.surface)
                                 .clipShape(.rect(cornerRadius: Theme.cornerRadius))
                                 .overlay(
@@ -83,8 +83,8 @@ struct StreakView: View {
                             )
                         }
                         .padding(.horizontal, Theme.horizontalPadding)
-                        .padding(.top, Theme.space24)
-                        .padding(.bottom, Theme.space24)
+                        .padding(.top, 24)
+                        .padding(.bottom, 24)
                     }
                     .scrollIndicators(.hidden)
                 }
@@ -92,5 +92,28 @@ struct StreakView: View {
         }
         .toolbar(.hidden, for: .navigationBar)
         .task { await viewModel.load() }
+    }
+}
+
+private struct StatCard: View {
+    let label: String
+    let value: String
+    let isAccent: Bool
+
+    var body: some View {
+        VStack(spacing: 3) {
+            Text(value)
+                .font(Theme.fontMono(28, .medium))
+                .foregroundStyle(isAccent ? Theme.accent : Theme.text3)
+            MonoLabel(text: label, size: 8, color: Theme.text3, tracking: 1.2)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 14)
+        .background(Theme.surface)
+        .overlay(
+            RoundedRectangle(cornerRadius: Theme.cornerRadius)
+                .stroke(Theme.border, lineWidth: 1)
+        )
+        .clipShape(.rect(cornerRadius: Theme.cornerRadius))
     }
 }

@@ -78,8 +78,7 @@ struct MusclePickerViewModelTests {
             "Core", "Quads", "Glutes", "Hamstrings",
             "Calves", "Full Body", "Upper", "Lower"
         ]
-        let labels = viewModel.muscles.map(\.label)
-        #expect(labels == expectedLabels)
+        #expect(viewModel.muscles == expectedLabels)
     }
 
     @Test

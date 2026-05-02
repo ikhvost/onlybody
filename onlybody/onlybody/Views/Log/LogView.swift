@@ -12,7 +12,7 @@ struct LogView: View {
                 ProgressView()
                     .tint(Theme.accent)
             } else if let errorMessage = viewModel.errorMessage, viewModel.sessions.isEmpty {
-                VStack(spacing: Theme.space10) {
+                VStack(spacing: 10) {
                     MonoLabel(text: errorMessage, size: 10, color: Theme.text2, tracking: 0.4)
                     Button("Retry") {
                         Task { await viewModel.load() }
@@ -39,7 +39,7 @@ struct LogView: View {
     }
 
     private var headerView: some View {
-        VStack(alignment: .leading, spacing: Theme.space8) {
+        VStack(alignment: .leading, spacing: 8) {
             MonoLabel(text: "Training history", size: 9, color: Theme.text3, tracking: 1.2)
             Text("Log")
                 .font(Theme.fontSans(26, .heavy))
@@ -47,12 +47,12 @@ struct LogView: View {
                 .foregroundStyle(Theme.text)
         }
         .padding(.horizontal, Theme.horizontalPadding)
-        .padding(.top, Theme.space16)
-        .padding(.bottom, Theme.space14)
+        .padding(.top, 16)
+        .padding(.bottom, 14)
     }
 
     private var emptyState: some View {
-        VStack(spacing: Theme.space8) {
+        VStack(spacing: 8) {
             Spacer().frame(height: 120)
             MonoLabel(text: "No training history yet", size: 10, color: Theme.text2, tracking: 0.4)
         }
@@ -78,21 +78,21 @@ struct LogView: View {
     private func monthHeader(label: String) -> some View {
         MonoLabel(text: label, size: 10, color: Theme.text3, tracking: 1.0)
             .padding(.horizontal, Theme.horizontalPadding)
-            .padding(.top, Theme.space14)
-            .padding(.bottom, Theme.space8)
+            .padding(.top, 14)
+            .padding(.bottom, 8)
     }
 
     private func sessionRow(for session: Session) -> some View {
-        HStack(spacing: Theme.space10) {
+        HStack(spacing: 10) {
             dateSquare(for: session)
 
-            VStack(alignment: .leading, spacing: Theme.space3) {
+            VStack(alignment: .leading, spacing: 3) {
                 Text(session.workoutName)
                     .font(Theme.fontSans(14, .bold))
                     .foregroundStyle(Theme.text)
                     .lineLimit(1)
 
-                HStack(spacing: Theme.space6) {
+                HStack(spacing: 6) {
                     Text(viewModel.weekdayText(for: session))
                     Text("·")
                     Text(viewModel.durationText(for: session))
@@ -108,7 +108,7 @@ struct LogView: View {
 
             ChevronIcon(color: Theme.text3)
         }
-        .padding(.vertical, Theme.space9)
+        .padding(.vertical, 9)
         .padding(.horizontal, Theme.horizontalPadding)
     }
 
@@ -174,6 +174,5 @@ private struct StubSessionRepository: SessionRepository {
         return [may1, april25, april20]
     }
 
-    func recentSessions(limit: Int) async throws -> [Session] { try await allSessions() }
     func save(_ session: Session) async throws {}
 }

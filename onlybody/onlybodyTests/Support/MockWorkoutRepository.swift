@@ -6,8 +6,6 @@ final class MockWorkoutRepository: WorkoutRepository {
     var stubbedWorkouts: [Workout] = []
     var shouldThrow = false
     var savedWorkouts: [Workout] = []
-    var deletedWorkouts: [Workout] = []
-    var deletedItems: [WorkoutItem] = []
 
     func allWorkouts() async throws -> [Workout] {
         if shouldThrow {
@@ -30,17 +28,9 @@ final class MockWorkoutRepository: WorkoutRepository {
         savedWorkouts.append(workout)
     }
 
-    func delete(_ workout: Workout) async throws {
-        if shouldThrow {
-            throw TestError.expectedFailure
-        }
-        deletedWorkouts.append(workout)
-    }
-
     func deleteItems(_ items: [WorkoutItem]) async throws {
         if shouldThrow {
             throw TestError.expectedFailure
         }
-        deletedItems.append(contentsOf: items)
     }
 }

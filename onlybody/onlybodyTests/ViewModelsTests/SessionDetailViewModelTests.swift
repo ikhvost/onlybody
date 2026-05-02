@@ -162,12 +162,4 @@ struct SessionDetailViewModelTests {
         #expect(viewModel.setLabel(index: 2, reps: 10) == "SET 3 \u{00B7} 10 REPS")
     }
 
-    @Test
-    func workoutNameReturnsSessionWorkoutName() {
-        let session = Session()
-        session.workoutName = "Full Body"
-        let viewModel = SessionDetailViewModel(session: session)
-
-        #expect(viewModel.workoutName == "Full Body")
-    }
 }

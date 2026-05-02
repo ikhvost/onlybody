@@ -49,13 +49,4 @@ final class TrainViewModel {
             errorMessage = "Could not load workouts."
         }
     }
-
-    func delete(_ workout: Workout) async {
-        do {
-            try await workoutsRepository.delete(workout)
-            workouts.removeAll { $0.id == workout.id }
-        } catch {
-            errorMessage = "Could not delete workout."
-        }
-    }
 }

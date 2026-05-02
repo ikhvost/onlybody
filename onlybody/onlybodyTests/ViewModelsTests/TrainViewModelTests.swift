@@ -57,27 +57,6 @@ struct TrainViewModelTests {
     }
 
     @Test
-    func deleteRemovesWorkout() async {
-        let workoutRepo = MockWorkoutRepository()
-
-        let fullBody = Workout()
-        fullBody.name = "Full Body"
-
-        workoutRepo.stubbedWorkouts = [fullBody]
-
-        let viewModel = TrainViewModel(workouts: workoutRepo)
-        await viewModel.load()
-
-        #expect(viewModel.workouts.count == 1)
-
-        await viewModel.delete(fullBody)
-
-        #expect(viewModel.workouts.isEmpty)
-        #expect(workoutRepo.deletedWorkouts.count == 1)
-        #expect(workoutRepo.deletedWorkouts.first?.name == "Full Body")
-    }
-
-    @Test
     func loadSetsErrorMessageWhenRepositoryFails() async {
         let workoutRepo = MockWorkoutRepository()
         workoutRepo.shouldThrow = true
@@ -90,21 +69,4 @@ struct TrainViewModelTests {
         #expect(viewModel.isLoading == false)
     }
 
-    @Test
-    func deleteErrorSetsErrorMessage() async {
-        let workoutRepo = MockWorkoutRepository()
-
-        let fullBody = Workout()
-        fullBody.name = "Full Body"
-        workoutRepo.stubbedWorkouts = [fullBody]
-
-        let viewModel = TrainViewModel(workouts: workoutRepo)
-        await viewModel.load()
-        #expect(viewModel.workouts.count == 1)
-        #expect(viewModel.errorMessage == nil)
-
-        workoutRepo.shouldThrow = true
-        await viewModel.delete(fullBody)
-        #expect(viewModel.errorMessage == "Could not delete workout.")
-    }
 }

@@ -23,7 +23,7 @@ struct BottomNav: View {
                     LibraryIcon(color: selectedTab == .library ? Theme.accent : Theme.iconDim, size: 19)
                 }
             }
-            .padding(.vertical, Theme.space10)
+            .padding(.vertical, 10)
         }
         .background(Theme.bg)
     }
@@ -32,7 +32,7 @@ struct BottomNav: View {
         Button {
             setTab(appTab)
         } label: {
-            VStack(spacing: Theme.space6) {
+            VStack(spacing: 6) {
                 icon()
 
                 MonoLabel(

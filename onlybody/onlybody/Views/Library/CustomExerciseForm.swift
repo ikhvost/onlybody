@@ -32,8 +32,8 @@ struct CustomExerciseForm: View {
                 }
 
                 ScrollView {
-                    VStack(alignment: .leading, spacing: Theme.space16) {
-                        VStack(alignment: .leading, spacing: Theme.space8) {
+                    VStack(alignment: .leading, spacing: 16) {
+                        VStack(alignment: .leading, spacing: 8) {
                             MonoLabel(text: "Name", size: 10, tracking: 0.8)
 
                             TextField("Exercise name", text: $viewModel.name)
@@ -41,8 +41,8 @@ struct CustomExerciseForm: View {
                                 .foregroundStyle(Theme.text)
                                 .textInputAutocapitalization(.words)
                                 .autocorrectionDisabled()
-                                .padding(.horizontal, Theme.space10)
-                                .padding(.vertical, Theme.space9)
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 9)
                                 .background(Theme.surface)
                                 .overlay {
                                     RoundedRectangle(cornerRadius: Theme.cornerRadius)
@@ -51,10 +51,10 @@ struct CustomExerciseForm: View {
                                 .clipShape(.rect(cornerRadius: Theme.cornerRadius))
                         }
 
-                        VStack(alignment: .leading, spacing: Theme.space8) {
+                        VStack(alignment: .leading, spacing: 8) {
                             MonoLabel(text: "Primary muscle", size: 10, tracking: 0.8)
 
-                            LazyVGrid(columns: columns, alignment: .leading, spacing: Theme.space8) {
+                            LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
                                 ForEach(viewModel.muscleOptions, id: \.self) { muscle in
                                     ChipView(label: muscle, isActive: viewModel.primaryMuscle == muscle) {
                                         viewModel.togglePrimaryMuscle(muscle)
@@ -63,10 +63,10 @@ struct CustomExerciseForm: View {
                             }
                         }
 
-                        VStack(alignment: .leading, spacing: Theme.space8) {
+                        VStack(alignment: .leading, spacing: 8) {
                             MonoLabel(text: "Secondary muscles", size: 10, tracking: 0.8)
 
-                            LazyVGrid(columns: columns, alignment: .leading, spacing: Theme.space8) {
+                            LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
                                 ForEach(viewModel.muscleOptions.filter { $0 != viewModel.primaryMuscle }, id: \.self) { muscle in
                                     ChipView(label: muscle, isActive: viewModel.secondaryMuscles.contains(muscle)) {
                                         viewModel.toggleSecondaryMuscle(muscle)
@@ -75,10 +75,10 @@ struct CustomExerciseForm: View {
                             }
                         }
 
-                        VStack(alignment: .leading, spacing: Theme.space8) {
+                        VStack(alignment: .leading, spacing: 8) {
                             MonoLabel(text: "Equipment", size: 10, tracking: 0.8)
 
-                            LazyVGrid(columns: columns, alignment: .leading, spacing: Theme.space8) {
+                            LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
                                 ForEach(viewModel.equipmentOptions, id: \.self) { equipment in
                                     ChipView(label: equipment, isActive: viewModel.selectedEquipment.contains(equipment)) {
                                         viewModel.toggleEquipment(equipment)
@@ -92,8 +92,8 @@ struct CustomExerciseForm: View {
                         }
                     }
                     .padding(.horizontal, Theme.horizontalPadding)
-                    .padding(.top, Theme.space16)
-                    .padding(.bottom, Theme.space24)
+                    .padding(.top, 16)
+                    .padding(.bottom, 24)
                 }
                 .scrollIndicators(.hidden)
             }

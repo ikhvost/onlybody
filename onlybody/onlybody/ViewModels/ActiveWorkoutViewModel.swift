@@ -28,8 +28,6 @@ final class ActiveWorkoutViewModel {
     var saveTask: Task<Void, Never>?
     var elapsedSeconds: Int = 0
 
-    var exerciseCount: Int { items.count }
-
     var currentItem: WorkoutItem? {
         guard items.indices.contains(currentExerciseIndex) else { return nil }
         return items[currentExerciseIndex]
@@ -57,14 +55,6 @@ final class ActiveWorkoutViewModel {
 
     var completedSetsForCurrent: Int {
         countCompletedSets(for: currentExerciseIndex)
-    }
-
-    var totalCompletedSets: Int {
-        var count = 0
-        for i in items.indices {
-            count += countCompletedSets(for: i)
-        }
-        return count
     }
 
     var canGoPrevious: Bool {

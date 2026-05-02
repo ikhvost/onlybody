@@ -11,7 +11,7 @@ struct LibraryExerciseRow: View {
 
     var body: some View {
         Button(action: action) {
-            HStack(spacing: Theme.space10) {
+            HStack(spacing: 10) {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(exercise.name)
                         .font(Theme.fontSans(15, .bold))
@@ -34,7 +34,7 @@ struct LibraryExerciseRow: View {
                 ChevronIcon(color: Theme.text3, size: 14)
             }
             .padding(.horizontal, Theme.horizontalPadding)
-            .padding(.vertical, Theme.space13)
+            .padding(.vertical, 13)
             .contentShape(.rect)
         }
         .buttonStyle(.plain)

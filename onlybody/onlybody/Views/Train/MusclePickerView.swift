@@ -33,15 +33,15 @@ struct MusclePickerView: View {
                             .padding(.bottom, 5)
 
                         MonoLabel(text: "Select muscle groups", size: 10, color: Theme.text3, tracking: 1)
-                            .padding(.bottom, Theme.space24)
+                            .padding(.bottom, 24)
 
-                        FlowLayout(spacing: Theme.space8) {
-                            ForEach(viewModel.muscles) { muscle in
+                        FlowLayout(spacing: 8) {
+                            ForEach(viewModel.muscles, id: \.self) { muscle in
                                 ChipView(
-                                    label: muscle.label,
-                                    isActive: viewModel.selectedIDs.contains(muscle.id)
+                                    label: muscle,
+                                    isActive: viewModel.selectedIDs.contains(muscle)
                                 ) {
-                                    viewModel.toggle(muscle.id)
+                                    viewModel.toggle(muscle)
                                 }
                             }
                         }
@@ -51,15 +51,15 @@ struct MusclePickerView: View {
                                 .font(Theme.fontMono(11, .medium))
                                 .foregroundStyle(Theme.accent)
                                 .tracking(0.5)
-                                .padding(.top, Theme.space24)
+                                .padding(.top, 24)
                         }
                     }
                     .padding(.horizontal, Theme.horizontalPadding)
-                    .padding(.top, Theme.space24)
+                    .padding(.top, 24)
                 }
                 .scrollIndicators(.hidden)
 
-                VStack(spacing: Theme.space10) {
+                VStack(spacing: 10) {
                     Button {
                         onBuild(viewModel.selectedIDs)
                     } label: {

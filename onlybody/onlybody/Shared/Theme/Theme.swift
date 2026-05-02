@@ -14,24 +14,10 @@ enum Theme {
     static let text3 = Color(red: 245 / 255, green: 240 / 255, blue: 232 / 255, opacity: 0.24)
     static let iconDim = Color(red: 245 / 255, green: 240 / 255, blue: 232 / 255, opacity: 0.28)
     static let danger = Color(red: 224 / 255, green: 90 / 255, blue: 78 / 255)
-    static let success = Color(red: 76 / 255, green: 175 / 255, blue: 110 / 255)
 
     static let horizontalPadding: CGFloat = 18
     static let cornerRadius: CGFloat = 4
     static let chipCornerRadius: CGFloat = 3
-    static let space3: CGFloat = 3
-    static let space6: CGFloat = 6
-    static let space8: CGFloat = 8
-    static let space9: CGFloat = 9
-    static let space10: CGFloat = 10
-    static let space13: CGFloat = 13
-    static let space14: CGFloat = 14
-    static let space16: CGFloat = 16
-    static let space24: CGFloat = 24
-
-    static let chipToggleFontSize: CGFloat = 12
-    static let chipToggleVerticalPadding: CGFloat = 9
-    static let chipToggleHorizontalPadding: CGFloat = 4
 
     static func fontSans(_ size: CGFloat, _ weight: Font.Weight = .regular) -> Font {
         .custom("DM Sans", size: size).weight(weight)

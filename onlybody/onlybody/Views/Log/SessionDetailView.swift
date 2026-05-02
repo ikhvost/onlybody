@@ -9,7 +9,7 @@ struct SessionDetailView: View {
             Theme.bg.ignoresSafeArea()
 
             VStack(spacing: 0) {
-                NavBarView(title: viewModel.workoutName) {
+                NavBarView(title: viewModel.session.workoutName) {
                     Button {
                         dismiss()
                     } label: {
@@ -23,16 +23,16 @@ struct SessionDetailView: View {
                     .buttonStyle(.plain)
                     .accessibilityLabel("Back to log")
                 } trailing: {
-                    Spacer().frame(width: 60)
+                    EmptyView()
                 }
 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
                         MonoLabel(text: viewModel.dateLabel, size: 9, color: Theme.text3, tracking: 1.0)
-                            .padding(.bottom, Theme.space6)
+                            .padding(.bottom, 6)
 
-                        HStack(spacing: Theme.space10) {
-                            HStack(spacing: Theme.space3) {
+                        HStack(spacing: 10) {
+                            HStack(spacing: 3) {
                                 Text(viewModel.durationValue)
                                     .font(Theme.fontMono(24, .medium))
                                     .foregroundStyle(Theme.accent)
@@ -41,7 +41,7 @@ struct SessionDetailView: View {
                                     .foregroundStyle(Theme.text2)
                             }
 
-                            HStack(spacing: Theme.space3) {
+                            HStack(spacing: 3) {
                                 Text(viewModel.caloriesValue)
                                     .font(Theme.fontMono(24, .medium))
                                     .foregroundStyle(Theme.text)
@@ -52,12 +52,12 @@ struct SessionDetailView: View {
                                 }
                             }
                         }
-                        .padding(.bottom, Theme.space24)
+                        .padding(.bottom, 24)
 
                         Rectangle()
                             .fill(Theme.border)
                             .frame(height: 1)
-                            .padding(.bottom, Theme.space16)
+                            .padding(.bottom, 16)
 
                         ForEach(viewModel.sortedItems.enumerated(), id: \.element.id) { (index, item) in
                             SessionItemRow(
@@ -66,16 +66,10 @@ struct SessionDetailView: View {
                                 viewModel: viewModel
                             )
                         }
-
-                        GhostButton(
-                            title: "Repeat this session",
-                            action: {}
-                        )
-                        .padding(.top, Theme.space24)
                     }
                     .padding(.horizontal, Theme.horizontalPadding)
-                    .padding(.top, Theme.space16)
-                    .padding(.bottom, Theme.space24)
+                    .padding(.top, 16)
+                    .padding(.bottom, 24)
                 }
                 .scrollIndicators(.hidden)
             }
@@ -105,7 +99,7 @@ private struct SessionItemRow: View {
                     tracking: 0.3
                 )
             }
-            .padding(.bottom, Theme.space6)
+            .padding(.bottom, 6)
 
             ForEach(item.setReps.indices, id: \.self) { setIndex in
                 MonoLabel(
@@ -121,7 +115,7 @@ private struct SessionItemRow: View {
                 Rectangle()
                     .fill(Theme.border)
                     .frame(height: 1)
-                    .padding(.vertical, Theme.space13)
+                    .padding(.vertical, 13)
             }
         }
     }

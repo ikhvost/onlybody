@@ -16,7 +16,7 @@ struct NavBarView<Leading: View, Trailing: View>: View {
     }
 
     var body: some View {
-        HStack(spacing: Theme.space10) {
+        HStack(spacing: 10) {
             leading
                 .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -30,7 +30,7 @@ struct NavBarView<Leading: View, Trailing: View>: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .padding(.horizontal, Theme.horizontalPadding)
-        .padding(.vertical, Theme.space10)
+        .padding(.vertical, 10)
         .overlay(alignment: .bottom) {
             Rectangle()
                 .fill(Theme.border)

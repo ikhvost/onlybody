@@ -92,12 +92,12 @@ struct SessionBuilderView: View {
     @ViewBuilder
     private var targetChipsSection: some View {
         if !viewModel.targetMuscleGroups.isEmpty {
-            VStack(alignment: .leading, spacing: Theme.space8) {
+            VStack(alignment: .leading, spacing: 8) {
                 MonoLabel(text: "Targets", size: 10, color: Theme.text2, tracking: 0.5)
 
-                FlowLayout(spacing: Theme.space6) {
+                FlowLayout(spacing: 6) {
                     ForEach(viewModel.targetMuscleGroups, id: \.self) { muscleID in
-                        Text(muscleLabel(for: muscleID))
+                        Text(muscleID)
                             .font(Theme.fontSans(12, .semibold))
                             .foregroundStyle(Theme.accent)
                             .padding(.horizontal, 10)
@@ -112,14 +112,14 @@ struct SessionBuilderView: View {
                 }
             }
             .padding(.horizontal, Theme.horizontalPadding)
-            .padding(.top, Theme.space16)
+            .padding(.top, 16)
         }
     }
 
     // MARK: - Name
 
     private var nameSection: some View {
-        VStack(alignment: .leading, spacing: Theme.space8) {
+        VStack(alignment: .leading, spacing: 8) {
             MonoLabel(text: "Session name", size: 10, color: Theme.text2, tracking: 0.5)
                 .padding(.horizontal, Theme.horizontalPadding)
 
@@ -138,23 +138,23 @@ struct SessionBuilderView: View {
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
         }
-        .padding(.top, Theme.space16)
+        .padding(.top, 16)
     }
 
     // MARK: - Set Style
 
     private var setStyleSection: some View {
-        VStack(alignment: .leading, spacing: Theme.space8) {
+        VStack(alignment: .leading, spacing: 8) {
             MonoLabel(text: "Set style", size: 10, color: Theme.text2, tracking: 0.5)
                 .padding(.horizontal, Theme.horizontalPadding)
 
-            HStack(spacing: Theme.space8) {
+            HStack(spacing: 8) {
                 modeButton("Smart pick", mode: "smart")
                 modeButton("I choose", mode: "manual")
             }
             .padding(.horizontal, Theme.horizontalPadding)
         }
-        .padding(.top, Theme.space16)
+        .padding(.top, 16)
     }
 
     private func modeButton(_ label: String, mode: String) -> some View {
@@ -165,7 +165,7 @@ struct SessionBuilderView: View {
                 .font(Theme.fontSans(13, .semibold))
                 .foregroundStyle(viewModel.mode == mode ? Theme.accentDark : Theme.text2)
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, Theme.space10)
+                .padding(.vertical, 10)
                 .background(viewModel.mode == mode ? Theme.accent : Theme.surface2)
                 .clipShape(.rect(cornerRadius: Theme.cornerRadius))
                 .overlay {
@@ -203,7 +203,7 @@ struct SessionBuilderView: View {
                     .stroke(Theme.border, lineWidth: 1)
             }
             .padding(.horizontal, Theme.horizontalPadding)
-            .padding(.top, Theme.space14)
+            .padding(.top, 14)
         }
     }
 
@@ -212,8 +212,7 @@ struct SessionBuilderView: View {
             return "Movements are picked daily from your targets. Switch to \"I choose\" to build manually."
         }
 
-        let labels = viewModel.targetMuscleGroups.map { muscleLabel(for: $0) }
-        let formatted = labels.formatted(.list(type: .and))
+        let formatted = viewModel.targetMuscleGroups.joined(separator: ", ")
         return "Movements are picked daily from your targets (\(formatted)). Switch to \"I choose\" to build manually."
     }
 
@@ -222,7 +221,7 @@ struct SessionBuilderView: View {
     @ViewBuilder
     private var movementsSection: some View {
         if viewModel.mode == "manual" {
-            VStack(alignment: .leading, spacing: Theme.space10) {
+            VStack(alignment: .leading, spacing: 10) {
                 HStack {
                     MonoLabel(text: "Movements", size: 10, color: Theme.text2, tracking: 0.5)
                     Spacer()
@@ -262,7 +261,7 @@ struct SessionBuilderView: View {
                     }
                     .padding(.horizontal, Theme.horizontalPadding)
                 } else {
-                    VStack(spacing: Theme.space6) {
+                    VStack(spacing: 6) {
                         ForEach(viewModel.movements) { movement in
                             movementCard(movement)
                         }
@@ -270,15 +269,13 @@ struct SessionBuilderView: View {
                     .padding(.horizontal, Theme.horizontalPadding)
                 }
             }
-            .padding(.top, Theme.space16)
+            .padding(.top, 16)
         }
     }
 
     private func movementCard(_ movement: MovementConfig) -> some View {
         VStack(spacing: 0) {
-            HStack(spacing: Theme.space10) {
-                DragIcon(color: Theme.border2, size: 16)
-
+            HStack(spacing: 10) {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(movement.exercise.name)
                         .font(Theme.fontSans(14, .bold))
@@ -309,7 +306,7 @@ struct SessionBuilderView: View {
                 .fill(Theme.border)
                 .frame(height: 1)
 
-            HStack(spacing: Theme.space10) {
+            HStack(spacing: 10) {
                 StepperView(
                     label: "Sets",
                     value: movement.sets,
@@ -341,7 +338,7 @@ struct SessionBuilderView: View {
                 )
             }
             .padding(.horizontal, 13)
-            .padding(.vertical, Theme.space10)
+            .padding(.vertical, 10)
         }
         .background(Theme.surface)
         .clipShape(.rect(cornerRadius: Theme.cornerRadius))
@@ -354,10 +351,10 @@ struct SessionBuilderView: View {
     // MARK: - Training Days
 
     private var trainingDaysSection: some View {
-        VStack(alignment: .leading, spacing: Theme.space8) {
+        VStack(alignment: .leading, spacing: 8) {
             MonoLabel(text: "Training days", size: 10, color: Theme.text2, tracking: 0.5)
 
-            HStack(spacing: Theme.space6) {
+            HStack(spacing: 6) {
                 ForEach(viewModel.dayNames, id: \.self) { day in
                     ChipView(
                         label: day,
@@ -376,11 +373,11 @@ struct SessionBuilderView: View {
                     color: Theme.text3,
                     tracking: 0.3
                 )
-                .padding(.top, Theme.space8)
+                .padding(.top, 8)
             }
         }
         .padding(.horizontal, Theme.horizontalPadding)
-        .padding(.top, Theme.space16)
+        .padding(.top, 16)
     }
 
     // MARK: - Duration
@@ -400,8 +397,8 @@ struct SessionBuilderView: View {
                     .foregroundStyle(Theme.accent)
             }
             .padding(.horizontal, Theme.horizontalPadding)
-            .padding(.top, Theme.space14)
-                .padding(.bottom, Theme.space10)
+            .padding(.top, 14)
+                .padding(.bottom, 10)
                 .overlay(alignment: .top) {
                     Rectangle()
                         .fill(Theme.border)
@@ -411,25 +408,7 @@ struct SessionBuilderView: View {
             }
     }
 
-    private func muscleLabel(for id: String) -> String {
-        muscleLabels[id] ?? id
-    }
 }
-
-private let muscleLabels: [String: String] = [
-    "Chest": "Chest",
-    "Back": "Back",
-    "Shoulders": "Shoulders",
-    "Arms": "Arms",
-    "Core": "Core",
-    "Quads": "Quads",
-    "Glutes": "Glutes",
-    "Hamstrings": "Hamstrings",
-    "Calves": "Calves",
-    "Full Body": "Full Body",
-    "Upper": "Upper",
-    "Lower": "Lower",
-]
 
 #Preview("Session Builder — Create") {
     let viewModel = SessionBuilderViewModel(
@@ -459,14 +438,10 @@ private struct PreviewWorkoutRepository: WorkoutRepository {
     func allWorkouts() async throws -> [Workout] { [] }
     func workout(by id: UUID) async throws -> Workout? { nil }
     func save(_ workout: Workout) async throws {}
-    func delete(_ workout: Workout) async throws {}
     func deleteItems(_ items: [WorkoutItem]) async throws {}
 }
 
 private struct PreviewExerciseRepository: ExerciseRepository {
     func allExercises() async throws -> [Exercise] { [] }
-    func exercises(primaryMuscle: String) async throws -> [Exercise] { [] }
-    func exercises(matching name: String) async throws -> [Exercise] { [] }
     func save(_ exercise: Exercise) async throws {}
-    func delete(_ exercise: Exercise) async throws {}
 }

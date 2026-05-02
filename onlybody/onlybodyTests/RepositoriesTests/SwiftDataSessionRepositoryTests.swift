@@ -82,33 +82,6 @@ struct SwiftDataSessionRepositoryTests {
     }
 
     @Test
-    func recentSessionsRespectsLimitAndOrder() async throws {
-        let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(
-            for: Session.self,
-            SessionItem.self,
-            configurations: configuration
-        )
-        let repository = SwiftDataSessionRepository(context: container.mainContext)
-
-        for i in 0..<5 {
-            let session = Session()
-            session.workoutName = "Workout \(i)"
-            session.date = Date(timeIntervalSince1970: Double(1_000_000 + i * 86_400))
-            try await repository.save(session)
-        }
-
-        let all = try await repository.allSessions()
-        #expect(all.count == 5)
-
-        let recent = try await repository.recentSessions(limit: 3)
-        #expect(recent.count == 3)
-        #expect(recent[0].workoutName == "Workout 4")
-        #expect(recent[1].workoutName == "Workout 3")
-        #expect(recent[2].workoutName == "Workout 2")
-    }
-
-    @Test
     func updateSession() async throws {
         let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(

@@ -31,12 +31,8 @@ struct SwiftDataExerciseRepositoryTests {
         try await repository.save(pushUp)
 
         let allExercises = try await repository.allExercises()
-        let matchingExercises = try await repository.exercises(matching: "push")
-        let chestExercises = try await repository.exercises(primaryMuscle: "Chest")
 
         #expect(allExercises.map(\.name) == ["Push-Ups", "Squats"])
-        #expect(matchingExercises.map(\.name) == ["Push-Ups"])
-        #expect(chestExercises.map(\.name) == ["Push-Ups"])
 
         pushUp.frequencyPreference = "more"
         try await repository.save(pushUp)

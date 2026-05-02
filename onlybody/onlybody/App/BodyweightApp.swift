@@ -24,8 +24,6 @@ struct BodyweightApp: App {
     var body: some Scene {
         WindowGroup {
             AppTabView(repositories: repositories)
-                .modelContainer(container)
-                .environment(\.repositories, repositories)
         }
     }
 }

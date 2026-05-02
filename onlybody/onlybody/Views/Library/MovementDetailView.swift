@@ -39,11 +39,11 @@ struct MovementDetailView: View {
                     .buttonStyle(.plain)
                     .accessibilityLabel("Back to library")
                 } trailing: {
-                    Spacer().frame(width: 60)
+                    EmptyView()
                 }
 
                 ScrollView {
-                    VStack(alignment: .leading, spacing: Theme.space16) {
+                    VStack(alignment: .leading, spacing: 16) {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(viewModel.exercise.name)
                                 .font(Theme.fontSans(26, .heavy))
@@ -60,10 +60,10 @@ struct MovementDetailView: View {
                             .fill(Theme.border)
                             .frame(height: 1)
 
-                        VStack(alignment: .leading, spacing: Theme.space8) {
+                        VStack(alignment: .leading, spacing: 8) {
                             MonoLabel(text: "Primary muscle", size: 10, tracking: 0.8)
 
-                            HStack(spacing: Theme.space8) {
+                            HStack(spacing: 8) {
                                 Rectangle()
                                     .fill(Theme.accent)
                                     .frame(width: 8, height: 8)
@@ -75,10 +75,10 @@ struct MovementDetailView: View {
                             }
                         }
 
-                        VStack(alignment: .leading, spacing: Theme.space8) {
+                        VStack(alignment: .leading, spacing: 8) {
                             MonoLabel(text: "Secondary", size: 10, tracking: 0.8)
 
-                            HStack(alignment: .top, spacing: Theme.space8) {
+                            HStack(alignment: .top, spacing: 8) {
                                 Rectangle()
                                     .fill(Theme.border2)
                                     .frame(width: 8, height: 8)
@@ -108,7 +108,7 @@ struct MovementDetailView: View {
                             .fill(Theme.border)
                             .frame(height: 1)
 
-                        HStack(spacing: Theme.space8) {
+                        HStack(spacing: 8) {
                             Text("Equipment")
                                 .font(Theme.fontSans(13))
                                 .foregroundStyle(Theme.text2)
@@ -124,18 +124,18 @@ struct MovementDetailView: View {
                             .fill(Theme.border)
                             .frame(height: 1)
 
-                        VStack(alignment: .leading, spacing: Theme.space8) {
+                        VStack(alignment: .leading, spacing: 8) {
                             MonoLabel(text: "Include in sessions", size: 10, tracking: 0.8)
 
-                            HStack(spacing: Theme.space8) {
+                            HStack(spacing: 8) {
                                 ForEach(frequencyOptions, id: \.value) { option in
                                     ChipView(
                                         label: option.label,
                                         isActive: viewModel.selectedFrequency == option.value,
-                                        size: Theme.chipToggleFontSize,
+                                        size: 12,
                                         cornerRadius: Theme.cornerRadius,
-                                        horizontalPadding: Theme.chipToggleHorizontalPadding,
-                                        verticalPadding: Theme.chipToggleVerticalPadding
+                                        horizontalPadding: 4,
+                                        verticalPadding: 9
                                     ) {
                                         Task {
                                             await viewModel.setFrequency(option.value)
@@ -149,8 +149,8 @@ struct MovementDetailView: View {
                         }
                     }
                     .padding(.horizontal, Theme.horizontalPadding)
-                    .padding(.top, Theme.space16)
-                    .padding(.bottom, Theme.space24)
+                    .padding(.top, 16)
+                    .padding(.bottom, 24)
                 }
                 .scrollIndicators(.hidden)
             }
