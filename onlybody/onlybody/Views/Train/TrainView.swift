@@ -2,6 +2,7 @@ import SwiftUI
 
 struct TrainView: View {
     let viewModel: TrainViewModel
+    let showSessionBuilder: (UUID?) -> Void
 
     var body: some View {
         ZStack {
@@ -11,7 +12,7 @@ struct TrainView: View {
                 TrainHeaderView(
                     dateDisplay: viewModel.dateDisplay,
                     onCreateTap: {
-                        // Future: open MusclePicker
+                        showSessionBuilder(nil)
                     }
                 )
 
@@ -47,8 +48,8 @@ struct TrainView: View {
                     WorkoutListView(
                         workouts: viewModel.workouts,
                         todayName: viewModel.todayName,
-                        onEdit: { _ in
-                            // Future: open SessionBuilder for editing
+                        onEdit: { workout in
+                            showSessionBuilder(workout.id)
                         },
                         onStart: { _ in
                             // Future: open ActiveSession
@@ -66,7 +67,8 @@ struct TrainView: View {
         viewModel: TrainViewModel(
             workouts: PlaceholderWorkoutRepository(),
             sessions: PlaceholderSessionRepository()
-        )
+        ),
+        showSessionBuilder: { _ in }
     )
     .preferredColorScheme(.dark)
 }

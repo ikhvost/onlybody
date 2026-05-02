@@ -47,7 +47,32 @@ struct AppTabView: View {
     private var tabContent: some View {
         ZStack {
             tabStack(.train, path: $trainPath) {
-                TrainView(viewModel: trainViewModel)
+                TrainView(
+                    viewModel: trainViewModel,
+                    showSessionBuilder: { workoutID in
+                        trainPath.append(TrainRoute.sessionBuilder(workoutID: workoutID))
+                    }
+                )
+                .navigationDestination(for: TrainRoute.self) { route in
+                    switch route {
+                    case .sessionBuilder(let workoutID):
+                        let workout = workoutID.flatMap { id in
+                            trainViewModel.workouts.first { $0.id == id }
+                        }
+                        SessionBuilderView(
+                            viewModel: SessionBuilderViewModel(
+                                workouts: repositories.workouts,
+                                exercises: repositories.exercises,
+                                workout: workout
+                            )
+                        )
+                    }
+                }
+            }
+            .onChange(of: trainPath) { _, _ in
+                if trainPath.isEmpty {
+                    Task { await trainViewModel.load() }
+                }
             }
 
             tabStack(.log, path: $logPath) {

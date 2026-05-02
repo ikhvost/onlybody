@@ -16,29 +16,29 @@ Implement `SessionBuilderViewModel`, `SessionBuilderView`, and `ExercisePickerVi
 
 ## Acceptance criteria
 
-- [ ] Train add action can route to Session Builder create mode.
-- [ ] Train edit action routes to Session Builder edit mode with existing workout data.
-- [ ] Session Builder uses custom `NavBarView` with Back, title, and Save.
-- [ ] Create mode title is `New Session`.
-- [ ] Edit mode title is `Edit Session`.
-- [ ] Session name field is present and persists to `Workout.name`.
-- [ ] Set style control includes `Smart pick` and `I choose`.
-- [ ] Manual mode is represented by `I choose` and persists as approved model value.
-- [ ] Movement section includes Add button.
-- [ ] Add opens `ExercisePickerView` as a sheet or equivalent approved presentation.
-- [ ] Exercise Picker supports search, muscle filter chips, and picker-mode rows with plus icon.
-- [ ] Tapping a movement adds it to the builder and returns to the builder.
-- [ ] Movement cards show drag icon, movement name, meta line, remove button, and inline steppers.
-- [ ] Sets stepper increments by 1 and respects a sensible minimum.
-- [ ] Reps stepper increments by 1 and respects a sensible minimum.
-- [ ] Rest stepper increments by 15 seconds and displays seconds.
-- [ ] Training days show the seven approved small chips.
-- [ ] Estimated duration updates when movements or rest/sets values change.
-- [ ] Saving create mode creates a `Workout` and ordered `WorkoutItem` records.
-- [ ] Saving edit mode updates the existing workout rather than creating a duplicate.
-- [ ] Successful save pops back to Train.
-- [ ] Train reloads and displays the saved or updated workout.
-- [ ] `SessionBuilderViewModel` tests cover add movement, remove movement, estimated duration, create save, and edit prepopulation.
+- [x] Train add action can route to Session Builder create mode.
+- [x] Train edit action routes to Session Builder edit mode with existing workout data.
+- [x] Session Builder uses custom `NavBarView` with Back, title, and Save.
+- [x] Create mode title is `New Session`.
+- [x] Edit mode title is `Edit Session`.
+- [x] Session name field is present and persists to `Workout.name`.
+- [x] Set style control includes `Smart pick` and `I choose`.
+- [x] Manual mode is represented by `I choose` and persists as approved model value.
+- [x] Movement section includes Add button.
+- [x] Add opens `ExercisePickerView` as a sheet or equivalent approved presentation.
+- [x] Exercise Picker supports search, muscle filter chips, and picker-mode rows with plus icon.
+- [x] Tapping a movement adds it to the builder and returns to the builder.
+- [x] Movement cards show drag icon, movement name, meta line, remove button, and inline steppers.
+- [x] Sets stepper increments by 1 and respects a sensible minimum.
+- [x] Reps stepper increments by 1 and respects a sensible minimum.
+- [x] Rest stepper increments by 15 seconds and displays seconds.
+- [x] Training days show the seven approved small chips.
+- [x] Estimated duration updates when movements or rest/sets values change.
+- [x] Saving create mode creates a `Workout` and ordered `WorkoutItem` records.
+- [x] Saving edit mode updates the existing workout rather than creating a duplicate.
+- [x] Successful save pops back to Train.
+- [x] Train reloads and displays the saved or updated workout.
+- [x] `SessionBuilderViewModel` tests cover add movement, remove movement, estimated duration, create save, and edit prepopulation.
 
 ## Blocked by
 
