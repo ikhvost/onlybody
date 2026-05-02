@@ -2,9 +2,10 @@ import SwiftUI
 
 struct MovementDetailView: View {
     @Environment(\.dismiss) private var dismiss
-    @Bindable var viewModel: MovementDetailViewModel
+    let viewModel: MovementDetailViewModel
 
     private let frequencyOptions = [
+        (label: "Normal", value: "normal"),
         (label: "More often", value: "more"),
         (label: "Less often", value: "less"),
         (label: "Exclude", value: "never")
@@ -36,9 +37,9 @@ struct MovementDetailView: View {
                         }
                     }
                     .buttonStyle(.plain)
+                    .accessibilityLabel("Back to library")
                 } trailing: {
-                    Color.clear
-                        .frame(width: 60, height: 1)
+                    Spacer().frame(width: 60)
                 }
 
                 ScrollView {
@@ -100,6 +101,7 @@ struct MovementDetailView: View {
                                 MonoLabel(text: "[ muscle diagram ]", size: 10, tracking: 1)
                             }
                             .frame(height: 120)
+                            .accessibilityLabel("Muscle diagram placeholder")
                         }
 
                         Rectangle()
@@ -127,13 +129,21 @@ struct MovementDetailView: View {
 
                             HStack(spacing: Theme.space8) {
                                 ForEach(frequencyOptions, id: \.value) { option in
-                                    ChipView(label: option.label, isActive: viewModel.selectedFrequency == option.value) {
+                                    ChipView(
+                                        label: option.label,
+                                        isActive: viewModel.selectedFrequency == option.value,
+                                        size: Theme.chipToggleFontSize,
+                                        cornerRadius: Theme.cornerRadius,
+                                        horizontalPadding: Theme.chipToggleHorizontalPadding,
+                                        verticalPadding: Theme.chipToggleVerticalPadding
+                                    ) {
                                         Task {
                                             await viewModel.setFrequency(option.value)
                                         }
                                     }
                                     .frame(maxWidth: .infinity)
                                     .disabled(viewModel.isSaving)
+                                    .accessibilityLabel("Set frequency to \(option.label)")
                                 }
                             }
                         }

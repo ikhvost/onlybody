@@ -16,24 +16,24 @@ Implement `MovementDetailViewModel` and `MovementDetailView`. Navigation should 
 
 ## Acceptance criteria
 
-- [ ] Tapping a Library row pushes Movement Detail with `navigationDestination(for:)`.
-- [ ] No `NavigationLink` is introduced.
-- [ ] Movement Detail has custom `NavBarView` with Back button and title `Movement`.
-- [ ] Screen title shows the exercise name in approved typography.
-- [ ] Custom exercises show the approved `CUSTOM` badge.
-- [ ] Primary muscle section shows amber square and primary muscle name.
-- [ ] Secondary section shows dim square and secondary muscle list joined by comma.
-- [ ] Muscle diagram placeholder renders with approved surface, border, height, and mono label.
-- [ ] Equipment row shows label and equipment value in mono text.
-- [ ] Include-in-sessions control shows `More often`, `Less often`, and `Exclude`.
-- [ ] Frequency values map to `more`, `less`, and `never`.
-- [ ] Active frequency option uses amber active chip styling.
-- [ ] Tapping a frequency option updates `exercise.frequencyPreference`.
-- [ ] Updated preference is saved immediately through `ExerciseRepository.save`.
-- [ ] Preference remains changed after navigating away and returning.
-- [ ] `MovementDetailViewModel` depends only on `ExerciseRepository`.
-- [ ] Repository save errors are handled without crashing.
-- [ ] No SF Symbols, hardcoded colors, hardcoded font sizes, or hardcoded spacing values are introduced in the view.
+- [x] Tapping a Library row pushes Movement Detail with `navigationDestination(for:)`.
+- [x] No `NavigationLink` is introduced.
+- [x] Movement Detail has custom `NavBarView` with Back button and title `Movement`.
+- [x] Screen title shows the exercise name in approved typography.
+- [x] Custom exercises show the approved `CUSTOM` badge.
+- [x] Primary muscle section shows amber square and primary muscle name.
+- [x] Secondary section shows dim square and secondary muscle list joined by comma.
+- [x] Muscle diagram placeholder renders with approved surface, border, height, and mono label.
+- [x] Equipment row shows label and equipment value in mono text.
+- [x] Include-in-sessions control shows `More often`, `Less often`, and `Exclude`.
+- [x] Frequency values map to `more`, `less`, and `never`.
+- [x] Active frequency option uses amber active chip styling.
+- [x] Tapping a frequency option updates `exercise.frequencyPreference`.
+- [x] Updated preference is saved immediately through `ExerciseRepository.save`.
+- [x] Preference remains changed after navigating away and returning.
+- [x] `MovementDetailViewModel` depends only on `ExerciseRepository`.
+- [x] Repository save errors are handled without crashing.
+- [x] No SF Symbols, hardcoded colors, hardcoded font sizes, or hardcoded spacing values are introduced in the view.
 
 ## Blocked by
 

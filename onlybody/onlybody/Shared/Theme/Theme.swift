@@ -26,6 +26,10 @@ enum Theme {
     static let space16: CGFloat = 16
     static let space24: CGFloat = 24
 
+    static let chipToggleFontSize: CGFloat = 12
+    static let chipToggleVerticalPadding: CGFloat = 9
+    static let chipToggleHorizontalPadding: CGFloat = 4
+
     static func fontSans(_ size: CGFloat, _ weight: Font.Weight = .regular) -> Font {
         .custom("DM Sans", size: size).weight(weight)
     }

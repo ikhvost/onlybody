@@ -16,7 +16,7 @@ final class MovementDetailViewModel {
     }
 
     func setFrequency(_ value: String) async {
-        guard selectedFrequency != value else {
+        guard selectedFrequency != value, !isSaving else {
             return
         }
 

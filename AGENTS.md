@@ -4,6 +4,9 @@
 
 Bodyweight training app for iOS. Single user, on-device data, no CloudKit. The app will evolve significantly — architecture must support frequent change with loose coupling and high cohesion.
 
+## IMPORTANT
+**WORK ONLY ON ASKED TASK OR TASKS. NEVER WORK ON SOMETHING ELSE. THE WHOLE SCOPE DESCRIBED IN THE TASK**
+
 ---
 
 > **Before any UI implementation work, read these two files:**
