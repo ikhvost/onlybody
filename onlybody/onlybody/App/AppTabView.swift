@@ -62,6 +62,7 @@ struct AppTabView: View {
                     onStartWorkout: { id in
                         activeWorkoutViewModel = ActiveWorkoutViewModel(
                             workouts: repositories.workouts,
+                            sessions: repositories.sessions,
                             workoutId: id
                         )
                     }

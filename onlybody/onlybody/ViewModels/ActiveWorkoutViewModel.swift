@@ -5,6 +5,7 @@ import Observation
 @Observable
 final class ActiveWorkoutViewModel {
     private let workoutsRepository: any WorkoutRepository
+    private let sessionsRepository: any SessionRepository
 
     let workoutId: UUID
 
@@ -24,6 +25,7 @@ final class ActiveWorkoutViewModel {
     let restTimer = RestTimer()
 
     private var elapsedTask: Task<Void, Never>?
+    private var saveTask: Task<Void, Never>?
     var elapsedSeconds: Int = 0
 
     var exerciseCount: Int { items.count }
@@ -85,9 +87,11 @@ final class ActiveWorkoutViewModel {
 
     init(
         workouts: any WorkoutRepository,
+        sessions: any SessionRepository,
         workoutId: UUID
     ) {
         self.workoutsRepository = workouts
+        self.sessionsRepository = sessions
         self.workoutId = workoutId
     }
 
@@ -145,6 +149,10 @@ final class ActiveWorkoutViewModel {
         } else {
             isComplete = true
             elapsedTask?.cancel()
+            restTimer.skip()
+            saveTask = Task { [self] in
+                await saveSession()
+            }
         }
     }
 
@@ -183,6 +191,13 @@ final class ActiveWorkoutViewModel {
         restTimer.skip()
     }
 
+    func endSession() async {
+        errorMessage = nil
+        elapsedTask?.cancel()
+        restTimer.skip()
+        await saveSession()
+    }
+
     func buildSessionItems() -> [SessionItem] {
         var result: [SessionItem] = []
 
@@ -207,6 +222,21 @@ final class ActiveWorkoutViewModel {
         }
 
         return result
+    }
+
+    private func saveSession() async {
+        let session = Session()
+        session.date = Date.now
+        session.durationSeconds = elapsedSeconds
+        session.caloriesBurned = Int(Double(elapsedSeconds) / 60.0 * 8.0)
+        session.workoutName = workoutName
+        session.items = buildSessionItems()
+
+        do {
+            try await sessionsRepository.save(session)
+        } catch {
+            errorMessage = "Could not save session."
+        }
     }
 
     private func startElapsedTimer() {

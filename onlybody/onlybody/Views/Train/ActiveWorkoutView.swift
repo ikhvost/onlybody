@@ -4,13 +4,15 @@ struct ActiveWorkoutView: View {
     let viewModel: ActiveWorkoutViewModel
     let onEnd: () -> Void
 
+    @State private var showEndPrompt = false
+
     var body: some View {
         ZStack {
             Theme.bg.ignoresSafeArea()
 
             if viewModel.isLoading {
                 ActiveWorkoutLoadingView()
-            } else if viewModel.errorMessage != nil {
+            } else if viewModel.errorMessage != nil && viewModel.items.isEmpty {
                 ActiveWorkoutErrorView(
                     errorMessage: viewModel.errorMessage,
                     onEnd: onEnd
@@ -19,6 +21,7 @@ struct ActiveWorkoutView: View {
                 ActiveWorkoutCompletionView(
                     elapsedString: formatTime(viewModel.elapsedSeconds),
                     exerciseCount: viewModel.exerciseCount,
+                    errorMessage: viewModel.errorMessage,
                     onEnd: onEnd
                 )
             } else if !viewModel.items.isEmpty {
@@ -33,13 +36,14 @@ struct ActiveWorkoutView: View {
                     currentSetIndex: viewModel.currentSetIndex,
                     reps: viewModel.currentDisplayReps,
                     weight: viewModel.currentWeight,
+                    errorMessage: viewModel.errorMessage,
                     canGoPrevious: viewModel.canGoPrevious,
                     canSkip: viewModel.canSkip,
                     nextExerciseName: viewModel.nextExerciseName,
                     isRestActive: viewModel.restTimer.isActive,
                     restSecondsString: formatTime(viewModel.restTimer.remainingSeconds),
                     restNextName: viewModel.restTimer.nextExerciseName,
-                    onEnd: onEnd,
+                    onEnd: { showEndPrompt = true },
                     onMarkSetDone: { viewModel.markSetDone() },
                     onIncrementReps: { viewModel.incrementReps() },
                     onDecrementReps: { viewModel.decrementReps() },
@@ -50,6 +54,19 @@ struct ActiveWorkoutView: View {
                     onSkipRest: { viewModel.restTimer.skip() }
                 )
             }
+        }
+        .alert("End workout?", isPresented: $showEndPrompt) {
+            Button("End & Save", role: .destructive) {
+                Task {
+                    await viewModel.endSession()
+                    if viewModel.errorMessage == nil {
+                        onEnd()
+                    }
+                }
+            }
+            Button("Continue", role: .cancel) {}
+        } message: {
+            Text("Completed sets will be saved.")
         }
         .task {
             await viewModel.load()
@@ -100,6 +117,7 @@ private struct ActiveWorkoutErrorView: View {
 private struct ActiveWorkoutCompletionView: View {
     let elapsedString: String
     let exerciseCount: Int
+    let errorMessage: String?
     let onEnd: () -> Void
 
     var body: some View {
@@ -121,6 +139,16 @@ private struct ActiveWorkoutCompletionView: View {
                 tracking: 1
             )
             .padding(.top, 10)
+
+            if let error = errorMessage {
+                MonoLabel(
+                    text: error,
+                    size: 9,
+                    color: Theme.danger,
+                    tracking: 0.4
+                )
+                .padding(.top, 10)
+            }
 
             PrimaryButton(title: "Close") {
                 onEnd()
@@ -145,6 +173,7 @@ private struct ActiveWorkoutBody: View {
     let currentSetIndex: Int
     let reps: Int
     let weight: Double
+    let errorMessage: String?
     let canGoPrevious: Bool
     let canSkip: Bool
     let nextExerciseName: String
@@ -175,6 +204,16 @@ private struct ActiveWorkoutBody: View {
                     currentIndex: currentIndex,
                     totalCount: totalCount
                 )
+
+                if let error = errorMessage {
+                    MonoLabel(
+                        text: error,
+                        size: 9,
+                        color: Theme.danger,
+                        tracking: 0.4
+                    )
+                    .padding(.top, 4)
+                }
 
                 ActiveWorkoutExerciseContent(
                     exerciseName: exerciseName,

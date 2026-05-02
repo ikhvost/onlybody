@@ -38,11 +38,16 @@ struct ActiveWorkoutViewModelTests {
 
     private func makeViewModel(
         workout: Workout
-    ) -> (ActiveWorkoutViewModel, MockWorkoutRepository) {
-        let repo = MockWorkoutRepository()
-        repo.stubbedWorkouts = [workout]
-        let viewModel = ActiveWorkoutViewModel(workouts: repo, workoutId: workout.id)
-        return (viewModel, repo)
+    ) -> (ActiveWorkoutViewModel, MockWorkoutRepository, MockSessionRepository) {
+        let workoutRepo = MockWorkoutRepository()
+        workoutRepo.stubbedWorkouts = [workout]
+        let sessionRepo = MockSessionRepository()
+        let viewModel = ActiveWorkoutViewModel(
+            workouts: workoutRepo,
+            sessions: sessionRepo,
+            workoutId: workout.id
+        )
+        return (viewModel, workoutRepo, sessionRepo)
     }
 
     // MARK: - Load
@@ -58,7 +63,7 @@ struct ActiveWorkoutViewModelTests {
         ]
 
         let workout = makeWorkout(id: UUID(), name: "Test Workout", items: items)
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
 
@@ -73,7 +78,7 @@ struct ActiveWorkoutViewModelTests {
 
     @Test
     func loadSetsErrorWhenWorkoutNotFound() async {
-        let (viewModel, _) = makeViewModel(workout: makeWorkout(id: UUID(), name: "Gone", items: []))
+        let (viewModel, _, _) = makeViewModel(workout: makeWorkout(id: UUID(), name: "Gone", items: []))
 
         await viewModel.load()
 
@@ -87,7 +92,7 @@ struct ActiveWorkoutViewModelTests {
         let exercise = makeExercise(name: "Push-Ups")
         let item = makeWorkoutItem(order: 0, sets: 3, targetReps: 10, restSeconds: 45, exercise: exercise)
         let workout = makeWorkout(id: UUID(), name: "Test", items: [item])
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
 
@@ -105,7 +110,7 @@ struct ActiveWorkoutViewModelTests {
         let exercise = makeExercise(name: "Push-Ups")
         let item = makeWorkoutItem(order: 0, sets: 2, targetReps: 10, restSeconds: 45, exercise: exercise)
         let workout = makeWorkout(id: UUID(), name: "Test", items: [item])
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
         viewModel.markSetDone()
@@ -119,7 +124,7 @@ struct ActiveWorkoutViewModelTests {
         let exercise = makeExercise(name: "Push-Ups")
         let item = makeWorkoutItem(order: 0, sets: 2, targetReps: 10, restSeconds: 45, exercise: exercise)
         let workout = makeWorkout(id: UUID(), name: "Test", items: [item])
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
         viewModel.incrementReps()
@@ -134,7 +139,7 @@ struct ActiveWorkoutViewModelTests {
         let exercise = makeExercise(name: "Push-Ups")
         let item = makeWorkoutItem(order: 0, sets: 3, targetReps: 10, restSeconds: 45, exercise: exercise)
         let workout = makeWorkout(id: UUID(), name: "Test", items: [item])
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
         viewModel.incrementReps()
@@ -160,7 +165,7 @@ struct ActiveWorkoutViewModelTests {
         ]
 
         let workout = makeWorkout(id: UUID(), name: "Test", items: items)
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
         viewModel.markSetDone()
@@ -176,7 +181,7 @@ struct ActiveWorkoutViewModelTests {
         let exercise = makeExercise(name: "Push-Ups")
         let item = makeWorkoutItem(order: 0, sets: 1, targetReps: 10, restSeconds: 45, exercise: exercise)
         let workout = makeWorkout(id: UUID(), name: "Test", items: [item])
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
         viewModel.markSetDone()
@@ -191,7 +196,7 @@ struct ActiveWorkoutViewModelTests {
         let exercise = makeExercise(name: "Push-Ups")
         let item = makeWorkoutItem(order: 0, sets: 3, targetReps: 10, restSeconds: 45, exercise: exercise)
         let workout = makeWorkout(id: UUID(), name: "Test", items: [item])
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
         viewModel.markSetDone()
@@ -212,7 +217,7 @@ struct ActiveWorkoutViewModelTests {
         ]
 
         let workout = makeWorkout(id: UUID(), name: "Test", items: items)
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
         viewModel.markSetDone()
@@ -235,7 +240,7 @@ struct ActiveWorkoutViewModelTests {
         ]
 
         let workout = makeWorkout(id: UUID(), name: "Test", items: items)
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
         viewModel.skipExercise()
@@ -259,7 +264,7 @@ struct ActiveWorkoutViewModelTests {
         ]
 
         let workout = makeWorkout(id: UUID(), name: "Test", items: items)
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
         viewModel.skipExercise()
@@ -273,7 +278,7 @@ struct ActiveWorkoutViewModelTests {
         let exercise = makeExercise(name: "Push-Ups")
         let item = makeWorkoutItem(order: 0, sets: 2, targetReps: 10, restSeconds: 45, exercise: exercise)
         let workout = makeWorkout(id: UUID(), name: "Test", items: [item])
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
 
@@ -292,7 +297,7 @@ struct ActiveWorkoutViewModelTests {
         ]
 
         let workout = makeWorkout(id: UUID(), name: "Test", items: items)
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
 
@@ -307,7 +312,7 @@ struct ActiveWorkoutViewModelTests {
         let exercise = makeExercise(name: "Push-Ups")
         let item = makeWorkoutItem(order: 0, sets: 2, targetReps: 10, restSeconds: 45, exercise: exercise)
         let workout = makeWorkout(id: UUID(), name: "Test", items: [item])
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
         viewModel.incrementReps()
@@ -320,7 +325,7 @@ struct ActiveWorkoutViewModelTests {
         let exercise = makeExercise(name: "Push-Ups")
         let item = makeWorkoutItem(order: 0, sets: 2, targetReps: 10, restSeconds: 45, exercise: exercise)
         let workout = makeWorkout(id: UUID(), name: "Test", items: [item])
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
         viewModel.decrementReps()
@@ -333,7 +338,7 @@ struct ActiveWorkoutViewModelTests {
         let exercise = makeExercise(name: "Push-Ups")
         let item = makeWorkoutItem(order: 0, sets: 2, targetReps: 1, restSeconds: 45, exercise: exercise)
         let workout = makeWorkout(id: UUID(), name: "Test", items: [item])
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
         viewModel.decrementReps()
@@ -349,7 +354,7 @@ struct ActiveWorkoutViewModelTests {
         let exercise = makeExercise(name: "Push-Ups")
         let item = makeWorkoutItem(order: 0, sets: 2, targetReps: 10, restSeconds: 45, exercise: exercise)
         let workout = makeWorkout(id: UUID(), name: "Test", items: [item])
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
 
@@ -361,7 +366,7 @@ struct ActiveWorkoutViewModelTests {
         let exercise = makeExercise(name: "Push-Ups")
         let item = makeWorkoutItem(order: 0, sets: 2, targetReps: 10, restSeconds: 45, exercise: exercise)
         let workout = makeWorkout(id: UUID(), name: "Test", items: [item])
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
         viewModel.incrementWeight()
@@ -374,7 +379,7 @@ struct ActiveWorkoutViewModelTests {
         let exercise = makeExercise(name: "Push-Ups")
         let item = makeWorkoutItem(order: 0, sets: 2, targetReps: 10, restSeconds: 45, exercise: exercise)
         let workout = makeWorkout(id: UUID(), name: "Test", items: [item])
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
         viewModel.decrementWeight()
@@ -393,7 +398,7 @@ struct ActiveWorkoutViewModelTests {
         ]
 
         let workout = makeWorkout(id: UUID(), name: "Test", items: items)
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
         viewModel.incrementWeight()
@@ -419,7 +424,7 @@ struct ActiveWorkoutViewModelTests {
         ]
 
         let workout = makeWorkout(id: UUID(), name: "Test", items: items)
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
 
@@ -442,7 +447,7 @@ struct ActiveWorkoutViewModelTests {
         let exercise = makeExercise(name: "Push-Ups")
         let item = makeWorkoutItem(order: 0, sets: 1, targetReps: 10, restSeconds: 45, exercise: exercise)
         let workout = makeWorkout(id: UUID(), name: "Test", items: [item])
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
         viewModel.incrementWeight()
@@ -460,12 +465,206 @@ struct ActiveWorkoutViewModelTests {
         let exercise = makeExercise(name: "Push-Ups")
         let item = makeWorkoutItem(order: 0, sets: 3, targetReps: 10, restSeconds: 45, exercise: exercise)
         let workout = makeWorkout(id: UUID(), name: "Test", items: [item])
-        let (viewModel, _) = makeViewModel(workout: workout)
+        let (viewModel, _, _) = makeViewModel(workout: workout)
 
         await viewModel.load()
         viewModel.markSetDone()
         viewModel.cleanup()
 
         #expect(!viewModel.restTimer.isActive)
+    }
+
+    // MARK: - Session Save
+
+    @Test
+    func markSetDoneOnFinalSetSavesExactlyOneSession() async throws {
+        let exercise = makeExercise(name: "Push-Ups")
+        let item = makeWorkoutItem(order: 0, sets: 1, targetReps: 10, restSeconds: 45, exercise: exercise)
+        let workout = makeWorkout(id: UUID(), name: "Full Body", items: [item])
+        let (viewModel, _, sessionRepo) = makeViewModel(workout: workout)
+
+        await viewModel.load()
+        viewModel.markSetDone()
+
+        #expect(viewModel.isComplete)
+
+        await Task.yield()
+
+        #expect(sessionRepo.savedSessions.count == 1)
+        let saved = try #require(sessionRepo.savedSessions.first)
+        #expect(saved.workoutName == "Full Body")
+        #expect(saved.durationSeconds == viewModel.elapsedSeconds)
+        #expect(saved.date != nil)
+    }
+
+    @Test
+    func savedSessionUsesWorkoutNameSnapshot() async throws {
+        let exercise = makeExercise(name: "Push-Ups")
+        let item = makeWorkoutItem(order: 0, sets: 1, targetReps: 10, restSeconds: 45, exercise: exercise)
+        let workout = makeWorkout(id: UUID(), name: "Snapshot Name", items: [item])
+        let (viewModel, _, sessionRepo) = makeViewModel(workout: workout)
+
+        await viewModel.load()
+        viewModel.markSetDone()
+        await Task.yield()
+
+        let saved = try #require(sessionRepo.savedSessions.first)
+        #expect(saved.workoutName == "Snapshot Name")
+    }
+
+    @Test
+    func savedSessionItemsUseExerciseNameSnapshots() async throws {
+        let pushUps = makeExercise(name: "Push-Ups")
+        let squats = makeExercise(name: "Squats")
+
+        let items = [
+            makeWorkoutItem(order: 0, sets: 1, targetReps: 10, restSeconds: 45, exercise: pushUps),
+            makeWorkoutItem(order: 1, sets: 1, targetReps: 8, restSeconds: 60, exercise: squats),
+        ]
+
+        let workout = makeWorkout(id: UUID(), name: "Test", items: items)
+        let (viewModel, _, sessionRepo) = makeViewModel(workout: workout)
+
+        await viewModel.load()
+        viewModel.markSetDone()
+        viewModel.skipExercise()
+        viewModel.markSetDone()
+        await Task.yield()
+
+        let saved = try #require(sessionRepo.savedSessions.first)
+        let sortedItems = saved.items?.sorted { $0.order < $1.order }
+        #expect(sortedItems?.count == 2)
+        #expect(sortedItems?[0].exerciseName == "Push-Ups")
+        #expect(sortedItems?[1].exerciseName == "Squats")
+    }
+
+    @Test
+    func savedSessionItemOrderMatchesWorkoutItemOrder() async throws {
+        let pushUps = makeExercise(name: "Push-Ups")
+        let squats = makeExercise(name: "Squats")
+
+        let items = [
+            makeWorkoutItem(order: 1, sets: 1, targetReps: 10, restSeconds: 45, exercise: squats),
+            makeWorkoutItem(order: 0, sets: 1, targetReps: 8, restSeconds: 60, exercise: pushUps),
+        ]
+
+        let workout = makeWorkout(id: UUID(), name: "Test", items: items)
+        let (viewModel, _, sessionRepo) = makeViewModel(workout: workout)
+
+        await viewModel.load()
+        viewModel.markSetDone()
+        viewModel.skipExercise()
+        viewModel.markSetDone()
+        await Task.yield()
+
+        let saved = try #require(sessionRepo.savedSessions.first)
+        let sortedItems = saved.items?.sorted { $0.order < $1.order }
+        #expect(sortedItems?[0].order == 0)
+        #expect(sortedItems?[1].order == 1)
+    }
+
+    @Test
+    func savedSetRepsLengthMatchesCompletedSets() async throws {
+        let exercise = makeExercise(name: "Push-Ups")
+        let item = makeWorkoutItem(order: 0, sets: 3, targetReps: 10, restSeconds: 45, exercise: exercise)
+        let workout = makeWorkout(id: UUID(), name: "Test", items: [item])
+        let (viewModel, _, sessionRepo) = makeViewModel(workout: workout)
+
+        await viewModel.load()
+        viewModel.markSetDone()
+        viewModel.markSetDone()
+        viewModel.markSetDone()
+        await Task.yield()
+
+        let saved = try #require(sessionRepo.savedSessions.first)
+        let sessionItems = saved.items?.sorted { $0.order < $1.order }
+        #expect(sessionItems?[0].setReps == [10, 10, 10])
+    }
+
+    @Test
+    func savedWeightUsesActiveWorkoutWeightValue() async throws {
+        let exercise = makeExercise(name: "Push-Ups")
+        let item = makeWorkoutItem(order: 0, sets: 1, targetReps: 10, restSeconds: 45, exercise: exercise)
+        let workout = makeWorkout(id: UUID(), name: "Test", items: [item])
+        let (viewModel, _, sessionRepo) = makeViewModel(workout: workout)
+
+        await viewModel.load()
+        viewModel.incrementWeight()
+        viewModel.incrementWeight()
+        viewModel.markSetDone()
+        await Task.yield()
+
+        let saved = try #require(sessionRepo.savedSessions.first)
+        let sessionItems = saved.items?.sorted { $0.order < $1.order }
+        #expect(sessionItems?[0].weightKg == 5.0)
+    }
+
+    @Test
+    func caloriesUsesRoughEstimateFromElapsedMinutes() async throws {
+        let exercise = makeExercise(name: "Push-Ups")
+        let item = makeWorkoutItem(order: 0, sets: 1, targetReps: 10, restSeconds: 45, exercise: exercise)
+        let workout = makeWorkout(id: UUID(), name: "Test", items: [item])
+        let (viewModel, _, sessionRepo) = makeViewModel(workout: workout)
+
+        await viewModel.load()
+        viewModel.elapsedSeconds = 1450
+        viewModel.markSetDone()
+        await Task.yield()
+
+        let saved = try #require(sessionRepo.savedSessions.first)
+        let expectedCalories = Int(Double(1450) / 60.0 * 8.0)
+        #expect(saved.caloriesBurned == expectedCalories)
+    }
+
+    @Test
+    func saveFailureSetsErrorMessage() async throws {
+        let exercise = makeExercise(name: "Push-Ups")
+        let item = makeWorkoutItem(order: 0, sets: 1, targetReps: 10, restSeconds: 45, exercise: exercise)
+        let workout = makeWorkout(id: UUID(), name: "Test", items: [item])
+
+        let workoutRepo = MockWorkoutRepository()
+        workoutRepo.stubbedWorkouts = [workout]
+        let sessionRepo = MockSessionRepository()
+        sessionRepo.shouldThrow = true
+        let viewModel = ActiveWorkoutViewModel(
+            workouts: workoutRepo,
+            sessions: sessionRepo,
+            workoutId: workout.id
+        )
+
+        await viewModel.load()
+        viewModel.markSetDone()
+        await Task.yield()
+
+        #expect(viewModel.errorMessage == "Could not save session.")
+        #expect(viewModel.isComplete)
+    }
+
+    @Test
+    func endSessionSavesAvailableCompletedData() async throws {
+        let pushUps = makeExercise(name: "Push-Ups")
+        let squats = makeExercise(name: "Squats")
+
+        let items = [
+            makeWorkoutItem(order: 0, sets: 2, targetReps: 10, restSeconds: 45, exercise: pushUps),
+            makeWorkoutItem(order: 1, sets: 2, targetReps: 8, restSeconds: 60, exercise: squats),
+        ]
+
+        let workout = makeWorkout(id: UUID(), name: "Partial", items: items)
+        let (viewModel, _, sessionRepo) = makeViewModel(workout: workout)
+
+        await viewModel.load()
+        viewModel.markSetDone()
+
+        await viewModel.endSession()
+
+        #expect(sessionRepo.savedSessions.count == 1)
+        let saved = try #require(sessionRepo.savedSessions.first)
+        #expect(saved.workoutName == "Partial")
+
+        let sessionItems = saved.items?.sorted { $0.order < $1.order }
+        #expect(sessionItems?.count == 2)
+        #expect(sessionItems?[0].setReps == [10])
+        #expect(sessionItems?[1].setReps.isEmpty == true)
     }
 }

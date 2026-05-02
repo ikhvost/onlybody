@@ -16,25 +16,25 @@ Create `Session` and `SessionItem` SwiftData models, `SessionRepository` protoco
 
 ## Acceptance criteria
 
-- [ ] `Session` is a SwiftData `@Model` in its own file.
-- [ ] `SessionItem` is a SwiftData `@Model` in its own file.
-- [ ] `Session.id` uses `@Attribute(.unique)`.
-- [ ] `Session` includes date, duration seconds, optional calories burned, workout name snapshot, and optional items relationship.
-- [ ] `SessionItem` includes id, order, exercise name snapshot, planned sets, planned reps, set reps, and optional weight kg.
-- [ ] All non-optional model properties have defaults.
-- [ ] `SessionRepository` exposes `allSessions`, `recentSessions(limit:)`, and `save`.
-- [ ] `recentSessions(limit:)` returns most recent sessions first and respects fetch limit.
-- [ ] Completing the final set creates and saves exactly one `Session`.
-- [ ] Saved session uses workout name snapshot so it survives future workout deletion.
-- [ ] Saved session items use exercise name snapshots so they survive future exercise deletion.
-- [ ] Saved session item order matches workout item order.
-- [ ] Saved `setReps` length matches completed sets for each movement.
-- [ ] Saved weight uses the active workout weight value for each movement where applicable.
-- [ ] Calories use the approved rough estimate from elapsed minutes.
-- [ ] Save failures surface through `ActiveWorkoutViewModel.errorMessage`.
-- [ ] Ending a session intentionally saves available completed data if the approved behavior in the current implementation plan requires it.
-- [ ] In-memory repository tests cover session save/fetch and recent limit.
-- [ ] Active Workout ViewModel test verifies session save on completion.
+- [x] `Session` is a SwiftData `@Model` in its own file.
+- [x] `SessionItem` is a SwiftData `@Model` in its own file.
+- [x] `Session.id` uses `@Attribute(.unique)`.
+- [x] `Session` includes date, duration seconds, optional calories burned, workout name snapshot, and optional items relationship.
+- [x] `SessionItem` includes id, order, exercise name snapshot, planned sets, planned reps, set reps, and optional weight kg.
+- [x] All non-optional model properties have defaults.
+- [x] `SessionRepository` exposes `allSessions`, `recentSessions(limit:)`, and `save`.
+- [x] `recentSessions(limit:)` returns most recent sessions first and respects fetch limit.
+- [x] Completing the final set creates and saves exactly one `Session`.
+- [x] Saved session uses workout name snapshot so it survives future workout deletion.
+- [x] Saved session items use exercise name snapshots so they survive future exercise deletion.
+- [x] Saved session item order matches workout item order.
+- [x] Saved `setReps` length matches completed sets for each movement.
+- [x] Saved weight uses the active workout weight value for each movement where applicable.
+- [x] Calories use the approved rough estimate from elapsed minutes.
+- [x] Save failures surface through `ActiveWorkoutViewModel.errorMessage`.
+- [x] Ending a session intentionally saves available completed data if the approved behavior in the current implementation plan requires it.
+- [x] In-memory repository tests cover session save/fetch and recent limit.
+- [x] Active Workout ViewModel test verifies session save on completion.
 
 ## Blocked by
 
