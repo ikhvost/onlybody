@@ -16,25 +16,25 @@ Use existing workouts from the repository. Wire custom navigation routes for Tra
 
 ## Acceptance criteria
 
-- [ ] Current date label uses approved format such as `FRI, MAY 1`.
-- [ ] Train title uses `OnlyBody` with approved typography.
-- [ ] Header plus button routes to Muscle Picker.
-- [ ] Tapping the title or approved affordance routes to Streak screen placeholder or real screen if available.
-- [ ] Day strip renders Sun through Sat.
-- [ ] Today is underlined with amber.
-- [ ] Day dots reflect whether any saved workout is scheduled for that day.
-- [ ] Today's dot is amber when a workout is scheduled today.
-- [ ] Non-today scheduled dots use dim border styling.
-- [ ] Today callout shows `Today` and scheduled workout names when present.
-- [ ] Rest day callout appears when no workouts are scheduled today.
-- [ ] Workout rows scheduled today have amber left border.
-- [ ] Workout rows not scheduled today have transparent left border.
-- [ ] Edit button routes to Session Builder edit mode.
-- [ ] Start button sets selected workout for full-screen active workout presentation.
-- [ ] Active workout presentation uses `fullScreenCover`.
-- [ ] Bottom navigation hides when any tab has a pushed sub-screen.
-- [ ] Bottom navigation reappears after popping back to root.
-- [ ] App still does not use `TabView`, `Tab`, `tabItem`, or `NavigationLink`.
+- [x] Current date label uses approved format such as `FRI, MAY 1`.
+- [x] Train title uses `OnlyBody` with approved typography.
+- [x] Header plus button routes to Muscle Picker.
+- [x] Tapping the title or approved affordance routes to Streak screen placeholder or real screen if available.
+- [x] Day strip renders Sun through Sat.
+- [x] Today is underlined with amber.
+- [x] Day dots reflect whether any saved workout is scheduled for that day.
+- [x] Today's dot is amber when a workout is scheduled today.
+- [x] Non-today scheduled dots use dim border styling.
+- [x] Today callout shows `Today` and scheduled workout names when present.
+- [x] Rest day callout appears when no workouts are scheduled today.
+- [x] Workout rows scheduled today have amber left border.
+- [x] Workout rows not scheduled today have transparent left border.
+- [x] Edit button routes to Session Builder edit mode.
+- [x] Start button sets selected workout for full-screen active workout presentation.
+- [x] Active workout presentation uses `fullScreenCover`.
+- [x] Bottom navigation hides when any tab has a pushed sub-screen.
+- [x] Bottom navigation reappears after popping back to root.
+- [x] App still does not use `TabView`, `Tab`, `tabItem`, or `NavigationLink`.
 
 ## Blocked by
 

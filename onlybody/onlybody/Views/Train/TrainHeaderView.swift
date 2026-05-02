@@ -3,20 +3,32 @@ import SwiftUI
 struct TrainHeaderView: View {
     let dateDisplay: String
     let onCreateTap: () -> Void
+    let onTitleTap: () -> Void
 
     var body: some View {
         HStack(alignment: .bottom) {
             VStack(alignment: .leading, spacing: Theme.space3) {
-                MonoLabel(
-                    text: dateDisplay,
-                    size: 9,
-                    color: Theme.text3,
-                    tracking: 1.2
-                )
-                Text("OnlyBody")
-                    .font(Theme.fontSans(26, .heavy))
-                    .tracking(-1)
-                    .foregroundStyle(Theme.text)
+                Button {
+                    onTitleTap()
+                } label: {
+                    MonoLabel(
+                        text: dateDisplay,
+                        size: 9,
+                        color: Theme.text3,
+                        tracking: 1.2
+                    )
+                }
+                .buttonStyle(.plain)
+
+                Button {
+                    onTitleTap()
+                } label: {
+                    Text("OnlyBody")
+                        .font(Theme.fontSans(26, .heavy))
+                        .tracking(-1)
+                        .foregroundStyle(Theme.text)
+                }
+                .buttonStyle(.plain)
             }
 
             Spacer()

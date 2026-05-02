@@ -4,6 +4,8 @@ struct TrainView: View {
     let viewModel: TrainViewModel
     let showMusclePicker: () -> Void
     let showSessionBuilder: (UUID?) -> Void
+    let showStreak: () -> Void
+    let onStartWorkout: (UUID, String) -> Void
 
     var body: some View {
         ZStack {
@@ -14,6 +16,9 @@ struct TrainView: View {
                     dateDisplay: viewModel.dateDisplay,
                     onCreateTap: {
                         showMusclePicker()
+                    },
+                    onTitleTap: {
+                        showStreak()
                     }
                 )
 
@@ -52,8 +57,8 @@ struct TrainView: View {
                         onEdit: { workout in
                             showSessionBuilder(workout.id)
                         },
-                        onStart: { _ in
-                            // Future: open ActiveSession
+                        onStart: { workout in
+                            onStartWorkout(workout.id, workout.name)
                         }
                     )
                 }
@@ -70,7 +75,9 @@ struct TrainView: View {
             sessions: PlaceholderSessionRepository()
         ),
         showMusclePicker: {},
-        showSessionBuilder: { _ in }
+        showSessionBuilder: { _ in },
+        showStreak: {},
+        onStartWorkout: { _, _ in }
     )
     .preferredColorScheme(.dark)
 }

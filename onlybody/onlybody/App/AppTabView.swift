@@ -9,6 +9,8 @@ struct AppTabView: View {
     @State private var trainPath = NavigationPath()
     @State private var logPath = NavigationPath()
     @State private var libraryPath = NavigationPath()
+    @State private var activeWorkoutID: UUID?
+    @State private var activeWorkoutName: String = ""
 
     init(repositories: Repositories) {
         self.repositories = repositories
@@ -54,6 +56,13 @@ struct AppTabView: View {
                     },
                     showSessionBuilder: { workoutID in
                         trainPath.append(TrainRoute.sessionBuilder(workoutID: workoutID))
+                    },
+                    showStreak: {
+                        trainPath.append(TrainRoute.streak)
+                    },
+                    onStartWorkout: { id, name in
+                        activeWorkoutID = id
+                        activeWorkoutName = name
                     }
                 )
                 .navigationDestination(for: TrainRoute.self) { route in
@@ -86,6 +95,8 @@ struct AppTabView: View {
                                 targetMuscleGroups: targetMuscleGroups
                             )
                         )
+                    case .streak:
+                        StreakView()
                     }
                 }
             }
@@ -93,6 +104,17 @@ struct AppTabView: View {
                 if trainPath.isEmpty {
                     Task { await trainViewModel.load() }
                 }
+            }
+            .fullScreenCover(isPresented: Binding(
+                get: { activeWorkoutID != nil },
+                set: { if !$0 { activeWorkoutID = nil } }
+            )) {
+                ActiveWorkoutView(
+                    workoutName: activeWorkoutName,
+                    onEnd: {
+                        activeWorkoutID = nil
+                    }
+                )
             }
 
             tabStack(.log, path: $logPath) {
@@ -133,7 +155,7 @@ struct AppTabView: View {
                         }
                     }
                 }
-            }
+        }
         }
     }
 
