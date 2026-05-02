@@ -5,7 +5,6 @@ import Observation
 @Observable
 final class TrainViewModel {
     private let workoutsRepository: any WorkoutRepository
-    private let sessionsRepository: any SessionRepository
 
     var workouts: [Workout] = []
     var isLoading = false
@@ -34,9 +33,8 @@ final class TrainViewModel {
         ).uppercased()
     }
 
-    init(workouts: any WorkoutRepository, sessions: any SessionRepository) {
+    init(workouts: any WorkoutRepository) {
         self.workoutsRepository = workouts
-        self.sessionsRepository = sessions
     }
 
     func load() async {

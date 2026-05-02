@@ -7,7 +7,6 @@ struct TrainViewModelTests {
     @Test
     func loadPopulatesWorkouts() async {
         let workoutRepo = MockWorkoutRepository()
-        let sessionRepo = MockSessionRepository()
 
         let fullBody = Workout()
         fullBody.name = "Full Body"
@@ -19,7 +18,7 @@ struct TrainViewModelTests {
 
         workoutRepo.stubbedWorkouts = [fullBody, upperBody]
 
-        let viewModel = TrainViewModel(workouts: workoutRepo, sessions: sessionRepo)
+        let viewModel = TrainViewModel(workouts: workoutRepo)
         await viewModel.load()
 
         #expect(viewModel.workouts.count == 2)
@@ -31,7 +30,6 @@ struct TrainViewModelTests {
     @Test
     func todaysWorkoutsFiltersCorrectly() async {
         let workoutRepo = MockWorkoutRepository()
-        let sessionRepo = MockSessionRepository()
 
         let today = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][
             Calendar.current.component(.weekday, from: Date()) - 1
@@ -47,7 +45,7 @@ struct TrainViewModelTests {
 
         workoutRepo.stubbedWorkouts = [fullBody, upperBody]
 
-        let viewModel = TrainViewModel(workouts: workoutRepo, sessions: sessionRepo)
+        let viewModel = TrainViewModel(workouts: workoutRepo)
         await viewModel.load()
 
         let todaysNames = viewModel.todaysWorkouts.map(\.name)
@@ -61,14 +59,13 @@ struct TrainViewModelTests {
     @Test
     func deleteRemovesWorkout() async {
         let workoutRepo = MockWorkoutRepository()
-        let sessionRepo = MockSessionRepository()
 
         let fullBody = Workout()
         fullBody.name = "Full Body"
 
         workoutRepo.stubbedWorkouts = [fullBody]
 
-        let viewModel = TrainViewModel(workouts: workoutRepo, sessions: sessionRepo)
+        let viewModel = TrainViewModel(workouts: workoutRepo)
         await viewModel.load()
 
         #expect(viewModel.workouts.count == 1)
@@ -84,9 +81,8 @@ struct TrainViewModelTests {
     func loadSetsErrorMessageWhenRepositoryFails() async {
         let workoutRepo = MockWorkoutRepository()
         workoutRepo.shouldThrow = true
-        let sessionRepo = MockSessionRepository()
 
-        let viewModel = TrainViewModel(workouts: workoutRepo, sessions: sessionRepo)
+        let viewModel = TrainViewModel(workouts: workoutRepo)
         await viewModel.load()
 
         #expect(viewModel.workouts.isEmpty)
@@ -97,13 +93,12 @@ struct TrainViewModelTests {
     @Test
     func deleteErrorSetsErrorMessage() async {
         let workoutRepo = MockWorkoutRepository()
-        let sessionRepo = MockSessionRepository()
 
         let fullBody = Workout()
         fullBody.name = "Full Body"
         workoutRepo.stubbedWorkouts = [fullBody]
 
-        let viewModel = TrainViewModel(workouts: workoutRepo, sessions: sessionRepo)
+        let viewModel = TrainViewModel(workouts: workoutRepo)
         await viewModel.load()
         #expect(viewModel.workouts.count == 1)
         #expect(viewModel.errorMessage == nil)

@@ -457,6 +457,7 @@ private let muscleLabels: [String: String] = [
 
 private struct PreviewWorkoutRepository: WorkoutRepository {
     func allWorkouts() async throws -> [Workout] { [] }
+    func workout(by id: UUID) async throws -> Workout? { nil }
     func save(_ workout: Workout) async throws {}
     func delete(_ workout: Workout) async throws {}
     func deleteItems(_ items: [WorkoutItem]) async throws {}

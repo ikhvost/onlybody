@@ -5,7 +5,7 @@ struct TrainView: View {
     let showMusclePicker: () -> Void
     let showSessionBuilder: (UUID?) -> Void
     let showStreak: () -> Void
-    let onStartWorkout: (UUID, String) -> Void
+    let onStartWorkout: (UUID) -> Void
 
     var body: some View {
         ZStack {
@@ -58,7 +58,7 @@ struct TrainView: View {
                             showSessionBuilder(workout.id)
                         },
                         onStart: { workout in
-                            onStartWorkout(workout.id, workout.name)
+                            onStartWorkout(workout.id)
                         }
                     )
                 }
@@ -71,26 +71,22 @@ struct TrainView: View {
 #Preview("Train — placeholder") {
     TrainView(
         viewModel: TrainViewModel(
-            workouts: PlaceholderWorkoutRepository(),
-            sessions: PlaceholderSessionRepository()
+            workouts: PlaceholderWorkoutRepository()
         ),
         showMusclePicker: {},
         showSessionBuilder: { _ in },
         showStreak: {},
-        onStartWorkout: { _, _ in }
+        onStartWorkout: { _ in }
     )
     .preferredColorScheme(.dark)
 }
 
 private struct PlaceholderWorkoutRepository: WorkoutRepository {
     func allWorkouts() async throws -> [Workout] { [] }
+    func workout(by id: UUID) async throws -> Workout? { nil }
     func save(_ workout: Workout) async throws {}
     func delete(_ workout: Workout) async throws {}
     func deleteItems(_ items: [WorkoutItem]) async throws {}
 }
 
-private struct PlaceholderSessionRepository: SessionRepository {
-    func allSessions() async throws -> [Session] { [] }
-    func recentSessions(limit: Int) async throws -> [Session] { [] }
-    func save(_ session: Session) async throws {}
-}
+

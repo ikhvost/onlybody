@@ -9,12 +9,11 @@ struct AppTabView: View {
     @State private var trainPath = NavigationPath()
     @State private var logPath = NavigationPath()
     @State private var libraryPath = NavigationPath()
-    @State private var activeWorkoutID: UUID?
-    @State private var activeWorkoutName: String = ""
+    @State private var activeWorkoutViewModel: ActiveWorkoutViewModel?
 
     init(repositories: Repositories) {
         self.repositories = repositories
-        _trainViewModel = State(initialValue: TrainViewModel(workouts: repositories.workouts, sessions: repositories.sessions))
+        _trainViewModel = State(initialValue: TrainViewModel(workouts: repositories.workouts))
         _libraryViewModel = State(initialValue: LibraryViewModel(exercises: repositories.exercises))
     }
 
@@ -60,9 +59,11 @@ struct AppTabView: View {
                     showStreak: {
                         trainPath.append(TrainRoute.streak)
                     },
-                    onStartWorkout: { id, name in
-                        activeWorkoutID = id
-                        activeWorkoutName = name
+                    onStartWorkout: { id in
+                        activeWorkoutViewModel = ActiveWorkoutViewModel(
+                            workouts: repositories.workouts,
+                            workoutId: id
+                        )
                     }
                 )
                 .navigationDestination(for: TrainRoute.self) { route in
@@ -106,15 +107,14 @@ struct AppTabView: View {
                 }
             }
             .fullScreenCover(isPresented: Binding(
-                get: { activeWorkoutID != nil },
-                set: { if !$0 { activeWorkoutID = nil } }
+                get: { activeWorkoutViewModel != nil },
+                set: { if !$0 { dismissActiveWorkout() } }
             )) {
-                ActiveWorkoutView(
-                    workoutName: activeWorkoutName,
-                    onEnd: {
-                        activeWorkoutID = nil
-                    }
-                )
+                if let viewModel = activeWorkoutViewModel {
+                    ActiveWorkoutView(viewModel: viewModel, onEnd: {
+                        dismissActiveWorkout()
+                    })
+                }
             }
 
             tabStack(.log, path: $logPath) {
@@ -157,6 +157,12 @@ struct AppTabView: View {
                 }
         }
         }
+    }
+
+    private func dismissActiveWorkout() {
+        activeWorkoutViewModel?.cleanup()
+        activeWorkoutViewModel = nil
+        Task { await trainViewModel.load() }
     }
 
     private func tabStack<Content: View>(

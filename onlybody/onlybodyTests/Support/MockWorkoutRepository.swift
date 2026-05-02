@@ -16,6 +16,13 @@ final class MockWorkoutRepository: WorkoutRepository {
         return stubbedWorkouts
     }
 
+    func workout(by id: UUID) async throws -> Workout? {
+        if shouldThrow {
+            throw TestError.expectedFailure
+        }
+        return stubbedWorkouts.first { $0.id == id }
+    }
+
     func save(_ workout: Workout) async throws {
         if shouldThrow {
             throw TestError.expectedFailure

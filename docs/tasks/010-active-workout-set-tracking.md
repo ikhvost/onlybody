@@ -16,31 +16,31 @@ Implement `RestTimer`, `ActiveWorkoutViewModel`, `ActiveWorkoutView`, and any mi
 
 ## Acceptance criteria
 
-- [ ] Active Workout starts from a selected saved `Workout`.
-- [ ] Active Workout is presented with `fullScreenCover`.
-- [ ] Workout items are sorted by `order` before execution.
-- [ ] Top bar shows current movement index, total count, elapsed timer, and End button.
-- [ ] Progress bar uses scale or equivalent GeometryReader-free approach.
-- [ ] Exercise name uses approved 38px heavy typography through `Theme`.
-- [ ] Caption shows current set and target reps or max hold.
-- [ ] `SetTrackerView` shows completed, current, and pending square states.
-- [ ] Reps card defaults to target reps.
-- [ ] Reps can be adjusted per set.
-- [ ] Weight card defaults to 0 kg.
-- [ ] Weight increments/decrements by 2.5 kg and never goes below 0.
-- [ ] Mark Set Done records the displayed reps for the current set.
-- [ ] Mark Set Done advances to the next set when more sets remain.
-- [ ] Mark Set Done advances to the next exercise after the final set of an exercise.
-- [ ] Completion state appears after the final set of the final exercise.
-- [ ] Rest overlay appears between sets or exercises according to rest rules.
-- [ ] Rest overlay auto-dismisses when countdown reaches zero.
-- [ ] Skip rest cancels countdown and hides overlay.
-- [ ] `RestTimer` uses `Task.sleep(for:)` and not `Timer`, `DispatchQueue`, or `Task.sleep(nanoseconds:)`.
-- [ ] Previous exercise control appears only when there is a previous exercise.
-- [ ] Skip exercise control appears only when there is a next exercise.
-- [ ] Completion overlay shows elapsed time and movement count.
-- [ ] `ActiveWorkoutViewModel` tests cover set advancement, exercise advancement, completion, and completed set data.
-- [ ] `RestTimer` tests cover start, skip, and countdown behavior.
+- [x] Active Workout starts from a selected saved `Workout`.
+- [x] Active Workout is presented with `fullScreenCover`.
+- [x] Workout items are sorted by `order` before execution.
+- [x] Top bar shows current movement index, total count, elapsed timer, and End button.
+- [x] Progress bar uses scale or equivalent GeometryReader-free approach.
+- [x] Exercise name uses approved 38px heavy typography through `Theme`.
+- [x] Caption shows current set and target reps or max hold.
+- [x] `SetTrackerView` shows completed, current, and pending square states.
+- [x] Reps card defaults to target reps.
+- [x] Reps can be adjusted per set.
+- [x] Weight card defaults to 0 kg.
+- [x] Weight increments/decrements by 2.5 kg and never goes below 0.
+- [x] Mark Set Done records the displayed reps for the current set.
+- [x] Mark Set Done advances to the next set when more sets remain.
+- [x] Mark Set Done advances to the next exercise after the final set of an exercise.
+- [x] Completion state appears after the final set of the final exercise.
+- [x] Rest overlay appears between sets or exercises according to rest rules.
+- [x] Rest overlay auto-dismisses when countdown reaches zero.
+- [x] Skip rest cancels countdown and hides overlay.
+- [x] `RestTimer` uses `Task.sleep(for:)` and not `Timer`, `DispatchQueue`, or `Task.sleep(nanoseconds:)`.
+- [x] Previous exercise control appears only when there is a previous exercise.
+- [x] Skip exercise control appears only when there is a next exercise.
+- [x] Completion overlay shows elapsed time and movement count.
+- [x] `ActiveWorkoutViewModel` tests cover set advancement, exercise advancement, completion, and completed set data.
+- [x] `RestTimer` tests cover start, skip, and countdown behavior.
 
 ## Blocked by
 
