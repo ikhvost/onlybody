@@ -16,23 +16,23 @@ Implement `CustomExerciseViewModel` and `CustomExerciseForm`. The form collects 
 
 ## Acceptance criteria
 
-- [ ] Library plus button opens `CustomExerciseForm` as a sheet.
-- [ ] Form uses custom `NavBarView` with Cancel, `New Exercise`, and Save.
-- [ ] Name input is present and uses approved surface/border styling.
-- [ ] Primary muscle section uses single-select chips.
-- [ ] Secondary muscles section uses multi-select chips.
-- [ ] Equipment section uses multi-select chips.
-- [ ] Save is disabled while name is blank or primary muscle is not selected.
-- [ ] Name is trimmed before saving.
-- [ ] If no equipment is selected, saved equipment defaults to `None`.
-- [ ] Saved exercise has `isCustom = true`.
-- [ ] Saved exercise has default `frequencyPreference = normal` unless explicitly changed by model default.
-- [ ] Save goes through `ExerciseRepository.save`.
-- [ ] Successful save dismisses the sheet.
-- [ ] Library refreshes and shows the new custom exercise.
-- [ ] New custom exercise row shows the `CUSTOM` badge.
-- [ ] Save errors are surfaced through ViewModel error state.
-- [ ] `CustomExerciseViewModel` tests cover invalid state, valid state, default equipment, trimmed name, and repository save.
+- [x] Library plus button opens `CustomExerciseForm` as a sheet.
+- [x] Form uses custom `NavBarView` with Cancel, `New Exercise`, and Save.
+- [x] Name input is present and uses approved surface/border styling.
+- [x] Primary muscle section uses single-select chips.
+- [x] Secondary muscles section uses multi-select chips.
+- [x] Equipment section uses multi-select chips.
+- [x] Save is disabled while name is blank or primary muscle is not selected.
+- [x] Name is trimmed before saving.
+- [x] If no equipment is selected, saved equipment defaults to `None`.
+- [x] Saved exercise has `isCustom = true`.
+- [x] Saved exercise has default `frequencyPreference = normal` unless explicitly changed by model default.
+- [x] Save goes through `ExerciseRepository.save`.
+- [x] Successful save dismisses the sheet.
+- [x] Library refreshes and shows the new custom exercise.
+- [x] New custom exercise row shows the `CUSTOM` badge.
+- [x] Save errors are surfaced through ViewModel error state.
+- [x] `CustomExerciseViewModel` tests cover invalid state, valid state, default equipment, trimmed name, and repository save.
 
 ## Blocked by
 
