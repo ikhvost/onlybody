@@ -16,22 +16,22 @@ Add `LibraryViewModel`, `LibraryView`, and shared components needed for the cata
 
 ## Acceptance criteria
 
-- [ ] `LibraryViewModel` is `@Observable` and `@MainActor`.
-- [ ] `LibraryViewModel` depends on `ExerciseRepository` protocol, not SwiftData types.
-- [ ] `LibraryViewModel.load()` populates `allExercises` from the repository and exposes loading/error state.
-- [ ] `filteredExercises` filters by selected muscle and search text.
-- [ ] Search uses `localizedStandardContains`.
-- [ ] Library header matches the design: mono `MOVEMENT CATALOG`, title `Library`, and amber plus button.
-- [ ] Search field uses custom `SearchIcon`.
-- [ ] Filter row uses horizontally scrolling small `ChipView`s.
-- [ ] Filter values include `All`, `Chest`, `Back`, `Shoulders`, `Arms`, `Core`, `Quads`, `Glutes`, `Hamstrings`, and `Calves`.
-- [ ] Movement rows are rendered with reusable `ExerciseRow`.
-- [ ] `ExerciseRow` shows exercise name, primary muscle, equipment, trailing chevron in Library mode, and bottom divider.
-- [ ] Custom exercises render the approved `CUSTOM` badge.
-- [ ] Empty state appears when no exercises match search/filter.
-- [ ] Loading and repository error states are visible or alertable through ViewModel state.
-- [ ] `LibraryView` does not import SwiftData, use `@Query`, or access `ModelContext`.
-- [ ] `LibraryViewModel` tests cover loading, search filtering, muscle filtering, combined filtering, and error state.
+- [x] `LibraryViewModel` is `@Observable` and `@MainActor`.
+- [x] `LibraryViewModel` depends on `ExerciseRepository` protocol, not SwiftData types.
+- [x] `LibraryViewModel.load()` populates `allExercises` from the repository and exposes loading/error state.
+- [x] `filteredExercises` filters by selected muscle and search text.
+- [x] Search uses `localizedStandardContains`.
+- [x] Library header matches the design: mono `MOVEMENT CATALOG`, title `Library`, and amber plus button.
+- [x] Search field uses custom `SearchIcon`.
+- [x] Filter row uses horizontally scrolling small `ChipView`s.
+- [x] Filter values include `All`, `Chest`, `Back`, `Shoulders`, `Arms`, `Core`, `Quads`, `Glutes`, `Hamstrings`, and `Calves`.
+- [x] Movement rows are rendered with reusable `ExerciseRow`.
+- [x] `ExerciseRow` shows exercise name, primary muscle, equipment, trailing chevron in Library mode, and bottom divider.
+- [x] Custom exercises render the approved `CUSTOM` badge.
+- [x] Empty state appears when no exercises match search/filter.
+- [x] Loading and repository error states are visible or alertable through ViewModel state.
+- [x] `LibraryView` does not import SwiftData, use `@Query`, or access `ModelContext`.
+- [x] `LibraryViewModel` tests cover loading, search filtering, muscle filtering, combined filtering, and error state.
 
 ## Blocked by
 

@@ -16,24 +16,24 @@ Create the `Exercise` SwiftData model, `ExerciseRepository` protocol, `SwiftData
 
 ## Acceptance criteria
 
-- [ ] `Exercise` is a SwiftData `@Model` in its own file.
-- [ ] `Exercise.id` uses `@Attribute(.unique)`.
-- [ ] `Exercise` has default values for all non-optional properties.
-- [ ] `Exercise` includes name, primary muscle, secondary muscles, equipment, frequency preference, custom flag, created date, and optional workout item relationship.
-- [ ] `ExerciseRepository` exposes `allExercises`, `exercises(primaryMuscle:)`, `exercises(matching:)`, `save`, and `delete`.
-- [ ] `SwiftDataExerciseRepository` is isolated to the main actor and accepts `ModelContext` through its initializer.
-- [ ] `allExercises()` fetches exercises sorted by name.
-- [ ] Name matching uses `localizedStandardContains`, not `contains`.
-- [ ] `Repositories` is injected through SwiftUI environment.
-- [ ] `BodyweightApp` creates `ModelContainer` for the available models.
-- [ ] `SeedData.json` includes at least 25 exercises.
-- [ ] Seed data covers at least two exercises for each required muscle group from the approved task plan.
-- [ ] Seed equipment values are limited to the approved set: `None`, `Dumbbells`, `Pull-up Bar`, `Resistance Bands`, `Kettlebell`, `Barbell`.
-- [ ] `SeedManager` imports seed data only when the `didSeedExercises` flag is false.
-- [ ] Relaunching the app does not duplicate seeded exercises.
-- [ ] Library placeholder renders real seeded exercises from `ExerciseRepository`.
-- [ ] Views do not import SwiftData and do not use `@Query` or `ModelContext`.
-- [ ] In-memory repository integration test verifies exercise save and fetch behavior.
+- [x] `Exercise` is a SwiftData `@Model` in its own file.
+- [x] `Exercise.id` uses `@Attribute(.unique)`.
+- [x] `Exercise` has default values for all non-optional properties.
+- [x] `Exercise` includes name, primary muscle, secondary muscles, equipment, frequency preference, custom flag, created date, and optional workout item relationship.
+- [x] `ExerciseRepository` exposes `allExercises`, `exercises(primaryMuscle:)`, `exercises(matching:)`, `save`, and `delete`.
+- [x] `SwiftDataExerciseRepository` is isolated to the main actor and accepts `ModelContext` through its initializer.
+- [x] `allExercises()` fetches exercises sorted by name.
+- [x] Name matching uses `localizedStandardContains`, not `contains`.
+- [x] `Repositories` is injected through SwiftUI environment.
+- [x] `BodyweightApp` creates `ModelContainer` for the available models.
+- [x] `SeedData.json` includes at least 25 exercises.
+- [x] Seed data covers at least two exercises for each required muscle group from the approved task plan.
+- [x] Seed equipment values are limited to the approved set: `None`, `Dumbbells`, `Pull-up Bar`, `Resistance Bands`, `Kettlebell`, `Barbell`.
+- [x] `SeedManager` imports seed data only when the `didSeedExercises` flag is false.
+- [x] Relaunching the app does not duplicate seeded exercises.
+- [x] Library placeholder renders real seeded exercises from `ExerciseRepository`.
+- [x] Views do not import SwiftData and do not use `@Query` or `ModelContext`.
+- [x] In-memory repository integration test verifies exercise save and fetch behavior.
 
 ## Blocked by
 

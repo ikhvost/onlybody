@@ -19,6 +19,7 @@ enum Theme {
     static let horizontalPadding: CGFloat = 18
     static let cornerRadius: CGFloat = 4
     static let chipCornerRadius: CGFloat = 3
+    static let space3: CGFloat = 3
     static let space6: CGFloat = 6
     static let space8: CGFloat = 8
     static let space10: CGFloat = 10

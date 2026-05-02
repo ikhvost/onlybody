@@ -15,7 +15,7 @@ struct LibraryView: View {
 
             VStack(alignment: .leading, spacing: 0) {
                 HStack(alignment: .bottom) {
-                    VStack(alignment: .leading, spacing: Theme.space8) {
+                    VStack(alignment: .leading, spacing: Theme.space3) {
                         MonoLabel(text: "Movement catalog", size: 9, tracking: 1.2)
 
                         Text("Library")

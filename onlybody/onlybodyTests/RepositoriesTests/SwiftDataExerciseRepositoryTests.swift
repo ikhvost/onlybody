@@ -9,6 +9,7 @@ struct SwiftDataExerciseRepositoryTests {
         let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(
             for: Exercise.self,
+            Workout.self,
             WorkoutItem.self,
             configurations: configuration
         )
