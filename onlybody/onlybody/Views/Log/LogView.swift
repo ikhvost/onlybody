@@ -148,12 +148,6 @@ struct LogView: View {
     .preferredColorScheme(.dark)
 }
 
-private struct EmptySessionRepository: SessionRepository {
-    func allSessions() async throws -> [Session] { [] }
-    func recentSessions(limit: Int) async throws -> [Session] { [] }
-    func save(_ session: Session) async throws {}
-}
-
 private struct StubSessionRepository: SessionRepository {
     func allSessions() async throws -> [Session] {
         let may1 = Session()

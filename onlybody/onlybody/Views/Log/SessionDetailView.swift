@@ -2,14 +2,14 @@ import SwiftUI
 
 struct SessionDetailView: View {
     @Environment(\.dismiss) private var dismiss
-    let session: Session
+    let viewModel: SessionDetailViewModel
 
     var body: some View {
         ZStack {
             Theme.bg.ignoresSafeArea()
 
             VStack(spacing: 0) {
-                NavBarView(title: session.workoutName) {
+                NavBarView(title: viewModel.workoutName) {
                     Button {
                         dismiss()
                     } label: {
@@ -27,24 +27,50 @@ struct SessionDetailView: View {
                 }
 
                 ScrollView {
-                    VStack(alignment: .leading, spacing: Theme.space16) {
-                        MonoLabel(text: dateLabel, size: 9, color: Theme.text3, tracking: 1.0)
+                    VStack(alignment: .leading, spacing: 0) {
+                        MonoLabel(text: viewModel.dateLabel, size: 9, color: Theme.text3, tracking: 1.0)
+                            .padding(.bottom, Theme.space6)
 
                         HStack(spacing: Theme.space10) {
-                            Text(durationText)
-                                .font(Theme.fontMono(24, .medium))
-                                .foregroundStyle(Theme.accent)
+                            HStack(spacing: Theme.space3) {
+                                Text(viewModel.durationValue)
+                                    .font(Theme.fontMono(24, .medium))
+                                    .foregroundStyle(Theme.accent)
+                                Text(viewModel.durationUnit)
+                                    .font(Theme.fontMono(12))
+                                    .foregroundStyle(Theme.text2)
+                            }
 
-                            Text(caloriesText)
-                                .font(Theme.fontMono(12))
-                                .foregroundStyle(Theme.text2)
+                            HStack(spacing: Theme.space3) {
+                                Text(viewModel.caloriesValue)
+                                    .font(Theme.fontMono(24, .medium))
+                                    .foregroundStyle(Theme.text)
+                                if !viewModel.caloriesUnit.isEmpty {
+                                    Text(viewModel.caloriesUnit)
+                                        .font(Theme.fontMono(12))
+                                        .foregroundStyle(Theme.text2)
+                                }
+                            }
                         }
+                        .padding(.bottom, Theme.space24)
 
                         Rectangle()
                             .fill(Theme.border)
                             .frame(height: 1)
+                            .padding(.bottom, Theme.space16)
 
-                        MonoLabel(text: "Session details will be available in the next update.", size: 10, color: Theme.text2, tracking: 0.4)
+                        ForEach(viewModel.sortedItems.indices, id: \.self) { index in
+                            let item = viewModel.sortedItems[index]
+                            let isLast = index == viewModel.sortedItems.count - 1
+
+                            sessionItemView(item: item, isLast: isLast)
+                        }
+
+                        GhostButton(
+                            title: "Repeat this session",
+                            action: {}
+                        )
+                        .padding(.top, Theme.space24)
                     }
                     .padding(.horizontal, Theme.horizontalPadding)
                     .padding(.top, Theme.space16)
@@ -56,27 +82,41 @@ struct SessionDetailView: View {
         .toolbar(.hidden, for: .navigationBar)
     }
 
-    private var dateLabel: String {
-        session.date.formatted(
-            .dateTime
-                .weekday(.wide)
-                .month(.wide)
-                .day()
-        ).uppercased()
-    }
+    private func sessionItemView(item: SessionItem, isLast: Bool) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(alignment: .top) {
+                Text(item.exerciseName)
+                    .font(Theme.fontSans(14, .bold))
+                    .foregroundStyle(Theme.text)
 
-    private var durationText: String {
-        let totalSeconds = session.durationSeconds
-        let minutes = totalSeconds / 60
-        let seconds = totalSeconds % 60
-        return "\(minutes):\(String(format: "%02d", seconds)) min"
-    }
+                Spacer()
 
-    private var caloriesText: String {
-        if let cals = session.caloriesBurned {
-            return "\(cals) kcal"
+                MonoLabel(
+                    text: "\(viewModel.totalReps(for: item)) REPS TOTAL",
+                    size: 9,
+                    color: Theme.text3,
+                    tracking: 0.3
+                )
+            }
+            .padding(.bottom, Theme.space6)
+
+            ForEach(item.setReps.indices, id: \.self) { setIndex in
+                MonoLabel(
+                    text: viewModel.setLabel(index: setIndex, reps: item.setReps[setIndex]),
+                    size: 9,
+                    color: Theme.text3,
+                    tracking: 0.3
+                )
+                .padding(.bottom, 2)
+            }
+
+            if !isLast {
+                Rectangle()
+                    .fill(Theme.border)
+                    .frame(height: 1)
+                    .padding(.vertical, Theme.space13)
+            }
         }
-        return "—"
     }
 }
 
@@ -87,6 +127,27 @@ struct SessionDetailView: View {
     session.caloriesBurned = 102
     session.date = Calendar.current.date(from: DateComponents(year: 2026, month: 5, day: 1))!
 
-    return SessionDetailView(session: session)
-        .preferredColorScheme(.dark)
+    let item1 = SessionItem()
+    item1.order = 0
+    item1.exerciseName = "Push-Ups"
+    item1.plannedSets = 3
+    item1.plannedReps = 12
+    item1.setReps = [12, 12, 12]
+
+    let item2 = SessionItem()
+    item2.order = 1
+    item2.exerciseName = "Pull-Ups"
+    item2.plannedSets = 3
+    item2.plannedReps = 8
+    item2.setReps = [8, 8, 8]
+
+    session.items = [item1, item2]
+
+    return SessionDetailView(
+        viewModel: SessionDetailViewModel(
+            session: session,
+            sessions: EmptySessionRepository()
+        )
+    )
+    .preferredColorScheme(.dark)
 }

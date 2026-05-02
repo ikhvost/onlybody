@@ -16,21 +16,21 @@ Implement `SessionDetailViewModel` and `SessionDetailView`. The ViewModel can be
 
 ## Acceptance criteria
 
-- [ ] Tapping a Log row opens Session Detail.
-- [ ] Detail route uses `navigationDestination(for:)`.
-- [ ] Screen uses custom `NavBarView` with Back and session workout name as title.
-- [ ] Date displays in approved uppercase weekday/month/day format, for example `FRIDAY, MAY 1`.
-- [ ] Duration displays in `MM:SS` and uses amber mono styling.
-- [ ] Calories display uses approved mono styling and handles nil values.
-- [ ] Session items are sorted by `order`.
-- [ ] Each session item shows exercise name.
-- [ ] Each session item shows total reps computed from `setReps`.
-- [ ] Each completed set is rendered as a mono line such as `SET 1 - 12 REPS` or the approved equivalent label.
-- [ ] Divider styling matches the approved design.
-- [ ] `Repeat this session` ghost button is present as an MVP affordance.
-- [ ] Repeat button does not need to perform an action unless separately scoped.
-- [ ] `SessionDetailView` does not import SwiftData, use `@Query`, or access `ModelContext`.
-- [ ] `SessionDetailViewModel` tests cover date formatting, duration formatting, sorted items, and total reps.
+- [x] Tapping a Log row opens Session Detail.
+- [x] Detail route uses `navigationDestination(for:)`.
+- [x] Screen uses custom `NavBarView` with Back and session workout name as title.
+- [x] Date displays in approved uppercase weekday/month/day format, for example `FRIDAY, MAY 1`.
+- [x] Duration displays in `MM:SS` and uses amber mono styling.
+- [x] Calories display uses approved mono styling and handles nil values.
+- [x] Session items are sorted by `order`.
+- [x] Each session item shows exercise name.
+- [x] Each session item shows total reps computed from `setReps`.
+- [x] Each completed set is rendered as a mono line such as `SET 1 - 12 REPS` or the approved equivalent label.
+- [x] Divider styling matches the approved design.
+- [x] `Repeat this session` ghost button is present as an MVP affordance.
+- [x] Repeat button does not need to perform an action unless separately scoped.
+- [x] `SessionDetailView` does not import SwiftData, use `@Query`, or access `ModelContext`.
+- [x] `SessionDetailViewModel` tests cover date formatting, duration formatting, sorted items, and total reps.
 
 ## Blocked by
 

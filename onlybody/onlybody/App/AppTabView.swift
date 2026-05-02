@@ -131,7 +131,12 @@ struct AppTabView: View {
                     switch route {
                     case .sessionDetail(let sessionID):
                         if let session = logViewModel.sessions.first(where: { $0.id == sessionID }) {
-                            SessionDetailView(session: session)
+                            SessionDetailView(
+                                viewModel: SessionDetailViewModel(
+                                    session: session,
+                                    sessions: repositories.sessions
+                                )
+                            )
                         } else {
                             ZStack {
                                 Theme.bg.ignoresSafeArea()
