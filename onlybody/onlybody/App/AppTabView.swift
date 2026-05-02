@@ -4,6 +4,7 @@ struct AppTabView: View {
     private let repositories: Repositories
 
     @State private var tabViewModel = AppTabViewModel()
+    @State private var trainViewModel: TrainViewModel
     @State private var libraryViewModel: LibraryViewModel
     @State private var trainPath = NavigationPath()
     @State private var logPath = NavigationPath()
@@ -11,6 +12,7 @@ struct AppTabView: View {
 
     init(repositories: Repositories) {
         self.repositories = repositories
+        _trainViewModel = State(initialValue: TrainViewModel(workouts: repositories.workouts, sessions: repositories.sessions))
         _libraryViewModel = State(initialValue: LibraryViewModel(exercises: repositories.exercises))
     }
 
@@ -45,7 +47,7 @@ struct AppTabView: View {
     private var tabContent: some View {
         ZStack {
             tabStack(.train, path: $trainPath) {
-                TrainView()
+                TrainView(viewModel: trainViewModel)
             }
 
             tabStack(.log, path: $logPath) {

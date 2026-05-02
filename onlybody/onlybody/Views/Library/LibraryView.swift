@@ -53,7 +53,7 @@ struct LibraryView: View {
                             .autocorrectionDisabled()
                     }
                     .padding(.horizontal, Theme.space10)
-                    .padding(.vertical, 9)
+                    .padding(.vertical, Theme.space9)
                     .background(Theme.surface)
                     .overlay {
                         RoundedRectangle(cornerRadius: Theme.cornerRadius)

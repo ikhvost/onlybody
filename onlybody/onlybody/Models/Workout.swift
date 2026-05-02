@@ -9,7 +9,7 @@ final class Workout {
     var targetMuscleGroups: [String] = []
     var scheduledDays: [String] = []
     var createdAt: Date = Date.now
-    @Relationship(deleteRule: .nullify) var items: [WorkoutItem]? = nil
+    @Relationship(deleteRule: .cascade) var items: [WorkoutItem]? = nil
 
     init() {}
 }

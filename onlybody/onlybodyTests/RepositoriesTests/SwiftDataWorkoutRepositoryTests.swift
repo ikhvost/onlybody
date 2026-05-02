@@ -116,7 +116,7 @@ struct SwiftDataWorkoutRepositoryTests {
     }
 
     @Test
-    func deleteWorkoutNullifiesItems() async throws {
+    func deleteWorkoutCascadesToItemsButPreservesExercises() async throws {
         let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(
             for: Exercise.self,
@@ -146,10 +146,16 @@ struct SwiftDataWorkoutRepositoryTests {
         let before = try await workoutRepo.allWorkouts()
         #expect(before.count == 1)
 
+        let workoutItemsBeforeDelete = try container.mainContext.fetch(FetchDescriptor<WorkoutItem>())
+        #expect(workoutItemsBeforeDelete.count == 1)
+
         try await workoutRepo.delete(workout)
 
         let after = try await workoutRepo.allWorkouts()
         #expect(after.isEmpty)
+
+        let workoutItemsAfterDelete = try container.mainContext.fetch(FetchDescriptor<WorkoutItem>())
+        #expect(workoutItemsAfterDelete.isEmpty)
 
         let stillExists = try await exerciseRepo.allExercises()
         #expect(stillExists.count == 1)

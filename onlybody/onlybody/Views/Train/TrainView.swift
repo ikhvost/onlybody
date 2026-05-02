@@ -1,21 +1,84 @@
 import SwiftUI
 
 struct TrainView: View {
+    let viewModel: TrainViewModel
+
     var body: some View {
         ZStack {
             Theme.bg.ignoresSafeArea()
-            VStack(spacing: Theme.space8) {
-                MonoLabel(text: "Ready to train", size: 10, tracking: 1.2)
-                Text("OnlyBody")
-                    .font(Theme.fontSans(26, .heavy))
-                    .tracking(-1)
-                    .foregroundStyle(Theme.text)
+
+            VStack(spacing: 0) {
+                TrainHeaderView(
+                    dateDisplay: viewModel.dateDisplay,
+                    onCreateTap: {
+                        // Future: open MusclePicker
+                    }
+                )
+
+                if viewModel.isLoading {
+                    Spacer()
+                    ProgressView()
+                        .tint(Theme.accent)
+                    Spacer()
+                } else if let errorMessage = viewModel.errorMessage {
+                    Spacer()
+                    VStack(spacing: Theme.space10) {
+                        MonoLabel(text: errorMessage, size: 10, color: Theme.text2, tracking: 0.4)
+                        Button("Retry") {
+                            Task { await viewModel.load() }
+                        }
+                        .font(Theme.fontMono(12, .medium))
+                        .foregroundStyle(Theme.accent)
+                    }
+                    Spacer()
+                } else if viewModel.workouts.isEmpty {
+                    Spacer()
+                    TrainEmptyStateView()
+                    Spacer()
+                } else {
+                    DayStripView(
+                        dayNames: viewModel.dayNames,
+                        todayIndex: viewModel.todayIndex,
+                        workouts: viewModel.workouts
+                    )
+                    TodayCalloutView(
+                        todaysWorkouts: viewModel.todaysWorkouts
+                    )
+                    WorkoutListView(
+                        workouts: viewModel.workouts,
+                        todayName: viewModel.todayName,
+                        onEdit: { _ in
+                            // Future: open SessionBuilder for editing
+                        },
+                        onStart: { _ in
+                            // Future: open ActiveSession
+                        }
+                    )
+                }
             }
         }
+        .task { await viewModel.load() }
     }
 }
 
-#Preview("Train") {
-    TrainView()
-        .preferredColorScheme(.dark)
+#Preview("Train — placeholder") {
+    TrainView(
+        viewModel: TrainViewModel(
+            workouts: PlaceholderWorkoutRepository(),
+            sessions: PlaceholderSessionRepository()
+        )
+    )
+    .preferredColorScheme(.dark)
+}
+
+private struct PlaceholderWorkoutRepository: WorkoutRepository {
+    func allWorkouts() async throws -> [Workout] { [] }
+    func save(_ workout: Workout) async throws {}
+    func delete(_ workout: Workout) async throws {}
+}
+
+private struct PlaceholderSessionRepository: SessionRepository {
+    func allSessions() async throws -> [Session] { [] }
+    func recentSessions(limit: Int) async throws -> [Session] { [] }
+    func save(_ session: Session) async throws {}
 }

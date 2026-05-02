@@ -34,7 +34,7 @@ struct LibraryExerciseRow: View {
                 ChevronIcon(color: Theme.text3, size: 14)
             }
             .padding(.horizontal, Theme.horizontalPadding)
-            .padding(.vertical, 13)
+            .padding(.vertical, Theme.space13)
             .contentShape(.rect)
         }
         .buttonStyle(.plain)

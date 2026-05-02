@@ -16,24 +16,24 @@ Create `Workout` and `WorkoutItem` SwiftData models, `WorkoutRepository` protoco
 
 ## Acceptance criteria
 
-- [ ] `Workout` is a SwiftData `@Model` in its own file.
-- [ ] `WorkoutItem` is a SwiftData `@Model` in its own file.
-- [ ] `Workout.id` uses `@Attribute(.unique)`.
-- [ ] `Workout` includes name, mode, target muscle groups, scheduled days, created date, and optional items relationship.
-- [ ] `WorkoutItem` includes id, order, sets, target reps, rest seconds, optional exercise relationship, and optional workout relationship.
-- [ ] Relationships use optional values and approved delete rules.
-- [ ] `WorkoutRepository` exposes `allWorkouts`, `save`, and `delete`.
-- [ ] `SwiftDataWorkoutRepository` accepts `ModelContext` through initializer.
-- [ ] `allWorkouts()` returns saved workouts in stable order.
-- [ ] `TrainViewModel` is `@Observable` and `@MainActor`.
-- [ ] `TrainViewModel` depends on `WorkoutRepository` and `SessionRepository` protocol placeholders only where needed.
-- [ ] Train screen loads workouts from the repository.
-- [ ] Train header uses approved date/title/add button layout.
-- [ ] Day strip renders all seven days.
-- [ ] Empty state appears when no workouts exist.
-- [ ] Workout rows show name, scheduled days or `UNSCHEDULED`, movement count, edit button, and start button.
-- [ ] `TrainView` does not import SwiftData, use `@Query`, or access `ModelContext`.
-- [ ] In-memory repository tests cover workout save, fetch, and delete.
+- [x] `Workout` is a SwiftData `@Model` in its own file.
+- [x] `WorkoutItem` is a SwiftData `@Model` in its own file.
+- [x] `Workout.id` uses `@Attribute(.unique)`.
+- [x] `Workout` includes name, mode, target muscle groups, scheduled days, created date, and optional items relationship.
+- [x] `WorkoutItem` includes id, order, sets, target reps, rest seconds, optional exercise relationship, and optional workout relationship.
+- [x] Relationships use optional values and approved delete rules.
+- [x] `WorkoutRepository` exposes `allWorkouts`, `save`, and `delete`.
+- [x] `SwiftDataWorkoutRepository` accepts `ModelContext` through initializer.
+- [x] `allWorkouts()` returns saved workouts in stable order.
+- [x] `TrainViewModel` is `@Observable` and `@MainActor`.
+- [x] `TrainViewModel` depends on `WorkoutRepository` and `SessionRepository` protocol placeholders only where needed.
+- [x] Train screen loads workouts from the repository.
+- [x] Train header uses approved date/title/add button layout.
+- [x] Day strip renders all seven days.
+- [x] Empty state appears when no workouts exist.
+- [x] Workout rows show name, scheduled days or `UNSCHEDULED`, movement count, edit button, and start button.
+- [x] `TrainView` does not import SwiftData, use `@Query`, or access `ModelContext`.
+- [x] In-memory repository tests cover workout save, fetch, and delete.
 
 ## Blocked by
 
