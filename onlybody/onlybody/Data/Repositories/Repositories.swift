@@ -23,6 +23,7 @@ private struct FatalErrorWorkoutRepository: WorkoutRepository {
     func allWorkouts() async throws -> [Workout] { fatalError("Not configured") }
     func save(_ workout: Workout) async throws { fatalError("Not configured") }
     func delete(_ workout: Workout) async throws { fatalError("Not configured") }
+    func deleteItems(_ items: [WorkoutItem]) async throws { fatalError("Not configured") }
 }
 
 private struct FatalErrorSessionRepository: SessionRepository {

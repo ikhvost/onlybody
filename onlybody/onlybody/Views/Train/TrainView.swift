@@ -2,6 +2,7 @@ import SwiftUI
 
 struct TrainView: View {
     let viewModel: TrainViewModel
+    let showMusclePicker: () -> Void
     let showSessionBuilder: (UUID?) -> Void
 
     var body: some View {
@@ -12,7 +13,7 @@ struct TrainView: View {
                 TrainHeaderView(
                     dateDisplay: viewModel.dateDisplay,
                     onCreateTap: {
-                        showSessionBuilder(nil)
+                        showMusclePicker()
                     }
                 )
 
@@ -68,6 +69,7 @@ struct TrainView: View {
             workouts: PlaceholderWorkoutRepository(),
             sessions: PlaceholderSessionRepository()
         ),
+        showMusclePicker: {},
         showSessionBuilder: { _ in }
     )
     .preferredColorScheme(.dark)
@@ -77,6 +79,7 @@ private struct PlaceholderWorkoutRepository: WorkoutRepository {
     func allWorkouts() async throws -> [Workout] { [] }
     func save(_ workout: Workout) async throws {}
     func delete(_ workout: Workout) async throws {}
+    func deleteItems(_ items: [WorkoutItem]) async throws {}
 }
 
 private struct PlaceholderSessionRepository: SessionRepository {

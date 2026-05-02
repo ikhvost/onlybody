@@ -16,26 +16,26 @@ Implement `MusclePickerViewModel`, `MusclePickerView`, and `SmartWorkoutGenerato
 
 ## Acceptance criteria
 
-- [ ] Train plus opens Muscle Picker before Session Builder.
-- [ ] Muscle Picker uses custom `NavBarView` with Back and `New Session`.
-- [ ] Muscle Picker shows the approved heading and mono label.
-- [ ] Muscle Picker includes all 12 approved muscle chips: Chest, Back, Shoulders, Arms, Core, Quads, Glutes, Hamstrings, Calves, Full Body, Upper, and Lower.
-- [ ] Muscle chips toggle selection.
-- [ ] Selection summary joins selected muscles with ` + `.
-- [ ] Build button is disabled until at least one muscle is selected.
-- [ ] Build routes to Session Builder with selected targets.
-- [ ] Skip routes to Session Builder with no targets.
-- [ ] Session Builder displays selected targets as read-only amber dim chips.
-- [ ] Smart mode shows the approved auto-selected movements info card.
-- [ ] Saving in smart mode generates workout items from available exercises.
-- [ ] `SmartWorkoutGenerator` excludes exercises where `frequencyPreference == never`.
-- [ ] `SmartWorkoutGenerator` matches exercises by primary muscle or secondary muscles.
-- [ ] `SmartWorkoutGenerator` sorts preference order as `more`, then `normal`, then `less`.
-- [ ] `SmartWorkoutGenerator` respects duration budget except for the first generated item.
-- [ ] Fallback behavior uses equipment-free exercises when too few matches exist.
-- [ ] Generated workout persists target muscle groups to `Workout.targetMuscleGroups`.
-- [ ] Generated workout appears on Train after save.
-- [ ] Service tests cover exclusion, preference ordering, duration budget, fallback, and muscle filtering.
+- [x] Train plus opens Muscle Picker before Session Builder.
+- [x] Muscle Picker uses custom `NavBarView` with Back and `New Session`.
+- [x] Muscle Picker shows the approved heading and mono label.
+- [x] Muscle Picker includes all 12 approved muscle chips: Chest, Back, Shoulders, Arms, Core, Quads, Glutes, Hamstrings, Calves, Full Body, Upper, and Lower.
+- [x] Muscle chips toggle selection.
+- [x] Selection summary joins selected muscles with ` + `.
+- [x] Build button is disabled until at least one muscle is selected.
+- [x] Build routes to Session Builder with selected targets.
+- [x] Skip routes to Session Builder with no targets.
+- [x] Session Builder displays selected targets as read-only amber dim chips.
+- [x] Smart mode shows the approved auto-selected movements info card.
+- [x] Saving in smart mode generates workout items from available exercises.
+- [x] `SmartWorkoutGenerator` excludes exercises where `frequencyPreference == never`.
+- [x] `SmartWorkoutGenerator` matches exercises by primary muscle or secondary muscles.
+- [x] `SmartWorkoutGenerator` sorts preference order as `more`, then `normal`, then `less`.
+- [x] `SmartWorkoutGenerator` respects duration budget except for the first generated item.
+- [x] Fallback behavior uses equipment-free exercises when too few matches exist.
+- [x] Generated workout persists target muscle groups to `Workout.targetMuscleGroups`.
+- [x] Generated workout appears on Train after save.
+- [x] Service tests cover exclusion, preference ordering, duration budget, fallback, and muscle filtering.
 
 ## Blocked by
 

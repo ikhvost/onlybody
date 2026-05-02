@@ -556,4 +556,157 @@ struct SessionBuilderViewModelTests {
         #expect(viewModel.allExercises.isEmpty)
         #expect(viewModel.errorMessage == "Could not load exercises.")
     }
+
+    // MARK: - Smart Save
+
+    @Test
+    func smartSaveGeneratesMovementsAndSavesWorkout() async {
+        let workoutRepo = MockWorkoutRepository()
+        let exerciseRepo = MockExerciseRepository()
+
+        let chestExercise = Exercise()
+        chestExercise.name = "Push-Ups"
+        chestExercise.primaryMuscle = "Chest"
+        chestExercise.equipment = ["None"]
+
+        let backExercise = Exercise()
+        backExercise.name = "Pull-Ups"
+        backExercise.primaryMuscle = "Back"
+        backExercise.equipment = ["Pull-up Bar"]
+
+        let deterministicGen = SmartWorkoutGenerator(
+            randomSets: { _ in 3 },
+            randomReps: { _ in 10 },
+            randomRest: { _ in 45 }
+        )
+
+        let viewModel = SessionBuilderViewModel(
+            workouts: workoutRepo,
+            exercises: exerciseRepo,
+            workout: nil,
+            targetMuscleGroups: ["Chest", "Back"],
+            generator: deterministicGen
+        )
+
+        viewModel.allExercises = [chestExercise, backExercise]
+        viewModel.name = "Smart Chest & Back"
+        viewModel.toggleDay("Mon")
+
+        let success = await viewModel.save()
+
+        #expect(success == true)
+        #expect(workoutRepo.savedWorkouts.count == 1)
+
+        let savedWorkout = workoutRepo.savedWorkouts.first!
+        #expect(savedWorkout.name == "Smart Chest & Back")
+        #expect(savedWorkout.mode == "smart")
+        #expect(savedWorkout.targetMuscleGroups == ["Chest", "Back"])
+        #expect(savedWorkout.scheduledDays == ["Mon"])
+
+        let items = savedWorkout.items?.sorted(by: { $0.order < $1.order }) ?? []
+        #expect(items.count >= 2)
+    }
+
+    @Test
+    func smartSaveSetsErrorMessageWhenNoExercisesMatch() async {
+        let workoutRepo = MockWorkoutRepository()
+        let exerciseRepo = MockExerciseRepository()
+        let deterministicGen = SmartWorkoutGenerator(
+            randomSets: { _ in 3 },
+            randomReps: { _ in 10 },
+            randomRest: { _ in 45 }
+        )
+
+        let viewModel = SessionBuilderViewModel(
+            workouts: workoutRepo,
+            exercises: exerciseRepo,
+            workout: nil,
+            targetMuscleGroups: ["Chest"],
+            generator: deterministicGen
+        )
+
+        viewModel.allExercises = []
+        viewModel.name = "Empty Smart"
+
+        let success = await viewModel.save()
+
+        #expect(success == false)
+        #expect(viewModel.errorMessage == "No exercises match. Try different muscle groups.")
+        #expect(workoutRepo.savedWorkouts.isEmpty)
+    }
+
+    @Test
+    func smartSavePreservesManualModeWhenNoTargets() async {
+        let workoutRepo = MockWorkoutRepository()
+        let exerciseRepo = MockExerciseRepository()
+
+        let exercise = Exercise()
+        exercise.name = "Push-Ups"
+
+        let viewModel = SessionBuilderViewModel(
+            workouts: workoutRepo,
+            exercises: exerciseRepo,
+            workout: nil,
+            targetMuscleGroups: []
+        )
+
+        viewModel.allExercises = [exercise]
+        viewModel.mode = "manual"
+        viewModel.addMovement(exercise)
+
+        let success = await viewModel.save()
+
+        #expect(success == true)
+        let savedWorkout = workoutRepo.savedWorkouts.first!
+        #expect(savedWorkout.mode == "manual")
+        #expect(savedWorkout.targetMuscleGroups.isEmpty)
+        #expect(savedWorkout.items?.count == 1)
+    }
+
+    @Test
+    func smartSaveDefaultModeWhenTargetsProvided() async {
+        let workoutRepo = MockWorkoutRepository()
+        let exerciseRepo = MockExerciseRepository()
+        let deterministicGen = SmartWorkoutGenerator(
+            randomSets: { _ in 3 },
+            randomReps: { _ in 10 },
+            randomRest: { _ in 45 }
+        )
+
+        let chestExercise = Exercise()
+        chestExercise.name = "Push-Ups"
+        chestExercise.primaryMuscle = "Chest"
+        chestExercise.equipment = ["None"]
+
+        let viewModel = SessionBuilderViewModel(
+            workouts: workoutRepo,
+            exercises: exerciseRepo,
+            workout: nil,
+            targetMuscleGroups: ["Chest"],
+            generator: deterministicGen
+        )
+
+        #expect(viewModel.mode == "smart")
+    }
+
+    @Test
+    func editModePreservesTargetMuscleGroups() async {
+        let workoutRepo = MockWorkoutRepository()
+        let exerciseRepo = MockExerciseRepository()
+
+        let existing = Workout()
+        existing.id = UUID()
+        existing.name = "Old Smart"
+        existing.mode = "smart"
+        existing.targetMuscleGroups = ["Chest", "Back"]
+
+        let viewModel = SessionBuilderViewModel(
+            workouts: workoutRepo,
+            exercises: exerciseRepo,
+            workout: existing
+        )
+
+        #expect(viewModel.targetMuscleGroups == ["Chest", "Back"])
+        #expect(viewModel.mode == "smart")
+    }
 }

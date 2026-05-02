@@ -26,4 +26,11 @@ final class SwiftDataWorkoutRepository: WorkoutRepository {
         context.delete(workout)
         try context.save()
     }
+
+    func deleteItems(_ items: [WorkoutItem]) async throws {
+        for item in items {
+            context.delete(item)
+        }
+        try context.save()
+    }
 }

@@ -49,13 +49,32 @@ struct AppTabView: View {
             tabStack(.train, path: $trainPath) {
                 TrainView(
                     viewModel: trainViewModel,
+                    showMusclePicker: {
+                        trainPath.append(TrainRoute.musclePicker)
+                    },
                     showSessionBuilder: { workoutID in
                         trainPath.append(TrainRoute.sessionBuilder(workoutID: workoutID))
                     }
                 )
                 .navigationDestination(for: TrainRoute.self) { route in
                     switch route {
-                    case .sessionBuilder(let workoutID):
+                    case .musclePicker:
+                        MusclePickerView(
+                            viewModel: MusclePickerViewModel(),
+                            onBuild: { selected in
+                                trainPath.append(TrainRoute.sessionBuilder(
+                                    workoutID: nil,
+                                    targetMuscleGroups: selected
+                                ))
+                            },
+                            onSkip: {
+                                trainPath.append(TrainRoute.sessionBuilder(
+                                    workoutID: nil,
+                                    targetMuscleGroups: []
+                                ))
+                            }
+                        )
+                    case .sessionBuilder(let workoutID, let targetMuscleGroups):
                         let workout = workoutID.flatMap { id in
                             trainViewModel.workouts.first { $0.id == id }
                         }
@@ -63,7 +82,8 @@ struct AppTabView: View {
                             viewModel: SessionBuilderViewModel(
                                 workouts: repositories.workouts,
                                 exercises: repositories.exercises,
-                                workout: workout
+                                workout: workout,
+                                targetMuscleGroups: targetMuscleGroups
                             )
                         )
                     }

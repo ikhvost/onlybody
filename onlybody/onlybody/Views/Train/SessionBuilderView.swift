@@ -41,6 +41,7 @@ struct SessionBuilderView: View {
 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
+                        targetChipsSection
                         nameSection
                         setStyleSection
                         smartInfoSection
@@ -65,6 +66,16 @@ struct SessionBuilderView: View {
         .task {
             await viewModel.loadExercises()
         }
+        .alert("Error", isPresented: Binding(
+            get: { viewModel.errorMessage != nil },
+            set: { if !$0 { viewModel.errorMessage = nil } }
+        )) {
+            Button("OK") {
+                viewModel.errorMessage = nil
+            }
+        } message: {
+            Text(viewModel.errorMessage ?? "")
+        }
     }
 
     private func handleSave() {
@@ -73,6 +84,35 @@ struct SessionBuilderView: View {
             if success {
                 dismiss()
             }
+        }
+    }
+
+    // MARK: - Target Chips
+
+    @ViewBuilder
+    private var targetChipsSection: some View {
+        if !viewModel.targetMuscleGroups.isEmpty {
+            VStack(alignment: .leading, spacing: Theme.space8) {
+                MonoLabel(text: "Targets", size: 10, color: Theme.text2, tracking: 0.5)
+
+                FlowLayout(spacing: Theme.space6) {
+                    ForEach(viewModel.targetMuscleGroups, id: \.self) { muscleID in
+                        Text(muscleLabel(for: muscleID))
+                            .font(Theme.fontSans(12, .semibold))
+                            .foregroundStyle(Theme.accent)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 4)
+                            .background(Theme.accentDim)
+                            .clipShape(.rect(cornerRadius: Theme.chipCornerRadius))
+                            .overlay {
+                                RoundedRectangle(cornerRadius: Theme.chipCornerRadius)
+                                    .stroke(Theme.accent.opacity(0.2), lineWidth: 1)
+                            }
+                    }
+                }
+            }
+            .padding(.horizontal, Theme.horizontalPadding)
+            .padding(.top, Theme.space16)
         }
     }
 
@@ -149,7 +189,7 @@ struct SessionBuilderView: View {
                     .font(Theme.fontSans(13, .bold))
                     .foregroundStyle(Theme.text)
 
-                Text("Movements are picked daily from your targets. Switch to \"I choose\" to build manually.")
+                Text(smartInfoDescription)
                     .font(Theme.fontSans(12))
                     .foregroundStyle(Theme.text2)
                     .lineSpacing(4)
@@ -165,6 +205,16 @@ struct SessionBuilderView: View {
             .padding(.horizontal, Theme.horizontalPadding)
             .padding(.top, Theme.space14)
         }
+    }
+
+    private var smartInfoDescription: String {
+        if viewModel.targetMuscleGroups.isEmpty {
+            return "Movements are picked daily from your targets. Switch to \"I choose\" to build manually."
+        }
+
+        let labels = viewModel.targetMuscleGroups.map { muscleLabel(for: $0) }
+        let formatted = labels.formatted(.list(type: .and))
+        return "Movements are picked daily from your targets (\(formatted)). Switch to \"I choose\" to build manually."
     }
 
     // MARK: - Movements
@@ -351,22 +401,42 @@ struct SessionBuilderView: View {
             }
             .padding(.horizontal, Theme.horizontalPadding)
             .padding(.top, Theme.space14)
-            .padding(.bottom, Theme.space10)
-            .overlay(alignment: .top) {
-                Rectangle()
-                    .fill(Theme.border)
-                    .frame(height: 1)
-                    .padding(.horizontal, Theme.horizontalPadding)
+                .padding(.bottom, Theme.space10)
+                .overlay(alignment: .top) {
+                    Rectangle()
+                        .fill(Theme.border)
+                        .frame(height: 1)
+                        .padding(.horizontal, Theme.horizontalPadding)
+                }
             }
-        }
+    }
+
+    private func muscleLabel(for id: String) -> String {
+        muscleLabels[id] ?? id
     }
 }
+
+private let muscleLabels: [String: String] = [
+    "Chest": "Chest",
+    "Back": "Back",
+    "Shoulders": "Shoulders",
+    "Arms": "Arms",
+    "Core": "Core",
+    "Quads": "Quads",
+    "Glutes": "Glutes",
+    "Hamstrings": "Hamstrings",
+    "Calves": "Calves",
+    "Full Body": "Full Body",
+    "Upper": "Upper",
+    "Lower": "Lower",
+]
 
 #Preview("Session Builder — Create") {
     let viewModel = SessionBuilderViewModel(
         workouts: PreviewWorkoutRepository(),
         exercises: PreviewExerciseRepository(),
-        workout: nil
+        workout: nil,
+        targetMuscleGroups: []
     )
 
     let pushUps = Exercise()
@@ -389,6 +459,7 @@ private struct PreviewWorkoutRepository: WorkoutRepository {
     func allWorkouts() async throws -> [Workout] { [] }
     func save(_ workout: Workout) async throws {}
     func delete(_ workout: Workout) async throws {}
+    func deleteItems(_ items: [WorkoutItem]) async throws {}
 }
 
 private struct PreviewExerciseRepository: ExerciseRepository {

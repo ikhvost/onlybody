@@ -23,128 +23,126 @@ struct ExercisePickerView: View {
     }
 
     var body: some View {
-        NavigationStack {
-            VStack(spacing: 0) {
-                NavBarView(title: "Add Movement") {
-                    Button {
-                        dismiss()
-                    } label: {
-                        BackIcon(color: Theme.text, size: 18)
-                    }
-                    .buttonStyle(.plain)
-                } trailing: {
-                    Color.clear.frame(width: 60)
+        VStack(spacing: 0) {
+            NavBarView(title: "Add Movement") {
+                Button {
+                    dismiss()
+                } label: {
+                    BackIcon(color: Theme.text, size: 18)
                 }
-
-                VStack(spacing: Theme.space8) {
-                    HStack(spacing: Theme.space8) {
-                        SearchIcon(color: Theme.text3, size: 15)
-
-                        TextField("Search movements...", text: $searchText)
-                            .font(Theme.fontSans(13))
-                            .foregroundStyle(Theme.text)
-                            .textInputAutocapitalization(.never)
-                            .autocorrectionDisabled()
-                    }
-                    .padding(.horizontal, Theme.space10)
-                    .padding(.vertical, Theme.space9)
-                    .background(Theme.surface)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: Theme.cornerRadius)
-                            .stroke(Theme.border2, lineWidth: 1)
-                    }
-                    .clipShape(.rect(cornerRadius: Theme.cornerRadius))
-
-                    ScrollView(.horizontal) {
-                        HStack(spacing: Theme.space6) {
-                            ForEach(filters, id: \.self) { filter in
-                                ChipView(
-                                    label: filter,
-                                    isActive: selectedFilter == filter,
-                                    isSmall: true
-                                ) {
-                                    selectedFilter = filter
-                                }
-                            }
-                        }
-                        .padding(.bottom, 2)
-                    }
-                    .scrollIndicators(.hidden)
-                }
-                .padding(.horizontal, Theme.horizontalPadding)
-                .padding(.vertical, Theme.space10)
-
-                Rectangle()
-                    .fill(Theme.border)
-                    .frame(height: 1)
-
-                if filteredExercises.isEmpty {
-                    VStack(spacing: Theme.space8) {
-                        Spacer()
-                        MonoLabel(
-                            text: "No movements found",
-                            size: 10,
-                            color: Theme.text2,
-                            tracking: 0.4
-                        )
-                        Spacer()
-                    }
-                    .frame(maxWidth: .infinity)
-                } else {
-                    ScrollView {
-                        LazyVStack(spacing: 0) {
-                            ForEach(filteredExercises, id: \.id) { exercise in
-                                Button {
-                                    onAdd(exercise)
-                                    dismiss()
-                                } label: {
-                                    HStack(spacing: Theme.space10) {
-                                        VStack(alignment: .leading, spacing: 2) {
-                                            Text(exercise.name)
-                                                .font(Theme.fontSans(15, .bold))
-                                                .foregroundStyle(Theme.text)
-
-                                            MonoLabel(
-                                                text: "\(exercise.primaryMuscle.uppercased()) · \(exercise.equipment.isEmpty ? "NONE" : exercise.equipment.joined(separator: ", ").uppercased())",
-                                                size: 9,
-                                                color: Theme.text3,
-                                                tracking: 0.3
-                                            )
-
-                                            if exercise.isCustom {
-                                                MonoLabel(
-                                                    text: "CUSTOM",
-                                                    size: 8,
-                                                    color: Theme.accent,
-                                                    tracking: 0.5
-                                                )
-                                                .padding(.horizontal, 6)
-                                                .padding(.vertical, 2)
-                                                .background(Theme.accentDim)
-                                                .clipShape(.rect(cornerRadius: 2))
-                                                .padding(.top, 5)
-                                            }
-                                        }
-
-                                        Spacer()
-
-                                        PlusIcon(color: Theme.accent, size: 16)
-                                    }
-                                    .padding(.vertical, Theme.space13)
-                                    .padding(.horizontal, Theme.horizontalPadding)
-                                }
-                                .buttonStyle(.plain)
-
-                                Rectangle()
-                                    .fill(Theme.border)
-                                    .frame(height: 1)
-                            }
-                        }
-                    }
-                    .scrollIndicators(.hidden)
-                }
+                .buttonStyle(.plain)
+            } trailing: {
+                Color.clear.frame(width: 60)
             }
-            .background(Theme.bg)
+
+            VStack(spacing: Theme.space8) {
+                HStack(spacing: Theme.space8) {
+                    SearchIcon(color: Theme.text3, size: 15)
+
+                    TextField("Search movements...", text: $searchText)
+                        .font(Theme.fontSans(13))
+                        .foregroundStyle(Theme.text)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                }
+                .padding(.horizontal, Theme.space10)
+                .padding(.vertical, Theme.space9)
+                .background(Theme.surface)
+                .overlay {
+                    RoundedRectangle(cornerRadius: Theme.cornerRadius)
+                        .stroke(Theme.border2, lineWidth: 1)
+                }
+                .clipShape(.rect(cornerRadius: Theme.cornerRadius))
+
+                ScrollView(.horizontal) {
+                    HStack(spacing: Theme.space6) {
+                        ForEach(filters, id: \.self) { filter in
+                            ChipView(
+                                label: filter,
+                                isActive: selectedFilter == filter,
+                                isSmall: true
+                            ) {
+                                selectedFilter = filter
+                            }
+                        }
+                    }
+                    .padding(.bottom, 2)
+                }
+                .scrollIndicators(.hidden)
+            }
+            .padding(.horizontal, Theme.horizontalPadding)
+            .padding(.vertical, Theme.space10)
+
+            Rectangle()
+                .fill(Theme.border)
+                .frame(height: 1)
+
+            if filteredExercises.isEmpty {
+                VStack(spacing: Theme.space8) {
+                    Spacer()
+                    MonoLabel(
+                        text: "No movements found",
+                        size: 10,
+                        color: Theme.text2,
+                        tracking: 0.4
+                    )
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity)
+            } else {
+                ScrollView {
+                    LazyVStack(spacing: 0) {
+                        ForEach(filteredExercises, id: \.id) { exercise in
+                            Button {
+                                onAdd(exercise)
+                                dismiss()
+                            } label: {
+                                HStack(spacing: Theme.space10) {
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text(exercise.name)
+                                            .font(Theme.fontSans(15, .bold))
+                                            .foregroundStyle(Theme.text)
+
+                                        MonoLabel(
+                                            text: "\(exercise.primaryMuscle.uppercased()) · \(exercise.equipment.isEmpty ? "NONE" : exercise.equipment.joined(separator: ", ").uppercased())",
+                                            size: 9,
+                                            color: Theme.text3,
+                                            tracking: 0.3
+                                        )
+
+                                        if exercise.isCustom {
+                                            MonoLabel(
+                                                text: "CUSTOM",
+                                                size: 8,
+                                                color: Theme.accent,
+                                                tracking: 0.5
+                                            )
+                                            .padding(.horizontal, 6)
+                                            .padding(.vertical, 2)
+                                            .background(Theme.accentDim)
+                                            .clipShape(.rect(cornerRadius: 2))
+                                            .padding(.top, 5)
+                                        }
+                                    }
+
+                                    Spacer()
+
+                                    PlusIcon(color: Theme.accent, size: 16)
+                                }
+                                .padding(.vertical, Theme.space13)
+                                .padding(.horizontal, Theme.horizontalPadding)
+                            }
+                            .buttonStyle(.plain)
+
+                            Rectangle()
+                                .fill(Theme.border)
+                                .frame(height: 1)
+                        }
+                    }
+                }
+                .scrollIndicators(.hidden)
+            }
         }
+        .background(Theme.bg)
     }
 }

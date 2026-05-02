@@ -6,11 +6,13 @@ import Observation
 final class SessionBuilderViewModel {
     private let workoutsRepository: any WorkoutRepository
     private let exercisesRepository: any ExerciseRepository
+    private let smartGenerator: SmartWorkoutGenerator
 
     let editingWorkout: Workout?
 
     var name: String = ""
-    var mode: String = "manual"
+    var mode: String = "smart"
+    var targetMuscleGroups: [String] = []
     var movements: [MovementConfig] = []
     var scheduledDays: [String] = []
     var isSaving = false
@@ -38,14 +40,22 @@ final class SessionBuilderViewModel {
     init(
         workouts: any WorkoutRepository,
         exercises: any ExerciseRepository,
-        workout: Workout? = nil
+        workout: Workout? = nil,
+        targetMuscleGroups: [String] = [],
+        generator: SmartWorkoutGenerator = SmartWorkoutGenerator()
     ) {
         self.workoutsRepository = workouts
         self.exercisesRepository = exercises
+        self.smartGenerator = generator
         self.editingWorkout = workout
+        self.targetMuscleGroups = targetMuscleGroups
 
         if let workout {
             populateFrom(workout)
+        } else if !targetMuscleGroups.isEmpty {
+            self.mode = "smart"
+        } else {
+            self.mode = "manual"
         }
     }
 
@@ -96,6 +106,32 @@ final class SessionBuilderViewModel {
         defer { isSaving = false }
 
         do {
+            if mode == "smart" && targetMuscleGroups.isEmpty {
+                mode = "manual"
+            }
+
+            if mode == "smart" && !targetMuscleGroups.isEmpty {
+                let config = SmartWorkoutGenerator.Config(
+                    targetMuscleGroups: targetMuscleGroups,
+                    durationMinutes: 30
+                )
+                let generated = smartGenerator.generate(config: config, from: allExercises)
+
+                guard !generated.isEmpty else {
+                    errorMessage = "No exercises match. Try different muscle groups."
+                    return false
+                }
+
+                movements = generated.map {
+                    MovementConfig(
+                        exercise: $0.exercise,
+                        sets: $0.sets,
+                        reps: $0.reps,
+                        restSeconds: $0.restSeconds
+                    )
+                }
+            }
+
             let workout: Workout
             if let existing = editingWorkout {
                 workout = existing
@@ -108,12 +144,11 @@ final class SessionBuilderViewModel {
                 : name.trimmingCharacters(in: .whitespacesAndNewlines)
             workout.mode = mode
             workout.scheduledDays = scheduledDays
+            workout.targetMuscleGroups = targetMuscleGroups
 
             if let existingItems = workout.items {
+                try await workoutsRepository.deleteItems(existingItems)
                 workout.items = nil
-                for item in existingItems {
-                    item.workout = nil
-                }
             }
 
             var newItems: [WorkoutItem] = []
@@ -140,6 +175,7 @@ final class SessionBuilderViewModel {
     private func populateFrom(_ workout: Workout) {
         name = workout.name
         mode = workout.mode
+        targetMuscleGroups = workout.targetMuscleGroups
         scheduledDays = workout.scheduledDays
 
         if let items = workout.items {

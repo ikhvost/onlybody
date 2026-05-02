@@ -1,5 +1,6 @@
 import Foundation
 
 enum TrainRoute: Hashable {
-    case sessionBuilder(workoutID: UUID?)
+    case musclePicker
+    case sessionBuilder(workoutID: UUID?, targetMuscleGroups: [String] = [])
 }
