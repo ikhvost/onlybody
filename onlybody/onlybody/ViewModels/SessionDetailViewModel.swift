@@ -4,8 +4,6 @@ import Observation
 @MainActor
 @Observable
 final class SessionDetailViewModel {
-    private let sessionsRepository: any SessionRepository
-
     let session: Session
 
     var workoutName: String {
@@ -18,7 +16,7 @@ final class SessionDetailViewModel {
                 .weekday(.wide)
                 .month(.wide)
                 .day()
-                .locale(Locale(identifier: "en_US_POSIX"))
+                .locale(Locale(identifier: "en_US"))
         ).uppercased()
     }
 
@@ -46,9 +44,8 @@ final class SessionDetailViewModel {
         (session.items ?? []).sorted { $0.order < $1.order }
     }
 
-    init(session: Session, sessions: any SessionRepository) {
+    init(session: Session) {
         self.session = session
-        self.sessionsRepository = sessions
     }
 
     func totalReps(for item: SessionItem) -> Int {

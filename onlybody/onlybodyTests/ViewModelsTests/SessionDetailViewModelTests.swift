@@ -8,7 +8,7 @@ struct SessionDetailViewModelTests {
     func dateLabelFormatsWeekdayMonthDayUppercased() {
         let session = Session()
         session.date = Calendar.current.date(from: DateComponents(year: 2026, month: 5, day: 1))!
-        let viewModel = SessionDetailViewModel(session: session, sessions: MockSessionRepository())
+        let viewModel = SessionDetailViewModel(session: session)
 
         let label = viewModel.dateLabel
         #expect(label == "FRIDAY, MAY 1")
@@ -18,7 +18,7 @@ struct SessionDetailViewModelTests {
     func dateLabelIsAlwaysUppercased() {
         let session = Session()
         session.date = Calendar.current.date(from: DateComponents(year: 2026, month: 1, day: 14))!
-        let viewModel = SessionDetailViewModel(session: session, sessions: MockSessionRepository())
+        let viewModel = SessionDetailViewModel(session: session)
 
         let label = viewModel.dateLabel
         #expect(label == "WEDNESDAY, JANUARY 14")
@@ -30,7 +30,7 @@ struct SessionDetailViewModelTests {
     func durationValueFormatsMinutesAndSeconds() {
         let session = Session()
         session.durationSeconds = 1450
-        let viewModel = SessionDetailViewModel(session: session, sessions: MockSessionRepository())
+        let viewModel = SessionDetailViewModel(session: session)
 
         #expect(viewModel.durationValue == "24:10")
     }
@@ -39,7 +39,7 @@ struct SessionDetailViewModelTests {
     func durationValueZeroSecondsShowsZeroPadded() {
         let session = Session()
         session.durationSeconds = 120
-        let viewModel = SessionDetailViewModel(session: session, sessions: MockSessionRepository())
+        let viewModel = SessionDetailViewModel(session: session)
 
         #expect(viewModel.durationValue == "2:00")
     }
@@ -48,7 +48,7 @@ struct SessionDetailViewModelTests {
     func durationValueZeroDuration() {
         let session = Session()
         session.durationSeconds = 0
-        let viewModel = SessionDetailViewModel(session: session, sessions: MockSessionRepository())
+        let viewModel = SessionDetailViewModel(session: session)
 
         #expect(viewModel.durationValue == "0:00")
     }
@@ -56,7 +56,7 @@ struct SessionDetailViewModelTests {
     @Test
     func durationUnitIsMin() {
         let session = Session()
-        let viewModel = SessionDetailViewModel(session: session, sessions: MockSessionRepository())
+        let viewModel = SessionDetailViewModel(session: session)
 
         #expect(viewModel.durationUnit == "min")
     }
@@ -65,7 +65,7 @@ struct SessionDetailViewModelTests {
     func caloriesValueWithCalories() {
         let session = Session()
         session.caloriesBurned = 102
-        let viewModel = SessionDetailViewModel(session: session, sessions: MockSessionRepository())
+        let viewModel = SessionDetailViewModel(session: session)
 
         #expect(viewModel.caloriesValue == "102")
     }
@@ -74,7 +74,7 @@ struct SessionDetailViewModelTests {
     func caloriesValueNilShowsEmDash() {
         let session = Session()
         session.caloriesBurned = nil
-        let viewModel = SessionDetailViewModel(session: session, sessions: MockSessionRepository())
+        let viewModel = SessionDetailViewModel(session: session)
 
         #expect(viewModel.caloriesValue == "\u{2014}")
     }
@@ -83,7 +83,7 @@ struct SessionDetailViewModelTests {
     func caloriesUnitWithCalories() {
         let session = Session()
         session.caloriesBurned = 150
-        let viewModel = SessionDetailViewModel(session: session, sessions: MockSessionRepository())
+        let viewModel = SessionDetailViewModel(session: session)
 
         #expect(viewModel.caloriesUnit == "kcal")
     }
@@ -92,7 +92,7 @@ struct SessionDetailViewModelTests {
     func caloriesUnitNil() {
         let session = Session()
         session.caloriesBurned = nil
-        let viewModel = SessionDetailViewModel(session: session, sessions: MockSessionRepository())
+        let viewModel = SessionDetailViewModel(session: session)
 
         #expect(viewModel.caloriesUnit == "")
     }
@@ -115,7 +115,7 @@ struct SessionDetailViewModelTests {
 
         session.items = [item2, item0, item1]
 
-        let viewModel = SessionDetailViewModel(session: session, sessions: MockSessionRepository())
+        let viewModel = SessionDetailViewModel(session: session)
         let sorted = viewModel.sortedItems
 
         #expect(sorted.count == 3)
@@ -128,7 +128,7 @@ struct SessionDetailViewModelTests {
     func sortedItemsEmptyWhenItemsNil() {
         let session = Session()
         session.items = nil
-        let viewModel = SessionDetailViewModel(session: session, sessions: MockSessionRepository())
+        let viewModel = SessionDetailViewModel(session: session)
 
         #expect(viewModel.sortedItems.isEmpty)
     }
@@ -137,7 +137,7 @@ struct SessionDetailViewModelTests {
     func totalRepsReturnsSumOfSetReps() {
         let item = SessionItem()
         item.setReps = [12, 12, 12]
-        let viewModel = SessionDetailViewModel(session: Session(), sessions: MockSessionRepository())
+        let viewModel = SessionDetailViewModel(session: Session())
 
         let total = viewModel.totalReps(for: item)
         #expect(total == 36)
@@ -147,7 +147,7 @@ struct SessionDetailViewModelTests {
     func totalRepsEmptySetRepsReturnsZero() {
         let item = SessionItem()
         item.setReps = []
-        let viewModel = SessionDetailViewModel(session: Session(), sessions: MockSessionRepository())
+        let viewModel = SessionDetailViewModel(session: Session())
 
         let total = viewModel.totalReps(for: item)
         #expect(total == 0)
@@ -155,7 +155,7 @@ struct SessionDetailViewModelTests {
 
     @Test
     func setLabelFormatsIndexAndReps() {
-        let viewModel = SessionDetailViewModel(session: Session(), sessions: MockSessionRepository())
+        let viewModel = SessionDetailViewModel(session: Session())
 
         #expect(viewModel.setLabel(index: 0, reps: 12) == "SET 1 \u{00B7} 12 REPS")
         #expect(viewModel.setLabel(index: 1, reps: 8) == "SET 2 \u{00B7} 8 REPS")
@@ -166,7 +166,7 @@ struct SessionDetailViewModelTests {
     func workoutNameReturnsSessionWorkoutName() {
         let session = Session()
         session.workoutName = "Full Body"
-        let viewModel = SessionDetailViewModel(session: session, sessions: MockSessionRepository())
+        let viewModel = SessionDetailViewModel(session: session)
 
         #expect(viewModel.workoutName == "Full Body")
     }

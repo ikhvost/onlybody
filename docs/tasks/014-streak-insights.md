@@ -16,25 +16,25 @@ Implement `StreakCalculator`, `StreakViewModel`, and `StreakView`. Wire a Train 
 
 ## Acceptance criteria
 
-- [ ] Train provides an approved route to Streak screen.
-- [ ] Streak route uses `navigationDestination(for:)`.
-- [ ] `StreakCalculator` is pure logic and has no SwiftUI imports.
-- [ ] `StreakCalculator.calculate` accepts sessions and optional today date.
-- [ ] Empty sessions produce current `0`, longest `0`, total `0`.
-- [ ] One session today produces current `1`, longest `1`, total `1`.
-- [ ] One session yesterday produces current `0`, longest `1`, total `1`.
-- [ ] Consecutive sessions through today produce matching current and longest values.
-- [ ] Gaps break the current streak.
-- [ ] Past longest run is preserved even when current streak is shorter.
-- [ ] Duplicate sessions on the same day do not inflate current or longest streak.
-- [ ] Total uses raw session count, not deduplicated day count.
-- [ ] `StreakViewModel` depends on `SessionRepository` protocol.
-- [ ] `StreakViewModel` builds a 20 week by 7 day heatmap.
-- [ ] Heatmap cells reflect actual session days using start-of-day comparison.
-- [ ] Streak screen renders Current, Longest, and Total stat cards.
-- [ ] Current value uses dim text color; Longest and Total use accent.
-- [ ] Heatmap uses 7 rows and 20 columns with approved cell styling.
-- [ ] Service tests cover empty, today, yesterday, consecutive, gap, past longest, and duplicate-day cases.
+- [x] Train provides an approved route to Streak screen.
+- [x] Streak route uses `navigationDestination(for:)`.
+- [x] `StreakCalculator` is pure logic and has no SwiftUI imports.
+- [x] `StreakCalculator.calculate` accepts sessions and optional today date.
+- [x] Empty sessions produce current `0`, longest `0`, total `0`.
+- [x] One session today produces current `1`, longest `1`, total `1`.
+- [x] One session yesterday produces current `0`, longest `1`, total `1`.
+- [x] Consecutive sessions through today produce matching current and longest values.
+- [x] Gaps break the current streak.
+- [x] Past longest run is preserved even when current streak is shorter.
+- [x] Duplicate sessions on the same day do not inflate current or longest streak.
+- [x] Total uses raw session count, not deduplicated day count.
+- [x] `StreakViewModel` depends on `SessionRepository` protocol.
+- [x] `StreakViewModel` builds a 20 week by 7 day heatmap.
+- [x] Heatmap cells reflect actual session days using start-of-day comparison.
+- [x] Streak screen renders Current, Longest, and Total stat cards.
+- [x] Current value uses dim text color; Longest and Total use accent.
+- [x] Heatmap uses 7 rows and 20 columns with approved cell styling.
+- [x] Service tests cover empty, today, yesterday, consecutive, gap, past longest, and duplicate-day cases.
 
 ## Blocked by
 

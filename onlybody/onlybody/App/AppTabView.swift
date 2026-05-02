@@ -100,7 +100,7 @@ struct AppTabView: View {
                             )
                         )
                     case .streak:
-                        StreakView()
+                        StreakView(viewModel: StreakViewModel(sessions: repositories.sessions))
                     }
                 }
             }
@@ -132,10 +132,7 @@ struct AppTabView: View {
                     case .sessionDetail(let sessionID):
                         if let session = logViewModel.sessions.first(where: { $0.id == sessionID }) {
                             SessionDetailView(
-                                viewModel: SessionDetailViewModel(
-                                    session: session,
-                                    sessions: repositories.sessions
-                                )
+                                viewModel: SessionDetailViewModel(session: session)
                             )
                         } else {
                             ZStack {

@@ -59,11 +59,12 @@ struct SessionDetailView: View {
                             .frame(height: 1)
                             .padding(.bottom, Theme.space16)
 
-                        ForEach(viewModel.sortedItems.indices, id: \.self) { index in
-                            let item = viewModel.sortedItems[index]
-                            let isLast = index == viewModel.sortedItems.count - 1
-
-                            sessionItemView(item: item, isLast: isLast)
+                        ForEach(viewModel.sortedItems.enumerated(), id: \.element.id) { (index, item) in
+                            SessionItemRow(
+                                item: item,
+                                isLast: index == viewModel.sortedItems.count - 1,
+                                viewModel: viewModel
+                            )
                         }
 
                         GhostButton(
@@ -81,8 +82,14 @@ struct SessionDetailView: View {
         }
         .toolbar(.hidden, for: .navigationBar)
     }
+}
 
-    private func sessionItemView(item: SessionItem, isLast: Bool) -> some View {
+private struct SessionItemRow: View {
+    let item: SessionItem
+    let isLast: Bool
+    let viewModel: SessionDetailViewModel
+
+    var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(alignment: .top) {
                 Text(item.exerciseName)
@@ -144,10 +151,7 @@ struct SessionDetailView: View {
     session.items = [item1, item2]
 
     return SessionDetailView(
-        viewModel: SessionDetailViewModel(
-            session: session,
-            sessions: EmptySessionRepository()
-        )
+        viewModel: SessionDetailViewModel(session: session)
     )
     .preferredColorScheme(.dark)
 }

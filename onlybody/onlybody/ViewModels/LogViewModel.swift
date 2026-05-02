@@ -49,10 +49,8 @@ final class LogViewModel {
     }
 
     func durationText(for session: Session) -> String {
-        let totalSeconds = session.durationSeconds
-        let minutes = totalSeconds / 60
-        let seconds = totalSeconds % 60
-        return "\(minutes):\(String(format: "%02d", seconds))"
+        Duration.seconds(session.durationSeconds)
+            .formatted(.time(pattern: .minuteSecond))
     }
 
     func caloriesText(for session: Session) -> String {
