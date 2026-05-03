@@ -9,14 +9,6 @@ Bodyweight training app for iOS. Single user, on-device data, no CloudKit. The a
 
 ---
 
-> **Before any UI implementation work, read these two files:**
-> - `docs/design.html` — interactive HTML prototype, source of truth for visuals and interactions
-> - `docs/plans/2026-05-01-bodyweight-training-design.md` — written design spec (colors, typography, components, all 10 screens)
->
-> The design is fully custom (dark-only, DM Sans/DM Mono, amber `#E8A23A` accent). It overrides all standard iOS/SwiftUI defaults. Do not infer visual behavior from HIG.
-
----
-
 ## Target
 
 - **iOS:** 26.0+
@@ -47,82 +39,95 @@ View ──reads──> ViewModel (@Observable @MainActor) ──calls──> Re
 
 ### Project structure
 
+> This project uses `PBXFileSystemSynchronizedRootGroup` (Xcode 16+). New files and folders added to the filesystem are automatically tracked by Xcode — no manual `.xcodeproj` edits required.
+
 ```
-BodyweightApp/
+onlybody/                              — source root (PBXFileSystemSynchronizedRootGroup)
 ├── App/
 │   ├── BodyweightApp.swift            — @main entry, ModelContainer, root view
+│   ├── AppTab.swift                   — AppTab enum + AppTabViewModel
 │   └── AppTabView.swift               — Custom tab container (NOT SwiftUI TabView)
-├── Models/                            — SwiftData @Model classes, one type per file
-│   ├── Exercise.swift
-│   ├── Workout.swift
-│   ├── WorkoutItem.swift
-│   ├── Session.swift
-│   └── SessionItem.swift
-├── Data/
-│   ├── Repositories/                  — Protocols + SwiftData implementations
+├── Features/                          — View + ViewModel colocated per feature
+│   ├── Train/
+│   │   ├── TrainViewModel.swift
+│   │   ├── TrainView.swift
+│   │   ├── TrainRoute.swift
+│   │   ├── MusclePickerViewModel.swift
+│   │   ├── MusclePickerView.swift
+│   │   ├── SessionBuilderViewModel.swift
+│   │   ├── SessionBuilderView.swift
+│   │   ├── ActiveWorkoutViewModel.swift
+│   │   ├── ActiveWorkoutView.swift
+│   │   ├── StreakViewModel.swift
+│   │   └── StreakView.swift
+│   ├── Log/
+│   │   ├── LogViewModel.swift
+│   │   ├── LogView.swift
+│   │   └── SessionDetailView.swift
+│   └── Library/
+│       ├── LibraryViewModel.swift
+│       ├── LibraryView.swift
+│       ├── LibraryExerciseRow.swift
+│       ├── MovementDetailViewModel.swift
+│       ├── MovementDetailView.swift
+│       ├── CustomExerciseViewModel.swift
+│       └── CustomExerciseForm.swift
+├── Core/                              — Infrastructure: repositories, services, seed
+│   ├── Repositories/
 │   │   ├── ExerciseRepository.swift
 │   │   ├── WorkoutRepository.swift
 │   │   ├── SessionRepository.swift
 │   │   ├── SwiftDataExerciseRepository.swift
 │   │   ├── SwiftDataWorkoutRepository.swift
 │   │   └── SwiftDataSessionRepository.swift
+│   ├── Services/                      — Pure logic, no SwiftUI
+│   │   ├── SmartWorkoutGenerator.swift
+│   │   ├── StreakCalculator.swift      — [Session] → streak stats (current/longest/total)
+│   │   └── RestTimer.swift
 │   └── Seed/
+│       ├── ExerciseSeed.swift
 │       ├── SeedData.json
 │       └── SeedManager.swift
-├── Services/                          — Pure logic, no SwiftUI
-│   ├── SmartWorkoutGenerator.swift
-│   ├── StreakCalculator.swift          — [Session] → streak stats (current/longest/total)
-│   └── RestTimer.swift
-├── ViewModels/                        — @Observable @MainActor, one per screen
-│   ├── TrainViewModel.swift
-│   ├── MusclePickerViewModel.swift
-│   ├── SessionBuilderViewModel.swift
-│   ├── ActiveWorkoutViewModel.swift
-│   ├── LogViewModel.swift
-│   ├── SessionDetailViewModel.swift
-│   ├── LibraryViewModel.swift
-│   ├── MovementDetailViewModel.swift
-│   ├── CustomExerciseViewModel.swift
-│   └── StreakViewModel.swift
-├── Views/                             — Thin rendering, no logic
-│   ├── Train/
-│   │   ├── TrainView.swift
-│   │   ├── MusclePickerView.swift
-│   │   ├── SessionBuilderView.swift
-│   │   └── ActiveWorkoutView.swift
-│   ├── Log/
-│   │   ├── LogView.swift
-│   │   └── SessionDetailView.swift
-│   └── Library/
-│       ├── LibraryView.swift
-│       ├── MovementDetailView.swift
-│       └── CustomExerciseForm.swift
+├── Models/                            — SwiftData @Model classes, one type per file
+│   ├── Exercise.swift
+│   ├── Workout.swift
+│   ├── WorkoutItem.swift
+│   ├── Session.swift
+│   └── SessionItem.swift
 ├── Shared/
 │   ├── Theme/
 │   │   └── Theme.swift                — Design tokens: colors, fonts, spacing
-│   ├── Icons/
-│   │   └── AppIcons.swift             — Custom SwiftUI Shape/Path icons
-│   └── Components/                    — Reusable views, no own view models
-│       ├── MonoLabel.swift
-│       ├── PrimaryButton.swift
-│       ├── GhostButton.swift
-│       ├── ChipView.swift
-│       ├── StepperView.swift
-│       ├── SetTrackerView.swift
-│       ├── NavBarView.swift
-│       ├── ExerciseRow.swift
-│       └── ExercisePickerView.swift
+│   ├── Icons/                         — Custom SwiftUI Shape/Path icons (one per file)
+│   ├── Components/                    — Reusable views, no own view models
+│   │   ├── MonoLabel.swift
+│   │   ├── PrimaryButton.swift
+│   │   ├── GhostButton.swift
+│   │   ├── ChipView.swift
+│   │   ├── StepperView.swift
+│   │   ├── SetTrackerView.swift
+│   │   ├── NavBarView.swift
+│   │   ├── BottomNav.swift
+│   │   ├── ExercisePickerView.swift
+│   │   ├── CustomBadgeView.swift
+│   │   └── FlowLayout.swift
+│   ├── Domain/                        — Cross-cutting domain enums and catalogs
+│   │   ├── ExerciseCatalog.swift
+│   │   ├── ExerciseFrequency.swift
+│   │   ├── Weekdays.swift
+│   │   └── WorkoutMode.swift
+│   └── Preview/                       — Mock repositories for Xcode Previews
 ├── Resources/
-│   └── Assets.xcassets/
-└── Tests/
-    ├── ServicesTests/
-    │   ├── SmartWorkoutGeneratorTests.swift
-    │   ├── StreakCalculatorTests.swift
-    │   └── RestTimerTests.swift
-    └── ViewModelsTests/
-        ├── TrainViewModelTests.swift
-        ├── SessionBuilderViewModelTests.swift
-        └── ActiveWorkoutViewModelTests.swift
+│   ├── Assets.xcassets/
+│   └── Fonts/
+onlybodyTests/                         — test root (PBXFileSystemSynchronizedRootGroup)
+├── Features/
+│   ├── Train/                         — TrainViewModelTests, ActiveWorkoutViewModelTests, etc.
+│   ├── Log/                           — LogViewModelTests
+│   └── Library/                       — LibraryViewModelTests, etc.
+├── Core/
+│   ├── Repositories/                  — SwiftData*RepositoryTests (in-memory ModelContainer)
+│   └── Services/                      — SmartWorkoutGeneratorTests, StreakCalculatorTests, etc.
+└── Support/                           — Mock repositories, TestError
 ```
 
 ---
