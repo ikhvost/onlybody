@@ -135,7 +135,7 @@ struct LibraryView: View {
 }
 
 #Preview("Library") {
-    let viewModel = LibraryViewModel(exercises: EmptyExerciseRepository())
+    let viewModel = LibraryViewModel(exercises: PreviewExerciseRepository())
 
     let pushUps = Exercise()
     pushUps.name = "Push-Ups"
@@ -153,7 +153,7 @@ struct LibraryView: View {
     return LibraryView(
         viewModel: viewModel,
         makeCustomExerciseViewModel: {
-            CustomExerciseViewModel(exercises: EmptyExerciseRepository())
+            CustomExerciseViewModel(exercises: PreviewExerciseRepository())
         },
         showMovement: { _ in }
     )

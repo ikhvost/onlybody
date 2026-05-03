@@ -9,7 +9,7 @@ struct MusclePickerViewModelTests {
     func initialSelectionIsEmpty() async {
         let viewModel = MusclePickerViewModel()
 
-        #expect(viewModel.selectedIDs.isEmpty)
+        #expect(viewModel.selectedMuscles.isEmpty)
         #expect(viewModel.selectionSummary.isEmpty)
     }
 
@@ -35,7 +35,7 @@ struct MusclePickerViewModelTests {
 
         viewModel.toggle("Chest")
 
-        #expect(viewModel.selectedIDs == ["Chest"])
+        #expect(viewModel.selectedMuscles == ["Chest"])
     }
 
     @Test
@@ -45,7 +45,7 @@ struct MusclePickerViewModelTests {
         viewModel.toggle("Chest")
         viewModel.toggle("Chest")
 
-        #expect(viewModel.selectedIDs.isEmpty)
+        #expect(viewModel.selectedMuscles.isEmpty)
     }
 
     @Test
@@ -89,7 +89,7 @@ struct MusclePickerViewModelTests {
         viewModel.toggle("Back")
         viewModel.toggle("Shoulders")
 
-        #expect(viewModel.selectedIDs.count == 3)
+        #expect(viewModel.selectedMuscles.count == 3)
         #expect(viewModel.selectionSummary == "Chest + Back + Shoulders")
     }
 

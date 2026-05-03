@@ -14,7 +14,7 @@ struct StreakView: View {
                         dismiss()
                     } label: {
                         HStack(spacing: 4) {
-                            BackIcon(color: Theme.accent, size: 16)
+                            ChevronIcon(isBack: true, color: Theme.accent, size: 16, inset: 8)
                             Text("Back")
                                 .font(Theme.fontSans(14, .semibold))
                                 .foregroundStyle(Theme.accent)
@@ -22,8 +22,6 @@ struct StreakView: View {
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel("Back to train")
-                } trailing: {
-                    EmptyView()
                 }
 
                 if let errorMessage = viewModel.errorMessage {

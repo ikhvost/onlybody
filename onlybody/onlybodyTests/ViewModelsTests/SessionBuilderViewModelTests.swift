@@ -357,7 +357,7 @@ struct SessionBuilderViewModelTests {
         exercise.primaryMuscle = "Chest"
 
         viewModel.name = "Full Body"
-        viewModel.mode = "manual"
+        viewModel.mode = .manual
         viewModel.addMovement(exercise)
         viewModel.toggleDay("Mon")
         viewModel.toggleDay("Wed")
@@ -369,7 +369,7 @@ struct SessionBuilderViewModelTests {
 
         let savedWorkout = workoutRepo.savedWorkouts.first!
         #expect(savedWorkout.name == "Full Body")
-        #expect(savedWorkout.mode == "manual")
+        #expect(savedWorkout.mode == WorkoutMode.manual.rawValue)
         #expect(savedWorkout.scheduledDays == ["Mon", "Wed"])
         #expect(savedWorkout.items?.count == 1)
 
@@ -465,7 +465,7 @@ struct SessionBuilderViewModelTests {
         let existing = Workout()
         existing.id = UUID()
         existing.name = "Old Name"
-        existing.mode = "smart"
+        existing.mode = WorkoutMode.smart.rawValue
         existing.scheduledDays = ["Mon"]
 
         let oldItem = WorkoutItem()
@@ -486,14 +486,14 @@ struct SessionBuilderViewModelTests {
         )
 
         #expect(viewModel.name == "Old Name")
-        #expect(viewModel.mode == "smart")
+        #expect(viewModel.mode == .smart)
         #expect(viewModel.scheduledDays == ["Mon"])
         #expect(viewModel.movements.count == 1)
 
         let newExercise = Exercise()
         newExercise.name = "Push-Ups"
         viewModel.name = "Updated Name"
-        viewModel.mode = "manual"
+        viewModel.mode = .manual
         viewModel.scheduledDays = []
         viewModel.movements = []
         viewModel.addMovement(newExercise)
@@ -502,12 +502,14 @@ struct SessionBuilderViewModelTests {
         let success = await viewModel.save()
 
         #expect(success == true)
+        #expect(workoutRepo.deletedItems.count == 1)
+        #expect(workoutRepo.deletedItems.first?.order == 0)
         #expect(workoutRepo.savedWorkouts.count == 1)
 
         let savedWorkout = workoutRepo.savedWorkouts.first!
         #expect(savedWorkout.id == existing.id)
         #expect(savedWorkout.name == "Updated Name")
-        #expect(savedWorkout.mode == "manual")
+        #expect(savedWorkout.mode == WorkoutMode.manual.rawValue)
         #expect(savedWorkout.scheduledDays == ["Fri"])
         #expect(savedWorkout.items?.count == 1)
         #expect(savedWorkout.items?.first?.exercise?.name == "Push-Ups")
@@ -599,7 +601,7 @@ struct SessionBuilderViewModelTests {
 
         let savedWorkout = workoutRepo.savedWorkouts.first!
         #expect(savedWorkout.name == "Smart Chest & Back")
-        #expect(savedWorkout.mode == "smart")
+        #expect(savedWorkout.mode == WorkoutMode.smart.rawValue)
         #expect(savedWorkout.targetMuscleGroups == ["Chest", "Back"])
         #expect(savedWorkout.scheduledDays == ["Mon"])
 
@@ -651,14 +653,14 @@ struct SessionBuilderViewModelTests {
         )
 
         viewModel.allExercises = [exercise]
-        viewModel.mode = "manual"
+        viewModel.mode = .manual
         viewModel.addMovement(exercise)
 
         let success = await viewModel.save()
 
         #expect(success == true)
         let savedWorkout = workoutRepo.savedWorkouts.first!
-        #expect(savedWorkout.mode == "manual")
+        #expect(savedWorkout.mode == WorkoutMode.manual.rawValue)
         #expect(savedWorkout.targetMuscleGroups.isEmpty)
         #expect(savedWorkout.items?.count == 1)
     }
@@ -686,7 +688,7 @@ struct SessionBuilderViewModelTests {
             generator: deterministicGen
         )
 
-        #expect(viewModel.mode == "smart")
+        #expect(viewModel.mode == .smart)
     }
 
     @Test
@@ -697,7 +699,7 @@ struct SessionBuilderViewModelTests {
         let existing = Workout()
         existing.id = UUID()
         existing.name = "Old Smart"
-        existing.mode = "smart"
+        existing.mode = WorkoutMode.smart.rawValue
         existing.targetMuscleGroups = ["Chest", "Back"]
 
         let viewModel = SessionBuilderViewModel(
@@ -707,6 +709,6 @@ struct SessionBuilderViewModelTests {
         )
 
         #expect(viewModel.targetMuscleGroups == ["Chest", "Back"])
-        #expect(viewModel.mode == "smart")
+        #expect(viewModel.mode == .smart)
     }
 }

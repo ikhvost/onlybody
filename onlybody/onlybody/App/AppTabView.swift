@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct AppTabView: View {
-    private let repositories: Repositories
+    private let exercises: any ExerciseRepository
+    private let workouts: any WorkoutRepository
+    private let sessions: any SessionRepository
 
     @State private var selectedTab: AppTab = .train
     @State private var trainViewModel: TrainViewModel
@@ -12,11 +14,17 @@ struct AppTabView: View {
     @State private var libraryPath = NavigationPath()
     @State private var activeWorkoutViewModel: ActiveWorkoutViewModel?
 
-    init(repositories: Repositories) {
-        self.repositories = repositories
-        _trainViewModel = State(initialValue: TrainViewModel(workouts: repositories.workouts))
-        _logViewModel = State(initialValue: LogViewModel(sessions: repositories.sessions))
-        _libraryViewModel = State(initialValue: LibraryViewModel(exercises: repositories.exercises))
+    init(
+        exercises: any ExerciseRepository,
+        workouts: any WorkoutRepository,
+        sessions: any SessionRepository
+    ) {
+        self.exercises = exercises
+        self.workouts = workouts
+        self.sessions = sessions
+        _trainViewModel = State(initialValue: TrainViewModel(workouts: workouts))
+        _logViewModel = State(initialValue: LogViewModel(sessions: sessions))
+        _libraryViewModel = State(initialValue: LibraryViewModel(exercises: exercises))
     }
 
     private var showsBottomNav: Bool {
@@ -63,8 +71,8 @@ struct AppTabView: View {
                     },
                     onStartWorkout: { id in
                         activeWorkoutViewModel = ActiveWorkoutViewModel(
-                            workouts: repositories.workouts,
-                            sessions: repositories.sessions,
+                            workouts: workouts,
+                            sessions: sessions,
                             workoutId: id
                         )
                     }
@@ -93,14 +101,14 @@ struct AppTabView: View {
                         }
                         SessionBuilderView(
                             viewModel: SessionBuilderViewModel(
-                                workouts: repositories.workouts,
-                                exercises: repositories.exercises,
+                                workouts: workouts,
+                                exercises: exercises,
                                 workout: workout,
                                 targetMuscleGroups: targetMuscleGroups
                             )
                         )
                     case .streak:
-                        StreakView(viewModel: StreakViewModel(sessions: repositories.sessions))
+                        StreakView(viewModel: StreakViewModel(sessions: sessions))
                     }
                 }
             }
@@ -129,9 +137,7 @@ struct AppTabView: View {
                 )
                 .navigationDestination(for: UUID.self) { sessionID in
                     if let session = logViewModel.sessions.first(where: { $0.id == sessionID }) {
-                        SessionDetailView(
-                            viewModel: SessionDetailViewModel(session: session)
-                        )
+                        SessionDetailView(session: session)
                     } else {
                         ZStack {
                             Theme.bg.ignoresSafeArea()
@@ -155,7 +161,7 @@ struct AppTabView: View {
                 LibraryView(
                     viewModel: libraryViewModel,
                     makeCustomExerciseViewModel: {
-                        CustomExerciseViewModel(exercises: repositories.exercises)
+                        CustomExerciseViewModel(exercises: exercises)
                     },
                     showMovement: {
                         libraryPath.append($0.id)
@@ -166,7 +172,7 @@ struct AppTabView: View {
                         MovementDetailView(
                             viewModel: MovementDetailViewModel(
                                 exercise: exercise,
-                                exercises: repositories.exercises
+                                exercises: exercises
                             )
                         )
                     } else {

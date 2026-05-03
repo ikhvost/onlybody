@@ -10,7 +10,7 @@ final class TrainViewModel {
     var isLoading = false
     var errorMessage: String? = nil
 
-    let dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    let dayNames = Weekdays.shortNames
 
     var todayIndex: Int {
         Calendar.current.component(.weekday, from: Date()) - 1

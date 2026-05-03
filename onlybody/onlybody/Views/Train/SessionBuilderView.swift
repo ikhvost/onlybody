@@ -7,20 +7,16 @@ struct SessionBuilderView: View {
 
     @State private var isShowingExercisePicker = false
 
-    private var title: String {
-        viewModel.isEditMode ? "Edit Session" : "New Session"
-    }
-
     var body: some View {
         ZStack {
             Theme.bg.ignoresSafeArea()
 
             VStack(spacing: 0) {
-                NavBarView(title: title) {
+                NavBarView(title: viewModel.isEditMode ? "Edit Session" : "New Session") {
                     Button {
                         dismiss()
                     } label: {
-                        BackIcon(color: Theme.text, size: 18)
+                        ChevronIcon(isBack: true, color: Theme.text, size: 18, inset: 8)
                     }
                     .buttonStyle(.plain)
                 } trailing: {
@@ -149,15 +145,15 @@ struct SessionBuilderView: View {
                 .padding(.horizontal, Theme.horizontalPadding)
 
             HStack(spacing: 8) {
-                modeButton("Smart pick", mode: "smart")
-                modeButton("I choose", mode: "manual")
+                modeButton("Smart pick", mode: .smart)
+                modeButton("I choose", mode: .manual)
             }
             .padding(.horizontal, Theme.horizontalPadding)
         }
         .padding(.top, 16)
     }
 
-    private func modeButton(_ label: String, mode: String) -> some View {
+    private func modeButton(_ label: String, mode: WorkoutMode) -> some View {
         Button {
             viewModel.mode = mode
         } label: {
@@ -183,7 +179,7 @@ struct SessionBuilderView: View {
 
     @ViewBuilder
     private var smartInfoSection: some View {
-        if viewModel.mode == "smart" {
+        if viewModel.mode == .smart {
             VStack(alignment: .leading, spacing: 4) {
                 Text("Auto-selected movements")
                     .font(Theme.fontSans(13, .bold))
@@ -220,7 +216,7 @@ struct SessionBuilderView: View {
 
     @ViewBuilder
     private var movementsSection: some View {
-        if viewModel.mode == "manual" {
+        if viewModel.mode == .manual {
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
                     MonoLabel(text: "Movements", size: 10, color: Theme.text2, tracking: 0.5)
@@ -398,14 +394,14 @@ struct SessionBuilderView: View {
             }
             .padding(.horizontal, Theme.horizontalPadding)
             .padding(.top, 14)
-                .padding(.bottom, 10)
-                .overlay(alignment: .top) {
-                    Rectangle()
-                        .fill(Theme.border)
-                        .frame(height: 1)
-                        .padding(.horizontal, Theme.horizontalPadding)
-                }
+            .padding(.bottom, 10)
+            .overlay(alignment: .top) {
+                Rectangle()
+                    .fill(Theme.border)
+                    .frame(height: 1)
+                    .padding(.horizontal, Theme.horizontalPadding)
             }
+        }
     }
 
 }
@@ -432,16 +428,4 @@ struct SessionBuilderView: View {
 
     return SessionBuilderView(viewModel: viewModel)
         .preferredColorScheme(.dark)
-}
-
-private struct PreviewWorkoutRepository: WorkoutRepository {
-    func allWorkouts() async throws -> [Workout] { [] }
-    func workout(by id: UUID) async throws -> Workout? { nil }
-    func save(_ workout: Workout) async throws {}
-    func deleteItems(_ items: [WorkoutItem]) async throws {}
-}
-
-private struct PreviewExerciseRepository: ExerciseRepository {
-    func allExercises() async throws -> [Exercise] { [] }
-    func save(_ exercise: Exercise) async throws {}
 }

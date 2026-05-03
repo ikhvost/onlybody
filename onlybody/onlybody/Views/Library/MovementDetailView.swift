@@ -4,22 +4,6 @@ struct MovementDetailView: View {
     @Environment(\.dismiss) private var dismiss
     let viewModel: MovementDetailViewModel
 
-    private let frequencyOptions = [
-        (label: "Normal", value: "normal"),
-        (label: "More often", value: "more"),
-        (label: "Less often", value: "less"),
-        (label: "Exclude", value: "never")
-    ]
-
-    private var equipmentText: String {
-        let equipment = viewModel.exercise.equipment.joined(separator: ", ")
-        return equipment.isEmpty ? "None" : equipment
-    }
-
-    private var secondaryMusclesText: String {
-        viewModel.exercise.secondaryMuscles.isEmpty ? "None" : viewModel.exercise.secondaryMuscles.joined(separator: ", ")
-    }
-
     var body: some View {
         ZStack {
             Theme.bg.ignoresSafeArea()
@@ -30,7 +14,7 @@ struct MovementDetailView: View {
                         dismiss()
                     } label: {
                         HStack(spacing: 4) {
-                            BackIcon(color: Theme.accent, size: 16)
+                            ChevronIcon(isBack: true, color: Theme.accent, size: 16, inset: 8)
                             Text("Back")
                                 .font(Theme.fontSans(14, .semibold))
                                 .foregroundStyle(Theme.accent)
@@ -38,8 +22,6 @@ struct MovementDetailView: View {
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel("Back to library")
-                } trailing: {
-                    EmptyView()
                 }
 
                 ScrollView {
@@ -85,7 +67,7 @@ struct MovementDetailView: View {
                                     .clipShape(.rect(cornerRadius: 1))
                                     .padding(.top, 4)
 
-                                Text(secondaryMusclesText)
+                                Text(viewModel.exercise.secondaryMuscles.isEmpty ? "None" : viewModel.exercise.secondaryMuscles.joined(separator: ", "))
                                     .font(Theme.fontSans(13))
                                     .foregroundStyle(Theme.text2)
                             }
@@ -115,7 +97,7 @@ struct MovementDetailView: View {
 
                             Spacer()
 
-                            Text(equipmentText)
+                            Text(viewModel.exercise.equipmentLabel)
                                 .font(Theme.fontMono(13, .bold))
                                 .foregroundStyle(Theme.text)
                         }
@@ -128,22 +110,22 @@ struct MovementDetailView: View {
                             MonoLabel(text: "Include in sessions", size: 10, tracking: 0.8)
 
                             HStack(spacing: 8) {
-                                ForEach(frequencyOptions, id: \.value) { option in
+                                ForEach(ExerciseFrequency.allCases, id: \.rawValue) { frequency in
                                     ChipView(
-                                        label: option.label,
-                                        isActive: viewModel.selectedFrequency == option.value,
+                                        label: frequency.label,
+                                        isActive: viewModel.selectedFrequency == frequency,
                                         size: 12,
                                         cornerRadius: Theme.cornerRadius,
                                         horizontalPadding: 4,
                                         verticalPadding: 9
                                     ) {
                                         Task {
-                                            await viewModel.setFrequency(option.value)
+                                            await viewModel.setFrequency(frequency)
                                         }
                                     }
                                     .frame(maxWidth: .infinity)
                                     .disabled(viewModel.isSaving)
-                                    .accessibilityLabel("Set frequency to \(option.label)")
+                                    .accessibilityLabel("Set frequency to \(frequency.label)")
                                 }
                             }
                         }
@@ -170,7 +152,7 @@ struct MovementDetailView: View {
     return MovementDetailView(
         viewModel: MovementDetailViewModel(
             exercise: exercise,
-            exercises: EmptyExerciseRepository()
+            exercises: PreviewExerciseRepository()
         )
     )
     .preferredColorScheme(.dark)

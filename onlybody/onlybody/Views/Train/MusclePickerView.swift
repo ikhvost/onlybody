@@ -17,11 +17,9 @@ struct MusclePickerView: View {
                     Button {
                         dismiss()
                     } label: {
-                        BackIcon(color: Theme.text, size: 18)
+                        ChevronIcon(isBack: true, color: Theme.text, size: 18, inset: 8)
                     }
                     .buttonStyle(.plain)
-                } trailing: {
-                    EmptyView()
                 }
 
                 ScrollView {
@@ -39,14 +37,14 @@ struct MusclePickerView: View {
                             ForEach(viewModel.muscles, id: \.self) { muscle in
                                 ChipView(
                                     label: muscle,
-                                    isActive: viewModel.selectedIDs.contains(muscle)
+                                    isActive: viewModel.selectedMuscles.contains(muscle)
                                 ) {
                                     viewModel.toggle(muscle)
                                 }
                             }
                         }
 
-                        if !viewModel.selectedIDs.isEmpty {
+                        if !viewModel.selectedMuscles.isEmpty {
                             Text(viewModel.selectionSummary)
                                 .font(Theme.fontMono(11, .medium))
                                 .foregroundStyle(Theme.accent)
@@ -61,13 +59,13 @@ struct MusclePickerView: View {
 
                 VStack(spacing: 10) {
                     Button {
-                        onBuild(viewModel.selectedIDs)
+                        onBuild(viewModel.selectedMuscles)
                     } label: {
                         HStack(spacing: 5) {
                             Text("Build session")
                                 .font(Theme.fontSans(13, .bold))
                                 .foregroundStyle(viewModel.canBuild ? Theme.accentDark : Theme.text3)
-                            ForwardIcon(color: viewModel.canBuild ? Theme.accentDark : Theme.text3, size: 12)
+                            ChevronIcon(color: viewModel.canBuild ? Theme.accentDark : Theme.text3, size: 12, inset: 8)
                         }
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 12)

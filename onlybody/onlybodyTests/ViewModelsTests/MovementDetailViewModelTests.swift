@@ -7,27 +7,27 @@ struct MovementDetailViewModelTests {
     func setFrequencyUpdatesExerciseAndPersists() async {
         let repository = MockExerciseRepository()
         let exercise = Exercise()
-        exercise.frequencyPreference = "normal"
+        exercise.frequencyPreference = ExerciseFrequency.normal.rawValue
 
         let viewModel = MovementDetailViewModel(exercise: exercise, exercises: repository)
-        await viewModel.setFrequency("more")
+        await viewModel.setFrequency(.more)
 
-        #expect(viewModel.selectedFrequency == "more")
-        #expect(exercise.frequencyPreference == "more")
+        #expect(viewModel.selectedFrequency == .more)
+        #expect(exercise.frequencyPreference == ExerciseFrequency.more.rawValue)
         #expect(repository.savedExercises.count == 1)
-        #expect(repository.savedExercises.first?.frequencyPreference == "more")
+        #expect(repository.savedExercises.first?.frequencyPreference == ExerciseFrequency.more.rawValue)
     }
 
     @Test
     func setFrequencySkipsSaveWhenValueUnchanged() async {
         let repository = MockExerciseRepository()
         let exercise = Exercise()
-        exercise.frequencyPreference = "more"
+        exercise.frequencyPreference = ExerciseFrequency.more.rawValue
 
         let viewModel = MovementDetailViewModel(exercise: exercise, exercises: repository)
-        await viewModel.setFrequency("more")
+        await viewModel.setFrequency(.more)
 
-        #expect(viewModel.selectedFrequency == "more")
+        #expect(viewModel.selectedFrequency == .more)
         #expect(repository.savedExercises.isEmpty)
     }
 
@@ -36,13 +36,13 @@ struct MovementDetailViewModelTests {
         let repository = MockExerciseRepository()
         repository.shouldThrow = true
         let exercise = Exercise()
-        exercise.frequencyPreference = "normal"
+        exercise.frequencyPreference = ExerciseFrequency.normal.rawValue
 
         let viewModel = MovementDetailViewModel(exercise: exercise, exercises: repository)
-        await viewModel.setFrequency("more")
+        await viewModel.setFrequency(.more)
 
-        #expect(viewModel.selectedFrequency == "normal")
-        #expect(exercise.frequencyPreference == "normal")
+        #expect(viewModel.selectedFrequency == .normal)
+        #expect(exercise.frequencyPreference == ExerciseFrequency.normal.rawValue)
     }
 
     @Test
@@ -53,7 +53,7 @@ struct MovementDetailViewModelTests {
         let viewModel = MovementDetailViewModel(exercise: exercise, exercises: repository)
         #expect(viewModel.isSaving == false)
 
-        await viewModel.setFrequency("more")
+        await viewModel.setFrequency(.more)
 
         #expect(viewModel.isSaving == false)
     }
@@ -64,20 +64,20 @@ struct MovementDetailViewModelTests {
         let exercise = Exercise()
 
         let viewModel = MovementDetailViewModel(exercise: exercise, exercises: repository)
-        #expect(viewModel.selectedFrequency == "normal")
+        #expect(viewModel.selectedFrequency == .normal)
 
         viewModel.isSaving = true
-        await viewModel.setFrequency("more")
+        await viewModel.setFrequency(.more)
 
-        #expect(viewModel.selectedFrequency == "normal")
-        #expect(exercise.frequencyPreference == "normal")
+        #expect(viewModel.selectedFrequency == .normal)
+        #expect(exercise.frequencyPreference == ExerciseFrequency.normal.rawValue)
         #expect(repository.savedExercises.isEmpty)
 
         viewModel.isSaving = false
-        await viewModel.setFrequency("more")
+        await viewModel.setFrequency(.more)
 
-        #expect(viewModel.selectedFrequency == "more")
-        #expect(exercise.frequencyPreference == "more")
+        #expect(viewModel.selectedFrequency == .more)
+        #expect(exercise.frequencyPreference == ExerciseFrequency.more.rawValue)
         #expect(repository.savedExercises.count == 1)
     }
 
@@ -88,6 +88,6 @@ struct MovementDetailViewModelTests {
 
         let viewModel = MovementDetailViewModel(exercise: exercise, exercises: repository)
 
-        #expect(viewModel.selectedFrequency == "normal")
+        #expect(viewModel.selectedFrequency == .normal)
     }
 }

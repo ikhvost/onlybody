@@ -5,10 +5,9 @@ import SwiftData
 final class Workout {
     @Attribute(.unique) var id: UUID = UUID()
     var name: String = ""
-    var mode: String = "smart"
+    var mode: String = WorkoutMode.smart.rawValue
     var targetMuscleGroups: [String] = []
     var scheduledDays: [String] = []
-    var createdAt: Date = Date.now
     @Relationship(deleteRule: .cascade) var items: [WorkoutItem]? = nil
 
     init() {}

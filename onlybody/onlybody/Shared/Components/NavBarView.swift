@@ -37,4 +37,13 @@ struct NavBarView<Leading: View, Trailing: View>: View {
                 .frame(height: 1)
         }
     }
+
+    init(
+        title: String,
+        @ViewBuilder leading: () -> Leading
+    ) where Trailing == EmptyView {
+        self.init(title: title, leading: leading) {
+            EmptyView()
+        }
+    }
 }

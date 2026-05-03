@@ -30,7 +30,7 @@ struct ActiveWorkoutView: View {
                     totalCount: viewModel.items.count,
                     elapsedString: formatTime(viewModel.elapsedSeconds),
                     exerciseName: viewModel.currentExerciseName,
-                    setLabel: setLabel,
+                    setLabel: "Set \(viewModel.currentSetIndex + 1) of \(viewModel.currentSetsTotal) \u{00B7} " + (viewModel.currentTargetReps > 0 ? "Target \(viewModel.currentTargetReps) reps" : "max hold"),
                     totalSets: viewModel.currentSetsTotal,
                     completedSets: viewModel.completedSetsForCurrent,
                     currentSetIndex: viewModel.currentSetIndex,
@@ -71,13 +71,6 @@ struct ActiveWorkoutView: View {
         .task {
             await viewModel.load()
         }
-    }
-
-    private var setLabel: String {
-        let target = viewModel.currentTargetReps > 0
-            ? "Target \(viewModel.currentTargetReps) reps"
-            : "max hold"
-        return "Set \(viewModel.currentSetIndex + 1) of \(viewModel.currentSetsTotal) \u{00B7} \(target)"
     }
 
     private func formatTime(_ seconds: Int) -> String {
@@ -455,45 +448,13 @@ private struct ActiveWorkoutWeightCard: View {
     let onDecrement: () -> Void
 
     var body: some View {
-        VStack(spacing: 6) {
-            MonoLabel(text: "Added kg", size: 9, color: Theme.text3, tracking: 0.5)
-
-            HStack(spacing: 4) {
-                Button {
-                    onDecrement()
-                } label: {
-                    Text("\u{2212}")
-                        .font(Theme.fontMono(14, .medium))
-                        .foregroundStyle(weight > 0 ? Theme.text : Theme.text3)
-                        .frame(width: 24, height: 24)
-                        .background(Theme.surface2)
-                        .clipShape(.rect(cornerRadius: Theme.chipCornerRadius))
-                        .overlay {
-                            RoundedRectangle(cornerRadius: Theme.chipCornerRadius)
-                                .stroke(Theme.border2, lineWidth: 1)
-                        }
-                }
-                .disabled(weight <= 0)
-                .buttonStyle(.plain)
-
-                Text(formatWeight(weight))
-                    .font(Theme.fontMono(14, .bold))
-                    .foregroundStyle(Theme.text)
-                    .frame(maxWidth: .infinity)
-
-                Button {
-                    onIncrement()
-                } label: {
-                    Text("+")
-                        .font(Theme.fontMono(14, .medium))
-                        .foregroundStyle(Theme.accentDark)
-                        .frame(width: 24, height: 24)
-                        .background(Theme.accent)
-                        .clipShape(.rect(cornerRadius: Theme.chipCornerRadius))
-                }
-                .buttonStyle(.plain)
-            }
-        }
+        StepperView(
+            label: "Added kg",
+            valueText: weight.formatted(.number.precision(.fractionLength(0...1)).grouping(.never)),
+            canDecrement: weight > 0,
+            onIncrement: onIncrement,
+            onDecrement: onDecrement
+        )
         .frame(maxWidth: .infinity)
         .padding(.vertical, 12)
         .padding(.horizontal, 14)
@@ -503,10 +464,6 @@ private struct ActiveWorkoutWeightCard: View {
                 .stroke(Theme.border, lineWidth: 1)
         }
         .clipShape(.rect(cornerRadius: Theme.cornerRadius))
-    }
-
-    private func formatWeight(_ value: Double) -> String {
-        value.formatted(.number.precision(.fractionLength(0...1)).grouping(.never))
     }
 }
 

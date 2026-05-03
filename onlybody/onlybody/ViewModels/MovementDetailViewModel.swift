@@ -6,16 +6,16 @@ final class MovementDetailViewModel {
     private let exercisesRepository: any ExerciseRepository
 
     var exercise: Exercise
-    var selectedFrequency: String
+    var selectedFrequency: ExerciseFrequency
     var isSaving = false
 
     init(exercise: Exercise, exercises: any ExerciseRepository) {
         self.exercise = exercise
         self.exercisesRepository = exercises
-        selectedFrequency = exercise.frequencyPreference
+        selectedFrequency = ExerciseFrequency(rawValue: exercise.frequencyPreference) ?? .normal
     }
 
-    func setFrequency(_ value: String) async {
+    func setFrequency(_ value: ExerciseFrequency) async {
         guard selectedFrequency != value, !isSaving else {
             return
         }
@@ -23,14 +23,14 @@ final class MovementDetailViewModel {
         let previousValue = selectedFrequency
 
         selectedFrequency = value
-        exercise.frequencyPreference = value
+        exercise.frequencyPreference = value.rawValue
         isSaving = true
 
         do {
             try await exercisesRepository.save(exercise)
         } catch {
             selectedFrequency = previousValue
-            exercise.frequencyPreference = previousValue
+            exercise.frequencyPreference = previousValue.rawValue
         }
 
         isSaving = false

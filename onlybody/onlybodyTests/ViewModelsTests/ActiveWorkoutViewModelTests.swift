@@ -494,7 +494,7 @@ struct ActiveWorkoutViewModelTests {
         let saved = try #require(sessionRepo.savedSessions.first)
         #expect(saved.workoutName == "Full Body")
         #expect(saved.durationSeconds == viewModel.elapsedSeconds)
-        #expect(saved.date != nil)
+        #expect(saved.date.timeIntervalSince1970 > 0)
     }
 
     @Test

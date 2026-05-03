@@ -102,6 +102,6 @@ struct CustomExerciseForm: View {
 }
 
 #Preview("Custom Exercise") {
-    CustomExerciseForm(viewModel: CustomExerciseViewModel(exercises: EmptyExerciseRepository()))
+    CustomExerciseForm(viewModel: CustomExerciseViewModel(exercises: PreviewExerciseRepository()))
         .preferredColorScheme(.dark)
 }

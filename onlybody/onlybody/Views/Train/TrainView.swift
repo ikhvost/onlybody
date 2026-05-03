@@ -71,7 +71,7 @@ struct TrainView: View {
 #Preview("Train — placeholder") {
     TrainView(
         viewModel: TrainViewModel(
-            workouts: PlaceholderWorkoutRepository()
+            workouts: PreviewWorkoutRepository()
         ),
         showMusclePicker: {},
         showSessionBuilder: { _ in },
@@ -258,17 +258,6 @@ private struct WorkoutRow: View {
     let onEditTap: () -> Void
     let onStartTap: () -> Void
 
-    private var daysText: String {
-        if workout.scheduledDays.isEmpty {
-            return "UNSCHEDULED"
-        }
-        return workout.scheduledDays.joined(separator: " · ")
-    }
-
-    private var movementCount: Int {
-        workout.items?.count ?? 0
-    }
-
     var body: some View {
         HStack(spacing: 14) {
             VStack(alignment: .leading, spacing: 3) {
@@ -277,7 +266,7 @@ private struct WorkoutRow: View {
                     .foregroundStyle(Theme.text)
 
                 MonoLabel(
-                    text: "\(daysText)  ·  \(movementCount) MVMTS",
+                    text: "\(workout.scheduledDays.isEmpty ? "UNSCHEDULED" : workout.scheduledDays.joined(separator: " · "))  ·  \(workout.items?.count ?? 0) MVMTS",
                     size: 9,
                     color: Theme.text3,
                     tracking: 0.5
@@ -323,11 +312,4 @@ private struct WorkoutRow: View {
                 .padding(.leading, Theme.horizontalPadding)
         }
     }
-}
-
-private struct PlaceholderWorkoutRepository: WorkoutRepository {
-    func allWorkouts() async throws -> [Workout] { [] }
-    func workout(by id: UUID) async throws -> Workout? { nil }
-    func save(_ workout: Workout) async throws {}
-    func deleteItems(_ items: [WorkoutItem]) async throws {}
 }

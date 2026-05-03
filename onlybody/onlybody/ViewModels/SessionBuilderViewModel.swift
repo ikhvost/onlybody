@@ -11,7 +11,7 @@ final class SessionBuilderViewModel {
     let editingWorkout: Workout?
 
     var name: String = ""
-    var mode: String = "smart"
+    var mode: WorkoutMode = .smart
     var targetMuscleGroups: [String] = []
     var movements: [MovementConfig] = []
     var scheduledDays: [String] = []
@@ -19,7 +19,7 @@ final class SessionBuilderViewModel {
     var errorMessage: String?
     var allExercises: [Exercise] = []
 
-    let dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    let dayNames = Weekdays.shortNames
 
     var isEditMode: Bool {
         editingWorkout != nil
@@ -53,9 +53,9 @@ final class SessionBuilderViewModel {
         if let workout {
             populateFrom(workout)
         } else if !targetMuscleGroups.isEmpty {
-            self.mode = "smart"
+            mode = .smart
         } else {
-            self.mode = "manual"
+            mode = .manual
         }
     }
 
@@ -106,11 +106,11 @@ final class SessionBuilderViewModel {
         defer { isSaving = false }
 
         do {
-            if mode == "smart" && targetMuscleGroups.isEmpty {
-                mode = "manual"
+            if mode == .smart && targetMuscleGroups.isEmpty {
+                mode = .manual
             }
 
-            if mode == "smart" && !targetMuscleGroups.isEmpty {
+            if mode == .smart && !targetMuscleGroups.isEmpty {
                 let config = SmartWorkoutGenerator.Config(
                     targetMuscleGroups: targetMuscleGroups,
                     durationMinutes: 30
@@ -142,7 +142,7 @@ final class SessionBuilderViewModel {
             workout.name = name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
                 ? "My Session"
                 : name.trimmingCharacters(in: .whitespacesAndNewlines)
-            workout.mode = mode
+            workout.mode = mode.rawValue
             workout.scheduledDays = scheduledDays
             workout.targetMuscleGroups = targetMuscleGroups
 
@@ -174,7 +174,7 @@ final class SessionBuilderViewModel {
 
     private func populateFrom(_ workout: Workout) {
         name = workout.name
-        mode = workout.mode
+        mode = WorkoutMode(rawValue: workout.mode) ?? .manual
         targetMuscleGroups = workout.targetMuscleGroups
         scheduledDays = workout.scheduledDays
 

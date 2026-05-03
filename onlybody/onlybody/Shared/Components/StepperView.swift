@@ -2,15 +2,39 @@ import SwiftUI
 
 struct StepperView: View {
     let label: String
-    let value: Int
-    let step: Int
-    let minValue: Int
-    let format: (Int) -> String
+    let valueText: String
+    let canDecrement: Bool
     let onIncrement: () -> Void
     let onDecrement: () -> Void
 
-    private var canDecrement: Bool {
-        value - step >= minValue
+    init(
+        label: String,
+        value: Int,
+        step: Int,
+        minValue: Int,
+        format: (Int) -> String,
+        onIncrement: @escaping () -> Void,
+        onDecrement: @escaping () -> Void
+    ) {
+        self.label = label
+        valueText = format(value)
+        canDecrement = value - step >= minValue
+        self.onIncrement = onIncrement
+        self.onDecrement = onDecrement
+    }
+
+    init(
+        label: String,
+        valueText: String,
+        canDecrement: Bool,
+        onIncrement: @escaping () -> Void,
+        onDecrement: @escaping () -> Void
+    ) {
+        self.label = label
+        self.valueText = valueText
+        self.canDecrement = canDecrement
+        self.onIncrement = onIncrement
+        self.onDecrement = onDecrement
     }
 
     var body: some View {
@@ -37,7 +61,7 @@ struct StepperView: View {
                 .disabled(!canDecrement)
                 .buttonStyle(.plain)
 
-                Text(format(value))
+                Text(valueText)
                     .font(Theme.fontMono(14, .bold))
                     .foregroundStyle(Theme.text)
                     .frame(maxWidth: .infinity)

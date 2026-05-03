@@ -13,27 +13,8 @@ final class CustomExerciseViewModel {
     var isSaving = false
     var errorMessage: String? = nil
 
-    let muscleOptions = [
-        "Chest",
-        "Back",
-        "Shoulders",
-        "Arms",
-        "Core",
-        "Quads",
-        "Glutes",
-        "Hamstrings",
-        "Calves",
-        "Full Body"
-    ]
-
-    let equipmentOptions = [
-        "None",
-        "Dumbbells",
-        "Pull-up Bar",
-        "Resistance Bands",
-        "Kettlebell",
-        "Barbell"
-    ]
+    let muscleOptions = ExerciseCatalog.primaryMuscles
+    let equipmentOptions = ExerciseCatalog.equipment
 
     var isValid: Bool {
         !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && !primaryMuscle.isEmpty

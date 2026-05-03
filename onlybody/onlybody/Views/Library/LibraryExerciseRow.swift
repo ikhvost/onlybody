@@ -4,11 +4,6 @@ struct LibraryExerciseRow: View {
     let exercise: Exercise
     let action: () -> Void
 
-    private var equipmentText: String {
-        let equipment = exercise.equipment.joined(separator: ", ")
-        return equipment.isEmpty ? "None" : equipment
-    }
-
     var body: some View {
         Button(action: action) {
             HStack(spacing: 10) {
@@ -18,7 +13,7 @@ struct LibraryExerciseRow: View {
                         .foregroundStyle(Theme.text)
 
                     MonoLabel(
-                        text: "\(exercise.primaryMuscle) · \(equipmentText)",
+                        text: "\(exercise.primaryMuscle) · \(exercise.equipmentLabel)",
                         size: 9,
                         color: Theme.text3,
                         tracking: 0.3

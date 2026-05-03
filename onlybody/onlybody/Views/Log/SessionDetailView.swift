@@ -1,20 +1,25 @@
+import Foundation
 import SwiftUI
 
 struct SessionDetailView: View {
     @Environment(\.dismiss) private var dismiss
-    let viewModel: SessionDetailViewModel
+    let session: Session
+
+    private var sortedItems: [SessionItem] {
+        (session.items ?? []).sorted { $0.order < $1.order }
+    }
 
     var body: some View {
         ZStack {
             Theme.bg.ignoresSafeArea()
 
             VStack(spacing: 0) {
-                NavBarView(title: viewModel.session.workoutName) {
+                NavBarView(title: session.workoutName) {
                     Button {
                         dismiss()
                     } label: {
                         HStack(spacing: 4) {
-                            BackIcon(color: Theme.accent, size: 16)
+                            ChevronIcon(isBack: true, color: Theme.accent, size: 16, inset: 8)
                             Text("Back")
                                 .font(Theme.fontSans(14, .semibold))
                                 .foregroundStyle(Theme.accent)
@@ -22,31 +27,29 @@ struct SessionDetailView: View {
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel("Back to log")
-                } trailing: {
-                    EmptyView()
                 }
 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
-                        MonoLabel(text: viewModel.dateLabel, size: 9, color: Theme.text3, tracking: 1.0)
+                        MonoLabel(text: formattedDate(session.date), size: 9, color: Theme.text3, tracking: 1.0)
                             .padding(.bottom, 6)
 
                         HStack(spacing: 10) {
                             HStack(spacing: 3) {
-                                Text(viewModel.durationValue)
+                                Text(Duration.seconds(session.durationSeconds).formatted(.time(pattern: .minuteSecond)))
                                     .font(Theme.fontMono(24, .medium))
                                     .foregroundStyle(Theme.accent)
-                                Text(viewModel.durationUnit)
+                                Text("min")
                                     .font(Theme.fontMono(12))
                                     .foregroundStyle(Theme.text2)
                             }
 
                             HStack(spacing: 3) {
-                                Text(viewModel.caloriesValue)
+                                Text(session.caloriesBurned.map(String.init) ?? "\u{2014}")
                                     .font(Theme.fontMono(24, .medium))
                                     .foregroundStyle(Theme.text)
-                                if !viewModel.caloriesUnit.isEmpty {
-                                    Text(viewModel.caloriesUnit)
+                                if session.caloriesBurned != nil {
+                                    Text("kcal")
                                         .font(Theme.fontMono(12))
                                         .foregroundStyle(Theme.text2)
                                 }
@@ -59,11 +62,10 @@ struct SessionDetailView: View {
                             .frame(height: 1)
                             .padding(.bottom, 16)
 
-                        ForEach(viewModel.sortedItems.enumerated(), id: \.element.id) { (index, item) in
+                        ForEach(sortedItems.enumerated(), id: \.element.id) { index, item in
                             SessionItemRow(
                                 item: item,
-                                isLast: index == viewModel.sortedItems.count - 1,
-                                viewModel: viewModel
+                                isLast: index == sortedItems.count - 1
                             )
                         }
                     }
@@ -76,12 +78,21 @@ struct SessionDetailView: View {
         }
         .toolbar(.hidden, for: .navigationBar)
     }
+
+    private func formattedDate(_ date: Date) -> String {
+        date.formatted(
+            .dateTime
+                .weekday(.wide)
+                .month(.wide)
+                .day()
+                .locale(Locale(identifier: "en_US"))
+        ).uppercased()
+    }
 }
 
 private struct SessionItemRow: View {
     let item: SessionItem
     let isLast: Bool
-    let viewModel: SessionDetailViewModel
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -93,7 +104,7 @@ private struct SessionItemRow: View {
                 Spacer()
 
                 MonoLabel(
-                    text: "\(viewModel.totalReps(for: item)) REPS TOTAL",
+                    text: "\(item.setReps.reduce(0, +)) REPS TOTAL",
                     size: 9,
                     color: Theme.text3,
                     tracking: 0.3
@@ -103,7 +114,7 @@ private struct SessionItemRow: View {
 
             ForEach(item.setReps.indices, id: \.self) { setIndex in
                 MonoLabel(
-                    text: viewModel.setLabel(index: setIndex, reps: item.setReps[setIndex]),
+                    text: "SET \(setIndex + 1) \u{00B7} \(item.setReps[setIndex]) REPS",
                     size: 9,
                     color: Theme.text3,
                     tracking: 0.3
@@ -144,8 +155,6 @@ private struct SessionItemRow: View {
 
     session.items = [item1, item2]
 
-    return SessionDetailView(
-        viewModel: SessionDetailViewModel(session: session)
-    )
-    .preferredColorScheme(.dark)
+    return SessionDetailView(session: session)
+        .preferredColorScheme(.dark)
 }

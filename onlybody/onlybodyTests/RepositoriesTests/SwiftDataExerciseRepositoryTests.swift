@@ -34,11 +34,11 @@ struct SwiftDataExerciseRepositoryTests {
 
         #expect(allExercises.map(\.name) == ["Push-Ups", "Squats"])
 
-        pushUp.frequencyPreference = "more"
+        pushUp.frequencyPreference = ExerciseFrequency.more.rawValue
         try await repository.save(pushUp)
 
         let updatedExercises = try await repository.allExercises()
         #expect(updatedExercises.count == 2)
-        #expect(updatedExercises.first { $0.name == "Push-Ups" }?.frequencyPreference == "more")
+        #expect(updatedExercises.first { $0.name == "Push-Ups" }?.frequencyPreference == ExerciseFrequency.more.rawValue)
     }
 }

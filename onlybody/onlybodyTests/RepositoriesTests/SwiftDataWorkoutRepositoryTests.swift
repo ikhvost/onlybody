@@ -17,12 +17,12 @@ struct SwiftDataWorkoutRepositoryTests {
 
         let fullBody = Workout()
         fullBody.name = "Full Body"
-        fullBody.mode = "smart"
+        fullBody.mode = WorkoutMode.smart.rawValue
         fullBody.scheduledDays = ["Mon", "Wed", "Fri"]
 
         let upperBody = Workout()
         upperBody.name = "Upper Body"
-        upperBody.mode = "manual"
+        upperBody.mode = WorkoutMode.manual.rawValue
         upperBody.scheduledDays = ["Tue", "Thu"]
 
         try await repository.save(fullBody)
@@ -100,18 +100,18 @@ struct SwiftDataWorkoutRepositoryTests {
 
         let workout = Workout()
         workout.name = "Original"
-        workout.mode = "smart"
+        workout.mode = WorkoutMode.smart.rawValue
         try await repository.save(workout)
 
         workout.name = "Updated"
-        workout.mode = "manual"
+        workout.mode = WorkoutMode.manual.rawValue
         workout.scheduledDays = ["Sat"]
         try await repository.save(workout)
 
         let all = try await repository.allWorkouts()
         #expect(all.count == 1)
         #expect(all[0].name == "Updated")
-        #expect(all[0].mode == "manual")
+        #expect(all[0].mode == WorkoutMode.manual.rawValue)
         #expect(all[0].scheduledDays == ["Sat"])
     }
 

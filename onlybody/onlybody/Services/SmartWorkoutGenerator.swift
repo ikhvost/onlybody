@@ -35,13 +35,7 @@ struct SmartWorkoutGenerator {
     func generate(config: Config, from exercises: [Exercise]) -> [GeneratedMovement] {
         let expanded = expandTargets(config.targetMuscleGroups)
 
-        let pool = exercises
-            .filter { exercise in
-                expanded.contains(exercise.primaryMuscle)
-                    || !Set(exercise.secondaryMuscles).isDisjoint(with: Set(expanded))
-            }
-            .filter { $0.frequencyPreference != "never" }
-            .sorted { preferenceRank($0.frequencyPreference) < preferenceRank($1.frequencyPreference) }
+        let pool = filteredPool(from: exercises, matching: expanded)
 
         if pool.isEmpty {
             return []
@@ -50,15 +44,10 @@ struct SmartWorkoutGenerator {
         let items = buildMovements(pool: pool, timeBudget: config.durationMinutes * 60)
 
         guard items.count >= 2 else {
-            let equipmentFree = exercises.filter { exercise in
-                exercise.equipment.contains("None")
-                    && (expanded.contains(exercise.primaryMuscle)
-                        || !Set(exercise.secondaryMuscles).isDisjoint(with: Set(expanded)))
-            }
             return buildMovements(
-                pool: equipmentFree
-                    .filter { $0.frequencyPreference != "never" }
-                    .sorted { preferenceRank($0.frequencyPreference) < preferenceRank($1.frequencyPreference) },
+                pool: filteredPool(from: exercises.filter { exercise in
+                    exercise.equipment.contains("None")
+                }, matching: expanded),
                 timeBudget: config.durationMinutes * 60
             )
         }
@@ -66,12 +55,17 @@ struct SmartWorkoutGenerator {
         return items
     }
 
-    private func preferenceRank(_ p: String) -> Int {
-        switch p {
-        case "more": return 0
-        case "less": return 2
-        default: return 1
-        }
+    private func filteredPool(from exercises: [Exercise], matching expanded: [String]) -> [Exercise] {
+        exercises
+            .filter { exercise in
+                expanded.contains(exercise.primaryMuscle)
+                    || !Set(exercise.secondaryMuscles).isDisjoint(with: Set(expanded))
+            }
+            .filter { ExerciseFrequency(rawValue: $0.frequencyPreference) != .never }
+            .sorted {
+                (ExerciseFrequency(rawValue: $0.frequencyPreference) ?? .normal).rank
+                    < (ExerciseFrequency(rawValue: $1.frequencyPreference) ?? .normal).rank
+            }
     }
 
     private func buildMovements(pool: [Exercise], timeBudget: Int) -> [GeneratedMovement] {
@@ -106,11 +100,11 @@ struct SmartWorkoutGenerator {
         for group in groups {
             switch group {
             case "Full Body":
-                expanded.formUnion(Self.allMuscles)
+                expanded.formUnion(ExerciseCatalog.allMuscles)
             case "Upper":
-                expanded.formUnion(Self.upperMuscles)
+                expanded.formUnion(ExerciseCatalog.upperMuscles)
             case "Lower":
-                expanded.formUnion(Self.lowerMuscles)
+                expanded.formUnion(ExerciseCatalog.lowerMuscles)
             default:
                 expanded.insert(group)
             }
@@ -118,13 +112,4 @@ struct SmartWorkoutGenerator {
 
         return Array(expanded)
     }
-
-    private static let allMuscles = [
-        "Chest", "Back", "Shoulders", "Arms",
-        "Core", "Quads", "Glutes", "Hamstrings", "Calves"
-    ]
-
-    private static let upperMuscles = ["Chest", "Back", "Shoulders", "Arms"]
-
-    private static let lowerMuscles = ["Quads", "Glutes", "Hamstrings", "Calves"]
 }

@@ -12,6 +12,7 @@ struct SeedManager {
         }
 
         guard let url = bundle.url(forResource: "SeedData", withExtension: "json") else {
+            assertionFailure("Missing SeedData.json")
             return
         }
 
@@ -25,14 +26,14 @@ struct SeedManager {
                 exercise.primaryMuscle = seed.primaryMuscle
                 exercise.secondaryMuscles = seed.secondaryMuscles
                 exercise.equipment = seed.equipment
-                exercise.frequencyPreference = seed.frequencyPreference
+                exercise.frequencyPreference = ExerciseFrequency(rawValue: seed.frequencyPreference)?.rawValue ?? ExerciseFrequency.normal.rawValue
                 exercise.isCustom = seed.isCustom
                 context.insert(exercise)
             }
 
             try context.save()
         } catch {
-            return
+            assertionFailure("Failed to seed exercises: \(error)")
         }
     }
 }

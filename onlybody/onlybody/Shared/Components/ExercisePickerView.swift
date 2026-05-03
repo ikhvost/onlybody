@@ -9,10 +9,7 @@ struct ExercisePickerView: View {
     @State private var searchText = ""
     @State private var selectedFilter = "All"
 
-    let filters = [
-        "All", "Chest", "Back", "Shoulders", "Arms",
-        "Core", "Quads", "Glutes", "Hamstrings", "Calves", "Full Body"
-    ]
+    let filters = ExerciseCatalog.filters
 
     private var filteredExercises: [Exercise] {
         exercises.filter { exercise in
@@ -28,11 +25,9 @@ struct ExercisePickerView: View {
                 Button {
                     dismiss()
                 } label: {
-                    BackIcon(color: Theme.text, size: 18)
+                    ChevronIcon(isBack: true, color: Theme.text, size: 18, inset: 8)
                 }
                 .buttonStyle(.plain)
-            } trailing: {
-                EmptyView()
             }
 
             VStack(spacing: 8) {
@@ -104,23 +99,14 @@ struct ExercisePickerView: View {
                                             .foregroundStyle(Theme.text)
 
                                         MonoLabel(
-                                            text: "\(exercise.primaryMuscle.uppercased()) · \(exercise.equipment.isEmpty ? "NONE" : exercise.equipment.joined(separator: ", ").uppercased())",
+                                            text: "\(exercise.primaryMuscle.uppercased()) · \(exercise.equipmentLabel.uppercased())",
                                             size: 9,
                                             color: Theme.text3,
                                             tracking: 0.3
                                         )
 
                                         if exercise.isCustom {
-                                            MonoLabel(
-                                                text: "CUSTOM",
-                                                size: 8,
-                                                color: Theme.accent,
-                                                tracking: 0.5
-                                            )
-                                            .padding(.horizontal, 6)
-                                            .padding(.vertical, 2)
-                                            .background(Theme.accentDim)
-                                            .clipShape(.rect(cornerRadius: 2))
+                                            CustomBadgeView()
                                             .padding(.top, 5)
                                         }
                                     }

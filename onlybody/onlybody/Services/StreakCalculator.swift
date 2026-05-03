@@ -16,10 +16,8 @@ struct StreakCalculator {
             return Stats(current: 0, longest: 0, total: 0)
         }
 
-        let sorted = sessions.sorted { $0.date < $1.date }
-
         var uniqueDays: Set<Date> = []
-        for session in sorted {
+        for session in sessions {
             uniqueDays.insert(calendar.startOfDay(for: session.date))
         }
 

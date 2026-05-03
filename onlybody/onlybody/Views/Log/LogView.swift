@@ -129,7 +129,7 @@ struct LogView: View {
 #Preview("Log — empty") {
     LogView(
         viewModel: LogViewModel(
-            sessions: EmptySessionRepository()
+            sessions: PreviewSessionRepository()
         ),
         showSessionDetail: { _ in }
     )
@@ -139,40 +139,32 @@ struct LogView: View {
 #Preview("Log — filled") {
     LogView(
         viewModel: {
-            let vm = LogViewModel(sessions: StubSessionRepository())
+            let may1 = Session()
+            may1.id = UUID()
+            may1.workoutName = "Full Body"
+            may1.durationSeconds = 1450
+            may1.caloriesBurned = 102
+            may1.date = Calendar.current.date(from: DateComponents(year: 2026, month: 5, day: 1))!
+
+            let april25 = Session()
+            april25.id = UUID()
+            april25.workoutName = "Upper Body"
+            april25.durationSeconds = 2178
+            april25.caloriesBurned = 140
+            april25.date = Calendar.current.date(from: DateComponents(year: 2026, month: 4, day: 25))!
+
+            let april20 = Session()
+            april20.id = UUID()
+            april20.workoutName = "Lower Body"
+            april20.durationSeconds = 1800
+            april20.caloriesBurned = nil
+            april20.date = Calendar.current.date(from: DateComponents(year: 2026, month: 4, day: 20))!
+
+            let vm = LogViewModel(sessions: PreviewSessionRepository(sessions: [may1, april25, april20]))
             Task { await vm.load() }
             return vm
         }(),
         showSessionDetail: { _ in }
     )
     .preferredColorScheme(.dark)
-}
-
-private struct StubSessionRepository: SessionRepository {
-    func allSessions() async throws -> [Session] {
-        let may1 = Session()
-        may1.id = UUID()
-        may1.workoutName = "Full Body"
-        may1.durationSeconds = 1450
-        may1.caloriesBurned = 102
-        may1.date = Calendar.current.date(from: DateComponents(year: 2026, month: 5, day: 1))!
-
-        let april25 = Session()
-        april25.id = UUID()
-        april25.workoutName = "Upper Body"
-        april25.durationSeconds = 2178
-        april25.caloriesBurned = 140
-        april25.date = Calendar.current.date(from: DateComponents(year: 2026, month: 4, day: 25))!
-
-        let april20 = Session()
-        april20.id = UUID()
-        april20.workoutName = "Lower Body"
-        april20.durationSeconds = 1800
-        april20.caloriesBurned = nil
-        april20.date = Calendar.current.date(from: DateComponents(year: 2026, month: 4, day: 20))!
-
-        return [may1, april25, april20]
-    }
-
-    func save(_ session: Session) async throws {}
 }

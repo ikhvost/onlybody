@@ -4,38 +4,25 @@ import Observation
 @MainActor
 @Observable
 final class MusclePickerViewModel {
-    let muscles = [
-        "Chest",
-        "Back",
-        "Shoulders",
-        "Arms",
-        "Core",
-        "Quads",
-        "Glutes",
-        "Hamstrings",
-        "Calves",
-        "Full Body",
-        "Upper",
-        "Lower",
-    ]
+    let muscles = ExerciseCatalog.sessionTargets
 
-    var selectedIDs: [String] = []
+    var selectedMuscles: [String] = []
 
     var selectionSummary: String {
         muscles
-            .filter { selectedIDs.contains($0) }
+            .filter { selectedMuscles.contains($0) }
             .joined(separator: " + ")
     }
 
     var canBuild: Bool {
-        !selectedIDs.isEmpty
+        !selectedMuscles.isEmpty
     }
 
-    func toggle(_ id: String) {
-        if let index = selectedIDs.firstIndex(of: id) {
-            selectedIDs.remove(at: index)
+    func toggle(_ muscle: String) {
+        if let index = selectedMuscles.firstIndex(of: muscle) {
+            selectedMuscles.remove(at: index)
         } else {
-            selectedIDs.append(id)
+            selectedMuscles.append(muscle)
         }
     }
 }

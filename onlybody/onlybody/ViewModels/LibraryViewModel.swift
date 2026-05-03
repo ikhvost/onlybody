@@ -12,19 +12,7 @@ final class LibraryViewModel {
     var isLoading = false
     var errorMessage: String? = nil
 
-    let filters = [
-        "All",
-        "Chest",
-        "Back",
-        "Shoulders",
-        "Arms",
-        "Core",
-        "Quads",
-        "Glutes",
-        "Hamstrings",
-        "Calves",
-        "Full Body"
-    ]
+    let filters = ExerciseCatalog.filters
 
     var filteredExercises: [Exercise] {
         allExercises.filter {

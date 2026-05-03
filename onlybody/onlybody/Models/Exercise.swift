@@ -8,10 +8,12 @@ final class Exercise {
     var primaryMuscle: String = ""
     var secondaryMuscles: [String] = []
     var equipment: [String] = []
-    var frequencyPreference: String = "normal"
+    var frequencyPreference: String = ExerciseFrequency.normal.rawValue
     var isCustom: Bool = false
-    var createdAt: Date = Date.now
-    @Relationship(deleteRule: .nullify, inverse: \WorkoutItem.exercise) var workoutItems: [WorkoutItem]? = nil
 
     init() {}
+
+    var equipmentLabel: String {
+        equipment.isEmpty ? "None" : equipment.joined(separator: ", ")
+    }
 }
