@@ -95,7 +95,7 @@ onlybody/                              — source root (PBXFileSystemSynchronize
 │       ├── MovementDetailView.swift
 │       ├── CustomExerciseViewModel.swift
 │       └── CustomExerciseForm.swift
-├── Core/                              — Infrastructure: repositories, services, seed
+├── Core/                              — Infrastructure: repositories, services
 │   ├── Repositories/
 │   │   ├── ExerciseRepository.swift
 │   │   ├── WorkoutRepository.swift
@@ -107,10 +107,6 @@ onlybody/                              — source root (PBXFileSystemSynchronize
 │   │   ├── SmartWorkoutGenerator.swift
 │   │   ├── StreakCalculator.swift      — [Session] → streak stats (current/longest/total)
 │   │   └── RestTimer.swift
-│   └── Seed/
-│       ├── ExerciseSeed.swift
-│       ├── SeedData.json
-│       └── SeedManager.swift
 ├── Models/                            — SwiftData @Model classes, one type per file
 │   ├── Exercise.swift
 │   ├── Workout.swift
@@ -141,7 +137,8 @@ onlybody/                              — source root (PBXFileSystemSynchronize
 │   └── Preview/                       — Mock repositories for Xcode Previews
 ├── Resources/
 │   ├── Assets.xcassets/
-│   └── Fonts/
+│   ├── Fonts/
+│   └── SeedStore/                     — pre-seeded SQLite store bundled with the app
 onlybodyTests/                         — test root (PBXFileSystemSynchronizedRootGroup)
 ├── Features/
 │   ├── Train/                         — TrainViewModelTests, ActiveWorkoutViewModelTests, etc.
@@ -251,6 +248,13 @@ enum AppTab: String, CaseIterable { case train, log, library }
 - All model properties must have default values OR be optional.
 - Relationships must be optional when the related object may be deleted independently.
 - Use `@Relationship(deleteRule: .cascade)` when a parent owns its children (e.g. `Workout.items`, `Session.items`). Use `@Relationship(deleteRule: .nullify)` for cross-references where the related object may be deleted independently (e.g. `WorkoutItem.workout` inverse).
+
+- **Seed data**: Exercise catalog is shipped as a pre-populated SQLite store in `Resources/SeedStore/default.store`, copied to Documents on first launch. No runtime JSON parsing or bulk inserts. When exercises change, regenerate with:
+  ```bash
+  swift run --package-path Scripts/StoreGenerator StoreGenerator \
+    onlybody/onlybody/Resources/SeedStore/default.store \
+    onlybody/onlybody/Core/Seed/SeedData.json
+  ```
 
 ## Testing
 
