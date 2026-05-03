@@ -72,6 +72,7 @@ struct SessionBuilderView: View {
         } message: {
             Text(viewModel.errorMessage ?? "")
         }
+        .toolbar(.hidden, for: .navigationBar)
     }
 
     private func handleSave() {
