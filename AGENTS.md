@@ -1,241 +1,134 @@
-# AGENTS.md — OnlyBody (Bodyweight Training App)
+# AGENTS.md — OnlyBody
+
+## Start Here
+
+Before doing non-trivial work, read these files in repo root:
+
+1. `DOCUMENTATION_AND_RULES.md`
+2. `APPLICATION_CHANGE_CONTEXT.md`
+
+Do not treat archived MVP planning docs as active instructions unless the task explicitly asks for historical behavior or design verification.
 
 ## Project Overview
 
-Bodyweight training app for iOS. Single user, on-device data, no CloudKit. The app will evolve significantly — architecture must support frequent change with loose coupling and high cohesion.
+OnlyBody is an iOS bodyweight training app built with SwiftUI and SwiftData.
 
-## IMPORTANT
-**WORK ONLY ON ASKED TASK OR TASKS. NEVER WORK ON SOMETHING ELSE. THE WHOLE SCOPE DESCRIBED IN THE TASK**
+- Single-user
+- On-device only
+- No CloudKit
+- No third-party dependencies
+- iOS 26.0+
+- Swift 6.2 with strict concurrency
 
----
+## Scope Discipline
 
-> **Before any UI implementation work, read these two files:**
-> - `docs/design.html` — interactive HTML prototype, source of truth for visuals and interactions
-> - `docs/plans/2026-05-01-bodyweight-training-design.md` — written design spec (colors, typography, components, all 10 screens)
->
-> The design is fully custom (dark-only, DM Sans/DM Mono, amber `#E8A23A` accent). It overrides all standard iOS/SwiftUI defaults. Do not infer visual behavior from HIG.
+Work only on the asked task or tasks.
 
----
+- Do not broaden scope on your own.
+- Do not revive archived plans as mandatory requirements.
+- If a task conflicts with current docs, follow `DOCUMENTATION_AND_RULES.md` and `APPLICATION_CHANGE_CONTEXT.md`.
+- If a task conflicts with shipped code behavior, inspect the code and ask one short question before making a high-risk change.
 
-## Target
+## Current Working Context
 
-- **iOS:** 26.0+
-- **Swift:** 6.2, strict concurrency
-- **Frameworks:** SwiftUI + SwiftData (on-device only)
-- **No third-party dependencies**
+The repo is no longer in MVP planning mode.
 
-## Role
+- `AGENTS.md` gives evergreen repo-level engineering rules.
+- `DOCUMENTATION_AND_RULES.md` explains which docs are active, which are archived, and how agents should use them.
+- `APPLICATION_CHANGE_CONTEXT.md` describes the current architecture, target structure, migration direction, and practical constraints for future work.
+- `docs/archive/mvp/` contains historical MVP design, tech, and task documents. Use them only as reference.
 
-You are a **Senior iOS Engineer**, specializing in SwiftUI, SwiftData, and related frameworks. Interactions and accessibility must follow Apple's HIG. Visuals do not — the design system is fully custom.
+## Architecture Rules
 
----
+Target interaction flow remains:
 
-## Architecture
-
-```
-View ──reads──> ViewModel (@Observable @MainActor) ──calls──> Repository (protocol) ──impl──> SwiftDataRepository
-```
-
-### Loose Coupling Rules
-
-- **Views** depend only on their ViewModel — never access repositories or services directly. No `@Query`. No `ModelContext`. No SwiftData imports.
-- **ViewModels** depend on repository *protocols* — never on concrete SwiftData types. All screen state and logic. Testable with mock repositories.
-- **Repositories** — protocols (`ExerciseRepository`, `WorkoutRepository`, `SessionRepository`) with `SwiftData*` implementations. Swap implementations without touching views or view models.
-- **Services** — pure logic structs. No SwiftUI imports. No SwiftData. No ViewModels. Fully unit-testable.
-- **No ViewModel-to-ViewModel dependencies.** Pass data through navigation, not shared state.
-- **Theme.swift** is the only cross-cutting dependency for views — everything else is injected.
-
-### Project structure
-
-```
-BodyweightApp/
-├── App/
-│   ├── BodyweightApp.swift            — @main entry, ModelContainer, root view
-│   └── AppTabView.swift               — Custom tab container (NOT SwiftUI TabView)
-├── Models/                            — SwiftData @Model classes, one type per file
-│   ├── Exercise.swift
-│   ├── Workout.swift
-│   ├── WorkoutItem.swift
-│   ├── Session.swift
-│   └── SessionItem.swift
-├── Data/
-│   ├── Repositories/                  — Protocols + SwiftData implementations
-│   │   ├── ExerciseRepository.swift
-│   │   ├── WorkoutRepository.swift
-│   │   ├── SessionRepository.swift
-│   │   ├── SwiftDataExerciseRepository.swift
-│   │   ├── SwiftDataWorkoutRepository.swift
-│   │   └── SwiftDataSessionRepository.swift
-│   └── Seed/
-│       ├── SeedData.json
-│       └── SeedManager.swift
-├── Services/                          — Pure logic, no SwiftUI
-│   ├── SmartWorkoutGenerator.swift
-│   ├── StreakCalculator.swift          — [Session] → streak stats (current/longest/total)
-│   └── RestTimer.swift
-├── ViewModels/                        — @Observable @MainActor, one per screen
-│   ├── TrainViewModel.swift
-│   ├── MusclePickerViewModel.swift
-│   ├── SessionBuilderViewModel.swift
-│   ├── ActiveWorkoutViewModel.swift
-│   ├── LogViewModel.swift
-│   ├── SessionDetailViewModel.swift
-│   ├── LibraryViewModel.swift
-│   ├── MovementDetailViewModel.swift
-│   ├── CustomExerciseViewModel.swift
-│   └── StreakViewModel.swift
-├── Views/                             — Thin rendering, no logic
-│   ├── Train/
-│   │   ├── TrainView.swift
-│   │   ├── MusclePickerView.swift
-│   │   ├── SessionBuilderView.swift
-│   │   └── ActiveWorkoutView.swift
-│   ├── Log/
-│   │   ├── LogView.swift
-│   │   └── SessionDetailView.swift
-│   └── Library/
-│       ├── LibraryView.swift
-│       ├── MovementDetailView.swift
-│       └── CustomExerciseForm.swift
-├── Shared/
-│   ├── Theme/
-│   │   └── Theme.swift                — Design tokens: colors, fonts, spacing
-│   ├── Icons/
-│   │   └── AppIcons.swift             — Custom SwiftUI Shape/Path icons
-│   └── Components/                    — Reusable views, no own view models
-│       ├── MonoLabel.swift
-│       ├── PrimaryButton.swift
-│       ├── GhostButton.swift
-│       ├── ChipView.swift
-│       ├── StepperView.swift
-│       ├── SetTrackerView.swift
-│       ├── NavBarView.swift
-│       ├── ExerciseRow.swift
-│       └── ExercisePickerView.swift
-├── Resources/
-│   └── Assets.xcassets/
-└── Tests/
-    ├── ServicesTests/
-    │   ├── SmartWorkoutGeneratorTests.swift
-    │   ├── StreakCalculatorTests.swift
-    │   └── RestTimerTests.swift
-    └── ViewModelsTests/
-        ├── TrainViewModelTests.swift
-        ├── SessionBuilderViewModelTests.swift
-        └── ActiveWorkoutViewModelTests.swift
+```text
+View -> ViewModel (@Observable @MainActor) -> Repository protocol -> SwiftData repository
 ```
 
----
+Rules:
 
-## Theme
+- Views depend on their view model or explicit screen inputs only.
+- No `@Query`, `ModelContext`, or SwiftData imports in views.
+- View models must be `@Observable` and `@MainActor`.
+- View models depend on repository protocols, not concrete SwiftData implementations.
+- No view-model-to-view-model dependencies.
+- Services are pure logic units. No SwiftUI. No SwiftData.
+- `Theme.swift` is the source of truth for visual tokens used in code.
 
-All design tokens live in `Shared/Theme/Theme.swift`. This is the single source of truth for colors, fonts, and spacing. Never hardcode color literals, font sizes, or padding values in views.
+Important current-state nuance:
 
-Key constants:
-- `Theme.accent` — `#E8A23A`
-- `Theme.accentDim`, `Theme.accentDark`
-- `Theme.bg`, `Theme.surface`, `Theme.surface2`
-- `Theme.text`, `Theme.text2`, `Theme.text3`
-- `Theme.border`, `Theme.border2`
-- `Theme.danger`, `Theme.success`
-- `Theme.fontSans(_ size: CGFloat, _ weight: Font.Weight)` — DM Sans
-- `Theme.fontMono(_ size: CGFloat, _ weight: Font.Weight)` — DM Mono
-- `Theme.horizontalPadding` — 18
-- `Theme.cornerRadius` — 4
-- `Theme.chipCornerRadius` — 3
+- The codebase already uses repository protocols, but many view models and services still operate on SwiftData model types directly.
+- Do not describe or assume the app is already fully domain-decoupled from persistence.
+- Prefer incremental structure improvements over a full architecture rewrite.
 
----
+## Navigation Rules
 
-## Navigation
+- Do not use SwiftUI `TabView` for app tabs.
+- Use `NavigationStack` and `navigationDestination(for:)`.
+- Do not use `NavigationLink` for app flow.
+- `ActiveWorkoutView` should stay behind `fullScreenCover` unless the task intentionally changes workout flow.
 
-Custom tab navigation — do **NOT** use SwiftUI `TabView` or the `Tab` API.
+## Swift Rules
 
-```swift
-enum AppTab: String, CaseIterable { case train, log, library }
+- No `ObservableObject`, `@Published`, `@StateObject`, `@ObservedObject`, or `@EnvironmentObject`.
+- No `DispatchQueue.main.async()` where async/await is appropriate.
+- No force unwraps or force `try` unless failure is unrecoverable.
+- Prefer modern Foundation and Swift APIs.
+- Prefer `Task.sleep(for:)` over `Task.sleep(nanoseconds:)`.
+- Use `localizedStandardContains()` for user-facing search matching.
 
-@MainActor @Observable final class AppTabViewModel {
-    var selectedTab: AppTab = .train
-}
-```
-
-- `AppTabView` manages `selectedTab` and renders the custom `BottomNav`
-- Each tab owns its own `NavigationStack` with `navigationDestination(for:)`
-- `BottomNav` hides when a sub-screen is pushed (track navigation depth per tab)
-- `ActiveWorkoutView` is presented via `fullScreenCover` — prevents accidental back-navigation during a workout
-- No `NavigationLink` — use `navigationDestination(for:)` exclusively
-
----
-
-## Swift Instructions
-
-- `@Observable` classes must be `@MainActor`.
-- Never use `ObservableObject`, `@Published`, `@StateObject`, `@ObservedObject`, `@EnvironmentObject`.
-- Strict concurrency — no `DispatchQueue.main.async()`. Use async/await.
-- Prefer Swift-native over Foundation: `replacing("x", with: "y")` over `replacingOccurrences`.
-- Modern Foundation: `URL.documentsDirectory`, `appending(path:)`.
-- Never C-style formatting: use `Text(value, format: .number.precision(.fractionLength(2)))`.
-- Prefer static member lookup: `.circle` over `Circle()`, `.borderedProminent` over `BorderedProminentButtonStyle()`.
-- Filter user input with `localizedStandardContains()`, never `contains()`.
-- No force unwraps or force `try` unless unrecoverable.
-- Never legacy Formatters: `myDate.formatted(date: .abbreviated, time: .shortened)` over `DateFormatter`.
-- Never `Task.sleep(nanoseconds:)` — use `Task.sleep(for:)`.
-
-## SwiftUI Instructions
+## SwiftUI Rules
 
 - Use `foregroundStyle()` over `foregroundColor()`.
 - Use `clipShape(.rect(cornerRadius:))` over `cornerRadius()`.
-- Use `navigationDestination(for:)` with `NavigationStack`. No `NavigationLink`.
-- No `ObservableObject` — `@Observable` classes only.
-- No single-parameter `onChange()`. Use the two-parameter variant.
-- No `onTapGesture()` — use `Button` instead (unless you need tap location).
+- No single-parameter `onChange()`.
 - No `UIScreen.main.bounds`.
-- No `AnyView` unless absolutely required.
-- No `GeometryReader` — prefer `containerRelativeFrame()` or `visualEffect()`.
-- No view breakup via computed properties — create new `View` structs.
-- Use `ImageRenderer` over `UIGraphicsImageRenderer`.
-- `ForEach` over enumerated: `ForEach(x.enumerated(), id: \.element.id)` (no `Array()` wrapping).
-- Hide indicators: `.scrollIndicators(.hidden)`.
-- Use `ScrollPosition` and `defaultScrollAnchor` over `ScrollViewReader`.
-- No UIKit colors in SwiftUI.
-- **Font sizes:** OnlyBody uses a custom fixed typography scale in `Theme.swift`. Use `Theme.fontSans` and `Theme.fontMono` — NOT Dynamic Type text styles (`.title`, `.body`, etc.).
-- **Spacing/padding:** Always use `Theme` spacing constants. Do not call `.padding()` without a value — always reference `Theme.horizontalPadding` or an explicit `Theme` constant.
-- **Tab navigation:** Do NOT use SwiftUI `Tab` API or `tabItem()`. Use `AppTabView` with `AppTab` enum. See Navigation section.
-- Button with image must include text: `Button("Label", systemImage: "icon", action: ...)` — but prefer custom icon views over SF Symbols.
-- **Icons:** Custom icons live in `Shared/Icons/AppIcons.swift` as SwiftUI `Shape` or `Path` views. Do NOT use SF Symbols. Stroke style: `strokeLinecap: .square`, `strokeLineJoin: .miter`, `strokeWidth: 1.8`.
+- No `AnyView` unless clearly necessary.
+- No `GeometryReader` unless clearly necessary.
+- No `onTapGesture()` where `Button` is the correct control.
+- Use `Theme.fontSans` and `Theme.fontMono` instead of system text styles.
+- Use theme-based spacing and colors instead of introducing new ad hoc visual values.
 
-## SwiftData Instructions
+## SwiftData Rules
 
-- On-device only — `@Attribute(.unique)` is safe and should be used.
-- All model properties must have default values OR be optional.
-- Relationships must be optional when the related object may be deleted independently.
-- Use `@Relationship(deleteRule: .nullify)` for non-cascading deletions.
+- On-device only. `@Attribute(.unique)` is allowed where appropriate.
+- All model properties need defaults or optionals.
+- Relationships must reflect deletion behavior explicitly.
+- Persistence logic belongs in repositories, not views.
 
-## Testing
+## Testing Rules
 
-- Unit-test all Services (pure logic, no dependencies).
-- Unit-test all ViewModels using mock repository protocols.
-- Integration-test repositories with in-memory `ModelContainer`.
-- No UI tests for MVP unless required.
-- SwiftUI Previews for view iteration.
+- Unit-test services.
+- Unit-test view models with mock repositories.
+- Integration-test repository behavior with in-memory `ModelContainer` where repository behavior changes.
+- Do not add UI tests unless the task requires them.
+
+## Documentation Usage
+
+- Do not require `docs/archive/mvp/design.html` or old plan docs for every UI task.
+- Consult archived MVP docs only when:
+  - a task explicitly asks for parity with the original MVP design,
+  - you need to confirm an old product decision,
+  - or you are reviewing historical drift.
+- When current code and archived docs differ, prefer current active docs unless the task says otherwise.
 
 ## Code Quality
 
-- One type per file — no multiple structs/classes/enums in one file.
-- Feature-based folder organization.
-- Add documentation comments for public interfaces.
+- Prefer the smallest correct change.
+- Keep ownership clear.
+- Avoid turning `Shared` into a dumping ground.
+- Co-locate feature-specific code with its feature when touching structure.
+- Add concise comments only when they save real reader time.
 - No secrets in the repository.
-- If the project uses Localizable.xcstrings, use symbol keys accessed via generated symbols like `Text(.helloWorld)`.
 
-## Linting
+## Current Refactor Direction
 
-- No SwiftLint warnings or errors before committing.
+The next structural direction is feature-first organization with a thin app shell.
 
-## Xcode MCP (if configured)
+- `AppTabView` should trend toward a shell, not a multi-feature orchestration file.
+- Navigation ownership should gradually move toward feature flow views.
+- Views and view models for the same feature should be co-located over time.
+- `Shared` should contain only truly shared UI and infrastructure.
 
-Prefer these tools over generic alternatives:
-- `DocumentationSearch` — verify API availability before writing code
-- `BuildProject` — build after changes
-- `GetBuildLog` — inspect errors
-- `RenderPreview` — verify views via Xcode Previews
-- `ExecuteSnippet` — test code in source context
-- `XcodeRead`, `XcodeWrite`, `XcodeUpdate` — prefer for Xcode project files
+See `APPLICATION_CHANGE_CONTEXT.md` for the detailed migration direction.
