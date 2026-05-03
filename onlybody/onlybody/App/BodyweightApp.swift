@@ -7,6 +7,7 @@ struct BodyweightApp: App {
     let exercises: any ExerciseRepository
     let workouts: any WorkoutRepository
     let sessions: any SessionRepository
+    @State private var isLaunching = true
 
     init() {
         do {
@@ -34,7 +35,21 @@ struct BodyweightApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AppTabView(exercises: exercises, workouts: workouts, sessions: sessions)
+            ZStack {
+                AppTabView(exercises: exercises, workouts: workouts, sessions: sessions)
+                    .opacity(isLaunching ? 0 : 1)
+
+                if isLaunching {
+                    LaunchView()
+                        .transition(.opacity)
+                }
+            }
+            .task {
+                try? await Task.sleep(for: .seconds(1.8))
+                withAnimation(.easeInOut(duration: 0.4)) {
+                    isLaunching = false
+                }
+            }
         }
     }
 }
