@@ -351,12 +351,14 @@ struct SessionBuilderView: View {
         VStack(alignment: .leading, spacing: 8) {
             MonoLabel(text: "Training days", size: 11, color: Theme.text2, tracking: 0.5)
 
-            HStack(spacing: 6) {
+            HStack(spacing: 2) {
                 ForEach(viewModel.dayNames, id: \.self) { day in
                     ChipView(
                         label: day,
                         isActive: viewModel.scheduledDays.contains(day),
-                        isSmall: true
+                        size: 12,
+                        horizontalPadding: 8,
+                        verticalPadding: 6
                     ) {
                         viewModel.toggleDay(day)
                     }

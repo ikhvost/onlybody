@@ -88,6 +88,7 @@ struct MusclePickerView: View {
                 .padding(.bottom, 20)
             }
         }
+        .toolbar(.hidden, for: .navigationBar)
     }
 }
 
