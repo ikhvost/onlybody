@@ -600,22 +600,6 @@ struct ActiveWorkoutViewModelTests {
         #expect(sessionItems?[0].weightKg == 5.0)
     }
 
-    @Test
-    func caloriesUsesRoughEstimateFromElapsedMinutes() async throws {
-        let exercise = makeExercise(name: "Push-Ups")
-        let item = makeWorkoutItem(order: 0, sets: 1, targetReps: 10, restSeconds: 45, exercise: exercise)
-        let workout = makeWorkout(id: UUID(), name: "Test", items: [item])
-        let (viewModel, _, sessionRepo) = makeViewModel(workout: workout)
-
-        await viewModel.load()
-        viewModel.elapsedSeconds = 1450
-        viewModel.markSetDone()
-        await viewModel.saveTask?.value
-
-        let saved = try #require(sessionRepo.savedSessions.first)
-        let expectedCalories = Int(Double(1450) / 60.0 * 8.0)
-        #expect(saved.caloriesBurned == expectedCalories)
-    }
 
     @Test
     func saveFailureSetsErrorMessage() async throws {

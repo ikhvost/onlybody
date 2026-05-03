@@ -219,7 +219,7 @@ final class ActiveWorkoutViewModel {
         let session = Session()
         session.date = Date.now
         session.durationSeconds = elapsedSeconds
-        session.caloriesBurned = Int(Double(elapsedSeconds) / 60.0 * 8.0)
+
         session.workoutName = workoutName
         session.items = buildSessionItems()
 

@@ -44,16 +44,7 @@ struct SessionDetailView: View {
                                     .foregroundStyle(Theme.text2)
                             }
 
-                            HStack(spacing: 3) {
-                                Text(session.caloriesBurned.map(String.init) ?? "\u{2014}")
-                                    .font(Theme.fontMono(24, .medium))
-                                    .foregroundStyle(Theme.text)
-                                if session.caloriesBurned != nil {
-                                    Text("kcal")
-                                        .font(Theme.fontMono(13))
-                                        .foregroundStyle(Theme.text2)
-                                }
-                            }
+
                         }
                         .padding(.bottom, 24)
 
@@ -136,7 +127,7 @@ private struct SessionItemRow: View {
     let session = Session()
     session.workoutName = "Full Body"
     session.durationSeconds = 1450
-    session.caloriesBurned = 102
+
     session.date = Calendar.current.date(from: DateComponents(year: 2026, month: 5, day: 1))!
 
     let item1 = SessionItem()

@@ -96,8 +96,6 @@ struct LogView: View {
                     Text(viewModel.weekdayText(for: session))
                     Text("·")
                     Text(viewModel.durationText(for: session))
-                    Text("·")
-                    Text(viewModel.caloriesText(for: session))
                 }
                 .font(Theme.fontMono(10))
                 .foregroundStyle(Theme.text2)
@@ -143,21 +141,21 @@ struct LogView: View {
             may1.id = UUID()
             may1.workoutName = "Full Body"
             may1.durationSeconds = 1450
-            may1.caloriesBurned = 102
+
             may1.date = Calendar.current.date(from: DateComponents(year: 2026, month: 5, day: 1))!
 
             let april25 = Session()
             april25.id = UUID()
             april25.workoutName = "Upper Body"
             april25.durationSeconds = 2178
-            april25.caloriesBurned = 140
+
             april25.date = Calendar.current.date(from: DateComponents(year: 2026, month: 4, day: 25))!
 
             let april20 = Session()
             april20.id = UUID()
             april20.workoutName = "Lower Body"
             april20.durationSeconds = 1800
-            april20.caloriesBurned = nil
+
             april20.date = Calendar.current.date(from: DateComponents(year: 2026, month: 4, day: 20))!
 
             let vm = LogViewModel(sessions: PreviewSessionRepository(sessions: [may1, april25, april20]))

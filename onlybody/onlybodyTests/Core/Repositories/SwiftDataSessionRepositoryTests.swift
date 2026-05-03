@@ -18,13 +18,13 @@ struct SwiftDataSessionRepositoryTests {
         let session1 = Session()
         session1.workoutName = "Full Body"
         session1.durationSeconds = 1450
-        session1.caloriesBurned = 102
+
         session1.date = Date(timeIntervalSince1970: 1_000_000)
 
         let session2 = Session()
         session2.workoutName = "Upper Body"
         session2.durationSeconds = 2178
-        session2.caloriesBurned = 140
+
         session2.date = Date(timeIntervalSince1970: 2_000_000)
 
         try await repository.save(session1)
@@ -98,13 +98,13 @@ struct SwiftDataSessionRepositoryTests {
 
         session.workoutName = "Updated"
         session.durationSeconds = 1800
-        session.caloriesBurned = 200
+
         try await repository.save(session)
 
         let all = try await repository.allSessions()
         #expect(all.count == 1)
         #expect(all[0].workoutName == "Updated")
         #expect(all[0].durationSeconds == 1800)
-        #expect(all[0].caloriesBurned == 200)
+
     }
 }

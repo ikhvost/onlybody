@@ -53,12 +53,6 @@ final class LogViewModel {
             .formatted(.time(pattern: .minuteSecond))
     }
 
-    func caloriesText(for session: Session) -> String {
-        if let cals = session.caloriesBurned {
-            return "\(cals) kcal"
-        }
-        return "—"
-    }
 
     private let calendar = Calendar.current
 

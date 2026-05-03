@@ -102,30 +102,6 @@ struct LogViewModelTests {
         #expect(viewModel.errorMessage == nil)
     }
 
-    @Test
-    func caloriesTextHandlesNilGracefully() async {
-        let sessionRepo = MockSessionRepository()
-
-        let withCals = Session()
-        withCals.id = UUID()
-        withCals.workoutName = "With Cals"
-        withCals.caloriesBurned = 150
-        withCals.date = Date()
-
-        let withoutCals = Session()
-        withoutCals.id = UUID()
-        withoutCals.workoutName = "No Cals"
-        withoutCals.caloriesBurned = nil
-        withoutCals.date = Date()
-
-        sessionRepo.stubbedSessions = [withCals, withoutCals]
-
-        let viewModel = LogViewModel(sessions: sessionRepo)
-        await viewModel.load()
-
-        #expect(viewModel.caloriesText(for: withCals) == "150 kcal")
-        #expect(viewModel.caloriesText(for: withoutCals) == "—")
-    }
 
     @Test
     func durationTextFormatsMinutesAndSeconds() async {
