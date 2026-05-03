@@ -1,8 +1,12 @@
 # OnlyBody
 
-OnlyBody is an iOS bodyweight training app built with SwiftUI and SwiftData.
+OnlyBody is an iOS bodyweight training app built with SwiftUI and SwiftData. The product direction, architecture, and visual system are already defined in the planning docs; the checked-in app target is still in early implementation.
 
-The MVP is implemented. The repository is now in a cleanup and next-iteration phase focused on documentation reset, structure improvement, and incremental architecture refinement.
+## Status
+
+- MVP direction is approved in `docs/plans/`
+- The current Xcode target still contains mostly starter scaffold code
+- The source of truth for future implementation is the design prototype and planning documents, not the default SwiftUI template files
 
 ## Stack
 
@@ -10,77 +14,78 @@ The MVP is implemented. The repository is now in a cleanup and next-iteration ph
 - Swift 6.2 with strict concurrency
 - SwiftUI
 - SwiftData
-- On-device storage only
+- On-device storage only, no CloudKit
 - No third-party dependencies
 
-## Read First
+## Source Of Truth
 
-For current context, read these files in order:
+Read these before making UI or architecture changes:
 
-1. `AGENTS.md`
-2. `DOCUMENTATION_AND_RULES.md`
-3. `APPLICATION_CHANGE_CONTEXT.md`
+1. `docs/design.html`
+2. `docs/plans/2026-05-01-bodyweight-training-design.md`
+3. `docs/plans/2026-05-01-bodyweight-training-tech.md`
+4. `docs/plans/2026-05-01-onlybody-implementation-tasks.md`
+5. `docs/tasks/README.md`
 
-These files are the active working context for future engineering tasks.
+The visual system is fully custom:
 
-## Archived MVP Docs
+- Dark-only interface
+- DM Sans and DM Mono typography
+- Amber accent `#E8A23A`
+- Custom icons instead of SF Symbols
+- Custom bottom navigation instead of SwiftUI `TabView`
 
-The original MVP planning artifacts were archived to:
+## Architecture
 
-- `docs/archive/mvp/design.html`
-- `docs/archive/mvp/plans/`
-- `docs/archive/mvp/tasks/`
-
-They are historical reference only. Do not treat them as mandatory prereads unless a task explicitly requires historical MVP parity.
-
-## Current Architecture Summary
-
-Current mental model:
+Target architecture:
 
 ```text
 View -> ViewModel (@Observable @MainActor) -> Repository protocol -> SwiftData repository
 ```
 
-Important current-state nuance:
+Core rules:
 
-- views are already feature-grouped
-- view models are still mostly flat
-- `AppTabView` currently owns too much orchestration
-- repository abstraction exists, but many layers still use SwiftData model types directly
+- Views read from view models only
+- View models depend on repository protocols, not concrete SwiftData types
+- Services contain pure logic and avoid SwiftUI and SwiftData
+- `Shared/Theme/Theme.swift` is the single source of truth for design tokens
+- Navigation uses `NavigationStack` and `navigationDestination(for:)`
+- `ActiveWorkoutView` should be presented with `fullScreenCover`
 
-See `APPLICATION_CHANGE_CONTEXT.md` for the detailed structure and migration direction.
+## Repository Layout
 
-## App Location
-
-The Xcode project and app source live under:
-
-```text
-onlybody/
-```
-
-Open:
+Current repository structure:
 
 ```text
-onlybody/onlybody.xcodeproj
+.
+├── onlybody/                 # Xcode project and targets
+├── docs/                     # design, technical plans, and task breakdowns
+├── AGENTS.md                 # repo-specific engineering instructions
+├── .gitignore
+└── README.md
 ```
 
-## Working Principles
+Planned app structure is documented in `docs/plans/2026-05-01-bodyweight-training-tech.md`.
 
-- Prefer small, correct changes.
-- Keep feature ownership clear.
-- Avoid growing `Shared` with feature-specific code.
-- Preserve the repository boundary.
-- Do not introduce third-party dependencies.
-- Use `Theme.swift` for visual tokens already represented in code.
+## Getting Started
 
-## Next Direction
+1. Open `onlybody/onlybody.xcodeproj` in Xcode.
+2. Select the `onlybody` app target.
+3. Build and run on an iOS 26.0+ simulator.
+4. Use the planning docs to guide any non-trivial implementation work.
 
-The next structural direction is:
+## Development Notes
 
-- a thinner app shell
-- explicit app dependency construction
-- feature-local flow ownership
-- feature-first file organization
-- smaller and stricter shared surface area
+- Do not treat the current template views as product direction.
+- Keep changes aligned with the approved design spec and technical plan.
+- Prefer small, focused changes.
+- Do not add third-party dependencies.
+- Keep all design tokens centralized in `Theme.swift` once the design system is implemented.
 
-This is an incremental migration direction, not a mandate for a full rewrite.
+## Documentation Index
+
+- Design prototype: `docs/design.html`
+- Design spec: `docs/plans/2026-05-01-bodyweight-training-design.md`
+- Technical plan: `docs/plans/2026-05-01-bodyweight-training-tech.md`
+- Implementation breakdown: `docs/plans/2026-05-01-onlybody-implementation-tasks.md`
+- Task index: `docs/tasks/README.md`

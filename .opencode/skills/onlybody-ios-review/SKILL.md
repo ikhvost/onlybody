@@ -20,7 +20,7 @@ If no findings are discovered, say so explicitly and note residual risks or test
 
 1. Read the diff or changed files.
 2. Read adjacent types, protocols, and call sites needed to understand impact.
-3. If any UI is affected, first read `AGENTS.md`, `DOCUMENTATION_AND_RULES.md`, and `APPLICATION_CHANGE_CONTEXT.md`. Read `docs/archive/mvp/design.html` and archived MVP design docs only when the task requires historical design parity or drift review.
+3. If any UI is affected, read `docs/design.html` and `docs/plans/2026-05-01-bodyweight-training-design.md` before judging visuals or interactions.
 4. Review against OnlyBody rules before giving style feedback.
 5. Prioritize bugs, behavior regressions, and architecture violations over nits.
 6. Keep the summary brief and secondary to findings.
@@ -50,7 +50,7 @@ If no findings are discovered, say so explicitly and note residual risks or test
 
 - No hardcoded colors, font sizes, or spacing where `Theme` should be used.
 - Use `Theme.fontSans` and `Theme.fontMono`.
-- Flag drift from current active repo rules first. If the task is about historical MVP fidelity, also compare against the archived MVP prototype, written spec, custom navigation, typography, icons, and spacing rules.
+- Flag drift from the design prototype, written spec, custom navigation, typography, icons, and spacing rules.
 
 ### SwiftData
 

@@ -1,12 +1,6 @@
 # OnlyBody MVP Task Index
 
-Archive notice:
-
-- This task index is historical MVP planning material.
-- It is not the active backlog for the repository.
-- The current working context now lives in `AGENTS.md`, `DOCUMENTATION_AND_RULES.md`, and `APPLICATION_CHANGE_CONTEXT.md`.
-
-These tasks were vertical tracer-bullet slices derived from the original MVP implementation plan and design/technical planning documents.
+These tasks are vertical tracer-bullet slices derived from `docs/plans/2026-05-01-onlybody-implementation-tasks.md` and the approved technical/design plans.
 
 ## Dependency order
 
