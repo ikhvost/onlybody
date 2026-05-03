@@ -4,9 +4,6 @@
 
 Bodyweight training app for iOS. Single user, on-device data, no CloudKit. The app will evolve significantly — architecture must support frequent change with loose coupling and high cohesion.
 
-## IMPORTANT
-**WORK ONLY ON ASKED TASK OR TASKS. NEVER WORK ON SOMETHING ELSE. THE WHOLE SCOPE DESCRIBED IN THE TASK**
-
 ---
 
 ## Target
@@ -22,6 +19,15 @@ You are a **Senior iOS Engineer**, specializing in SwiftUI, SwiftData, and relat
 
 ---
 
+## Code Philosophy
+
+- **Readable over clever.** Code is read far more than written. Prefer obvious names and explicit control flow over compact or indirect expressions.
+- **Easy to change.** Favour small, focused types. A function or view that does one thing is straightforward to replace; a tangled one is not. Flat, deletable code beats deep hierarchies.
+- **No premature abstraction.** Introduce a protocol or shared type only when a second concrete use already exists. The repository protocol / preview-repository / mock-repository triad is the model — each layer has a real second implementation.
+- **One type, one file.** If a file grows unwieldy, split it. Never nest types or accumulate helpers in one file.
+
+---
+
 ## Architecture
 
 ```
@@ -33,9 +39,26 @@ View ──reads──> ViewModel (@Observable @MainActor) ──calls──> Re
 - **Views** depend only on their ViewModel — never access repositories or services directly. No `@Query`. No `ModelContext`. No SwiftData imports.
 - **ViewModels** depend on repository *protocols* — never on concrete SwiftData types. All screen state and logic. Testable with mock repositories.
 - **Repositories** — protocols (`ExerciseRepository`, `WorkoutRepository`, `SessionRepository`) with `SwiftData*` implementations. Swap implementations without touching views or view models.
-- **Services** — pure logic structs. No SwiftUI imports. No SwiftData. No ViewModels. Fully unit-testable.
+- **Services** — contain logic that doesn't belong in a ViewModel. Prefer pure structs when there is no mutable state across time (`SmartWorkoutGenerator`, `StreakCalculator`). Use `@MainActor @Observable final class` only when the service owns persistent mutable state (`RestTimer` manages countdown state across view renders). No SwiftData imports in services.
+- **Repository injection** — repositories are concrete-typed once at app entry in `BodyweightApp.init()`, then passed through view `init` parameters as protocol types (`any ExerciseRepository`, etc.). ViewModels never see the concrete SwiftData type.
 - **No ViewModel-to-ViewModel dependencies.** Pass data through navigation, not shared state.
 - **Theme.swift** is the only cross-cutting dependency for views — everything else is injected.
+
+### Preview Repositories
+
+`Shared/Preview/` contains `#if DEBUG`-gated structs (`PreviewWorkoutRepository`, `PreviewExerciseRepository`, `PreviewSessionRepository`) that implement each repository protocol with fixed fixture data. Reads return injected arrays; writes are no-ops. Use these in `#Preview` blocks — never create a live `ModelContainer` in previews.
+
+```swift
+#if DEBUG
+struct PreviewWorkoutRepository: WorkoutRepository {
+    let workouts: [Workout]
+    func allWorkouts() async throws -> [Workout] { workouts }
+    func workout(by id: UUID) async throws -> Workout? { workouts.first { $0.id == id } }
+    func save(_ workout: Workout) async throws {}
+    func deleteItems(_ items: [WorkoutItem]) async throws {}
+}
+#endif
+```
 
 ### Project structure
 
@@ -80,7 +103,7 @@ onlybody/                              — source root (PBXFileSystemSynchronize
 │   │   ├── SwiftDataExerciseRepository.swift
 │   │   ├── SwiftDataWorkoutRepository.swift
 │   │   └── SwiftDataSessionRepository.swift
-│   ├── Services/                      — Pure logic, no SwiftUI
+│   ├── Services/                      — Business logic; structs preferred, class when stateful
 │   │   ├── SmartWorkoutGenerator.swift
 │   │   ├── StreakCalculator.swift      — [Session] → streak stats (current/longest/total)
 │   │   └── RestTimer.swift
@@ -97,7 +120,7 @@ onlybody/                              — source root (PBXFileSystemSynchronize
 ├── Shared/
 │   ├── Theme/
 │   │   └── Theme.swift                — Design tokens: colors, fonts, spacing
-│   ├── Icons/                         — Custom SwiftUI Shape/Path icons (one per file)
+│   ├── Icons/                         — Canvas-based icon Views (one per file) + AppIcons.swift config
 │   ├── Components/                    — Reusable views, no own view models
 │   │   ├── MonoLabel.swift
 │   │   ├── PrimaryButton.swift
@@ -142,7 +165,7 @@ Key constants:
 - `Theme.bg`, `Theme.surface`, `Theme.surface2`
 - `Theme.text`, `Theme.text2`, `Theme.text3`
 - `Theme.border`, `Theme.border2`
-- `Theme.danger`, `Theme.success`
+- `Theme.danger`, `Theme.iconDim`
 - `Theme.fontSans(_ size: CGFloat, _ weight: Font.Weight)` — DM Sans
 - `Theme.fontMono(_ size: CGFloat, _ weight: Font.Weight)` — DM Mono
 - `Theme.horizontalPadding` — 18
@@ -206,20 +229,48 @@ enum AppTab: String, CaseIterable { case train, log, library }
 - **Spacing/padding:** Always use `Theme` spacing constants. Do not call `.padding()` without a value — always reference `Theme.horizontalPadding` or an explicit `Theme` constant.
 - **Tab navigation:** Do NOT use SwiftUI `Tab` API or `tabItem()`. Use `AppTabView` with `AppTab` enum. See Navigation section.
 - Button with image must include text: `Button("Label", systemImage: "icon", action: ...)` — but prefer custom icon views over SF Symbols.
-- **Icons:** Custom icons live in `Shared/Icons/AppIcons.swift` as SwiftUI `Shape` or `Path` views. Do NOT use SF Symbols. Stroke style: `strokeLinecap: .square`, `strokeLineJoin: .miter`, `strokeWidth: 1.8`.
+- **Icons:** Custom icons live in `Shared/Icons/` — one file per icon (e.g. `TrainIcon.swift`, `ChevronIcon.swift`). Each is a `Canvas`-based `View`. Do NOT use SF Symbols. Shared config lives in `AppIcons.swift` (`viewport: CGFloat = 24`, `stroke: StrokeStyle`). Canonical pattern:
+  ```swift
+  struct FooIcon: View {
+      var color: Color = Theme.text
+      var size: CGFloat = 20
+      var body: some View {
+          Canvas { context, canvasSize in
+              let scale = canvasSize.width / AppIcons.viewport
+              context.scaleBy(x: scale, y: scale)
+              context.stroke(path, with: .color(color), style: AppIcons.stroke)
+          }
+          .frame(width: size, height: size)
+      }
+  }
+  ```
 
 ## SwiftData Instructions
 
 - On-device only — `@Attribute(.unique)` is safe and should be used.
 - All model properties must have default values OR be optional.
 - Relationships must be optional when the related object may be deleted independently.
-- Use `@Relationship(deleteRule: .nullify)` for non-cascading deletions.
+- Use `@Relationship(deleteRule: .cascade)` when a parent owns its children (e.g. `Workout.items`, `Session.items`). Use `@Relationship(deleteRule: .nullify)` for cross-references where the related object may be deleted independently (e.g. `WorkoutItem.workout` inverse).
 
 ## Testing
 
+Framework: **Swift Testing** (`@Test`, `#expect`) — do NOT use XCTest.
+
+```swift
+@MainActor
+struct FooViewModelTests {
+    @Test func someExpectedBehavior() async {
+        let repo = MockWorkoutRepository()
+        let vm = FooViewModel(workouts: repo)
+        await vm.load()
+        #expect(vm.workouts.count == 1)
+    }
+}
+```
+
 - Unit-test all Services (pure logic, no dependencies).
-- Unit-test all ViewModels using mock repository protocols.
-- Integration-test repositories with in-memory `ModelContainer`.
+- Unit-test all ViewModels using mock repository protocols. Mocks live in `onlybodyTests/Support/` (`MockWorkoutRepository`, `MockExerciseRepository`, `MockSessionRepository`). Each mock has a `shouldThrow` flag and records saved/deleted data for assertion.
+- Integration-test repositories with in-memory `ModelContainer` (`ModelConfiguration(isStoredInMemoryOnly: true)`).
 - No UI tests for MVP unless required.
 - SwiftUI Previews for view iteration.
 
