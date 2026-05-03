@@ -13,11 +13,11 @@ struct LogView: View {
                     .tint(Theme.accent)
             } else if let errorMessage = viewModel.errorMessage, viewModel.sessions.isEmpty {
                 VStack(spacing: 10) {
-                    MonoLabel(text: errorMessage, size: 10, color: Theme.text2, tracking: 0.4)
-                    Button("Retry") {
-                        Task { await viewModel.load() }
-                    }
-                    .font(Theme.fontMono(12, .medium))
+                     MonoLabel(text: errorMessage, size: 11, color: Theme.text2, tracking: 0.4)
+                     Button("Retry") {
+                         Task { await viewModel.load() }
+                     }
+                     .font(Theme.fontMono(13, .medium))
                     .foregroundStyle(Theme.accent)
                 }
             } else {
@@ -40,9 +40,9 @@ struct LogView: View {
 
     private var headerView: some View {
         VStack(alignment: .leading, spacing: 8) {
-            MonoLabel(text: "Training history", size: 9, color: Theme.text3, tracking: 1.2)
+            MonoLabel(text: "Training history", size: 10, color: Theme.text3, tracking: 1.2)
             Text("Log")
-                .font(Theme.fontSans(26, .heavy))
+                .font(Theme.fontSans(28, .heavy))
                 .tracking(-1)
                 .foregroundStyle(Theme.text)
         }
@@ -54,7 +54,7 @@ struct LogView: View {
     private var emptyState: some View {
         VStack(spacing: 8) {
             Spacer().frame(height: 120)
-            MonoLabel(text: "No training history yet", size: 10, color: Theme.text2, tracking: 0.4)
+            MonoLabel(text: "No training history yet", size: 11, color: Theme.text2, tracking: 0.4)
         }
         .frame(maxWidth: .infinity)
     }
@@ -76,7 +76,7 @@ struct LogView: View {
     }
 
     private func monthHeader(label: String) -> some View {
-        MonoLabel(text: label, size: 10, color: Theme.text3, tracking: 1.0)
+        MonoLabel(text: label, size: 11, color: Theme.text3, tracking: 1.0)
             .padding(.horizontal, Theme.horizontalPadding)
             .padding(.top, 14)
             .padding(.bottom, 8)
@@ -88,7 +88,7 @@ struct LogView: View {
 
             VStack(alignment: .leading, spacing: 3) {
                 Text(session.workoutName)
-                    .font(Theme.fontSans(14, .bold))
+                    .font(Theme.fontSans(15, .bold))
                     .foregroundStyle(Theme.text)
                     .lineLimit(1)
 
@@ -99,7 +99,7 @@ struct LogView: View {
                     Text("·")
                     Text(viewModel.caloriesText(for: session))
                 }
-                .font(Theme.fontMono(9))
+                .font(Theme.fontMono(10))
                 .foregroundStyle(Theme.text2)
                 .lineLimit(1)
             }

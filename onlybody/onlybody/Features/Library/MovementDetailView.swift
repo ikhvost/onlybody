@@ -16,7 +16,7 @@ struct MovementDetailView: View {
                         HStack(spacing: 4) {
                             ChevronIcon(isBack: true, color: Theme.accent, size: 16, inset: 8)
                             Text("Back")
-                                .font(Theme.fontSans(14, .semibold))
+                                .font(Theme.fontSans(15, .semibold))
                                 .foregroundStyle(Theme.accent)
                         }
                     }
@@ -28,7 +28,7 @@ struct MovementDetailView: View {
                     VStack(alignment: .leading, spacing: 16) {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(viewModel.exercise.name)
-                                .font(Theme.fontSans(26, .heavy))
+                                .font(Theme.fontSans(28, .heavy))
                                 .tracking(-0.8)
                                 .foregroundStyle(Theme.text)
 
@@ -43,7 +43,7 @@ struct MovementDetailView: View {
                             .frame(height: 1)
 
                         VStack(alignment: .leading, spacing: 8) {
-                            MonoLabel(text: "Primary muscle", size: 10, tracking: 0.8)
+                            MonoLabel(text: "Primary muscle", size: 11, tracking: 0.8)
 
                             HStack(spacing: 8) {
                                 Rectangle()
@@ -52,13 +52,13 @@ struct MovementDetailView: View {
                                     .clipShape(.rect(cornerRadius: 1))
 
                                 Text(viewModel.exercise.primaryMuscle)
-                                    .font(Theme.fontSans(14, .semibold))
+                                    .font(Theme.fontSans(15, .semibold))
                                     .foregroundStyle(Theme.text)
                             }
                         }
 
                         VStack(alignment: .leading, spacing: 8) {
-                            MonoLabel(text: "Secondary", size: 10, tracking: 0.8)
+                            MonoLabel(text: "Secondary", size: 11, tracking: 0.8)
 
                             HStack(alignment: .top, spacing: 8) {
                                 Rectangle()
@@ -68,7 +68,7 @@ struct MovementDetailView: View {
                                     .padding(.top, 4)
 
                                 Text(viewModel.exercise.secondaryMuscles.isEmpty ? "None" : viewModel.exercise.secondaryMuscles.joined(separator: ", "))
-                                    .font(Theme.fontSans(13))
+                                    .font(Theme.fontSans(14))
                                     .foregroundStyle(Theme.text2)
                             }
 
@@ -80,7 +80,7 @@ struct MovementDetailView: View {
                                     }
                                     .clipShape(.rect(cornerRadius: Theme.cornerRadius))
 
-                                MonoLabel(text: "[ muscle diagram ]", size: 10, tracking: 1)
+                                MonoLabel(text: "[ muscle diagram ]", size: 11, tracking: 1)
                             }
                             .frame(height: 120)
                             .accessibilityLabel("Muscle diagram placeholder")
@@ -92,13 +92,13 @@ struct MovementDetailView: View {
 
                         HStack(spacing: 8) {
                             Text("Equipment")
-                                .font(Theme.fontSans(13))
+                                .font(Theme.fontSans(14))
                                 .foregroundStyle(Theme.text2)
 
                             Spacer()
 
                             Text(viewModel.exercise.equipmentLabel)
-                                .font(Theme.fontMono(13, .bold))
+                                .font(Theme.fontMono(14, .bold))
                                 .foregroundStyle(Theme.text)
                         }
 
@@ -107,7 +107,7 @@ struct MovementDetailView: View {
                             .frame(height: 1)
 
                         VStack(alignment: .leading, spacing: 8) {
-                            MonoLabel(text: "Include in sessions", size: 10, tracking: 0.8)
+                            MonoLabel(text: "Include in sessions", size: 11, tracking: 0.8)
 
                             HStack(spacing: 8) {
                                 ForEach(ExerciseFrequency.allCases, id: \.rawValue) { frequency in

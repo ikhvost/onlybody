@@ -37,7 +37,7 @@ struct BottomNav: View {
 
                 MonoLabel(
                     text: label,
-                    size: 9,
+                    size: 10,
                     color: selectedTab == appTab ? Theme.accent : Theme.text3,
                     tracking: 1.2
                 )

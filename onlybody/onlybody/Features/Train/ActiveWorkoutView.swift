@@ -83,7 +83,7 @@ private struct ActiveWorkoutLoadingView: View {
         VStack(spacing: 10) {
             ProgressView()
                 .tint(Theme.accent)
-            MonoLabel(text: "Preparing workout", size: 10, color: Theme.text3, tracking: 1)
+            MonoLabel(text: "Preparing workout", size: 11, color: Theme.text3, tracking: 1)
         }
     }
 }
@@ -94,9 +94,9 @@ private struct ActiveWorkoutErrorView: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            MonoLabel(text: "Workout unavailable", size: 10, color: Theme.text2, tracking: 0.4)
+            MonoLabel(text: "Workout unavailable", size: 11, color: Theme.text2, tracking: 0.4)
             if let error = errorMessage {
-                MonoLabel(text: error, size: 9, color: Theme.text3, tracking: 0.4)
+                MonoLabel(text: error, size: 10, color: Theme.text3, tracking: 0.4)
             }
             GhostButton(title: "Close", action: onEnd)
         }
@@ -112,7 +112,7 @@ private struct ActiveWorkoutCompletionView: View {
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
-            MonoLabel(text: "Session complete", size: 10, color: Theme.text3, tracking: 2)
+            MonoLabel(text: "Session complete", size: 11, color: Theme.text3, tracking: 2)
 
             Text(elapsedString)
                 .font(Theme.fontMono(72, .medium))
@@ -123,7 +123,7 @@ private struct ActiveWorkoutCompletionView: View {
 
             MonoLabel(
                 text: "\(exerciseCount) movements done",
-                size: 11,
+                size: 12,
                 color: Theme.text2,
                 tracking: 1
             )
@@ -132,7 +132,7 @@ private struct ActiveWorkoutCompletionView: View {
             if let error = errorMessage {
                 MonoLabel(
                     text: error,
-                    size: 9,
+                    size: 10,
                     color: Theme.danger,
                     tracking: 0.4
                 )
@@ -197,7 +197,7 @@ private struct ActiveWorkoutBody: View {
                 if let error = errorMessage {
                     MonoLabel(
                         text: error,
-                        size: 9,
+                        size: 10,
                         color: Theme.danger,
                         tracking: 0.4
                     )
@@ -246,7 +246,7 @@ private struct ActiveWorkoutTopBar: View {
         HStack(spacing: 0) {
             MonoLabel(
                 text: "\(currentIndex + 1)/\(totalCount)",
-                size: 11,
+                size: 12,
                 color: Theme.text3,
                 tracking: 0.5
             )
@@ -382,7 +382,7 @@ private struct ActiveWorkoutExerciseHeader: View {
 
             MonoLabel(
                 text: setLabel,
-                size: 10,
+                size: 11,
                 color: Theme.text3,
                 tracking: 0.8
             )
@@ -497,9 +497,9 @@ private struct ActiveWorkoutUpNextSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
-            MonoLabel(text: "Up next", size: 9, color: Theme.text3, tracking: 0.5)
+            MonoLabel(text: "Up next", size: 10, color: Theme.text3, tracking: 0.5)
             Text(nextExerciseName)
-                .font(Theme.fontSans(13, .semibold))
+                .font(Theme.fontSans(14, .semibold))
                 .foregroundStyle(Theme.text2)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -518,7 +518,7 @@ private struct RestOverlayView: View {
             Theme.bg.ignoresSafeArea()
 
             VStack(spacing: 0) {
-                MonoLabel(text: "Recovery", size: 10, color: Theme.text3, tracking: 3)
+                MonoLabel(text: "Recovery", size: 11, color: Theme.text3, tracking: 3)
                     .padding(.bottom, 18)
 
                 Text(remainingString)
@@ -530,7 +530,7 @@ private struct RestOverlayView: View {
                 if !nextExerciseName.isEmpty {
                     MonoLabel(
                         text: "next \u{2014} \(nextExerciseName)",
-                        size: 10,
+                        size: 11,
                         color: Theme.text3,
                         tracking: 1.5
                     )

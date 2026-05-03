@@ -23,10 +23,10 @@ struct ChipView: View {
         self.label = label
         self.isActive = isActive
         self.isSmall = isSmall
-        self.size = size ?? (isSmall ? 11 : 13)
+        self.size = size ?? (isSmall ? 12 : 14)
         self.cornerRadius = cornerRadius ?? Theme.chipCornerRadius
-        self.horizontalPadding = horizontalPadding ?? (isSmall ? 10 : 15)
-        self.verticalPadding = verticalPadding ?? (isSmall ? 5 : 8)
+        self.horizontalPadding = horizontalPadding ?? (isSmall ? 11 : 16)
+        self.verticalPadding = verticalPadding ?? (isSmall ? 7 : 10)
         self.action = action
     }
 

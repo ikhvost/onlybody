@@ -39,7 +39,7 @@ struct StepperView: View {
 
     var body: some View {
         VStack(spacing: 6) {
-            MonoLabel(text: label, size: 9, color: Theme.text3, tracking: 0.5)
+            MonoLabel(text: label, size: 10, color: Theme.text3, tracking: 0.5)
 
             HStack(spacing: 4) {
                 Button {
@@ -50,7 +50,7 @@ struct StepperView: View {
                     Text("−")
                         .font(Theme.fontMono(14, .medium))
                         .foregroundStyle(canDecrement ? Theme.text : Theme.text3)
-                        .frame(width: 24, height: 24)
+                        .frame(width: 32, height: 32)
                         .background(Theme.surface2)
                         .clipShape(.rect(cornerRadius: Theme.chipCornerRadius))
                         .overlay {
@@ -72,7 +72,7 @@ struct StepperView: View {
                     Text("+")
                         .font(Theme.fontMono(14, .medium))
                         .foregroundStyle(Theme.accentDark)
-                        .frame(width: 24, height: 24)
+                        .frame(width: 32, height: 32)
                         .background(Theme.accent)
                         .clipShape(.rect(cornerRadius: Theme.chipCornerRadius))
                 }

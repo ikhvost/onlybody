@@ -35,7 +35,7 @@ struct ExercisePickerView: View {
                     SearchIcon(color: Theme.text3, size: 15)
 
                     TextField("Search movements...", text: $searchText)
-                        .font(Theme.fontSans(13))
+                        .font(Theme.fontSans(14))
                         .foregroundStyle(Theme.text)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
@@ -77,7 +77,7 @@ struct ExercisePickerView: View {
                     Spacer()
                     MonoLabel(
                         text: "No movements found",
-                        size: 10,
+                        size: 11,
                         color: Theme.text2,
                         tracking: 0.4
                     )
@@ -95,12 +95,12 @@ struct ExercisePickerView: View {
                                 HStack(spacing: 10) {
                                     VStack(alignment: .leading, spacing: 2) {
                                         Text(exercise.name)
-                                            .font(Theme.fontSans(15, .bold))
+                                            .font(Theme.fontSans(16, .bold))
                                             .foregroundStyle(Theme.text)
 
                                         MonoLabel(
                                             text: "\(exercise.primaryMuscle.uppercased()) · \(exercise.equipmentLabel.uppercased())",
-                                            size: 9,
+                                            size: 10,
                                             color: Theme.text3,
                                             tracking: 0.3
                                         )

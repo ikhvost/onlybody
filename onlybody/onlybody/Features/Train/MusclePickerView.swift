@@ -25,12 +25,12 @@ struct MusclePickerView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
                         Text("What are you training?")
-                            .font(Theme.fontSans(24, .bold))
+                            .font(Theme.fontSans(26, .bold))
                             .tracking(-0.8)
                             .foregroundStyle(Theme.text)
                             .padding(.bottom, 5)
 
-                        MonoLabel(text: "Select muscle groups", size: 10, color: Theme.text3, tracking: 1)
+                        MonoLabel(text: "Select muscle groups", size: 11, color: Theme.text3, tracking: 1)
                             .padding(.bottom, 24)
 
                         FlowLayout(spacing: 8) {
@@ -46,7 +46,7 @@ struct MusclePickerView: View {
 
                         if !viewModel.selectedMuscles.isEmpty {
                             Text(viewModel.selectionSummary)
-                                .font(Theme.fontMono(11, .medium))
+                                .font(Theme.fontMono(12, .medium))
                                 .foregroundStyle(Theme.accent)
                                 .tracking(0.5)
                                 .padding(.top, 24)
@@ -63,7 +63,7 @@ struct MusclePickerView: View {
                     } label: {
                         HStack(spacing: 5) {
                             Text("Build session")
-                                .font(Theme.fontSans(13, .bold))
+                                .font(Theme.fontSans(14, .bold))
                                 .foregroundStyle(viewModel.canBuild ? Theme.accentDark : Theme.text3)
                             ChevronIcon(color: viewModel.canBuild ? Theme.accentDark : Theme.text3, size: 12, inset: 8)
                         }
@@ -79,7 +79,7 @@ struct MusclePickerView: View {
                         onSkip()
                     } label: {
                         Text("Skip — pick movements myself")
-                            .font(Theme.fontSans(13))
+                            .font(Theme.fontSans(14))
                             .foregroundStyle(Theme.text3)
                     }
                     .buttonStyle(.plain)

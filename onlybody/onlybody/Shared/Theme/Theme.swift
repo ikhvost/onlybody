@@ -15,9 +15,9 @@ enum Theme {
     static let iconDim = Color(red: 245 / 255, green: 240 / 255, blue: 232 / 255, opacity: 0.28)
     static let danger = Color(red: 224 / 255, green: 90 / 255, blue: 78 / 255)
 
-    static let horizontalPadding: CGFloat = 18
+    static let horizontalPadding: CGFloat = 20
     static let cornerRadius: CGFloat = 4
-    static let chipCornerRadius: CGFloat = 3
+    static let chipCornerRadius: CGFloat = 4
 
     static func fontSans(_ size: CGFloat, _ weight: Font.Weight = .regular) -> Font {
         .custom("DM Sans", size: size).weight(weight)

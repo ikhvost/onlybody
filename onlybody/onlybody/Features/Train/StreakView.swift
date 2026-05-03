@@ -16,7 +16,7 @@ struct StreakView: View {
                         HStack(spacing: 4) {
                             ChevronIcon(isBack: true, color: Theme.accent, size: 16, inset: 8)
                             Text("Back")
-                                .font(Theme.fontSans(14, .semibold))
+                                .font(Theme.fontSans(15, .semibold))
                                 .foregroundStyle(Theme.accent)
                         }
                     }
@@ -26,7 +26,7 @@ struct StreakView: View {
 
                 if let errorMessage = viewModel.errorMessage {
                     Spacer()
-                    MonoLabel(text: errorMessage, size: 10, color: Theme.text2, tracking: 0.4)
+                    MonoLabel(text: errorMessage, size: 11, color: Theme.text2, tracking: 0.4)
                     Spacer()
                 } else {
                     ScrollView {
@@ -50,7 +50,7 @@ struct StreakView: View {
                             }
 
                             VStack(alignment: .leading, spacing: 10) {
-                                MonoLabel(text: "Activity — Last 20 weeks", size: 10, color: Theme.text3, tracking: 1)
+                                MonoLabel(text: "Activity — Last 20 weeks", size: 11, color: Theme.text3, tracking: 1)
 
                                 VStack(spacing: 3) {
                                     ForEach(0..<7, id: \.self) { row in
@@ -75,7 +75,7 @@ struct StreakView: View {
 
                             MonoLabel(
                                 text: "Manage streak in Settings",
-                                size: 9,
+                                size: 10,
                                 color: Theme.text3,
                                 tracking: 1
                             )
@@ -103,7 +103,7 @@ private struct StatCard: View {
             Text(value)
                 .font(Theme.fontMono(28, .medium))
                 .foregroundStyle(isAccent ? Theme.accent : Theme.text3)
-            MonoLabel(text: label, size: 8, color: Theme.text3, tracking: 1.2)
+            MonoLabel(text: label, size: 9, color: Theme.text3, tracking: 1.2)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 14)

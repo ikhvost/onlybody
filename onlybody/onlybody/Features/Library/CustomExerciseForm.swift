@@ -24,7 +24,7 @@ struct CustomExerciseForm: View {
                         }
                     } label: {
                         Text("Save")
-                            .font(Theme.fontSans(15, .bold))
+                            .font(Theme.fontSans(16, .bold))
                             .foregroundStyle(viewModel.isValid && !viewModel.isSaving ? Theme.accent : Theme.text3)
                     }
                     .buttonStyle(.plain)
@@ -34,10 +34,10 @@ struct CustomExerciseForm: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
                         VStack(alignment: .leading, spacing: 8) {
-                            MonoLabel(text: "Name", size: 10, tracking: 0.8)
+                            MonoLabel(text: "Name", size: 11, tracking: 0.8)
 
                             TextField("Exercise name", text: $viewModel.name)
-                                .font(Theme.fontSans(13))
+                                .font(Theme.fontSans(14))
                                 .foregroundStyle(Theme.text)
                                 .textInputAutocapitalization(.words)
                                 .autocorrectionDisabled()
@@ -52,7 +52,7 @@ struct CustomExerciseForm: View {
                         }
 
                         VStack(alignment: .leading, spacing: 8) {
-                            MonoLabel(text: "Primary muscle", size: 10, tracking: 0.8)
+                            MonoLabel(text: "Primary muscle", size: 11, tracking: 0.8)
 
                             LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
                                 ForEach(viewModel.muscleOptions, id: \.self) { muscle in
@@ -64,7 +64,7 @@ struct CustomExerciseForm: View {
                         }
 
                         VStack(alignment: .leading, spacing: 8) {
-                            MonoLabel(text: "Secondary muscles", size: 10, tracking: 0.8)
+                            MonoLabel(text: "Secondary muscles", size: 11, tracking: 0.8)
 
                             LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
                                 ForEach(viewModel.muscleOptions.filter { $0 != viewModel.primaryMuscle }, id: \.self) { muscle in
@@ -76,7 +76,7 @@ struct CustomExerciseForm: View {
                         }
 
                         VStack(alignment: .leading, spacing: 8) {
-                            MonoLabel(text: "Equipment", size: 10, tracking: 0.8)
+                            MonoLabel(text: "Equipment", size: 11, tracking: 0.8)
 
                             LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
                                 ForEach(viewModel.equipmentOptions, id: \.self) { equipment in
@@ -88,7 +88,7 @@ struct CustomExerciseForm: View {
                         }
 
                         if let errorMessage = viewModel.errorMessage {
-                            MonoLabel(text: errorMessage, size: 10, color: Theme.danger, tracking: 0.4)
+                            MonoLabel(text: errorMessage, size: 11, color: Theme.danger, tracking: 0.4)
                         }
                     }
                     .padding(.horizontal, Theme.horizontalPadding)

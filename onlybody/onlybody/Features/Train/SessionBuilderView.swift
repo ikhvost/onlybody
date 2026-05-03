@@ -24,7 +24,7 @@ struct SessionBuilderView: View {
                         handleSave()
                     } label: {
                         Text("Save")
-                            .font(Theme.fontSans(13, .bold))
+                        .font(Theme.fontSans(15, .bold))
                             .foregroundStyle(Theme.accentDark)
                             .padding(.horizontal, 14)
                             .padding(.vertical, 6)
@@ -89,12 +89,12 @@ struct SessionBuilderView: View {
     private var targetChipsSection: some View {
         if !viewModel.targetMuscleGroups.isEmpty {
             VStack(alignment: .leading, spacing: 8) {
-                MonoLabel(text: "Targets", size: 10, color: Theme.text2, tracking: 0.5)
+                MonoLabel(text: "Targets", size: 11, color: Theme.text2, tracking: 0.5)
 
                 FlowLayout(spacing: 6) {
                     ForEach(viewModel.targetMuscleGroups, id: \.self) { muscleID in
                         Text(muscleID)
-                            .font(Theme.fontSans(12, .semibold))
+                .font(Theme.fontSans(14, .semibold))
                             .foregroundStyle(Theme.accent)
                             .padding(.horizontal, 10)
                             .padding(.vertical, 4)
@@ -116,11 +116,11 @@ struct SessionBuilderView: View {
 
     private var nameSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            MonoLabel(text: "Session name", size: 10, color: Theme.text2, tracking: 0.5)
+            MonoLabel(text: "Session name", size: 11, color: Theme.text2, tracking: 0.5)
                 .padding(.horizontal, Theme.horizontalPadding)
 
             TextField("e.g. Full Body", text: $viewModel.name)
-                .font(Theme.fontSans(15))
+                .font(Theme.fontSans(16))
                 .foregroundStyle(Theme.text)
                 .padding(.horizontal, 13)
                 .padding(.vertical, 11)
@@ -141,7 +141,7 @@ struct SessionBuilderView: View {
 
     private var setStyleSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            MonoLabel(text: "Set style", size: 10, color: Theme.text2, tracking: 0.5)
+            MonoLabel(text: "Set style", size: 11, color: Theme.text2, tracking: 0.5)
                 .padding(.horizontal, Theme.horizontalPadding)
 
             HStack(spacing: 8) {
@@ -158,7 +158,7 @@ struct SessionBuilderView: View {
             viewModel.mode = mode
         } label: {
             Text(label)
-                .font(Theme.fontSans(13, .semibold))
+                .font(Theme.fontSans(14, .semibold))
                 .foregroundStyle(viewModel.mode == mode ? Theme.accentDark : Theme.text2)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 10)
@@ -182,11 +182,11 @@ struct SessionBuilderView: View {
         if viewModel.mode == .smart {
             VStack(alignment: .leading, spacing: 4) {
                 Text("Auto-selected movements")
-                    .font(Theme.fontSans(13, .bold))
+                    .font(Theme.fontSans(14, .bold))
                     .foregroundStyle(Theme.text)
 
                 Text(smartInfoDescription)
-                    .font(Theme.fontSans(12))
+                    .font(Theme.fontSans(14))
                     .foregroundStyle(Theme.text2)
                     .lineSpacing(4)
             }
@@ -219,15 +219,15 @@ struct SessionBuilderView: View {
         if viewModel.mode == .manual {
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
-                    MonoLabel(text: "Movements", size: 10, color: Theme.text2, tracking: 0.5)
+                    MonoLabel(text: "Movements", size: 11, color: Theme.text2, tracking: 0.5)
                     Spacer()
                     Button {
                         isShowingExercisePicker = true
                     } label: {
                         HStack(spacing: 5) {
-                            PlusIcon(color: Theme.accentDark, size: 12)
+                            PlusIcon(color: Theme.accentDark, size: 13)
                             Text("Add")
-                                .font(Theme.fontSans(12, .bold))
+                                .font(Theme.fontSans(14, .bold))
                                 .foregroundStyle(Theme.accentDark)
                         }
                         .padding(.horizontal, 12)
@@ -242,7 +242,7 @@ struct SessionBuilderView: View {
                 if viewModel.movements.isEmpty {
                     MonoLabel(
                         text: "No movements yet",
-                        size: 10,
+                        size: 11,
                         color: Theme.text3,
                         tracking: 0.5
                     )
@@ -279,7 +279,7 @@ struct SessionBuilderView: View {
 
                     MonoLabel(
                         text: "\(movement.sets) SETS · \(movement.reps) REPS · \(movement.restSeconds)S REST",
-                        size: 9,
+                        size: 10,
                         color: Theme.text3,
                         tracking: 0.4
                     )
@@ -290,7 +290,7 @@ struct SessionBuilderView: View {
                 Button {
                     viewModel.removeMovement(movement.id)
                 } label: {
-                    RemoveIcon(color: Theme.danger, size: 15)
+                    RemoveIcon(color: Theme.danger, size: 16)
                 }
                 .buttonStyle(.plain)
                 .padding(4)
@@ -348,7 +348,7 @@ struct SessionBuilderView: View {
 
     private var trainingDaysSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            MonoLabel(text: "Training days", size: 10, color: Theme.text2, tracking: 0.5)
+            MonoLabel(text: "Training days", size: 11, color: Theme.text2, tracking: 0.5)
 
             HStack(spacing: 6) {
                 ForEach(viewModel.dayNames, id: \.self) { day in
@@ -365,7 +365,7 @@ struct SessionBuilderView: View {
             if viewModel.scheduledDays.isEmpty {
                 MonoLabel(
                     text: "No days scheduled",
-                    size: 10,
+                    size: 11,
                     color: Theme.text3,
                     tracking: 0.3
                 )
@@ -383,13 +383,13 @@ struct SessionBuilderView: View {
         if !viewModel.movements.isEmpty {
             HStack {
                 Text("Est. duration")
-                    .font(Theme.fontSans(13))
+                    .font(Theme.fontSans(14))
                     .foregroundStyle(Theme.text2)
 
                 Spacer()
 
                 Text("~\(viewModel.estimatedDurationMinutes) min")
-                    .font(Theme.fontMono(13, .medium))
+                    .font(Theme.fontMono(14, .medium))
                     .foregroundStyle(Theme.accent)
             }
             .padding(.horizontal, Theme.horizontalPadding)

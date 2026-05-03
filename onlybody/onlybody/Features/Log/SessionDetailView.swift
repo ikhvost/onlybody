@@ -21,7 +21,7 @@ struct SessionDetailView: View {
                         HStack(spacing: 4) {
                             ChevronIcon(isBack: true, color: Theme.accent, size: 16, inset: 8)
                             Text("Back")
-                                .font(Theme.fontSans(14, .semibold))
+                                .font(Theme.fontSans(15, .semibold))
                                 .foregroundStyle(Theme.accent)
                         }
                     }
@@ -31,7 +31,7 @@ struct SessionDetailView: View {
 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
-                        MonoLabel(text: formattedDate(session.date), size: 9, color: Theme.text3, tracking: 1.0)
+                        MonoLabel(text: formattedDate(session.date), size: 10, color: Theme.text3, tracking: 1.0)
                             .padding(.bottom, 6)
 
                         HStack(spacing: 10) {
@@ -40,7 +40,7 @@ struct SessionDetailView: View {
                                     .font(Theme.fontMono(24, .medium))
                                     .foregroundStyle(Theme.accent)
                                 Text("min")
-                                    .font(Theme.fontMono(12))
+                                    .font(Theme.fontMono(13))
                                     .foregroundStyle(Theme.text2)
                             }
 
@@ -50,7 +50,7 @@ struct SessionDetailView: View {
                                     .foregroundStyle(Theme.text)
                                 if session.caloriesBurned != nil {
                                     Text("kcal")
-                                        .font(Theme.fontMono(12))
+                                        .font(Theme.fontMono(13))
                                         .foregroundStyle(Theme.text2)
                                 }
                             }
@@ -98,14 +98,14 @@ private struct SessionItemRow: View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(alignment: .top) {
                 Text(item.exerciseName)
-                    .font(Theme.fontSans(14, .bold))
+                    .font(Theme.fontSans(15, .bold))
                     .foregroundStyle(Theme.text)
 
                 Spacer()
 
                 MonoLabel(
                     text: "\(item.setReps.reduce(0, +)) REPS TOTAL",
-                    size: 9,
+                    size: 10,
                     color: Theme.text3,
                     tracking: 0.3
                 )
@@ -115,7 +115,7 @@ private struct SessionItemRow: View {
             ForEach(item.setReps.indices, id: \.self) { setIndex in
                 MonoLabel(
                     text: "SET \(setIndex + 1) \u{00B7} \(item.setReps[setIndex]) REPS",
-                    size: 9,
+                    size: 10,
                     color: Theme.text3,
                     tracking: 0.3
                 )

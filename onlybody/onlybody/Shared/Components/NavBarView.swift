@@ -21,7 +21,7 @@ struct NavBarView<Leading: View, Trailing: View>: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             Text(title)
-                .font(Theme.fontSans(15, .bold))
+                .font(Theme.fontSans(16, .bold))
                 .tracking(-0.2)
                 .foregroundStyle(Theme.text)
                 .frame(maxWidth: .infinity)

@@ -16,10 +16,10 @@ struct LibraryView: View {
             VStack(alignment: .leading, spacing: 0) {
                 HStack(alignment: .bottom) {
                     VStack(alignment: .leading, spacing: 3) {
-                        MonoLabel(text: "Movement catalog", size: 9, tracking: 1.2)
+                        MonoLabel(text: "Movement catalog", size: 10, tracking: 1.2)
 
                         Text("Library")
-                            .font(Theme.fontSans(26, .heavy))
+                            .font(Theme.fontSans(28, .heavy))
                             .tracking(-1)
                             .foregroundStyle(Theme.text)
                     }
@@ -47,7 +47,7 @@ struct LibraryView: View {
                         SearchIcon(color: Theme.text3, size: 15)
 
                         TextField("Search...", text: $viewModel.searchText)
-                            .font(Theme.fontSans(13))
+                            .font(Theme.fontSans(14))
                             .foregroundStyle(Theme.text)
                             .textInputAutocapitalization(.never)
                             .autocorrectionDisabled()
@@ -82,18 +82,18 @@ struct LibraryView: View {
 
                 if viewModel.isLoading {
                     VStack(spacing: 8) {
-                        MonoLabel(text: "Loading library", size: 10, tracking: 1.0)
+                        MonoLabel(text: "Loading library", size: 11, tracking: 1.0)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else if let errorMessage = viewModel.errorMessage {
                     VStack(spacing: 8) {
-                        MonoLabel(text: errorMessage, size: 10, color: Theme.text2, tracking: 0.4)
+                        MonoLabel(text: errorMessage, size: 11, color: Theme.text2, tracking: 0.4)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(.horizontal, Theme.horizontalPadding)
                 } else if viewModel.filteredExercises.isEmpty {
                     VStack(spacing: 8) {
-                        MonoLabel(text: "No movements found", size: 10, color: Theme.text2, tracking: 0.4)
+                        MonoLabel(text: "No movements found", size: 11, color: Theme.text2, tracking: 0.4)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(.horizontal, Theme.horizontalPadding)

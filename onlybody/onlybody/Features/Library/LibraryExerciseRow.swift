@@ -9,12 +9,12 @@ struct LibraryExerciseRow: View {
             HStack(spacing: 10) {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(exercise.name)
-                        .font(Theme.fontSans(15, .bold))
+                        .font(Theme.fontSans(16, .bold))
                         .foregroundStyle(Theme.text)
 
                     MonoLabel(
                         text: "\(exercise.primaryMuscle) · \(exercise.equipmentLabel)",
-                        size: 9,
+                        size: 10,
                         color: Theme.text3,
                         tracking: 0.3
                     )

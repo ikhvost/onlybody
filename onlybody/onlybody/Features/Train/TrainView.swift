@@ -34,7 +34,7 @@ struct TrainView: View {
                         Button("Retry") {
                             Task { await viewModel.load() }
                         }
-                        .font(Theme.fontMono(12, .medium))
+                         .font(Theme.fontMono(13, .medium))
                         .foregroundStyle(Theme.accent)
                     }
                     Spacer()
@@ -94,7 +94,7 @@ private struct TrainHeader: View {
                 } label: {
                     MonoLabel(
                         text: dateDisplay,
-                        size: 9,
+                        size: 10,
                         color: Theme.text3,
                         tracking: 1.2
                     )
@@ -105,7 +105,7 @@ private struct TrainHeader: View {
                     onTitleTap()
                 } label: {
                     Text("OnlyBody")
-                        .font(Theme.fontSans(26, .heavy))
+                        .font(Theme.fontSans(28, .heavy))
                         .tracking(-1)
                         .foregroundStyle(Theme.text)
                 }
@@ -136,9 +136,9 @@ private struct TrainHeader: View {
 private struct TrainEmptyState: View {
     var body: some View {
         VStack(spacing: 10) {
-            MonoLabel(text: "No workouts yet", size: 10, color: Theme.text2, tracking: 1.0)
+            MonoLabel(text: "No workouts yet", size: 11, color: Theme.text2, tracking: 1.0)
             Text("Tap the + button to create a workout")
-                .font(Theme.fontSans(13))
+                .font(Theme.fontSans(14))
                 .foregroundStyle(Theme.text3)
         }
     }
@@ -158,7 +158,7 @@ private struct TrainDayStrip: View {
                 VStack(spacing: 5) {
                     MonoLabel(
                         text: day,
-                        size: 8,
+                    size: 10,
                         color: isToday ? Theme.accent : Theme.text3,
                         tracking: 0.3
                     )
@@ -191,7 +191,7 @@ private struct TodayCallout: View {
             if todaysWorkouts.isEmpty {
                 HStack {
                     Text("Rest day")
-                        .font(Theme.fontMono(9))
+                        .font(Theme.fontMono(10))
                         .foregroundStyle(Theme.text3)
                         .tracking(1)
                     Spacer()
@@ -207,9 +207,9 @@ private struct TodayCallout: View {
                 .padding(.bottom, 10)
             } else {
                 VStack(alignment: .leading, spacing: 2) {
-                    MonoLabel(text: "Today", size: 9, color: Theme.accent, tracking: 1)
+                    MonoLabel(text: "Today", size: 10, color: Theme.accent, tracking: 1)
                     Text(todaysWorkouts.map(\.name).joined(separator: " · "))
-                        .font(Theme.fontSans(13, .bold))
+                        .font(Theme.fontSans(14, .bold))
                         .foregroundStyle(Theme.text)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -262,7 +262,7 @@ private struct WorkoutRow: View {
         HStack(spacing: 14) {
             VStack(alignment: .leading, spacing: 3) {
                 Text(workout.name)
-                    .font(Theme.fontSans(15, .bold))
+                    .font(Theme.fontSans(16, .bold))
                     .foregroundStyle(Theme.text)
 
                 MonoLabel(
@@ -289,7 +289,7 @@ private struct WorkoutRow: View {
             } label: {
                 Text("START →")
                     .tracking(1.2)
-                    .font(Theme.fontMono(11, .medium))
+                    .font(Theme.fontMono(12, .medium))
                     .foregroundStyle(Theme.accentDark)
             }
             .buttonStyle(.plain)
