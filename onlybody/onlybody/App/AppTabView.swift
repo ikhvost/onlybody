@@ -205,6 +205,7 @@ struct AppTabView: View {
                 .toolbar(.hidden, for: .navigationBar)
         }
         .opacity(selectedTab == tab ? 1 : 0)
+        .animation(.easeInOut(duration: 0.15), value: selectedTab)
         .allowsHitTesting(selectedTab == tab)
         .accessibilityHidden(selectedTab != tab)
     }

@@ -11,11 +11,11 @@ struct PrimaryButton: View {
                 .font(Theme.fontSans(16, .bold))
                 .foregroundStyle(disabled ? Theme.text3 : Theme.accentDark)
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
+                .padding(.vertical, 19)
                 .background(disabled ? Theme.surface2 : Theme.accent)
                 .clipShape(.rect(cornerRadius: Theme.cornerRadius))
         }
         .disabled(disabled)
-        .buttonStyle(.plain)
+        .buttonStyle(PressableButtonStyle())
     }
 }

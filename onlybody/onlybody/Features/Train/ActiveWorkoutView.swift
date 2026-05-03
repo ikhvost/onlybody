@@ -5,6 +5,8 @@ struct ActiveWorkoutView: View {
     let onEnd: () -> Void
 
     @State private var showEndPrompt = false
+    @State private var setCompletedCount = 0
+    @State private var navigationCount = 0
 
     var body: some View {
         ZStack {
@@ -44,13 +46,13 @@ struct ActiveWorkoutView: View {
                     restSecondsString: formatTime(viewModel.restTimer.remainingSeconds),
                     restNextName: viewModel.restTimer.nextExerciseName,
                     onEnd: { showEndPrompt = true },
-                    onMarkSetDone: { viewModel.markSetDone() },
+                    onMarkSetDone: { viewModel.markSetDone(); setCompletedCount += 1 },
                     onIncrementReps: { viewModel.incrementReps() },
                     onDecrementReps: { viewModel.decrementReps() },
                     onIncrementWeight: { viewModel.incrementWeight() },
                     onDecrementWeight: { viewModel.decrementWeight() },
-                    onPreviousExercise: { viewModel.previousExercise() },
-                    onSkipExercise: { viewModel.skipExercise() },
+                    onPreviousExercise: { viewModel.previousExercise(); navigationCount += 1 },
+                    onSkipExercise: { viewModel.skipExercise(); navigationCount += 1 },
                     onSkipRest: { viewModel.restTimer.skip() }
                 )
             }
@@ -71,6 +73,8 @@ struct ActiveWorkoutView: View {
         .task {
             await viewModel.load()
         }
+        .sensoryFeedback(.impact(.medium), trigger: setCompletedCount)
+        .sensoryFeedback(.selection, trigger: navigationCount)
     }
 
     private func formatTime(_ seconds: Int) -> String {

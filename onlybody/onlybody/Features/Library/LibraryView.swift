@@ -5,6 +5,12 @@ struct LibraryView: View {
 
     let showMovement: (Exercise) -> Void
 
+    private var contentState: String {
+        if viewModel.isLoading { return "loading" }
+        if viewModel.errorMessage != nil { return "error" }
+        return "ready"
+    }
+
     var body: some View {
         ZStack {
             Theme.bg.ignoresSafeArea()
@@ -64,39 +70,46 @@ struct LibraryView: View {
                     .fill(Theme.border)
                     .frame(height: 1)
 
-                if viewModel.isLoading {
-                    VStack(spacing: 8) {
-                        MonoLabel(text: "Loading library", size: 11, tracking: 1.0)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                } else if let errorMessage = viewModel.errorMessage {
-                    VStack(spacing: 8) {
-                        MonoLabel(text: errorMessage, size: 11, color: Theme.text2, tracking: 0.4)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .padding(.horizontal, Theme.horizontalPadding)
-                } else if viewModel.filteredExercises.isEmpty {
-                    VStack(spacing: 8) {
-                        MonoLabel(text: "No movements found", size: 11, color: Theme.text2, tracking: 0.4)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .padding(.horizontal, Theme.horizontalPadding)
-                } else {
-                    ScrollView {
-                        LazyVStack(alignment: .leading, spacing: 0) {
-                            ForEach(viewModel.filteredExercises, id: \.id) { exercise in
-                                LibraryExerciseRow(exercise: exercise) {
-                                    showMovement(exercise)
-                                }
+                ZStack {
+                    if viewModel.isLoading {
+                        VStack(spacing: 8) {
+                            MonoLabel(text: "Loading library", size: 11, tracking: 1.0)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .transition(.opacity)
+                    } else if let errorMessage = viewModel.errorMessage {
+                        VStack(spacing: 8) {
+                            MonoLabel(text: errorMessage, size: 11, color: Theme.text2, tracking: 0.4)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .padding(.horizontal, Theme.horizontalPadding)
+                        .transition(.opacity)
+                    } else if viewModel.filteredExercises.isEmpty {
+                        VStack(spacing: 8) {
+                            MonoLabel(text: "No movements found", size: 11, color: Theme.text2, tracking: 0.4)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .padding(.horizontal, Theme.horizontalPadding)
+                        .transition(.opacity)
+                    } else {
+                        ScrollView {
+                            LazyVStack(alignment: .leading, spacing: 0) {
+                                ForEach(viewModel.filteredExercises, id: \.id) { exercise in
+                                    LibraryExerciseRow(exercise: exercise) {
+                                        showMovement(exercise)
+                                    }
 
-                                Rectangle()
-                                    .fill(Theme.border)
-                                    .frame(height: 1)
+                                    Rectangle()
+                                        .fill(Theme.border)
+                                        .frame(height: 1)
+                                }
                             }
                         }
+                        .scrollIndicators(.hidden)
+                        .transition(.opacity)
                     }
-                    .scrollIndicators(.hidden)
                 }
+                .animation(.easeInOut(duration: 0.25), value: contentState)
             }
         }
         .task {

@@ -4,6 +4,12 @@ struct LogView: View {
     let viewModel: LogViewModel
     let showSessionDetail: (UUID) -> Void
 
+    private var contentState: String {
+        if viewModel.isLoading { return "loading" }
+        if viewModel.errorMessage != nil && viewModel.sessions.isEmpty { return "error" }
+        return "content"
+    }
+
     var body: some View {
         ZStack {
             Theme.bg.ignoresSafeArea()
@@ -11,15 +17,18 @@ struct LogView: View {
             if viewModel.isLoading {
                 ProgressView()
                     .tint(Theme.accent)
+                    .transition(.opacity)
             } else if let errorMessage = viewModel.errorMessage, viewModel.sessions.isEmpty {
                 VStack(spacing: 10) {
-                     MonoLabel(text: errorMessage, size: 11, color: Theme.text2, tracking: 0.4)
-                     Button("Retry") {
-                         Task { await viewModel.load() }
-                     }
-                     .font(Theme.fontMono(13, .medium))
+                    MonoLabel(text: errorMessage, size: 11, color: Theme.text2, tracking: 0.4)
+                    Button("Retry") {
+                        Task { await viewModel.load() }
+                    }
+                    .font(Theme.fontMono(13, .medium))
                     .foregroundStyle(Theme.accent)
+                    .buttonStyle(PressableButtonStyle())
                 }
+                .transition(.opacity)
             } else {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
@@ -33,8 +42,10 @@ struct LogView: View {
                     }
                 }
                 .scrollIndicators(.hidden)
+                .transition(.opacity)
             }
         }
+        .animation(.easeInOut(duration: 0.25), value: contentState)
         .task { await viewModel.load() }
     }
 
@@ -69,7 +80,7 @@ struct LogView: View {
                 } label: {
                     sessionRow(for: session)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(PressableButtonStyle())
                 .accessibilityLabel("\(session.workoutName), \(viewModel.weekdayText(for: session))")
             }
         }

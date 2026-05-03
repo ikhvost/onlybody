@@ -7,6 +7,13 @@ struct TrainView: View {
     let showStreak: () -> Void
     let onStartWorkout: (UUID) -> Void
 
+    private var contentState: String {
+        if viewModel.isLoading { return "loading" }
+        if viewModel.errorMessage != nil { return "error" }
+        if viewModel.workouts.isEmpty { return "empty" }
+        return "content"
+    }
+
     var body: some View {
         ZStack {
             Theme.bg.ignoresSafeArea()
@@ -22,46 +29,63 @@ struct TrainView: View {
                     }
                 )
 
-                if viewModel.isLoading {
-                    Spacer()
-                    ProgressView()
-                        .tint(Theme.accent)
-                    Spacer()
-                } else if let errorMessage = viewModel.errorMessage {
-                    Spacer()
-                    VStack(spacing: 10) {
-                        MonoLabel(text: errorMessage, size: 10, color: Theme.text2, tracking: 0.4)
-                        Button("Retry") {
-                            Task { await viewModel.load() }
+                ZStack {
+                    if viewModel.isLoading {
+                        VStack {
+                            Spacer()
+                            ProgressView()
+                                .tint(Theme.accent)
+                            Spacer()
                         }
-                         .font(Theme.fontMono(13, .medium))
-                        .foregroundStyle(Theme.accent)
+                        .transition(.opacity)
+                    } else if let errorMessage = viewModel.errorMessage {
+                        VStack {
+                            Spacer()
+                            VStack(spacing: 10) {
+                                MonoLabel(text: errorMessage, size: 10, color: Theme.text2, tracking: 0.4)
+                                Button("Retry") {
+                                    Task { await viewModel.load() }
+                                }
+                                .font(Theme.fontMono(13, .medium))
+                                .foregroundStyle(Theme.accent)
+                                .buttonStyle(PressableButtonStyle())
+                            }
+                            Spacer()
+                        }
+                        .transition(.opacity)
+                    } else if viewModel.workouts.isEmpty {
+                        VStack {
+                            Spacer()
+                            TrainEmptyState()
+                            Spacer()
+                        }
+                        .transition(.opacity)
+                    } else {
+                        VStack(spacing: 0) {
+                            TrainDayStrip(
+                                dayNames: viewModel.dayNames,
+                                todayIndex: viewModel.todayIndex,
+                                workouts: viewModel.workouts
+                            )
+                            TodayCallout(
+                                todaysWorkouts: viewModel.todaysWorkouts
+                            )
+                            WorkoutList(
+                                workouts: viewModel.workouts,
+                                todayName: viewModel.todayName,
+                                onEdit: { workout in
+                                    showSessionBuilder(workout.id)
+                                },
+                                onStart: { workout in
+                                    onStartWorkout(workout.id)
+                                }
+                            )
+                        }
+                        .transition(.opacity)
                     }
-                    Spacer()
-                } else if viewModel.workouts.isEmpty {
-                    Spacer()
-                    TrainEmptyState()
-                    Spacer()
-                } else {
-                    TrainDayStrip(
-                        dayNames: viewModel.dayNames,
-                        todayIndex: viewModel.todayIndex,
-                        workouts: viewModel.workouts
-                    )
-                    TodayCallout(
-                        todaysWorkouts: viewModel.todaysWorkouts
-                    )
-                    WorkoutList(
-                        workouts: viewModel.workouts,
-                        todayName: viewModel.todayName,
-                        onEdit: { workout in
-                            showSessionBuilder(workout.id)
-                        },
-                        onStart: { workout in
-                            onStartWorkout(workout.id)
-                        }
-                    )
                 }
+                .animation(.easeInOut(duration: 0.25), value: contentState)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
         .task { await viewModel.load() }
@@ -99,7 +123,8 @@ private struct TrainHeader: View {
                         tracking: 1.2
                     )
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(PressableButtonStyle())
+                .accessibilityLabel("Show streak")
 
                 Button {
                     onTitleTap()
@@ -109,7 +134,8 @@ private struct TrainHeader: View {
                         .tracking(-1)
                         .foregroundStyle(Theme.text)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(PressableButtonStyle())
+                .accessibilityLabel("OnlyBody — show streak")
             }
 
             Spacer()
@@ -120,12 +146,13 @@ private struct TrainHeader: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: Theme.cornerRadius)
                         .fill(Theme.accent)
-                        .frame(width: 34, height: 34)
+                        .frame(width: 38, height: 38)
 
                     PlusIcon(color: Theme.accentDark, size: 15)
                 }
             }
             .accessibilityLabel("Create workout")
+            .buttonStyle(PressableButtonStyle())
         }
         .padding(.horizontal, Theme.horizontalPadding)
         .padding(.top, 16)
@@ -158,7 +185,7 @@ private struct TrainDayStrip: View {
                 VStack(spacing: 5) {
                     MonoLabel(
                         text: day,
-                    size: 10,
+                        size: 10,
                         color: isToday ? Theme.accent : Theme.text3,
                         tracking: 0.3
                     )
@@ -280,7 +307,7 @@ private struct WorkoutRow: View {
             } label: {
                 EditIcon(color: Theme.text3, size: 15)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(PressableButtonStyle())
             .accessibilityLabel("Edit \(workout.name)")
             .padding(6)
 
@@ -292,13 +319,14 @@ private struct WorkoutRow: View {
                     .font(Theme.fontMono(12, .medium))
                     .foregroundStyle(Theme.accentDark)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(PressableButtonStyle())
+            .accessibilityLabel("Start \(workout.name)")
             .padding(.horizontal, 14)
-            .frame(height: 36)
+            .frame(height: 40)
             .background(Theme.accent)
             .clipShape(.rect(cornerRadius: Theme.chipCornerRadius))
         }
-        .padding(.vertical, 13)
+        .padding(.vertical, 16)
         .padding(.horizontal, Theme.horizontalPadding)
         .overlay(alignment: .leading) {
             Rectangle()

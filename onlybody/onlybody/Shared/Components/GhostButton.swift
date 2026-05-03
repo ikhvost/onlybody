@@ -10,13 +10,13 @@ struct GhostButton: View {
                 .font(Theme.fontSans(14, .medium))
                 .foregroundStyle(Theme.text2)
                 .padding(.horizontal, 15)
-                .padding(.vertical, 12)
+                .padding(.vertical, 14)
                 .overlay {
                     RoundedRectangle(cornerRadius: Theme.cornerRadius)
                         .stroke(Theme.border2, lineWidth: 1)
                 }
                 .clipShape(.rect(cornerRadius: Theme.cornerRadius))
         }
-        .buttonStyle(.plain)
+        .buttonStyle(PressableButtonStyle())
     }
 }

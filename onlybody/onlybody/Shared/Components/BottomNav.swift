@@ -14,18 +14,23 @@ struct BottomNav: View {
                 tabButton(for: .train, label: "TRAIN") {
                     TrainIcon(color: selectedTab == .train ? Theme.accent : Theme.iconDim, size: 19)
                 }
+                .accessibilityLabel("Train tab")
 
                 tabButton(for: .log, label: "LOG") {
                     LogIcon(color: selectedTab == .log ? Theme.accent : Theme.iconDim, size: 19)
                 }
+                .accessibilityLabel("Log tab")
 
                 tabButton(for: .library, label: "LIBRARY") {
                     LibraryIcon(color: selectedTab == .library ? Theme.accent : Theme.iconDim, size: 19)
                 }
+                .accessibilityLabel("Library tab")
             }
             .padding(.vertical, 10)
+            .animation(.spring(response: 0.25, dampingFraction: 0.75), value: selectedTab)
         }
         .background(Theme.bg)
+        .sensoryFeedback(.impact(.light), trigger: selectedTab)
     }
 
     private func tabButton(for appTab: AppTab, label: String, icon: @escaping () -> some View) -> some View {
@@ -49,5 +54,6 @@ struct BottomNav: View {
             }
         }
         .frame(maxWidth: .infinity)
+        .buttonStyle(PressableButtonStyle())
     }
 }
