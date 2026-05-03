@@ -135,8 +135,8 @@
 						CreatedOnToolsVersion = 26.4.1;
 						TestTargetID = DFA38F9C2FA5365800489D14;
 					};
+				};
 			};
-		};
 			buildConfigurationList = DFA38F982FA5365800489D14 /* Build configuration list for PBXProject "onlybody" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;

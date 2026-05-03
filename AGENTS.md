@@ -253,7 +253,7 @@ enum AppTab: String, CaseIterable { case train, log, library }
   ```bash
   swift run --package-path Scripts/StoreGenerator StoreGenerator \
     onlybody/onlybody/Resources/SeedStore/default.store \
-    onlybody/onlybody/Core/Seed/SeedData.json
+    Scripts/StoreGenerator/SeedData.json
   ```
 
 ## Testing
