@@ -30,7 +30,7 @@ struct BottomNav: View {
             .animation(.spring(response: 0.25, dampingFraction: 0.75), value: selectedTab)
         }
         .background(Theme.bg)
-        .sensoryFeedback(.impact(.light), trigger: selectedTab)
+        .sensoryFeedback(.impact(weight: .light), trigger: selectedTab)
     }
 
     private func tabButton(for appTab: AppTab, label: String, icon: @escaping () -> some View) -> some View {

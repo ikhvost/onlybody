@@ -73,7 +73,7 @@ struct ActiveWorkoutView: View {
         .task {
             await viewModel.load()
         }
-        .sensoryFeedback(.impact(.medium), trigger: setCompletedCount)
+        .sensoryFeedback(.impact(weight: .medium), trigger: setCompletedCount)
         .sensoryFeedback(.selection, trigger: navigationCount)
     }
 
