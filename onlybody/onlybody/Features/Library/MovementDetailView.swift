@@ -32,10 +32,6 @@ struct MovementDetailView: View {
                                 .tracking(-0.8)
                                 .foregroundStyle(Theme.text)
 
-                            if viewModel.exercise.isCustom {
-                                CustomBadgeView()
-                                    .padding(.top, 4)
-                            }
                         }
 
                         Rectangle()
@@ -147,8 +143,6 @@ struct MovementDetailView: View {
     exercise.primaryMuscle = "Quads"
     exercise.secondaryMuscles = ["Glutes"]
     exercise.equipment = ["None"]
-    exercise.isCustom = true
-
     return MovementDetailView(
         viewModel: MovementDetailViewModel(
             exercise: exercise,

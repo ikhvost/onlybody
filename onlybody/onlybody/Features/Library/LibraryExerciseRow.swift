@@ -19,10 +19,6 @@ struct LibraryExerciseRow: View {
                         tracking: 0.3
                     )
 
-                    if exercise.isCustom {
-                        CustomBadgeView()
-                            .padding(.top, 3)
-                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 

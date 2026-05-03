@@ -9,7 +9,6 @@ final class Exercise {
     var secondaryMuscles: [String] = []
     var equipment: [String] = []
     var frequencyPreference: String = "normal"
-    var isCustom: Bool = false
 
     init() {}
 }

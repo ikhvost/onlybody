@@ -105,10 +105,6 @@ struct ExercisePickerView: View {
                                             tracking: 0.3
                                         )
 
-                                        if exercise.isCustom {
-                                            CustomBadgeView()
-                                            .padding(.top, 5)
-                                        }
                                     }
 
                                     Spacer()

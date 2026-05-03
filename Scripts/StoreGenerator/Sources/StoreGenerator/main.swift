@@ -7,7 +7,6 @@ struct ExerciseSeed: Decodable {
     let secondaryMuscles: [String]
     let equipment: [String]
     let frequencyPreference: String
-    let isCustom: Bool
 }
 
 @MainActor
@@ -33,7 +32,6 @@ func generateStore(outputPath: String, seedDataPath: String) throws {
         exercise.secondaryMuscles = seed.secondaryMuscles
         exercise.equipment = seed.equipment
         exercise.frequencyPreference = seed.frequencyPreference
-        exercise.isCustom = seed.isCustom
         context.insert(exercise)
     }
 

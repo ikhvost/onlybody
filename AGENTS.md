@@ -92,9 +92,7 @@ onlybody/                              — source root (PBXFileSystemSynchronize
 │       ├── LibraryView.swift
 │       ├── LibraryExerciseRow.swift
 │       ├── MovementDetailViewModel.swift
-│       ├── MovementDetailView.swift
-│       ├── CustomExerciseViewModel.swift
-│       └── CustomExerciseForm.swift
+│       └── MovementDetailView.swift
 ├── Core/                              — Infrastructure: repositories, services
 │   ├── Repositories/
 │   │   ├── ExerciseRepository.swift
@@ -127,7 +125,6 @@ onlybody/                              — source root (PBXFileSystemSynchronize
 │   │   ├── NavBarView.swift
 │   │   ├── BottomNav.swift
 │   │   ├── ExercisePickerView.swift
-│   │   ├── CustomBadgeView.swift
 │   │   └── FlowLayout.swift
 │   ├── Domain/                        — Cross-cutting domain enums and catalogs
 │   │   ├── ExerciseCatalog.swift

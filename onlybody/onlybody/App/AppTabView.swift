@@ -160,9 +160,6 @@ struct AppTabView: View {
             tabStack(.library, path: $libraryPath) {
                 LibraryView(
                     viewModel: libraryViewModel,
-                    makeCustomExerciseViewModel: {
-                        CustomExerciseViewModel(exercises: exercises)
-                    },
                     showMovement: {
                         libraryPath.append($0.id)
                     }

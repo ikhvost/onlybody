@@ -3,11 +3,7 @@ import SwiftUI
 struct LibraryView: View {
     @Bindable var viewModel: LibraryViewModel
 
-    let makeCustomExerciseViewModel: () -> CustomExerciseViewModel
     let showMovement: (Exercise) -> Void
-
-    @State private var customExerciseViewModel: CustomExerciseViewModel?
-    @State private var isPresentingCustomExercise = false
 
     var body: some View {
         ZStack {
@@ -25,18 +21,6 @@ struct LibraryView: View {
                     }
 
                     Spacer(minLength: 10)
-
-                    Button {
-                        customExerciseViewModel = makeCustomExerciseViewModel()
-                        isPresentingCustomExercise = true
-                    } label: {
-                        PlusIcon(color: Theme.accentDark, size: 14)
-                            .frame(width: 32, height: 32)
-                            .background(Theme.accent)
-                            .clipShape(.rect(cornerRadius: Theme.cornerRadius))
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityLabel("Add custom exercise")
                 }
                 .padding(.horizontal, Theme.horizontalPadding)
                 .padding(.top, 16)
@@ -118,19 +102,6 @@ struct LibraryView: View {
         .task {
             await viewModel.load()
         }
-        .sheet(isPresented: $isPresentingCustomExercise, onDismiss: {
-            customExerciseViewModel = nil
-
-            Task {
-                await viewModel.load()
-            }
-        }) {
-            if let customExerciseViewModel {
-                CustomExerciseForm(viewModel: customExerciseViewModel)
-                    .presentationDetents([.large])
-                    .presentationDragIndicator(.hidden)
-            }
-        }
     }
 }
 
@@ -146,15 +117,11 @@ struct LibraryView: View {
     splitSquats.name = "Bulgarian Split Squats"
     splitSquats.primaryMuscle = "Quads"
     splitSquats.equipment = ["None"]
-    splitSquats.isCustom = true
 
     viewModel.allExercises = [pushUps, splitSquats]
 
     return LibraryView(
         viewModel: viewModel,
-        makeCustomExerciseViewModel: {
-            CustomExerciseViewModel(exercises: PreviewExerciseRepository())
-        },
         showMovement: { _ in }
     )
     .preferredColorScheme(.dark)

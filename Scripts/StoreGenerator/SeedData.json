@@ -5,7 +5,6 @@
     "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Knee Push-Ups",
@@ -13,7 +12,6 @@
     "secondaryMuscles": ["Triceps", "Shoulders"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Incline Push-Ups",
@@ -21,7 +19,6 @@
     "secondaryMuscles": ["Triceps", "Shoulders"],
     "equipment": ["Elevated Surface"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Decline Push-Ups",
@@ -29,7 +26,6 @@
     "secondaryMuscles": ["Shoulders", "Triceps"],
     "equipment": ["Elevated Surface"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Archer Push-Ups",
@@ -37,7 +33,6 @@
     "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Wide Push-Ups",
@@ -45,7 +40,6 @@
     "secondaryMuscles": ["Shoulders"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Diamond Push-Ups",
@@ -53,7 +47,6 @@
     "secondaryMuscles": ["Chest", "Shoulders"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Typewriter Push-Ups",
@@ -61,7 +54,6 @@
     "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Spiderman Push-Ups",
@@ -69,7 +61,6 @@
     "secondaryMuscles": ["Core", "Triceps", "Hip Flexors"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Pseudo Planche Push-Ups",
@@ -77,7 +68,6 @@
     "secondaryMuscles": ["Chest", "Triceps", "Core"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Tucked Planche Push-Ups",
@@ -85,7 +75,6 @@
     "secondaryMuscles": ["Chest", "Triceps", "Core", "Lower Back"],
     "equipment": ["None", "Parallettes"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Straddle Planche Push-Ups",
@@ -93,7 +82,6 @@
     "secondaryMuscles": ["Chest", "Triceps", "Core", "Lower Back"],
     "equipment": ["None", "Parallettes"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Full Planche Push-Ups",
@@ -101,7 +89,6 @@
     "secondaryMuscles": ["Chest", "Triceps", "Core", "Lower Back"],
     "equipment": ["None", "Parallettes"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "One-Arm Push-Ups",
@@ -109,7 +96,6 @@
     "secondaryMuscles": ["Core", "Triceps", "Shoulders"],
     "equipment": ["None"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Bear Push-Ups",
@@ -117,7 +103,6 @@
     "secondaryMuscles": ["Triceps", "Chest"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Pike Push-Ups",
@@ -125,7 +110,6 @@
     "secondaryMuscles": ["Triceps", "Chest", "Traps"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Handstand Push-Ups",
@@ -133,7 +117,6 @@
     "secondaryMuscles": ["Triceps", "Traps", "Core"],
     "equipment": ["None"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Wall Handstand Push-Ups",
@@ -141,7 +124,6 @@
     "secondaryMuscles": ["Triceps", "Traps"],
     "equipment": ["None", "Wall"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "90-Degree Handstand Push-Ups",
@@ -149,7 +131,6 @@
     "secondaryMuscles": ["Chest", "Triceps", "Core", "Lower Back"],
     "equipment": ["None"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Shoulder Taps",
@@ -157,7 +138,6 @@
     "secondaryMuscles": ["Core"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Lateral Raises",
@@ -165,7 +145,6 @@
     "secondaryMuscles": ["Traps"],
     "equipment": ["Dumbbells", "Resistance Bands"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Dips",
@@ -173,7 +152,6 @@
     "secondaryMuscles": ["Chest", "Shoulders"],
     "equipment": ["Dip Bar", "Parallettes"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Tricep Dips",
@@ -181,7 +159,6 @@
     "secondaryMuscles": ["Shoulders"],
     "equipment": ["Bench", "Chair"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Straight Bar Dips",
@@ -189,7 +166,6 @@
     "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
     "equipment": ["Pull-up Bar"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Ring Dips",
@@ -197,7 +173,6 @@
     "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
     "equipment": ["Rings"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Bulgarian Dips",
@@ -205,7 +180,6 @@
     "secondaryMuscles": ["Shoulders", "Triceps"],
     "equipment": ["Rings"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Russian Dips",
@@ -213,7 +187,6 @@
     "secondaryMuscles": ["Shoulders", "Forearms", "Chest"],
     "equipment": ["Dip Bar"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Archer Dips",
@@ -221,7 +194,6 @@
     "secondaryMuscles": ["Triceps", "Shoulders"],
     "equipment": ["Dip Bar", "Rings"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Planche Lean",
@@ -229,7 +201,6 @@
     "secondaryMuscles": ["Core", "Forearms", "Chest"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Tuck Planche",
@@ -237,7 +208,6 @@
     "secondaryMuscles": ["Core", "Triceps", "Chest"],
     "equipment": ["None", "Parallettes"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Advanced Tuck Planche",
@@ -245,7 +215,6 @@
     "secondaryMuscles": ["Core", "Lower Back", "Triceps"],
     "equipment": ["None", "Parallettes"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Straddle Planche",
@@ -253,7 +222,6 @@
     "secondaryMuscles": ["Lower Back", "Core", "Glutes"],
     "equipment": ["None", "Parallettes"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Full Planche",
@@ -261,7 +229,6 @@
     "secondaryMuscles": ["Lower Back", "Core", "Glutes", "Triceps"],
     "equipment": ["None", "Parallettes"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Maltese",
@@ -269,7 +236,6 @@
     "secondaryMuscles": ["Chest", "Biceps", "Core"],
     "equipment": ["Rings", "Parallettes"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Crow Pose",
@@ -277,7 +243,6 @@
     "secondaryMuscles": ["Core", "Triceps", "Forearms"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Elbow Lever",
@@ -285,7 +250,6 @@
     "secondaryMuscles": ["Triceps", "Lower Back", "Forearms"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Handstand",
@@ -293,7 +257,6 @@
     "secondaryMuscles": ["Triceps", "Core", "Traps"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "One-Arm Handstand",
@@ -301,7 +264,6 @@
     "secondaryMuscles": ["Core", "Triceps", "Obliques"],
     "equipment": ["None"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Pull-Ups",
@@ -309,7 +271,6 @@
     "secondaryMuscles": ["Biceps", "Forearms", "Shoulders"],
     "equipment": ["Pull-up Bar"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Chin-Ups",
@@ -317,7 +278,6 @@
     "secondaryMuscles": ["Biceps", "Forearms"],
     "equipment": ["Pull-up Bar"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Wide-Grip Pull-Ups",
@@ -325,7 +285,6 @@
     "secondaryMuscles": ["Shoulders", "Forearms"],
     "equipment": ["Pull-up Bar"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Commando Pull-Ups",
@@ -333,7 +292,6 @@
     "secondaryMuscles": ["Biceps", "Forearms", "Core"],
     "equipment": ["Pull-up Bar"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Archer Pull-Ups",
@@ -341,7 +299,6 @@
     "secondaryMuscles": ["Biceps", "Forearms", "Core"],
     "equipment": ["Pull-up Bar"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Typewriter Pull-Ups",
@@ -349,7 +306,6 @@
     "secondaryMuscles": ["Biceps", "Forearms", "Core"],
     "equipment": ["Pull-up Bar"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "High Pull-Ups",
@@ -357,7 +313,6 @@
     "secondaryMuscles": ["Biceps", "Forearms", "Shoulders"],
     "equipment": ["Pull-up Bar"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Explosive Pull-Ups",
@@ -365,7 +320,6 @@
     "secondaryMuscles": ["Biceps", "Core", "Shoulders"],
     "equipment": ["Pull-up Bar"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "L-Sit Pull-Ups",
@@ -373,7 +327,6 @@
     "secondaryMuscles": ["Core", "Hip Flexors", "Biceps"],
     "equipment": ["Pull-up Bar"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "One-Arm Pull-Ups",
@@ -381,7 +334,6 @@
     "secondaryMuscles": ["Biceps", "Forearms", "Core"],
     "equipment": ["Pull-up Bar"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Negative Pull-Ups",
@@ -389,7 +341,6 @@
     "secondaryMuscles": ["Biceps", "Forearms"],
     "equipment": ["Pull-up Bar"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Assisted Pull-Ups",
@@ -397,7 +348,6 @@
     "secondaryMuscles": ["Biceps"],
     "equipment": ["Pull-up Bar", "Resistance Bands"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Inverted Rows",
@@ -405,7 +355,6 @@
     "secondaryMuscles": ["Biceps", "Forearms", "Shoulders"],
     "equipment": ["Low Bar", "Rings"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Low Inverted Rows",
@@ -413,7 +362,6 @@
     "secondaryMuscles": ["Biceps", "Shoulders"],
     "equipment": ["Low Bar", "Rings"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Doorway Rows",
@@ -421,7 +369,6 @@
     "secondaryMuscles": ["Biceps", "Forearms"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Towel Rows",
@@ -429,7 +376,6 @@
     "secondaryMuscles": ["Biceps", "Forearms"],
     "equipment": ["Towel"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Australian Pull-Ups",
@@ -437,7 +383,6 @@
     "secondaryMuscles": ["Biceps", "Shoulders"],
     "equipment": ["Low Bar"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Muscle-Ups",
@@ -445,7 +390,6 @@
     "secondaryMuscles": ["Triceps", "Shoulders", "Chest", "Core"],
     "equipment": ["Pull-up Bar"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Ring Muscle-Ups",
@@ -453,7 +397,6 @@
     "secondaryMuscles": ["Triceps", "Shoulders", "Chest", "Core"],
     "equipment": ["Rings"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Slow Muscle-Ups",
@@ -461,7 +404,6 @@
     "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
     "equipment": ["Pull-up Bar", "Rings"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Bar Hang",
@@ -469,7 +411,6 @@
     "secondaryMuscles": ["Shoulders"],
     "equipment": ["Pull-up Bar"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Active Hang",
@@ -477,7 +418,6 @@
     "secondaryMuscles": ["Forearms", "Shoulders"],
     "equipment": ["Pull-up Bar"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "One-Arm Hang",
@@ -485,7 +425,6 @@
     "secondaryMuscles": ["Shoulders", "Core"],
     "equipment": ["Pull-up Bar"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Front Lever Tuck",
@@ -493,7 +432,6 @@
     "secondaryMuscles": ["Core", "Shoulders", "Forearms"],
     "equipment": ["Pull-up Bar", "Rings"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Front Lever Straddle",
@@ -501,7 +439,6 @@
     "secondaryMuscles": ["Core", "Shoulders", "Glutes"],
     "equipment": ["Pull-up Bar", "Rings"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Front Lever",
@@ -509,7 +446,6 @@
     "secondaryMuscles": ["Core", "Shoulders", "Glutes", "Forearms"],
     "equipment": ["Pull-up Bar", "Rings"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "One-Leg Front Lever",
@@ -517,7 +453,6 @@
     "secondaryMuscles": ["Core", "Shoulders", "Glutes"],
     "equipment": ["Pull-up Bar", "Rings"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Front Lever Pull-Ups",
@@ -525,7 +460,6 @@
     "secondaryMuscles": ["Biceps", "Core", "Shoulders"],
     "equipment": ["Pull-up Bar", "Rings"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Back Lever Tuck",
@@ -533,7 +467,6 @@
     "secondaryMuscles": ["Back", "Shoulders", "Chest"],
     "equipment": ["Pull-up Bar", "Rings"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Back Lever Straddle",
@@ -541,7 +474,6 @@
     "secondaryMuscles": ["Back", "Shoulders", "Glutes"],
     "equipment": ["Pull-up Bar", "Rings"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Back Lever",
@@ -549,7 +481,6 @@
     "secondaryMuscles": ["Back", "Shoulders", "Lower Back"],
     "equipment": ["Pull-up Bar", "Rings"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Skin the Cat",
@@ -557,7 +488,6 @@
     "secondaryMuscles": ["Back", "Core", "Forearms"],
     "equipment": ["Pull-up Bar", "Rings"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "German Hang",
@@ -565,7 +495,6 @@
     "secondaryMuscles": ["Back", "Forearms"],
     "equipment": ["Pull-up Bar", "Rings"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Iron Cross",
@@ -573,7 +502,6 @@
     "secondaryMuscles": ["Back", "Chest", "Forearms", "Core"],
     "equipment": ["Rings"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Biceps Curls",
@@ -581,7 +509,6 @@
     "secondaryMuscles": ["Forearms"],
     "equipment": ["Dumbbells", "Resistance Bands"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Hammer Curls",
@@ -589,7 +516,6 @@
     "secondaryMuscles": ["Forearms"],
     "equipment": ["Dumbbells", "Resistance Bands"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Pelican Curls",
@@ -597,7 +523,6 @@
     "secondaryMuscles": ["Shoulders", "Chest"],
     "equipment": ["Rings", "Pull-up Bar"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Plank",
@@ -605,7 +530,6 @@
     "secondaryMuscles": ["Shoulders", "Glutes"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Knee Plank",
@@ -613,7 +537,6 @@
     "secondaryMuscles": ["Shoulders"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Side Plank",
@@ -621,7 +544,6 @@
     "secondaryMuscles": ["Obliques", "Shoulders"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Hollow Body Hold",
@@ -629,7 +551,6 @@
     "secondaryMuscles": ["Hip Flexors", "Quads"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Hollow Body Rocks",
@@ -637,7 +558,6 @@
     "secondaryMuscles": ["Hip Flexors", "Quads"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Leg Raises",
@@ -645,7 +565,6 @@
     "secondaryMuscles": ["Hip Flexors"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Reverse Crunch",
@@ -653,7 +572,6 @@
     "secondaryMuscles": ["Hip Flexors"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Bicycle Crunches",
@@ -661,7 +579,6 @@
     "secondaryMuscles": ["Obliques", "Hip Flexors"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "L-Sit",
@@ -669,7 +586,6 @@
     "secondaryMuscles": ["Quads", "Hip Flexors", "Shoulders", "Triceps"],
     "equipment": ["None", "Parallettes"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "V-Sit",
@@ -677,7 +593,6 @@
     "secondaryMuscles": ["Quads", "Hip Flexors", "Shoulders", "Triceps"],
     "equipment": ["None", "Parallettes"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Manna",
@@ -685,7 +600,6 @@
     "secondaryMuscles": ["Shoulders", "Triceps", "Lower Back", "Hamstrings"],
     "equipment": ["None", "Parallettes"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Toes to Bar",
@@ -693,7 +607,6 @@
     "secondaryMuscles": ["Hip Flexors", "Lats", "Grip"],
     "equipment": ["Pull-up Bar"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Knees to Elbows",
@@ -701,7 +614,6 @@
     "secondaryMuscles": ["Hip Flexors", "Lats", "Grip"],
     "equipment": ["Pull-up Bar"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Hanging Knee Tuck",
@@ -709,7 +621,6 @@
     "secondaryMuscles": ["Hip Flexors", "Grip"],
     "equipment": ["Pull-up Bar"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Windshield Wipers",
@@ -717,7 +628,6 @@
     "secondaryMuscles": ["Obliques", "Lats", "Grip"],
     "equipment": ["Pull-up Bar"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Dragon Flag",
@@ -725,7 +635,6 @@
     "secondaryMuscles": ["Lats", "Glutes", "Lower Back"],
     "equipment": ["Bench", "Pole"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Human Flag Tuck",
@@ -733,7 +642,6 @@
     "secondaryMuscles": ["Shoulders", "Lats", "Obliques"],
     "equipment": ["Vertical Pole", "Wall Bars"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Human Flag Straddle",
@@ -741,7 +649,6 @@
     "secondaryMuscles": ["Shoulders", "Lats", "Obliques", "Glutes"],
     "equipment": ["Vertical Pole", "Wall Bars"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Human Flag",
@@ -749,7 +656,6 @@
     "secondaryMuscles": ["Shoulders", "Lats", "Obliques"],
     "equipment": ["Vertical Pole", "Wall Bars"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Superman",
@@ -757,7 +663,6 @@
     "secondaryMuscles": ["Glutes", "Hamstrings"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Bird Dog",
@@ -765,7 +670,6 @@
     "secondaryMuscles": ["Lower Back", "Glutes", "Shoulders"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Squats",
@@ -773,7 +677,6 @@
     "secondaryMuscles": ["Glutes", "Hamstrings", "Core"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Assisted Squats",
@@ -781,7 +684,6 @@
     "secondaryMuscles": ["Glutes", "Hamstrings"],
     "equipment": ["None", "Pole"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Pistol Squats",
@@ -789,7 +691,6 @@
     "secondaryMuscles": ["Glutes", "Core", "Calves", "Hip Flexors"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Assisted Pistol Squats",
@@ -797,7 +698,6 @@
     "secondaryMuscles": ["Glutes", "Core", "Calves"],
     "equipment": ["None", "Pole"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Shrimp Squats",
@@ -805,7 +705,6 @@
     "secondaryMuscles": ["Glutes", "Core", "Hamstrings"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Sissy Squats",
@@ -813,7 +712,6 @@
     "secondaryMuscles": ["Core", "Calves"],
     "equipment": ["None"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Jump Squats",
@@ -821,7 +719,6 @@
     "secondaryMuscles": ["Calves", "Glutes", "Hamstrings"],
     "equipment": ["None"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Tuck Jump Squats",
@@ -829,7 +726,6 @@
     "secondaryMuscles": ["Calves", "Glutes", "Core"],
     "equipment": ["None"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Sumo Squats",
@@ -837,7 +733,6 @@
     "secondaryMuscles": ["Glutes", "Adductors"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Cossack Squats",
@@ -845,7 +740,6 @@
     "secondaryMuscles": ["Glutes", "Hamstrings", "Adductors", "Core"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Hindu Squats",
@@ -853,7 +747,6 @@
     "secondaryMuscles": ["Calves", "Glutes"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Skater Squats",
@@ -861,7 +754,6 @@
     "secondaryMuscles": ["Glutes", "Hamstrings", "Core"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Dragon Squats",
@@ -869,7 +761,6 @@
     "secondaryMuscles": ["Glutes", "Core", "Ankles", "Hamstrings"],
     "equipment": ["None"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Wall Sit",
@@ -877,7 +768,6 @@
     "secondaryMuscles": ["Glutes", "Core"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Alternating Wall Sit",
@@ -885,7 +775,6 @@
     "secondaryMuscles": ["Glutes", "Core"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Single-Leg Wall Sit",
@@ -893,7 +782,6 @@
     "secondaryMuscles": ["Glutes", "Core"],
     "equipment": ["None"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Lunges",
@@ -901,7 +789,6 @@
     "secondaryMuscles": ["Glutes", "Hamstrings"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Supported Lunges",
@@ -909,7 +796,6 @@
     "secondaryMuscles": ["Glutes"],
     "equipment": ["None", "Pole"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Reverse Lunges",
@@ -917,7 +803,6 @@
     "secondaryMuscles": ["Glutes", "Hamstrings"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Jumping Lunges",
@@ -925,7 +810,6 @@
     "secondaryMuscles": ["Glutes", "Calves", "Hamstrings"],
     "equipment": ["None"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Curtsy Lunges",
@@ -933,7 +817,6 @@
     "secondaryMuscles": ["Glutes", "Adductors"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Bulgarian Split Squats",
@@ -941,7 +824,6 @@
     "secondaryMuscles": ["Glutes", "Hamstrings"],
     "equipment": ["Elevated Surface", "Chair"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Step-Ups",
@@ -949,7 +831,6 @@
     "secondaryMuscles": ["Glutes", "Calves"],
     "equipment": ["Box", "Elevated Surface"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Jump Step-Ups",
@@ -957,7 +838,6 @@
     "secondaryMuscles": ["Glutes", "Calves"],
     "equipment": ["Box", "Elevated Surface"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Box Jumps",
@@ -965,7 +845,6 @@
     "secondaryMuscles": ["Glutes", "Calves", "Hamstrings"],
     "equipment": ["Box", "Elevated Surface"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Depth Jumps",
@@ -973,7 +852,6 @@
     "secondaryMuscles": ["Glutes", "Calves", "Hamstrings"],
     "equipment": ["Box", "Elevated Surface"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Single-Leg Box Jumps",
@@ -981,7 +859,6 @@
     "secondaryMuscles": ["Glutes", "Calves", "Core"],
     "equipment": ["Box", "Elevated Surface"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Glute Bridge",
@@ -989,7 +866,6 @@
     "secondaryMuscles": ["Hamstrings", "Core"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Single-Leg Glute Bridge",
@@ -997,7 +873,6 @@
     "secondaryMuscles": ["Hamstrings", "Core"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Hip Thrusts",
@@ -1005,7 +880,6 @@
     "secondaryMuscles": ["Hamstrings", "Core"],
     "equipment": ["Bench", "Elevated Surface"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Single-Leg Hip Thrusts",
@@ -1013,7 +887,6 @@
     "secondaryMuscles": ["Hamstrings", "Core"],
     "equipment": ["Bench", "Elevated Surface"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Donkey Kicks",
@@ -1021,7 +894,6 @@
     "secondaryMuscles": ["Core", "Hamstrings"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Reverse Hyperextension",
@@ -1029,7 +901,6 @@
     "secondaryMuscles": ["Lower Back", "Hamstrings"],
     "equipment": ["Bench", "Table"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Single-Leg Romanian Deadlift",
@@ -1037,7 +908,6 @@
     "secondaryMuscles": ["Glutes", "Core", "Calves"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Nordic Curls",
@@ -1045,7 +915,6 @@
     "secondaryMuscles": ["Glutes", "Calves"],
     "equipment": ["None"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Reverse Nordic Curls",
@@ -1053,7 +922,6 @@
     "secondaryMuscles": ["Core", "Hip Flexors"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Calf Raises",
@@ -1061,7 +929,6 @@
     "secondaryMuscles": ["Ankles"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Single-Leg Calf Raises",
@@ -1069,7 +936,6 @@
     "secondaryMuscles": ["Core"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Elevated Calf Raises",
@@ -1077,7 +943,6 @@
     "secondaryMuscles": ["Ankles"],
     "equipment": ["Step", "Elevated Surface"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Jumping Calf Raises",
@@ -1085,7 +950,6 @@
     "secondaryMuscles": ["Quads"],
     "equipment": ["None"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Burpees",
@@ -1093,7 +957,6 @@
     "secondaryMuscles": ["Chest", "Quads", "Shoulders", "Core"],
     "equipment": ["None"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Burpees with Pull-Up",
@@ -1101,7 +964,6 @@
     "secondaryMuscles": ["Back", "Biceps", "Chest", "Quads"],
     "equipment": ["Pull-up Bar"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Mountain Climbers",
@@ -1109,7 +971,6 @@
     "secondaryMuscles": ["Core", "Shoulders", "Hip Flexors"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Jumping Jacks",
@@ -1117,7 +978,6 @@
     "secondaryMuscles": ["Calves", "Shoulders"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Walking Jacks",
@@ -1125,7 +985,6 @@
     "secondaryMuscles": ["Calves", "Shoulders"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Star Jacks",
@@ -1133,7 +992,6 @@
     "secondaryMuscles": ["Quads", "Glutes", "Shoulders"],
     "equipment": ["None"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Bear Crawl",
@@ -1141,7 +999,6 @@
     "secondaryMuscles": ["Shoulders", "Core", "Quads"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Crab Walk",
@@ -1149,7 +1006,6 @@
     "secondaryMuscles": ["Triceps", "Shoulders", "Glutes", "Core"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Duck Walk",
@@ -1157,7 +1013,6 @@
     "secondaryMuscles": ["Glutes", "Core", "Calves"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Gorilla Walk",
@@ -1165,7 +1020,6 @@
     "secondaryMuscles": ["Back", "Shoulders", "Core", "Quads"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Frog Jump",
@@ -1173,7 +1027,6 @@
     "secondaryMuscles": ["Glutes", "Calves", "Core"],
     "equipment": ["None"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Inchworm",
@@ -1181,7 +1034,6 @@
     "secondaryMuscles": ["Shoulders", "Hamstrings", "Chest"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Alligator Crawl",
@@ -1189,7 +1041,6 @@
     "secondaryMuscles": ["Chest", "Core", "Shoulders", "Triceps"],
     "equipment": ["None"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Chameleon Walk",
@@ -1197,7 +1048,6 @@
     "secondaryMuscles": ["Chest", "Core", "Shoulders", "Hip Flexors"],
     "equipment": ["None"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Scorpion Walk",
@@ -1205,7 +1055,6 @@
     "secondaryMuscles": ["Shoulders", "Core", "Back", "Hip Flexors"],
     "equipment": ["None"],
     "frequencyPreference": "less",
-    "isCustom": false
   },
   {
     "name": "Leopard Crawl",
@@ -1213,7 +1062,6 @@
     "secondaryMuscles": ["Shoulders", "Core", "Quads", "Triceps"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Boat Pose",
@@ -1221,7 +1069,6 @@
     "secondaryMuscles": ["Hip Flexors", "Lower Back"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Chair Pose",
@@ -1229,7 +1076,6 @@
     "secondaryMuscles": ["Glutes", "Shoulders", "Lower Back"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Crescent Lunge",
@@ -1237,7 +1083,6 @@
     "secondaryMuscles": ["Glutes", "Core", "Calves"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Warrior III",
@@ -1245,7 +1090,6 @@
     "secondaryMuscles": ["Glutes", "Core", "Lower Back", "Shoulders"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   },
   {
     "name": "Chaturanga",
@@ -1253,6 +1097,5 @@
     "secondaryMuscles": ["Triceps", "Shoulders", "Core"],
     "equipment": ["None"],
     "frequencyPreference": "normal",
-    "isCustom": false
   }
 ]
