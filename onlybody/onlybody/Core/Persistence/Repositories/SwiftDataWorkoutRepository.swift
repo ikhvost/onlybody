@@ -24,6 +24,19 @@ final class SwiftDataWorkoutRepository: WorkoutRepository {
         return try context.fetch(descriptor).first?.snapshot()
     }
 
+    func delete(by id: UUID) async throws {
+        do {
+            var descriptor = FetchDescriptor<Workout>(predicate: #Predicate { $0.id == id })
+            descriptor.fetchLimit = 1
+            guard let model = try context.fetch(descriptor).first else { return }
+            context.delete(model)
+            try context.save()
+        } catch {
+            context.rollback()
+            throw error
+        }
+    }
+
     func save(_ value: WorkoutSnapshot) async throws {
         do {
             let id = value.id

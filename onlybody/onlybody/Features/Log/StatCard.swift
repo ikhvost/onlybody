@@ -12,6 +12,7 @@ struct StatCard: View {
                 .foregroundStyle(isAccent ? Theme.accent : Theme.text3)
             MonoLabel(text: label, size: Theme.type9, color: Theme.text3, tracking: 1.2)
         }
+        .accessibilityElement(children: .combine)
         .frame(maxWidth: .infinity)
         .padding(.vertical, Theme.space14)
         .background(Theme.surface)

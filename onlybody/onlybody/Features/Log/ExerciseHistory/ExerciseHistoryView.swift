@@ -51,7 +51,7 @@ struct ExerciseHistoryView: View {
                                 .font(Theme.fontSans(Theme.type14))
                                 .foregroundStyle(Theme.text2)
                         } else {
-                            MonoLabel(text: "Last session", size: Theme.type11, color: Theme.text2)
+                            MonoLabel(text: "Sessions", size: Theme.type11, color: Theme.text2)
                             LazyVStack(spacing: Theme.space14) {
                                 ForEach(viewModel.entries) { entry in
                                     ExerciseHistoryRow(entry: entry)

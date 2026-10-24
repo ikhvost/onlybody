@@ -10,7 +10,6 @@ struct AppComposition {
     func train() -> TrainViewModel { TrainViewModel(workouts: workouts) }
     func log() -> LogViewModel { LogViewModel(sessions: sessions) }
     func library() -> LibraryViewModel { LibraryViewModel(exercises: exercises) }
-    func streak() -> StreakViewModel { StreakViewModel(sessions: sessions) }
     func builder(workout: WorkoutSnapshot?, targets: [String]) -> SessionBuilderViewModel {
         SessionBuilderViewModel(workouts: workouts, exercises: exercises, workout: workout, targetMuscleGroups: targets)
     }

@@ -67,7 +67,7 @@ struct ActiveWorkoutView: View {
             }
         }
         .alert("End workout?", isPresented: $showEndPrompt) {
-            Button("End & Save", role: .destructive) {
+            Button("End & Save") {
                 Task {
                     await viewModel.endSession()
                     if viewModel.errorMessage == nil {
@@ -75,9 +75,12 @@ struct ActiveWorkoutView: View {
                     }
                 }
             }
+            Button("End Without Saving", role: .destructive) {
+                if viewModel.discardSession() { onEnd() }
+            }
             Button("Continue", role: .cancel) {}
         } message: {
-            Text("Completed sets will be saved.")
+            Text("Save your completed sets, or end without adding this workout to history.")
         }
         .task {
             await viewModel.load()

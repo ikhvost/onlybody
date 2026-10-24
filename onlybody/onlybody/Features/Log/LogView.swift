@@ -33,6 +33,7 @@ struct LogView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: Theme.space0) {
                         LogHeader()
+                        LogActivityView(viewModel: viewModel)
 
                         if viewModel.sessions.isEmpty {
                             LogEmpty()

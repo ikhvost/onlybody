@@ -27,6 +27,7 @@ final class ActiveWorkoutViewModel {
     private let time: any WorkoutTimeSource
     private var startedAt: Date?
     private var finishedAt: Date?
+    private var isDiscarded = false
     private let sessionID = UUID()
     private(set) var saveState: SessionSaveState = .idle
 
@@ -131,7 +132,7 @@ final class ActiveWorkoutViewModel {
     }
 
     func markSetDone() {
-        guard currentItem != nil, !isComplete, saveState == .idle else { return }
+        guard currentItem != nil, !isComplete, !isDiscarded, saveState == .idle else { return }
 
         let reps = currentDisplayReps
         completedSets[currentKey] = reps
@@ -193,8 +194,18 @@ final class ActiveWorkoutViewModel {
         // saveTask intentionally not cancelled — in-flight save must complete.
     }
 
+    /// Ends an active session without writing to history. Already-started saves cannot be discarded.
+    @discardableResult
+    func discardSession() -> Bool {
+        guard !isComplete, saveState == .idle, !isDiscarded else { return false }
+        isDiscarded = true
+        finishTiming()
+        cleanup()
+        return true
+    }
+
     func endSession() async {
-        guard !items.isEmpty else { return }
+        guard !items.isEmpty, !isDiscarded else { return }
         isComplete = true
         finishTiming()
         restTimer.skip()
@@ -236,7 +247,7 @@ final class ActiveWorkoutViewModel {
     }
 
     private func beginSave() {
-        guard saveState != .saving, saveState != .saved else { return }
+        guard !isDiscarded, saveState != .saving, saveState != .saved else { return }
         saveState = .saving
         errorMessage = nil
         saveTask = Task { [self] in await saveSession() }

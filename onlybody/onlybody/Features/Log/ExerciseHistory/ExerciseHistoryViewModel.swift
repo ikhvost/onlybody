@@ -35,7 +35,6 @@ final class ExerciseHistoryViewModel {
                 if $0.date != $1.date { return $0.date > $1.date }
                 return $0.id.uuidString < $1.id.uuidString
             }
-            entries = Array(entries.prefix(1))
         } catch {
             errorMessage = "Could not load exercise history."
         }

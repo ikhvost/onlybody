@@ -20,7 +20,6 @@ struct TrainRootView: View {
                 viewModel: viewModel,
                 showMusclePicker: { path.append(.musclePicker) },
                 showSessionBuilder: { path.append(.sessionBuilder(workoutID: $0)) },
-                showStreak: { path.append(.streak) },
                 onStartWorkout: { activeWorkout = composition.active(workoutID: $0) }
             )
             .toolbar(.hidden, for: .navigationBar)
@@ -35,8 +34,6 @@ struct TrainRootView: View {
                         viewModel: composition.builder(workout: viewModel.workouts.first { $0.id == id }, targets: targets),
                         onSaved: { path = [] }
                     )
-                case .streak:
-                    StreakView(viewModel: composition.streak())
                 }
             }
         }

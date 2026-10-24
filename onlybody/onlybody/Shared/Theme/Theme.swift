@@ -1,6 +1,16 @@
 import SwiftUI
 
 enum Theme {
+    static let brandBackground = Color(white: 0.02)
+    static let brandPrimary = Color(white: 0.94)
+    static let brandSecondary = Color(white: 0.52)
+    static let brandLetterScale: CGFloat = 0.68
+    static let brandLetterOffset: CGFloat = 0.13
+    static let brandIconMarkSize: CGFloat = 760
+    static let brandLaunchMarkSize: CGFloat = 112
+
+    static let activityCellHeight: CGFloat = 9
+    static let activityCellCornerRadius: CGFloat = 1
     static let backSwipeStartWidth: CGFloat = 80
     static let backSwipeDuration: Double = 0.3
     static let backSwipeParallax: CGFloat = 0.25

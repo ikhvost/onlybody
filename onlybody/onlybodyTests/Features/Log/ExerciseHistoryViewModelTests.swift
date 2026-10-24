@@ -4,7 +4,7 @@ import Testing
 
 @MainActor
 struct ExerciseHistoryViewModelTests {
-    @Test func showsOnlyLatestCompletedMatchingSession() async {
+    @Test func showsAllCompletedMatchingSessionsNewestFirst() async {
         let repo = MockSessionRepository()
         let completed = SessionItemSnapshot(order: 1, exerciseName: "Squats", setReps: [12, 8], weightKg: 2.5)
         let repeated = SessionItemSnapshot(order: 0, exerciseName: "Squats", setReps: [6], weightKg: 5)
@@ -17,7 +17,7 @@ struct ExerciseHistoryViewModelTests {
 
         await vm.load()
 
-        #expect(vm.entries.map(\.id) == [newer.id])
+        #expect(vm.entries.map(\.id) == [newer.id, older.id])
         #expect(vm.entries[0].items == [repeated, completed])
         #expect(vm.entries[0].date == newer.date)
         #expect(vm.entries[0].workoutName == "Full Body")

@@ -4,7 +4,6 @@ struct TrainView: View {
     let viewModel: TrainViewModel
     let showMusclePicker: () -> Void
     let showSessionBuilder: (UUID?) -> Void
-    let showStreak: () -> Void
     let onStartWorkout: (UUID) -> Void
 
     private var contentState: String {
@@ -23,9 +22,6 @@ struct TrainView: View {
                     dateDisplay: viewModel.dateDisplay,
                     onCreateTap: {
                         showMusclePicker()
-                    },
-                    onTitleTap: {
-                        showStreak()
                     }
                 )
 
@@ -100,7 +96,6 @@ struct TrainView: View {
         ),
         showMusclePicker: {},
         showSessionBuilder: { _ in },
-        showStreak: {},
         onStartWorkout: { _ in }
     )
     .preferredColorScheme(.dark)
@@ -120,7 +115,6 @@ struct TrainView: View {
         ),
         showMusclePicker: {},
         showSessionBuilder: { _ in },
-        showStreak: {},
         onStartWorkout: { _ in }
     )
     .preferredColorScheme(.dark)

@@ -7,6 +7,7 @@ struct SessionBuilderView: View {
 
     @Environment(\.dismiss) private var dismiss
 
+    @State private var showDeletePrompt = false
     @State private var showDiscardPrompt = false
     @State private var isShowingExercisePicker = false
 
@@ -51,6 +52,14 @@ struct SessionBuilderView: View {
                         BuilderMovements(viewModel: viewModel, isShowingExercisePicker: $isShowingExercisePicker)
                         BuilderDays(viewModel: viewModel)
                         BuilderDuration(viewModel: viewModel)
+                        if viewModel.isEditMode {
+                            Button("Delete Workout", role: .destructive) { showDeletePrompt = true }
+                                .font(Theme.fontSans(Theme.type15, .semibold))
+                                .foregroundStyle(Theme.danger)
+                                .padding(Theme.horizontalPadding)
+                                .disabled(viewModel.isSaving)
+                                .accessibilityIdentifier("builder.delete")
+                        }
                     }
                     .padding(.bottom, Theme.space28)
                 }
@@ -90,6 +99,18 @@ struct SessionBuilderView: View {
         .alert("Discard unsaved changes?", isPresented: $showDiscardPrompt) {
             Button("Discard changes", role: .destructive) { dismiss() }
             Button("Stay", role: .cancel) {}
+        }
+        .alert("Delete workout?", isPresented: $showDeletePrompt) {
+            Button("Delete Workout", role: .destructive) {
+                Task {
+                    if await viewModel.deleteWorkout() {
+                        if let onSaved { onSaved() } else { dismiss() }
+                    }
+                }
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("This removes the saved workout template. Your training history, exercise results and activity will stay.")
         }
         .toolbar(.hidden, for: .navigationBar)
     }

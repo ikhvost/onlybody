@@ -16,6 +16,8 @@ struct PreviewWorkoutRepository: WorkoutRepository {
         workouts.first { $0.id == id }
     }
 
+    func delete(by id: UUID) async throws {}
+
     func save(_ workout: WorkoutSnapshot) async throws {}
 
 }

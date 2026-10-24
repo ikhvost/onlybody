@@ -11,7 +11,20 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.04705882353" green="0.04705882353" blue="0.0431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="LaunchMark" translatesAutoresizingMaskIntoConstraints="NO" id="OBM-launch-mark">
+                                <rect key="frame" x="140.5" y="370" width="112" height="112"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="112" id="OBM-width"/>
+                                    <constraint firstAttribute="height" constant="112" id="OBM-height"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="OBM-launch-mark" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="OBM-center-x"/>
+                            <constraint firstItem="OBM-launch-mark" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="OBM-center-y"/>
+                        </constraints>
+                        <color key="backgroundColor" red="0.02" green="0.02" blue="0.02" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -20,4 +33,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="LaunchMark" width="112" height="112"/>
+    </resources>
 </document>

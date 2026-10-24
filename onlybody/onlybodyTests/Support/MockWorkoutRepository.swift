@@ -5,6 +5,7 @@ import Foundation
 final class MockWorkoutRepository: WorkoutRepository {
     var stubbedWorkouts: [WorkoutSnapshot] = []
     var shouldThrow = false
+    var deletedIDs: [UUID] = []
     var savedWorkouts: [WorkoutSnapshot] = []
 
     func allWorkouts() async throws -> [WorkoutSnapshot] {
@@ -19,6 +20,12 @@ final class MockWorkoutRepository: WorkoutRepository {
             throw TestError.expectedFailure
         }
         return stubbedWorkouts.first { $0.id == id }
+    }
+
+    func delete(by id: UUID) async throws {
+        if shouldThrow { throw TestError.expectedFailure }
+        deletedIDs.append(id)
+        stubbedWorkouts.removeAll { $0.id == id }
     }
 
     func save(_ workout: WorkoutSnapshot) async throws {

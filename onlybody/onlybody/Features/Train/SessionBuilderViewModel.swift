@@ -108,6 +108,20 @@ final class SessionBuilderViewModel {
         }
     }
 
+    func deleteWorkout() async -> Bool {
+        guard let editingWorkout, !isSaving else { return false }
+        isSaving = true
+        errorMessage = nil
+        defer { isSaving = false }
+        do {
+            try await workoutsRepository.delete(by: editingWorkout.id)
+            return true
+        } catch {
+            errorMessage = "Could not delete workout. Your training history is unchanged."
+            return false
+        }
+    }
+
     func save() async -> Bool {
         guard !isSaving else { return false }
         isSaving = true

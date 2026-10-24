@@ -23,13 +23,8 @@ struct ExerciseHistoryRow: View {
                             Spacer()
                             Text("\(item.setReps[index]) reps")
                                 .foregroundStyle(Theme.text)
-                            if let weight = item.weightForSet(at: index) {
-                                Text("· \(weight.formatted(.number.precision(.fractionLength(0...2)))) kg")
-                                    .foregroundStyle(Theme.accent)
-                            } else {
-                                Text("· weight not recorded")
-                                    .foregroundStyle(Theme.text2)
-                            }
+                            Text("· \((item.weightForSet(at: index) ?? 0).formatted(.number.precision(.fractionLength(0...2)))) kg")
+                                .foregroundStyle(Theme.accent)
                         }
                         .accessibilityElement(children: .combine)
                         .accessibilityIdentifier("exerciseHistory.set.\(index)")

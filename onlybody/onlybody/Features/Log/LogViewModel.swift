@@ -6,6 +6,11 @@ import Observation
 final class LogViewModel {
     private let sessionsRepository: any SessionRepository
 
+    var stats = StreakStats(current: 0, longest: 0, total: 0)
+    var heatmap: [[Bool]] = Array(repeating: Array(repeating: false, count: 20), count: 7)
+
+    var activeDaysInHeatmap: Int { heatmap.flatMap { $0 }.filter { $0 }.count }
+
     var sessions: [SessionSnapshot] = []
     var isLoading = false
     var errorMessage: String?
@@ -35,6 +40,8 @@ final class LogViewModel {
         do {
             sessions = try await sessionsRepository.allSessions()
                 .sorted { $0.date > $1.date }
+            stats = StreakCalculator().calculate(sessions: sessions)
+            heatmap = buildHeatmap(sessions: sessions)
         } catch {
             errorMessage = "Could not load training history."
         }
@@ -76,5 +83,36 @@ final class LogViewModel {
             return monthName
         }
         return "\(monthName) \(year)"
+    }
+    private func buildHeatmap(sessions: [SessionSnapshot]) -> [[Bool]] {
+        let calendar = Calendar.current
+        let todayStart = calendar.startOfDay(for: Date())
+
+        let weekday = calendar.component(.weekday, from: todayStart)
+        let daysSinceMonday = weekday >= 2 ? weekday - 2 : 6
+        guard let currentMonday = calendar.date(byAdding: .day, value: -daysSinceMonday, to: todayStart) else {
+            return Array(repeating: Array(repeating: false, count: 20), count: 7)
+        }
+
+        guard let startMonday = calendar.date(byAdding: .day, value: -(19 * 7), to: currentMonday) else {
+            return Array(repeating: Array(repeating: false, count: 20), count: 7)
+        }
+
+        var cells = Array(repeating: Array(repeating: false, count: 20), count: 7)
+
+        for session in sessions {
+            let day = calendar.startOfDay(for: session.date)
+            let daysFromStart = calendar.dateComponents([.day], from: startMonday, to: day).day ?? -1
+            guard daysFromStart >= 0, daysFromStart < 20 * 7 else { continue }
+
+            let column = daysFromStart / 7
+            let sessionWeekday = calendar.component(.weekday, from: day)
+            let row = (sessionWeekday + 5) % 7
+
+            guard row >= 0, row < 7, column >= 0, column < 20 else { continue }
+            cells[row][column] = true
+        }
+
+        return cells
     }
 }

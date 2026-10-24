@@ -3,7 +3,7 @@ import Testing
 @testable import onlybody
 
 @MainActor
-struct StreakViewModelTests {
+struct LogActivityTests {
     private let calendar = Calendar.current
 
     private func makeSession(daysAgo: Int) -> SessionSnapshot {
@@ -24,7 +24,7 @@ struct StreakViewModelTests {
             makeSession(daysAgo: 0),
         ]
 
-        let viewModel = StreakViewModel(sessions: repo)
+        let viewModel = LogViewModel(sessions: repo)
         await viewModel.load()
 
         #expect(viewModel.stats.current == 3)
@@ -37,7 +37,7 @@ struct StreakViewModelTests {
         let repo = MockSessionRepository()
         repo.stubbedSessions = []
 
-        let viewModel = StreakViewModel(sessions: repo)
+        let viewModel = LogViewModel(sessions: repo)
         await viewModel.load()
 
         #expect(viewModel.stats.current == 0)
@@ -52,7 +52,7 @@ struct StreakViewModelTests {
         let repo = MockSessionRepository()
         repo.stubbedSessions = []
 
-        let viewModel = StreakViewModel(sessions: repo)
+        let viewModel = LogViewModel(sessions: repo)
         await viewModel.load()
 
         #expect(viewModel.heatmap.count == 7)
@@ -63,7 +63,7 @@ struct StreakViewModelTests {
         let repo = MockSessionRepository()
         repo.stubbedSessions = []
 
-        let viewModel = StreakViewModel(sessions: repo)
+        let viewModel = LogViewModel(sessions: repo)
         await viewModel.load()
 
         for row in viewModel.heatmap {
@@ -78,7 +78,7 @@ struct StreakViewModelTests {
         let repo = MockSessionRepository()
         repo.stubbedSessions = [makeSession(daysAgo: 0)]
 
-        let viewModel = StreakViewModel(sessions: repo)
+        let viewModel = LogViewModel(sessions: repo)
         await viewModel.load()
 
         let todayStart = calendar.startOfDay(for: Date())
@@ -93,7 +93,7 @@ struct StreakViewModelTests {
         let repo = MockSessionRepository()
         repo.stubbedSessions = []
 
-        let viewModel = StreakViewModel(sessions: repo)
+        let viewModel = LogViewModel(sessions: repo)
         await viewModel.load()
 
         for row in viewModel.heatmap {
@@ -110,7 +110,7 @@ struct StreakViewModelTests {
         let repo = MockSessionRepository()
         repo.stubbedSessions = []
 
-        let viewModel = StreakViewModel(sessions: repo)
+        let viewModel = LogViewModel(sessions: repo)
         await viewModel.load()
 
         #expect(!viewModel.isLoading)
@@ -123,7 +123,7 @@ struct StreakViewModelTests {
         let repo = MockSessionRepository()
         repo.shouldThrow = true
 
-        let viewModel = StreakViewModel(sessions: repo)
+        let viewModel = LogViewModel(sessions: repo)
         await viewModel.load()
 
         #expect(viewModel.errorMessage != nil)
@@ -135,7 +135,7 @@ struct StreakViewModelTests {
         let repo = MockSessionRepository()
         repo.stubbedSessions = []
 
-        let viewModel = StreakViewModel(sessions: repo)
+        let viewModel = LogViewModel(sessions: repo)
         await viewModel.load()
 
         #expect(viewModel.errorMessage == nil)
