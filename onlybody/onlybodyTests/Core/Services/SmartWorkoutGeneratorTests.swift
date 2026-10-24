@@ -36,7 +36,7 @@ struct SmartWorkoutGeneratorTests {
     // MARK: - Exclusion
 
     @Test
-    func excludesExercisesWithFrequencyPreferenceNever() {
+    func legacyExclusionDoesNotRemoveExercises() {
         let exercises = [
             makeExercise(name: "Push-Ups", primaryMuscle: "Chest"),
             makeExercise(name: "Skip", primaryMuscle: "Chest", frequencyPreference: "never"),
@@ -46,8 +46,7 @@ struct SmartWorkoutGeneratorTests {
 
         let result = generator.generate(config: config, from: exercises)
 
-        #expect(result.count == 1)
-        #expect(result[0].exercise.name == "Push-Ups")
+        #expect(result.map(\.exercise.name) == ["Push-Ups", "Skip"])
     }
 
     // MARK: - Muscle Matching
@@ -149,7 +148,7 @@ struct SmartWorkoutGeneratorTests {
     // MARK: - Preference Ordering
 
     @Test
-    func sortsMoreBeforeNormalBeforeLess() {
+    func legacyPreferencesDoNotReorderExercises() {
         let exercises = [
             makeExercise(name: "Less", primaryMuscle: "Chest", frequencyPreference: "less"),
             makeExercise(name: "More", primaryMuscle: "Chest", frequencyPreference: "more"),
@@ -161,13 +160,11 @@ struct SmartWorkoutGeneratorTests {
         let result = generator.generate(config: config, from: exercises)
 
         #expect(result.count >= 3)
-        #expect(result[0].exercise.name == "More")
-        #expect(result[1].exercise.name == "Normal")
-        #expect(result[2].exercise.name == "Less")
+        #expect(result.map(\.exercise.name) == ["Less", "More", "Normal"])
     }
 
     @Test
-    func removesDuplicatedThroughSort() {
+    func keepsAllMatchingExercises() {
         let exercises = [
             makeExercise(name: "Keep", primaryMuscle: "Chest", frequencyPreference: "more"),
             makeExercise(name: "AlsoKeep", primaryMuscle: "Chest", frequencyPreference: "normal"),
@@ -253,7 +250,7 @@ struct SmartWorkoutGeneratorTests {
     }
 
     @Test
-    func fallbackExcludesNeverPreferenceEvenOnRetry() {
+    func legacyExclusionDoesNotEmptyBodyweightPool() {
         let exercises = [
             makeExercise(name: "Never Bodyweight", primaryMuscle: "Chest", equipment: ["None"], frequencyPreference: "never"),
             makeExercise(name: "Barbell Only", primaryMuscle: "Chest", equipment: ["Barbell"]),
@@ -263,10 +260,9 @@ struct SmartWorkoutGeneratorTests {
 
         let result = generator.generate(config: config, from: exercises)
 
-        // Original pool has 1 match (Barbell), fallback filters to equipment-free
-        // which is "Never Bodyweight" but frequencyPreference is "never" → excluded
+        // Both matching exercises remain eligible regardless of legacy preferences.
         let names = result.map(\.exercise.name)
-        #expect(!names.contains("Never Bodyweight"))
+        #expect(names.contains("Never Bodyweight"))
     }
 
     @Test
@@ -305,7 +301,7 @@ struct SmartWorkoutGeneratorTests {
     // MARK: - Edge Cases
 
     @Test
-    func keepsOriginalOrderWithinSamePreferenceTier() {
+    func keepsOriginalOrderRegardlessOfLegacyPreference() {
         let exercises = [
             makeExercise(name: "Second", primaryMuscle: "Chest", frequencyPreference: "normal"),
             makeExercise(name: "First", primaryMuscle: "Chest", frequencyPreference: "more"),
@@ -316,15 +312,11 @@ struct SmartWorkoutGeneratorTests {
 
         let result = generator.generate(config: config, from: exercises)
 
-        // "First" is "more", so it sorts first. "Second" and "Third" are "normal",
-        // preserving original relative order
-        #expect(result[0].exercise.name == "First")
-        let normalNames = result.dropFirst().map(\.exercise.name)
-        #expect(normalNames == ["Second", "Third"])
+        #expect(result.map(\.exercise.name) == ["Second", "First", "Third"])
     }
 
     @Test
-    func fallbackMaintainsMoreFirstOrdering() {
+    func bodyweightSelectionDoesNotFavorLegacyMorePreference() {
         let exercises = [
             makeExercise(name: "Less Bodyweight", primaryMuscle: "Chest", equipment: ["None"], frequencyPreference: "less"),
             makeExercise(name: "More Bodyweight", primaryMuscle: "Chest", equipment: ["None"], frequencyPreference: "more"),
@@ -337,7 +329,7 @@ struct SmartWorkoutGeneratorTests {
         let result = generator.generate(config: config, from: exercises)
 
         #expect(result.count >= 2)
-        #expect(result[0].exercise.name == "More Bodyweight")
-        #expect(result[1].exercise.name == "Less Bodyweight")
+        #expect(result[0].exercise.name == "Less Bodyweight")
+        #expect(result[1].exercise.name == "More Bodyweight")
     }
 }

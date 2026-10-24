@@ -197,6 +197,70 @@ nonisolated enum ExerciseDemonstrationCatalog {
         ExerciseDemonstration(
             id: "burpees", exerciseName: "Burpees",
             videoID: "auBLPXO8Fww", author: "CrossFit", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "scapular-push-ups", exerciseName: "Scapular Push-Ups",
+            videoID: "VMbyf9RKRIM", author: "OPEX Fitness", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "scapular-pull-ups", exerciseName: "Scapular Pull-Ups",
+            videoID: "tBg1uk2K964", author: "OPEX Fitness", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "close-grip-push-ups", exerciseName: "Close-Grip Push-Ups",
+            videoID: "zGEkpb42jhU", author: "Live Lean TV Daily Exercises", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "bird-dog", exerciseName: "Bird Dog",
+            videoID: "ZdAHe9_HeEw", author: "National Academy of Sports Medicine (NASM)", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "hollow-body-hold", exerciseName: "Hollow Body Hold",
+            videoID: "EsnM8eBtazU", author: "OPEX Fitness", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "bicycle-crunches", exerciseName: "Bicycle Crunches",
+            videoID: "wnuLak2onoA", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "flutter-kicks", exerciseName: "Flutter Kicks",
+            videoID: "5V4CETRga4E", author: "OPEX Fitness", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "hanging-knee-raises", exerciseName: "Hanging Knee Raises",
+            videoID: "ACnl_apRkqU", author: "OPEX Fitness", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "wall-sit", exerciseName: "Wall Sit",
+            videoID: "6Li55TURhVg", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "lateral-lunges", exerciseName: "Lateral Lunges",
+            videoID: "URQvRQT0XMA", author: "Runna", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "jump-squats", exerciseName: "Jump Squats",
+            videoID: "tZSYZdtbONc", author: "National Academy of Sports Medicine (NASM)", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "donkey-kicks", exerciseName: "Donkey Kicks",
+            videoID: "EtSJ8rwm5M8", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "fire-hydrants", exerciseName: "Fire Hydrants",
+            videoID: "hjMEwbXhya4", author: "Cūro Chiropractic", startSeconds: 32
+        ),
+        ExerciseDemonstration(
+            id: "bear-crawl", exerciseName: "Bear Crawl",
+            videoID: "w089AXf1f_g", author: "OPEX Fitness", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "high-knees", exerciseName: "High Knees",
+            videoID: "sTvekaq6vOU", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "bent-knee-calf-raises", exerciseName: "Bent-Knee Calf Raises",
+            videoID: "-KZ0TJydf8M", author: "Rx Rehab", startSeconds: 0
         )
     ]
 

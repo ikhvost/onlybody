@@ -35,6 +35,6 @@ For another in-app exercise using existing groups, no new raster image is necess
 
 ## Verification
 
-A nine-panel render was visually inspected for all region boundaries. Swift Testing verifies catalog mappings, precedence, unknown labels, Full Body handling, accessible descriptions and the bundled reference resolution. The bundled-store integration test checks all 49 exercises. The navigation E2E checks that the diagram exposes its accessible description.
+A nine-panel render was visually inspected for all region boundaries. Swift Testing verifies catalog mappings, precedence, unknown labels, Full Body handling, accessible descriptions and the bundled reference resolution. The bundled-store integration test checks all 65 exercises. The navigation E2E checks that the diagram exposes its accessible description.
 
-`Scripts/validate.sh` passed on 2026-10-24: architecture checks, SwiftLint with zero warnings, 166 Swift Testing tests, all five navigation/workout E2E journeys, Release build and temporary generation of the 49-exercise seed store. The complete diagram card was also inspected in the iPhone 17 Simulator.
+Initial diagram-release validation (`Scripts/validate.sh`) passed on 2026-10-24: architecture checks, SwiftLint with zero warnings, 166 Swift Testing tests, all five navigation/workout E2E journeys, Release build and temporary generation of the 49-exercise seed store. The complete diagram card was also inspected in the iPhone 17 Simulator.

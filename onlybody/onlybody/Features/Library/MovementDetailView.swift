@@ -28,6 +28,9 @@ struct MovementDetailView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: Theme.space16) {
                         VStack(alignment: .leading, spacing: Theme.space4) {
+                            ExerciseDifficultyBadge(difficulty: viewModel.exercise.difficulty)
+                                .accessibilityIdentifier("movement.difficulty")
+
                             Text(viewModel.exercise.name)
                                 .font(Theme.fontSans(Theme.type28, .heavy))
                                 .tracking(-0.8)
@@ -90,33 +93,6 @@ struct MovementDetailView: View {
                                 .foregroundStyle(Theme.text)
                         }
 
-                        Rectangle()
-                            .fill(Theme.border)
-                            .frame(height: 1)
-
-                        VStack(alignment: .leading, spacing: Theme.space8) {
-                            MonoLabel(text: "Include in sessions", size: Theme.type11, tracking: 0.8)
-
-                            HStack(spacing: Theme.space8) {
-                                ForEach(ExerciseFrequency.allCases, id: \.rawValue) { frequency in
-                                    ChipView(
-                                        label: frequency.label,
-                                        isActive: viewModel.selectedFrequency == frequency,
-                                        size: Theme.type12,
-                                        cornerRadius: Theme.cornerRadius,
-                                        horizontalPadding: 4,
-                                        verticalPadding: 9
-                                    ) {
-                                        Task {
-                                            await viewModel.setFrequency(frequency)
-                                        }
-                                    }
-                                    .frame(maxWidth: .infinity)
-                                    .disabled(viewModel.isSaving)
-                                    .accessibilityLabel("Set frequency to \(frequency.label)")
-                                }
-                            }
-                        }
                     }
                     .padding(.horizontal, Theme.horizontalPadding)
                     .padding(.top, Theme.space16)
@@ -139,7 +115,6 @@ struct MovementDetailView: View {
     return MovementDetailView(
         viewModel: MovementDetailViewModel(
             exercise: exercise,
-            exercises: PreviewExerciseRepository(exercises: [exercise]),
             demonstration: ExerciseDemonstrationCatalog.demonstration(for: exercise.name),
             allowsVideoLoading: false
         )

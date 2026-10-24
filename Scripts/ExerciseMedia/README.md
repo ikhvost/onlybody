@@ -1,10 +1,10 @@
 # Exercise demonstration catalog
 
-All 49 seed exercises use the official YouTube IFrame player. Only IDs, author names and start offsets ship in the app; no video files are copied. The compiled catalog has stable media keys independent of seed UUIDs. Exercise name matching is exact.
+All 65 seed exercises use the official YouTube IFrame player. Only IDs, author names and start offsets ship in the app; no video files are copied. The compiled catalog has stable media keys independent of seed UUIDs. Exercise name matching is exact.
 
 ## Content review
 
-On 2026-10-24 all 49 entries played in a signed-out browser using the official IFrame API. Visual samples were inspected for exercise variant, equipment and framing, including additional positions in longer clips. This is a browser playback and sampled visual review, not a full-length review of every clip or a physical iPhone sign-off. Availability can change by time, region or network.
+On 2026-10-24 all 65 entries played in a signed-out browser using the official IFrame API. Visual samples were inspected for exercise variant, equipment and framing, including additional positions in longer clips. This is a browser playback and sampled visual review, not a full-length review of every clip or a physical iPhone sign-off. Availability can change by time, region or network.
 
 Walking Jacks uses DAREBEE's low-impact Step Jacks demonstration. Foot-Assisted Dips uses parallel dip handles and a raised platform for foot assistance, matching the dip-bar and elevated-surface equipment.
 
@@ -59,6 +59,24 @@ Walking Jacks uses DAREBEE's low-impact Step Jacks demonstration. Foot-Assisted 
 | Jumping Jacks | [Watch](https://www.youtube.com/watch?v=uLVt6u15L98&t=0s) | National Academy of Sports Medicine (NASM) | 0 | 2026-10-24 |
 | Mountain Climbers | [Watch](https://www.youtube.com/watch?v=hq_0YlyfqGM&t=0s) | Group HIIT | 0 | 2026-10-24 |
 | Burpees | [Watch](https://www.youtube.com/watch?v=auBLPXO8Fww&t=0s) | CrossFit | 0 | 2026-10-24 |
+| Scapular Push-Ups | [Watch](https://www.youtube.com/watch?v=VMbyf9RKRIM&t=0s) | OPEX Fitness | 0 | 2026-10-24 |
+| Scapular Pull-Ups | [Watch](https://www.youtube.com/watch?v=tBg1uk2K964&t=0s) | OPEX Fitness | 0 | 2026-10-24 |
+| Close-Grip Push-Ups | [Watch](https://www.youtube.com/watch?v=zGEkpb42jhU&t=0s) | Live Lean TV Daily Exercises | 0 | 2026-10-24 |
+| Bird Dog | [Watch](https://www.youtube.com/watch?v=ZdAHe9_HeEw&t=0s) | National Academy of Sports Medicine (NASM) | 0 | 2026-10-24 |
+| Hollow Body Hold | [Watch](https://www.youtube.com/watch?v=EsnM8eBtazU&t=0s) | OPEX Fitness | 0 | 2026-10-24 |
+| Bicycle Crunches | [Watch](https://www.youtube.com/watch?v=wnuLak2onoA&t=0s) | PureGym | 0 | 2026-10-24 |
+| Flutter Kicks | [Watch](https://www.youtube.com/watch?v=5V4CETRga4E&t=0s) | OPEX Fitness | 0 | 2026-10-24 |
+| Hanging Knee Raises | [Watch](https://www.youtube.com/watch?v=ACnl_apRkqU&t=0s) | OPEX Fitness | 0 | 2026-10-24 |
+| Wall Sit | [Watch](https://www.youtube.com/watch?v=6Li55TURhVg&t=0s) | PureGym | 0 | 2026-10-24 |
+| Lateral Lunges | [Watch](https://www.youtube.com/watch?v=URQvRQT0XMA&t=0s) | Runna | 0 | 2026-10-24 |
+| Jump Squats | [Watch](https://www.youtube.com/watch?v=tZSYZdtbONc&t=0s) | National Academy of Sports Medicine (NASM) | 0 | 2026-10-24 |
+| Donkey Kicks | [Watch](https://www.youtube.com/watch?v=EtSJ8rwm5M8&t=0s) | PureGym | 0 | 2026-10-24 |
+| Fire Hydrants | [Watch](https://www.youtube.com/watch?v=hjMEwbXhya4&t=32s) | Cūro Chiropractic | 32 | 2026-10-24 |
+| Bear Crawl | [Watch](https://www.youtube.com/watch?v=w089AXf1f_g&t=0s) | OPEX Fitness | 0 | 2026-10-24 |
+| High Knees | [Watch](https://www.youtube.com/watch?v=sTvekaq6vOU&t=0s) | PureGym | 0 | 2026-10-24 |
+| Bent-Knee Calf Raises | [Watch](https://www.youtube.com/watch?v=-KZ0TJydf8M&t=0s) | Rx Rehab | 0 | 2026-10-24 |
+
+The 16 additions were played in signed-out official browser embeds and visually sampled on 2026-10-24. Equipment and named variants were checked; individual notes are in `catalog.json`. Fire Hydrants uses a simple side lift, with the introductory explanation skipped. No video files were downloaded.
 
 ## Updating content
 
@@ -68,7 +86,7 @@ Edit `catalog.json`, keep each existing stable key, review the replacement in a 
 
 Opening Library details immediately prepares a fresh, nonpersistent WKWebView with YouTube's own Play button; there is no Load Video step. Playback requires the user's gesture in the standard player. A system network-path monitor replaces the player with a simple offline placeholder when connectivity is lost, and prepares it again without autoplay when connectivity returns. The embed preserves YouTube controls, branding and fullscreen. It uses a 240-point-high viewport, a minimum width of 200 points, inline playback and the lowercase bundle identifier as HTTPS base URL and origin. No custom content overlays the player.
 
-Backgrounding pauses and suspends media. Returning permits manual playback without issuing a play command. If the app becomes inactive while loading, the unfinished player is discarded and is prepared again on return. Leaving details destroys the player. Load and buffering deadlines are 20 seconds; failures replace the player with a message and Retry while retaining the author, external link and exercise settings. A retry creates a new session; stale callbacks cannot alter it.
+Backgrounding pauses and suspends media. Returning permits manual playback without issuing a play command. If the app becomes inactive while loading, the unfinished player is discarded and is prepared again on return. Leaving details destroys the player. Load and buffering deadlines are 20 seconds; failures replace the player with a message and Retry while retaining the author, external link and exercise details. A retry creates a new session; stale callbacks cannot alter it.
 
 Previews use static states and disable network loading. Automated tests exercise state transitions, connectivity and the Library UI without YouTube access. UI tests explicitly inject a static ready preview through a Debug-only fixture gated by an isolated test-store UUID. Production always creates the real player.
 
@@ -86,3 +104,9 @@ Manual Simulator review confirmed that opening a movement immediately prepares t
 ## Official integration references
 
 Use through the official player follows [YouTube Terms of Service](https://www.youtube.com/t/terms); the selection does not assert that the underlying videos have open-content licences. Preserve the [required minimum player functionality and client identity](https://developers.google.com/youtube/terms/required-minimum-functionality). State and error handling follow the [IFrame Player API](https://developers.google.com/youtube/iframe_api_reference) and [player parameters](https://developers.google.com/youtube/player_parameters).
+
+## Catalog expansion
+
+The 65-entry release adds difficulty metadata and removes the frequency controls. The persistent schema remains unchanged; the seed store is regenerated. Existing installations read the expanded bundled catalog without replacing their workout/history store; see `Scripts/StoreGenerator/README.md`. The validation and iPhone notes above describe the earlier video-player release, not physical-device verification of this catalog update.
+
+The expanded release passed `Scripts/validate.sh` on 2026-10-24: 166 Swift Testing tests, all five E2E journeys, lint, architecture checks, generated-catalog checks, Release build and temporary generation of 65 seed exercises.

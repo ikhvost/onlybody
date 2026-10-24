@@ -3,6 +3,42 @@ import Testing
 
 @MainActor
 struct LibraryViewModelTests {
+    @Test func difficultySectionsCombineWithMuscleAndSearchFilters() async {
+        let repository = MockExerciseRepository()
+        repository.stubbedAllExercises = ["Archer Push-Ups", "Wall Push-Ups", "Standard Push-Ups"].map { name in
+            var exercise = ExerciseSnapshot()
+            exercise.name = name
+            exercise.primaryMuscle = "Chest"
+            return exercise
+        }
+        let viewModel = LibraryViewModel(exercises: repository)
+        await viewModel.load()
+        #expect(viewModel.sections.map(\.difficulty) == [.beginner, .intermediate, .advanced])
+        #expect(viewModel.sections.flatMap(\.exercises).count == 3)
+        viewModel.selectedDifficulty = .beginner
+        viewModel.selectedFilter = "Chest"
+        viewModel.searchText = "wall"
+        #expect(viewModel.filteredExercises.map(\.name) == ["Wall Push-Ups"])
+        #expect(viewModel.sections.map(\.difficulty) == [.beginner])
+        viewModel.selectedFilter = "Back"
+        #expect(viewModel.sections.isEmpty)
+        viewModel.selectedDifficulty = nil
+        viewModel.selectedFilter = "All"
+        viewModel.searchText = ""
+        #expect(viewModel.sections.count == 3)
+    }
+
+    @Test func legacyUnknownExercisesStayVisibleInUnratedSection() async {
+        let repository = MockExerciseRepository()
+        var exercise = ExerciseSnapshot()
+        exercise.name = "Legacy custom movement"
+        repository.stubbedAllExercises = [exercise]
+        let viewModel = LibraryViewModel(exercises: repository)
+        await viewModel.load()
+        #expect(viewModel.sections.map(\.difficulty) == [.unrated])
+        #expect(viewModel.sections.first?.exercises == [exercise])
+    }
+
     @Test
     func loadPopulatesExercisesAndFiltersBySearchAndMuscle() async {
         let repository = MockExerciseRepository()

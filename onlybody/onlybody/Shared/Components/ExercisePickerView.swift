@@ -8,6 +8,7 @@ struct ExercisePickerView: View {
 
     @State private var searchText = ""
     @State private var selectedFilter = "All"
+    @State private var selectedDifficulty: ExerciseDifficulty?
 
     let filters = ExerciseCatalog.filters
 
@@ -15,7 +16,7 @@ struct ExercisePickerView: View {
         exercises.filter { exercise in
             let matchesFilter = selectedFilter == "All" || exercise.primaryMuscle == selectedFilter
             let matchesSearch = searchText.isEmpty || exercise.name.localizedStandardContains(searchText)
-            return matchesFilter && matchesSearch
+            return matchesFilter && matchesSearch && (selectedDifficulty == nil || exercise.difficulty == selectedDifficulty)
         }
     }
 
@@ -64,6 +65,7 @@ struct ExercisePickerView: View {
                     .padding(.bottom, Theme.space2)
                 }
                 .scrollIndicators(.hidden)
+                ExerciseDifficultyFilter(selection: $selectedDifficulty)
             }
             .padding(.horizontal, Theme.horizontalPadding)
             .padding(.vertical, Theme.space10)
@@ -104,7 +106,7 @@ struct ExercisePickerView: View {
                                             color: Theme.text3,
                                             tracking: 0.3
                                         )
-
+                                        ExerciseDifficultyBadge(difficulty: exercise.difficulty)
                                     }
 
                                     Spacer()

@@ -54,7 +54,7 @@ struct MovementMuscleDiagramView: View {
     exercise.primaryMuscle = "Chest"
     exercise.secondaryMuscles = ["Arms", "Shoulders", "Core"]
     return MovementMuscleDiagramView(
-        viewModel: MovementDetailViewModel(exercise: exercise, exercises: PreviewExerciseRepository(exercises: [exercise]))
+        viewModel: MovementDetailViewModel(exercise: exercise)
     )
     .padding(Theme.horizontalPadding)
     .background(Theme.bg)

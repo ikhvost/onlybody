@@ -45,11 +45,7 @@ nonisolated struct SmartWorkoutGenerator: Sendable {
                 expanded.contains(exercise.primaryMuscle)
                     || !Set(exercise.secondaryMuscles).isDisjoint(with: Set(expanded))
             }
-            .filter { ExerciseFrequency(rawValue: $0.frequencyPreference) != .never }
-            .sorted {
-                (ExerciseFrequency(rawValue: $0.frequencyPreference) ?? .normal).rank
-                    < (ExerciseFrequency(rawValue: $1.frequencyPreference) ?? .normal).rank
-            }
+
     }
 
     private func buildMovements(pool: [ExerciseSnapshot], timeBudget: Int) -> [GeneratedMovement] {

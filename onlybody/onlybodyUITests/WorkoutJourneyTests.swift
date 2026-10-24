@@ -79,9 +79,20 @@ final class WorkoutJourneyTests: XCTestCase {
     func testNavigationAndFullscreenWorkout() {
         createWorkout()
         tap("tab.library")
-        let movement = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "library.exercise.")).firstMatch
+        tap("difficulty.intermediate")
+        XCTAssertTrue(app.descendants(matching: .any)["library.section.intermediate"].exists)
+        XCTAssertFalse(app.descendants(matching: .any)["library.section.beginner"].exists)
+        tap("difficulty.beginner")
+        let search = app.textFields["library.search"]
+        search.tap()
+        search.typeText("Bird Dog")
+        let movement = app.buttons["library.exercise.Bird Dog"]
         XCTAssertTrue(movement.waitForExistence(timeout: 10))
         movement.tap()
+        XCTAssertTrue(app.staticTexts["movement.difficulty"].label.contains("Beginner"))
+        XCTAssertFalse(app.buttons["Set frequency to More often"].exists)
+        XCTAssertFalse(app.buttons["Set frequency to Less often"].exists)
+        XCTAssertFalse(app.buttons["Set frequency to Exclude"].exists)
         XCTAssertTrue(app.descendants(matching: .any)["demonstration.preview"].waitForExistence(timeout: 10))
         XCTAssertFalse(app.buttons["demonstration.load"].exists)
         XCTAssertTrue(app.staticTexts["demonstration.author"].exists)

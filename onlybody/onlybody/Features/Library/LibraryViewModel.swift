@@ -9,6 +9,7 @@ final class LibraryViewModel {
     var allExercises: [ExerciseSnapshot] = []
     var searchText = ""
     var selectedFilter = "All"
+    var selectedDifficulty: ExerciseDifficulty?
     var isLoading = false
     var errorMessage: String?
 
@@ -17,7 +18,17 @@ final class LibraryViewModel {
     var filteredExercises: [ExerciseSnapshot] {
         allExercises.filter {
             (selectedFilter == "All" || $0.primaryMuscle == selectedFilter) &&
+            (selectedDifficulty == nil || $0.difficulty == selectedDifficulty) &&
             (searchText.isEmpty || $0.name.localizedStandardContains(searchText))
+        }
+    }
+
+    var sections: [LibraryDifficultySection] {
+        let filtered = filteredExercises
+        return ExerciseDifficulty.allCases.compactMap { level in
+            let matches = filtered.filter { $0.difficulty == level }
+                .sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
+            return matches.isEmpty ? nil : LibraryDifficultySection(difficulty: level, exercises: matches)
         }
     }
 

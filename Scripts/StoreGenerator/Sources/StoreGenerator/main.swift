@@ -13,9 +13,25 @@ func generateStore(outputPath: String, seedDataPath: String) throws {
         configurations: config
     )
     let context = container.mainContext
+    context.autosaveEnabled = false
 
     let jsonData = try Data(contentsOf: URL(fileURLWithPath: seedDataPath))
     let seeds = try JSONDecoder().decode([ExerciseSeed].self, from: jsonData)
+
+    guard Set(seeds.map(\.name)).count == seeds.count else {
+        throw NSError(domain: "StoreGenerator", code: 1, userInfo: [NSLocalizedDescriptionKey: "Duplicate exercise names in seed data."])
+    }
+    let workoutCount = try context.fetchCount(FetchDescriptor<Workout>())
+    let itemCount = try context.fetchCount(FetchDescriptor<WorkoutItem>())
+    let sessionCount = try context.fetchCount(FetchDescriptor<Session>())
+    let sessionItemCount = try context.fetchCount(FetchDescriptor<SessionItem>())
+    guard workoutCount + itemCount + sessionCount + sessionItemCount == 0 else {
+        throw NSError(domain: "StoreGenerator", code: 2, userInfo: [NSLocalizedDescriptionKey: "Refusing to replace a store containing user training data."])
+    }
+    // Regeneration replaces seed rows atomically instead of appending a duplicate catalog.
+    for exercise in try context.fetch(FetchDescriptor<Exercise>()) {
+        context.delete(exercise)
+    }
 
     for seed in seeds {
         let exercise = Exercise()

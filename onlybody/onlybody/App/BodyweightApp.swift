@@ -22,11 +22,13 @@ struct BodyweightApp: App {
 
         do {
             let storeURL = try AppStoreLocation.url()
+            guard let seedURL = Bundle.main.url(forResource: "default", withExtension: "store") else {
+                throw PersistenceError.exerciseUnavailable
+            }
+            let catalog = try BundledExerciseCatalog.load(from: seedURL)
 
             if !FileManager.default.fileExists(atPath: storeURL.path()) {
-                if let seedURL = Bundle.main.url(forResource: "default", withExtension: "store") {
-                    try FileManager.default.copyItem(at: seedURL, to: storeURL)
-                }
+                try FileManager.default.copyItem(at: seedURL, to: storeURL)
             }
 
             let config = ModelConfiguration(url: storeURL)
@@ -35,8 +37,8 @@ struct BodyweightApp: App {
                 configurations: config
             )
             container = storeContainer
-            exercises = SwiftDataExerciseRepository(context: ModelContext(storeContainer))
-            workouts = SwiftDataWorkoutRepository(context: ModelContext(storeContainer))
+            exercises = SwiftDataExerciseRepository(context: ModelContext(storeContainer), catalog: catalog)
+            workouts = SwiftDataWorkoutRepository(context: ModelContext(storeContainer), catalog: catalog)
             sessions = SwiftDataSessionRepository(context: ModelContext(storeContainer))
         } catch {
             fatalError("ModelContainer failed: \(error)")

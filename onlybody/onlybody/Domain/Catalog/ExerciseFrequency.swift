@@ -1,32 +1,8 @@
-nonisolated enum ExerciseFrequency: String, CaseIterable {
+/// Legacy persisted values, retained only to reopen and round-trip existing stores.
+/// They are not exposed in the UI and never affect workout generation.
+nonisolated enum ExerciseFrequency: String {
     case normal
     case more
     case less
     case never
-
-    var label: String {
-        switch self {
-        case .normal:
-            "Normal"
-        case .more:
-            "More often"
-        case .less:
-            "Less often"
-        case .never:
-            "Exclude"
-        }
-    }
-
-    var rank: Int {
-        switch self {
-        case .more:
-            0
-        case .normal:
-            1
-        case .less:
-            2
-        case .never:
-            3
-        }
-    }
 }

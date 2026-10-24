@@ -45,7 +45,7 @@ struct MuscleDiagramTests {
         var exercise = ExerciseSnapshot()
         exercise.primaryMuscle = "Quads"
         exercise.secondaryMuscles = ["Glutes"]
-        let viewModel = MovementDetailViewModel(exercise: exercise, exercises: MockExerciseRepository())
+        let viewModel = MovementDetailViewModel(exercise: exercise)
         #expect(viewModel.muscleDiagram.primary == [.quads])
         #expect(viewModel.muscleDiagram.secondary == [.glutes])
         #expect(viewModel.muscleDiagramDescription.contains("Primary: Quads"))

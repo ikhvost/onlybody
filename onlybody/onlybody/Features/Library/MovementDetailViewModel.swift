@@ -4,7 +4,6 @@ import Observation
 @MainActor
 @Observable
 final class MovementDetailViewModel {
-    private let exercisesRepository: any ExerciseRepository
     private let timeSource: any WorkoutTimeSource
     private let allowsVideoLoading: Bool
     private let network: any NetworkAvailabilitySource
@@ -19,8 +18,6 @@ final class MovementDetailViewModel {
     private(set) var isPlayerActive = true
 
     var exercise: ExerciseSnapshot
-    var selectedFrequency: ExerciseFrequency
-    var isSaving = false
 
     var muscleDiagram: MuscleDiagram {
         MuscleDiagram(primaryMuscle: exercise.primaryMuscle, secondaryMuscles: exercise.secondaryMuscles)
@@ -42,7 +39,6 @@ final class MovementDetailViewModel {
 
     init(
         exercise: ExerciseSnapshot,
-        exercises: any ExerciseRepository,
         demonstration: ExerciseDemonstration? = nil,
         bundleIdentifier: String = Bundle.main.bundleIdentifier ?? "",
         allowsVideoLoading: Bool = true,
@@ -50,8 +46,6 @@ final class MovementDetailViewModel {
         timeSource: any WorkoutTimeSource = SystemWorkoutTimeSource()
     ) {
         self.exercise = exercise
-        self.exercisesRepository = exercises
-        selectedFrequency = ExerciseFrequency(rawValue: exercise.frequencyPreference) ?? .normal
         self.demonstration = demonstration
         playerDocument = demonstration.flatMap {
             YouTubeEmbedDocument(demonstration: $0, bundleIdentifier: bundleIdentifier)
@@ -157,24 +151,4 @@ final class MovementDetailViewModel {
         demonstrationState = .failed(failure)
     }
 
-    func setFrequency(_ value: ExerciseFrequency) async {
-        guard selectedFrequency != value, !isSaving else {
-            return
-        }
-
-        let previousValue = selectedFrequency
-
-        selectedFrequency = value
-        exercise.frequencyPreference = value.rawValue
-        isSaving = true
-
-        do {
-            try await exercisesRepository.save(exercise)
-        } catch {
-            selectedFrequency = previousValue
-            exercise.frequencyPreference = previousValue.rawValue
-        }
-
-        isSaving = false
-    }
 }

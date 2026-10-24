@@ -5,7 +5,6 @@ import Testing
 @MainActor
 struct MovementDemonstrationTests {
     private func makeViewModel(
-        repository: MockExerciseRepository = MockExerciseRepository(),
         clock: any WorkoutTimeSource = ManualWorkoutTimeSource(),
         allowsVideoLoading: Bool = true,
         network: any NetworkAvailabilitySource = ManualNetworkAvailabilitySource()
@@ -14,7 +13,6 @@ struct MovementDemonstrationTests {
         exercise.name = "Dead Bug"
         return MovementDetailViewModel(
             exercise: exercise,
-            exercises: repository,
             demonstration: ExerciseDemonstrationCatalog.demonstration(for: exercise.name),
             bundleIdentifier: "ikhvost.onlybody",
             allowsVideoLoading: allowsVideoLoading,
@@ -157,28 +155,21 @@ struct MovementDemonstrationTests {
         await task.value
     }
 
-    @Test func unknownExerciseStillSavesPreferences() async {
-        let repository = MockExerciseRepository()
-        let viewModel = MovementDetailViewModel(exercise: ExerciseSnapshot(), exercises: repository)
+    @Test func unknownExerciseRemainsAvailableWithoutMedia() {
+        let exercise = ExerciseSnapshot()
+        let viewModel = MovementDetailViewModel(exercise: exercise)
         viewModel.loadDemonstration()
         #expect(viewModel.playerSessionID == nil)
-        await viewModel.setFrequency(.more)
-        #expect(repository.savedExercises.count == 1)
+        #expect(viewModel.exercise == exercise)
     }
 
-    @Test func playbackErrorsDoNotChangeOrBlockPreferences() async throws {
-        let repository = MockExerciseRepository()
-        let viewModel = makeViewModel(repository: repository)
+    @Test func playbackErrorsDoNotChangeExerciseDetails() throws {
+        let viewModel = makeViewModel()
+        let original = viewModel.exercise
         viewModel.loadDemonstration()
         let session = try #require(viewModel.playerSessionID)
         viewModel.receivePlayerEvent(.failed(.connection), sessionID: session)
-        #expect(repository.savedExercises.isEmpty)
-        await viewModel.setFrequency(.more)
-        #expect(repository.savedExercises.first?.frequencyPreference == ExerciseFrequency.more.rawValue)
-        repository.shouldThrow = true
-        await viewModel.setFrequency(.less)
-        #expect(viewModel.selectedFrequency == .more)
-        #expect(viewModel.exercise.frequencyPreference == ExerciseFrequency.more.rawValue)
+        #expect(viewModel.exercise == original)
         #expect(viewModel.demonstrationState == .failed(.connection))
     }
 }

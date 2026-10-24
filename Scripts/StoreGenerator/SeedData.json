@@ -9,7 +9,8 @@
     "equipment": [
       "Wall"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   },
   {
     "name": "Incline Push-Ups",
@@ -22,7 +23,8 @@
     "equipment": [
       "Elevated Surface"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   },
   {
     "name": "Knee Push-Ups",
@@ -34,7 +36,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   },
   {
     "name": "Standard Push-Ups",
@@ -47,7 +50,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
   },
   {
     "name": "Decline Push-Ups",
@@ -60,7 +64,8 @@
     "equipment": [
       "Elevated Surface"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
   },
   {
     "name": "Archer Push-Ups",
@@ -73,7 +78,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "advanced"
   },
   {
     "name": "Superman",
@@ -85,7 +91,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   },
   {
     "name": "Prone Y Raises",
@@ -96,7 +103,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   },
   {
     "name": "Reverse Snow Angels",
@@ -107,7 +115,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   },
   {
     "name": "Inverted Rows",
@@ -120,7 +129,8 @@
     "equipment": [
       "Low Bar"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
   },
   {
     "name": "Foot-Assisted Pull-Ups",
@@ -132,7 +142,8 @@
       "Pull-up Bar",
       "Elevated Surface"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   },
   {
     "name": "Negative Pull-Ups",
@@ -145,7 +156,8 @@
       "Pull-up Bar",
       "Elevated Surface"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
   },
   {
     "name": "Chin-Ups",
@@ -156,7 +168,8 @@
     "equipment": [
       "Pull-up Bar"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
   },
   {
     "name": "Pull-Ups",
@@ -168,7 +181,8 @@
     "equipment": [
       "Pull-up Bar"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
   },
   {
     "name": "Archer Pull-Ups",
@@ -180,7 +194,8 @@
     "equipment": [
       "Pull-up Bar"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "advanced"
   },
   {
     "name": "Pike Push-Ups",
@@ -192,7 +207,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
   },
   {
     "name": "Feet-Elevated Pike Push-Ups",
@@ -205,7 +221,8 @@
     "equipment": [
       "Elevated Surface"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "advanced"
   },
   {
     "name": "Wall Handstand Push-Ups",
@@ -217,7 +234,8 @@
     "equipment": [
       "Wall"
     ],
-    "frequencyPreference": "less"
+    "frequencyPreference": "normal",
+    "difficulty": "advanced"
   },
   {
     "name": "Foot-Assisted Dips",
@@ -230,7 +248,8 @@
       "Dip Bar",
       "Elevated Surface"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   },
   {
     "name": "Diamond Push-Ups",
@@ -243,7 +262,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
   },
   {
     "name": "Dips",
@@ -255,7 +275,8 @@
     "equipment": [
       "Dip Bar"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
   },
   {
     "name": "Dead Bug",
@@ -264,7 +285,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   },
   {
     "name": "Plank",
@@ -276,7 +298,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   },
   {
     "name": "Side Plank",
@@ -288,7 +311,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   },
   {
     "name": "Reverse Crunch",
@@ -297,7 +321,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   },
   {
     "name": "Hanging Leg Raises",
@@ -309,7 +334,8 @@
     "equipment": [
       "Pull-up Bar"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "advanced"
   },
   {
     "name": "Assisted Squats",
@@ -320,7 +346,8 @@
     "equipment": [
       "Stable Support"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   },
   {
     "name": "Squats",
@@ -332,7 +359,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   },
   {
     "name": "Split Squats",
@@ -343,7 +371,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   },
   {
     "name": "Reverse Lunges",
@@ -355,7 +384,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   },
   {
     "name": "Step-Ups",
@@ -367,7 +397,8 @@
     "equipment": [
       "Elevated Surface"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   },
   {
     "name": "Bulgarian Split Squats",
@@ -379,7 +410,8 @@
     "equipment": [
       "Elevated Surface"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
   },
   {
     "name": "Assisted Pistol Squats",
@@ -392,7 +424,8 @@
     "equipment": [
       "Stable Support"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
   },
   {
     "name": "Cossack Squats",
@@ -405,7 +438,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
   },
   {
     "name": "Pistol Squats",
@@ -418,7 +452,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "advanced"
   },
   {
     "name": "Glute Bridge",
@@ -430,7 +465,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   },
   {
     "name": "Side-Lying Hip Abduction",
@@ -439,7 +475,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   },
   {
     "name": "Single-Leg Glute Bridge",
@@ -451,7 +488,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
   },
   {
     "name": "Single-Leg Hip Thrusts",
@@ -463,7 +501,8 @@
     "equipment": [
       "Elevated Surface"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
   },
   {
     "name": "Single-Leg Romanian Deadlift",
@@ -475,7 +514,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
   },
   {
     "name": "Hamstring Walkouts",
@@ -487,7 +527,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
   },
   {
     "name": "Sliding Leg Curls",
@@ -499,7 +540,8 @@
     "equipment": [
       "Towel"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
   },
   {
     "name": "Nordic Curls",
@@ -510,7 +552,8 @@
     "equipment": [
       "Fixed Ankle Support"
     ],
-    "frequencyPreference": "less"
+    "frequencyPreference": "normal",
+    "difficulty": "advanced"
   },
   {
     "name": "Calf Raises",
@@ -519,7 +562,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   },
   {
     "name": "Single-Leg Calf Raises",
@@ -528,7 +572,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
   },
   {
     "name": "Walking Jacks",
@@ -540,7 +585,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   },
   {
     "name": "Jumping Jacks",
@@ -552,7 +598,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   },
   {
     "name": "Mountain Climbers",
@@ -564,7 +611,8 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "normal"
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
   },
   {
     "name": "Burpees",
@@ -578,6 +626,208 @@
     "equipment": [
       "None"
     ],
-    "frequencyPreference": "less"
+    "frequencyPreference": "normal",
+    "difficulty": "advanced"
+  },
+  {
+    "name": "Scapular Push-Ups",
+    "primaryMuscle": "Shoulders",
+    "secondaryMuscles": [
+      "Chest",
+      "Core"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
+  },
+  {
+    "name": "Scapular Pull-Ups",
+    "primaryMuscle": "Back",
+    "secondaryMuscles": [
+      "Shoulders",
+      "Arms"
+    ],
+    "equipment": [
+      "Pull-up Bar"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
+  },
+  {
+    "name": "Close-Grip Push-Ups",
+    "primaryMuscle": "Arms",
+    "secondaryMuscles": [
+      "Chest",
+      "Shoulders",
+      "Core"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
+  },
+  {
+    "name": "Bird Dog",
+    "primaryMuscle": "Core",
+    "secondaryMuscles": [
+      "Back",
+      "Glutes",
+      "Shoulders"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
+  },
+  {
+    "name": "Hollow Body Hold",
+    "primaryMuscle": "Core",
+    "secondaryMuscles": [],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
+  },
+  {
+    "name": "Bicycle Crunches",
+    "primaryMuscle": "Core",
+    "secondaryMuscles": [],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
+  },
+  {
+    "name": "Flutter Kicks",
+    "primaryMuscle": "Core",
+    "secondaryMuscles": [],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
+  },
+  {
+    "name": "Hanging Knee Raises",
+    "primaryMuscle": "Core",
+    "secondaryMuscles": [
+      "Arms",
+      "Back"
+    ],
+    "equipment": [
+      "Pull-up Bar"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
+  },
+  {
+    "name": "Wall Sit",
+    "primaryMuscle": "Quads",
+    "secondaryMuscles": [
+      "Glutes"
+    ],
+    "equipment": [
+      "Wall"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
+  },
+  {
+    "name": "Lateral Lunges",
+    "primaryMuscle": "Quads",
+    "secondaryMuscles": [
+      "Glutes",
+      "Hamstrings",
+      "Core"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
+  },
+  {
+    "name": "Jump Squats",
+    "primaryMuscle": "Quads",
+    "secondaryMuscles": [
+      "Glutes",
+      "Calves",
+      "Core"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
+  },
+  {
+    "name": "Donkey Kicks",
+    "primaryMuscle": "Glutes",
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Core"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
+  },
+  {
+    "name": "Fire Hydrants",
+    "primaryMuscle": "Glutes",
+    "secondaryMuscles": [
+      "Core"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
+  },
+  {
+    "name": "Bear Crawl",
+    "primaryMuscle": "Full Body",
+    "secondaryMuscles": [
+      "Shoulders",
+      "Core",
+      "Quads",
+      "Arms"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
+  },
+  {
+    "name": "High Knees",
+    "primaryMuscle": "Full Body",
+    "secondaryMuscles": [
+      "Quads",
+      "Calves",
+      "Core"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate"
+  },
+  {
+    "name": "Bent-Knee Calf Raises",
+    "primaryMuscle": "Calves",
+    "secondaryMuscles": [],
+    "equipment": [
+      "Stable Support"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner"
   }
 ]

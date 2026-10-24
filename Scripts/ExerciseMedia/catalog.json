@@ -439,5 +439,165 @@
     "startSeconds": 0,
     "reviewStatus": "browser-embed-and-visual-sample",
     "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "scapular-push-ups",
+    "exerciseName": "Scapular Push-Ups",
+    "videoID": "VMbyf9RKRIM",
+    "author": "OPEX Fitness",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24",
+    "reviewNotes": "Straight-arm scapular motion in a floor plank; no equipment."
+  },
+  {
+    "key": "scapular-pull-ups",
+    "exerciseName": "Scapular Pull-Ups",
+    "videoID": "tBg1uk2K964",
+    "author": "OPEX Fitness",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24",
+    "reviewNotes": "Straight elbows throughout the hanging scapular pull; pull-up bar."
+  },
+  {
+    "key": "close-grip-push-ups",
+    "exerciseName": "Close-Grip Push-Ups",
+    "videoID": "zGEkpb42jhU",
+    "author": "Live Lean TV Daily Exercises",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24",
+    "reviewNotes": "Close hands and tucked elbows on toes; floor variation, not knees."
+  },
+  {
+    "key": "bird-dog",
+    "exerciseName": "Bird Dog",
+    "videoID": "ZdAHe9_HeEw",
+    "author": "National Academy of Sports Medicine (NASM)",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24",
+    "reviewNotes": "Opposite arm and leg extend from hands and knees."
+  },
+  {
+    "key": "hollow-body-hold",
+    "exerciseName": "Hollow Body Hold",
+    "videoID": "EsnM8eBtazU",
+    "author": "OPEX Fitness",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24",
+    "reviewNotes": "Shoulders and straight legs lifted; arms extend overhead into a hollow hold."
+  },
+  {
+    "key": "bicycle-crunches",
+    "exerciseName": "Bicycle Crunches",
+    "videoID": "wnuLak2onoA",
+    "author": "PureGym",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24",
+    "reviewNotes": "Alternating elbow-to-opposite-knee crunch with leg extension."
+  },
+  {
+    "key": "flutter-kicks",
+    "exerciseName": "Flutter Kicks",
+    "videoID": "5V4CETRga4E",
+    "author": "OPEX Fitness",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24",
+    "reviewNotes": "Alternating small straight-leg kicks while supine, shoulders lifted."
+  },
+  {
+    "key": "hanging-knee-raises",
+    "exerciseName": "Hanging Knee Raises",
+    "videoID": "ACnl_apRkqU",
+    "author": "OPEX Fitness",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24",
+    "reviewNotes": "Bent knees lift while hanging from a pull-up bar."
+  },
+  {
+    "key": "wall-sit",
+    "exerciseName": "Wall Sit",
+    "videoID": "6Li55TURhVg",
+    "author": "PureGym",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24",
+    "reviewNotes": "Bilateral wall-supported squat hold."
+  },
+  {
+    "key": "lateral-lunges",
+    "exerciseName": "Lateral Lunges",
+    "videoID": "URQvRQT0XMA",
+    "author": "Runna",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24",
+    "reviewNotes": "Bodyweight step-out lateral lunge; no dumbbells."
+  },
+  {
+    "key": "jump-squats",
+    "exerciseName": "Jump Squats",
+    "videoID": "tZSYZdtbONc",
+    "author": "National Academy of Sports Medicine (NASM)",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24",
+    "reviewNotes": "Bodyweight squat to jump and controlled landing."
+  },
+  {
+    "key": "donkey-kicks",
+    "exerciseName": "Donkey Kicks",
+    "videoID": "EtSJ8rwm5M8",
+    "author": "PureGym",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24",
+    "reviewNotes": "Bent-knee hip extension from hands and knees."
+  },
+  {
+    "key": "fire-hydrants",
+    "exerciseName": "Fire Hydrants",
+    "videoID": "hjMEwbXhya4",
+    "author": "Cūro Chiropractic",
+    "startSeconds": 32,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24",
+    "reviewNotes": "Bent-knee hip abduction from quadruped; use 32s to skip verbal introduction."
+  },
+  {
+    "key": "bear-crawl",
+    "exerciseName": "Bear Crawl",
+    "videoID": "w089AXf1f_g",
+    "author": "OPEX Fitness",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24",
+    "reviewNotes": "Forward quadrupedal crawl with knees hovering above the floor."
+  },
+  {
+    "key": "high-knees",
+    "exerciseName": "High Knees",
+    "videoID": "sTvekaq6vOU",
+    "author": "PureGym",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24",
+    "reviewNotes": "Alternating running high knees without equipment."
+  },
+  {
+    "key": "bent-knee-calf-raises",
+    "exerciseName": "Bent-Knee Calf Raises",
+    "videoID": "-KZ0TJydf8M",
+    "author": "Rx Rehab",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24",
+    "reviewNotes": "Bilateral heel raises with bent knees and a stable hand support."
   }
 ]

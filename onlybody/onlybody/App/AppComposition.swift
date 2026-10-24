@@ -29,7 +29,6 @@ struct AppComposition {
         #endif
         return MovementDetailViewModel(
             exercise: exercise,
-            exercises: exercises,
             demonstration: ExerciseDemonstrationCatalog.demonstration(for: exercise.name),
             bundleIdentifier: Bundle.main.bundleIdentifier ?? "",
             allowsVideoLoading: allowsVideoLoading,

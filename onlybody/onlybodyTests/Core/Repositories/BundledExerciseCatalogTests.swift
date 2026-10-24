@@ -24,7 +24,7 @@ struct BundledExerciseCatalogTests {
 
         #expect(viewModel.errorMessage == nil)
         let exercises = viewModel.allExercises
-        #expect(exercises.count == 49)
+        #expect(exercises.count == 65)
         #expect(Set(exercises.map(\.id)).count == exercises.count)
         #expect(Set(exercises.map(\.name)).count == exercises.count)
         #expect(Set(exercises.map(\.name)) == Set(ExerciseDemonstrationCatalog.all.map(\.exerciseName)))
@@ -35,6 +35,7 @@ struct BundledExerciseCatalogTests {
 
         for exercise in exercises {
             let diagram = MuscleDiagram(primaryMuscle: exercise.primaryMuscle, secondaryMuscles: exercise.secondaryMuscles)
+            #expect(exercise.difficulty != .unrated)
             #expect(diagram.hasHighlightedRegions)
             #expect(exercise.primaryMuscle == "Full Body" || !diagram.primary.isEmpty)
             #expect(Set(diagram.secondary.map(\.rawValue)) == Set(exercise.secondaryMuscles))
@@ -47,6 +48,8 @@ struct BundledExerciseCatalogTests {
             #expect(ExerciseFrequency(rawValue: exercise.frequencyPreference) != nil)
         }
 
+        #expect(Set(ExerciseDifficultyCatalog.levels.keys) == Set(exercises.map(\.name)))
+
         for muscle in ExerciseCatalog.primaryMuscles {
             viewModel.selectedFilter = muscle
             #expect(!viewModel.filteredExercises.isEmpty)
@@ -54,14 +57,14 @@ struct BundledExerciseCatalogTests {
         }
 
         viewModel.selectedFilter = "Back"
-        #expect(viewModel.filteredExercises.count == 9)
+        #expect(viewModel.filteredExercises.count == 10)
         #expect(viewModel.filteredExercises.filter { $0.equipment == ["None"] }.count == 3)
         viewModel.searchText = "snow"
         #expect(viewModel.filteredExercises.map(\.name) == ["Reverse Snow Angels"])
         viewModel.searchText = ""
         viewModel.selectedFilter = "Core"
-        #expect(viewModel.filteredExercises.count == 5)
+        #expect(viewModel.filteredExercises.count == 10)
         viewModel.selectedFilter = "All"
-        #expect(viewModel.filteredExercises.count == 49)
+        #expect(viewModel.filteredExercises.count == 65)
     }
 }

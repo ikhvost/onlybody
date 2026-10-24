@@ -5,9 +5,11 @@ import SwiftData
 @MainActor
 final class SwiftDataWorkoutRepository: WorkoutRepository {
     private let context: ModelContext
+    private let catalog: [ExerciseSnapshot]
 
-    init(context: ModelContext) {
+    init(context: ModelContext, catalog: [ExerciseSnapshot] = []) {
         self.context = context
+        self.catalog = catalog
         context.autosaveEnabled = false
     }
 
@@ -43,13 +45,8 @@ final class SwiftDataWorkoutRepository: WorkoutRepository {
                 item.sets = valueItem.sets
                 item.targetReps = valueItem.targetReps
                 item.restSeconds = valueItem.restSeconds
-                if let exerciseID = valueItem.exercise?.id {
-                    var exercises = FetchDescriptor<Exercise>(predicate: #Predicate { $0.id == exerciseID })
-                    exercises.fetchLimit = 1
-                    guard let exercise = try context.fetch(exercises).first else {
-                        throw PersistenceError.exerciseUnavailable
-                    }
-                    item.exercise = exercise
+                if let exercise = valueItem.exercise {
+                    item.exercise = try resolveExercise(exercise)
                 }
                 item.workout = model
                 model.items?.append(item)
@@ -59,5 +56,29 @@ final class SwiftDataWorkoutRepository: WorkoutRepository {
             context.rollback()
             throw error
         }
+    }
+
+    /// Materialize only a selected new catalog entry in the workout's atomic transaction.
+    private func resolveExercise(_ value: ExerciseSnapshot) throws -> Exercise {
+        let id = value.id
+        var descriptor = FetchDescriptor<Exercise>(predicate: #Predicate { $0.id == id })
+        descriptor.fetchLimit = 1
+        if let existing = try context.fetch(descriptor).first { return existing }
+        guard let entry = catalog.first(where: { $0.id == value.id && $0.name == value.name }) else {
+            throw PersistenceError.exerciseUnavailable
+        }
+        // Another screen may have saved this entry since the builder loaded its catalog.
+        let name = entry.name
+        var byName = FetchDescriptor<Exercise>(predicate: #Predicate { $0.name == name })
+        byName.fetchLimit = 1
+        if let existing = try context.fetch(byName).first { return existing }
+        let model = Exercise()
+        model.id = entry.id
+        model.name = entry.name
+        model.primaryMuscle = entry.primaryMuscle
+        model.secondaryMuscles = entry.secondaryMuscles
+        model.equipment = entry.equipment
+        context.insert(model)
+        return model
     }
 }

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct LibraryView: View {
     @Bindable var viewModel: LibraryViewModel
+    @FocusState private var isSearchFocused: Bool
 
     let showMovement: (ExerciseSnapshot) -> Void
 
@@ -37,6 +38,10 @@ struct LibraryView: View {
                         SearchIcon(color: Theme.text3, size: Theme.type15)
 
                         TextField("Search...", text: $viewModel.searchText)
+                            .accessibilityIdentifier("library.search")
+                            .focused($isSearchFocused)
+                            .submitLabel(.done)
+                            .onSubmit { isSearchFocused = false }
                             .font(Theme.fontSans(Theme.type14))
                             .foregroundStyle(Theme.text)
                             .textInputAutocapitalization(.never)
@@ -62,6 +67,8 @@ struct LibraryView: View {
                         .padding(.bottom, Theme.space2)
                     }
                     .scrollIndicators(.hidden)
+
+                    ExerciseDifficultyFilter(selection: $viewModel.selectedDifficulty)
                 }
                 .padding(.horizontal, Theme.horizontalPadding)
                 .padding(.bottom, Theme.space10)
@@ -94,18 +101,22 @@ struct LibraryView: View {
                     } else {
                         ScrollView {
                             LazyVStack(alignment: .leading, spacing: Theme.space0) {
-                                ForEach(viewModel.filteredExercises, id: \.id) { exercise in
-                                    LibraryExerciseRow(exercise: exercise) {
-                                        showMovement(exercise)
+                                ForEach(viewModel.sections) { section in
+                                    LibraryDifficultyHeader(section: section)
+                                    ForEach(section.exercises) { exercise in
+                                        LibraryExerciseRow(exercise: exercise) {
+                                            isSearchFocused = false
+                                            showMovement(exercise)
+                                        }
+                                        Rectangle()
+                                            .fill(Theme.border)
+                                            .frame(height: 1)
                                     }
-
-                                    Rectangle()
-                                        .fill(Theme.border)
-                                        .frame(height: 1)
                                 }
                             }
                         }
                         .scrollIndicators(.hidden)
+                        .scrollDismissesKeyboard(.interactively)
                         .transition(.opacity)
                     }
                 }

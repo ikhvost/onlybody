@@ -5,15 +5,28 @@ import SwiftData
 @MainActor
 final class SwiftDataExerciseRepository: ExerciseRepository {
     private let context: ModelContext
+    private let catalog: [ExerciseSnapshot]
 
-    init(context: ModelContext) {
+    init(context: ModelContext, catalog: [ExerciseSnapshot] = []) {
         self.context = context
+        self.catalog = catalog
         context.autosaveEnabled = false
     }
 
     func allExercises() async throws -> [ExerciseSnapshot] {
         let descriptor = FetchDescriptor<Exercise>(sortBy: [SortDescriptor(\Exercise.name)])
-        return try context.fetch(descriptor).map { $0.snapshot() }
+        let saved = try context.fetch(descriptor).map { $0.snapshot() }
+        // Use the release's metadata while preserving IDs referenced by existing workouts.
+        let current = catalog.map { entry in
+            var value = entry
+            if let existing = saved.first(where: { $0.name == entry.name }) {
+                value.id = existing.id
+            }
+            return value
+        }
+        let currentNames = Set(catalog.map(\.name))
+        return (current + saved.filter { !currentNames.contains($0.name) })
+            .sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
     }
 
     func save(_ value: ExerciseSnapshot) async throws {
