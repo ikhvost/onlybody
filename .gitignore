@@ -71,5 +71,7 @@ fastlane/screenshots/**/*.png
 fastlane/test_output
 
 # Transient SQLite sidecars must not be committed with the seed catalog.
-onlybody/onlybody/Resources/SeedStore/*.store-wal
-onlybody/onlybody/Resources/SeedStore/*.store-shm
+
+# SQLite transient files must never be bundled.
+onlybody/Products/*/Resources/SeedStore/*.store-wal
+onlybody/Products/*/Resources/SeedStore/*.store-shm

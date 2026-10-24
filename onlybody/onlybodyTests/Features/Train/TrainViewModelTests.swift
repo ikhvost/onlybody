@@ -1,6 +1,10 @@
 import Foundation
 import Testing
+#if ONLYWEIGHTS
+@testable import onlyweights
+#else
 @testable import onlybody
+#endif
 
 @MainActor
 struct TrainViewModelTests {
@@ -18,7 +22,7 @@ struct TrainViewModelTests {
 
         workoutRepo.stubbedWorkouts = [fullBody, upperBody]
 
-        let viewModel = TrainViewModel(workouts: workoutRepo)
+        let viewModel = TrainViewModel(workouts: workoutRepo, appName: "OnlyBody")
         await viewModel.load()
 
         #expect(viewModel.workouts.count == 2)
@@ -45,7 +49,7 @@ struct TrainViewModelTests {
 
         workoutRepo.stubbedWorkouts = [fullBody, upperBody]
 
-        let viewModel = TrainViewModel(workouts: workoutRepo)
+        let viewModel = TrainViewModel(workouts: workoutRepo, appName: "OnlyBody")
         await viewModel.load()
 
         let todaysNames = viewModel.todaysWorkouts.map(\.name)
@@ -61,7 +65,7 @@ struct TrainViewModelTests {
         let workoutRepo = MockWorkoutRepository()
         workoutRepo.shouldThrow = true
 
-        let viewModel = TrainViewModel(workouts: workoutRepo)
+        let viewModel = TrainViewModel(workouts: workoutRepo, appName: "OnlyBody")
         await viewModel.load()
 
         #expect(viewModel.workouts.isEmpty)

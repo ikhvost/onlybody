@@ -1,0 +1,264 @@
+[
+  {
+    "name": "Barbell Bench Press",
+    "primaryMuscle": "Chest",
+    "primaryMuscles": [
+      "Chest",
+      "Triceps"
+    ],
+    "secondaryMuscles": [
+      "Shoulders"
+    ],
+    "equipment": [
+      "Barbell",
+      "Flat Bench"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Incline Dumbbell Press",
+    "primaryMuscle": "Chest",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "equipment": [
+      "Dumbbells",
+      "Incline Bench"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Lat Pulldown",
+    "primaryMuscle": "Back",
+    "primaryMuscles": [
+      "Back"
+    ],
+    "secondaryMuscles": [
+      "Biceps",
+      "Forearms"
+    ],
+    "equipment": [
+      "Lat Pulldown Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Seated Cable Row",
+    "primaryMuscle": "Back",
+    "primaryMuscles": [
+      "Back"
+    ],
+    "secondaryMuscles": [
+      "Biceps",
+      "Shoulders",
+      "Forearms"
+    ],
+    "equipment": [
+      "Cable Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Dumbbell Shoulder Press",
+    "primaryMuscle": "Shoulders",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Triceps",
+      "Serratus"
+    ],
+    "equipment": [
+      "Dumbbells"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Dumbbell Lateral Raise",
+    "primaryMuscle": "Shoulders",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "Dumbbells"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Cable Face Pull",
+    "primaryMuscle": "Shoulders",
+    "primaryMuscles": [
+      "Shoulders",
+      "Back"
+    ],
+    "secondaryMuscles": [
+      "Biceps"
+    ],
+    "equipment": [
+      "Cable Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Dumbbell Curl",
+    "primaryMuscle": "Biceps",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "equipment": [
+      "Dumbbells"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Cable Triceps Pushdown",
+    "primaryMuscle": "Triceps",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "Cable Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Barbell Back Squat",
+    "primaryMuscle": "Quads",
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Adductors",
+      "Core"
+    ],
+    "equipment": [
+      "Barbell",
+      "Squat Rack"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "advanced",
+    "isFullBody": false
+  },
+  {
+    "name": "Leg Press",
+    "primaryMuscle": "Quads",
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Adductors"
+    ],
+    "equipment": [
+      "Leg Press Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Barbell Romanian Deadlift",
+    "primaryMuscle": "Hamstrings",
+    "primaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Back",
+      "Forearms",
+      "Core"
+    ],
+    "equipment": [
+      "Barbell"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Leg Extension",
+    "primaryMuscle": "Quads",
+    "primaryMuscles": [
+      "Quads"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "Leg Extension Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Seated Leg Curl",
+    "primaryMuscle": "Hamstrings",
+    "primaryMuscles": [
+      "Hamstrings"
+    ],
+    "secondaryMuscles": [
+      "Calves"
+    ],
+    "equipment": [
+      "Seated Leg Curl Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Standing Calf Raise",
+    "primaryMuscle": "Calves",
+    "primaryMuscles": [
+      "Calves"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "Standing Calf Raise Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Cable Crunch",
+    "primaryMuscle": "Core",
+    "primaryMuscles": [
+      "Core"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "Cable Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  }
+]

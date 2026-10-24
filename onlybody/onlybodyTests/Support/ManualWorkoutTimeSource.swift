@@ -1,5 +1,9 @@
 import Foundation
+#if ONLYWEIGHTS
+@testable import onlyweights
+#else
 @testable import onlybody
+#endif
 
 @MainActor
 final class ManualWorkoutTimeSource: WorkoutTimeSource {

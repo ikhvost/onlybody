@@ -13,6 +13,10 @@ for folder in ('Domain', 'Features', 'Shared'):
                 violations.append(f'{path.relative_to(root)}: forbidden dependency {pattern}')
         if folder == 'Domain' and 'import SwiftUI' in text:
             violations.append(f'{path.relative_to(root)}: domain imports SwiftUI')
+for product in ('OnlyBody', 'OnlyWeights'):
+    for path in (root.parent / 'Products' / product / 'Catalog').glob('*.swift'):
+        if re.search(r'import (SwiftData|SwiftUI)|\bModelContext\b', path.read_text()):
+            violations.append(f'{path}: catalog contains a framework dependency')
 if violations:
     raise SystemExit('\n'.join(violations))
 print('Architecture boundaries passed.')

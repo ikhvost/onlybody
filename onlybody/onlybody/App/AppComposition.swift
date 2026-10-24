@@ -3,15 +3,19 @@ import Foundation
 /// The app-level factory is the only layer wiring repositories to screens.
 @MainActor
 struct AppComposition {
+    let configuration: AppConfiguration
     let exercises: any ExerciseRepository
     let workouts: any WorkoutRepository
     let sessions: any SessionRepository
 
-    func train() -> TrainViewModel { TrainViewModel(workouts: workouts) }
+    func train() -> TrainViewModel { TrainViewModel(workouts: workouts, appName: configuration.displayName) }
     func log() -> LogViewModel { LogViewModel(sessions: sessions) }
     func library() -> LibraryViewModel { LibraryViewModel(exercises: exercises) }
     func builder(workout: WorkoutSnapshot?, targets: [String]) -> SessionBuilderViewModel {
-        SessionBuilderViewModel(workouts: workouts, exercises: exercises, workout: workout, targetMuscleGroups: targets)
+        SessionBuilderViewModel(
+            workouts: workouts, exercises: exercises, workout: workout, targetMuscleGroups: targets,
+            generator: SmartWorkoutGenerator(fallbackPolicy: configuration.workoutFallback)
+        )
     }
     func active(workoutID: UUID) -> ActiveWorkoutViewModel {
         ActiveWorkoutViewModel(workouts: workouts, sessions: sessions, workoutId: workoutID)

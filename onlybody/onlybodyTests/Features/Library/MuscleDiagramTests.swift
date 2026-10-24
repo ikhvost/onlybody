@@ -1,6 +1,10 @@
 import Testing
 import UIKit
+#if ONLYWEIGHTS
+@testable import onlyweights
+#else
 @testable import onlybody
+#endif
 
 @MainActor
 struct MuscleDiagramTests {

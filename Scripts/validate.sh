@@ -12,19 +12,22 @@ fi
 output="${VALIDATION_OUTPUT:-/tmp/onlybody-validation-$(date +%Y%m%d-%H%M%S)}"
 mkdir -p "$output"
 python3 Scripts/Validation/check-boundaries.py
-python3 Scripts/ExerciseMedia/generate.py --check
-python3 Scripts/StoreGenerator/generate-difficulties.py --check
-python3 Scripts/StoreGenerator/generate-muscles.py --check
+python3 Scripts/Validation/check-catalogs.py
 swiftlint lint --strict --no-cache
-xcodebuild test -project onlybody/onlybody.xcodeproj -scheme onlybody \
-    -destination "$DESTINATION" -parallel-testing-enabled NO \
-    -derivedDataPath "$output/DerivedData" -resultBundlePath "$output/Tests.xcresult"
-xcodebuild build -project onlybody/onlybody.xcodeproj -scheme onlybody \
-    -configuration Release -destination 'generic/platform=iOS Simulator' \
-    -derivedDataPath "$output/DerivedData" CODE_SIGNING_ALLOWED=NO
+for product in onlybody onlyweights; do
+    xcodebuild test -project onlybody/onlybody.xcodeproj -scheme "$product" \
+        -destination "$DESTINATION" -parallel-testing-enabled NO \
+        -derivedDataPath "$output/DerivedData" -resultBundlePath "$output/$product-Tests.xcresult"
+    xcodebuild build -project onlybody/onlybody.xcodeproj -scheme "$product" \
+        -configuration Release -destination 'generic/platform=iOS Simulator' \
+        -derivedDataPath "$output/DerivedData" CODE_SIGNING_ALLOWED=NO
+done
+python3 Scripts/Validation/check-app-bundles.py "$output/DerivedData/Build/Products/Release-iphonesimulator"
 if [[ "$actual" == "$expected" ]]; then
     swift run --package-path Scripts/StoreGenerator --scratch-path "$output/GeneratorBuild" \
-        StoreGenerator "$output/generated.store" Scripts/StoreGenerator/SeedData.json
+        StoreGenerator "$output/onlybody-generated.store" Scripts/StoreGenerator/SeedData.json
+    swift run --package-path Scripts/StoreGenerator --scratch-path "$output/GeneratorBuild" \
+        StoreGenerator "$output/onlyweights-generated.store" Scripts/StoreGenerator/OnlyWeights/SeedData.json
 else
     echo "Generator target-toolchain validation skipped: Swift 6.4 required."
 fi

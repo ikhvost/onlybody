@@ -35,3 +35,21 @@ Manual iPhone 17 Simulator review used the previous isolated 49-exercise store w
 Workout templates now persist optional `durationMinutes` and `restSeconds` alongside their per-movement settings. Optional fields permit lightweight migration of older stores: the editor defaults an absent target to 30 minutes, retains existing movement rest values and derives a uniform default rest when possible. Explicitly choosing a global rest updates existing movements and the default for added/generated movements. Historical sessions retain their actual elapsed duration and per-set results.
 
 The duration wheel offers 15–60 minutes in five-minute steps; rest offers 15–180 seconds in fifteen-second steps. Duration is a Smart-generation budget or a manual planning target, never a forced end timer. The estimate remains based on configured sets and rest, so it can differ from the target. Draft comparison includes both timing settings.
+
+## Product catalogs
+
+OnlyBody keeps its 65-entry authoring file and bundled store. OnlyWeights's initial 16-entry authoring file is `OnlyWeights/SeedData.json`; the two product stores are generated independently. Equipment and metadata use the shared domain taxonomy. Difficulty is a qualitative editorial classification of technique complexity, not a load prescription.
+
+OnlyWeights examples were checked against [NASM's bench press reference](https://www.nasm.org/resource-center/exercise-library/barbell-bench-press) and [seated leg curl reference](https://www.nasm.org/workout-exercise-guidance/how-to-seated-leg-curl). Muscle highlights represent selected primary and supporting groups in the app's coarse taxonomy, not measured activation or an exhaustive list of stabilizers. No videos are supplied in the initial Gym catalog.
+
+From the repository root, regenerate OnlyWeights metadata and seed with:
+
+```sh
+python3 Scripts/StoreGenerator/generate-difficulties.py --seed Scripts/StoreGenerator/OnlyWeights/SeedData.json --output onlybody/Products/OnlyWeights/Catalog/ExerciseDifficultyCatalog.swift
+python3 Scripts/StoreGenerator/generate-muscles.py --seed Scripts/StoreGenerator/OnlyWeights/SeedData.json --output onlybody/Products/OnlyWeights/Catalog/ExerciseMuscleCatalog.swift
+python3 Scripts/ExerciseMedia/generate.py --seed Scripts/StoreGenerator/OnlyWeights/SeedData.json --catalog Scripts/ExerciseMedia/onlyweights.json --output onlybody/Products/OnlyWeights/Catalog/ExerciseDemonstrationCatalog.swift --allow-missing
+swift run --package-path Scripts/StoreGenerator StoreGenerator onlybody/Products/OnlyWeights/Resources/SeedStore/default.store Scripts/StoreGenerator/OnlyWeights/SeedData.json
+python3 Scripts/Validation/check-catalogs.py
+```
+
+Without arguments, the metadata scripts still target OnlyBody. OnlyBody continues to require complete verified video coverage; `--allow-missing` permits a partial or empty OnlyWeights media catalog but still rejects duplicate or unknown exercise names and invalid entries. Existing exercise names remain the compatibility keys within each product. Never use a user's store as generator output.

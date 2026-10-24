@@ -3,6 +3,7 @@ import SwiftUI
 
 @main
 struct BodyweightApp: App {
+    let configuration = AppConfiguration.current
     let container: ModelContainer?
     let exercises: any ExerciseRepository
     let workouts: any WorkoutRepository
@@ -46,7 +47,7 @@ struct BodyweightApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AppTabView(composition: AppComposition(exercises: exercises, workouts: workouts, sessions: sessions))
+            AppTabView(composition: AppComposition(configuration: configuration, exercises: exercises, workouts: workouts, sessions: sessions))
         }
     }
 }

@@ -29,6 +29,7 @@ final class WorkoutJourneyTests: XCTestCase {
     }
 
     func testCreateSurvivesRelaunch() {
+        XCTAssertTrue(app.staticTexts[JourneyProduct.name].waitForExistence(timeout: 10))
         createWorkout(duration: "35 min", rest: "90 sec")
         app.terminate()
         app.launch()
@@ -77,7 +78,7 @@ final class WorkoutJourneyTests: XCTestCase {
         tap("active.close")
         tap("workout.start.E2E Workout")
         tap("active.history")
-        XCTAssertEqual(app.staticTexts["exerciseHistory.name"].label, "Standard Push-Ups")
+        XCTAssertEqual(app.staticTexts["exerciseHistory.name"].label, JourneyProduct.exercise)
         XCTAssertFalse(app.staticTexts["exerciseHistory.totalReps"].exists)
         XCTAssertFalse(app.staticTexts["exerciseHistory.totals"].exists)
         XCTAssertTrue(app.staticTexts["exerciseHistory.date"].waitForExistence(timeout: 10))
@@ -159,31 +160,43 @@ final class WorkoutJourneyTests: XCTestCase {
         tap("difficulty.beginner")
         let search = app.textFields["library.search"]
         search.tap()
-        search.typeText("Bird Dog")
-        let movement = app.buttons["library.exercise.Bird Dog"]
+        search.typeText(JourneyProduct.libraryExercise)
+        let movement = app.buttons["library.exercise.\(JourneyProduct.libraryExercise)"]
         XCTAssertTrue(movement.waitForExistence(timeout: 10))
         movement.tap()
         XCTAssertTrue(app.staticTexts["movement.difficulty"].label.contains("Beginner"))
         XCTAssertFalse(app.buttons["Set frequency to More often"].exists)
         XCTAssertFalse(app.buttons["Set frequency to Less often"].exists)
         XCTAssertFalse(app.buttons["Set frequency to Exclude"].exists)
-        XCTAssertTrue(app.descendants(matching: .any)["demonstration.player"].waitForExistence(timeout: 10))
-        XCTAssertFalse(app.buttons["demonstration.load"].exists)
-        XCTAssertTrue(app.staticTexts["demonstration.author"].exists)
-        XCTAssertFalse(app.buttons["demonstration.openYouTube"].exists)
         let diagram = app.descendants(matching: .any)["movement.muscleDiagram"]
         XCTAssertTrue(diagram.exists)
         XCTAssertTrue(diagram.label.contains("Muscle groups, front and back views"))
-        XCTAssertGreaterThan(app.webViews.count, 0, "The player uses local HTML and must not contact YouTube")
-        let play = app.buttons["Play demonstration"].firstMatch
-        XCTAssertTrue(play.waitForExistence(timeout: 10))
-        play.tap()
-        XCTAssertTrue(app.buttons["Pause demonstration"].firstMatch.exists)
-        app.swipeRight()
-        XCTAssertTrue(app.buttons["movement.back"].exists)
-        cancelBackSwipe()
-        XCTAssertTrue(app.buttons["movement.back"].exists)
-        swipeBackOverPlayer()
+        let screenshot = XCTAttachment(screenshot: app.screenshot())
+        screenshot.name = "\(JourneyProduct.name) movement details"
+        screenshot.lifetime = .keepAlways
+        add(screenshot)
+        if JourneyProduct.hasDemonstrations {
+            XCTAssertTrue(app.descendants(matching: .any)["demonstration.player"].waitForExistence(timeout: 10))
+            XCTAssertFalse(app.buttons["demonstration.load"].exists)
+            XCTAssertTrue(app.staticTexts["demonstration.author"].exists)
+            XCTAssertFalse(app.buttons["demonstration.openYouTube"].exists)
+            XCTAssertGreaterThan(app.webViews.count, 0, "The player uses local HTML and must not contact YouTube")
+            let play = app.buttons["Play demonstration"].firstMatch
+            XCTAssertTrue(play.waitForExistence(timeout: 10))
+            play.tap()
+            XCTAssertTrue(app.buttons["Pause demonstration"].firstMatch.exists)
+            app.swipeRight()
+            XCTAssertTrue(app.buttons["movement.back"].exists)
+            cancelBackSwipe()
+            XCTAssertTrue(app.buttons["movement.back"].exists)
+            swipeBackOverPlayer()
+        } else {
+            XCTAssertTrue(app.staticTexts["demonstration.unavailable"].exists)
+            XCTAssertEqual(app.webViews.count, 0)
+            cancelBackSwipe()
+            XCTAssertTrue(app.buttons["movement.back"].exists)
+            swipeBack()
+        }
         XCTAssertTrue(app.textFields["library.search"].waitForExistence(timeout: 10))
         tap("tab.log")
         tap("tab.train")
@@ -265,12 +278,18 @@ final class WorkoutJourneyTests: XCTestCase {
         tap("stepper.Reps.increase")
         tap("stepper.Added kg.increase")
         tap("active.guide")
-        XCTAssertTrue(app.descendants(matching: .any)["demonstration.player"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["Standard Push-Ups"].exists)
+        XCTAssertTrue(app.staticTexts[JourneyProduct.exercise].exists)
         XCTAssertFalse(app.staticTexts["Movement"].exists)
         XCTAssertEqual(app.buttons["movement.back"].label, "Back to workout")
-        XCTAssertGreaterThan(app.webViews.count, 0)
-        swipeBackOverPlayer()
+        if JourneyProduct.hasDemonstrations {
+            XCTAssertTrue(app.descendants(matching: .any)["demonstration.player"].waitForExistence(timeout: 10))
+            XCTAssertGreaterThan(app.webViews.count, 0)
+            swipeBackOverPlayer()
+        } else {
+            XCTAssertTrue(app.staticTexts["demonstration.unavailable"].waitForExistence(timeout: 10))
+            XCTAssertEqual(app.webViews.count, 0)
+            swipeBack()
+        }
         tap("active.history")
         XCTAssertTrue(app.staticTexts["exerciseHistory.empty"].waitForExistence(timeout: 10))
         swipeBack()
@@ -308,8 +327,8 @@ final class WorkoutJourneyTests: XCTestCase {
         let search = app.textFields["Search movements..."]
         XCTAssertTrue(search.waitForExistence(timeout: 10))
         search.tap()
-        search.typeText("Standard Push-Ups")
-        let exercise = app.buttons["exercise.pick.Standard Push-Ups"]
+        search.typeText(JourneyProduct.exercise)
+        let exercise = app.buttons["exercise.pick.\(JourneyProduct.exercise)"]
         // Fixture uses the catalog's exact display name.
         XCTAssertTrue(exercise.waitForExistence(timeout: 10))
         exercise.tap()

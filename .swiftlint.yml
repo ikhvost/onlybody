@@ -1,5 +1,7 @@
 included:
   - onlybody/onlybody
+  - onlybody/Products
+  - onlybody/ProductTests
   - onlybody/onlybodyTests
   - onlybody/onlybodyUITests
   - Scripts/StoreGenerator/Sources

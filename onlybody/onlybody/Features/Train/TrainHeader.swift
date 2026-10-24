@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct TrainHeader: View {
+    let appName: String
     let dateDisplay: String
     let onCreateTap: () -> Void
 
@@ -8,7 +9,7 @@ struct TrainHeader: View {
         HStack(alignment: .bottom) {
             VStack(alignment: .leading, spacing: Theme.space3) {
                 MonoLabel(text: dateDisplay, size: Theme.type10, color: Theme.text3, tracking: 1.2)
-                Text("OnlyBody")
+                Text(appName)
                     .font(Theme.fontSans(Theme.type28, .heavy))
                     .tracking(-1)
                     .foregroundStyle(Theme.text)

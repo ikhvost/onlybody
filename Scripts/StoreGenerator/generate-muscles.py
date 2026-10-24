@@ -4,8 +4,13 @@ import argparse
 import json
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
-TARGET = ROOT / 'onlybody/onlybody/Domain/Catalog/ExerciseMuscleCatalog.swift'
-rows = json.loads((ROOT / 'Scripts/StoreGenerator/SeedData.json').read_text())
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--seed', type=Path, default=ROOT / 'Scripts/StoreGenerator/SeedData.json')
+parser.add_argument('--output', type=Path, default=ROOT / 'onlybody/Products/OnlyBody/Catalog/ExerciseMuscleCatalog.swift')
+parser.add_argument('--check', action='store_true')
+args = parser.parse_args()
+TARGET = args.output
+rows = json.loads(args.seed.read_text())
 assert len({row['name'] for row in rows}) == len(rows)
 groups = {'Chest', 'Back', 'Shoulders', 'Biceps', 'Triceps', 'Forearms', 'Serratus',
           'Core', 'Quads', 'Glutes', 'Hamstrings', 'Calves', 'Hip Flexors', 'Adductors'}
@@ -23,9 +28,7 @@ for row in rows:
               f'            isFullBody: {str(row["isFullBody"]).lower()}),']
 lines += ['    ]', '}', '']
 content = '\n'.join(lines)
-parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--check', action='store_true')
-if parser.parse_args().check:
+if args.check:
     assert TARGET.read_text() == content, 'Regenerate muscle catalog'
     print(f'Validated muscle profiles for {len(rows)} exercises.')
 else:

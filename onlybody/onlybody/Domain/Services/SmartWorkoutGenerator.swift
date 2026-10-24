@@ -2,15 +2,18 @@ import Foundation
 
 nonisolated struct SmartWorkoutGenerator: Sendable {
 
+    let fallbackPolicy: WorkoutFallbackPolicy
     let randomSets: @Sendable (ClosedRange<Int>) -> Int
     let randomReps: @Sendable (ClosedRange<Int>) -> Int
     let randomRest: @Sendable ([Int]) -> Int
 
     init(
+        fallbackPolicy: WorkoutFallbackPolicy = .bodyweight,
         randomSets: @escaping @Sendable (ClosedRange<Int>) -> Int = { Int.random(in: $0) },
         randomReps: @escaping @Sendable (ClosedRange<Int>) -> Int = { Int.random(in: $0) },
         randomRest: @escaping @Sendable ([Int]) -> Int = { $0.randomElement() ?? 45 }
     ) {
+        self.fallbackPolicy = fallbackPolicy
         self.randomSets = randomSets
         self.randomReps = randomReps
         self.randomRest = randomRest
@@ -27,7 +30,7 @@ nonisolated struct SmartWorkoutGenerator: Sendable {
 
         let items = buildMovements(pool: pool, timeBudget: config.durationMinutes * 60, restSeconds: config.restSeconds)
 
-        guard items.count >= 2 else {
+        guard items.count >= 2 || fallbackPolicy == .matchingCatalog else {
             return buildMovements(
                 pool: filteredPool(from: exercises.filter { exercise in
                     exercise.equipment.contains("None")

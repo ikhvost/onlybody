@@ -1,6 +1,23 @@
-# OnlyBody
+# OnlyBody + OnlyWeights
 
-An on-device bodyweight training app built with SwiftUI and SwiftData. No CloudKit or third-party application dependencies.
+Two on-device training apps built from the same SwiftUI and SwiftData source tree. No CloudKit or third-party application dependencies.
+
+## Working on both apps
+
+Open `onlybody/onlybody.xcodeproj` and choose the **onlybody** or **onlyweights** scheme. A shared feature edit is compiled into both apps; each is archived and released separately.
+
+| Product | Bundle ID | Catalog | Branding |
+| --- | --- | --- | --- |
+| OnlyBody | `ikhvost.onlybody` | 65 bodyweight exercises, existing demonstrations | OB |
+| OnlyWeights | `ikhvost.onlyweights` | 16 gym exercises, no demonstrations yet | OW |
+
+- Shared code, fonts, anatomy artwork and launch storyboard: `onlybody/onlybody/`.
+- Product content and brand assets: `onlybody/Products/OnlyBody/` and `onlybody/Products/OnlyWeights/`. Each target includes only its own product folder.
+- Build settings: `onlybody/Configuration/App.xcconfig`, with identity overrides in `OnlyBody.xcconfig` and `OnlyWeights.xcconfig`.
+- `AppConfiguration` carries the display name and generator fallback policy through `AppComposition`. Features do not inspect build flags or bundles to discover their product.
+- Both products use the same SwiftData schema and `Documents/default.store` path inside independent app sandboxes. OnlyBody keeps its existing Bundle ID, seed bytes and user-data location. There is no shared user database or cross-app sync.
+- Shared test sources run in both test targets. Product-specific catalog tests live in `onlybody/ProductTests/`. `JourneyProduct` supplies real catalog names to the same five UI journeys.
+- `bash Scripts/AppIcon/generate.sh OnlyWeights` renders OW icon and launch assets; passing `OnlyBody` renders OB. The existing OnlyBody assets are retained by this change.
 
 ## Toolchain
 
@@ -44,10 +61,10 @@ An active workout has one session UUID and explicit idle/saving/saved/failed sta
 DESTINATION='platform=iOS Simulator,name=iPhone 17 Pro' Scripts/validate.sh
 ```
 
-The script checks architectural boundaries, SwiftLint, all tests, a Release simulator build and temporary seed generation. It stores `.xcresult`, screenshots attached on UI failures and build artifacts under a unique `/tmp` directory. Set `VALIDATION_OUTPUT` to retain them elsewhere. `ALLOW_OLDER_XCODE=1` explicitly permits compatibility checks on an older toolchain, but skips Swift 6.4 generator validation and does not establish target-toolchain support.
+The script checks architectural boundaries, both generated catalogs and bundled seed contents, SwiftLint, all tests and a Release simulator build for each product, bundle resource isolation and temporary generation of both seed stores. It stores `.xcresult`, screenshots attached on UI failures and build artifacts under a unique `/tmp` directory. Set `VALIDATION_OUTPUT` to retain them elsewhere. `ALLOW_OLDER_XCODE=1` explicitly permits compatibility checks on an older toolchain, but skips Swift 6.4 generator validation and does not establish target-toolchain support.
 
-- Unit and integration tests: Swift Testing in `onlybodyTests`.
-- E2E: XCTest + XCUIAutomation only in `onlybodyUITests`. Five journeys cover creation/relaunch, editing, completion/history, early completion and navigation.
+- Unit and integration tests: Swift Testing in `onlybodyTests` and `onlyweightsTests`.
+- E2E: XCTest + XCUIAutomation only in `onlybodyUITests` and `onlyweightsUITests`. Five journeys cover creation/relaunch, editing, completion/history, early completion and navigation.
 - Each E2E test starts with a unique UUID via the Debug-only `ONLYBODY_UI_STORE` environment variable and `ONLYBODY_UI_FIXTURE=catalog`. The app copies the real bundled catalog into `Documents/UITests/<UUID>/default.store`; the test uses real repositories. Relaunching retains that store. Production builds ignore this setting.
 - UI automation uses accessibility identifiers and bounded state waits. Unit timer tests use a manual clock instead of real delays.
 - Persistence tests open a copied bundled store, write data using the original model schema and reopen through the new domain boundary. They also exercise rollback, detached reads and session idempotency.
@@ -64,7 +81,29 @@ swift run --package-path Scripts/StoreGenerator StoreGenerator \
   /tmp/onlybody-new.store Scripts/StoreGenerator/SeedData.json
 ```
 
+For OnlyWeights use `Scripts/StoreGenerator/OnlyWeights/SeedData.json` and an independent output path. Shipping seeds live under `onlybody/Products/<Product>/Resources/SeedStore/default.store`; WAL/SHM sidecars are excluded from builds. See `Scripts/StoreGenerator/README.md` for metadata regeneration commands.
+
 Only replace the bundled store as part of an intentional catalog update. No runtime JSON parsing or bulk catalog insertion is used by the shipping app.
+
+### OnlyWeights rename — 24 October 2026
+
+The gym product is now OnlyWeights: scheme/module `onlyweights`, Bundle ID `ikhvost.onlyweights`, compile condition `ONLYWEIGHTS`, product folders `OnlyWeights`, and an OW monogram for its icon and launch artwork. Exercise content and the OnlyBody product are unchanged.
+
+After renaming, all 172 OnlyWeights and 199 OnlyBody Swift Testing tests passed, along with OnlyWeights' create/relaunch UI journey. Both Release builds, bundle identity/resource checks, lint, generated catalogs and architecture checks passed. Rename validation artifacts are in `/tmp/onlyweights-rename/`.
+
+### Historical two-product verification — 24 October 2026
+
+These results were recorded before the gym product was renamed from OnlyGym to OnlyWeights.
+
+On Xcode 27.1 / Swift 6.4 with iPhone 17 Pro / iOS 26.4.1, the complete two-product validation passed:
+
+- OnlyBody: 199 Swift Testing tests and all five E2E journeys.
+- OnlyGym: 172 Swift Testing tests and the same five E2E journeys.
+- Both Release simulator builds, zero SwiftLint violations, architecture checks, catalog checks, bundle identity/resource isolation and temporary generation of 65/16 exercises.
+- OnlyBody's seed, icon and launch artwork remain byte-identical to the previous revision. Existing-store upgrade tests passed without changing the persistence schema or production store location.
+- On a separate temporary simulator, both Debug apps stayed alive with `XCODE_RUNNING_FOR_PREVIEWS=1` and created no store. Launching both with the same test-store UUID produced distinct sandbox databases with their respective catalogs; a write to the disposable OnlyBody database did not change OnlyGym. The temporary simulator was removed afterward.
+- Visual review confirmed distinct OB/OG home-screen icons, the OnlyGym title and the Lat Pulldown muscle map with its no-video state. The OG launch artwork was inspected; both products use the unchanged launch storyboard layout. The additional navigation run with a retained screenshot passed (`onlygym-Visual.xcresult`).
+- Validation artifacts: `/tmp/onlybody-onlygym-validation/`; storage/preview evidence: `ProductIsolation.json`. Navigation journeys retain a movement-details screenshot for future visual review.
 
 ### Verification recorded for this refactor
 

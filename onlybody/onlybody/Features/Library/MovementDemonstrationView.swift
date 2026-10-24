@@ -40,6 +40,7 @@ struct MovementDemonstrationView: View {
                     .accessibilityIdentifier("demonstration.author")
             } else {
                 Text("No demonstration is available for this exercise yet.")
+                    .accessibilityIdentifier("demonstration.unavailable")
                     .font(Theme.fontSans(Theme.type14))
                     .foregroundStyle(Theme.text2)
             }

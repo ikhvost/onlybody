@@ -19,6 +19,7 @@ struct TrainView: View {
 
             VStack(spacing: Theme.space0) {
                 TrainHeader(
+                    appName: viewModel.appName,
                     dateDisplay: viewModel.dateDisplay,
                     onCreateTap: {
                         showMusclePicker()
@@ -92,7 +93,7 @@ struct TrainView: View {
 #Preview("Train — placeholder") {
     TrainView(
         viewModel: TrainViewModel(
-            workouts: PreviewWorkoutRepository()
+            workouts: PreviewWorkoutRepository(), appName: AppConfiguration.current.displayName
         ),
         showMusclePicker: {},
         showSessionBuilder: { _ in },
@@ -111,7 +112,7 @@ struct TrainView: View {
     )
     return TrainView(
         viewModel: TrainViewModel(
-            workouts: PreviewWorkoutRepository(workouts: [workout])
+            workouts: PreviewWorkoutRepository(workouts: [workout]), appName: AppConfiguration.current.displayName
         ),
         showMusclePicker: {},
         showSessionBuilder: { _ in },

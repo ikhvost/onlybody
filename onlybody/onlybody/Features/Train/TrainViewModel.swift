@@ -10,6 +10,8 @@ final class TrainViewModel {
     var isLoading = false
     var errorMessage: String?
 
+    let appName: String
+
     let dayNames = Weekdays.shortNames
 
     var todayIndex: Int {
@@ -33,8 +35,9 @@ final class TrainViewModel {
         ).uppercased()
     }
 
-    init(workouts: any WorkoutRepository) {
+    init(workouts: any WorkoutRepository, appName: String) {
         self.workoutsRepository = workouts
+        self.appName = appName
     }
 
     func load() async {

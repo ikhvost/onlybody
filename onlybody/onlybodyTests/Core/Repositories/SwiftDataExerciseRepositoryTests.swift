@@ -1,6 +1,10 @@
 import SwiftData
 import Testing
+#if ONLYWEIGHTS
+@testable import onlyweights
+#else
 @testable import onlybody
+#endif
 
 @MainActor
 struct SwiftDataExerciseRepositoryTests {

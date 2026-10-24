@@ -1,0 +1,3 @@
+#include "App.xcconfig"
+APP_DISPLAY_NAME = OnlyBody
+PRODUCT_BUNDLE_IDENTIFIER = ikhvost.onlybody
