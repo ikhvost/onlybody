@@ -4,7 +4,8 @@ import WebKit
 /// Observes content drags without intercepting taps or vertical scrolling.
 final class TabSwipeController: UIViewController, UIGestureRecognizerDelegate {
     var isEnabled = false
-    var onSwipe: (Bool) -> Void = { _ in }
+    var onDrag: (CGFloat) -> Void = { _ in }
+    var onEnd: (Bool?) -> Void = { _ in }
     private var pan: UIPanGestureRecognizer?
 
     override func viewDidAppear(_ animated: Bool) {
@@ -50,13 +51,20 @@ final class TabSwipeController: UIViewController, UIGestureRecognizerDelegate {
     }
 
     @objc private func handlePan(_ gesture: UIPanGestureRecognizer) {
-        guard isEnabled, gesture.state == .ended else { return }
         let distance = gesture.translation(in: gesture.view)
-        let velocity = gesture.velocity(in: gesture.view)
-        guard TabSwipeDecision.accepts(
-            horizontal: distance.x, vertical: distance.y, velocity: velocity.x,
-            thresholds: Theme.tabSwipeThresholds
-        ) else { return }
-        onSwipe(distance.x < 0)
+        switch gesture.state {
+        case .began, .changed:
+            if isEnabled { onDrag(distance.x) }
+        case .ended:
+            let accepted = isEnabled && TabSwipeDecision.accepts(
+                horizontal: distance.x, vertical: distance.y, velocity: gesture.velocity(in: gesture.view).x,
+                thresholds: Theme.tabSwipeThresholds
+            )
+            onEnd(accepted ? distance.x < 0 : nil)
+        case .cancelled, .failed:
+            onEnd(nil)
+        default:
+            break
+        }
     }
 }

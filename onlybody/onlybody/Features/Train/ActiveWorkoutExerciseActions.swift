@@ -11,7 +11,7 @@ struct ActiveWorkoutExerciseActions: View {
             Button(action: onGuide) {
                 HStack(spacing: Theme.space8) {
                     LibraryIcon(color: Theme.accent, size: Theme.type18)
-                    Text("Exercise guide")
+                    Text("Guide")
                 }
                 .frame(maxWidth: .infinity, minHeight: Theme.space48)
                 .background(Theme.surface2)

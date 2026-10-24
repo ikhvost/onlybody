@@ -11,9 +11,13 @@ Library movement details use one generated anatomical reference with front and b
 - `MuscleRegionPaths.swift` contains the aligned boundaries in reference-image coordinates. `MuscleAnatomyView` applies color while preserving the reference's muscle texture and shading. Theme owns colors and layout metrics.
 - Replacing or regenerating the reference requires checking and realigning every region boundary. A matching square image size alone does not guarantee alignment.
 
-The nine regions match the existing catalog: Chest, Back, Shoulders, Arms, Core, Quads, Glutes, Hamstrings and Calves. They represent broad groups, not individual-muscle effort measurements. Location terminology was cross-checked against the [OpenStax muscular-system chapter review](https://openstax.org/books/anatomy-and-physiology/pages/11-chapter-review). The app uses its existing primary and secondary exercise metadata; neither the seed store nor SwiftData schema changes.
+The 14 regions are Chest, Back, Shoulders, Biceps, Triceps, Forearms, Serratus, Core, Quads, Glutes, Hamstrings, Calves, Hip Flexors and Adductors. `AdditionalMuscleRegionPaths.swift` separates the anterior upper-arm biceps, posterior triceps and forearms. Hip Flexors uses a schematic anterior hip projection because some flexors lie deep beneath other muscles.
 
-Primary wins over duplicate secondary entries. Unknown labels remain unhighlighted. `Full Body` is a movement category, so those exercises show only the explicitly listed secondary groups and a caption explaining that choice; the diagram does not invent nine prime movers.
+`SeedData.json` stores explicit `primaryMuscles`, `secondaryMuscles` and `isFullBody` metadata for all 65 exercises. Run `python3 Scripts/StoreGenerator/generate-muscles.py` after editing it. Generated `ExerciseMuscleCatalog` resolves metadata by exact stable name for both new and existing installs. Persistent legacy fields and exercise IDs remain intact. Unknown legacy exercises retain their saved labels; the historical Arms label expands to Biceps, Triceps and Forearms without guessing a more specific role.
+
+Primary wins over duplicate secondary entries. Unknown regions remain unhighlighted. Full Body remains a filter/category; its exercises have explicit primary and secondary regions. Filters match any primary group. The generator accepts both current groups and saved Arms targets.
+
+See [muscle audit](muscle-audit.md) for the complete classification, assumptions and supporting references. These are qualitative programming categories, not measured effort percentages; technique changes the emphasis.
 
 ## Reusable image template
 
@@ -21,7 +25,7 @@ A personal ImageGen template named **OnlyBody Muscle Map** is installed as `$art
 
 Example request:
 
-> $artifact-template-onlybody-muscle-map Зроби карту м'язів для Standard Push-Ups. Основна група: Chest. Допоміжні: Arms, Shoulders, Core. Основні м'язи — золоті #E8A23A, допоміжні — світло-блакитні #8FABB0. Збережи позу, пропорції, передній і задній ракурси, текстуру та прозорий фон еталона. Без написів і логотипів. Зміни лише кольори потрібних м'язових ділянок.
+> $artifact-template-onlybody-muscle-map Зроби карту м'язів для Standard Push-Ups. Основні групи: Chest, Triceps. Допоміжні: Shoulders, Serratus, Core. Основні м'язи — золоті #E8A23A, допоміжні — світло-блакитні #8FABB0. Збережи позу, пропорції, передній і задній ракурси, текстуру та прозорий фон еталона. Без написів і логотипів. Зміни лише кольори потрібних м'язових ділянок.
 
 Supply these fields for each new picture:
 
@@ -35,6 +39,8 @@ For another in-app exercise using existing groups, no new raster image is necess
 
 ## Verification
 
-A nine-panel render was visually inspected for all region boundaries. Swift Testing verifies catalog mappings, precedence, unknown labels, Full Body handling, accessible descriptions and the bundled reference resolution. The bundled-store integration test checks all 65 exercises. The navigation E2E checks that the diagram exposes its accessible description.
+The original nine-region render and the updated six-exercise comparison were visually inspected. Swift Testing verifies catalog mappings, precedence, unknown labels, Full Body handling, accessible descriptions and the bundled reference resolution. The bundled-store integration test checks all 65 exercises. The navigation E2E checks that the diagram exposes its accessible description.
 
 Initial diagram-release validation (`Scripts/validate.sh`) passed on 2026-10-24: architecture checks, SwiftLint with zero warnings, 166 Swift Testing tests, all five navigation/workout E2E journeys, Release build and temporary generation of the 49-exercise seed store. The complete diagram card was also inspected in the iPhone 17 Simulator.
+
+Muscle-profile update validation (2026-10-24): 184 Swift Testing tests and five E2E journeys passed; strict SwiftLint, architecture boundaries, generated catalogs, Release build and temporary 65-exercise seed generation passed. The first full validation run exposed old single-primary filter assertions; after updating those expectations, the full unit/integration target was rerun successfully, followed by Release and generator checks. The six-exercise SwiftUI render checked Dips, Chin-Ups, Scapular Push-Ups, Hanging Leg Raises, Cossack Squats and Burpees. The Debug build was installed on the connected iPhone 15 Pro; a new hands-on device review was not performed.

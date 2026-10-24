@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct NavBarView<Leading: View, Trailing: View>: View {
-    let title: String
+    let title: String?
     private let leading: Leading
     private let trailing: Trailing
 
     init(
-        title: String,
+        title: String? = nil,
         @ViewBuilder leading: () -> Leading,
         @ViewBuilder trailing: () -> Trailing
     ) {
@@ -20,11 +20,13 @@ struct NavBarView<Leading: View, Trailing: View>: View {
             leading
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-            Text(title)
-                .font(Theme.fontSans(Theme.type16, .bold))
-                .tracking(-0.2)
-                .foregroundStyle(Theme.text)
-                .frame(maxWidth: .infinity)
+            if let title {
+                Text(title)
+                    .font(Theme.fontSans(Theme.type16, .bold))
+                    .tracking(-0.2)
+                    .foregroundStyle(Theme.text)
+                    .frame(maxWidth: .infinity)
+            }
 
             trailing
                 .frame(maxWidth: .infinity, alignment: .trailing)
@@ -39,7 +41,7 @@ struct NavBarView<Leading: View, Trailing: View>: View {
     }
 
     init(
-        title: String,
+        title: String? = nil,
         @ViewBuilder leading: () -> Leading
     ) where Trailing == EmptyView {
         self.init(title: title, leading: leading) {

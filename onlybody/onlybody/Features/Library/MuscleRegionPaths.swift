@@ -10,7 +10,8 @@ enum MuscleRegionPaths {
         case .chest: chest()
         case .back: back()
         case .shoulders: shoulders()
-        case .arms: arms()
+        case .biceps, .triceps, .forearms, .serratus, .hipFlexors, .adductors:
+            AdditionalMuscleRegionPaths.path(for: group)
         case .core: core()
         case .quads: quads()
         case .glutes: glutes()
@@ -77,36 +78,6 @@ enum MuscleRegionPaths {
         return result
     }
 
-    private static func arms() -> Path {
-        let front = Path { path in
-            path.move(to: CGPoint(x: 220, y: 328))
-            path.addCurve(to: CGPoint(x: 175, y: 354), control1: CGPoint(x: 204, y: 335), control2: CGPoint(x: 184, y: 344))
-            path.addCurve(to: CGPoint(x: 154, y: 425), control1: CGPoint(x: 163, y: 374), control2: CGPoint(x: 160, y: 406))
-            path.addCurve(to: CGPoint(x: 108, y: 535), control1: CGPoint(x: 135, y: 455), control2: CGPoint(x: 115, y: 497))
-            path.addLine(to: CGPoint(x: 88, y: 590))
-            path.addLine(to: CGPoint(x: 116, y: 600))
-            path.addCurve(to: CGPoint(x: 197, y: 486), control1: CGPoint(x: 140, y: 560), control2: CGPoint(x: 183, y: 523))
-            path.addCurve(to: CGPoint(x: 204, y: 446), control1: CGPoint(x: 203, y: 470), control2: CGPoint(x: 197, y: 457))
-            path.addCurve(to: CGPoint(x: 220, y: 328), control1: CGPoint(x: 221, y: 408), control2: CGPoint(x: 227, y: 367))
-            path.closeSubpath()
-        }
-        let rear = Path { path in
-            path.move(to: CGPoint(x: 784, y: 322))
-            path.addCurve(to: CGPoint(x: 735, y: 348), control1: CGPoint(x: 762, y: 330), control2: CGPoint(x: 744, y: 339))
-            path.addCurve(to: CGPoint(x: 719, y: 422), control1: CGPoint(x: 721, y: 373), control2: CGPoint(x: 723, y: 400))
-            path.addCurve(to: CGPoint(x: 681, y: 495), control1: CGPoint(x: 705, y: 445), control2: CGPoint(x: 690, y: 463))
-            path.addLine(to: CGPoint(x: 661, y: 590))
-            path.addLine(to: CGPoint(x: 690, y: 600))
-            path.addCurve(to: CGPoint(x: 738, y: 502), control1: CGPoint(x: 709, y: 560), control2: CGPoint(x: 726, y: 536))
-            path.addCurve(to: CGPoint(x: 754, y: 450), control1: CGPoint(x: 743, y: 485), control2: CGPoint(x: 741, y: 464))
-            path.addCurve(to: CGPoint(x: 784, y: 322), control1: CGPoint(x: 781, y: 407), control2: CGPoint(x: 797, y: 364))
-            path.closeSubpath()
-        }
-        var result = paired(front, around: 342)
-        result.addPath(paired(rear, around: 910))
-        return result
-    }
-
     private static func core() -> Path {
         let abdomen = Path { path in
             path.move(to: CGPoint(x: 336, y: 364))
@@ -131,7 +102,7 @@ enum MuscleRegionPaths {
         }
         var result = paired(abdomen, around: 342)
         result.addPath(paired(side, around: 342))
-        return result
+        return result.subtracting(AdditionalMuscleRegionPaths.path(for: .serratus))
     }
 
     private static func quads() -> Path {

@@ -50,14 +50,14 @@ struct PersistenceBoundaryTests {
         #expect(try await workouts.workout(by: workout.id)?.items.first?.exercise == nil)
     }
 
-    @Test func shippedSeedAndExistingHistoryReopenWithoutMigration() async throws {
+    @Test func shippedSeedMigratesAndExistingHistoryReopens() async throws {
         let directory = URL.temporaryDirectory.appending(path: UUID().uuidString)
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: directory) }
         let seed = try #require(Bundle.main.url(forResource: "default", withExtension: "store"))
         let url = directory.appending(path: "default.store")
         try FileManager.default.copyItem(at: seed, to: url)
-        // Write using the unchanged original persistence schema, then reopen through domain repositories.
+        // Open the shipped older seed schema, add history, then reopen through domain repositories.
         let sessionID = UUID()
         let workoutID = UUID()
         let count: Int
@@ -93,5 +93,6 @@ struct PersistenceBoundaryTests {
         let sessions = try await SwiftDataSessionRepository(context: context).allSessions()
         #expect(sessions.first?.id == sessionID)
         #expect(sessions.first?.items.first?.setReps == [9, 8])
+        #expect(sessions.first?.items.first?.setWeightsKg == nil)
     }
 }

@@ -42,8 +42,8 @@ nonisolated struct SmartWorkoutGenerator: Sendable {
     private func filteredPool(from exercises: [ExerciseSnapshot], matching expanded: [String]) -> [ExerciseSnapshot] {
         exercises
             .filter { exercise in
-                expanded.contains(exercise.primaryMuscle)
-                    || !Set(exercise.secondaryMuscles).isDisjoint(with: Set(expanded))
+                !Set(exercise.primaryMuscles).isDisjoint(with: expanded)
+                    || !Set(exercise.supportingMuscles).isDisjoint(with: Set(expanded))
             }
 
     }
@@ -81,6 +81,8 @@ nonisolated struct SmartWorkoutGenerator: Sendable {
             switch group {
             case "Full Body":
                 expanded.formUnion(ExerciseCatalog.allMuscles)
+            case "Arms":
+                expanded.formUnion(["Biceps", "Triceps", "Forearms"])
             case "Upper":
                 expanded.formUnion(ExerciseCatalog.upperMuscles)
             case "Lower":

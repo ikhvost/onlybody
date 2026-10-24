@@ -24,7 +24,7 @@ struct MovementMuscleDiagramView: View {
             }
 
             if viewModel.muscleDiagram.isFullBody {
-                Text("Full-body movement · supporting groups shown")
+                Text("Full-body movement · main groups shown")
                     .font(Theme.fontSans(Theme.type11))
                     .foregroundStyle(Theme.text2)
                     .multilineTextAlignment(.center)
@@ -52,7 +52,7 @@ struct MovementMuscleDiagramView: View {
 #Preview("Muscle diagram — push-up") {
     var exercise = ExerciseSnapshot()
     exercise.primaryMuscle = "Chest"
-    exercise.secondaryMuscles = ["Arms", "Shoulders", "Core"]
+    exercise.secondaryMuscles = ["Triceps", "Shoulders", "Core"]
     return MovementMuscleDiagramView(
         viewModel: MovementDetailViewModel(exercise: exercise)
     )

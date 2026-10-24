@@ -17,7 +17,7 @@ final class LibraryViewModel {
 
     var filteredExercises: [ExerciseSnapshot] {
         allExercises.filter {
-            (selectedFilter == "All" || $0.primaryMuscle == selectedFilter) &&
+            $0.matchesMuscleFilter(selectedFilter) &&
             (selectedDifficulty == nil || $0.difficulty == selectedDifficulty) &&
             (searchText.isEmpty || $0.name.localizedStandardContains(searchText))
         }

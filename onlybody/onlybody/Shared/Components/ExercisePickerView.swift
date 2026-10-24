@@ -14,7 +14,7 @@ struct ExercisePickerView: View {
 
     private var filteredExercises: [ExerciseSnapshot] {
         exercises.filter { exercise in
-            let matchesFilter = selectedFilter == "All" || exercise.primaryMuscle == selectedFilter
+            let matchesFilter = exercise.matchesMuscleFilter(selectedFilter)
             let matchesSearch = searchText.isEmpty || exercise.name.localizedStandardContains(searchText)
             return matchesFilter && matchesSearch && (selectedDifficulty == nil || exercise.difficulty == selectedDifficulty)
         }
@@ -101,7 +101,7 @@ struct ExercisePickerView: View {
                                             .foregroundStyle(Theme.text)
 
                                         MonoLabel(
-                                            text: "\(exercise.primaryMuscle.uppercased()) · \(exercise.equipmentLabel.uppercased())",
+                                            text: "\(exercise.primaryMuscleLabel.uppercased()) · \(exercise.equipmentLabel.uppercased())",
                                             size: Theme.type10,
                                             color: Theme.text3,
                                             tracking: 0.3

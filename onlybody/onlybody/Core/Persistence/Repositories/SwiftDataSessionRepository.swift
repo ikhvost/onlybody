@@ -38,6 +38,7 @@ final class SwiftDataSessionRepository: SessionRepository {
                 item.plannedReps = valueItem.plannedReps
                 item.setReps = valueItem.setReps
                 item.weightKg = valueItem.weightKg
+                item.setWeightsKg = valueItem.setWeightsKg
                 model.items?.append(item)
             }
             try context.save()

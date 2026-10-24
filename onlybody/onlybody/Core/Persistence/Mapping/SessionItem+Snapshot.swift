@@ -10,7 +10,8 @@ extension SessionItem {
             plannedSets: plannedSets,
             plannedReps: plannedReps,
             setReps: setReps,
-            weightKg: weightKg
+            weightKg: weightKg,
+            setWeightsKg: setWeightsKg
         )
     }
 }

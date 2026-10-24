@@ -14,6 +14,7 @@ mkdir -p "$output"
 python3 Scripts/Validation/check-boundaries.py
 python3 Scripts/ExerciseMedia/generate.py --check
 python3 Scripts/StoreGenerator/generate-difficulties.py --check
+python3 Scripts/StoreGenerator/generate-muscles.py --check
 swiftlint lint --strict --no-cache
 xcodebuild test -project onlybody/onlybody.xcodeproj -scheme onlybody \
     -destination "$DESTINATION" -parallel-testing-enabled NO \

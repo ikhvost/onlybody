@@ -22,9 +22,9 @@ struct MuscleDiagramTests {
     }
 
     @Test func primaryWinsAndSecondaryGroupsAreUnique() {
-        let diagram = MuscleDiagram(primaryMuscle: "Chest", secondaryMuscles: ["Arms", "Chest", "Arms", "Shoulders", "Unknown"])
+        let diagram = MuscleDiagram(primaryMuscle: "Chest", secondaryMuscles: ["Triceps", "Chest", "Triceps", "Shoulders", "Unknown"])
         #expect(diagram.primary == [.chest])
-        #expect(Set(diagram.secondary) == [.arms, .shoulders])
+        #expect(Set(diagram.secondary) == [.triceps, .shoulders])
         #expect(diagram.secondary.count == 2)
     }
 

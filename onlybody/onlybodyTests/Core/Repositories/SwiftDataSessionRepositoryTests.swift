@@ -60,6 +60,7 @@ struct SwiftDataSessionRepositoryTests {
         item2.plannedReps = 15
         item2.setReps = [15, 15, 15, 15]
         item2.weightKg = 10.0
+        item2.setWeightsKg = [0, 2.5, 5, 10]
 
         var session = SessionSnapshot()
         session.workoutName = "Full Body"
@@ -79,6 +80,7 @@ struct SwiftDataSessionRepositoryTests {
         #expect(sorted[0].setReps == [12, 12, 10])
         #expect(sorted[1].exerciseName == "Squats")
         #expect(sorted[1].weightKg == 10.0)
+        #expect(sorted[1].setWeightsKg == [0, 2.5, 5, 10])
     }
 
     @Test

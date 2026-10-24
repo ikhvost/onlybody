@@ -1,17 +1,19 @@
-/// Maps saved catalog labels to anatomy regions without relying on exercise IDs or names.
+/// Maps resolved catalog muscle roles to the anatomy illustration.
 nonisolated struct MuscleDiagram: Equatable, Sendable {
     let primary: [MuscleGroup]
     let secondary: [MuscleGroup]
     let isFullBody: Bool
 
-    init(primaryMuscle: String, secondaryMuscles: [String]) {
-        primary = MuscleGroup(rawValue: primaryMuscle).map { [$0] } ?? []
+    init(primaryMuscles: [String], secondaryMuscles: [String], isFullBody: Bool = false) {
+        primary = MuscleGroup.allCases.filter { primaryMuscles.contains($0.rawValue) }
         secondary = MuscleGroup.allCases.filter {
-            secondaryMuscles.contains($0.rawValue) && $0.rawValue != primaryMuscle
+            secondaryMuscles.contains($0.rawValue) && !primaryMuscles.contains($0.rawValue)
         }
-        // Full Body is a movement category, not evidence that every region is a prime mover.
-        // For these exercises the diagram shows only the explicitly listed supporting groups.
-        isFullBody = primaryMuscle == "Full Body"
+        self.isFullBody = isFullBody
+    }
+
+    init(primaryMuscle: String, secondaryMuscles: [String]) {
+        self.init(primaryMuscles: [primaryMuscle], secondaryMuscles: secondaryMuscles, isFullBody: primaryMuscle == "Full Body")
     }
 
     var hasHighlightedRegions: Bool { !primary.isEmpty || !secondary.isEmpty }

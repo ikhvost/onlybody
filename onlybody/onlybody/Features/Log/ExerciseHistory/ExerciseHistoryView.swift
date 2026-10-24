@@ -8,7 +8,7 @@ struct ExerciseHistoryView: View {
         ZStack {
             Theme.bg.ignoresSafeArea()
             VStack(spacing: Theme.space0) {
-                NavBarView(title: "History") {
+                NavBarView {
                     Button {
                         dismiss()
                     } label: {
@@ -51,11 +51,7 @@ struct ExerciseHistoryView: View {
                                 .font(Theme.fontSans(Theme.type14))
                                 .foregroundStyle(Theme.text2)
                         } else {
-                            ExerciseHistorySummary(
-                                workouts: viewModel.entries.count,
-                                sets: viewModel.totalSets,
-                                reps: viewModel.totalReps
-                            )
+                            MonoLabel(text: "Last session", size: Theme.type11, color: Theme.text2)
                             LazyVStack(spacing: Theme.space14) {
                                 ForEach(viewModel.entries) { entry in
                                     ExerciseHistoryRow(entry: entry)
@@ -78,7 +74,7 @@ struct ExerciseHistoryView: View {
 
 #if DEBUG
 #Preview("Exercise history") {
-    let item = SessionItemSnapshot(exerciseName: "Standard Push-Ups", setReps: [12, 10, 8], weightKg: 5)
+    let item = SessionItemSnapshot(exerciseName: "Standard Push-Ups", setReps: [12, 10, 8], setWeightsKg: [0, 2.5, 5])
     let session = SessionSnapshot(date: Date(timeIntervalSince1970: 1_790_000_000), workoutName: "Upper Body", items: [item])
     ExerciseHistoryView(viewModel: ExerciseHistoryViewModel(
         exerciseName: item.exerciseName, sessions: PreviewSessionRepository(sessions: [session])

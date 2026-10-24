@@ -6,6 +6,7 @@ import Observation
 final class MovementDetailViewModel {
     private let timeSource: any WorkoutTimeSource
     private let allowsVideoLoading: Bool
+    private let usesLocalPlayer: Bool
     private let network: any NetworkAvailabilitySource
     private var hasNetwork = true
 
@@ -20,13 +21,16 @@ final class MovementDetailViewModel {
     var exercise: ExerciseSnapshot
 
     var muscleDiagram: MuscleDiagram {
-        MuscleDiagram(primaryMuscle: exercise.primaryMuscle, secondaryMuscles: exercise.secondaryMuscles)
+        MuscleDiagram(
+            primaryMuscles: exercise.primaryMuscles,
+            secondaryMuscles: exercise.supportingMuscles,
+            isFullBody: exercise.muscleProfile.isFullBody)
     }
 
     var muscleDiagramDescription: String {
         let diagram = muscleDiagram
         var descriptions = ["Muscle groups, front and back views."]
-        if diagram.isFullBody { descriptions.append("Full-body exercise; only the listed supporting groups are highlighted.") }
+        if diagram.isFullBody { descriptions.append("Full-body exercise; primary and secondary groups are highlighted.") }
         if !diagram.primary.isEmpty {
             descriptions.append("Primary: \(diagram.primary.map(\.rawValue).joined(separator: ", ")).")
         }
@@ -42,12 +46,14 @@ final class MovementDetailViewModel {
         demonstration: ExerciseDemonstration? = nil,
         bundleIdentifier: String = Bundle.main.bundleIdentifier ?? "",
         allowsVideoLoading: Bool = true,
+        localPlayerDocument: YouTubeEmbedDocument? = nil,
         network: any NetworkAvailabilitySource = SystemNetworkAvailabilitySource(),
         timeSource: any WorkoutTimeSource = SystemWorkoutTimeSource()
     ) {
         self.exercise = exercise
         self.demonstration = demonstration
-        playerDocument = demonstration.flatMap {
+        usesLocalPlayer = localPlayerDocument != nil
+        playerDocument = localPlayerDocument ?? demonstration.flatMap {
             YouTubeEmbedDocument(demonstration: $0, bundleIdentifier: bundleIdentifier)
         }
         self.allowsVideoLoading = allowsVideoLoading
@@ -58,6 +64,7 @@ final class MovementDetailViewModel {
     func loadDemonstration() {
         guard isPlayerActive, hasNetwork, let demonstration else { return }
         guard allowsVideoLoading else {
+            if usesLocalPlayer { playerSessionID = UUID() }
             demonstrationState = .ready
             return
         }

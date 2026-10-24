@@ -11,9 +11,6 @@ final class ExerciseHistoryViewModel {
     private(set) var isLoading = false
     private(set) var errorMessage: String?
 
-    var totalReps: Int { entries.reduce(0) { $0 + $1.totalReps } }
-    var totalSets: Int { entries.reduce(0) { $0 + $1.totalSets } }
-
     init(exerciseName: String, sessions: any SessionRepository) {
         self.exerciseName = exerciseName
         self.sessions = sessions
@@ -38,6 +35,7 @@ final class ExerciseHistoryViewModel {
                 if $0.date != $1.date { return $0.date > $1.date }
                 return $0.id.uuidString < $1.id.uuidString
             }
+            entries = Array(entries.prefix(1))
         } catch {
             errorMessage = "Could not load exercise history."
         }

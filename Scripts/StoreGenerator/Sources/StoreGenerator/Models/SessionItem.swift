@@ -10,6 +10,7 @@ final class SessionItem {
     var plannedReps: Int = 12
     var setReps: [Int] = []
     var weightKg: Double?
+    var setWeightsKg: [Double]?
 
     init() {}
 }

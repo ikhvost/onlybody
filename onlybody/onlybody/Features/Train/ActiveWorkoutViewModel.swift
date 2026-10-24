@@ -15,6 +15,7 @@ final class ActiveWorkoutViewModel {
     var currentSetIndex: Int = 0
 
     var completedSets: [String: Int] = [:]
+    private var completedWeights: [String: Double] = [:]
     var actualReps: [String: Int] = [:]
     var weights: [Int: Double] = [:]
 
@@ -116,6 +117,7 @@ final class ActiveWorkoutViewModel {
             currentExerciseIndex = 0
             currentSetIndex = 0
             completedSets = [:]
+            completedWeights = [:]
             actualReps = [:]
             weights = [:]
             isComplete = false
@@ -133,6 +135,7 @@ final class ActiveWorkoutViewModel {
 
         let reps = currentDisplayReps
         completedSets[currentKey] = reps
+        completedWeights[currentKey] = currentWeight
 
         let nextSet = currentSetIndex + 1
 
@@ -215,13 +218,16 @@ final class ActiveWorkoutViewModel {
             sessionItem.weightKg = weights[index] ?? 0
 
             var setReps: [Int] = []
+            var setWeights: [Double] = []
             for setIndex in 0..<max(0, item.sets) {
                 let k = key(for: index, set: setIndex)
                 if let reps = completedSets[k] {
                     setReps.append(reps)
+                    setWeights.append(completedWeights[k] ?? 0)
                 }
             }
             sessionItem.setReps = setReps
+            sessionItem.setWeightsKg = setWeights
 
             result.append(sessionItem)
         }

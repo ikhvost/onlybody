@@ -13,7 +13,7 @@ struct LibraryExerciseRow: View {
                         .foregroundStyle(Theme.text)
 
                     MonoLabel(
-                        text: "\(exercise.primaryMuscle) · \(exercise.equipmentLabel)",
+                        text: "\(exercise.primaryMuscleLabel) · \(exercise.equipmentLabel)",
                         size: Theme.type10,
                         color: Theme.text3,
                         tracking: 0.3

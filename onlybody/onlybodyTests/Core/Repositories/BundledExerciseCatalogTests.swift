@@ -43,10 +43,11 @@ struct BundledExerciseCatalogTests {
         #expect(try context.fetchCount(FetchDescriptor<SessionItem>()) == 0)
 
         for exercise in exercises {
-            let diagram = MuscleDiagram(primaryMuscle: exercise.primaryMuscle, secondaryMuscles: exercise.secondaryMuscles)
+            let diagram = MovementDetailViewModel(exercise: exercise).muscleDiagram
             #expect(exercise.difficulty != .unrated)
             #expect(diagram.hasHighlightedRegions)
-            #expect(exercise.primaryMuscle == "Full Body" || !diagram.primary.isEmpty)
+            #expect(!diagram.primary.isEmpty)
+            #expect(Set(diagram.primary.map(\.rawValue)) == Set(exercise.primaryMuscles))
             #expect(Set(diagram.secondary.map(\.rawValue)) == Set(exercise.secondaryMuscles))
             #expect(ExerciseCatalog.primaryMuscles.contains(exercise.primaryMuscle))
             #expect(Set(exercise.secondaryMuscles).isSubset(of: Set(ExerciseCatalog.allMuscles)))
@@ -61,18 +62,20 @@ struct BundledExerciseCatalogTests {
 
         for muscle in ExerciseCatalog.primaryMuscles {
             viewModel.selectedFilter = muscle
-            #expect(!viewModel.filteredExercises.isEmpty)
-            #expect(viewModel.filteredExercises.allSatisfy { $0.primaryMuscle == muscle })
+            let expected = exercises.filter {
+                $0.primaryMuscles.contains(muscle) || (muscle == "Full Body" && $0.muscleProfile.isFullBody)
+            }
+            #expect(Set(viewModel.filteredExercises.map(\.id)) == Set(expected.map(\.id)))
         }
 
         viewModel.selectedFilter = "Back"
-        #expect(viewModel.filteredExercises.count == 10)
-        #expect(viewModel.filteredExercises.filter { $0.equipment == ["None"] }.count == 3)
+        #expect(viewModel.filteredExercises.count == 11)
+        #expect(viewModel.filteredExercises.filter { $0.equipment == ["None"] }.count == 4)
         viewModel.searchText = "snow"
         #expect(viewModel.filteredExercises.map(\.name) == ["Reverse Snow Angels"])
         viewModel.searchText = ""
         viewModel.selectedFilter = "Core"
-        #expect(viewModel.filteredExercises.count == 10)
+        #expect(viewModel.filteredExercises.count == 11)
         viewModel.selectedFilter = "All"
         #expect(viewModel.filteredExercises.count == 65)
     }

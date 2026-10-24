@@ -491,6 +491,23 @@ struct ActiveWorkoutViewModelTests {
         #expect(sessionItems[0].weightKg == 2.5)
     }
 
+    @Test func completedSetWeightsSurviveLaterChangesAndEarlyFinish() async {
+        let exercise = makeExercise(name: "Squats")
+        let item = makeWorkoutItem(order: 0, sets: 3, targetReps: 10, restSeconds: 45, exercise: exercise)
+        let workout = makeWorkout(id: UUID(), name: "Legs", items: [item])
+        let (vm, _, repository) = makeViewModel(workout: workout)
+        await vm.load()
+        defer { vm.cleanup() }
+        vm.markSetDone()
+        vm.incrementWeight()
+        vm.incrementReps()
+        vm.markSetDone()
+        vm.incrementWeight()
+        await vm.endSession()
+        #expect(repository.savedSessions.first?.items.first?.setReps == [10, 11])
+        #expect(repository.savedSessions.first?.items.first?.setWeightsKg == [0, 2.5])
+    }
+
     // MARK: - Cleanup
 
     @Test

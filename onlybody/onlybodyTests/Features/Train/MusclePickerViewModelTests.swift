@@ -68,13 +68,13 @@ struct MusclePickerViewModelTests {
     }
 
     @Test
-    func allTwelveMusclesPresent() async {
+    func allMuscleTargetsPresent() async {
         let viewModel = MusclePickerViewModel()
 
-        #expect(viewModel.muscles.count == 12)
+        #expect(viewModel.muscles.count == 17)
 
         let expectedLabels = [
-            "Chest", "Back", "Shoulders", "Arms",
+            "Chest", "Back", "Shoulders", "Biceps", "Triceps", "Forearms", "Serratus", "Hip Flexors", "Adductors",
             "Core", "Quads", "Glutes", "Hamstrings",
             "Calves", "Full Body", "Upper", "Lower"
         ]

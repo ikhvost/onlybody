@@ -3,218 +3,307 @@
     "name": "Wall Push-Ups",
     "primaryMuscle": "Chest",
     "secondaryMuscles": [
-      "Arms",
-      "Shoulders"
+      "Shoulders",
+      "Serratus",
+      "Core"
     ],
     "equipment": [
       "Wall"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Chest",
+      "Triceps"
+    ]
   },
   {
     "name": "Incline Push-Ups",
     "primaryMuscle": "Chest",
     "secondaryMuscles": [
-      "Arms",
       "Shoulders",
+      "Serratus",
       "Core"
     ],
     "equipment": [
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Chest",
+      "Triceps"
+    ]
   },
   {
     "name": "Knee Push-Ups",
     "primaryMuscle": "Chest",
     "secondaryMuscles": [
-      "Arms",
-      "Shoulders"
-    ],
-    "equipment": [
-      "None"
-    ],
-    "frequencyPreference": "normal",
-    "difficulty": "beginner"
-  },
-  {
-    "name": "Standard Push-Ups",
-    "primaryMuscle": "Chest",
-    "secondaryMuscles": [
-      "Arms",
       "Shoulders",
+      "Serratus",
       "Core"
     ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Chest",
+      "Triceps"
+    ]
+  },
+  {
+    "name": "Standard Push-Ups",
+    "primaryMuscle": "Chest",
+    "secondaryMuscles": [
+      "Shoulders",
+      "Serratus",
+      "Core"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Chest",
+      "Triceps"
+    ]
   },
   {
     "name": "Decline Push-Ups",
     "primaryMuscle": "Chest",
     "secondaryMuscles": [
       "Shoulders",
-      "Arms",
+      "Serratus",
       "Core"
     ],
     "equipment": [
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Chest",
+      "Triceps"
+    ]
   },
   {
     "name": "Archer Push-Ups",
     "primaryMuscle": "Chest",
     "secondaryMuscles": [
-      "Arms",
       "Shoulders",
+      "Serratus",
       "Core"
     ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced"
+    "difficulty": "advanced",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Chest",
+      "Triceps"
+    ]
   },
   {
     "name": "Superman",
     "primaryMuscle": "Back",
     "secondaryMuscles": [
-      "Glutes",
       "Hamstrings"
     ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Back",
+      "Glutes"
+    ]
   },
   {
     "name": "Prone Y Raises",
     "primaryMuscle": "Back",
     "secondaryMuscles": [
-      "Shoulders"
+      "Core"
     ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Back",
+      "Shoulders"
+    ]
   },
   {
     "name": "Reverse Snow Angels",
     "primaryMuscle": "Back",
     "secondaryMuscles": [
-      "Shoulders"
+      "Core"
     ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Back",
+      "Shoulders"
+    ]
   },
   {
     "name": "Inverted Rows",
     "primaryMuscle": "Back",
     "secondaryMuscles": [
-      "Arms",
       "Shoulders",
+      "Forearms",
       "Core"
     ],
     "equipment": [
       "Low Bar"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Back",
+      "Biceps"
+    ]
   },
   {
     "name": "Foot-Assisted Pull-Ups",
     "primaryMuscle": "Back",
     "secondaryMuscles": [
-      "Arms"
+      "Shoulders",
+      "Forearms",
+      "Core"
     ],
     "equipment": [
       "Pull-up Bar",
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Back",
+      "Biceps"
+    ]
   },
   {
     "name": "Negative Pull-Ups",
     "primaryMuscle": "Back",
     "secondaryMuscles": [
-      "Arms",
-      "Shoulders"
+      "Shoulders",
+      "Forearms",
+      "Core"
     ],
     "equipment": [
       "Pull-up Bar",
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Back",
+      "Biceps"
+    ]
   },
   {
     "name": "Chin-Ups",
     "primaryMuscle": "Back",
     "secondaryMuscles": [
-      "Arms"
-    ],
-    "equipment": [
-      "Pull-up Bar"
-    ],
-    "frequencyPreference": "normal",
-    "difficulty": "intermediate"
-  },
-  {
-    "name": "Pull-Ups",
-    "primaryMuscle": "Back",
-    "secondaryMuscles": [
-      "Arms",
-      "Shoulders"
-    ],
-    "equipment": [
-      "Pull-up Bar"
-    ],
-    "frequencyPreference": "normal",
-    "difficulty": "intermediate"
-  },
-  {
-    "name": "Archer Pull-Ups",
-    "primaryMuscle": "Back",
-    "secondaryMuscles": [
-      "Arms",
+      "Shoulders",
+      "Forearms",
       "Core"
     ],
     "equipment": [
       "Pull-up Bar"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Back",
+      "Biceps"
+    ]
+  },
+  {
+    "name": "Pull-Ups",
+    "primaryMuscle": "Back",
+    "secondaryMuscles": [
+      "Shoulders",
+      "Forearms",
+      "Core"
+    ],
+    "equipment": [
+      "Pull-up Bar"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Back",
+      "Biceps"
+    ]
+  },
+  {
+    "name": "Archer Pull-Ups",
+    "primaryMuscle": "Back",
+    "secondaryMuscles": [
+      "Shoulders",
+      "Forearms",
+      "Core"
+    ],
+    "equipment": [
+      "Pull-up Bar"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "advanced",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Back",
+      "Biceps"
+    ]
   },
   {
     "name": "Pike Push-Ups",
     "primaryMuscle": "Shoulders",
     "secondaryMuscles": [
-      "Arms",
-      "Chest"
+      "Serratus",
+      "Chest",
+      "Core"
     ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ]
   },
   {
     "name": "Feet-Elevated Pike Push-Ups",
     "primaryMuscle": "Shoulders",
     "secondaryMuscles": [
-      "Arms",
+      "Serratus",
       "Chest",
       "Core"
     ],
@@ -222,26 +311,36 @@
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced"
+    "difficulty": "advanced",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ]
   },
   {
     "name": "Wall Handstand Push-Ups",
     "primaryMuscle": "Shoulders",
     "secondaryMuscles": [
-      "Arms",
+      "Serratus",
+      "Chest",
       "Core"
     ],
     "equipment": [
       "Wall"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced"
+    "difficulty": "advanced",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ]
   },
   {
     "name": "Foot-Assisted Dips",
-    "primaryMuscle": "Arms",
+    "primaryMuscle": "Chest",
     "secondaryMuscles": [
-      "Chest",
       "Shoulders"
     ],
     "equipment": [
@@ -249,175 +348,258 @@
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Chest",
+      "Triceps"
+    ]
   },
   {
     "name": "Diamond Push-Ups",
-    "primaryMuscle": "Arms",
+    "primaryMuscle": "Chest",
     "secondaryMuscles": [
-      "Chest",
       "Shoulders",
+      "Serratus",
       "Core"
     ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Chest",
+      "Triceps"
+    ]
   },
   {
     "name": "Dips",
-    "primaryMuscle": "Arms",
+    "primaryMuscle": "Chest",
     "secondaryMuscles": [
-      "Chest",
       "Shoulders"
     ],
     "equipment": [
       "Dip Bar"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Chest",
+      "Triceps"
+    ]
   },
   {
     "name": "Dead Bug",
     "primaryMuscle": "Core",
-    "secondaryMuscles": [],
+    "secondaryMuscles": [
+      "Hip Flexors"
+    ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Core"
+    ]
   },
   {
     "name": "Plank",
     "primaryMuscle": "Core",
     "secondaryMuscles": [
       "Shoulders",
+      "Serratus",
       "Glutes"
     ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Core"
+    ]
   },
   {
     "name": "Side Plank",
     "primaryMuscle": "Core",
     "secondaryMuscles": [
       "Shoulders",
+      "Serratus",
       "Glutes"
     ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Core"
+    ]
   },
   {
     "name": "Reverse Crunch",
     "primaryMuscle": "Core",
-    "secondaryMuscles": [],
+    "secondaryMuscles": [
+      "Hip Flexors"
+    ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Core"
+    ]
   },
   {
     "name": "Hanging Leg Raises",
-    "primaryMuscle": "Core",
+    "primaryMuscle": "Hip Flexors",
     "secondaryMuscles": [
-      "Arms",
+      "Forearms",
       "Back"
     ],
     "equipment": [
       "Pull-up Bar"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced"
+    "difficulty": "advanced",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Hip Flexors",
+      "Core"
+    ]
   },
   {
     "name": "Assisted Squats",
     "primaryMuscle": "Quads",
     "secondaryMuscles": [
-      "Glutes"
+      "Adductors",
+      "Core",
+      "Calves"
     ],
     "equipment": [
       "Stable Support"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ]
   },
   {
     "name": "Squats",
     "primaryMuscle": "Quads",
     "secondaryMuscles": [
-      "Glutes",
-      "Core"
+      "Adductors",
+      "Core",
+      "Calves"
     ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ]
   },
   {
     "name": "Split Squats",
     "primaryMuscle": "Quads",
     "secondaryMuscles": [
-      "Glutes"
+      "Adductors",
+      "Core",
+      "Hamstrings",
+      "Calves"
     ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ]
   },
   {
     "name": "Reverse Lunges",
     "primaryMuscle": "Quads",
     "secondaryMuscles": [
-      "Glutes",
-      "Hamstrings"
+      "Adductors",
+      "Core",
+      "Hamstrings",
+      "Calves"
     ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ]
   },
   {
     "name": "Step-Ups",
     "primaryMuscle": "Quads",
     "secondaryMuscles": [
-      "Glutes",
+      "Adductors",
+      "Core",
+      "Hamstrings",
       "Calves"
     ],
     "equipment": [
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ]
   },
   {
     "name": "Bulgarian Split Squats",
     "primaryMuscle": "Quads",
     "secondaryMuscles": [
-      "Glutes",
-      "Hamstrings"
+      "Adductors",
+      "Core",
+      "Hamstrings",
+      "Calves"
     ],
     "equipment": [
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ]
   },
   {
     "name": "Assisted Pistol Squats",
     "primaryMuscle": "Quads",
     "secondaryMuscles": [
-      "Glutes",
+      "Adductors",
       "Core",
       "Calves"
     ],
@@ -425,27 +607,37 @@
       "Stable Support"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ]
   },
   {
     "name": "Cossack Squats",
     "primaryMuscle": "Quads",
     "secondaryMuscles": [
-      "Glutes",
-      "Hamstrings",
-      "Core"
+      "Core",
+      "Hamstrings"
     ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Quads",
+      "Glutes",
+      "Adductors"
+    ]
   },
   {
     "name": "Pistol Squats",
     "primaryMuscle": "Quads",
     "secondaryMuscles": [
-      "Glutes",
+      "Adductors",
       "Core",
       "Calves"
     ],
@@ -453,7 +645,12 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced"
+    "difficulty": "advanced",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ]
   },
   {
     "name": "Glute Bridge",
@@ -466,17 +663,27 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Glutes"
+    ]
   },
   {
     "name": "Side-Lying Hip Abduction",
     "primaryMuscle": "Glutes",
-    "secondaryMuscles": [],
+    "secondaryMuscles": [
+      "Core"
+    ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Glutes"
+    ]
   },
   {
     "name": "Single-Leg Glute Bridge",
@@ -489,7 +696,11 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Glutes"
+    ]
   },
   {
     "name": "Single-Leg Hip Thrusts",
@@ -502,20 +713,30 @@
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Glutes"
+    ]
   },
   {
     "name": "Single-Leg Romanian Deadlift",
     "primaryMuscle": "Hamstrings",
     "secondaryMuscles": [
-      "Glutes",
-      "Core"
+      "Back",
+      "Core",
+      "Adductors"
     ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ]
   },
   {
     "name": "Hamstring Walkouts",
@@ -528,7 +749,11 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Hamstrings"
+    ]
   },
   {
     "name": "Sliding Leg Curls",
@@ -541,19 +766,29 @@
       "Towel"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Hamstrings"
+    ]
   },
   {
     "name": "Nordic Curls",
     "primaryMuscle": "Hamstrings",
     "secondaryMuscles": [
-      "Calves"
+      "Calves",
+      "Glutes",
+      "Core"
     ],
     "equipment": [
       "Fixed Ankle Support"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced"
+    "difficulty": "advanced",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Hamstrings"
+    ]
   },
   {
     "name": "Calf Raises",
@@ -563,7 +798,11 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Calves"
+    ]
   },
   {
     "name": "Single-Leg Calf Raises",
@@ -573,37 +812,95 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Calves"
+    ]
   },
   {
     "name": "Walking Jacks",
     "primaryMuscle": "Full Body",
     "secondaryMuscles": [
       "Calves",
-      "Shoulders"
+      "Core"
     ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": true,
+    "primaryMuscles": [
+      "Glutes",
+      "Shoulders"
+    ]
   },
   {
     "name": "Jumping Jacks",
     "primaryMuscle": "Full Body",
     "secondaryMuscles": [
-      "Calves",
-      "Shoulders"
+      "Quads",
+      "Core",
+      "Adductors"
     ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": true,
+    "primaryMuscles": [
+      "Calves",
+      "Glutes",
+      "Shoulders"
+    ]
   },
   {
     "name": "Mountain Climbers",
     "primaryMuscle": "Full Body",
+    "secondaryMuscles": [
+      "Shoulders",
+      "Serratus",
+      "Triceps",
+      "Quads"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": true,
+    "primaryMuscles": [
+      "Hip Flexors",
+      "Core"
+    ]
+  },
+  {
+    "name": "Burpees",
+    "primaryMuscle": "Full Body",
+    "secondaryMuscles": [
+      "Shoulders",
+      "Core",
+      "Calves",
+      "Serratus"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "advanced",
+    "isFullBody": true,
+    "primaryMuscles": [
+      "Quads",
+      "Glutes",
+      "Chest",
+      "Triceps"
+    ]
+  },
+  {
+    "name": "Scapular Push-Ups",
+    "primaryMuscle": "Serratus",
     "secondaryMuscles": [
       "Core",
       "Shoulders"
@@ -612,68 +909,52 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
-  },
-  {
-    "name": "Burpees",
-    "primaryMuscle": "Full Body",
-    "secondaryMuscles": [
-      "Chest",
-      "Quads",
-      "Shoulders",
-      "Core"
-    ],
-    "equipment": [
-      "None"
-    ],
-    "frequencyPreference": "normal",
-    "difficulty": "advanced"
-  },
-  {
-    "name": "Scapular Push-Ups",
-    "primaryMuscle": "Shoulders",
-    "secondaryMuscles": [
-      "Chest",
-      "Core"
-    ],
-    "equipment": [
-      "None"
-    ],
-    "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Serratus"
+    ]
   },
   {
     "name": "Scapular Pull-Ups",
     "primaryMuscle": "Back",
     "secondaryMuscles": [
-      "Shoulders",
-      "Arms"
+      "Forearms",
+      "Core"
     ],
     "equipment": [
       "Pull-up Bar"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Back"
+    ]
   },
   {
     "name": "Close-Grip Push-Ups",
-    "primaryMuscle": "Arms",
+    "primaryMuscle": "Chest",
     "secondaryMuscles": [
-      "Chest",
       "Shoulders",
+      "Serratus",
       "Core"
     ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Chest",
+      "Triceps"
+    ]
   },
   {
     "name": "Bird Dog",
     "primaryMuscle": "Core",
     "secondaryMuscles": [
-      "Back",
       "Glutes",
       "Shoulders"
     ],
@@ -681,103 +962,150 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Core",
+      "Back"
+    ]
   },
   {
     "name": "Hollow Body Hold",
     "primaryMuscle": "Core",
-    "secondaryMuscles": [],
+    "secondaryMuscles": [
+      "Hip Flexors"
+    ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Core"
+    ]
   },
   {
     "name": "Bicycle Crunches",
     "primaryMuscle": "Core",
-    "secondaryMuscles": [],
+    "secondaryMuscles": [
+      "Hip Flexors"
+    ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Core"
+    ]
   },
   {
     "name": "Flutter Kicks",
-    "primaryMuscle": "Core",
-    "secondaryMuscles": [],
+    "primaryMuscle": "Hip Flexors",
+    "secondaryMuscles": [
+      "Core",
+      "Quads"
+    ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Hip Flexors"
+    ]
   },
   {
     "name": "Hanging Knee Raises",
-    "primaryMuscle": "Core",
+    "primaryMuscle": "Hip Flexors",
     "secondaryMuscles": [
-      "Arms",
+      "Forearms",
       "Back"
     ],
     "equipment": [
       "Pull-up Bar"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Hip Flexors",
+      "Core"
+    ]
   },
   {
     "name": "Wall Sit",
     "primaryMuscle": "Quads",
     "secondaryMuscles": [
-      "Glutes"
+      "Glutes",
+      "Core"
     ],
     "equipment": [
       "Wall"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Quads"
+    ]
   },
   {
     "name": "Lateral Lunges",
     "primaryMuscle": "Quads",
     "secondaryMuscles": [
-      "Glutes",
-      "Hamstrings",
-      "Core"
+      "Core",
+      "Hamstrings"
     ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Quads",
+      "Glutes",
+      "Adductors"
+    ]
   },
   {
     "name": "Jump Squats",
     "primaryMuscle": "Quads",
     "secondaryMuscles": [
-      "Glutes",
-      "Calves",
-      "Core"
+      "Core",
+      "Adductors"
     ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Quads",
+      "Glutes",
+      "Calves"
+    ]
   },
   {
     "name": "Donkey Kicks",
     "primaryMuscle": "Glutes",
     "secondaryMuscles": [
-      "Hamstrings",
       "Core"
     ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Glutes"
+    ]
   },
   {
     "name": "Fire Hydrants",
@@ -789,36 +1117,50 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Glutes"
+    ]
   },
   {
     "name": "Bear Crawl",
     "primaryMuscle": "Full Body",
     "secondaryMuscles": [
-      "Shoulders",
-      "Core",
       "Quads",
-      "Arms"
+      "Triceps",
+      "Hip Flexors"
     ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": true,
+    "primaryMuscles": [
+      "Core",
+      "Shoulders",
+      "Serratus"
+    ]
   },
   {
     "name": "High Knees",
     "primaryMuscle": "Full Body",
     "secondaryMuscles": [
       "Quads",
-      "Calves",
-      "Core"
+      "Core",
+      "Glutes"
     ],
     "equipment": [
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate"
+    "difficulty": "intermediate",
+    "isFullBody": true,
+    "primaryMuscles": [
+      "Hip Flexors",
+      "Calves"
+    ]
   },
   {
     "name": "Bent-Knee Calf Raises",
@@ -828,6 +1170,10 @@
       "Stable Support"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "isFullBody": false,
+    "primaryMuscles": [
+      "Calves"
+    ]
   }
 ]

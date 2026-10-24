@@ -10,7 +10,7 @@ struct MovementDetailView: View {
             Theme.bg.ignoresSafeArea()
 
             VStack(spacing: Theme.space0) {
-                NavBarView(title: "Movement") {
+                NavBarView {
                     Button {
                         dismiss()
                     } label: {
@@ -46,7 +46,7 @@ struct MovementDetailView: View {
                             .frame(height: 1)
 
                         VStack(alignment: .leading, spacing: Theme.space8) {
-                            MonoLabel(text: "Primary muscle", size: Theme.type11, tracking: 0.8)
+                            MonoLabel(text: "Primary muscles", size: Theme.type11, tracking: 0.8)
 
                             HStack(spacing: Theme.space8) {
                                 Rectangle()
@@ -54,7 +54,7 @@ struct MovementDetailView: View {
                                     .frame(width: 8, height: 8)
                                     .clipShape(.rect(cornerRadius: 1))
 
-                                Text(viewModel.exercise.primaryMuscle)
+                                Text(viewModel.exercise.primaryMuscleLabel)
                                     .font(Theme.fontSans(Theme.type15, .semibold))
                                     .foregroundStyle(Theme.text)
                             }
@@ -70,7 +70,7 @@ struct MovementDetailView: View {
                                     .clipShape(.rect(cornerRadius: 1))
                                     .padding(.top, Theme.space4)
 
-                                Text(viewModel.exercise.secondaryMuscles.isEmpty ? "None" : viewModel.exercise.secondaryMuscles.joined(separator: ", "))
+                                Text(viewModel.exercise.supportingMuscles.isEmpty ? "None" : viewModel.exercise.supportingMuscles.joined(separator: ", "))
                                     .font(Theme.fontSans(Theme.type14))
                                     .foregroundStyle(Theme.text2)
                             }

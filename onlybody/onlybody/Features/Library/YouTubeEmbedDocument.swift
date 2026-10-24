@@ -55,4 +55,25 @@ nonisolated struct YouTubeEmbedDocument {
         </body></html>
         """
     }
+
+    #if DEBUG
+    /// Network-free WebKit fixture for exercising the real player surface in UI tests.
+    static var localFixture: Self? {
+        guard let url = URL(string: "https://onlybody.invalid") else { return nil }
+        return Self(baseURL: url, html: """
+        <!doctype html><html><head>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'">
+        <style>html,body{margin:0;height:100%}body{display:grid;place-items:center}</style>
+        </head><body><button onclick="this.textContent='Pause demonstration'">Play demonstration</button>
+        <script>function pauseDemonstration() {}</script></body></html>
+        """)
+    }
+
+    private init(baseURL: URL, html: String) {
+        self.baseURL = baseURL
+        self.html = html
+    }
+    #endif
+
 }

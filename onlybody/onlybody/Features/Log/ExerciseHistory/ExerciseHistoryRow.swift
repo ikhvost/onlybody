@@ -16,14 +16,6 @@ struct ExerciseHistoryRow: View {
             }
             ForEach(entry.items) { item in
                 VStack(alignment: .leading, spacing: Theme.space8) {
-                    if let weight = item.weightKg {
-                        Text("\(weight.formatted(.number.precision(.fractionLength(0...2)))) kg added")
-                            .foregroundStyle(Theme.accent)
-                            .accessibilityIdentifier("exerciseHistory.weight")
-                    } else {
-                        Text("Added weight not recorded")
-                            .foregroundStyle(Theme.text2)
-                    }
                     ForEach(item.setReps.indices, id: \.self) { index in
                         HStack {
                             Text("Set \(index + 1)")
@@ -31,8 +23,16 @@ struct ExerciseHistoryRow: View {
                             Spacer()
                             Text("\(item.setReps[index]) reps")
                                 .foregroundStyle(Theme.text)
+                            if let weight = item.weightForSet(at: index) {
+                                Text("· \(weight.formatted(.number.precision(.fractionLength(0...2)))) kg")
+                                    .foregroundStyle(Theme.accent)
+                            } else {
+                                Text("· weight not recorded")
+                                    .foregroundStyle(Theme.text2)
+                            }
                         }
                         .accessibilityElement(children: .combine)
+                        .accessibilityIdentifier("exerciseHistory.set.\(index)")
                     }
                 }
                 .font(Theme.fontMono(Theme.type12))

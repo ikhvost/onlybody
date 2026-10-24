@@ -7,6 +7,7 @@ final class BackSwipeController: UIViewController, UIGestureRecognizerDelegate {
     private var previousEnabled = false
     private weak var contentGesture: UIGestureRecognizer?
     private var previousContentEnabled = false
+    private let expandedSwipe = ExpandedBackSwipe()
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -32,6 +33,9 @@ final class BackSwipeController: UIViewController, UIGestureRecognizerDelegate {
         contentGesture?.isEnabled = false
         gesture.delegate = self
         gesture.isEnabled = true
+        expandedSwipe.attach(to: navigationController, shouldBegin: { [weak self] in
+            self?.shouldBegin() ?? false
+        })
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -40,6 +44,7 @@ final class BackSwipeController: UIViewController, UIGestureRecognizerDelegate {
     }
 
     func detach() {
+        expandedSwipe.detach()
         if let gesture = popGesture, gesture.delegate === self {
             let originalDelegate = previousDelegate
             let enabled = previousEnabled
