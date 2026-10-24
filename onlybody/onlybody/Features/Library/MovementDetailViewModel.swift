@@ -22,6 +22,24 @@ final class MovementDetailViewModel {
     var selectedFrequency: ExerciseFrequency
     var isSaving = false
 
+    var muscleDiagram: MuscleDiagram {
+        MuscleDiagram(primaryMuscle: exercise.primaryMuscle, secondaryMuscles: exercise.secondaryMuscles)
+    }
+
+    var muscleDiagramDescription: String {
+        let diagram = muscleDiagram
+        var descriptions = ["Muscle groups, front and back views."]
+        if diagram.isFullBody { descriptions.append("Full-body exercise; only the listed supporting groups are highlighted.") }
+        if !diagram.primary.isEmpty {
+            descriptions.append("Primary: \(diagram.primary.map(\.rawValue).joined(separator: ", ")).")
+        }
+        if !diagram.secondary.isEmpty {
+            descriptions.append("Secondary: \(diagram.secondary.map(\.rawValue).joined(separator: ", ")).")
+        }
+        if !diagram.hasHighlightedRegions { descriptions.append("No muscle groups specified.") }
+        return descriptions.joined(separator: " ")
+    }
+
     init(
         exercise: ExerciseSnapshot,
         exercises: any ExerciseRepository,

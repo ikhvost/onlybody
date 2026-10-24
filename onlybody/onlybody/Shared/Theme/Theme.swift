@@ -21,6 +21,10 @@ enum Theme {
     static let typographyScale: CGFloat = 1.1
     static let demonstrationMinimumWidth: CGFloat = 200
     static let demonstrationHeight: CGFloat = 240
+    static let muscleDiagramMaximumWidth: CGFloat = 560
+    static let muscleDiagramNeutral = Color(white: 0.66)
+    static let muscleDiagramSecondary = Color(red: 143 / 255, green: 171 / 255, blue: 176 / 255).opacity(0.6)
+    static let muscleLegendMarkerSize: CGFloat = 8
 
     static func fontSans(_ size: CGFloat, _ weight: Font.Weight = .regular) -> Font {
         .custom("DM Sans", size: size * typographyScale).weight(weight)

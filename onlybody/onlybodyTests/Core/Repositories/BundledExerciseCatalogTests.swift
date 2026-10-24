@@ -34,6 +34,10 @@ struct BundledExerciseCatalogTests {
         #expect(try context.fetchCount(FetchDescriptor<SessionItem>()) == 0)
 
         for exercise in exercises {
+            let diagram = MuscleDiagram(primaryMuscle: exercise.primaryMuscle, secondaryMuscles: exercise.secondaryMuscles)
+            #expect(diagram.hasHighlightedRegions)
+            #expect(exercise.primaryMuscle == "Full Body" || !diagram.primary.isEmpty)
+            #expect(Set(diagram.secondary.map(\.rawValue)) == Set(exercise.secondaryMuscles))
             #expect(ExerciseCatalog.primaryMuscles.contains(exercise.primaryMuscle))
             #expect(Set(exercise.secondaryMuscles).isSubset(of: Set(ExerciseCatalog.allMuscles)))
             #expect(!exercise.secondaryMuscles.contains(exercise.primaryMuscle))

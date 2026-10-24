@@ -86,6 +86,9 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertFalse(app.buttons["demonstration.load"].exists)
         XCTAssertTrue(app.staticTexts["demonstration.author"].exists)
         XCTAssertTrue(app.buttons["demonstration.openYouTube"].exists)
+        let diagram = app.descendants(matching: .any)["movement.muscleDiagram"]
+        XCTAssertTrue(diagram.exists)
+        XCTAssertTrue(diagram.label.contains("Muscle groups, front and back views"))
         XCTAssertEqual(app.webViews.count, 0, "The test fixture must not contact YouTube")
         tap("movement.back")
         tap("tab.log")

@@ -61,7 +61,7 @@ struct MovementDetailView: View {
 
                             HStack(alignment: .top, spacing: Theme.space8) {
                                 Rectangle()
-                                    .fill(Theme.border2)
+                                    .fill(Theme.muscleDiagramSecondary)
                                     .frame(width: 8, height: 8)
                                     .clipShape(.rect(cornerRadius: 1))
                                     .padding(.top, Theme.space4)
@@ -71,18 +71,7 @@ struct MovementDetailView: View {
                                     .foregroundStyle(Theme.text2)
                             }
 
-                            ZStack {
-                                Theme.surface
-                                    .overlay {
-                                        RoundedRectangle(cornerRadius: Theme.cornerRadius)
-                                            .stroke(Theme.border, lineWidth: 1)
-                                    }
-                                    .clipShape(.rect(cornerRadius: Theme.cornerRadius))
-
-                                MonoLabel(text: "[ muscle diagram ]", size: Theme.type11, tracking: 1)
-                            }
-                            .frame(height: 120)
-                            .accessibilityLabel("Muscle diagram placeholder")
+                            MovementMuscleDiagramView(viewModel: viewModel)
                         }
 
                         Rectangle()
