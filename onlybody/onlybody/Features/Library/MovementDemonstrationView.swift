@@ -38,15 +38,6 @@ struct MovementDemonstrationView: View {
                     .font(Theme.fontSans(Theme.type12))
                     .foregroundStyle(Theme.text2)
                     .accessibilityIdentifier("demonstration.author")
-
-                if let url = demonstration.watchURL {
-                    Button("Open on YouTube") { openURL(url) }
-                        .font(Theme.fontSans(Theme.type14, .semibold))
-                        .foregroundStyle(Theme.accent)
-                        .frame(minHeight: Theme.space44)
-                        .accessibilityLabel("Open \(demonstration.exerciseName) on YouTube")
-                        .accessibilityIdentifier("demonstration.openYouTube")
-                }
             } else {
                 Text("No demonstration is available for this exercise yet.")
                     .font(Theme.fontSans(Theme.type14))

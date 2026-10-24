@@ -111,7 +111,7 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["demonstration.preview"].waitForExistence(timeout: 10))
         XCTAssertFalse(app.buttons["demonstration.load"].exists)
         XCTAssertTrue(app.staticTexts["demonstration.author"].exists)
-        XCTAssertTrue(app.buttons["demonstration.openYouTube"].exists)
+        XCTAssertFalse(app.buttons["demonstration.openYouTube"].exists)
         let diagram = app.descendants(matching: .any)["movement.muscleDiagram"]
         XCTAssertTrue(diagram.exists)
         XCTAssertTrue(diagram.label.contains("Muscle groups, front and back views"))
