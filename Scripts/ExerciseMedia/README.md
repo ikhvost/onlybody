@@ -4,6 +4,10 @@ All 65 seed exercises use the official YouTube IFrame player. Only IDs, author n
 
 ## Content review
 
+**Before adding or replacing any video in either app, complete [CHECKLIST.md](CHECKLIST.md).** It covers provenance, license evidence, physical-iPhone playback, player requirements, privacy and App Review evidence. Store dated results and screenshots in `Reviews/`; cite them in the change description. Do not equate catalog validation or browser playback with full approval.
+
+The [2026-10-24 checklist audit](Reviews/2026-10-24/REPORT.md) records all 65 OnlyBody entries, live Share → Embed evidence and remaining gaps. OnlyWeights currently has no videos. The historical review below is a playback/variant review only; it does not establish licensing, a complete audio review or App Store readiness.
+
 On 2026-10-24 all 65 entries played in a signed-out browser using the official IFrame API. Visual samples were inspected for exercise variant, equipment and framing, including additional positions in longer clips. This is a browser playback and sampled visual review, not a full-length review of every clip or a physical iPhone sign-off. Availability can change by time, region or network.
 
 Walking Jacks uses DAREBEE's low-impact Step Jacks demonstration. Foot-Assisted Dips uses parallel dip handles and a raised platform for foot assistance, matching the dip-bar and elevated-surface equipment.
@@ -80,7 +84,7 @@ The 16 additions were played in signed-out official browser embeds and visually 
 
 ## Updating content
 
-Edit `catalog.json`, keep each existing stable key, review the replacement in a signed-out embed and run `python3 Scripts/ExerciseMedia/generate.py`. Run `python3 Scripts/ExerciseMedia/generate.py --check` to verify exact seed coverage and generated output. Changes ship with an app release. The app never parses this authoring JSON.
+Complete [CHECKLIST.md](CHECKLIST.md) and save dated evidence first. Then edit `catalog.json` (OnlyBody) or `onlyweights.json` (OnlyWeights), keep each existing stable key, and run the generator with the product's input/output paths. Run `python3 Scripts/ExerciseMedia/generate.py --check` for OnlyBody; use the explicit OnlyWeights arguments documented in `../StoreGenerator/README.md`. Changes ship with an app release. The app never parses this authoring JSON. `reviewStatus: browser-embed-and-visual-sample` describes only the historical scope, not completion of the new checklist.
 
 ## Player behavior
 

@@ -1,0 +1,80 @@
+  - heading "Prone Y Raise" [level=1]
+  - link "Performance Course":
+    - /url: /@PerformanceCourse
+    - img "Performance Course"
+  - generic "Performance Course":
+    - link "Performance Course":
+      - /url: /@PerformanceCourse
+  - generic "5.5 thousand subscribers": 5.5k subscribers
+  - button "Subscribe to Performance Course.":
+    - generic: Subscribe
+  - button "like this video along with 843 other people":
+    - generic: "843"
+  - button "Dislike this video":
+  - button "Share":
+    - generic: Share
+  - button "Save to playlist":
+    - generic: Save
+  - button "More actions":
+  - generic: 365,735 views 7 Aug 2015
+  - generic: •Athlete will assume the face down prone position (or UAP and lean forward until torso is parallel to the floor depending on coaching emphasis) Keeping the back flat raise arms with thumbs up to shoulder height to form the letter Y.
+  - link "Performance Course 5.5k subscribers":
+    - /url: /@PerformanceCourse
+    - heading "Performance Course" [level=3]
+    - generic: 5.5k subscribers
+  - link "Videos":
+    - /url: /channel/UCRuQY9E1uk6Fml6fLQ2dtxQ/videos
+    - generic: Videos
+  - link "About":
+    - /url: /channel/UCRuQY9E1uk6Fml6fLQ2dtxQ/about
+    - generic: About
+  - link "Facebook":
+    - /url: https://www.facebook.com/pages/Performance-Course/157051154320539?ref=hl
+    - generic: Facebook
+  - link "Twitter":
+    - /url: https://www.twitter.com/PCnowisthetime
+    - generic: Twitter
+  - button "Show less"
+
+
+- dialog [active]:
+  - iframe:
+    - generic "YouTube Video Player"
+    - button "Play video":
+    - button "Hide player controls"
+    - link "Prone Y Raise":
+      - /url: https://www.youtube.com/watch?v=w1AWGKubE5U
+    - link "Performance Course":
+      - /url: /channel/UCRuQY9E1uk6Fml6fLQ2dtxQ
+      - generic: Performance Course
+    - button "thumbnail-image":
+      - img "thumbnail-image"
+    - generic: Performance Course
+    - generic: 5.5k subscribers
+    - button "Share":
+    - link "Watch Later":
+      - /url: https://accounts.google.com/ServiceLogin
+    - link "Watch on YouTube":
+      - /url: https://www.youtube.com/watch?v=w1AWGKubE5U
+      - text: Watch on
+  - generic: Embed Video
+  - textbox: <iframe width="560" height="315" src="https://www.youtube.com/embed/w1AWGKubE5U?si=1Bn0nVFdaQ2wf_lH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  - checkbox "Start at":
+    - generic: Start at
+  - generic "0 seconds":
+    - textbox [disabled]: 0:00
+  - text: Embed Options
+  - checkbox "Show player controls." [checked]:
+    - generic: Show player controls.
+  - checkbox "When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.":
+    - generic: Enable privacy-enhanced mode.
+  - tooltip "tooltip"
+  - link "API Reference":
+    - /url: https://developers.google.com/youtube/iframe_api_reference
+  - link "Developer Sample":
+    - /url: https://developers.google.com/youtube/youtube_player_demo
+  - text: By embedding YouTube videos on your site, you are agreeing to
+  - link "YouTube API Terms of Service":
+    - /url: https://developers.google.com/youtube/terms/api-services-terms-of-service
+  - button "Copy":
+    - generic: Copy

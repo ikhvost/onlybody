@@ -199,6 +199,20 @@ enum AppTab: String, CaseIterable { case train, log, library }
 - Do not regenerate OnlyBody's seed or rename existing exercises for a branding/build-structure change. Existing database path and model identities must remain stable.
 - Build settings exclude SQLite WAL/SHM sidecars from both app bundles.
 
+## Mandatory YouTube content and integration review
+
+- **Always read and complete [Scripts/ExerciseMedia/CHECKLIST.md](Scripts/ExerciseMedia/CHECKLIST.md) before adding or replacing any video in either product.** Apply it also to video ID/author/start-offset changes, player changes and release review. This is a required repository workflow, not an optional suggestion.
+- Record per-video URL, exact video title, author/channel, license type or explicit uncertainty, review date, reviewer, screenshots and all checklist results in `Scripts/ExerciseMedia/Reviews/<YYYY-MM-DD>/`. Link the evidence in the change description. Keep evidence outside app targets; never commit videos, cookies, tokens or private device identifiers.
+- Verify the channel's provenance, review the complete video with sound for suspicious third-party material, inspect Share → Embed, and test real playback on a physical iPhone. Clearly distinguish browser samples, simulator/local-fixture tests and physical-device playback. Never invent a license, rights confirmation or a test result.
+- Standard YouTube License is not automatically disqualifying for official embedding. Do not require Creative Commons, a purchased license or individual author permission solely because the video uses Standard licensing. Evaluate allowed embedding under current YouTube terms separately from permission to download, modify or redistribute files. Preserve evidence of any additional permissions actually obtained.
+- Use only the official YouTube IFrame Player in WKWebView. Set app identification using `loadHTMLString(..., baseURL:)` with `https://<actual Bundle ID>`, matching origin and a non-suppressing referrer policy. The identities are `https://ikhvost.onlybody` and `https://ikhvost.onlyweights`; do not copy example Bundle IDs from documentation.
+- Preserve a viewport of at least 200 × 200 CSS pixels, standard controls, YouTube branding, links and ads. Do not cover or crop the player or filter its advertising. Preserve the existing author caption; it is a project convention in addition to standard player attribution.
+- Never extract streams, provide unauthorized offline copies, or charge for access to embedded YouTube playback. Normal buffering by the official player is not an app offline-download feature.
+- Keep recoverable handling of errors 100, 101, 150 and 153, network loss, timeout, deletion and embedding restrictions. Exercise details and workouts must remain usable without a video.
+- Before release, verify a user-accessible privacy policy and terms covering YouTube API Services, Google Privacy Policy, YouTube Terms, relevant data transfer/cookies/ads and applicable consent. A local draft or nonpersistent WebKit store is not proof of compliance. Keep an App Review evidence package; never promise approval.
+- Mark outcomes PASS, FAIL, UNCONFIRMED or justified N/A. A generated catalog, a historical browser review or green tests do not establish legal clearance or complete checklist approval. Resolve failures before adding a video; explicitly document every remaining unknown and never label a partial review complete.
+- Run shared `YouTubeIntegrationTests` for both app schemes after integration changes. OnlyBody additionally retains catalog and playback-state tests; OnlyWeights currently has no videos. The latest recorded audit is [Reviews/2026-10-24/REPORT.md](Scripts/ExerciseMedia/Reviews/2026-10-24/REPORT.md).
+
 ## Testing
 
 Framework: **Swift Testing** (`@Test`, `#expect`) for unit and integration tests. **XCTest + XCUIAutomation is allowed only in `onlybodyUITests` / `onlyweightsUITests`**, as explicitly approved for the five E2E journeys.

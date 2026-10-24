@@ -1,0 +1,113 @@
+  - heading "Movement Demo | Body Weight Single Leg Romanian Deadlift" [level=1]
+  - link "ConstantlyVariedFitness":
+    - /url: /@ConstantlyVariedFitness
+    - img "ConstantlyVariedFitness"
+  - generic "ConstantlyVariedFitness":
+    - link "ConstantlyVariedFitness":
+      - /url: /@ConstantlyVariedFitness
+  - generic "31.8 thousand subscribers": 31.8k subscribers
+  - button "Subscribe to ConstantlyVariedFitness.":
+    - generic: Subscribe
+  - button "like this video along with 289 other people":
+    - generic: "289"
+  - button "Dislike this video":
+  - button "Share":
+  - button "Save to playlist":
+  - button "More actions":
+  - text: 127,411 views 6 Sept 2020
+  - link "#SingleLegRDL":
+    - /url: /hashtag/singlelegrdl
+  - link "#SingleLegRomanianDeadlift":
+    - /url: /hashtag/singlelegromaniandeadlift
+  - text: "Learn how to perform a body weight single leg Romanian deadlift and how to execute it with proper technique. If you would like to see any other exercise demo videos, leave them down below in the comments. Sign up for our daily online dumbbell program that comes with warm ups, workout notes, post workouts stretches and more here:"
+  - link "https://bit.ly/CVFSignUp":
+    - /url: https://bit.ly/CVFSignUp
+  - text: Leave any questions down below, drop a like and subscribe! Thanks for watching! ----- DISCOUNTS AMAZON fitness products I HIGHLY RECOMMEND |
+  - link "https://bit.ly/AmazonCVF":
+    - /url: https://bit.ly/AmazonCVF
+  - text: SAVE 10% w/ code CVF10 on the BEST workout earbuds |
+  - link "https://bit.ly/ESCSounds":
+    - /url: https://bit.ly/ESCSounds
+  - text: SAVE 10% w/ code YOUTUBE on our FUNCTIONAL merch |
+  - link "https://bit.ly/ApparelCVF":
+    - /url: https://bit.ly/ApparelCVF
+  - text: SAVE 10% at CHECKOUT on my FAVORITE supplements |
+  - link "https://bit.ly/XenduranceCVF":
+    - /url: https://bit.ly/XenduranceCVF
+  - text: "----- POPULAR PLAYLISTS High Intensity Home Workouts |"
+  - link "https://bit.ly/CrossFitWODs":
+    - /url: https://bit.ly/CrossFitWODs
+  - text: Fitness Product Reviews |
+  - link "https://bit.ly/FitnessProductReviews":
+    - /url: https://bit.ly/FitnessProductReviews
+  - text: Follow Along Stretch Routines |
+  - link "https://bit.ly/StretchRoutines":
+    - /url: https://bit.ly/StretchRoutines
+  - text: "----- Social Media Instagram |"
+  - link "https://bit.ly/InstaCVF":
+    - /url: https://bit.ly/InstaCVF
+  - text: "----- I am not a doctor, or a medical professional. Always consult a physician before starting any exercise program. Use of this information is strictly at your own risk. I will not assume any liability for direct or indirect losses or damages that may result from the use of information contained in this video including but not limited to economic loss, injury, illness or death."
+  - link "#SingleLegRomanianDeadlift":
+    - /url: /hashtag/singlelegromaniandeadlift
+  - link "#SingleLegRDL":
+    - /url: /hashtag/singlelegrdl
+  - link "ConstantlyVariedFitness 31.8k subscribers":
+    - /url: /@ConstantlyVariedFitness
+    - heading "ConstantlyVariedFitness" [level=3]
+    - generic: 31.8k subscribers
+  - link "Videos":
+    - /url: /channel/UCS6JxKa6MgHMyMK0WwxzU2g/videos
+    - generic: Videos
+  - link "About":
+    - /url: /channel/UCS6JxKa6MgHMyMK0WwxzU2g/about
+    - generic: About
+  - link "Instagram (CVF)":
+    - /url: https://www.instagram.com/constantlyvariedfitness/
+    - generic: Instagram (CVF)
+  - link "Instagram (Personal)":
+    - /url: https://www.instagram.com/hvddie/
+    - generic: Instagram (Personal)
+  - button "Show less"
+
+
+- dialog [active]:
+  - iframe:
+    - generic "YouTube Video Player"
+    - button "Play video":
+    - button "Hide player controls"
+    - link "Movement Demo | Body Weight Single Leg Romanian Deadlift":
+      - /url: https://www.youtube.com/watch?v=JQZqPsmeesc
+    - link "ConstantlyVariedFitness":
+      - /url: /channel/UCS6JxKa6MgHMyMK0WwxzU2g
+      - generic: ConstantlyVariedFitness
+    - button "thumbnail-image":
+      - img "thumbnail-image"
+    - generic: ConstantlyVariedFitness
+    - generic: 31.8k subscribers
+    - button "Share":
+    - link "Watch Later":
+      - /url: https://accounts.google.com/ServiceLogin
+    - link "Watch on YouTube":
+      - /url: https://www.youtube.com/watch?v=JQZqPsmeesc
+      - text: Watch on
+  - generic: Embed Video
+  - textbox: <iframe width="560" height="315" src="https://www.youtube.com/embed/JQZqPsmeesc?si=w6pTkgABWX1TBvX8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  - checkbox "Start at":
+    - generic: Start at
+  - generic "0 seconds":
+    - textbox [disabled]: 0:00
+  - text: Embed Options
+  - checkbox "Show player controls." [checked]:
+    - generic: Show player controls.
+  - checkbox "When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.":
+    - generic: Enable privacy-enhanced mode.
+  - tooltip "tooltip"
+  - link "API Reference":
+    - /url: https://developers.google.com/youtube/iframe_api_reference
+  - link "Developer Sample":
+    - /url: https://developers.google.com/youtube/youtube_player_demo
+  - text: By embedding YouTube videos on your site, you are agreeing to
+  - link "YouTube API Terms of Service":
+    - /url: https://developers.google.com/youtube/terms/api-services-terms-of-service
+  - button "Copy":
+    - generic: Copy

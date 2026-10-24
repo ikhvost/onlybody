@@ -1,0 +1,128 @@
+  - heading "Mountain Climber - Exercise Demo" [level=1]
+  - link "Group HIIT":
+    - /url: /@GroupHIIT
+    - img "Group HIIT"
+  - generic "Group HIIT":
+    - link "Group HIIT":
+      - /url: /@GroupHIIT
+  - img "Verified"
+  - generic "290 thousand subscribers": 290k subscribers
+  - button "Subscribe to Group HIIT.":
+    - generic: Subscribe
+  - button "like this video along with 1,616 other people":
+    - generic: 1.6k
+  - button "Dislike this video"
+  - button "Share"
+  - button "Save to playlist"
+  - button "More actions"
+  - generic: 374,301 views 6 Aug 2022 1 product
+  - heading "Group HIIT tagged products below. Learn more":
+    - text: Group HIIT tagged products below.
+    - generic: Learn more
+  - text: "To perform a mountain climber, start in standing plank position with wrists in line with elbows and a neutral back. Alternate bringing your knees into your chest in a running motion. Focus on keeping your hips parallel to the mat, making sure not to rock side-to-side as you pedal your legs back and forth. To decrease intensity, slow the movement down by stepping forward with each foot. Follow over 100 free workouts:"
+  - link "https://www.grouphiit.com/freeworkouts":
+    - /url: https://www.grouphiit.com/freeworkouts
+  - text: "Access all of our workouts:"
+  - link "https://www.grouphiit.com/join":
+    - /url: https://www.grouphiit.com/join
+  - text: "Start a Program:"
+  - link "https://www.grouphiit.com/programs":
+    - /url: https://www.grouphiit.com/programs
+  - text: Follow Us
+  - link "https://www.grouphiit.com":
+    - /url: https://www.grouphiit.com/
+  - 'link "YouTube Channel Link: grouphiitworkouts"':
+    - /url: https://www.youtube.com/grouphiitworkouts
+    - text: / grouphiitworkouts
+  - 'link "Instagram Channel Link: grouphiit"':
+    - /url: http://www.instagram.com/grouphiit
+    - text: / grouphiit
+  - 'link "Pinterest Channel Link: grouphiit"':
+    - /url: https://www.pinterest.com/grouphiit
+    - text: / grouphiit
+  - 'link "Facebook Channel Link: grouphiit"':
+    - /url: https://www.facebook.com/grouphiit
+    - text: / grouphiit
+  - 'link "SoundCloud Channel Link: grouphiit"':
+    - /url: https://www.soundcloud.com/grouphiit
+    - text: / grouphiit
+  - link "https://www.quora.com/grouphiit":
+    - /url: https://www.quora.com/grouphiit
+  - 'link "TikTok Channel Link: grouphiit"':
+    - /url: https://www.tiktok.com/@grouphiit
+    - text: / grouphiit
+  - generic: Transcript
+  - paragraph: Follow along using the transcript.
+  - button "Show transcript":
+    - generic: Show transcript
+  - link "Group HIIT 290k subscribers":
+    - /url: /@GroupHIIT
+    - heading "Group HIIT" [level=3]
+    - generic: 290k subscribers
+  - link "Videos":
+    - /url: /channel/UC_aLZ9YxRrGmCe1Zd3GSkEA/videos
+    - generic: Videos
+  - link "About":
+    - /url: /channel/UC_aLZ9YxRrGmCe1Zd3GSkEA/about
+    - generic: About
+  - link "Instagram":
+    - /url: https://www.instagram.com/grouphiit
+    - generic: Instagram
+  - link "Facebook":
+    - /url: https://www.facebook.com/grouphiit
+    - generic: Facebook
+  - link "Pinterest":
+    - /url: https://www.pinterest.com/grouphiit
+    - generic: Pinterest
+  - link "Twitter":
+    - /url: https://www.twitter.com/grouphiit
+    - generic: Twitter
+  - link "Join to Access All Programs Join to Access All Programs View the Challenge":
+    - /url: https://www.grouphiit.com/join
+    - img "Join to Access All Programs"
+    - generic: Join to Access All Programs
+    - generic: View the Challenge
+  - button "Show less"
+
+
+- dialog [active]:
+  - iframe:
+    - generic "YouTube Video Player"
+    - button "Play video":
+    - button "Hide player controls"
+    - link "Mountain Climber - Exercise Demo":
+      - /url: https://www.youtube.com/watch?v=hq_0YlyfqGM
+    - link "Group HIIT":
+      - /url: /channel/UC_aLZ9YxRrGmCe1Zd3GSkEA
+      - generic: Group HIIT
+    - button "thumbnail-image":
+      - img "thumbnail-image"
+    - generic: Group HIIT
+    - generic: 290k subscribers
+    - button "Share":
+    - link "Watch Later":
+      - /url: https://accounts.google.com/ServiceLogin
+    - link "Watch on YouTube":
+      - /url: https://www.youtube.com/watch?v=hq_0YlyfqGM
+      - text: Watch on
+  - generic: Embed Video
+  - textbox: <iframe width="560" height="315" src="https://www.youtube.com/embed/hq_0YlyfqGM?si=FbG9J_qcTtzJAVHo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  - checkbox "Start at":
+    - generic: Start at
+  - generic "0 seconds":
+    - textbox [disabled]: 0:00
+  - text: Embed Options
+  - checkbox "Show player controls." [checked]:
+    - generic: Show player controls.
+  - checkbox "When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.":
+    - generic: Enable privacy-enhanced mode.
+  - tooltip "tooltip"
+  - link "API Reference":
+    - /url: https://developers.google.com/youtube/iframe_api_reference
+  - link "Developer Sample":
+    - /url: https://developers.google.com/youtube/youtube_player_demo
+  - text: By embedding YouTube videos on your site, you are agreeing to
+  - link "YouTube API Terms of Service":
+    - /url: https://developers.google.com/youtube/terms/api-services-terms-of-service
+  - button "Copy":
+    - generic: Copy

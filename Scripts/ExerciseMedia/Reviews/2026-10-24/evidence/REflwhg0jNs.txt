@@ -1,0 +1,104 @@
+  - heading "Bodyweight Split Squat (Exercise Library)" [level=1]
+  - link "Horton Barbell":
+    - /url: /@hortonbarbell
+    - img "Horton Barbell"
+  - generic "Horton Barbell":
+    - link "Horton Barbell":
+      - /url: /@hortonbarbell
+  - generic "4.18 thousand subscribers": 4.18k subscribers
+  - button "Join this channel":
+    - generic: Join
+  - button "Subscribe to Horton Barbell.":
+    - generic: Subscribe
+  - button "like this video along with 10 other people":
+    - generic: "10"
+  - button "Dislike this video":
+  - button "Share":
+    - generic: Share
+  - button "Save to playlist":
+    - generic: Save
+  - button "More actions":
+  - generic: 4,984 views 15 Sept 2025
+  - text: "Thanks to Taji Johnson for demoing how to do Bodyweight Split Squats. Step-by-Step Instructions Set-Up:"
+  - list:
+    - listitem: Stand tall and step one foot forward and the other foot back into a staggered stance, about hip-to-shoulder-width apart.
+    - listitem: Keep your chest up, core braced, and hands at your sides or in front of you for balance.
+  - text: "Execution:"
+  - list:
+    - listitem: Lower straight down by bending both knees until your back knee hovers just above the floor and your front thigh is about parallel to the ground.
+    - listitem: Keep your front heel planted and your torso upright.
+    - listitem: Push through your front foot to return to the starting position.
+    - listitem: Complete all reps on one side before switching legs.
+  - text: "Tips for Proper Form:"
+  - list:
+    - listitem: Keep your front knee aligned with your toes, don’t let it cave inward.
+    - listitem: Maintain a vertical torso instead of leaning excessively forward.
+    - listitem: Adjust stance length so you feel stable and balanced.
+  - text: Bodyweight Split Squat Key Benefits
+  - list:
+    - listitem: Builds unilateral lower-body strength and stability.
+    - listitem: Improves balance and coordination.
+    - listitem: Strengthens hips and knees while correcting side-to-side imbalances.
+  - generic: How this was made
+  - generic: Auto-dubbed
+  - text: Audio tracks for some languages were automatically generated.
+  - link "Learn more":
+    - /url: //support.google.com/youtube/answer/15569972?hl=en-GB
+  - generic: Transcript
+  - paragraph: Follow along using the transcript.
+  - button "Show transcript":
+    - generic: Show transcript
+  - link "Horton Barbell 4.18k subscribers":
+    - /url: /@hortonbarbell
+    - heading "Horton Barbell" [level=3]
+    - generic: 4.18k subscribers
+  - link "Videos":
+    - /url: /channel/UCaLexL5lzgH7D7YRNxFgqHQ/videos
+    - generic: Videos
+  - link "About":
+    - /url: /channel/UCaLexL5lzgH7D7YRNxFgqHQ/about
+    - generic: About
+  - button "Show less"
+
+
+- dialog [active]:
+  - iframe:
+    - generic "YouTube Video Player"
+    - button "Play video":
+    - button "Hide player controls"
+    - link "Bodyweight Split Squat (Exercise Library)":
+      - /url: https://www.youtube.com/watch?v=REflwhg0jNs
+    - link "Horton Barbell":
+      - /url: /channel/UCaLexL5lzgH7D7YRNxFgqHQ
+      - generic: Horton Barbell
+    - button "thumbnail-image":
+      - img "thumbnail-image"
+    - generic: Horton Barbell
+    - generic: 4.18k subscribers
+    - button "Share":
+    - link "Watch Later":
+      - /url: https://accounts.google.com/ServiceLogin
+    - link "Watch on YouTube":
+      - /url: https://www.youtube.com/watch?v=REflwhg0jNs
+      - text: Watch on
+  - generic: Embed Video
+  - textbox: <iframe width="560" height="315" src="https://www.youtube.com/embed/REflwhg0jNs?si=kINdUHvqgOJZdeOK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  - checkbox "Start at":
+    - generic: Start at
+  - generic "0 seconds":
+    - textbox [disabled]: 0:00
+  - text: Embed Options
+  - checkbox "Show player controls." [checked]:
+    - generic: Show player controls.
+  - checkbox "When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.":
+    - generic: Enable privacy-enhanced mode.
+  - tooltip "tooltip"
+  - link "API Reference":
+    - /url: https://developers.google.com/youtube/iframe_api_reference
+  - link "Developer Sample":
+    - /url: https://developers.google.com/youtube/youtube_player_demo
+  - text: By embedding YouTube videos on your site, you are agreeing to
+  - link "YouTube API Terms of Service":
+    - /url: https://developers.google.com/youtube/terms/api-services-terms-of-service
+  - button "Copy":
+    - generic: Copy

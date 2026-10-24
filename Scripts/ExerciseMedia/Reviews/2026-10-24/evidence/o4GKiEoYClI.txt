@@ -1,0 +1,84 @@
+  - heading "Dead Bug Exercise For Core Stability | Pursuit Physical Therapy" [level=1]
+  - link "Pursuit Physical Therapy":
+    - /url: /@PursuitPhysicalTherapy
+    - img "Pursuit Physical Therapy"
+  - generic "Pursuit Physical Therapy":
+    - link "Pursuit Physical Therapy":
+      - /url: /@PursuitPhysicalTherapy
+  - generic "5.49 thousand subscribers": 5.49k subscribers
+  - button "Subscribe to Pursuit Physical Therapy.":
+    - generic: Subscribe
+  - button "like this video along with 7,265 other people":
+    - generic: 7.2k
+  - button "Dislike this video":
+  - button "Share":
+    - generic: Share
+  - button "Save to playlist":
+    - generic: Save
+  - button "More actions":
+  - generic: 1,314,495 views 18 Aug 2021
+  - text: No description has been added to this video.
+  - generic: Transcript
+  - paragraph: Follow along using the transcript.
+  - button "Show transcript":
+    - generic: Show transcript
+  - link "Pursuit Physical Therapy 5.49k subscribers":
+    - /url: /@PursuitPhysicalTherapy
+    - heading "Pursuit Physical Therapy" [level=3]
+    - generic: 5.49k subscribers
+  - link "Videos":
+    - /url: /channel/UCIvL27r2NHTVKwbrlwAKLbA/videos
+    - generic: Videos
+  - link "About":
+    - /url: /channel/UCIvL27r2NHTVKwbrlwAKLbA/about
+    - generic: About
+  - link "Facebook":
+    - /url: http://www.facebook.com/pursuitphysicaltherapy
+    - generic: Facebook
+  - link "Instagram":
+    - /url: https://www.instagram.com/pursuittherapy/?hl=en
+    - generic: Instagram
+  - button "Show less"
+
+
+- dialog [active]:
+  - iframe:
+    - generic "YouTube Video Player"
+    - button "Play video":
+    - button "Hide player controls"
+    - link "Dead Bug Exercise For Core Stability | Pursuit Physical Therapy":
+      - /url: https://www.youtube.com/watch?v=o4GKiEoYClI
+    - link "Pursuit Physical Therapy":
+      - /url: /channel/UCIvL27r2NHTVKwbrlwAKLbA
+      - generic: Pursuit Physical Therapy
+    - button "thumbnail-image":
+      - img "thumbnail-image"
+    - generic: Pursuit Physical Therapy
+    - generic: 5.49k subscribers
+    - button "Share":
+    - link "Watch Later":
+      - /url: https://accounts.google.com/ServiceLogin
+    - link "Watch on YouTube":
+      - /url: https://www.youtube.com/watch?v=o4GKiEoYClI
+      - text: Watch on
+  - generic: Embed Video
+  - textbox: <iframe width="560" height="315" src="https://www.youtube.com/embed/o4GKiEoYClI?si=MfZxQ1_tycqqz_YD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  - checkbox "Start at":
+    - generic: Start at
+  - generic "0 seconds":
+    - textbox [disabled]: 0:00
+  - text: Embed Options
+  - checkbox "Show player controls." [checked]:
+    - generic: Show player controls.
+  - checkbox "When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.":
+    - generic: Enable privacy-enhanced mode.
+  - tooltip "tooltip"
+  - link "API Reference":
+    - /url: https://developers.google.com/youtube/iframe_api_reference
+  - link "Developer Sample":
+    - /url: https://developers.google.com/youtube/youtube_player_demo
+  - text: By embedding YouTube videos on your site, you are agreeing to
+  - link "YouTube API Terms of Service":
+    - /url: https://developers.google.com/youtube/terms/api-services-terms-of-service
+  - button "Copy":
+    - generic: Copy

@@ -1,0 +1,85 @@
+  - heading "Towel Hamstring Curls" [level=1]
+  - link "Nick Brattain":
+    - /url: /@nickbrattain1884
+    - img "Nick Brattain"
+  - generic "Nick Brattain":
+    - link "Nick Brattain":
+      - /url: /@nickbrattain1884
+  - generic "1.12 thousand subscribers": 1.12k subscribers
+  - button "Subscribe to Nick Brattain.":
+    - generic: Subscribe
+  - button "like this video along with 83 other people":
+    - generic: "83"
+  - button "Dislike this video":
+  - button "Share":
+  - button "Save to playlist":
+  - button "More actions":
+  - generic: 25,128 views 27 Mar 2020
+  - generic: This video demonstrates a great at-home option to strengthen the hamstrings. Keep the core braced and only lengthen until you can bring the heels back in without compromising your spine's position. For more information visit brattainsportsperformance.com
+  - generic: Transcript
+  - paragraph: Follow along using the transcript.
+  - button "Show transcript":
+    - generic: Show transcript
+  - link "Nick Brattain 1.12k subscribers":
+    - /url: /@nickbrattain1884
+    - heading "Nick Brattain" [level=3]
+    - generic: 1.12k subscribers
+  - link "Videos":
+    - /url: /channel/UC5qZskSfwkJVDUNfRir6eww/videos
+    - generic: Videos
+  - link "About":
+    - /url: /channel/UC5qZskSfwkJVDUNfRir6eww/about
+    - generic: About
+  - link "Instagram":
+    - /url: https://www.instagram.com/brattainsportsperf/?hl=en
+    - generic: Instagram
+  - link "Facebook":
+    - /url: https://www.facebook.com/BrattainSportsPerformance/
+    - generic: Facebook
+  - link "Twitter":
+    - /url: https://twitter.com/BrattainPerf?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor
+    - generic: Twitter
+  - button "Show less"
+
+
+- dialog [active]:
+  - iframe:
+    - generic "YouTube Video Player"
+    - button "Play video":
+    - button "Hide player controls"
+    - link "Towel Hamstring Curls":
+      - /url: https://www.youtube.com/watch?v=cWSsWpuxmYM
+    - link "Nick Brattain":
+      - /url: /channel/UC5qZskSfwkJVDUNfRir6eww
+      - generic: Nick Brattain
+    - button "thumbnail-image":
+      - img "thumbnail-image"
+    - generic: Nick Brattain
+    - generic: 1.12k subscribers
+    - button "Share":
+    - link "Watch Later":
+      - /url: https://accounts.google.com/ServiceLogin
+    - link "Watch on YouTube":
+      - /url: https://www.youtube.com/watch?v=cWSsWpuxmYM
+      - text: Watch on
+  - generic: Embed Video
+  - textbox: <iframe width="560" height="315" src="https://www.youtube.com/embed/cWSsWpuxmYM?si=bGQ8PkKWbeGrkL3L" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  - checkbox "Start at":
+    - generic: Start at
+  - generic "0 seconds":
+    - textbox [disabled]: 0:00
+  - text: Embed Options
+  - checkbox "Show player controls." [checked]:
+    - generic: Show player controls.
+  - checkbox "When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.":
+    - generic: Enable privacy-enhanced mode.
+  - tooltip "tooltip"
+  - link "API Reference":
+    - /url: https://developers.google.com/youtube/iframe_api_reference
+  - link "Developer Sample":
+    - /url: https://developers.google.com/youtube/youtube_player_demo
+  - text: By embedding YouTube videos on your site, you are agreeing to
+  - link "YouTube API Terms of Service":
+    - /url: https://developers.google.com/youtube/terms/api-services-terms-of-service
+  - button "Copy":
+    - generic: Copy

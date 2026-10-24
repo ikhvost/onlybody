@@ -57,6 +57,8 @@ An active workout has one session UUID and explicit idle/saving/saved/failed sta
 
 ## Validation
 
+Before adding or replacing YouTube demonstrations in **either app**, complete the mandatory [video checklist](Scripts/ExerciseMedia/CHECKLIST.md) and retain dated evidence. The [current audit](Scripts/ExerciseMedia/Reviews/2026-10-24/REPORT.md) distinguishes code checks, per-video Embed availability and unresolved privacy/device/content review items. Automated validation does not certify these manual checks.
+
 ```sh
 DESTINATION='platform=iOS Simulator,name=iPhone 17 Pro' Scripts/validate.sh
 ```

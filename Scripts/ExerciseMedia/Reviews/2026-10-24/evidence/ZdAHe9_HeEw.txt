@@ -1,0 +1,94 @@
+  - heading "How to do a Bird Dog | Proper Form & Technique | NASM" [level=1]
+  - link "National Academy of Sports Medicine (NASM)":
+    - /url: /@NasmOrgPersonalTrainer
+    - img "National Academy of Sports Medicine (NASM)"
+  - generic "National Academy of Sports Medicine (NASM)":
+    - link "National Academy of Sports Medicine (NASM)":
+      - /url: /@NasmOrgPersonalTrainer
+  - generic "108 thousand subscribers": 108k subscribers
+  - button "Subscribe to National Academy of Sports Medicine (NASM).":
+    - generic: Subscribe
+  - button "like this video along with 543 other people":
+    - generic: "543"
+  - button "Dislike this video":
+  - button "Share":
+  - button "Save to playlist":
+  - button "More actions":
+  - text: 188,659 views 28 Apr 2021
+  - link "#Glutes":
+    - /url: /hashtag/glutes
+  - link "#ErectorSpinae":
+    - /url: /hashtag/erectorspinae
+  - link "#RectusAbdominis":
+    - /url: /hashtag/rectusabdominis
+  - text: "Learn how to do the perfect birddog from the most trusted name in fitness, the National Academy of Sports Medicine. Steps for Doing a Birddog:"
+  - list:
+    - listitem: Start on all fours with the spine in a neutral position.
+    - listitem: Draw the abs in and tuck the chin.
+    - listitem: Slowly lift one arm and the opposite leg with toes pointed away from the body.
+    - listitem: Keep the arm and leg straight and lift them to body height without arching the back.
+    - listitem: Slowly return the arm and leg to the ground.
+    - listitem: Repeat, alternating sides, for the desired number of repetitions before switching to the other leg.
+  - text: 𝙀𝙫𝙚𝙧𝙮𝙤𝙣𝙚 𝙡𝙤𝙫𝙚𝙨 𝙁𝙍𝙀𝙀. 𝙏𝙝𝙖𝙩'𝙨 𝙬𝙝𝙮 𝙬𝙚'𝙧𝙚 𝙤𝙛𝙛𝙚𝙧𝙞𝙣𝙜 𝙮𝙤𝙪 𝙖 𝙛𝙧𝙚𝙚 𝙉𝘼𝙎𝙈 𝙈𝙞𝙣𝙞-𝘾𝙤𝙪𝙧𝙨𝙚 𝙤𝙣 𝙃𝙤𝙬 𝙩𝙤 𝘽𝙪𝙞𝙡𝙙 𝙩𝙝𝙚 𝘽𝙚𝙨𝙩 𝙖𝙩 𝙃𝙤𝙢𝙚 𝙒𝙤𝙧𝙠𝙤𝙪𝙩. 𝘾𝙡𝙖𝙞𝙢 𝙮𝙤𝙪𝙧𝙨 𝙗𝙚𝙛𝙤𝙧𝙚 𝙞𝙩'𝙨 𝙜𝙤𝙣𝙚.
+  - link "https://bit.ly/3t1nWo7":
+    - /url: https://bit.ly/3t1nWo7
+  - link "#ErectorSpinae":
+    - /url: /hashtag/erectorspinae
+  - link "#RectusAbdominis":
+    - /url: /hashtag/rectusabdominis
+  - link "#Glutes":
+    - /url: /hashtag/glutes
+  - link "National Academy of Sports Medicine (NASM) 108k subscribers":
+    - /url: /@NasmOrgPersonalTrainer
+    - heading "National Academy of Sports Medicine (NASM)" [level=3]
+    - generic: 108k subscribers
+  - link "Videos":
+    - /url: /channel/UCjWgUFeyDbeQ3Q_eVCup_7Q/videos
+    - generic: Videos
+  - link "About":
+    - /url: /channel/UCjWgUFeyDbeQ3Q_eVCup_7Q/about
+    - generic: About
+  - button "Show less"
+
+
+- dialog [active]:
+  - iframe:
+    - generic "YouTube Video Player"
+    - button "Play video":
+    - button "Hide player controls"
+    - link "How to do a Bird Dog | Proper Form & Technique | NASM":
+      - /url: https://www.youtube.com/watch?v=ZdAHe9_HeEw
+    - link "National Academy of Sports Medicine (NASM)":
+      - /url: /channel/UCjWgUFeyDbeQ3Q_eVCup_7Q
+      - generic: National Academy of Sports Medicine (NASM)
+    - button "thumbnail-image":
+      - img "thumbnail-image"
+    - generic: National Academy of Sports Medicine (NASM)
+    - generic: 108k subscribers
+    - button "Share":
+    - link "Watch Later":
+      - /url: https://accounts.google.com/ServiceLogin
+    - link "Watch on YouTube":
+      - /url: https://www.youtube.com/watch?v=ZdAHe9_HeEw
+      - text: Watch on
+  - generic: Embed Video
+  - textbox: <iframe width="560" height="315" src="https://www.youtube.com/embed/ZdAHe9_HeEw?si=UxEG4TD9w8PzP4MN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  - checkbox "Start at":
+    - generic: Start at
+  - generic "0 seconds":
+    - textbox [disabled]: 0:00
+  - text: Embed Options
+  - checkbox "Show player controls." [checked]:
+    - generic: Show player controls.
+  - checkbox "When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.":
+    - generic: Enable privacy-enhanced mode.
+  - tooltip "tooltip"
+  - link "API Reference":
+    - /url: https://developers.google.com/youtube/iframe_api_reference
+  - link "Developer Sample":
+    - /url: https://developers.google.com/youtube/youtube_player_demo
+  - text: By embedding YouTube videos on your site, you are agreeing to
+  - link "YouTube API Terms of Service":
+    - /url: https://developers.google.com/youtube/terms/api-services-terms-of-service
+  - button "Copy":
+    - generic: Copy

@@ -1,0 +1,84 @@
+  - heading "Reverse Snow Angel | Exercise Of The Week | Advanced Spine & Sports Care Chicago" [level=1]
+  - link "Advanced Spine & Sports Care":
+    - /url: /@AdvancedSpineSportsCare
+    - img "Advanced Spine & Sports Care"
+  - generic "Advanced Spine & Sports Care":
+    - link "Advanced Spine & Sports Care":
+      - /url: /@AdvancedSpineSportsCare
+  - generic "548 subscribers"
+  - button "Subscribe to Advanced Spine & Sports Care.":
+    - generic: Subscribe
+  - button "like this video along with 208 other people":
+    - generic: "208"
+  - button "Dislike this video":
+  - button "Share":
+    - generic: Share
+  - button "Save to playlist":
+    - generic: Save
+  - button "More actions":
+  - generic: 38,541 views 25 Jan 2019
+  - text: Learn more about Advanced Spine & Sports Care at
+  - link "https://chiropracticsportscare.com":
+    - /url: https://chiropracticsportscare.com/
+  - text: "Dr. Jason Ingham, DC, CCSP Dr. Erin Steller, DC Also follow us on Facebook:"
+  - 'link "Facebook Channel Link: mychicagochiro"':
+    - /url: https://www.facebook.com/mychicagochiro
+    - text: / mychicagochiro
+  - generic: Transcript
+  - paragraph: Follow along using the transcript.
+  - button "Show transcript":
+    - generic: Show transcript
+  - link "Advanced Spine & Sports Care 548 subscribers":
+    - /url: /@AdvancedSpineSportsCare
+    - heading "Advanced Spine & Sports Care" [level=3]
+    - generic: 548 subscribers
+  - link "Videos":
+    - /url: /channel/UCJrBVyRFX8nPDn7HPrTvXaQ/videos
+    - generic: Videos
+  - link "About":
+    - /url: /channel/UCJrBVyRFX8nPDn7HPrTvXaQ/about
+    - generic: About
+  - button "Show less"
+
+
+- dialog [active]:
+  - iframe:
+    - generic "YouTube Video Player"
+    - button "Play video":
+    - button "Hide player controls"
+    - link "Reverse Snow Angel | Exercise Of The Week | Advanced Spine & Sports Care Chicago":
+      - /url: https://www.youtube.com/watch?v=R4iO4gXC_TY
+    - link "Advanced Spine & Sports Care":
+      - /url: /channel/UCJrBVyRFX8nPDn7HPrTvXaQ
+      - generic: Advanced Spine & Sports Care
+    - button "thumbnail-image":
+      - img "thumbnail-image"
+    - generic: Advanced Spine & Sports Care
+    - generic: 548 subscribers
+    - button "Share":
+    - link "Watch Later":
+      - /url: https://accounts.google.com/ServiceLogin
+    - link "Watch on YouTube":
+      - /url: https://www.youtube.com/watch?v=R4iO4gXC_TY
+      - text: Watch on
+  - generic: Embed Video
+  - textbox: <iframe width="560" height="315" src="https://www.youtube.com/embed/R4iO4gXC_TY?si=E1oaQ4XLIMvovoA9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  - checkbox "Start at":
+    - generic: Start at
+  - generic "0 seconds":
+    - textbox [disabled]: 0:00
+  - text: Embed Options
+  - checkbox "Show player controls." [checked]:
+    - generic: Show player controls.
+  - checkbox "When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.":
+    - generic: Enable privacy-enhanced mode.
+  - tooltip "tooltip"
+  - link "API Reference":
+    - /url: https://developers.google.com/youtube/iframe_api_reference
+  - link "Developer Sample":
+    - /url: https://developers.google.com/youtube/youtube_player_demo
+  - text: By embedding YouTube videos on your site, you are agreeing to
+  - link "YouTube API Terms of Service":
+    - /url: https://developers.google.com/youtube/terms/api-services-terms-of-service
+  - button "Copy":
+    - generic: Copy

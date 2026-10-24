@@ -1,0 +1,104 @@
+  - heading "Cossack Squat Movement Demo" [level=1]
+  - link "The Active Life":
+    - /url: /@TheActiveLife
+    - img "The Active Life"
+  - generic "The Active Life":
+    - link "The Active Life":
+      - /url: /@TheActiveLife
+  - generic "22.9 thousand subscribers": 22.9k subscribers
+  - button "Subscribe to The Active Life.":
+    - generic: Subscribe
+  - button "like this video along with 149 other people":
+    - generic: "149"
+  - button "Dislike this video"
+  - button "Share":
+    - generic: Share
+  - button "Save to playlist":
+    - generic: Save
+  - button "More actions"
+  - generic: 66,617 views 5 Sept 2019
+  - text: Active Life Professionals help people who won’t take “if it hurts, don’t do it” for an answer. Want to learn how to get out of pain without giving up your active life, go to
+  - link "https://activelifeprofessional.com/fi...":
+    - /url: https://activelifeprofessional.com/find-a-pro-near-me/
+  - text: Are you a coach or trainer who wants to learn how to build a fulfilling coaching business helping people get out of pain without giving up their active life? Head to
+  - link "https://activelifeprofessional.com/al...":
+    - /url: https://activelifeprofessional.com/al-p-coaching-program/
+  - text: Follow Dr. Sean Pastuch @
+  - 'link "Instagram Channel Link: drseanpastuch"':
+    - /url: https://www.instagram.com/drseanpastuch/
+    - text: / drseanpastuch
+  - text: Follow Active Life RX @
+  - 'link "Instagram Channel Link: activeliferx"':
+    - /url: https://www.instagram.com/activeliferx/
+    - text: / activeliferx
+  - text: Follow Active Life Professional @
+  - 'link "Instagram Channel Link: activelifeprofessional"':
+    - /url: https://www.instagram.com/activelifeprofessional
+    - text: / activelifeprofessional
+  - text: Subscribe to our podcast -
+  - 'link "YouTube Channel Link: @activelifepodcast"':
+    - /url: /channel/UC-A0AY-lAKvkEVxS4j3t4eQ
+    - text: / @activelifepodcast
+  - generic: How this was made
+  - generic: Auto-dubbed
+  - text: Audio tracks for some languages were automatically generated.
+  - link "Learn more":
+    - /url: //support.google.com/youtube/answer/15569972?hl=en-GB
+  - generic: Transcript
+  - paragraph: Follow along using the transcript.
+  - button "Show transcript":
+    - generic: Show transcript
+  - link "The Active Life 22.9k subscribers":
+    - /url: /@TheActiveLife
+    - heading "The Active Life" [level=3]
+    - generic: 22.9k subscribers
+  - link "Videos":
+    - /url: /channel/UC3I2mI2yyfngC82AcqQO-dg/videos
+    - generic: Videos
+  - link "About":
+    - /url: /channel/UC3I2mI2yyfngC82AcqQO-dg/about
+    - generic: About
+  - button "Show less"
+
+
+- dialog [active]:
+  - iframe:
+    - generic "YouTube Video Player"
+    - button "Play video":
+    - button "Hide player controls"
+    - link "Cossack Squat Movement Demo":
+      - /url: https://www.youtube.com/watch?v=iPZNB5GsOnM
+    - link "The Active Life":
+      - /url: /channel/UC3I2mI2yyfngC82AcqQO-dg
+      - generic: The Active Life
+    - button "thumbnail-image":
+      - img "thumbnail-image"
+    - generic: The Active Life
+    - generic: 22.9k subscribers
+    - button "Share":
+    - link "Watch Later":
+      - /url: https://accounts.google.com/ServiceLogin
+    - link "Watch on YouTube":
+      - /url: https://www.youtube.com/watch?v=iPZNB5GsOnM
+      - text: Watch on
+  - generic: Embed Video
+  - textbox: <iframe width="560" height="315" src="https://www.youtube.com/embed/iPZNB5GsOnM?si=HpkBOuNmYzjBNojG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  - checkbox "Start at":
+    - generic: Start at
+  - generic "0 seconds":
+    - textbox [disabled]: 0:00
+  - text: Embed Options
+  - checkbox "Show player controls." [checked]:
+    - generic: Show player controls.
+  - checkbox "When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.":
+    - generic: Enable privacy-enhanced mode.
+  - tooltip "tooltip"
+  - link "API Reference":
+    - /url: https://developers.google.com/youtube/iframe_api_reference
+  - link "Developer Sample":
+    - /url: https://developers.google.com/youtube/youtube_player_demo
+  - text: By embedding YouTube videos on your site, you are agreeing to
+  - link "YouTube API Terms of Service":
+    - /url: https://developers.google.com/youtube/terms/api-services-terms-of-service
+  - button "Copy":
+    - generic: Copy

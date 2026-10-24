@@ -1,0 +1,76 @@
+  - heading "How To Do Negative Pull Ups" [level=1]
+  - link "PureGym":
+    - /url: /@PureGymVideo
+    - img "PureGym"
+  - generic "PureGym":
+    - link "PureGym":
+      - /url: /@PureGymVideo
+  - generic "105 thousand subscribers": 105k subscribers
+  - button "Subscribe to PureGym.":
+    - generic: Subscribe
+  - button "Like":
+    - generic: Like
+  - button "Dislike this video":
+  - button "Share":
+    - generic: Share
+  - button "Save to playlist":
+    - generic: Save
+  - button "More actions":
+  - generic: 8,175 views 10 Jun 2024
+  - text: Negative pull ups are a pull up variation that focuses on lengthening the eccentric (lowering) portion of the pull up. This is a great way to build back and bicep strength and work up towards your first pull up, or to help increase the number of pull ups you are able to do. Here, Personal Trainer Danny shows how to do negative pull ups. How To Do Negative Pul Ups 1. Place a tall box, step or chair in front of a pull up bar and step up onto the platform. This needs to be at a height where you can get your chin above the bar by stepping or jumping off. 2. Grab the bar with an overhand grip, hands slightly wider than shoulder width apart, and step or jump off the platform so that your chin is above the bar, arms bent. 3. Keep both arms bent and squeeze your shoulder blades together to lift your chest towards the bar. 4. Slowly lower yourself down by extending the arms. This should be a controlled movement, with the arms straightening as slowly as you're able to. 5. Once your arms are fully extended and your shoulders are fully dropped, hold this position for a few seconds before coming off the bar and starting again. Get more exercise demonstrations here 👉
+  - link "https://www.puregym.com/exercises/":
+    - /url: https://www.puregym.com/exercises/
+  - link "PureGym 105k subscribers":
+    - /url: /@PureGymVideo
+    - heading "PureGym" [level=3]
+    - generic: 105k subscribers
+  - link "Videos":
+    - /url: /channel/UCBbB-PR9CsGcMnswP04TbhQ/videos
+    - generic: Videos
+  - link "About":
+    - /url: /channel/UCBbB-PR9CsGcMnswP04TbhQ/about
+    - generic: About
+  - button "Show less"
+
+
+- dialog [active]:
+  - iframe:
+    - generic "YouTube Video Player"
+    - button "Play video":
+    - button "Hide player controls"
+    - link "How To Do Negative Pull Ups":
+      - /url: https://www.youtube.com/watch?v=jBSMDqs7OzM
+    - link "PureGym":
+      - /url: /channel/UCBbB-PR9CsGcMnswP04TbhQ
+      - generic: PureGym
+    - button "thumbnail-image":
+      - img "thumbnail-image"
+    - generic: PureGym
+    - generic: 105k subscribers
+    - button "Share":
+    - link "Watch Later":
+      - /url: https://accounts.google.com/ServiceLogin
+    - link "Watch on YouTube":
+      - /url: https://www.youtube.com/watch?v=jBSMDqs7OzM
+      - text: Watch on
+  - generic: Embed Video
+  - textbox: <iframe width="560" height="315" src="https://www.youtube.com/embed/jBSMDqs7OzM?si=yw9Q3H0fuplO170a" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  - checkbox "Start at":
+    - generic: Start at
+  - generic "0 seconds":
+    - textbox [disabled]: 0:00
+  - text: Embed Options
+  - checkbox "Show player controls." [checked]:
+    - generic: Show player controls.
+  - checkbox "When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.":
+    - generic: Enable privacy-enhanced mode.
+  - tooltip "tooltip"
+  - link "API Reference":
+    - /url: https://developers.google.com/youtube/iframe_api_reference
+  - link "Developer Sample":
+    - /url: https://developers.google.com/youtube/youtube_player_demo
+  - text: By embedding YouTube videos on your site, you are agreeing to
+  - link "YouTube API Terms of Service":
+    - /url: https://developers.google.com/youtube/terms/api-services-terms-of-service
+  - button "Copy":
+    - generic: Copy

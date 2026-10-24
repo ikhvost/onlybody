@@ -1,0 +1,39 @@
+import XCTest
+
+/// Temporary live-network audit; retained outside the test target after execution.
+@MainActor
+final class YouTubeLiveAuditTests: XCTestCase {
+    func testLivePlayback() {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        app.launchArguments = ["-AppleLanguages", "(en)", "-AppleLocale", "en_US"]
+        app.launchEnvironment["ONLYBODY_UI_FIXTURE"] = "catalog"
+        app.launchEnvironment["ONLYBODY_UI_STORE"] = UUID().uuidString
+        app.launch()
+        defer { app.terminate() }
+        XCTAssertTrue(app.buttons["tab.library"].waitForExistence(timeout: 15))
+        app.buttons["tab.library"].tap()
+        let search = app.textFields["library.search"]
+        XCTAssertTrue(search.waitForExistence(timeout: 10))
+        search.tap()
+        search.typeText("Wall Push-Ups")
+        let movement = app.buttons["library.exercise.Wall Push-Ups"]
+        XCTAssertTrue(movement.waitForExistence(timeout: 10))
+        movement.tap()
+        let player = app.webViews.firstMatch
+        XCTAssertTrue(player.waitForExistence(timeout: 20))
+        let ready = XCTAttachment(screenshot: app.screenshot())
+        ready.name = "Physical iPhone live YouTube before Play"
+        ready.lifetime = .keepAlways
+        add(ready)
+        let play = player.buttons.matching(NSPredicate(format: "label CONTAINS[c] %@", "Play")).firstMatch
+        XCTAssertTrue(play.waitForExistence(timeout: 25), app.debugDescription)
+        play.tap()
+        let pause = player.buttons.matching(NSPredicate(format: "label CONTAINS[c] %@", "Pause")).firstMatch
+        XCTAssertTrue(pause.waitForExistence(timeout: 25), app.debugDescription)
+        let playing = XCTAttachment(screenshot: app.screenshot())
+        playing.name = "Physical iPhone live YouTube playing"
+        playing.lifetime = .keepAlways
+        add(playing)
+    }
+}

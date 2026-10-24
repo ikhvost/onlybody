@@ -1,0 +1,81 @@
+  - heading "Pull-up Feet Assisted" [level=1]
+  - link "Champion Physical Therapy and Performance":
+    - /url: /@championptp
+    - img "Champion Physical Therapy and Performance"
+  - generic "Champion Physical Therapy and Performance":
+    - link "Champion Physical Therapy and Performance":
+      - /url: /@championptp
+  - generic "8.26 thousand subscribers": 8.26k subscribers
+  - button "Subscribe to Champion Physical Therapy and Performance.":
+    - generic: Subscribe
+  - button "like this video along with 12 other people":
+    - generic: "12"
+  - button "Dislike this video":
+  - button "Share":
+  - button "Save to playlist":
+  - button "More actions":
+  - generic: 5,922 views 26 Feb 2018
+  - text: No description has been added to this video.
+  - link "Champion Physical Therapy and Performance 8.26k subscribers":
+    - /url: /@championptp
+    - heading "Champion Physical Therapy and Performance" [level=3]
+    - generic: 8.26k subscribers
+  - link "Videos":
+    - /url: /channel/UCgwq1NCwQv0ORA7Aea-zERA/videos
+    - generic: Videos
+  - link "About":
+    - /url: /channel/UCgwq1NCwQv0ORA7Aea-zERA/about
+    - generic: About
+  - link "Instagram":
+    - /url: http://instagram.com/championptp
+    - generic: Instagram
+  - link "Facebook":
+    - /url: http://www.facebook.com/ChampionPTandPerformance
+    - generic: Facebook
+  - link "Twitter":
+    - /url: http://twitter.com/championptp
+    - generic: Twitter
+  - button "Show less"
+
+
+- dialog [active]:
+  - iframe:
+    - generic "YouTube Video Player"
+    - button "Play video":
+    - button "Hide player controls"
+    - link "Pull-up Feet Assisted":
+      - /url: https://www.youtube.com/watch?v=jwFirnEhSX8
+    - link "Champion Physical Therapy and Performance":
+      - /url: /channel/UCgwq1NCwQv0ORA7Aea-zERA
+      - generic: Champion Physical Therapy and Performance
+    - button "thumbnail-image":
+      - img "thumbnail-image"
+    - generic: Champion Physical Therapy and Performance
+    - generic: 8.26k subscribers
+    - button "Share":
+    - link "Watch Later":
+      - /url: https://accounts.google.com/ServiceLogin
+    - link "Watch on YouTube":
+      - /url: https://www.youtube.com/watch?v=jwFirnEhSX8
+      - text: Watch on
+  - generic: Embed Video
+  - textbox: <iframe width="560" height="315" src="https://www.youtube.com/embed/jwFirnEhSX8?si=p845ZA051bDJFivv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  - checkbox "Start at":
+    - generic: Start at
+  - generic "0 seconds":
+    - textbox [disabled]: 0:00
+  - text: Embed Options
+  - checkbox "Show player controls." [checked]:
+    - generic: Show player controls.
+  - checkbox "When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.":
+    - generic: Enable privacy-enhanced mode.
+  - tooltip "tooltip"
+  - link "API Reference":
+    - /url: https://developers.google.com/youtube/iframe_api_reference
+  - link "Developer Sample":
+    - /url: https://developers.google.com/youtube/youtube_player_demo
+  - text: By embedding YouTube videos on your site, you are agreeing to
+  - link "YouTube API Terms of Service":
+    - /url: https://developers.google.com/youtube/terms/api-services-terms-of-service
+  - button "Copy":
+    - generic: Copy

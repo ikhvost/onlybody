@@ -1,0 +1,94 @@
+  - heading "How to do a Squat Jump | Proper Form & Technique | NASM" [level=1]
+  - link "National Academy of Sports Medicine (NASM)":
+    - /url: /@NasmOrgPersonalTrainer
+    - img "National Academy of Sports Medicine (NASM)"
+  - generic "National Academy of Sports Medicine (NASM)":
+    - link "National Academy of Sports Medicine (NASM)":
+      - /url: /@NasmOrgPersonalTrainer
+  - generic "108 thousand subscribers": 108k subscribers
+  - button "Subscribe to National Academy of Sports Medicine (NASM).":
+    - generic: Subscribe
+  - button "like this video along with 55 other people":
+    - generic: "55"
+  - button "Dislike this video"
+  - button "Share"
+  - button "Save to playlist"
+  - button "More actions"
+  - text: 14,872 views 28 Apr 2021
+  - link "#Calves":
+    - /url: /hashtag/calves
+  - link "#Glutes":
+    - /url: /hashtag/glutes
+  - link "#Hamstrings":
+    - /url: /hashtag/hamstrings
+  - text: "Learn how to do the perfect squat jump from the most trusted name in fitness, the National Academy of Sports Medicine. Steps for Doing a Squat Jump:"
+  - list:
+    - listitem: Stand with your feet straight and shoulder-width apart.
+    - listitem: Draw in the belly button and squeeze the butt muscles.
+    - listitem: Jump up, raising the arms above the head, and land softly on the balls of the feet, but behind the arch of the feet.
+    - listitem: Repeat for the desired number of repetitions.
+  - text: 𝙀𝙫𝙚𝙧𝙮𝙤𝙣𝙚 𝙡𝙤𝙫𝙚𝙨 𝙁𝙍𝙀𝙀. 𝙏𝙝𝙖𝙩'𝙨 𝙬𝙝𝙮 𝙬𝙚'𝙧𝙚 𝙤𝙛𝙛𝙚𝙧𝙞𝙣𝙜 𝙮𝙤𝙪 𝙖 𝙛𝙧𝙚𝙚 𝙉𝘼𝙎𝙈 𝙈𝙞𝙣𝙞-𝘾𝙤𝙪𝙧𝙨𝙚 𝙤𝙣 𝙃𝙤𝙬 𝙩𝙤 𝘽𝙪𝙞𝙡𝙙 𝙩𝙝𝙚 𝘽𝙚𝙨𝙩 𝙖𝙩 𝙃𝙤𝙢𝙚 𝙒𝙤𝙧𝙠𝙤𝙪𝙩. 𝘾𝙡𝙖𝙞𝙢 𝙮𝙤𝙪𝙧𝙨 𝙗𝙚𝙛𝙤𝙧𝙚 𝙞𝙩'𝙨 𝙜𝙤𝙣𝙚.
+  - link "https://bit.ly/3eDesKK":
+    - /url: https://bit.ly/3eDesKK
+  - link "#Quadriceps":
+    - /url: /hashtag/quadriceps
+  - link "#Hamstrings":
+    - /url: /hashtag/hamstrings
+  - link "#Calves":
+    - /url: /hashtag/calves
+  - link "#Glutes":
+    - /url: /hashtag/glutes
+  - link "National Academy of Sports Medicine (NASM) 108k subscribers":
+    - /url: /@NasmOrgPersonalTrainer
+    - heading "National Academy of Sports Medicine (NASM)" [level=3]
+    - generic: 108k subscribers
+  - link "Videos":
+    - /url: /channel/UCjWgUFeyDbeQ3Q_eVCup_7Q/videos
+    - generic: Videos
+  - link "About":
+    - /url: /channel/UCjWgUFeyDbeQ3Q_eVCup_7Q/about
+    - generic: About
+  - button "Show less"
+
+
+- dialog [active]:
+  - iframe:
+    - generic "YouTube Video Player"
+    - button "Play video":
+    - button "Hide player controls"
+    - link "How to do a Squat Jump | Proper Form & Technique | NASM":
+      - /url: https://www.youtube.com/watch?v=tZSYZdtbONc
+    - link "National Academy of Sports Medicine (NASM)":
+      - /url: /channel/UCjWgUFeyDbeQ3Q_eVCup_7Q
+      - generic: National Academy of Sports Medicine (NASM)
+    - button "thumbnail-image":
+      - img "thumbnail-image"
+    - generic: National Academy of Sports Medicine (NASM)
+    - generic: 108k subscribers
+    - button "Share":
+    - link "Watch Later":
+      - /url: https://accounts.google.com/ServiceLogin
+    - link "Watch on YouTube":
+      - /url: https://www.youtube.com/watch?v=tZSYZdtbONc
+      - text: Watch on
+  - generic: Embed Video
+  - textbox: <iframe width="560" height="315" src="https://www.youtube.com/embed/tZSYZdtbONc?si=mJdlyaz8um6NszYR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  - checkbox "Start at":
+    - generic: Start at
+  - generic "0 seconds":
+    - textbox [disabled]: 0:00
+  - text: Embed Options
+  - checkbox "Show player controls." [checked]:
+    - generic: Show player controls.
+  - checkbox "When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.":
+    - generic: Enable privacy-enhanced mode.
+  - tooltip "tooltip"
+  - link "API Reference":
+    - /url: https://developers.google.com/youtube/iframe_api_reference
+  - link "Developer Sample":
+    - /url: https://developers.google.com/youtube/youtube_player_demo
+  - text: By embedding YouTube videos on your site, you are agreeing to
+  - link "YouTube API Terms of Service":
+    - /url: https://developers.google.com/youtube/terms/api-services-terms-of-service
+  - button "Copy":
+    - generic: Copy

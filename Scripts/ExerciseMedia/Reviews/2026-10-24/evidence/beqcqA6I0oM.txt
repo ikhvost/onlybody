@@ -1,0 +1,62 @@
+  - heading "Bulgarian split squat - Bodyweight" [level=1]
+  - link "Range Physio":
+    - /url: /@rangephysio550
+    - img "Range Physio"
+  - generic "Range Physio":
+    - link "Range Physio":
+      - /url: /@rangephysio550
+  - generic "75 subscribers"
+  - button "Subscribe to Range Physio.":
+    - generic: Subscribe
+  - button "like this video along with 27 other people":
+    - generic: "27"
+  - button "Dislike this video":
+  - button "Share":
+    - generic: Share
+  - button "Save to playlist":
+    - generic: Save
+  - button "More actions":
+  - generic: 7,083 views 23 Mar 2023
+  - text: No description has been added to this video.
+  - button "Show less"
+
+
+- dialog [active]:
+  - iframe:
+    - generic "YouTube Video Player"
+    - button "Play video":
+    - button "Hide player controls"
+    - link "Bulgarian split squat - Bodyweight":
+      - /url: https://www.youtube.com/watch?v=beqcqA6I0oM
+    - link "Range Physio":
+      - /url: /channel/UCxmds1dMcUXYHRlmvO33InA
+      - generic: Range Physio
+    - button "thumbnail-image":
+      - img "thumbnail-image"
+    - generic: Range Physio
+    - generic: 75 subscribers
+    - button "Copy link":
+    - link "Watch on YouTube":
+      - /url: https://www.youtube.com/watch?v=beqcqA6I0oM
+      - text: Watch on
+  - generic: Embed Video
+  - textbox: <iframe width="560" height="315" src="https://www.youtube.com/embed/beqcqA6I0oM?si=uUHo3dqMBW45giMb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  - checkbox "Start at":
+    - generic: Start at
+  - generic "0 seconds":
+    - textbox [disabled]: 0:00
+  - text: Embed Options
+  - checkbox "Show player controls." [checked]:
+    - generic: Show player controls.
+  - checkbox "When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.":
+    - generic: Enable privacy-enhanced mode.
+  - tooltip "tooltip"
+  - link "API Reference":
+    - /url: https://developers.google.com/youtube/iframe_api_reference
+  - link "Developer Sample":
+    - /url: https://developers.google.com/youtube/youtube_player_demo
+  - text: By embedding YouTube videos on your site, you are agreeing to
+  - link "YouTube API Terms of Service":
+    - /url: https://developers.google.com/youtube/terms/api-services-terms-of-service
+  - button "Copy":
+    - generic: Copy

@@ -1,0 +1,83 @@
+  - heading "Strict Pull Up - OPEX Exercise Library" [level=1]
+  - link "OPEX Fitness":
+    - /url: /@OPEXFitness
+    - img "OPEX Fitness"
+  - generic "OPEX Fitness":
+    - link "OPEX Fitness":
+      - /url: /@OPEXFitness
+  - generic "39.8 thousand subscribers": 39.8k subscribers
+  - button "Subscribe to OPEX Fitness.":
+    - generic: Subscribe
+  - button "like this video along with 59 other people":
+    - generic: "59"
+  - button "Dislike this video":
+  - button "Share":
+  - button "Save to playlist":
+  - button "More actions":
+  - generic: 86,793 views 29 May 2020
+  - text: Start the Strict Pull Up in a hang position with hands shoulder-width apart. Engage the lats and pull up to the bar with until your chin clears the bar. In a neutral position return back to the starting position. OPEX Fitness is the education provider for coaches seeking career success, longevity, and fulfillment. Our mission is to bring honor back to the coaching profession. Through our coaching education and our Gym Licensing Program, we provide coaches with the tools needed to professionalize their passion. OPEX On The Web OPEX Coaching Education -
+  - link "https://www.OPEXfit.com":
+    - /url: https://www.OPEXfit.com/
+  - text: OPEX Gyms -
+  - link "https://www.OPEXgyms.com":
+    - /url: https://www.OPEXgyms.com/
+  - link "OPEX Fitness 39.8k subscribers":
+    - /url: /@OPEXFitness
+    - heading "OPEX Fitness" [level=3]
+    - generic: 39.8k subscribers
+  - link "Videos":
+    - /url: /channel/UCCgDGih2kSp0A6W_0cVYuaQ/videos
+    - generic: Videos
+  - link "About":
+    - /url: /channel/UCCgDGih2kSp0A6W_0cVYuaQ/about
+    - generic: About
+  - link "OPEX IG":
+    - /url: https://www.instagram.com/opexfitness/
+    - generic: OPEX IG
+  - link "CoachRx IG":
+    - /url: https://www.instagram.com/coachrx.app/
+    - generic: CoachRx IG
+  - button "Show less"
+
+
+- dialog [active]:
+  - iframe:
+    - generic "YouTube Video Player"
+    - button "Play video":
+    - button "Hide player controls"
+    - link "Strict Pull Up - OPEX Exercise Library":
+      - /url: https://www.youtube.com/watch?v=jgFel4wZl3I
+    - link "OPEX Fitness":
+      - /url: /channel/UCCgDGih2kSp0A6W_0cVYuaQ
+      - generic: OPEX Fitness
+    - button "thumbnail-image":
+      - img "thumbnail-image"
+    - generic: OPEX Fitness
+    - generic: 39.8k subscribers
+    - button "Share":
+    - link "Watch Later":
+      - /url: https://accounts.google.com/ServiceLogin
+    - link "Watch on YouTube":
+      - /url: https://www.youtube.com/watch?v=jgFel4wZl3I
+      - text: Watch on
+  - generic: Embed Video
+  - textbox: <iframe width="560" height="315" src="https://www.youtube.com/embed/jgFel4wZl3I?si=B9ydBtWI8Sggfs_R" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  - checkbox "Start at":
+    - generic: Start at
+  - generic "0 seconds":
+    - textbox [disabled]: 0:00
+  - text: Embed Options
+  - checkbox "Show player controls." [checked]:
+    - generic: Show player controls.
+  - checkbox "When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.":
+    - generic: Enable privacy-enhanced mode.
+  - tooltip "tooltip"
+  - link "API Reference":
+    - /url: https://developers.google.com/youtube/iframe_api_reference
+  - link "Developer Sample":
+    - /url: https://developers.google.com/youtube/youtube_player_demo
+  - text: By embedding YouTube videos on your site, you are agreeing to
+  - link "YouTube API Terms of Service":
+    - /url: https://developers.google.com/youtube/terms/api-services-terms-of-service
+  - button "Copy":
+    - generic: Copy

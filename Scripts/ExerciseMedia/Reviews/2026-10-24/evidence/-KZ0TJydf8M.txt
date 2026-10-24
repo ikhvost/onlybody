@@ -1,0 +1,76 @@
+  - heading "Physical Therapy Bent Knee Calf Raises" [level=1]
+  - link "Rx Rehab":
+    - /url: /@rxrehab6984
+    - img "Rx Rehab"
+  - generic "Rx Rehab":
+    - link "Rx Rehab":
+      - /url: /@rxrehab6984
+  - generic "532 subscribers"
+  - button "Subscribe to Rx Rehab.":
+    - generic: Subscribe
+  - button "like this video along with 12 other people":
+    - generic: "12"
+  - button "Dislike this video":
+  - button "Share":
+  - button "Save to playlist":
+  - button "More actions":
+  - generic: 4,360 views 21 Feb 2023
+  - generic: Scott demonstrates how to do the bent knee calf raises. This focuses more on your soleus muscle in your calf. This is a great exercise to do if you have tight calf muscles, Achilles tendon injuries, or plantar fasciitis. We recommend doing 3 sets of 10 raises. Remember to take breaks between sets! A calf stretch afterwards can also be helpful if they are still tight. Happy recovery!
+  - generic: Transcript
+  - paragraph: Follow along using the transcript.
+  - button "Show transcript":
+    - generic: Show transcript
+  - link "Rx Rehab 532 subscribers":
+    - /url: /@rxrehab6984
+    - heading "Rx Rehab" [level=3]
+    - generic: 532 subscribers
+  - link "Videos":
+    - /url: /channel/UCXev-za2M-VAHfU1A97HOmg/videos
+    - generic: Videos
+  - link "About":
+    - /url: /channel/UCXev-za2M-VAHfU1A97HOmg/about
+    - generic: About
+  - button "Show less"
+
+
+- dialog [active]:
+  - iframe:
+    - generic "YouTube Video Player"
+    - button "Play video":
+    - button "Hide player controls"
+    - link "Physical Therapy Bent Knee Calf Raises":
+      - /url: https://www.youtube.com/watch?v=-KZ0TJydf8M
+    - link "Rx Rehab":
+      - /url: /channel/UCXev-za2M-VAHfU1A97HOmg
+      - generic: Rx Rehab
+    - button "thumbnail-image":
+      - img "thumbnail-image"
+    - generic: Rx Rehab
+    - generic: 532 subscribers
+    - button "Share":
+    - link "Watch Later":
+      - /url: https://accounts.google.com/ServiceLogin
+    - link "Watch on YouTube":
+      - /url: https://www.youtube.com/watch?v=-KZ0TJydf8M
+      - text: Watch on
+  - generic: Embed Video
+  - textbox: <iframe width="560" height="315" src="https://www.youtube.com/embed/-KZ0TJydf8M?si=yc-nZdncO2vrYFq_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  - checkbox "Start at":
+    - generic: Start at
+  - generic "0 seconds":
+    - textbox [disabled]: 0:00
+  - text: Embed Options
+  - checkbox "Show player controls." [checked]:
+    - generic: Show player controls.
+  - checkbox "When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.":
+    - generic: Enable privacy-enhanced mode.
+  - tooltip "tooltip"
+  - link "API Reference":
+    - /url: https://developers.google.com/youtube/iframe_api_reference
+  - link "Developer Sample":
+    - /url: https://developers.google.com/youtube/youtube_player_demo
+  - text: By embedding YouTube videos on your site, you are agreeing to
+  - link "YouTube API Terms of Service":
+    - /url: https://developers.google.com/youtube/terms/api-services-terms-of-service
+  - button "Copy":
+    - generic: Copy

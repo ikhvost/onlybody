@@ -1,0 +1,74 @@
+  - heading "How To Do High Knees" [level=1]
+  - link "PureGym":
+    - /url: /@PureGymVideo
+    - img "PureGym"
+  - generic "PureGym":
+    - link "PureGym":
+      - /url: /@PureGymVideo
+  - generic "105 thousand subscribers": 105k subscribers
+  - button "Subscribe to PureGym.":
+    - generic: Subscribe
+  - button "Like":
+    - generic: Like
+  - button "Dislike this video":
+  - button "Share":
+  - button "Save to playlist":
+  - button "More actions":
+  - generic: 28,245 views 30 Jan 2018
+  - text: The high knees exercise is a fast paced cardio exercise which gets your heart rate up and burns calories, so it's great for HIIT workouts, warm ups, or keeping your heart rate high during training sessions. It can also help to increase strength, power, and endurance in your lower body, and improve your balance and stability. 1. Stand with your feet around hip-width apart. 2. Hold your forearms out in front of you, palms facing the floor, with your elbows at a 90 degree angle. 3. While standing on the spot, quickly bring your right knee up to meet your palms. 4. Drop your leg back down and quickly bring your left knee up. 5. Alternate between both legs for your desired reps or total time. Find more exercise demonstrations here 👉
+  - link "https://puregym.com/exercises/":
+    - /url: https://puregym.com/exercises/
+  - link "PureGym 105k subscribers":
+    - /url: /@PureGymVideo
+    - heading "PureGym" [level=3]
+    - generic: 105k subscribers
+  - link "Videos":
+    - /url: /channel/UCBbB-PR9CsGcMnswP04TbhQ/videos
+    - generic: Videos
+  - link "About":
+    - /url: /channel/UCBbB-PR9CsGcMnswP04TbhQ/about
+    - generic: About
+  - button "Show less"
+
+
+- dialog [active]:
+  - iframe:
+    - generic "YouTube Video Player"
+    - button "Play video":
+    - button "Hide player controls"
+    - link "How To Do High Knees":
+      - /url: https://www.youtube.com/watch?v=sTvekaq6vOU
+    - link "PureGym":
+      - /url: /channel/UCBbB-PR9CsGcMnswP04TbhQ
+      - generic: PureGym
+    - button "thumbnail-image":
+      - img "thumbnail-image"
+    - generic: PureGym
+    - generic: 105k subscribers
+    - button "Share":
+    - link "Watch Later":
+      - /url: https://accounts.google.com/ServiceLogin
+    - link "Watch on YouTube":
+      - /url: https://www.youtube.com/watch?v=sTvekaq6vOU
+      - text: Watch on
+  - generic: Embed Video
+  - textbox: <iframe width="560" height="315" src="https://www.youtube.com/embed/sTvekaq6vOU?si=BO4x4kHLkZRQFpCB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  - checkbox "Start at":
+    - generic: Start at
+  - generic "0 seconds":
+    - textbox [disabled]: 0:00
+  - text: Embed Options
+  - checkbox "Show player controls." [checked]:
+    - generic: Show player controls.
+  - checkbox "When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.":
+    - generic: Enable privacy-enhanced mode.
+  - tooltip "tooltip"
+  - link "API Reference":
+    - /url: https://developers.google.com/youtube/iframe_api_reference
+  - link "Developer Sample":
+    - /url: https://developers.google.com/youtube/youtube_player_demo
+  - text: By embedding YouTube videos on your site, you are agreeing to
+  - link "YouTube API Terms of Service":
+    - /url: https://developers.google.com/youtube/terms/api-services-terms-of-service
+  - button "Copy":
+    - generic: Copy
