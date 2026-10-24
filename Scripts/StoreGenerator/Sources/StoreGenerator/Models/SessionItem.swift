@@ -9,7 +9,7 @@ final class SessionItem {
     var plannedSets: Int = 3
     var plannedReps: Int = 12
     var setReps: [Int] = []
-    var weightKg: Double? = nil
+    var weightKg: Double?
 
     init() {}
 }

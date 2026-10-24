@@ -15,12 +15,12 @@ struct SwiftDataWorkoutRepositoryTests {
         )
         let repository = SwiftDataWorkoutRepository(context: container.mainContext)
 
-        let fullBody = Workout()
+        var fullBody = WorkoutSnapshot()
         fullBody.name = "Full Body"
         fullBody.mode = WorkoutMode.smart.rawValue
         fullBody.scheduledDays = ["Mon", "Wed", "Fri"]
 
-        let upperBody = Workout()
+        var upperBody = WorkoutSnapshot()
         upperBody.name = "Upper Body"
         upperBody.mode = WorkoutMode.manual.rawValue
         upperBody.scheduledDays = ["Tue", "Thu"]
@@ -45,26 +45,26 @@ struct SwiftDataWorkoutRepositoryTests {
         let workoutRepo = SwiftDataWorkoutRepository(context: container.mainContext)
         let exerciseRepo = SwiftDataExerciseRepository(context: container.mainContext)
 
-        let pushUp = Exercise()
+        var pushUp = ExerciseSnapshot()
         pushUp.name = "Push-Ups"
         pushUp.primaryMuscle = "Chest"
         try await exerciseRepo.save(pushUp)
 
-        let squat = Exercise()
+        var squat = ExerciseSnapshot()
         squat.name = "Squats"
         squat.primaryMuscle = "Quads"
         try await exerciseRepo.save(squat)
 
-        let workout = Workout()
+        var workout = WorkoutSnapshot()
         workout.name = "Full Body"
 
-        let item1 = WorkoutItem()
+        var item1 = WorkoutItemSnapshot()
         item1.order = 0
         item1.sets = 3
         item1.targetReps = 12
         item1.exercise = pushUp
 
-        let item2 = WorkoutItem()
+        var item2 = WorkoutItemSnapshot()
         item2.order = 1
         item2.sets = 4
         item2.targetReps = 15
@@ -78,13 +78,13 @@ struct SwiftDataWorkoutRepositoryTests {
 
         let fetched = all[0]
         #expect(fetched.name == "Full Body")
-        #expect(fetched.items?.count == 2)
+        #expect(fetched.items.count == 2)
 
-        let sorted = fetched.items?.sorted { $0.order < $1.order }
-        #expect(sorted?[0].exercise?.name == "Push-Ups")
-        #expect(sorted?[1].exercise?.name == "Squats")
-        #expect(sorted?[0].sets == 3)
-        #expect(sorted?[1].targetReps == 15)
+        let sorted = fetched.items.sorted { $0.order < $1.order }
+        #expect(sorted[0].exercise?.name == "Push-Ups")
+        #expect(sorted[1].exercise?.name == "Squats")
+        #expect(sorted[0].sets == 3)
+        #expect(sorted[1].targetReps == 15)
     }
 
     @Test
@@ -98,7 +98,7 @@ struct SwiftDataWorkoutRepositoryTests {
         )
         let repository = SwiftDataWorkoutRepository(context: container.mainContext)
 
-        let workout = Workout()
+        var workout = WorkoutSnapshot()
         workout.name = "Original"
         workout.mode = WorkoutMode.smart.rawValue
         try await repository.save(workout)

@@ -15,13 +15,13 @@ struct SwiftDataSessionRepositoryTests {
         )
         let repository = SwiftDataSessionRepository(context: container.mainContext)
 
-        let session1 = Session()
+        var session1 = SessionSnapshot()
         session1.workoutName = "Full Body"
         session1.durationSeconds = 1450
 
         session1.date = Date(timeIntervalSince1970: 1_000_000)
 
-        let session2 = Session()
+        var session2 = SessionSnapshot()
         session2.workoutName = "Upper Body"
         session2.durationSeconds = 2178
 
@@ -46,14 +46,14 @@ struct SwiftDataSessionRepositoryTests {
         )
         let repository = SwiftDataSessionRepository(context: container.mainContext)
 
-        let item1 = SessionItem()
+        var item1 = SessionItemSnapshot()
         item1.order = 0
         item1.exerciseName = "Push-Ups"
         item1.plannedSets = 3
         item1.plannedReps = 12
         item1.setReps = [12, 12, 10]
 
-        let item2 = SessionItem()
+        var item2 = SessionItemSnapshot()
         item2.order = 1
         item2.exerciseName = "Squats"
         item2.plannedSets = 4
@@ -61,7 +61,7 @@ struct SwiftDataSessionRepositoryTests {
         item2.setReps = [15, 15, 15, 15]
         item2.weightKg = 10.0
 
-        let session = Session()
+        var session = SessionSnapshot()
         session.workoutName = "Full Body"
         session.items = [item1, item2]
 
@@ -72,13 +72,13 @@ struct SwiftDataSessionRepositoryTests {
 
         let fetched = all[0]
         #expect(fetched.workoutName == "Full Body")
-        #expect(fetched.items?.count == 2)
+        #expect(fetched.items.count == 2)
 
-        let sorted = fetched.items?.sorted { $0.order < $1.order }
-        #expect(sorted?[0].exerciseName == "Push-Ups")
-        #expect(sorted?[0].setReps == [12, 12, 10])
-        #expect(sorted?[1].exerciseName == "Squats")
-        #expect(sorted?[1].weightKg == 10.0)
+        let sorted = fetched.items.sorted { $0.order < $1.order }
+        #expect(sorted[0].exerciseName == "Push-Ups")
+        #expect(sorted[0].setReps == [12, 12, 10])
+        #expect(sorted[1].exerciseName == "Squats")
+        #expect(sorted[1].weightKg == 10.0)
     }
 
     @Test
@@ -91,7 +91,7 @@ struct SwiftDataSessionRepositoryTests {
         )
         let repository = SwiftDataSessionRepository(context: container.mainContext)
 
-        let session = Session()
+        var session = SessionSnapshot()
         session.workoutName = "Original"
         session.durationSeconds = 0
         try await repository.save(session)

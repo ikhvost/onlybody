@@ -1,20 +1,20 @@
 import SwiftUI
 
 struct LibraryExerciseRow: View {
-    let exercise: Exercise
+    let exercise: ExerciseSnapshot
     let action: () -> Void
 
     var body: some View {
         Button(action: action) {
-            HStack(spacing: 10) {
-                VStack(alignment: .leading, spacing: 2) {
+            HStack(spacing: Theme.space10) {
+                VStack(alignment: .leading, spacing: Theme.space2) {
                     Text(exercise.name)
-                        .font(Theme.fontSans(16, .bold))
+                        .font(Theme.fontSans(Theme.type16, .bold))
                         .foregroundStyle(Theme.text)
 
                     MonoLabel(
                         text: "\(exercise.primaryMuscle) · \(exercise.equipmentLabel)",
-                        size: 10,
+                        size: Theme.type10,
                         color: Theme.text3,
                         tracking: 0.3
                     )
@@ -22,10 +22,10 @@ struct LibraryExerciseRow: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                ChevronIcon(color: Theme.text3, size: 14)
+                ChevronIcon(color: Theme.text3, size: Theme.type14)
             }
             .padding(.horizontal, Theme.horizontalPadding)
-            .padding(.vertical, 13)
+            .padding(.vertical, Theme.space13)
             .contentShape(.rect)
         }
         .buttonStyle(.plain)

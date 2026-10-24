@@ -3,7 +3,7 @@ import SwiftUI
 struct LibraryView: View {
     @Bindable var viewModel: LibraryViewModel
 
-    let showMovement: (Exercise) -> Void
+    let showMovement: (ExerciseSnapshot) -> Void
 
     private var contentState: String {
         if viewModel.isLoading { return "loading" }
@@ -15,13 +15,13 @@ struct LibraryView: View {
         ZStack {
             Theme.bg.ignoresSafeArea()
 
-            VStack(alignment: .leading, spacing: 0) {
+            VStack(alignment: .leading, spacing: Theme.space0) {
                 HStack(alignment: .bottom) {
-                    VStack(alignment: .leading, spacing: 3) {
-                        MonoLabel(text: "Movement catalog", size: 10, tracking: 1.2)
+                    VStack(alignment: .leading, spacing: Theme.space3) {
+                        MonoLabel(text: "Movement catalog", size: Theme.type10, tracking: 1.2)
 
                         Text("Library")
-                            .font(Theme.fontSans(28, .heavy))
+                            .font(Theme.fontSans(Theme.type28, .heavy))
                             .tracking(-1)
                             .foregroundStyle(Theme.text)
                     }
@@ -29,21 +29,21 @@ struct LibraryView: View {
                     Spacer(minLength: 10)
                 }
                 .padding(.horizontal, Theme.horizontalPadding)
-                .padding(.top, 16)
-                .padding(.bottom, 10)
+                .padding(.top, Theme.space16)
+                .padding(.bottom, Theme.space10)
 
-                VStack(spacing: 8) {
-                    HStack(spacing: 8) {
-                        SearchIcon(color: Theme.text3, size: 15)
+                VStack(spacing: Theme.space8) {
+                    HStack(spacing: Theme.space8) {
+                        SearchIcon(color: Theme.text3, size: Theme.type15)
 
                         TextField("Search...", text: $viewModel.searchText)
-                            .font(Theme.fontSans(14))
+                            .font(Theme.fontSans(Theme.type14))
                             .foregroundStyle(Theme.text)
                             .textInputAutocapitalization(.never)
                             .autocorrectionDisabled()
                     }
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 9)
+                    .padding(.horizontal, Theme.space10)
+                    .padding(.vertical, Theme.space9)
                     .background(Theme.surface)
                     .overlay {
                         RoundedRectangle(cornerRadius: Theme.cornerRadius)
@@ -52,19 +52,19 @@ struct LibraryView: View {
                     .clipShape(.rect(cornerRadius: Theme.cornerRadius))
 
                     ScrollView(.horizontal) {
-                        HStack(spacing: 6) {
+                        HStack(spacing: Theme.space6) {
                             ForEach(viewModel.filters, id: \.self) { filter in
                                 ChipView(label: filter, isActive: viewModel.selectedFilter == filter, isSmall: true) {
                                     viewModel.selectedFilter = filter
                                 }
                             }
                         }
-                        .padding(.bottom, 2)
+                        .padding(.bottom, Theme.space2)
                     }
                     .scrollIndicators(.hidden)
                 }
                 .padding(.horizontal, Theme.horizontalPadding)
-                .padding(.bottom, 10)
+                .padding(.bottom, Theme.space10)
 
                 Rectangle()
                     .fill(Theme.border)
@@ -72,28 +72,28 @@ struct LibraryView: View {
 
                 ZStack {
                     if viewModel.isLoading {
-                        VStack(spacing: 8) {
-                            MonoLabel(text: "Loading library", size: 11, tracking: 1.0)
+                        VStack(spacing: Theme.space8) {
+                            MonoLabel(text: "Loading library", size: Theme.type11, tracking: 1.0)
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .transition(.opacity)
                     } else if let errorMessage = viewModel.errorMessage {
-                        VStack(spacing: 8) {
-                            MonoLabel(text: errorMessage, size: 11, color: Theme.text2, tracking: 0.4)
+                        VStack(spacing: Theme.space8) {
+                            MonoLabel(text: errorMessage, size: Theme.type11, color: Theme.text2, tracking: 0.4)
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .padding(.horizontal, Theme.horizontalPadding)
                         .transition(.opacity)
                     } else if viewModel.filteredExercises.isEmpty {
-                        VStack(spacing: 8) {
-                            MonoLabel(text: "No movements found", size: 11, color: Theme.text2, tracking: 0.4)
+                        VStack(spacing: Theme.space8) {
+                            MonoLabel(text: "No movements found", size: Theme.type11, color: Theme.text2, tracking: 0.4)
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .padding(.horizontal, Theme.horizontalPadding)
                         .transition(.opacity)
                     } else {
                         ScrollView {
-                            LazyVStack(alignment: .leading, spacing: 0) {
+                            LazyVStack(alignment: .leading, spacing: Theme.space0) {
                                 ForEach(viewModel.filteredExercises, id: \.id) { exercise in
                                     LibraryExerciseRow(exercise: exercise) {
                                         showMovement(exercise)
@@ -118,20 +118,21 @@ struct LibraryView: View {
     }
 }
 
+#if DEBUG
 #Preview("Library") {
-    let viewModel = LibraryViewModel(exercises: PreviewExerciseRepository())
-
-    let pushUps = Exercise()
+    var pushUps = ExerciseSnapshot()
     pushUps.name = "Push-Ups"
     pushUps.primaryMuscle = "Chest"
     pushUps.equipment = ["None"]
 
-    let splitSquats = Exercise()
+    var splitSquats = ExerciseSnapshot()
     splitSquats.name = "Bulgarian Split Squats"
     splitSquats.primaryMuscle = "Quads"
     splitSquats.equipment = ["None"]
 
-    viewModel.allExercises = [pushUps, splitSquats]
+    let viewModel = LibraryViewModel(
+        exercises: PreviewExerciseRepository(exercises: [pushUps, splitSquats])
+    )
 
     return LibraryView(
         viewModel: viewModel,
@@ -139,3 +140,4 @@ struct LibraryView: View {
     )
     .preferredColorScheme(.dark)
 }
+#endif

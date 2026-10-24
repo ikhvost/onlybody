@@ -3,11 +3,11 @@ import Foundation
 
 @MainActor
 final class MockExerciseRepository: ExerciseRepository {
-    var stubbedAllExercises: [Exercise] = []
+    var stubbedAllExercises: [ExerciseSnapshot] = []
     var shouldThrow = false
-    var savedExercises: [Exercise] = []
+    var savedExercises: [ExerciseSnapshot] = []
 
-    func allExercises() async throws -> [Exercise] {
+    func allExercises() async throws -> [ExerciseSnapshot] {
         if shouldThrow {
             throw TestError.expectedFailure
         }
@@ -15,7 +15,7 @@ final class MockExerciseRepository: ExerciseRepository {
         return stubbedAllExercises
     }
 
-    func save(_ exercise: Exercise) async throws {
+    func save(_ exercise: ExerciseSnapshot) async throws {
         if shouldThrow {
             throw TestError.expectedFailure
         }

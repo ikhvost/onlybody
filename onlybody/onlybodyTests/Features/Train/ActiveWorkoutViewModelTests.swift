@@ -5,8 +5,8 @@ import Testing
 @MainActor
 struct ActiveWorkoutViewModelTests {
 
-    private func makeExercise(name: String) -> Exercise {
-        let exercise = Exercise()
+    private func makeExercise(name: String) -> ExerciseSnapshot {
+        var exercise = ExerciseSnapshot()
         exercise.name = name
         exercise.primaryMuscle = "Full Body"
         return exercise
@@ -17,9 +17,9 @@ struct ActiveWorkoutViewModelTests {
         sets: Int,
         targetReps: Int,
         restSeconds: Int,
-        exercise: Exercise
-    ) -> WorkoutItem {
-        let item = WorkoutItem()
+        exercise: ExerciseSnapshot
+    ) -> WorkoutItemSnapshot {
+        var item = WorkoutItemSnapshot()
         item.order = order
         item.sets = sets
         item.targetReps = targetReps
@@ -28,8 +28,8 @@ struct ActiveWorkoutViewModelTests {
         return item
     }
 
-    private func makeWorkout(id: UUID, name: String, items: [WorkoutItem]) -> Workout {
-        let workout = Workout()
+    private func makeWorkout(id: UUID, name: String, items: [WorkoutItemSnapshot]) -> WorkoutSnapshot {
+        var workout = WorkoutSnapshot()
         workout.id = id
         workout.name = name
         workout.items = items
@@ -37,7 +37,7 @@ struct ActiveWorkoutViewModelTests {
     }
 
     private func makeViewModel(
-        workout: Workout
+        workout: WorkoutSnapshot
     ) -> (ActiveWorkoutViewModel, MockWorkoutRepository, MockSessionRepository) {
         let workoutRepo = MockWorkoutRepository()
         workoutRepo.stubbedWorkouts = [workout]
@@ -152,7 +152,7 @@ struct ActiveWorkoutViewModelTests {
         #expect(viewModel.currentDisplayReps == 11)
     }
 
-    // MARK: - Exercise Advancement
+    // MARK: - ExerciseSnapshot Advancement
 
     @Test
     func markSetDoneAdvancesToNextExerciseAfterLastSet() async {
@@ -411,7 +411,7 @@ struct ActiveWorkoutViewModelTests {
         #expect(viewModel.currentWeight == 0)
     }
 
-    // MARK: - Session Items
+    // MARK: - SessionSnapshot Items
 
     @Test
     func buildSessionItemsCreatesItemsForEachExercise() async {
@@ -474,7 +474,7 @@ struct ActiveWorkoutViewModelTests {
         #expect(!viewModel.restTimer.isActive)
     }
 
-    // MARK: - Session Save
+    // MARK: - SessionSnapshot Save
 
     @Test
     func markSetDoneOnFinalSetSavesExactlyOneSession() async throws {
@@ -532,10 +532,10 @@ struct ActiveWorkoutViewModelTests {
         await viewModel.saveTask?.value
 
         let saved = try #require(sessionRepo.savedSessions.first)
-        let sortedItems = saved.items?.sorted { $0.order < $1.order }
-        #expect(sortedItems?.count == 2)
-        #expect(sortedItems?[0].exerciseName == "Push-Ups")
-        #expect(sortedItems?[1].exerciseName == "Squats")
+        let sortedItems = saved.items.sorted { $0.order < $1.order }
+        #expect(sortedItems.count == 2)
+        #expect(sortedItems[0].exerciseName == "Push-Ups")
+        #expect(sortedItems[1].exerciseName == "Squats")
     }
 
     @Test
@@ -559,9 +559,9 @@ struct ActiveWorkoutViewModelTests {
 
         let saved = try #require(sessionRepo.savedSessions.first)
         #expect(saved.workoutName == "Test")
-        let sortedItems = saved.items?.sorted { $0.order < $1.order }
-        #expect(sortedItems?[0].order == 0)
-        #expect(sortedItems?[1].order == 1)
+        let sortedItems = saved.items.sorted { $0.order < $1.order }
+        #expect(sortedItems[0].order == 0)
+        #expect(sortedItems[1].order == 1)
     }
 
     @Test
@@ -578,8 +578,8 @@ struct ActiveWorkoutViewModelTests {
         await viewModel.saveTask?.value
 
         let saved = try #require(sessionRepo.savedSessions.first)
-        let sessionItems = saved.items?.sorted { $0.order < $1.order }
-        #expect(sessionItems?[0].setReps == [10, 10, 10])
+        let sessionItems = saved.items.sorted { $0.order < $1.order }
+        #expect(sessionItems[0].setReps == [10, 10, 10])
     }
 
     @Test
@@ -596,10 +596,9 @@ struct ActiveWorkoutViewModelTests {
         await viewModel.saveTask?.value
 
         let saved = try #require(sessionRepo.savedSessions.first)
-        let sessionItems = saved.items?.sorted { $0.order < $1.order }
-        #expect(sessionItems?[0].weightKg == 5.0)
+        let sessionItems = saved.items.sorted { $0.order < $1.order }
+        #expect(sessionItems[0].weightKg == 5.0)
     }
-
 
     @Test
     func saveFailureSetsErrorMessage() async throws {
@@ -647,9 +646,9 @@ struct ActiveWorkoutViewModelTests {
         let saved = try #require(sessionRepo.savedSessions.first)
         #expect(saved.workoutName == "Partial")
 
-        let sessionItems = saved.items?.sorted { $0.order < $1.order }
-        #expect(sessionItems?.count == 2)
-        #expect(sessionItems?[0].setReps == [10])
-        #expect(sessionItems?[1].setReps.isEmpty == true)
+        let sessionItems = saved.items.sorted { $0.order < $1.order }
+        #expect(sessionItems.count == 2)
+        #expect(sessionItems[0].setReps == [10])
+        #expect(sessionItems[1].setReps.isEmpty == true)
     }
 }

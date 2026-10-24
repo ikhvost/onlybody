@@ -3,15 +3,25 @@ import SwiftUI
 
 @main
 struct BodyweightApp: App {
-    let container: ModelContainer
+    let container: ModelContainer?
     let exercises: any ExerciseRepository
     let workouts: any WorkoutRepository
     let sessions: any SessionRepository
     @State private var isLaunching = true
 
     init() {
+        #if DEBUG
+        if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+            container = nil
+            exercises = PreviewExerciseRepository()
+            workouts = PreviewWorkoutRepository()
+            sessions = PreviewSessionRepository()
+            return
+        }
+        #endif
+
         do {
-            let storeURL = URL.documentsDirectory.appending(path: "default.store")
+            let storeURL = try AppStoreLocation.url()
 
             if !FileManager.default.fileExists(atPath: storeURL.path()) {
                 if let seedURL = Bundle.main.url(forResource: "default", withExtension: "store") {
@@ -20,14 +30,14 @@ struct BodyweightApp: App {
             }
 
             let config = ModelConfiguration(url: storeURL)
-            container = try ModelContainer(
+            let storeContainer = try ModelContainer(
                 for: Exercise.self, Workout.self, WorkoutItem.self, Session.self, SessionItem.self,
                 configurations: config
             )
-            let context = container.mainContext
-            exercises = SwiftDataExerciseRepository(context: context)
-            workouts = SwiftDataWorkoutRepository(context: context)
-            sessions = SwiftDataSessionRepository(context: context)
+            container = storeContainer
+            exercises = SwiftDataExerciseRepository(context: ModelContext(storeContainer))
+            workouts = SwiftDataWorkoutRepository(context: ModelContext(storeContainer))
+            sessions = SwiftDataSessionRepository(context: ModelContext(storeContainer))
         } catch {
             fatalError("ModelContainer failed: \(error)")
         }
@@ -36,7 +46,7 @@ struct BodyweightApp: App {
     var body: some Scene {
         WindowGroup {
             ZStack {
-                AppTabView(exercises: exercises, workouts: workouts, sessions: sessions)
+                AppTabView(composition: AppComposition(exercises: exercises, workouts: workouts, sessions: sessions))
                     .opacity(isLaunching ? 0 : 1)
 
                 if isLaunching {

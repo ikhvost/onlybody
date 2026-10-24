@@ -15,13 +15,13 @@ struct SwiftDataExerciseRepositoryTests {
         )
         let repository = SwiftDataExerciseRepository(context: container.mainContext)
 
-        let squat = Exercise()
+        var squat = ExerciseSnapshot()
         squat.name = "Squats"
         squat.primaryMuscle = "Quads"
         squat.secondaryMuscles = ["Glutes"]
         squat.equipment = ["None"]
 
-        let pushUp = Exercise()
+        var pushUp = ExerciseSnapshot()
         pushUp.name = "Push-Ups"
         pushUp.primaryMuscle = "Chest"
         pushUp.secondaryMuscles = ["Triceps"]

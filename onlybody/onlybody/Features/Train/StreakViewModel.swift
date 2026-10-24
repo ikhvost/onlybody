@@ -6,7 +6,7 @@ import Observation
 final class StreakViewModel {
     private let sessionsRepository: any SessionRepository
 
-    var stats = StreakCalculator.Stats(current: 0, longest: 0, total: 0)
+    var stats = StreakStats(current: 0, longest: 0, total: 0)
     var heatmap: [[Bool]] = Array(repeating: Array(repeating: false, count: 20), count: 7)
     var isLoading = false
     var errorMessage: String?
@@ -31,7 +31,7 @@ final class StreakViewModel {
         }
     }
 
-    private func buildHeatmap(sessions: [Session]) -> [[Bool]] {
+    private func buildHeatmap(sessions: [SessionSnapshot]) -> [[Bool]] {
         let calendar = Calendar.current
         let todayStart = calendar.startOfDay(for: Date())
 

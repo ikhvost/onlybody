@@ -1,15 +1,15 @@
 #if DEBUG
 struct PreviewSessionRepository: SessionRepository {
-    let sessions: [Session]
+    let sessions: [SessionSnapshot]
 
-    init(sessions: [Session] = []) {
+    init(sessions: [SessionSnapshot] = []) {
         self.sessions = sessions
     }
 
-    func allSessions() async throws -> [Session] {
+    func allSessions() async throws -> [SessionSnapshot] {
         sessions
     }
 
-    func save(_ session: Session) async throws {}
+    func save(_ session: SessionSnapshot) async throws {}
 }
 #endif

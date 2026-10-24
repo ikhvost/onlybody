@@ -8,17 +8,17 @@ struct LogViewModelTests {
     func loadPopulatesSessionsSortedNewestFirst() async {
         let sessionRepo = MockSessionRepository()
 
-        let oldest = Session()
+        var oldest = SessionSnapshot()
         oldest.id = UUID()
         oldest.workoutName = "Oldest"
         oldest.date = Calendar.current.date(from: DateComponents(year: 2026, month: 1, day: 10))!
 
-        let newest = Session()
+        var newest = SessionSnapshot()
         newest.id = UUID()
         newest.workoutName = "Newest"
         newest.date = Calendar.current.date(from: DateComponents(year: 2026, month: 5, day: 1))!
 
-        let middle = Session()
+        var middle = SessionSnapshot()
         middle.id = UUID()
         middle.workoutName = "Middle"
         middle.date = Calendar.current.date(from: DateComponents(year: 2026, month: 3, day: 15))!
@@ -51,17 +51,17 @@ struct LogViewModelTests {
     func monthSectionsGroupsByMonth() async {
         let sessionRepo = MockSessionRepository()
 
-        let maySession = Session()
+        var maySession = SessionSnapshot()
         maySession.id = UUID()
         maySession.workoutName = "May Workout"
         maySession.date = Calendar.current.date(from: DateComponents(year: 2026, month: 5, day: 1))!
 
-        let aprilSession = Session()
+        var aprilSession = SessionSnapshot()
         aprilSession.id = UUID()
         aprilSession.workoutName = "April Workout"
         aprilSession.date = Calendar.current.date(from: DateComponents(year: 2026, month: 4, day: 25))!
 
-        let alsoApril = Session()
+        var alsoApril = SessionSnapshot()
         alsoApril.id = UUID()
         alsoApril.workoutName = "Also April"
         alsoApril.date = Calendar.current.date(from: DateComponents(year: 2026, month: 4, day: 20))!
@@ -102,12 +102,11 @@ struct LogViewModelTests {
         #expect(viewModel.errorMessage == nil)
     }
 
-
     @Test
     func durationTextFormatsMinutesAndSeconds() async {
         let sessionRepo = MockSessionRepository()
 
-        let session = Session()
+        var session = SessionSnapshot()
         session.id = UUID()
         session.workoutName = "Test"
         session.durationSeconds = 1450
@@ -125,7 +124,7 @@ struct LogViewModelTests {
     func pastYearMonthLabelIncludesYear() async {
         let sessionRepo = MockSessionRepository()
 
-        let pastSession = Session()
+        var pastSession = SessionSnapshot()
         pastSession.id = UUID()
         pastSession.workoutName = "Past"
         pastSession.date = Calendar.current.date(from: DateComponents(year: 2024, month: 12, day: 15))!
@@ -143,7 +142,7 @@ struct LogViewModelTests {
     @Test
     func loadGuardsAgainstConcurrentCalls() async {
         let sessionRepo = MockSessionRepository()
-        let session = Session()
+        var session = SessionSnapshot()
         session.workoutName = "Test"
         session.date = Date()
         sessionRepo.stubbedSessions = [session]

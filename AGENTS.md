@@ -9,7 +9,7 @@ Bodyweight training app for iOS. Single user, on-device data, no CloudKit. The a
 ## Target
 
 - **iOS:** 26.0+
-- **Swift:** 6.2, strict concurrency
+- **Swift:** 6.4 (Xcode 27.1), Swift 6 language mode, strict concurrency
 - **Frameworks:** SwiftUI + SwiftData (on-device only)
 - **No third-party dependencies**
 
@@ -38,114 +38,47 @@ View ──reads──> ViewModel (@Observable @MainActor) ──calls──> Re
 
 - **Views** depend only on their ViewModel — never access repositories or services directly. No `@Query`. No `ModelContext`. No SwiftData imports.
 - **ViewModels** depend on repository *protocols* — never on concrete SwiftData types. All screen state and logic. Testable with mock repositories.
-- **Repositories** — protocols (`ExerciseRepository`, `WorkoutRepository`, `SessionRepository`) with `SwiftData*` implementations. Swap implementations without touching views or view models.
+- **Repositories** — protocols (`ExerciseRepository`, `WorkoutRepository`, `SessionRepository`) with `SwiftData*` implementations. Contracts expose only detached snapshots. Save entire workout aggregates atomically; do not introduce a separate `deleteItems` write. Swap implementations without touching views or view models.
 - **Services** — contain logic that doesn't belong in a ViewModel. Prefer pure structs when there is no mutable state across time (`SmartWorkoutGenerator`, `StreakCalculator`). Use `@MainActor @Observable final class` only when the service owns persistent mutable state (`RestTimer` manages countdown state across view renders). No SwiftData imports in services.
-- **Repository injection** — repositories are concrete-typed once at app entry in `BodyweightApp.init()`, then passed through view `init` parameters as protocol types (`any ExerciseRepository`, etc.). ViewModels never see the concrete SwiftData type.
+- **Repository injection** — repositories are concrete-typed once at app entry in `BodyweightApp.init()`, then injected into `AppComposition` as protocol types. App-level navigation roots use that factory; feature screens receive ViewModels. ViewModels never see concrete SwiftData types.
 - **No ViewModel-to-ViewModel dependencies.** Pass data through navigation, not shared state.
 - **Theme.swift** is the only cross-cutting dependency for views — everything else is injected.
 
 ### Preview Repositories
 
-`Shared/Preview/` contains `#if DEBUG`-gated structs (`PreviewWorkoutRepository`, `PreviewExerciseRepository`, `PreviewSessionRepository`) that implement each repository protocol with fixed fixture data. Reads return injected arrays; writes are no-ops. Use these in `#Preview` blocks — never create a live `ModelContainer` in previews.
+`Shared/Preview/` contains `#if DEBUG`-gated structs (`PreviewWorkoutRepository`, `PreviewExerciseRepository`, `PreviewSessionRepository`) that implement each repository protocol with fixed fixture data. Reads return injected arrays; writes are no-ops. Use these in `#Preview` blocks — never create a live `ModelContainer` in previews. The DEBUG app initializer detects `XCODE_RUNNING_FOR_PREVIEWS` and injects preview repositories without opening or copying a store. Inject fixtures into preview repositories so view `.task` loads preserve the data.
 
 ```swift
 #if DEBUG
 struct PreviewWorkoutRepository: WorkoutRepository {
-    let workouts: [Workout]
-    func allWorkouts() async throws -> [Workout] { workouts }
-    func workout(by id: UUID) async throws -> Workout? { workouts.first { $0.id == id } }
-    func save(_ workout: Workout) async throws {}
-    func deleteItems(_ items: [WorkoutItem]) async throws {}
+    let workouts: [WorkoutSnapshot]
+    func allWorkouts() async throws -> [WorkoutSnapshot] { workouts }
+    func workout(by id: UUID) async throws -> WorkoutSnapshot? { workouts.first { $0.id == id } }
+    func save(_ workout: WorkoutSnapshot) async throws {}
 }
 #endif
 ```
 
 ### Project structure
 
-> This project uses `PBXFileSystemSynchronizedRootGroup` (Xcode 16+). New files and folders added to the filesystem are automatically tracked by Xcode — no manual `.xcodeproj` edits required.
+The source root is `onlybody/onlybody/`; source and test groups are filesystem-synchronized.
+New files need no project edits. New targets do require project configuration.
 
-```
-onlybody/                              — source root (PBXFileSystemSynchronizedRootGroup)
-├── App/
-│   ├── BodyweightApp.swift            — @main entry, ModelContainer, root view
-│   ├── AppTab.swift                   — AppTab enum + AppTabViewModel
-│   └── AppTabView.swift               — Custom tab container (NOT SwiftUI TabView)
-├── Features/                          — View + ViewModel colocated per feature
-│   ├── Train/
-│   │   ├── TrainViewModel.swift
-│   │   ├── TrainView.swift
-│   │   ├── TrainRoute.swift
-│   │   ├── MusclePickerViewModel.swift
-│   │   ├── MusclePickerView.swift
-│   │   ├── SessionBuilderViewModel.swift
-│   │   ├── SessionBuilderView.swift
-│   │   ├── ActiveWorkoutViewModel.swift
-│   │   ├── ActiveWorkoutView.swift
-│   │   ├── StreakViewModel.swift
-│   │   └── StreakView.swift
-│   ├── Log/
-│   │   ├── LogViewModel.swift
-│   │   ├── LogView.swift
-│   │   └── SessionDetailView.swift
-│   └── Library/
-│       ├── LibraryViewModel.swift
-│       ├── LibraryView.swift
-│       ├── LibraryExerciseRow.swift
-│       ├── MovementDetailViewModel.swift
-│       └── MovementDetailView.swift
-├── Core/                              — Infrastructure: repositories, services
-│   ├── Repositories/
-│   │   ├── ExerciseRepository.swift
-│   │   ├── WorkoutRepository.swift
-│   │   ├── SessionRepository.swift
-│   │   ├── SwiftDataExerciseRepository.swift
-│   │   ├── SwiftDataWorkoutRepository.swift
-│   │   └── SwiftDataSessionRepository.swift
-│   ├── Services/                      — Business logic; structs preferred, class when stateful
-│   │   ├── SmartWorkoutGenerator.swift
-│   │   ├── StreakCalculator.swift      — [Session] → streak stats (current/longest/total)
-│   │   └── RestTimer.swift
-├── Models/                            — SwiftData @Model classes, one type per file
-│   ├── Exercise.swift
-│   ├── Workout.swift
-│   ├── WorkoutItem.swift
-│   ├── Session.swift
-│   └── SessionItem.swift
-├── Shared/
-│   ├── Theme/
-│   │   └── Theme.swift                — Design tokens: colors, fonts, spacing
-│   ├── Icons/                         — Canvas-based icon Views (one per file) + AppIcons.swift config
-│   ├── Components/                    — Reusable views, no own view models
-│   │   ├── MonoLabel.swift
-│   │   ├── PrimaryButton.swift
-│   │   ├── GhostButton.swift
-│   │   ├── ChipView.swift
-│   │   ├── StepperView.swift
-│   │   ├── SetTrackerView.swift
-│   │   ├── NavBarView.swift
-│   │   ├── BottomNav.swift
-│   │   ├── ExercisePickerView.swift
-│   │   └── FlowLayout.swift
-│   ├── Domain/                        — Cross-cutting domain enums and catalogs
-│   │   ├── ExerciseCatalog.swift
-│   │   ├── ExerciseFrequency.swift
-│   │   ├── Weekdays.swift
-│   │   └── WorkoutMode.swift
-│   └── Preview/                       — Mock repositories for Xcode Previews
-├── Resources/
-│   ├── Assets.xcassets/
-│   ├── Fonts/
-│   └── SeedStore/                     — pre-seeded SQLite store bundled with the app
-onlybodyTests/                         — test root (PBXFileSystemSynchronizedRootGroup)
-├── Features/
-│   ├── Train/                         — TrainViewModelTests, ActiveWorkoutViewModelTests, etc.
-│   ├── Log/                           — LogViewModelTests
-│   └── Library/                       — LibraryViewModelTests, etc.
-├── Core/
-│   ├── Repositories/                  — SwiftData*RepositoryTests (in-memory ModelContainer)
-│   └── Services/                      — SmartWorkoutGeneratorTests, StreakCalculatorTests, etc.
-└── Support/                           — Mock repositories, TestError
-```
+- `App/`: composition root, `AppComposition`, custom tab shell and per-tab navigation roots.
+- `Domain/Models/`: detached `Sendable` value snapshots; never import SwiftData or SwiftUI.
+- `Domain/Repositories/`: `@MainActor` async protocols accepting/returning snapshots.
+- `Domain/Services/`: pure business logic and observable timers with injected time.
+- `Domain/Catalog/`: shared domain enums and catalog constants.
+- `Core/Persistence/Models/`: unchanged SwiftData entities. Preserve their names and schema for store compatibility.
+- `Core/Persistence/Mapping/`: explicit persistence-to-domain mapping.
+- `Core/Persistence/Repositories/`: SwiftData writes in private contexts, autosave off, one save with rollback per aggregate.
+- `Features/{Train,Log,Library}/`: screens, ViewModels and feature-local components, one type per file.
+- `Shared/{Theme,Icons,Components,Preview}/`: visual primitives, tokens and no-op preview repositories.
+- `Resources/SeedStore/`: bundled SQLite catalog, copied on first launch.
+- `onlybody/onlybodyTests/`: Swift Testing unit and integration suites and mocks.
+- `onlybody/onlybodyUITests/`: XCTest UI automation only, using real persistence in an isolated test store.
+- `Scripts/validate.sh`: lint, boundary checks, tests, Release build and temporary seed generation.
+
 
 ---
 
@@ -162,9 +95,9 @@ Key constants:
 - `Theme.danger`, `Theme.iconDim`
 - `Theme.fontSans(_ size: CGFloat, _ weight: Font.Weight)` — DM Sans
 - `Theme.fontMono(_ size: CGFloat, _ weight: Font.Weight)` — DM Mono
-- `Theme.horizontalPadding` — 18
+- `Theme.horizontalPadding` — 22
 - `Theme.cornerRadius` — 4
-- `Theme.chipCornerRadius` — 3
+- `Theme.chipCornerRadius` — 4
 
 ---
 
@@ -255,7 +188,7 @@ enum AppTab: String, CaseIterable { case train, log, library }
 
 ## Testing
 
-Framework: **Swift Testing** (`@Test`, `#expect`) — do NOT use XCTest.
+Framework: **Swift Testing** (`@Test`, `#expect`) for unit and integration tests. **XCTest + XCUIAutomation is allowed only in `onlybodyUITests`**, as explicitly approved for the five E2E journeys.
 
 ```swift
 @MainActor
@@ -270,9 +203,9 @@ struct FooViewModelTests {
 ```
 
 - Unit-test all Services (pure logic, no dependencies).
-- Unit-test all ViewModels using mock repository protocols. Mocks live in `onlybodyTests/Support/` (`MockWorkoutRepository`, `MockExerciseRepository`, `MockSessionRepository`). Each mock has a `shouldThrow` flag and records saved/deleted data for assertion.
+- Unit-test all ViewModels using mock repository protocols. Mocks live in `onlybodyTests/Support/` (`MockWorkoutRepository`, `MockExerciseRepository`, `MockSessionRepository`). Each mock has a `shouldThrow` flag and records writes for assertion. Timer tests inject `ManualWorkoutTimeSource`; do not wait for wall-clock seconds.
 - Integration-test repositories with in-memory `ModelContainer` (`ModelConfiguration(isStoredInMemoryOnly: true)`).
-- No UI tests for MVP unless required.
+- Maintain five E2E journeys: create/relaunch, edit, complete/history, early finish, navigation. Use Debug-only UUID-isolated file stores and real repositories, accessibility identifiers and bounded waits.
 - SwiftUI Previews for view iteration.
 
 ## Code Quality

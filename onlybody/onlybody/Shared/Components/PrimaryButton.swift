@@ -8,10 +8,10 @@ struct PrimaryButton: View {
     var body: some View {
         Button(action: action) {
             Text(title)
-                .font(Theme.fontSans(16, .bold))
+                .font(Theme.fontSans(Theme.type16, .bold))
                 .foregroundStyle(disabled ? Theme.text3 : Theme.accentDark)
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 19)
+                .padding(.vertical, Theme.space19)
                 .background(disabled ? Theme.surface2 : Theme.accent)
                 .clipShape(.rect(cornerRadius: Theme.cornerRadius))
         }

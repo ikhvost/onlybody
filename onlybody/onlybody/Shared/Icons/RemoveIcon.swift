@@ -2,7 +2,7 @@ import SwiftUI
 
 struct RemoveIcon: View {
     var color: Color = Theme.text
-    var size: CGFloat = 20
+    var size: CGFloat = Theme.type20
 
     var body: some View {
         Canvas { context, canvasSize in

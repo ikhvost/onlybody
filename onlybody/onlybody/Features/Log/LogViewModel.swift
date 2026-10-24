@@ -6,11 +6,11 @@ import Observation
 final class LogViewModel {
     private let sessionsRepository: any SessionRepository
 
-    var sessions: [Session] = []
+    var sessions: [SessionSnapshot] = []
     var isLoading = false
-    var errorMessage: String? = nil
+    var errorMessage: String?
 
-    var monthSections: [(label: String, sessions: [Session])] {
+    var monthSections: [(label: String, sessions: [SessionSnapshot])] {
         let grouped = Dictionary(grouping: sessions) { session in
             monthKey(for: session.date)
         }
@@ -40,19 +40,18 @@ final class LogViewModel {
         }
     }
 
-    func dayText(for session: Session) -> String {
+    func dayText(for session: SessionSnapshot) -> String {
         session.date.formatted(.dateTime.day())
     }
 
-    func weekdayText(for session: Session) -> String {
+    func weekdayText(for session: SessionSnapshot) -> String {
         session.date.formatted(.dateTime.weekday(.wide))
     }
 
-    func durationText(for session: Session) -> String {
+    func durationText(for session: SessionSnapshot) -> String {
         Duration.seconds(session.durationSeconds)
             .formatted(.time(pattern: .minuteSecond))
     }
-
 
     private let calendar = Calendar.current
 
@@ -61,7 +60,7 @@ final class LogViewModel {
         guard let year = components.year, let month = components.month else {
             return "0000-00"
         }
-        return "\(year)-\(String(format: "%02d", month))"
+        return "\(year)-\(month.formatted(.number.precision(.integerLength(2)).grouping(.never).locale(Locale(identifier: "en_US_POSIX"))))"
     }
 
     private func monthLabel(for key: String) -> String {

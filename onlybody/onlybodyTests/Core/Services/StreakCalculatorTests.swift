@@ -5,17 +5,22 @@ import Testing
 @MainActor
 struct StreakCalculatorTests {
     private let calculator = StreakCalculator()
-    private let calendar = Calendar.current
+    private let referenceToday = Date(timeIntervalSince1970: 1_780_315_200)
+    private var calendar: Calendar {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 0) ?? .gmt
+        return calendar
+    }
 
-    private func makeSession(daysAgo: Int) -> Session {
-        let date = calendar.date(byAdding: .day, value: -daysAgo, to: Date())!
-        let session = Session()
+    private func makeSession(daysAgo: Int) -> SessionSnapshot {
+        let date = calendar.date(byAdding: .day, value: -daysAgo, to: referenceToday)!
+        var session = SessionSnapshot()
         session.date = date
         return session
     }
 
-    private func makeSession(on date: Date) -> Session {
-        let session = Session()
+    private func makeSession(on date: Date) -> SessionSnapshot {
+        var session = SessionSnapshot()
         session.date = date
         return session
     }
@@ -24,7 +29,7 @@ struct StreakCalculatorTests {
 
     @Test
     func emptySessionsReturnsAllZero() {
-        let stats = calculator.calculate(sessions: [])
+        let stats = calculator.calculate(sessions: [], today: referenceToday, calendar: calendar)
 
         #expect(stats.current == 0)
         #expect(stats.longest == 0)
@@ -36,7 +41,7 @@ struct StreakCalculatorTests {
     @Test
     func oneSessionTodayProducesCurrentOneLongestOneTotalOne() {
         let session = makeSession(daysAgo: 0)
-        let stats = calculator.calculate(sessions: [session])
+        let stats = calculator.calculate(sessions: [session], today: referenceToday, calendar: calendar)
 
         #expect(stats.current == 1)
         #expect(stats.longest == 1)
@@ -48,7 +53,7 @@ struct StreakCalculatorTests {
     @Test
     func oneSessionYesterdayProducesCurrentZeroLongestOneTotalOne() {
         let session = makeSession(daysAgo: 1)
-        let stats = calculator.calculate(sessions: [session])
+        let stats = calculator.calculate(sessions: [session], today: referenceToday, calendar: calendar)
 
         #expect(stats.current == 0)
         #expect(stats.longest == 1)
@@ -65,7 +70,7 @@ struct StreakCalculatorTests {
             makeSession(daysAgo: 1),
             makeSession(daysAgo: 0),
         ]
-        let stats = calculator.calculate(sessions: sessions)
+        let stats = calculator.calculate(sessions: sessions, today: referenceToday, calendar: calendar)
 
         #expect(stats.current == 4)
         #expect(stats.longest == 4)
@@ -81,7 +86,7 @@ struct StreakCalculatorTests {
             makeSession(daysAgo: 1),
             makeSession(daysAgo: 0),
         ]
-        let stats = calculator.calculate(sessions: sessions)
+        let stats = calculator.calculate(sessions: sessions, today: referenceToday, calendar: calendar)
 
         #expect(stats.current == 2)
         #expect(stats.longest == 2)
@@ -92,7 +97,7 @@ struct StreakCalculatorTests {
 
     @Test
     func pastLongestPreservedWhenCurrentShorter() {
-        let today = calendar.startOfDay(for: Date())
+        let today = calendar.startOfDay(for: referenceToday)
 
         let fourteenDaysAgo = calendar.date(byAdding: .day, value: -14, to: today)!
         let thirteenDaysAgo = calendar.date(byAdding: .day, value: -13, to: today)!
@@ -116,7 +121,7 @@ struct StreakCalculatorTests {
             makeSession(daysAgo: 0),
         ]
 
-        let stats = calculator.calculate(sessions: sessions)
+        let stats = calculator.calculate(sessions: sessions, today: referenceToday, calendar: calendar)
 
         #expect(stats.current == 2)
         #expect(stats.longest == 7)
@@ -134,7 +139,7 @@ struct StreakCalculatorTests {
             makeSession(daysAgo: 1),
             makeSession(daysAgo: 0),
         ]
-        let stats = calculator.calculate(sessions: sessions)
+        let stats = calculator.calculate(sessions: sessions, today: referenceToday, calendar: calendar)
 
         #expect(stats.current == 3)
         #expect(stats.longest == 3)
@@ -151,7 +156,7 @@ struct StreakCalculatorTests {
             makeSession(daysAgo: 2),
             makeSession(daysAgo: 0),
         ]
-        let stats = calculator.calculate(sessions: sessions)
+        let stats = calculator.calculate(sessions: sessions, today: referenceToday, calendar: calendar)
 
         #expect(stats.current == 1)
         #expect(stats.total == 4)
@@ -166,7 +171,7 @@ struct StreakCalculatorTests {
         let sessionDate = calendar.date(from: DateComponents(year: 2026, month: 5, day: 5))!
         let session = makeSession(on: sessionDate)
 
-        let stats = calculator.calculate(sessions: [session], today: referenceDate)
+        let stats = calculator.calculate(sessions: [session], today: referenceDate, calendar: calendar)
 
         #expect(stats.current == 1)
         #expect(stats.longest == 1)
@@ -180,7 +185,7 @@ struct StreakCalculatorTests {
         let sessionDate = calendar.date(from: DateComponents(year: 2026, month: 5, day: 4))!
         let session = makeSession(on: sessionDate)
 
-        let stats = calculator.calculate(sessions: [session], today: referenceDate)
+        let stats = calculator.calculate(sessions: [session], today: referenceDate, calendar: calendar)
 
         #expect(stats.current == 0)
         #expect(stats.longest == 1)

@@ -8,8 +8,8 @@ final class WorkoutItem {
     var sets: Int = 3
     var targetReps: Int = 12
     var restSeconds: Int = 45
-    @Relationship var exercise: Exercise? = nil
-    @Relationship(deleteRule: .nullify, inverse: \Workout.items) var workout: Workout? = nil
+    @Relationship var exercise: Exercise?
+    @Relationship(deleteRule: .nullify, inverse: \Workout.items) var workout: Workout?
 
     init() {}
 }

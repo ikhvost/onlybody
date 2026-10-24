@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct SessionBuilderView: View {
-    @Bindable var viewModel: SessionBuilderViewModel
+    @State var viewModel: SessionBuilderViewModel
+
+    var onSaved: (() -> Void)?
 
     @Environment(\.dismiss) private var dismiss
 
@@ -11,12 +13,12 @@ struct SessionBuilderView: View {
         ZStack {
             Theme.bg.ignoresSafeArea()
 
-            VStack(spacing: 0) {
+            VStack(spacing: Theme.space0) {
                 NavBarView(title: viewModel.isEditMode ? "Edit Session" : "New Session") {
                     Button {
                         dismiss()
                     } label: {
-                        ChevronIcon(isBack: true, color: Theme.text, size: 18, inset: 8)
+                        ChevronIcon(isBack: true, color: Theme.text, size: Theme.type18, inset: 8)
                     }
                     .buttonStyle(.plain)
                 } trailing: {
@@ -24,28 +26,29 @@ struct SessionBuilderView: View {
                         handleSave()
                     } label: {
                         Text("Save")
-                        .font(Theme.fontSans(15, .bold))
+                        .font(Theme.fontSans(Theme.type15, .bold))
                             .foregroundStyle(Theme.accentDark)
-                            .padding(.horizontal, 14)
-                            .padding(.vertical, 6)
+                            .padding(.horizontal, Theme.space14)
+                            .padding(.vertical, Theme.space6)
                             .background(Theme.accent)
                             .clipShape(.rect(cornerRadius: Theme.cornerRadius))
                     }
                     .buttonStyle(.plain)
                     .disabled(viewModel.isSaving)
+                    .accessibilityIdentifier("builder.save")
                 }
 
                 ScrollView {
-                    VStack(alignment: .leading, spacing: 0) {
-                        targetChipsSection
-                        nameSection
-                        setStyleSection
-                        smartInfoSection
-                        movementsSection
-                        trainingDaysSection
-                        durationSection
+                    VStack(alignment: .leading, spacing: Theme.space0) {
+                        BuilderTargets(viewModel: viewModel)
+                        BuilderName(viewModel: viewModel)
+                        BuilderStyle(viewModel: viewModel)
+                        BuilderSmartInfo(viewModel: viewModel)
+                        BuilderMovements(viewModel: viewModel, isShowingExercisePicker: $isShowingExercisePicker)
+                        BuilderDays(viewModel: viewModel)
+                        BuilderDuration(viewModel: viewModel)
                     }
-                    .padding(.bottom, 28)
+                    .padding(.bottom, Theme.space28)
                 }
                 .scrollIndicators(.hidden)
             }
@@ -79,356 +82,33 @@ struct SessionBuilderView: View {
         Task {
             let success = await viewModel.save()
             if success {
-                dismiss()
-            }
-        }
-    }
-
-    // MARK: - Target Chips
-
-    @ViewBuilder
-    private var targetChipsSection: some View {
-        if !viewModel.targetMuscleGroups.isEmpty {
-            VStack(alignment: .leading, spacing: 8) {
-                MonoLabel(text: "Targets", size: 11, color: Theme.text2, tracking: 0.5)
-
-                FlowLayout(spacing: 6) {
-                    ForEach(viewModel.targetMuscleGroups, id: \.self) { muscleID in
-                        Text(muscleID)
-                .font(Theme.fontSans(14, .semibold))
-                            .foregroundStyle(Theme.accent)
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 4)
-                            .background(Theme.accentDim)
-                            .clipShape(.rect(cornerRadius: Theme.chipCornerRadius))
-                            .overlay {
-                                RoundedRectangle(cornerRadius: Theme.chipCornerRadius)
-                                    .stroke(Theme.accent.opacity(0.2), lineWidth: 1)
-                            }
-                    }
-                }
-            }
-            .padding(.horizontal, Theme.horizontalPadding)
-            .padding(.top, 16)
-        }
-    }
-
-    // MARK: - Name
-
-    private var nameSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            MonoLabel(text: "Session name", size: 11, color: Theme.text2, tracking: 0.5)
-                .padding(.horizontal, Theme.horizontalPadding)
-
-            TextField("e.g. Full Body", text: $viewModel.name)
-                .font(Theme.fontSans(16))
-                .foregroundStyle(Theme.text)
-                .padding(.horizontal, 13)
-                .padding(.vertical, 11)
-                .background(Theme.surface)
-                .clipShape(.rect(cornerRadius: Theme.cornerRadius))
-                .overlay {
-                    RoundedRectangle(cornerRadius: Theme.cornerRadius)
-                        .stroke(Theme.border2, lineWidth: 1)
-                }
-                .padding(.horizontal, Theme.horizontalPadding)
-                .textInputAutocapitalization(.never)
-                .autocorrectionDisabled()
-        }
-        .padding(.top, 16)
-    }
-
-    // MARK: - Set Style
-
-    private var setStyleSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            MonoLabel(text: "Set style", size: 11, color: Theme.text2, tracking: 0.5)
-                .padding(.horizontal, Theme.horizontalPadding)
-
-            HStack(spacing: 8) {
-                modeButton("Smart pick", mode: .smart)
-                modeButton("I choose", mode: .manual)
-            }
-            .padding(.horizontal, Theme.horizontalPadding)
-        }
-        .padding(.top, 16)
-    }
-
-    private func modeButton(_ label: String, mode: WorkoutMode) -> some View {
-        Button {
-            viewModel.mode = mode
-        } label: {
-            Text(label)
-                .font(Theme.fontSans(14, .semibold))
-                .foregroundStyle(viewModel.mode == mode ? Theme.accentDark : Theme.text2)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 10)
-                .background(viewModel.mode == mode ? Theme.accent : Theme.surface2)
-                .clipShape(.rect(cornerRadius: Theme.cornerRadius))
-                .overlay {
-                    RoundedRectangle(cornerRadius: Theme.cornerRadius)
-                        .stroke(
-                            viewModel.mode == mode ? Theme.accent : Theme.border2,
-                            lineWidth: 1
-                        )
-                }
-        }
-        .buttonStyle(.plain)
-    }
-
-    // MARK: - Smart Info
-
-    @ViewBuilder
-    private var smartInfoSection: some View {
-        if viewModel.mode == .smart {
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Auto-selected movements")
-                    .font(Theme.fontSans(14, .bold))
-                    .foregroundStyle(Theme.text)
-
-                Text(smartInfoDescription)
-                    .font(Theme.fontSans(14))
-                    .foregroundStyle(Theme.text2)
-                    .lineSpacing(4)
-            }
-            .padding(14)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Theme.surface)
-            .clipShape(.rect(cornerRadius: Theme.cornerRadius))
-            .overlay {
-                RoundedRectangle(cornerRadius: Theme.cornerRadius)
-                    .stroke(Theme.border, lineWidth: 1)
-            }
-            .padding(.horizontal, Theme.horizontalPadding)
-            .padding(.top, 14)
-        }
-    }
-
-    private var smartInfoDescription: String {
-        if viewModel.targetMuscleGroups.isEmpty {
-            return "Movements are picked daily from your targets. Switch to \"I choose\" to build manually."
-        }
-
-        let formatted = viewModel.targetMuscleGroups.joined(separator: ", ")
-        return "Movements are picked daily from your targets (\(formatted)). Switch to \"I choose\" to build manually."
-    }
-
-    // MARK: - Movements
-
-    @ViewBuilder
-    private var movementsSection: some View {
-        if viewModel.mode == .manual {
-            VStack(alignment: .leading, spacing: 10) {
-                HStack {
-                    MonoLabel(text: "Movements", size: 11, color: Theme.text2, tracking: 0.5)
-                    Spacer()
-                    Button {
-                        isShowingExercisePicker = true
-                    } label: {
-                        HStack(spacing: 5) {
-                            PlusIcon(color: Theme.accentDark, size: 13)
-                            Text("Add")
-                                .font(Theme.fontSans(14, .bold))
-                                .foregroundStyle(Theme.accentDark)
-                        }
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 5)
-                        .background(Theme.accent)
-                        .clipShape(.rect(cornerRadius: Theme.chipCornerRadius))
-                    }
-                    .buttonStyle(.plain)
-                }
-                .padding(.horizontal, Theme.horizontalPadding)
-
-                if viewModel.movements.isEmpty {
-                    MonoLabel(
-                        text: "No movements yet",
-                        size: 11,
-                        color: Theme.text3,
-                        tracking: 0.5
-                    )
-                    .frame(maxWidth: .infinity)
-                    .padding(22)
-                    .background(Theme.surface)
-                    .clipShape(.rect(cornerRadius: Theme.cornerRadius))
-                    .overlay {
-                        RoundedRectangle(cornerRadius: Theme.cornerRadius)
-                            .stroke(style: StrokeStyle(lineWidth: 1, dash: [4, 4]))
-                            .foregroundStyle(Theme.border2)
-                    }
-                    .padding(.horizontal, Theme.horizontalPadding)
-                } else {
-                    VStack(spacing: 6) {
-                        ForEach(viewModel.movements) { movement in
-                            movementCard(movement)
-                        }
-                    }
-                    .padding(.horizontal, Theme.horizontalPadding)
-                }
-            }
-            .padding(.top, 16)
-        }
-    }
-
-    private func movementCard(_ movement: MovementConfig) -> some View {
-        VStack(spacing: 0) {
-            HStack(spacing: 10) {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(movement.exercise.name)
-                        .font(Theme.fontSans(14, .bold))
-                        .foregroundStyle(Theme.text)
-
-                    MonoLabel(
-                        text: "\(movement.sets) SETS · \(movement.reps) REPS · \(movement.restSeconds)S REST",
-                        size: 10,
-                        color: Theme.text3,
-                        tracking: 0.4
-                    )
-                }
-
-                Spacer()
-
-                Button {
-                    viewModel.removeMovement(movement.id)
-                } label: {
-                    RemoveIcon(color: Theme.danger, size: 16)
-                }
-                .buttonStyle(.plain)
-                .padding(4)
-            }
-            .padding(.horizontal, 13)
-            .padding(.vertical, 11)
-
-            Rectangle()
-                .fill(Theme.border)
-                .frame(height: 1)
-
-            HStack(spacing: 10) {
-                StepperView(
-                    label: "Sets",
-                    value: movement.sets,
-                    step: 1,
-                    minValue: 1,
-                    format: { "\($0)" },
-                    onIncrement: { viewModel.setSets(movement.sets + 1, forMovement: movement.id) },
-                    onDecrement: { viewModel.setSets(movement.sets - 1, forMovement: movement.id) }
-                )
-
-                StepperView(
-                    label: "Reps",
-                    value: movement.reps,
-                    step: 1,
-                    minValue: 1,
-                    format: { "\($0)" },
-                    onIncrement: { viewModel.setReps(movement.reps + 1, forMovement: movement.id) },
-                    onDecrement: { viewModel.setReps(movement.reps - 1, forMovement: movement.id) }
-                )
-
-                StepperView(
-                    label: "Rest",
-                    value: movement.restSeconds,
-                    step: 15,
-                    minValue: 15,
-                    format: { "\($0)s" },
-                    onIncrement: { viewModel.setRest(movement.restSeconds + 15, forMovement: movement.id) },
-                    onDecrement: { viewModel.setRest(movement.restSeconds - 15, forMovement: movement.id) }
-                )
-            }
-            .padding(.horizontal, 13)
-            .padding(.vertical, 10)
-        }
-        .background(Theme.surface)
-        .clipShape(.rect(cornerRadius: Theme.cornerRadius))
-        .overlay {
-            RoundedRectangle(cornerRadius: Theme.cornerRadius)
-                .stroke(Theme.border, lineWidth: 1)
-        }
-    }
-
-    // MARK: - Training Days
-
-    private var trainingDaysSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            MonoLabel(text: "Training days", size: 11, color: Theme.text2, tracking: 0.5)
-
-            HStack(spacing: 2) {
-                ForEach(viewModel.dayNames, id: \.self) { day in
-                    ChipView(
-                        label: day,
-                        isActive: viewModel.scheduledDays.contains(day),
-                        size: 12,
-                        horizontalPadding: 8,
-                        verticalPadding: 6
-                    ) {
-                        viewModel.toggleDay(day)
-                    }
-                }
-            }
-
-            if viewModel.scheduledDays.isEmpty {
-                MonoLabel(
-                    text: "No days scheduled",
-                    size: 11,
-                    color: Theme.text3,
-                    tracking: 0.3
-                )
-                .padding(.top, 8)
-            }
-        }
-        .padding(.horizontal, Theme.horizontalPadding)
-        .padding(.top, 16)
-    }
-
-    // MARK: - Duration
-
-    @ViewBuilder
-    private var durationSection: some View {
-        if !viewModel.movements.isEmpty {
-            HStack {
-                Text("Est. duration")
-                    .font(Theme.fontSans(14))
-                    .foregroundStyle(Theme.text2)
-
-                Spacer()
-
-                Text("~\(viewModel.estimatedDurationMinutes) min")
-                    .font(Theme.fontMono(14, .medium))
-                    .foregroundStyle(Theme.accent)
-            }
-            .padding(.horizontal, Theme.horizontalPadding)
-            .padding(.top, 14)
-            .padding(.bottom, 10)
-            .overlay(alignment: .top) {
-                Rectangle()
-                    .fill(Theme.border)
-                    .frame(height: 1)
-                    .padding(.horizontal, Theme.horizontalPadding)
+                if let onSaved { onSaved() } else { dismiss() }
             }
         }
     }
 
 }
 
+#if DEBUG
 #Preview("Session Builder — Create") {
-    let viewModel = SessionBuilderViewModel(
-        workouts: PreviewWorkoutRepository(),
-        exercises: PreviewExerciseRepository(),
-        workout: nil,
-        targetMuscleGroups: []
-    )
-
-    let pushUps = Exercise()
+    var pushUps = ExerciseSnapshot()
     pushUps.name = "Push-Ups"
     pushUps.primaryMuscle = "Chest"
     pushUps.equipment = ["None"]
 
-    let pullUps = Exercise()
+    var pullUps = ExerciseSnapshot()
     pullUps.name = "Pull-Ups"
     pullUps.primaryMuscle = "Back"
     pullUps.equipment = ["Pull-up Bar"]
 
-    viewModel.allExercises = [pushUps, pullUps]
+    let viewModel = SessionBuilderViewModel(
+        workouts: PreviewWorkoutRepository(),
+        exercises: PreviewExerciseRepository(exercises: [pushUps, pullUps]),
+        workout: nil,
+        targetMuscleGroups: []
+    )
 
     return SessionBuilderView(viewModel: viewModel)
         .preferredColorScheme(.dark)
 }
+#endif

@@ -7,11 +7,11 @@ struct LibraryViewModelTests {
     func loadPopulatesExercisesAndFiltersBySearchAndMuscle() async {
         let repository = MockExerciseRepository()
 
-        let pushUps = Exercise()
+        var pushUps = ExerciseSnapshot()
         pushUps.name = "Push-Ups"
         pushUps.primaryMuscle = "Chest"
 
-        let pullUps = Exercise()
+        var pullUps = ExerciseSnapshot()
         pullUps.name = "Pull-Ups"
         pullUps.primaryMuscle = "Back"
 
@@ -35,15 +35,15 @@ struct LibraryViewModelTests {
     func filtersBySearchAndMuscleCombined() async {
         let repository = MockExerciseRepository()
 
-        let pushUps = Exercise()
+        var pushUps = ExerciseSnapshot()
         pushUps.name = "Push-Ups"
         pushUps.primaryMuscle = "Chest"
 
-        let pullUps = Exercise()
+        var pullUps = ExerciseSnapshot()
         pullUps.name = "Pull-Ups"
         pullUps.primaryMuscle = "Back"
 
-        let archerPushUps = Exercise()
+        var archerPushUps = ExerciseSnapshot()
         archerPushUps.name = "Archer Push-Ups"
         archerPushUps.primaryMuscle = "Chest"
 

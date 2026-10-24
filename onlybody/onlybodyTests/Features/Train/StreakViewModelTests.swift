@@ -6,9 +6,9 @@ import Testing
 struct StreakViewModelTests {
     private let calendar = Calendar.current
 
-    private func makeSession(daysAgo: Int) -> Session {
+    private func makeSession(daysAgo: Int) -> SessionSnapshot {
         let date = calendar.date(byAdding: .day, value: -daysAgo, to: Date())!
-        let session = Session()
+        var session = SessionSnapshot()
         session.date = date
         return session
     }

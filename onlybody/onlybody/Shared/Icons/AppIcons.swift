@@ -5,13 +5,14 @@ enum AppIcons {
     static let stroke = StrokeStyle(lineWidth: 1.8, lineCap: .square, lineJoin: .miter)
 }
 
+#if DEBUG
 #Preview("Icons") {
     ScrollView {
-        VStack(alignment: .leading, spacing: 24) {
+        VStack(alignment: .leading, spacing: Theme.space24) {
             Text("All Icons")
-                .font(Theme.fontSans(20, .bold))
+                .font(Theme.fontSans(Theme.type20, .bold))
 
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: Theme.space16) {
                 appIconPreviewRow("Train", TrainIcon(color: .white))
                 appIconPreviewRow("Log", LogIcon(color: .white))
                 appIconPreviewRow("Library", LibraryIcon(color: .white))
@@ -28,9 +29,9 @@ enum AppIcons {
                 .foregroundStyle(Theme.border2)
 
             Text("Amber Variants")
-                .font(Theme.fontSans(20, .bold))
+                .font(Theme.fontSans(Theme.type20, .bold))
 
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: Theme.space16) {
                 appIconPreviewRow("Train", TrainIcon(color: Theme.accent))
                 appIconPreviewRow("Log", LogIcon(color: Theme.accent))
                 appIconPreviewRow("Library", LibraryIcon(color: Theme.accent))
@@ -41,12 +42,13 @@ enum AppIcons {
     }
     .background(Theme.bg)
 }
+#endif
 
 private func appIconPreviewRow(_ label: String, _ icon: some View) -> some View {
-    HStack(spacing: 10) {
+    HStack(spacing: Theme.space10) {
         icon
         Text(label)
-            .font(Theme.fontMono(11))
+            .font(Theme.fontMono(Theme.type11))
             .foregroundStyle(Theme.text2)
     }
 }

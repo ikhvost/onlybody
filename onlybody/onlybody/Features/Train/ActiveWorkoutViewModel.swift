@@ -10,7 +10,7 @@ final class ActiveWorkoutViewModel {
     let workoutId: UUID
 
     var workoutName: String = ""
-    var items: [WorkoutItem] = []
+    var items: [WorkoutItemSnapshot] = []
     var currentExerciseIndex: Int = 0
     var currentSetIndex: Int = 0
 
@@ -20,15 +20,20 @@ final class ActiveWorkoutViewModel {
 
     var isComplete: Bool = false
     var isLoading: Bool = false
-    var errorMessage: String? = nil
+    var errorMessage: String?
 
-    let restTimer = RestTimer()
+    let restTimer: RestTimer
+    private let time: any WorkoutTimeSource
+    private var startedAt: Date?
+    private var finishedAt: Date?
+    private let sessionID = UUID()
+    private(set) var saveState: SessionSaveState = .idle
 
     private var elapsedTask: Task<Void, Never>?
     var saveTask: Task<Void, Never>?
     var elapsedSeconds: Int = 0
 
-    var currentItem: WorkoutItem? {
+    var currentItem: WorkoutItemSnapshot? {
         guard items.indices.contains(currentExerciseIndex) else { return nil }
         return items[currentExerciseIndex]
     }
@@ -78,15 +83,18 @@ final class ActiveWorkoutViewModel {
     init(
         workouts: any WorkoutRepository,
         sessions: any SessionRepository,
-        workoutId: UUID
+        workoutId: UUID,
+        time: any WorkoutTimeSource = SystemWorkoutTimeSource()
     ) {
         self.workoutsRepository = workouts
         self.sessionsRepository = sessions
         self.workoutId = workoutId
+        self.time = time
+        self.restTimer = RestTimer(time: time)
     }
 
     func load() async {
-        guard !isLoading else { return }
+        guard !isLoading, startedAt == nil else { return }
         isLoading = true
         errorMessage = nil
         defer { isLoading = false }
@@ -98,7 +106,7 @@ final class ActiveWorkoutViewModel {
             }
 
             workoutName = workout.name
-            items = (workout.items ?? []).sorted { $0.order < $1.order }
+            items = (workout.items).sorted { $0.order < $1.order }
 
             if items.isEmpty {
                 errorMessage = "Workout has no exercises."
@@ -113,6 +121,7 @@ final class ActiveWorkoutViewModel {
             isComplete = false
             elapsedSeconds = 0
 
+            startedAt = time.now
             startElapsedTimer()
         } catch {
             errorMessage = "Could not load workout."
@@ -120,7 +129,7 @@ final class ActiveWorkoutViewModel {
     }
 
     func markSetDone() {
-        guard currentItem != nil else { return }
+        guard currentItem != nil, !isComplete, saveState == .idle else { return }
 
         let reps = currentDisplayReps
         completedSets[currentKey] = reps
@@ -138,11 +147,10 @@ final class ActiveWorkoutViewModel {
             restTimer.start(seconds: currentItem?.restSeconds ?? 60, nextExercise: nextName)
         } else {
             isComplete = true
+            finishTiming()
             elapsedTask?.cancel()
             restTimer.skip()
-            saveTask = Task { [self] in
-                await saveSession()
-            }
+            beginSave()
         }
     }
 
@@ -183,17 +191,23 @@ final class ActiveWorkoutViewModel {
     }
 
     func endSession() async {
-        errorMessage = nil
-        elapsedTask?.cancel()
+        guard !items.isEmpty else { return }
+        isComplete = true
+        finishTiming()
         restTimer.skip()
-        await saveSession()
+        beginSave()
+        await saveTask?.value
     }
 
-    func buildSessionItems() -> [SessionItem] {
-        var result: [SessionItem] = []
+    func retrySave() async {
+        await endSession()
+    }
+
+    func buildSessionItems() -> [SessionItemSnapshot] {
+        var result: [SessionItemSnapshot] = []
 
         for (index, item) in items.enumerated() {
-            let sessionItem = SessionItem()
+            var sessionItem = SessionItemSnapshot()
             sessionItem.order = item.order
             sessionItem.exerciseName = item.exercise?.name ?? ""
             sessionItem.plannedSets = item.sets
@@ -201,7 +215,7 @@ final class ActiveWorkoutViewModel {
             sessionItem.weightKg = weights[index]
 
             var setReps: [Int] = []
-            for setIndex in 0..<item.sets {
+            for setIndex in 0..<max(0, item.sets) {
                 let k = key(for: index, set: setIndex)
                 if let reps = completedSets[k] {
                     setReps.append(reps)
@@ -215,9 +229,17 @@ final class ActiveWorkoutViewModel {
         return result
     }
 
+    private func beginSave() {
+        guard saveState != .saving, saveState != .saved else { return }
+        saveState = .saving
+        errorMessage = nil
+        saveTask = Task { [self] in await saveSession() }
+    }
+
     private func saveSession() async {
-        let session = Session()
-        session.date = Date.now
+        var session = SessionSnapshot()
+        session.id = sessionID
+        session.date = finishedAt ?? time.now
         session.durationSeconds = elapsedSeconds
 
         session.workoutName = workoutName
@@ -225,17 +247,28 @@ final class ActiveWorkoutViewModel {
 
         do {
             try await sessionsRepository.save(session)
+            saveState = .saved
         } catch {
+            saveState = .failed
             errorMessage = "Could not save session."
         }
     }
 
+    private func finishTiming() {
+        if finishedAt == nil { finishedAt = time.now }
+        if let startedAt, let finishedAt {
+            elapsedSeconds = max(0, Int(finishedAt.timeIntervalSince(startedAt)))
+        }
+        elapsedTask?.cancel()
+    }
+
     private func startElapsedTimer() {
         elapsedTask?.cancel()
-        elapsedTask = Task {
+        elapsedTask = Task { [weak self, time] in
             while !Task.isCancelled {
-                try? await Task.sleep(for: .seconds(1))
-                elapsedSeconds += 1
+                do { try await time.sleep(for: .seconds(1)) } catch { return }
+                guard !Task.isCancelled, let self, let startedAt else { return }
+                elapsedSeconds = max(0, Int(time.now.timeIntervalSince(startedAt)))
             }
         }
     }
@@ -248,10 +281,8 @@ final class ActiveWorkoutViewModel {
         guard items.indices.contains(exerciseIndex) else { return 0 }
         let exercise = items[exerciseIndex]
         var count = 0
-        for s in 0..<exercise.sets {
-            if completedSets[key(for: exerciseIndex, set: s)] != nil {
-                count += 1
-            }
+        for set in 0..<max(0, exercise.sets) where completedSets[key(for: exerciseIndex, set: set)] != nil {
+            count += 1
         }
         return count
     }

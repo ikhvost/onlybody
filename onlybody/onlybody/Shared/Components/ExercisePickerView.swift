@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct ExercisePickerView: View {
-    let exercises: [Exercise]
-    let onAdd: (Exercise) -> Void
+    let exercises: [ExerciseSnapshot]
+    let onAdd: (ExerciseSnapshot) -> Void
 
     @Environment(\.dismiss) private var dismiss
 
@@ -11,7 +11,7 @@ struct ExercisePickerView: View {
 
     let filters = ExerciseCatalog.filters
 
-    private var filteredExercises: [Exercise] {
+    private var filteredExercises: [ExerciseSnapshot] {
         exercises.filter { exercise in
             let matchesFilter = selectedFilter == "All" || exercise.primaryMuscle == selectedFilter
             let matchesSearch = searchText.isEmpty || exercise.name.localizedStandardContains(searchText)
@@ -20,28 +20,28 @@ struct ExercisePickerView: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(spacing: Theme.space0) {
             NavBarView(title: "Add Movement") {
                 Button {
                     dismiss()
                 } label: {
-                    ChevronIcon(isBack: true, color: Theme.text, size: 18, inset: 8)
+                    ChevronIcon(isBack: true, color: Theme.text, size: Theme.type18, inset: 8)
                 }
                 .buttonStyle(.plain)
             }
 
-            VStack(spacing: 8) {
-                HStack(spacing: 8) {
-                    SearchIcon(color: Theme.text3, size: 15)
+            VStack(spacing: Theme.space8) {
+                HStack(spacing: Theme.space8) {
+                    SearchIcon(color: Theme.text3, size: Theme.type15)
 
                     TextField("Search movements...", text: $searchText)
-                        .font(Theme.fontSans(14))
+                        .font(Theme.fontSans(Theme.type14))
                         .foregroundStyle(Theme.text)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
                 }
-                .padding(.horizontal, 10)
-                .padding(.vertical, 9)
+                .padding(.horizontal, Theme.space10)
+                .padding(.vertical, Theme.space9)
                 .background(Theme.surface)
                 .overlay {
                     RoundedRectangle(cornerRadius: Theme.cornerRadius)
@@ -50,7 +50,7 @@ struct ExercisePickerView: View {
                 .clipShape(.rect(cornerRadius: Theme.cornerRadius))
 
                 ScrollView(.horizontal) {
-                    HStack(spacing: 6) {
+                    HStack(spacing: Theme.space6) {
                         ForEach(filters, id: \.self) { filter in
                             ChipView(
                                 label: filter,
@@ -61,23 +61,23 @@ struct ExercisePickerView: View {
                             }
                         }
                     }
-                    .padding(.bottom, 2)
+                    .padding(.bottom, Theme.space2)
                 }
                 .scrollIndicators(.hidden)
             }
             .padding(.horizontal, Theme.horizontalPadding)
-            .padding(.vertical, 10)
+            .padding(.vertical, Theme.space10)
 
             Rectangle()
                 .fill(Theme.border)
                 .frame(height: 1)
 
             if filteredExercises.isEmpty {
-                VStack(spacing: 8) {
+                VStack(spacing: Theme.space8) {
                     Spacer()
                     MonoLabel(
                         text: "No movements found",
-                        size: 11,
+                        size: Theme.type11,
                         color: Theme.text2,
                         tracking: 0.4
                     )
@@ -86,21 +86,21 @@ struct ExercisePickerView: View {
                 .frame(maxWidth: .infinity)
             } else {
                 ScrollView {
-                    LazyVStack(spacing: 0) {
+                    LazyVStack(spacing: Theme.space0) {
                         ForEach(filteredExercises, id: \.id) { exercise in
                             Button {
                                 onAdd(exercise)
                                 dismiss()
                             } label: {
-                                HStack(spacing: 10) {
-                                    VStack(alignment: .leading, spacing: 2) {
+                                HStack(spacing: Theme.space10) {
+                                    VStack(alignment: .leading, spacing: Theme.space2) {
                                         Text(exercise.name)
-                                            .font(Theme.fontSans(16, .bold))
+                                            .font(Theme.fontSans(Theme.type16, .bold))
                                             .foregroundStyle(Theme.text)
 
                                         MonoLabel(
                                             text: "\(exercise.primaryMuscle.uppercased()) · \(exercise.equipmentLabel.uppercased())",
-                                            size: 10,
+                                            size: Theme.type10,
                                             color: Theme.text3,
                                             tracking: 0.3
                                         )
@@ -109,12 +109,13 @@ struct ExercisePickerView: View {
 
                                     Spacer()
 
-                                    PlusIcon(color: Theme.accent, size: 16)
+                                    PlusIcon(color: Theme.accent, size: Theme.type16)
                                 }
-                                .padding(.vertical, 13)
+                                .padding(.vertical, Theme.space13)
                                 .padding(.horizontal, Theme.horizontalPadding)
                             }
                             .buttonStyle(.plain)
+                            .accessibilityIdentifier("exercise.pick.\(exercise.name)")
 
                             Rectangle()
                                 .fill(Theme.border)

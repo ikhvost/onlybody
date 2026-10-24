@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct MusclePickerView: View {
-    @Bindable var viewModel: MusclePickerViewModel
+    @State var viewModel: MusclePickerViewModel
 
     let onBuild: ([String]) -> Void
     let onSkip: () -> Void
@@ -12,28 +12,28 @@ struct MusclePickerView: View {
         ZStack {
             Theme.bg.ignoresSafeArea()
 
-            VStack(spacing: 0) {
+            VStack(spacing: Theme.space0) {
                 NavBarView(title: "New Session") {
                     Button {
                         dismiss()
                     } label: {
-                        ChevronIcon(isBack: true, color: Theme.text, size: 18, inset: 8)
+                        ChevronIcon(isBack: true, color: Theme.text, size: Theme.type18, inset: 8)
                     }
                     .buttonStyle(.plain)
                 }
 
                 ScrollView {
-                    VStack(alignment: .leading, spacing: 0) {
+                    VStack(alignment: .leading, spacing: Theme.space0) {
                         Text("What are you training?")
-                            .font(Theme.fontSans(26, .bold))
+                            .font(Theme.fontSans(Theme.type26, .bold))
                             .tracking(-0.8)
                             .foregroundStyle(Theme.text)
-                            .padding(.bottom, 5)
+                            .padding(.bottom, Theme.space5)
 
-                        MonoLabel(text: "Select muscle groups", size: 11, color: Theme.text3, tracking: 1)
-                            .padding(.bottom, 24)
+                        MonoLabel(text: "Select muscle groups", size: Theme.type11, color: Theme.text3, tracking: 1)
+                            .padding(.bottom, Theme.space24)
 
-                        FlowLayout(spacing: 8) {
+                        FlowLayout(spacing: Theme.space8) {
                             ForEach(viewModel.muscles, id: \.self) { muscle in
                                 ChipView(
                                     label: muscle,
@@ -46,29 +46,29 @@ struct MusclePickerView: View {
 
                         if !viewModel.selectedMuscles.isEmpty {
                             Text(viewModel.selectionSummary)
-                                .font(Theme.fontMono(12, .medium))
+                                .font(Theme.fontMono(Theme.type12, .medium))
                                 .foregroundStyle(Theme.accent)
                                 .tracking(0.5)
-                                .padding(.top, 24)
+                                .padding(.top, Theme.space24)
                         }
                     }
                     .padding(.horizontal, Theme.horizontalPadding)
-                    .padding(.top, 24)
+                    .padding(.top, Theme.space24)
                 }
                 .scrollIndicators(.hidden)
 
-                VStack(spacing: 10) {
+                VStack(spacing: Theme.space10) {
                     Button {
                         onBuild(viewModel.selectedMuscles)
                     } label: {
-                        HStack(spacing: 5) {
+                        HStack(spacing: Theme.space5) {
                             Text("Build session")
-                                .font(Theme.fontSans(14, .bold))
+                                .font(Theme.fontSans(Theme.type14, .bold))
                                 .foregroundStyle(viewModel.canBuild ? Theme.accentDark : Theme.text3)
-                            ChevronIcon(color: viewModel.canBuild ? Theme.accentDark : Theme.text3, size: 12, inset: 8)
+                            ChevronIcon(color: viewModel.canBuild ? Theme.accentDark : Theme.text3, size: Theme.type12, inset: 8)
                         }
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 12)
+                        .padding(.vertical, Theme.space12)
                         .background(viewModel.canBuild ? Theme.accent : Theme.surface2)
                         .clipShape(.rect(cornerRadius: Theme.cornerRadius))
                     }
@@ -79,19 +79,21 @@ struct MusclePickerView: View {
                         onSkip()
                     } label: {
                         Text("Skip — pick movements myself")
-                            .font(Theme.fontSans(14))
+                            .font(Theme.fontSans(Theme.type14))
                             .foregroundStyle(Theme.text3)
                     }
+                    .accessibilityIdentifier("picker.manual")
                     .buttonStyle(.plain)
                 }
                 .padding(.horizontal, Theme.horizontalPadding)
-                .padding(.bottom, 20)
+                .padding(.bottom, Theme.space20)
             }
         }
         .toolbar(.hidden, for: .navigationBar)
     }
 }
 
+#if DEBUG
 #Preview("Muscle Picker — empty") {
     MusclePickerView(
         viewModel: MusclePickerViewModel(),
@@ -100,3 +102,4 @@ struct MusclePickerView: View {
     )
     .preferredColorScheme(.dark)
 }
+#endif

@@ -8,7 +8,7 @@ final class Session {
     var durationSeconds: Int = 0
 
     var workoutName: String = ""
-    @Relationship(deleteRule: .cascade) var items: [SessionItem]? = nil
+    @Relationship(deleteRule: .cascade) var items: [SessionItem]?
 
     init() {}
 }

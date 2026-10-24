@@ -6,14 +6,14 @@ struct MovementDetailViewModelTests {
     @Test
     func setFrequencyUpdatesExerciseAndPersists() async {
         let repository = MockExerciseRepository()
-        let exercise = Exercise()
+        var exercise = ExerciseSnapshot()
         exercise.frequencyPreference = ExerciseFrequency.normal.rawValue
 
         let viewModel = MovementDetailViewModel(exercise: exercise, exercises: repository)
         await viewModel.setFrequency(.more)
 
         #expect(viewModel.selectedFrequency == .more)
-        #expect(exercise.frequencyPreference == ExerciseFrequency.more.rawValue)
+        #expect(viewModel.exercise.frequencyPreference == ExerciseFrequency.more.rawValue)
         #expect(repository.savedExercises.count == 1)
         #expect(repository.savedExercises.first?.frequencyPreference == ExerciseFrequency.more.rawValue)
     }
@@ -21,7 +21,7 @@ struct MovementDetailViewModelTests {
     @Test
     func setFrequencySkipsSaveWhenValueUnchanged() async {
         let repository = MockExerciseRepository()
-        let exercise = Exercise()
+        var exercise = ExerciseSnapshot()
         exercise.frequencyPreference = ExerciseFrequency.more.rawValue
 
         let viewModel = MovementDetailViewModel(exercise: exercise, exercises: repository)
@@ -35,7 +35,7 @@ struct MovementDetailViewModelTests {
     func setFrequencyRollsBackOnSaveError() async {
         let repository = MockExerciseRepository()
         repository.shouldThrow = true
-        let exercise = Exercise()
+        var exercise = ExerciseSnapshot()
         exercise.frequencyPreference = ExerciseFrequency.normal.rawValue
 
         let viewModel = MovementDetailViewModel(exercise: exercise, exercises: repository)
@@ -48,7 +48,7 @@ struct MovementDetailViewModelTests {
     @Test
     func isSavingIsFalseAfterCompletion() async {
         let repository = MockExerciseRepository()
-        let exercise = Exercise()
+        let exercise = ExerciseSnapshot()
 
         let viewModel = MovementDetailViewModel(exercise: exercise, exercises: repository)
         #expect(viewModel.isSaving == false)
@@ -61,7 +61,7 @@ struct MovementDetailViewModelTests {
     @Test
     func setFrequencyBlockedWhileSaving() async {
         let repository = MockExerciseRepository()
-        let exercise = Exercise()
+        let exercise = ExerciseSnapshot()
 
         let viewModel = MovementDetailViewModel(exercise: exercise, exercises: repository)
         #expect(viewModel.selectedFrequency == .normal)
@@ -77,14 +77,14 @@ struct MovementDetailViewModelTests {
         await viewModel.setFrequency(.more)
 
         #expect(viewModel.selectedFrequency == .more)
-        #expect(exercise.frequencyPreference == ExerciseFrequency.more.rawValue)
+        #expect(viewModel.exercise.frequencyPreference == ExerciseFrequency.more.rawValue)
         #expect(repository.savedExercises.count == 1)
     }
 
     @Test
     func selectedFrequencyDefaultsToNormal() {
         let repository = MockExerciseRepository()
-        let exercise = Exercise()
+        let exercise = ExerciseSnapshot()
 
         let viewModel = MovementDetailViewModel(exercise: exercise, exercises: repository)
 

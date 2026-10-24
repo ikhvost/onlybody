@@ -8,11 +8,11 @@ struct TrainViewModelTests {
     func loadPopulatesWorkouts() async {
         let workoutRepo = MockWorkoutRepository()
 
-        let fullBody = Workout()
+        var fullBody = WorkoutSnapshot()
         fullBody.name = "Full Body"
         fullBody.scheduledDays = ["Mon", "Wed", "Fri"]
 
-        let upperBody = Workout()
+        var upperBody = WorkoutSnapshot()
         upperBody.name = "Upper Body"
         upperBody.scheduledDays = ["Tue", "Thu"]
 
@@ -35,11 +35,11 @@ struct TrainViewModelTests {
             Calendar.current.component(.weekday, from: Date()) - 1
         ]
 
-        let fullBody = Workout()
+        var fullBody = WorkoutSnapshot()
         fullBody.name = "Full Body"
         fullBody.scheduledDays = [today, "Fri"]
 
-        let upperBody = Workout()
+        var upperBody = WorkoutSnapshot()
         upperBody.name = "Upper Body"
         upperBody.scheduledDays = ["Wed"]
 

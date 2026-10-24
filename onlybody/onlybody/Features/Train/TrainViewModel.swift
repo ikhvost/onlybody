@@ -6,9 +6,9 @@ import Observation
 final class TrainViewModel {
     private let workoutsRepository: any WorkoutRepository
 
-    var workouts: [Workout] = []
+    var workouts: [WorkoutSnapshot] = []
     var isLoading = false
-    var errorMessage: String? = nil
+    var errorMessage: String?
 
     let dayNames = Weekdays.shortNames
 
@@ -20,7 +20,7 @@ final class TrainViewModel {
         dayNames[todayIndex]
     }
 
-    var todaysWorkouts: [Workout] {
+    var todaysWorkouts: [WorkoutSnapshot] {
         workouts.filter { $0.scheduledDays.contains(todayName) }
     }
 

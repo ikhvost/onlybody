@@ -6,7 +6,7 @@ struct SetTrackerView: View {
     let current: Int
 
     var body: some View {
-        HStack(spacing: 7) {
+        HStack(spacing: Theme.space7) {
             ForEach(0..<total, id: \.self) { index in
                 RoundedRectangle(cornerRadius: 2)
                     .fill(index < completed ? Theme.accent : (index == current ? Theme.accentDim : Theme.surface2))

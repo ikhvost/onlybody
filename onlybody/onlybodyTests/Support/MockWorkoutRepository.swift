@@ -3,37 +3,29 @@ import Foundation
 
 @MainActor
 final class MockWorkoutRepository: WorkoutRepository {
-    var stubbedWorkouts: [Workout] = []
+    var stubbedWorkouts: [WorkoutSnapshot] = []
     var shouldThrow = false
-    var savedWorkouts: [Workout] = []
-    var deletedItems: [WorkoutItem] = []
+    var savedWorkouts: [WorkoutSnapshot] = []
 
-    func allWorkouts() async throws -> [Workout] {
+    func allWorkouts() async throws -> [WorkoutSnapshot] {
         if shouldThrow {
             throw TestError.expectedFailure
         }
         return stubbedWorkouts
     }
 
-    func workout(by id: UUID) async throws -> Workout? {
+    func workout(by id: UUID) async throws -> WorkoutSnapshot? {
         if shouldThrow {
             throw TestError.expectedFailure
         }
         return stubbedWorkouts.first { $0.id == id }
     }
 
-    func save(_ workout: Workout) async throws {
+    func save(_ workout: WorkoutSnapshot) async throws {
         if shouldThrow {
             throw TestError.expectedFailure
         }
         savedWorkouts.append(workout)
     }
 
-    func deleteItems(_ items: [WorkoutItem]) async throws {
-        if shouldThrow {
-            throw TestError.expectedFailure
-        }
-
-        deletedItems.append(contentsOf: items)
-    }
 }

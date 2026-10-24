@@ -6,15 +6,15 @@ import Observation
 final class LibraryViewModel {
     private let exercisesRepository: any ExerciseRepository
 
-    var allExercises: [Exercise] = []
+    var allExercises: [ExerciseSnapshot] = []
     var searchText = ""
     var selectedFilter = "All"
     var isLoading = false
-    var errorMessage: String? = nil
+    var errorMessage: String?
 
     let filters = ExerciseCatalog.filters
 
-    var filteredExercises: [Exercise] {
+    var filteredExercises: [ExerciseSnapshot] {
         allExercises.filter {
             (selectedFilter == "All" || $0.primaryMuscle == selectedFilter) &&
             (searchText.isEmpty || $0.name.localizedStandardContains(searchText))
@@ -25,7 +25,7 @@ final class LibraryViewModel {
         self.exercisesRepository = exercises
     }
 
-    func exercise(id: UUID) -> Exercise? {
+    func exercise(id: UUID) -> ExerciseSnapshot? {
         allExercises.first { $0.id == id }
     }
 

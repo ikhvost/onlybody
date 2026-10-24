@@ -11,8 +11,8 @@ struct SmartWorkoutGeneratorTests {
         secondaryMuscles: [String] = [],
         equipment: [String] = ["None"],
         frequencyPreference: String = "normal"
-    ) -> Exercise {
-        let exercise = Exercise()
+    ) -> ExerciseSnapshot {
+        var exercise = ExerciseSnapshot()
         exercise.name = name
         exercise.primaryMuscle = primaryMuscle
         exercise.secondaryMuscles = secondaryMuscles
@@ -42,7 +42,7 @@ struct SmartWorkoutGeneratorTests {
             makeExercise(name: "Skip", primaryMuscle: "Chest", frequencyPreference: "never"),
         ]
         let generator = deterministicGenerator(sets: 3, reps: 10, rest: 45)
-        let config = SmartWorkoutGenerator.Config(targetMuscleGroups: ["Chest"], durationMinutes: 60)
+        let config = SmartWorkoutConfiguration(targetMuscleGroups: ["Chest"], durationMinutes: 60)
 
         let result = generator.generate(config: config, from: exercises)
 
@@ -60,7 +60,7 @@ struct SmartWorkoutGeneratorTests {
             makeExercise(name: "Tricep Dips", primaryMuscle: "Arms", secondaryMuscles: ["Chest"]),
         ]
         let generator = deterministicGenerator(sets: 3, reps: 10, rest: 45)
-        let config = SmartWorkoutGenerator.Config(targetMuscleGroups: ["Chest"], durationMinutes: 60)
+        let config = SmartWorkoutConfiguration(targetMuscleGroups: ["Chest"], durationMinutes: 60)
 
         let result = generator.generate(config: config, from: exercises)
         let names = result.map(\.exercise.name)
@@ -81,7 +81,7 @@ struct SmartWorkoutGeneratorTests {
             makeExercise(name: "Calf Raises", primaryMuscle: "Calves"),
         ]
         let generator = deterministicGenerator(sets: 3, reps: 10, rest: 45)
-        let config = SmartWorkoutGenerator.Config(
+        let config = SmartWorkoutConfiguration(
             targetMuscleGroups: ["Chest", "Quads"],
             durationMinutes: 60
         )
@@ -103,7 +103,7 @@ struct SmartWorkoutGeneratorTests {
             makeExercise(name: "Squats", primaryMuscle: "Quads"),
         ]
         let generator = deterministicGenerator(sets: 3, reps: 10, rest: 45)
-        let config = SmartWorkoutGenerator.Config(targetMuscleGroups: ["Full Body"], durationMinutes: 60)
+        let config = SmartWorkoutConfiguration(targetMuscleGroups: ["Full Body"], durationMinutes: 60)
 
         let result = generator.generate(config: config, from: exercises)
 
@@ -118,7 +118,7 @@ struct SmartWorkoutGeneratorTests {
             makeExercise(name: "Squats", primaryMuscle: "Quads"),
         ]
         let generator = deterministicGenerator(sets: 3, reps: 10, rest: 45)
-        let config = SmartWorkoutGenerator.Config(targetMuscleGroups: ["Upper"], durationMinutes: 60)
+        let config = SmartWorkoutConfiguration(targetMuscleGroups: ["Upper"], durationMinutes: 60)
 
         let result = generator.generate(config: config, from: exercises)
 
@@ -136,7 +136,7 @@ struct SmartWorkoutGeneratorTests {
             makeExercise(name: "Glute Bridge", primaryMuscle: "Glutes"),
         ]
         let generator = deterministicGenerator(sets: 3, reps: 10, rest: 45)
-        let config = SmartWorkoutGenerator.Config(targetMuscleGroups: ["Lower"], durationMinutes: 60)
+        let config = SmartWorkoutConfiguration(targetMuscleGroups: ["Lower"], durationMinutes: 60)
 
         let result = generator.generate(config: config, from: exercises)
 
@@ -156,7 +156,7 @@ struct SmartWorkoutGeneratorTests {
             makeExercise(name: "Normal", primaryMuscle: "Chest", frequencyPreference: "normal"),
         ]
         let generator = deterministicGenerator(sets: 3, reps: 10, rest: 45)
-        let config = SmartWorkoutGenerator.Config(targetMuscleGroups: ["Chest"], durationMinutes: 60)
+        let config = SmartWorkoutConfiguration(targetMuscleGroups: ["Chest"], durationMinutes: 60)
 
         let result = generator.generate(config: config, from: exercises)
 
@@ -173,7 +173,7 @@ struct SmartWorkoutGeneratorTests {
             makeExercise(name: "AlsoKeep", primaryMuscle: "Chest", frequencyPreference: "normal"),
         ]
         let generator = deterministicGenerator(sets: 3, reps: 10, rest: 45)
-        let config = SmartWorkoutGenerator.Config(targetMuscleGroups: ["Chest"], durationMinutes: 60)
+        let config = SmartWorkoutConfiguration(targetMuscleGroups: ["Chest"], durationMinutes: 60)
 
         let result = generator.generate(config: config, from: exercises)
 
@@ -194,7 +194,7 @@ struct SmartWorkoutGeneratorTests {
         // 3 sets * 30 + 2 * 45 = 180s per exercise
         // Budget = 6 min = 360s → fits 2 exercises exactly
         let generator = deterministicGenerator(sets: 3, reps: 10, rest: 45)
-        let config = SmartWorkoutGenerator.Config(targetMuscleGroups: ["Chest"], durationMinutes: 6)
+        let config = SmartWorkoutConfiguration(targetMuscleGroups: ["Chest"], durationMinutes: 6)
 
         let result = generator.generate(config: config, from: exercises)
 
@@ -210,7 +210,7 @@ struct SmartWorkoutGeneratorTests {
         // Each exercise = 3*30 + 2*45 = 180s
         // Budget = 1 min = 60s → only first fits (is always included)
         let generator = deterministicGenerator(sets: 3, reps: 10, rest: 45)
-        let config = SmartWorkoutGenerator.Config(targetMuscleGroups: ["Chest"], durationMinutes: 1)
+        let config = SmartWorkoutConfiguration(targetMuscleGroups: ["Chest"], durationMinutes: 1)
 
         let result = generator.generate(config: config, from: exercises)
 
@@ -226,7 +226,7 @@ struct SmartWorkoutGeneratorTests {
         // 3*30 + 2*45 = 180s per exercise
         // Budget = 360s = exactly 2 exercises
         let generator = deterministicGenerator(sets: 3, reps: 10, rest: 45)
-        let config = SmartWorkoutGenerator.Config(targetMuscleGroups: ["Chest"], durationMinutes: 6)
+        let config = SmartWorkoutConfiguration(targetMuscleGroups: ["Chest"], durationMinutes: 6)
 
         let result = generator.generate(config: config, from: exercises)
 
@@ -244,7 +244,7 @@ struct SmartWorkoutGeneratorTests {
         // Only ChestBodyweight matches Chest → 1 match → fallback triggers
         // Fallback: equipment-free + Chest filter → ChestBodyweight → 1 item
         let generator = deterministicGenerator(sets: 3, reps: 10, rest: 45)
-        let config = SmartWorkoutGenerator.Config(targetMuscleGroups: ["Chest"], durationMinutes: 60)
+        let config = SmartWorkoutConfiguration(targetMuscleGroups: ["Chest"], durationMinutes: 60)
 
         let result = generator.generate(config: config, from: exercises)
 
@@ -259,7 +259,7 @@ struct SmartWorkoutGeneratorTests {
             makeExercise(name: "Barbell Only", primaryMuscle: "Chest", equipment: ["Barbell"]),
         ]
         let generator = deterministicGenerator(sets: 3, reps: 10, rest: 45)
-        let config = SmartWorkoutGenerator.Config(targetMuscleGroups: ["Chest"], durationMinutes: 60)
+        let config = SmartWorkoutConfiguration(targetMuscleGroups: ["Chest"], durationMinutes: 60)
 
         let result = generator.generate(config: config, from: exercises)
 
@@ -271,9 +271,9 @@ struct SmartWorkoutGeneratorTests {
 
     @Test
     func returnsEmptyWhenNoExercisesMatch() {
-        let exercises: [Exercise] = []
+        let exercises: [ExerciseSnapshot] = []
         let generator = deterministicGenerator(sets: 3, reps: 10, rest: 45)
-        let config = SmartWorkoutGenerator.Config(targetMuscleGroups: ["Chest"], durationMinutes: 60)
+        let config = SmartWorkoutConfiguration(targetMuscleGroups: ["Chest"], durationMinutes: 60)
 
         let result = generator.generate(config: config, from: exercises)
 
@@ -292,7 +292,7 @@ struct SmartWorkoutGeneratorTests {
             randomReps: { _ in 15 },
             randomRest: { _ in 60 }
         )
-        let config = SmartWorkoutGenerator.Config(targetMuscleGroups: ["Chest"], durationMinutes: 60)
+        let config = SmartWorkoutConfiguration(targetMuscleGroups: ["Chest"], durationMinutes: 60)
 
         let result = generator.generate(config: config, from: exercises)
 
@@ -312,7 +312,7 @@ struct SmartWorkoutGeneratorTests {
             makeExercise(name: "Third", primaryMuscle: "Chest", frequencyPreference: "normal"),
         ]
         let generator = deterministicGenerator(sets: 3, reps: 10, rest: 45)
-        let config = SmartWorkoutGenerator.Config(targetMuscleGroups: ["Chest"], durationMinutes: 60)
+        let config = SmartWorkoutConfiguration(targetMuscleGroups: ["Chest"], durationMinutes: 60)
 
         let result = generator.generate(config: config, from: exercises)
 
@@ -332,7 +332,7 @@ struct SmartWorkoutGeneratorTests {
         ]
         // Only Less Bodyweight and More Bodyweight match Chest → 2 in pool → no fallback
         let generator = deterministicGenerator(sets: 3, reps: 10, rest: 45)
-        let config = SmartWorkoutGenerator.Config(targetMuscleGroups: ["Chest"], durationMinutes: 60)
+        let config = SmartWorkoutConfiguration(targetMuscleGroups: ["Chest"], durationMinutes: 60)
 
         let result = generator.generate(config: config, from: exercises)
 

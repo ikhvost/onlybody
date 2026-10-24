@@ -1,15 +1,15 @@
 #if DEBUG
 struct PreviewExerciseRepository: ExerciseRepository {
-    let exercises: [Exercise]
+    let exercises: [ExerciseSnapshot]
 
-    init(exercises: [Exercise] = []) {
+    init(exercises: [ExerciseSnapshot] = []) {
         self.exercises = exercises
     }
 
-    func allExercises() async throws -> [Exercise] {
+    func allExercises() async throws -> [ExerciseSnapshot] {
         exercises
     }
 
-    func save(_ exercise: Exercise) async throws {}
+    func save(_ exercise: ExerciseSnapshot) async throws {}
 }
 #endif

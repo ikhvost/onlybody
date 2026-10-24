@@ -2,22 +2,21 @@
 import Foundation
 
 struct PreviewWorkoutRepository: WorkoutRepository {
-    let workouts: [Workout]
+    let workouts: [WorkoutSnapshot]
 
-    init(workouts: [Workout] = []) {
+    init(workouts: [WorkoutSnapshot] = []) {
         self.workouts = workouts
     }
 
-    func allWorkouts() async throws -> [Workout] {
+    func allWorkouts() async throws -> [WorkoutSnapshot] {
         workouts
     }
 
-    func workout(by id: UUID) async throws -> Workout? {
+    func workout(by id: UUID) async throws -> WorkoutSnapshot? {
         workouts.first { $0.id == id }
     }
 
-    func save(_ workout: Workout) async throws {}
+    func save(_ workout: WorkoutSnapshot) async throws {}
 
-    func deleteItems(_ items: [WorkoutItem]) async throws {}
 }
 #endif

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MonoLabel: View {
     let text: String
-    var size: CGFloat = 11
+    var size: CGFloat = Theme.type11
     var color: Color = Theme.text3
     var tracking: CGFloat = 1.0
 

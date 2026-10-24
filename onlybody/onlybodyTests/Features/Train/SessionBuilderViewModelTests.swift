@@ -16,7 +16,7 @@ struct SessionBuilderViewModelTests {
             exercises: exerciseRepo
         )
 
-        let exercise = Exercise()
+        var exercise = ExerciseSnapshot()
         exercise.name = "Push-Ups"
         exercise.primaryMuscle = "Chest"
 
@@ -40,10 +40,10 @@ struct SessionBuilderViewModelTests {
             exercises: exerciseRepo
         )
 
-        let pushUps = Exercise()
+        var pushUps = ExerciseSnapshot()
         pushUps.name = "Push-Ups"
 
-        let pullUps = Exercise()
+        var pullUps = ExerciseSnapshot()
         pullUps.name = "Pull-Ups"
 
         viewModel.addMovement(pushUps)
@@ -65,10 +65,10 @@ struct SessionBuilderViewModelTests {
             exercises: exerciseRepo
         )
 
-        let pushUps = Exercise()
+        var pushUps = ExerciseSnapshot()
         pushUps.name = "Push-Ups"
 
-        let pullUps = Exercise()
+        var pullUps = ExerciseSnapshot()
         pullUps.name = "Pull-Ups"
 
         viewModel.addMovement(pushUps)
@@ -92,7 +92,7 @@ struct SessionBuilderViewModelTests {
             exercises: exerciseRepo
         )
 
-        let exercise = Exercise()
+        var exercise = ExerciseSnapshot()
         exercise.name = "Push-Ups"
         viewModel.addMovement(exercise)
 
@@ -112,7 +112,7 @@ struct SessionBuilderViewModelTests {
             exercises: exerciseRepo
         )
 
-        let exercise = Exercise()
+        let exercise = ExerciseSnapshot()
         viewModel.addMovement(exercise)
         let id = viewModel.movements[0].id
 
@@ -129,7 +129,7 @@ struct SessionBuilderViewModelTests {
             exercises: exerciseRepo
         )
 
-        let exercise = Exercise()
+        let exercise = ExerciseSnapshot()
         viewModel.addMovement(exercise)
         let id = viewModel.movements[0].id
 
@@ -149,7 +149,7 @@ struct SessionBuilderViewModelTests {
             exercises: exerciseRepo
         )
 
-        let exercise = Exercise()
+        let exercise = ExerciseSnapshot()
         viewModel.addMovement(exercise)
         let id = viewModel.movements[0].id
 
@@ -166,7 +166,7 @@ struct SessionBuilderViewModelTests {
             exercises: exerciseRepo
         )
 
-        let exercise = Exercise()
+        let exercise = ExerciseSnapshot()
         viewModel.addMovement(exercise)
         let id = viewModel.movements[0].id
 
@@ -183,7 +183,7 @@ struct SessionBuilderViewModelTests {
             exercises: exerciseRepo
         )
 
-        let exercise = Exercise()
+        let exercise = ExerciseSnapshot()
         viewModel.addMovement(exercise)
         let id = viewModel.movements[0].id
 
@@ -200,7 +200,7 @@ struct SessionBuilderViewModelTests {
             exercises: exerciseRepo
         )
 
-        let exercise = Exercise()
+        let exercise = ExerciseSnapshot()
         viewModel.addMovement(exercise)
         let id = viewModel.movements[0].id
 
@@ -272,7 +272,7 @@ struct SessionBuilderViewModelTests {
             exercises: exerciseRepo
         )
 
-        let exercise = Exercise()
+        let exercise = ExerciseSnapshot()
         viewModel.addMovement(exercise)
         // 3 sets × 30s + 2 rests × 45s = 90 + 90 = 180s
         #expect(viewModel.estimatedDurationSeconds == 180)
@@ -288,7 +288,7 @@ struct SessionBuilderViewModelTests {
             exercises: exerciseRepo
         )
 
-        let exercise = Exercise()
+        let exercise = ExerciseSnapshot()
         viewModel.addMovement(exercise)
         let id = viewModel.movements[0].id
 
@@ -307,7 +307,7 @@ struct SessionBuilderViewModelTests {
             exercises: exerciseRepo
         )
 
-        let exercise = Exercise()
+        let exercise = ExerciseSnapshot()
         viewModel.addMovement(exercise)
         let id = viewModel.movements[0].id
 
@@ -326,12 +326,12 @@ struct SessionBuilderViewModelTests {
             exercises: exerciseRepo
         )
 
-        let pushUps = Exercise()
+        var pushUps = ExerciseSnapshot()
         pushUps.name = "Push-Ups"
         viewModel.addMovement(pushUps)
         // 3 × 30 + 2 × 45 = 180
 
-        let pullUps = Exercise()
+        var pullUps = ExerciseSnapshot()
         pullUps.name = "Pull-Ups"
         viewModel.addMovement(pullUps)
         // 3 × 30 + 2 × 45 = 180
@@ -352,7 +352,7 @@ struct SessionBuilderViewModelTests {
             exercises: exerciseRepo
         )
 
-        let exercise = Exercise()
+        var exercise = ExerciseSnapshot()
         exercise.name = "Push-Ups"
         exercise.primaryMuscle = "Chest"
 
@@ -371,9 +371,9 @@ struct SessionBuilderViewModelTests {
         #expect(savedWorkout.name == "Full Body")
         #expect(savedWorkout.mode == WorkoutMode.manual.rawValue)
         #expect(savedWorkout.scheduledDays == ["Mon", "Wed"])
-        #expect(savedWorkout.items?.count == 1)
+        #expect(savedWorkout.items.count == 1)
 
-        let savedItem = savedWorkout.items?.first
+        let savedItem = savedWorkout.items.first
         #expect(savedItem?.order == 0)
         #expect(savedItem?.sets == 3)
         #expect(savedItem?.targetReps == 12)
@@ -390,7 +390,7 @@ struct SessionBuilderViewModelTests {
             exercises: exerciseRepo
         )
 
-        let exercise = Exercise()
+        let exercise = ExerciseSnapshot()
         viewModel.addMovement(exercise)
 
         let success = await viewModel.save()
@@ -409,13 +409,13 @@ struct SessionBuilderViewModelTests {
             exercises: exerciseRepo
         )
 
-        let pushUps = Exercise()
+        var pushUps = ExerciseSnapshot()
         pushUps.name = "Push-Ups"
 
-        let pullUps = Exercise()
+        var pullUps = ExerciseSnapshot()
         pullUps.name = "Pull-Ups"
 
-        let squats = Exercise()
+        var squats = ExerciseSnapshot()
         squats.name = "Squats"
 
         viewModel.addMovement(pushUps)
@@ -425,7 +425,7 @@ struct SessionBuilderViewModelTests {
         _ = await viewModel.save()
 
         let savedWorkout = workoutRepo.savedWorkouts.first!
-        let items = savedWorkout.items?.sorted(by: { $0.order < $1.order }) ?? []
+        let items = savedWorkout.items.sorted(by: { $0.order < $1.order })
 
         #expect(items.count == 3)
         #expect(items[0].order == 0)
@@ -446,7 +446,7 @@ struct SessionBuilderViewModelTests {
             exercises: exerciseRepo
         )
 
-        let exercise = Exercise()
+        let exercise = ExerciseSnapshot()
         viewModel.addMovement(exercise)
 
         let success = await viewModel.save()
@@ -462,20 +462,19 @@ struct SessionBuilderViewModelTests {
         let workoutRepo = MockWorkoutRepository()
         let exerciseRepo = MockExerciseRepository()
 
-        let existing = Workout()
+        var existing = WorkoutSnapshot()
         existing.id = UUID()
         existing.name = "Old Name"
         existing.mode = WorkoutMode.smart.rawValue
         existing.scheduledDays = ["Mon"]
 
-        let oldItem = WorkoutItem()
+        var oldItem = WorkoutItemSnapshot()
         oldItem.order = 0
         oldItem.sets = 5
         oldItem.targetReps = 10
         oldItem.restSeconds = 60
-        oldItem.exercise = Exercise()
+        oldItem.exercise = ExerciseSnapshot()
         oldItem.exercise?.name = "Old Exercise"
-        oldItem.workout = existing
 
         existing.items = [oldItem]
 
@@ -490,7 +489,7 @@ struct SessionBuilderViewModelTests {
         #expect(viewModel.scheduledDays == ["Mon"])
         #expect(viewModel.movements.count == 1)
 
-        let newExercise = Exercise()
+        var newExercise = ExerciseSnapshot()
         newExercise.name = "Push-Ups"
         viewModel.name = "Updated Name"
         viewModel.mode = .manual
@@ -502,8 +501,7 @@ struct SessionBuilderViewModelTests {
         let success = await viewModel.save()
 
         #expect(success == true)
-        #expect(workoutRepo.deletedItems.count == 1)
-        #expect(workoutRepo.deletedItems.first?.order == 0)
+        #expect(existing.items == [oldItem])
         #expect(workoutRepo.savedWorkouts.count == 1)
 
         let savedWorkout = workoutRepo.savedWorkouts.first!
@@ -511,8 +509,8 @@ struct SessionBuilderViewModelTests {
         #expect(savedWorkout.name == "Updated Name")
         #expect(savedWorkout.mode == WorkoutMode.manual.rawValue)
         #expect(savedWorkout.scheduledDays == ["Fri"])
-        #expect(savedWorkout.items?.count == 1)
-        #expect(savedWorkout.items?.first?.exercise?.name == "Push-Ups")
+        #expect(savedWorkout.items.count == 1)
+        #expect(savedWorkout.items.first?.exercise?.name == "Push-Ups")
     }
 
     // MARK: - Load Exercises
@@ -522,10 +520,10 @@ struct SessionBuilderViewModelTests {
         let workoutRepo = MockWorkoutRepository()
         let exerciseRepo = MockExerciseRepository()
 
-        let pushUps = Exercise()
+        var pushUps = ExerciseSnapshot()
         pushUps.name = "Push-Ups"
 
-        let pullUps = Exercise()
+        var pullUps = ExerciseSnapshot()
         pullUps.name = "Pull-Ups"
 
         exerciseRepo.stubbedAllExercises = [pushUps, pullUps]
@@ -566,12 +564,12 @@ struct SessionBuilderViewModelTests {
         let workoutRepo = MockWorkoutRepository()
         let exerciseRepo = MockExerciseRepository()
 
-        let chestExercise = Exercise()
+        var chestExercise = ExerciseSnapshot()
         chestExercise.name = "Push-Ups"
         chestExercise.primaryMuscle = "Chest"
         chestExercise.equipment = ["None"]
 
-        let backExercise = Exercise()
+        var backExercise = ExerciseSnapshot()
         backExercise.name = "Pull-Ups"
         backExercise.primaryMuscle = "Back"
         backExercise.equipment = ["Pull-up Bar"]
@@ -605,7 +603,7 @@ struct SessionBuilderViewModelTests {
         #expect(savedWorkout.targetMuscleGroups == ["Chest", "Back"])
         #expect(savedWorkout.scheduledDays == ["Mon"])
 
-        let items = savedWorkout.items?.sorted(by: { $0.order < $1.order }) ?? []
+        let items = savedWorkout.items.sorted(by: { $0.order < $1.order })
         #expect(items.count >= 2)
     }
 
@@ -642,7 +640,7 @@ struct SessionBuilderViewModelTests {
         let workoutRepo = MockWorkoutRepository()
         let exerciseRepo = MockExerciseRepository()
 
-        let exercise = Exercise()
+        var exercise = ExerciseSnapshot()
         exercise.name = "Push-Ups"
 
         let viewModel = SessionBuilderViewModel(
@@ -662,7 +660,7 @@ struct SessionBuilderViewModelTests {
         let savedWorkout = workoutRepo.savedWorkouts.first!
         #expect(savedWorkout.mode == WorkoutMode.manual.rawValue)
         #expect(savedWorkout.targetMuscleGroups.isEmpty)
-        #expect(savedWorkout.items?.count == 1)
+        #expect(savedWorkout.items.count == 1)
     }
 
     @Test
@@ -675,7 +673,7 @@ struct SessionBuilderViewModelTests {
             randomRest: { _ in 45 }
         )
 
-        let chestExercise = Exercise()
+        var chestExercise = ExerciseSnapshot()
         chestExercise.name = "Push-Ups"
         chestExercise.primaryMuscle = "Chest"
         chestExercise.equipment = ["None"]
@@ -696,7 +694,7 @@ struct SessionBuilderViewModelTests {
         let workoutRepo = MockWorkoutRepository()
         let exerciseRepo = MockExerciseRepository()
 
-        let existing = Workout()
+        var existing = WorkoutSnapshot()
         existing.id = UUID()
         existing.name = "Old Smart"
         existing.mode = WorkoutMode.smart.rawValue

@@ -19,6 +19,7 @@
 /* Begin PBXFileReference section */
 		DFA38F9D2FA5365800489D14 /* onlybody.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = onlybody.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFA38FAC2FA5365900489D14 /* onlybodyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = onlybodyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EFA38FAC2FA5365900489D14 /* onlybodyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = onlybodyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -30,6 +31,11 @@
 		DFA38FAF2FA5365900489D14 /* onlybodyTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = onlybodyTests;
+			sourceTree = "<group>";
+		};
+		EFA38FAF2FA5365900489D14 /* onlybodyUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = onlybodyUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -49,6 +55,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EFA38FA92FA5365900489D14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -57,6 +70,7 @@
 			children = (
 				DFA38F9F2FA5365800489D14 /* onlybody */,
 				DFA38FAF2FA5365900489D14 /* onlybodyTests */,
+                EFA38FAF2FA5365900489D14 /* onlybodyUITests */,
 				DFA38F9E2FA5365800489D14 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -66,6 +80,7 @@
 			children = (
 				DFA38F9D2FA5365800489D14 /* onlybody.app */,
 				DFA38FAC2FA5365900489D14 /* onlybodyTests.xctest */,
+                EFA38FAC2FA5365900489D14 /* onlybodyUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -118,6 +133,29 @@
 			productReference = DFA38FAC2FA5365900489D14 /* onlybodyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		EFA38FAB2FA5365900489D14 /* onlybodyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EFA38FC32FA5365900489D14 /* Build configuration list for PBXNativeTarget "onlybodyUITests" */;
+			buildPhases = (
+				EFA38FA82FA5365900489D14 /* Sources */,
+				EFA38FA92FA5365900489D14 /* Frameworks */,
+				EFA38FAA2FA5365900489D14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EFA38FAE2FA5365900489D14 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				EFA38FAF2FA5365900489D14 /* onlybodyUITests */,
+			);
+			name = onlybodyUITests;
+			packageProductDependencies = (
+			);
+			productName = onlybodyUITests;
+			productReference = EFA38FAC2FA5365900489D14 /* onlybodyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -153,6 +191,7 @@
 			targets = (
 				DFA38F9C2FA5365800489D14 /* onlybody */,
 				DFA38FAB2FA5365900489D14 /* onlybodyTests */,
+                EFA38FAB2FA5365900489D14 /* onlybodyUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -166,6 +205,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		DFA38FAA2FA5365900489D14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EFA38FAA2FA5365900489D14 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -189,10 +235,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EFA38FA82FA5365900489D14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
 		DFA38FAE2FA5365900489D14 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DFA38F9C2FA5365800489D14 /* onlybody */;
+			targetProxy = DFA38FAD2FA5365900489D14 /* PBXContainerItemProxy */;
+		};
+		EFA38FAE2FA5365900489D14 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DFA38F9C2FA5365800489D14 /* onlybody */;
 			targetProxy = DFA38FAD2FA5365900489D14 /* PBXContainerItemProxy */;
@@ -254,6 +312,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				/* No App Intents or App Shortcuts in the app or test targets. */
+				LM_SKIP_METADATA_EXTRACTION = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -312,6 +372,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				/* No App Intents or App Shortcuts in the app or test targets. */
+				LM_SKIP_METADATA_EXTRACTION = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -412,6 +474,28 @@
 			};
 			name = Debug;
 		};
+		EFA38FC42FA5365900489D14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+                TEST_TARGET_NAME = onlybody;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X65J587KN3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ikhvost.onlybodyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 		DFA38FC52FA5365900489D14 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -432,6 +516,28 @@
 				SWIFT_VERSION = 6;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/onlybody.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/onlybody";
+			};
+			name = Release;
+		};
+		EFA38FC52FA5365900489D14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+                TEST_TARGET_NAME = onlybody;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X65J587KN3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ikhvost.onlybodyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -461,6 +567,15 @@
 			buildConfigurations = (
 				DFA38FC42FA5365900489D14 /* Debug */,
 				DFA38FC52FA5365900489D14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EFA38FC32FA5365900489D14 /* Build configuration list for PBXNativeTarget "onlybodyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EFA38FC42FA5365900489D14 /* Debug */,
+				EFA38FC52FA5365900489D14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

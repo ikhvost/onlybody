@@ -16,12 +16,12 @@ struct NavBarView<Leading: View, Trailing: View>: View {
     }
 
     var body: some View {
-        HStack(spacing: 10) {
+        HStack(spacing: Theme.space10) {
             leading
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             Text(title)
-                .font(Theme.fontSans(16, .bold))
+                .font(Theme.fontSans(Theme.type16, .bold))
                 .tracking(-0.2)
                 .foregroundStyle(Theme.text)
                 .frame(maxWidth: .infinity)
@@ -30,7 +30,7 @@ struct NavBarView<Leading: View, Trailing: View>: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .padding(.horizontal, Theme.horizontalPadding)
-        .padding(.vertical, 10)
+        .padding(.vertical, Theme.space10)
         .overlay(alignment: .bottom) {
             Rectangle()
                 .fill(Theme.border)

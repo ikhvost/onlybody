@@ -3,25 +3,25 @@ import SwiftUI
 
 struct SessionDetailView: View {
     @Environment(\.dismiss) private var dismiss
-    let session: Session
+    let session: SessionSnapshot
 
-    private var sortedItems: [SessionItem] {
-        (session.items ?? []).sorted { $0.order < $1.order }
+    private var sortedItems: [SessionItemSnapshot] {
+        (session.items).sorted { $0.order < $1.order }
     }
 
     var body: some View {
         ZStack {
             Theme.bg.ignoresSafeArea()
 
-            VStack(spacing: 0) {
+            VStack(spacing: Theme.space0) {
                 NavBarView(title: session.workoutName) {
                     Button {
                         dismiss()
                     } label: {
-                        HStack(spacing: 4) {
-                            ChevronIcon(isBack: true, color: Theme.accent, size: 16, inset: 8)
+                        HStack(spacing: Theme.space4) {
+                            ChevronIcon(isBack: true, color: Theme.accent, size: Theme.type16, inset: 8)
                             Text("Back")
-                                .font(Theme.fontSans(15, .semibold))
+                                .font(Theme.fontSans(Theme.type15, .semibold))
                                 .foregroundStyle(Theme.accent)
                         }
                     }
@@ -30,28 +30,27 @@ struct SessionDetailView: View {
                 }
 
                 ScrollView {
-                    VStack(alignment: .leading, spacing: 0) {
-                        MonoLabel(text: formattedDate(session.date), size: 10, color: Theme.text3, tracking: 1.0)
-                            .padding(.bottom, 6)
+                    VStack(alignment: .leading, spacing: Theme.space0) {
+                        MonoLabel(text: formattedDate(session.date), size: Theme.type10, color: Theme.text3, tracking: 1.0)
+                            .padding(.bottom, Theme.space6)
 
-                        HStack(spacing: 10) {
-                            HStack(spacing: 3) {
+                        HStack(spacing: Theme.space10) {
+                            HStack(spacing: Theme.space3) {
                                 Text(Duration.seconds(session.durationSeconds).formatted(.time(pattern: .minuteSecond)))
-                                    .font(Theme.fontMono(24, .medium))
+                                    .font(Theme.fontMono(Theme.type24, .medium))
                                     .foregroundStyle(Theme.accent)
                                 Text("min")
-                                    .font(Theme.fontMono(13))
+                                    .font(Theme.fontMono(Theme.type13))
                                     .foregroundStyle(Theme.text2)
                             }
 
-
                         }
-                        .padding(.bottom, 24)
+                        .padding(.bottom, Theme.space24)
 
                         Rectangle()
                             .fill(Theme.border)
                             .frame(height: 1)
-                            .padding(.bottom, 16)
+                            .padding(.bottom, Theme.space16)
 
                         ForEach(sortedItems.enumerated(), id: \.element.id) { index, item in
                             SessionItemRow(
@@ -61,8 +60,8 @@ struct SessionDetailView: View {
                         }
                     }
                     .padding(.horizontal, Theme.horizontalPadding)
-                    .padding(.top, 16)
-                    .padding(.bottom, 24)
+                    .padding(.top, Theme.space16)
+                    .padding(.bottom, Theme.space24)
                 }
                 .scrollIndicators(.hidden)
             }
@@ -81,63 +80,22 @@ struct SessionDetailView: View {
     }
 }
 
-private struct SessionItemRow: View {
-    let item: SessionItem
-    let isLast: Bool
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            HStack(alignment: .top) {
-                Text(item.exerciseName)
-                    .font(Theme.fontSans(15, .bold))
-                    .foregroundStyle(Theme.text)
-
-                Spacer()
-
-                MonoLabel(
-                    text: "\(item.setReps.reduce(0, +)) REPS TOTAL",
-                    size: 10,
-                    color: Theme.text3,
-                    tracking: 0.3
-                )
-            }
-            .padding(.bottom, 6)
-
-            ForEach(item.setReps.indices, id: \.self) { setIndex in
-                MonoLabel(
-                    text: "SET \(setIndex + 1) \u{00B7} \(item.setReps[setIndex]) REPS",
-                    size: 10,
-                    color: Theme.text3,
-                    tracking: 0.3
-                )
-                .padding(.bottom, 2)
-            }
-
-            if !isLast {
-                Rectangle()
-                    .fill(Theme.border)
-                    .frame(height: 1)
-                    .padding(.vertical, 13)
-            }
-        }
-    }
-}
-
+#if DEBUG
 #Preview("Session Detail") {
-    let session = Session()
+    var session = SessionSnapshot()
     session.workoutName = "Full Body"
     session.durationSeconds = 1450
 
-    session.date = Calendar.current.date(from: DateComponents(year: 2026, month: 5, day: 1))!
+    session.date = Calendar.current.date(from: DateComponents(year: 2026, month: 5, day: 1)) ?? .now
 
-    let item1 = SessionItem()
+    var item1 = SessionItemSnapshot()
     item1.order = 0
     item1.exerciseName = "Push-Ups"
     item1.plannedSets = 3
     item1.plannedReps = 12
     item1.setReps = [12, 12, 12]
 
-    let item2 = SessionItem()
+    var item2 = SessionItemSnapshot()
     item2.order = 1
     item2.exerciseName = "Pull-Ups"
     item2.plannedSets = 3
@@ -149,3 +107,4 @@ private struct SessionItemRow: View {
     return SessionDetailView(session: session)
         .preferredColorScheme(.dark)
 }
+#endif

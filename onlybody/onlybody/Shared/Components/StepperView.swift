@@ -38,17 +38,17 @@ struct StepperView: View {
     }
 
     var body: some View {
-        VStack(spacing: 6) {
-            MonoLabel(text: label, size: 10, color: Theme.text3, tracking: 0.5)
+        VStack(spacing: Theme.space6) {
+            MonoLabel(text: label, size: Theme.type10, color: Theme.text3, tracking: 0.5)
 
-            HStack(spacing: 4) {
+            HStack(spacing: Theme.space4) {
                 Button {
                     if canDecrement {
                         onDecrement()
                     }
                 } label: {
                     Text("−")
-                        .font(Theme.fontMono(14, .medium))
+                        .font(Theme.fontMono(Theme.type14, .medium))
                         .foregroundStyle(canDecrement ? Theme.text : Theme.text3)
                         .frame(width: 32, height: 32)
                         .background(Theme.surface2)
@@ -58,11 +58,14 @@ struct StepperView: View {
                                 .stroke(Theme.border2, lineWidth: 1)
                         }
                 }
+                .accessibilityLabel("Decrease \(label)")
+                .accessibilityIdentifier("stepper.\(label).decrease")
                 .disabled(!canDecrement)
                 .buttonStyle(.plain)
 
                 Text(valueText)
-                    .font(Theme.fontMono(14, .bold))
+                    .accessibilityIdentifier("stepper.\(label).value")
+                    .font(Theme.fontMono(Theme.type14, .bold))
                     .foregroundStyle(Theme.text)
                     .frame(maxWidth: .infinity)
 
@@ -70,12 +73,14 @@ struct StepperView: View {
                     onIncrement()
                 } label: {
                     Text("+")
-                        .font(Theme.fontMono(14, .medium))
+                        .font(Theme.fontMono(Theme.type14, .medium))
                         .foregroundStyle(Theme.accentDark)
                         .frame(width: 32, height: 32)
                         .background(Theme.accent)
                         .clipShape(.rect(cornerRadius: Theme.chipCornerRadius))
                 }
+                .accessibilityLabel("Increase \(label)")
+                .accessibilityIdentifier("stepper.\(label).increase")
                 .buttonStyle(.plain)
             }
         }

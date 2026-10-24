@@ -1,14 +1,6 @@
 import Foundation
 import SwiftData
 
-struct ExerciseSeed: Decodable {
-    let name: String
-    let primaryMuscle: String
-    let secondaryMuscles: [String]
-    let equipment: [String]
-    let frequencyPreference: String
-}
-
 @MainActor
 func generateStore(outputPath: String, seedDataPath: String) throws {
     let storeURL = URL(fileURLWithPath: outputPath)

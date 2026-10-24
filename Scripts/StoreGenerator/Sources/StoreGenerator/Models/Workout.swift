@@ -8,7 +8,7 @@ final class Workout {
     var mode: String = "smart"
     var targetMuscleGroups: [String] = []
     var scheduledDays: [String] = []
-    @Relationship(deleteRule: .cascade) var items: [WorkoutItem]? = nil
+    @Relationship(deleteRule: .cascade) var items: [WorkoutItem]?
 
     init() {}
 }

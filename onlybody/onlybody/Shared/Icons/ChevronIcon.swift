@@ -3,7 +3,7 @@ import SwiftUI
 struct ChevronIcon: View {
     var isBack = false
     var color: Color = Theme.text
-    var size: CGFloat = 20
+    var size: CGFloat = Theme.type20
     var inset: CGFloat = 7
 
     var body: some View {

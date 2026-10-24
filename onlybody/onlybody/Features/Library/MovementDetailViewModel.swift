@@ -5,11 +5,11 @@ import Observation
 final class MovementDetailViewModel {
     private let exercisesRepository: any ExerciseRepository
 
-    var exercise: Exercise
+    var exercise: ExerciseSnapshot
     var selectedFrequency: ExerciseFrequency
     var isSaving = false
 
-    init(exercise: Exercise, exercises: any ExerciseRepository) {
+    init(exercise: ExerciseSnapshot, exercises: any ExerciseRepository) {
         self.exercise = exercise
         self.exercisesRepository = exercises
         selectedFrequency = ExerciseFrequency(rawValue: exercise.frequencyPreference) ?? .normal

@@ -8,7 +8,7 @@ final class SessionBuilderViewModel {
     private let exercisesRepository: any ExerciseRepository
     private let smartGenerator: SmartWorkoutGenerator
 
-    let editingWorkout: Workout?
+    let editingWorkout: WorkoutSnapshot?
 
     var name: String = ""
     var mode: WorkoutMode = .smart
@@ -17,7 +17,7 @@ final class SessionBuilderViewModel {
     var scheduledDays: [String] = []
     var isSaving = false
     var errorMessage: String?
-    var allExercises: [Exercise] = []
+    var allExercises: [ExerciseSnapshot] = []
 
     let dayNames = Weekdays.shortNames
 
@@ -40,7 +40,7 @@ final class SessionBuilderViewModel {
     init(
         workouts: any WorkoutRepository,
         exercises: any ExerciseRepository,
-        workout: Workout? = nil,
+        workout: WorkoutSnapshot? = nil,
         targetMuscleGroups: [String] = [],
         generator: SmartWorkoutGenerator = SmartWorkoutGenerator()
     ) {
@@ -67,7 +67,7 @@ final class SessionBuilderViewModel {
         }
     }
 
-    func addMovement(_ exercise: Exercise) {
+    func addMovement(_ exercise: ExerciseSnapshot) {
         let config = MovementConfig(exercise: exercise)
         movements.append(config)
     }
@@ -111,7 +111,7 @@ final class SessionBuilderViewModel {
             }
 
             if mode == .smart && !targetMuscleGroups.isEmpty {
-                let config = SmartWorkoutGenerator.Config(
+                let config = SmartWorkoutConfiguration(
                     targetMuscleGroups: targetMuscleGroups,
                     durationMinutes: 30
                 )
@@ -132,11 +132,11 @@ final class SessionBuilderViewModel {
                 }
             }
 
-            let workout: Workout
+            var workout: WorkoutSnapshot
             if let existing = editingWorkout {
                 workout = existing
             } else {
-                workout = Workout()
+                workout = WorkoutSnapshot()
             }
 
             workout.name = name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -146,20 +146,15 @@ final class SessionBuilderViewModel {
             workout.scheduledDays = scheduledDays
             workout.targetMuscleGroups = targetMuscleGroups
 
-            if let existingItems = workout.items {
-                try await workoutsRepository.deleteItems(existingItems)
-                workout.items = nil
-            }
-
-            var newItems: [WorkoutItem] = []
+            var newItems: [WorkoutItemSnapshot] = []
             for (index, movement) in movements.enumerated() {
-                let item = WorkoutItem()
+                var item = WorkoutItemSnapshot()
+                item.id = movement.id
                 item.order = index
                 item.sets = movement.sets
                 item.targetReps = movement.reps
                 item.restSeconds = movement.restSeconds
                 item.exercise = movement.exercise
-                item.workout = workout
                 newItems.append(item)
             }
             workout.items = newItems
@@ -172,31 +167,21 @@ final class SessionBuilderViewModel {
         }
     }
 
-    private func populateFrom(_ workout: Workout) {
+    private func populateFrom(_ workout: WorkoutSnapshot) {
         name = workout.name
         mode = WorkoutMode(rawValue: workout.mode) ?? .manual
         targetMuscleGroups = workout.targetMuscleGroups
         scheduledDays = workout.scheduledDays
 
-        if let items = workout.items {
-            let sorted = items.sorted(by: { $0.order < $1.order })
-            movements = sorted.compactMap { item in
-                guard let exercise = item.exercise else { return nil }
-                return MovementConfig(
-                    exercise: exercise,
-                    sets: item.sets,
-                    reps: item.targetReps,
-                    restSeconds: item.restSeconds
-                )
-            }
+        movements = workout.items.sorted { $0.order < $1.order }.compactMap { item in
+            guard let exercise = item.exercise else { return nil }
+            return MovementConfig(
+                id: item.id,
+                exercise: exercise,
+                sets: item.sets,
+                reps: item.targetReps,
+                restSeconds: item.restSeconds
+            )
         }
     }
-}
-
-struct MovementConfig: Identifiable {
-    let id = UUID()
-    let exercise: Exercise
-    var sets: Int = 3
-    var reps: Int = 12
-    var restSeconds: Int = 45
 }
