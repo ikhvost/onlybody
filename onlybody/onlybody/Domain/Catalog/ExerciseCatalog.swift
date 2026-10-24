@@ -14,7 +14,17 @@ nonisolated struct ExerciseCatalog {
 
     static let sessionTargets = primaryMuscles + ["Upper", "Lower"]
     static let filters = ["All"] + primaryMuscles
-    static let equipment = ["None", "Dumbbells", "Pull-up Bar", "Resistance Bands", "Kettlebell", "Barbell"]
+    static let equipment = [
+        "None",
+        "Wall",
+        "Stable Support",
+        "Elevated Surface",
+        "Pull-up Bar",
+        "Dip Bar",
+        "Low Bar",
+        "Towel",
+        "Fixed Ankle Support"
+    ]
 
     static let allMuscles = [
         "Chest",
