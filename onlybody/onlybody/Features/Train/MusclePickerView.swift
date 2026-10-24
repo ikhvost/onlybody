@@ -89,6 +89,7 @@ struct MusclePickerView: View {
                 .padding(.bottom, Theme.space20)
             }
         }
+        .background(BackSwipeBridge().allowsHitTesting(false))
         .toolbar(.hidden, for: .navigationBar)
     }
 }

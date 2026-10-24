@@ -50,6 +50,39 @@ struct ActiveWorkoutViewModelTests {
         return (viewModel, workoutRepo, sessionRepo)
     }
 
+    @Test
+    func returningFromExerciseScreensPreservesWorkoutProgress() async {
+        let exercise = makeExercise(name: "Squats")
+        let item = makeWorkoutItem(order: 0, sets: 3, targetReps: 10, restSeconds: 45, exercise: exercise)
+        let workout = makeWorkout(id: UUID(), name: "Legs", items: [item])
+        let (viewModel, _, sessionRepo) = makeViewModel(workout: workout)
+        await viewModel.load()
+        defer { viewModel.cleanup() }
+        viewModel.incrementWeight()
+        viewModel.markSetDone()
+        viewModel.incrementReps()
+
+        // SwiftUI reruns the workout's load task when it reappears after a push.
+        await viewModel.load()
+
+        #expect(viewModel.currentSetIndex == 1)
+        #expect(viewModel.completedSetsForCurrent == 1)
+        #expect(viewModel.currentDisplayReps == 11)
+        #expect(viewModel.currentWeight == 2.5)
+        #expect(viewModel.restTimer.isActive)
+        #expect(sessionRepo.savedSessions.isEmpty)
+        #expect(!viewModel.isComplete)
+    }
+
+    @Test
+    func unweightedWorkoutRecordsExplicitZeroAddedWeight() async {
+        let item = makeWorkoutItem(order: 0, sets: 1, targetReps: 10, restSeconds: 45, exercise: makeExercise(name: "Squats"))
+        let (viewModel, _, _) = makeViewModel(workout: makeWorkout(id: UUID(), name: "Legs", items: [item]))
+        await viewModel.load()
+        defer { viewModel.cleanup() }
+        #expect(viewModel.buildSessionItems().first?.weightKg == 0)
+    }
+
     // MARK: - Load
 
     @Test

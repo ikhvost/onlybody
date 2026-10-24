@@ -27,6 +27,9 @@ struct AppTabView: View {
                     .modifier(TabVisibility(isSelected: selectedTab == .library))
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(TabSwipeBridge(isEnabled: showsBottomNav) { forward in
+                if let next = selectedTab.adjacent(forward: forward) { selectedTab = next }
+            }.allowsHitTesting(false))
             if showsBottomNav {
                 BottomNav(selectedTab: selectedTab, setTab: { selectedTab = $0 })
             }

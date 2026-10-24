@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct TabVisibility: ViewModifier {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let isSelected: Bool
 
     func body(content: Content) -> some View {
@@ -8,6 +9,6 @@ struct TabVisibility: ViewModifier {
             .opacity(isSelected ? 1 : 0)
             .allowsHitTesting(isSelected)
             .accessibilityHidden(!isSelected)
-            .animation(.easeInOut(duration: 0.15), value: isSelected)
+            .animation(reduceMotion ? nil : .easeInOut(duration: Theme.tabTransitionDuration), value: isSelected)
     }
 }

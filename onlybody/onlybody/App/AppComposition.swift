@@ -17,6 +17,9 @@ struct AppComposition {
     func active(workoutID: UUID) -> ActiveWorkoutViewModel {
         ActiveWorkoutViewModel(workouts: workouts, sessions: sessions, workoutId: workoutID)
     }
+    func exerciseHistory(exerciseName: String) -> ExerciseHistoryViewModel {
+        ExerciseHistoryViewModel(exerciseName: exerciseName, sessions: sessions)
+    }
     func movement(_ exercise: ExerciseSnapshot) -> MovementDetailViewModel {
         var allowsVideoLoading = true
         #if DEBUG

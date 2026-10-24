@@ -8,6 +8,14 @@ final class SessionBuilderViewModel {
     private let exercisesRepository: any ExerciseRepository
     private let smartGenerator: SmartWorkoutGenerator
 
+    private var initialDraft: BuilderDraft?
+    var hasUnsavedChanges: Bool { initialDraft != draft }
+
+    private var draft: BuilderDraft {
+        BuilderDraft(name: name, mode: mode, targets: Set(targetMuscleGroups),
+                     movements: movements, days: Set(scheduledDays))
+    }
+
     let editingWorkout: WorkoutSnapshot?
 
     var name: String = ""
@@ -57,6 +65,7 @@ final class SessionBuilderViewModel {
         } else {
             mode = .manual
         }
+        initialDraft = draft
     }
 
     func loadExercises() async {
@@ -160,6 +169,7 @@ final class SessionBuilderViewModel {
             workout.items = newItems
 
             try await workoutsRepository.save(workout)
+            initialDraft = draft
             return true
         } catch {
             errorMessage = "Could not save session."

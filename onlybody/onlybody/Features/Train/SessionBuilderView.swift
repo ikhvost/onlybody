@@ -7,6 +7,7 @@ struct SessionBuilderView: View {
 
     @Environment(\.dismiss) private var dismiss
 
+    @State private var showDiscardPrompt = false
     @State private var isShowingExercisePicker = false
 
     var body: some View {
@@ -16,11 +17,14 @@ struct SessionBuilderView: View {
             VStack(spacing: Theme.space0) {
                 NavBarView(title: viewModel.isEditMode ? "Edit Session" : "New Session") {
                     Button {
-                        dismiss()
+                        requestBack()
                     } label: {
                         ChevronIcon(isBack: true, color: Theme.text, size: Theme.type18, inset: 8)
                     }
                     .buttonStyle(.plain)
+                    .accessibilityLabel("Back")
+                    .accessibilityIdentifier("builder.back")
+                    .disabled(viewModel.isSaving)
                 } trailing: {
                     Button {
                         handleSave()
@@ -75,7 +79,24 @@ struct SessionBuilderView: View {
         } message: {
             Text(viewModel.errorMessage ?? "")
         }
+        .background(BackSwipeBridge {
+            guard !viewModel.isSaving else { return false }
+            if viewModel.hasUnsavedChanges {
+                showDiscardPrompt = true
+                return false
+            }
+            return true
+        }.allowsHitTesting(false))
+        .alert("Discard unsaved changes?", isPresented: $showDiscardPrompt) {
+            Button("Discard changes", role: .destructive) { dismiss() }
+            Button("Stay", role: .cancel) {}
+        }
         .toolbar(.hidden, for: .navigationBar)
+    }
+
+    private func requestBack() {
+        guard !viewModel.isSaving else { return }
+        if viewModel.hasUnsavedChanges { showDiscardPrompt = true } else { dismiss() }
     }
 
     private func handleSave() {

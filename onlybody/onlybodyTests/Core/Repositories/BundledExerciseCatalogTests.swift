@@ -5,6 +5,15 @@ import Testing
 
 @MainActor
 struct BundledExerciseCatalogTests {
+    @Test func catalogReadsSeedWithoutChangingItsBytesOrRequiringBundledSidecars() throws {
+        let seed = try #require(Bundle.main.url(forResource: "default", withExtension: "store"))
+        let original = try Data(contentsOf: seed)
+        let catalog = try BundledExerciseCatalog.load(from: seed)
+        #expect(catalog.count == 65)
+        #expect(try Data(contentsOf: seed) == original)
+        #expect(Set(catalog.map(\.name)) == Set(ExerciseDifficultyCatalog.levels.keys))
+    }
+
     @Test func freshInstallationLoadsCuratedCatalogIntoLibrary() async throws {
         let directory = URL.temporaryDirectory.appending(path: UUID().uuidString)
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)

@@ -45,7 +45,7 @@ struct TrainRootView: View {
         }
         .fullScreenCover(isPresented: Binding(get: { activeWorkout != nil }, set: { if !$0 { dismissWorkout() } })) {
             if let activeWorkout {
-                ActiveWorkoutView(viewModel: activeWorkout, onEnd: dismissWorkout)
+                ActiveWorkoutRootView(composition: composition, viewModel: activeWorkout, onEnd: dismissWorkout)
                     .interactiveDismissDisabled()
             }
         }

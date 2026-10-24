@@ -212,7 +212,7 @@ final class ActiveWorkoutViewModel {
             sessionItem.exerciseName = item.exercise?.name ?? ""
             sessionItem.plannedSets = item.sets
             sessionItem.plannedReps = item.targetReps
-            sessionItem.weightKg = weights[index]
+            sessionItem.weightKg = weights[index] ?? 0
 
             var setReps: [Int] = []
             for setIndex in 0..<max(0, item.sets) {

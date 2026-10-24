@@ -3,6 +3,7 @@ import SwiftUI
 struct MovementDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @State var viewModel: MovementDetailViewModel
+    var backLabel = "Back to library"
 
     var body: some View {
         ZStack {
@@ -21,7 +22,7 @@ struct MovementDetailView: View {
                         }
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("Back to library")
+                    .accessibilityLabel(backLabel)
                     .accessibilityIdentifier("movement.back")
                 }
 
@@ -101,6 +102,7 @@ struct MovementDetailView: View {
                 .scrollIndicators(.hidden)
             }
         }
+        .background(BackSwipeBridge().allowsHitTesting(false))
         .toolbar(.hidden, for: .navigationBar)
     }
 }

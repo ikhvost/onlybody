@@ -28,6 +28,10 @@ struct ActiveWorkoutBody: View {
     let onSkipExercise: () -> Void
     let onSkipRest: () -> Void
 
+    let canShowGuide: Bool
+    let onGuide: () -> Void
+    let onHistory: () -> Void
+
     var body: some View {
         ZStack {
             VStack(spacing: Theme.space0) {
@@ -70,7 +74,10 @@ struct ActiveWorkoutBody: View {
                     onIncrementWeight: onIncrementWeight,
                     onDecrementWeight: onDecrementWeight,
                     onPreviousExercise: onPreviousExercise,
-                    onSkipExercise: onSkipExercise
+                    onSkipExercise: onSkipExercise,
+                    canShowGuide: canShowGuide,
+                    onGuide: onGuide,
+                    onHistory: onHistory
                 )
             }
 

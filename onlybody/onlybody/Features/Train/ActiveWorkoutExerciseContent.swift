@@ -19,6 +19,10 @@ struct ActiveWorkoutExerciseContent: View {
     let onPreviousExercise: () -> Void
     let onSkipExercise: () -> Void
 
+    let canShowGuide: Bool
+    let onGuide: () -> Void
+    let onHistory: () -> Void
+
     var body: some View {
         VStack(spacing: Theme.space0) {
             ScrollView {
@@ -28,6 +32,15 @@ struct ActiveWorkoutExerciseContent: View {
                         setLabel: setLabel
                     )
                     .padding(.horizontal, Theme.horizontalPadding)
+
+                    ActiveWorkoutExerciseActions(
+                        canShowGuide: canShowGuide,
+                        canShowHistory: !exerciseName.isEmpty,
+                        onGuide: onGuide,
+                        onHistory: onHistory
+                    )
+                    .padding(.horizontal, Theme.horizontalPadding)
+                    .padding(.top, Theme.space16)
 
                     SetTrackerView(
                         total: totalSets,

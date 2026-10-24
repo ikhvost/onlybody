@@ -88,6 +88,7 @@ struct StreakView: View {
                 }
             }
         }
+        .background(BackSwipeBridge().allowsHitTesting(false))
         .toolbar(.hidden, for: .navigationBar)
         .task { await viewModel.load() }
     }

@@ -9,6 +9,7 @@ final class WorkoutJourneyTests: XCTestCase {
         await MainActor.run {
             continueAfterFailure = false
             app = XCUIApplication()
+            app.launchArguments = ["-AppleLanguages", "(en)", "-AppleLocale", "en_US"]
             app.launchEnvironment["ONLYBODY_UI_FIXTURE"] = "catalog"
             app.launchEnvironment["ONLYBODY_UI_STORE"] = UUID().uuidString
             app.launchEnvironment["ONLYBODY_DEMONSTRATION_FIXTURE"] = "ready"
@@ -55,8 +56,21 @@ final class WorkoutJourneyTests: XCTestCase {
     func testCompleteWritesOneSession() {
         createWorkout()
         tap("workout.start.E2E Workout")
+        tap("stepper.Added kg.increase")
         tap("active.markSetDone")
         tap("active.close")
+        tap("workout.start.E2E Workout")
+        tap("active.history")
+        XCTAssertEqual(app.staticTexts["exerciseHistory.name"].label, "Standard Push-Ups")
+        XCTAssertTrue(app.staticTexts["exerciseHistory.totalReps"].waitForExistence(timeout: 10))
+        XCTAssertEqual(app.staticTexts["exerciseHistory.totalReps"].label, "12 reps total")
+        XCTAssertTrue(app.staticTexts["exerciseHistory.date"].exists)
+        XCTAssertEqual(app.staticTexts["exerciseHistory.weight"].label, "2.5 kg added")
+        tap("exerciseHistory.back")
+        tap("active.end")
+        tap("Continue")
+        app.terminate()
+        app.launch()
         verifyHistory(reps: 12)
         app.terminate()
         app.launch()
@@ -78,6 +92,7 @@ final class WorkoutJourneyTests: XCTestCase {
 
     func testNavigationAndFullscreenWorkout() {
         createWorkout()
+        verifyTabSwipesAndDraftProtection()
         tap("tab.library")
         tap("difficulty.intermediate")
         XCTAssertTrue(app.descendants(matching: .any)["library.section.intermediate"].exists)
@@ -101,7 +116,10 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertTrue(diagram.exists)
         XCTAssertTrue(diagram.label.contains("Muscle groups, front and back views"))
         XCTAssertEqual(app.webViews.count, 0, "The test fixture must not contact YouTube")
-        tap("movement.back")
+        cancelBackSwipe()
+        XCTAssertTrue(app.buttons["movement.back"].exists)
+        swipeBack()
+        XCTAssertTrue(app.textFields["library.search"].waitForExistence(timeout: 10))
         tap("tab.log")
         tap("tab.train")
         tap("workout.edit.E2E Workout")
@@ -110,12 +128,64 @@ final class WorkoutJourneyTests: XCTestCase {
         tap("workout.start.E2E Workout")
         XCTAssertTrue(app.buttons["active.markSetDone"].waitForExistence(timeout: 10))
         XCTAssertFalse(app.buttons["tab.train"].isHittable)
+        verifyExerciseScreensReturnToWorkout()
         tap("active.end")
         tap("Continue")
         XCTAssertTrue(app.buttons["active.markSetDone"].exists)
         tap("active.end")
         tap("End & Save")
         XCTAssertTrue(app.buttons["tab.train"].waitForExistence(timeout: 10))
+    }
+
+    private func cancelBackSwipe() {
+        let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.01, dy: 0.5))
+        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.18, dy: 0.5))
+        start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .slow, thenHoldForDuration: 0.5)
+    }
+
+    private func swipeBack() {
+        let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.01, dy: 0.5))
+        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.85, dy: 0.5))
+        start.press(forDuration: 0.05, thenDragTo: end)
+    }
+
+    private func verifyTabSwipesAndDraftProtection() {
+        app.swipeLeft()
+        XCTAssertTrue(app.staticTexts["NO TRAINING HISTORY YET"].waitForExistence(timeout: 10))
+        app.swipeLeft()
+        XCTAssertTrue(app.textFields["library.search"].waitForExistence(timeout: 10))
+        app.swipeRight()
+        XCTAssertTrue(app.staticTexts["NO TRAINING HISTORY YET"].waitForExistence(timeout: 10))
+        app.swipeRight()
+        tap("workout.edit.E2E Workout")
+        tap("stepper.Reps.increase")
+        swipeBack()
+        tap("Stay")
+        XCTAssertTrue(app.textFields["builder.name"].exists)
+        tap("builder.back")
+        tap("Discard changes")
+        tap("workout.edit.E2E Workout")
+        XCTAssertTrue(app.staticTexts["1 SETS · 12 REPS · 45S REST"].exists)
+        swipeBack()
+        XCTAssertTrue(app.buttons["workout.start.E2E Workout"].waitForExistence(timeout: 10))
+    }
+
+    private func verifyExerciseScreensReturnToWorkout() {
+        tap("stepper.Reps.increase")
+        tap("stepper.Added kg.increase")
+        tap("active.guide")
+        XCTAssertTrue(app.descendants(matching: .any)["demonstration.preview"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Standard Push-Ups"].exists)
+        XCTAssertEqual(app.buttons["movement.back"].label, "Back to workout")
+        XCTAssertEqual(app.webViews.count, 0)
+        swipeBack()
+        tap("active.history")
+        XCTAssertTrue(app.staticTexts["exerciseHistory.empty"].waitForExistence(timeout: 10))
+        swipeBack()
+        XCTAssertEqual(app.staticTexts["stepper.Reps.value"].label, "13")
+        XCTAssertEqual(app.staticTexts["stepper.Added kg.value"].label, "2.5")
+        XCTAssertTrue(app.buttons["active.markSetDone"].exists)
+        XCTAssertFalse(app.buttons["tab.train"].isHittable)
     }
 
     private func createWorkout(sets: Int = 1) {

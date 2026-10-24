@@ -3,6 +3,8 @@ import SwiftUI
 struct ActiveWorkoutView: View {
     @State var viewModel: ActiveWorkoutViewModel
     let onEnd: () -> Void
+    let onGuide: (ExerciseSnapshot) -> Void
+    let onHistory: (String) -> Void
 
     @State private var showEndPrompt = false
     @State private var setCompletedCount = 0
@@ -55,7 +57,12 @@ struct ActiveWorkoutView: View {
                     onDecrementWeight: { viewModel.decrementWeight() },
                     onPreviousExercise: { viewModel.previousExercise(); navigationCount += 1 },
                     onSkipExercise: { viewModel.skipExercise(); navigationCount += 1 },
-                    onSkipRest: { viewModel.restTimer.skip() }
+                    onSkipRest: { viewModel.restTimer.skip() },
+                    canShowGuide: viewModel.currentItem?.exercise != nil,
+                    onGuide: {
+                        if let exercise = viewModel.currentItem?.exercise { onGuide(exercise) }
+                    },
+                    onHistory: { onHistory(viewModel.currentExerciseName) }
                 )
             }
         }
@@ -97,7 +104,9 @@ struct ActiveWorkoutView: View {
             sessions: PreviewSessionRepository(),
             workoutId: workout.id
         ),
-        onEnd: {}
+        onEnd: {},
+        onGuide: { _ in },
+        onHistory: { _ in }
     )
     .preferredColorScheme(.dark)
 }

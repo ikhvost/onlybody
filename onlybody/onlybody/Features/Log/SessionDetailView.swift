@@ -66,6 +66,7 @@ struct SessionDetailView: View {
                 .scrollIndicators(.hidden)
             }
         }
+        .background(BackSwipeBridge().allowsHitTesting(false))
         .toolbar(.hidden, for: .navigationBar)
     }
 
