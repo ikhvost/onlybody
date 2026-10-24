@@ -48,6 +48,7 @@ struct SessionBuilderView: View {
                         BuilderTargets(viewModel: viewModel)
                         BuilderName(viewModel: viewModel)
                         BuilderStyle(viewModel: viewModel)
+                        BuilderTiming(viewModel: viewModel)
                         BuilderSmartInfo(viewModel: viewModel)
                         BuilderMovements(viewModel: viewModel, isShowingExercisePicker: $isShowingExercisePicker)
                         BuilderDays(viewModel: viewModel)

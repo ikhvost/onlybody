@@ -13,7 +13,7 @@ final class SessionBuilderViewModel {
 
     private var draft: BuilderDraft {
         BuilderDraft(name: name, mode: mode, targets: Set(targetMuscleGroups),
-                     movements: movements, days: Set(scheduledDays))
+                     movements: movements, durationMinutes: durationMinutes, restSeconds: restSeconds, days: Set(scheduledDays))
     }
 
     let editingWorkout: WorkoutSnapshot?
@@ -23,6 +23,9 @@ final class SessionBuilderViewModel {
     var targetMuscleGroups: [String] = []
     var movements: [MovementConfig] = []
     var scheduledDays: [String] = []
+    private(set) var durationMinutes = 30
+    private(set) var restSeconds = 45
+    var hasMixedRest: Bool { movements.contains { $0.restSeconds != restSeconds } }
     var isSaving = false
     var errorMessage: String?
     var allExercises: [ExerciseSnapshot] = []
@@ -77,8 +80,19 @@ final class SessionBuilderViewModel {
     }
 
     func addMovement(_ exercise: ExerciseSnapshot) {
-        let config = MovementConfig(exercise: exercise)
+        let config = MovementConfig(exercise: exercise, restSeconds: restSeconds)
         movements.append(config)
+    }
+
+    func setDurationMinutes(_ value: Int) {
+        guard WorkoutTimingOptions.durations.contains(value) else { return }
+        durationMinutes = value
+    }
+
+    func setDefaultRestSeconds(_ value: Int) {
+        guard WorkoutTimingOptions.rests.contains(value) else { return }
+        restSeconds = value
+        for index in movements.indices { movements[index].restSeconds = value }
     }
 
     func removeMovement(_ id: UUID) {
@@ -133,10 +147,14 @@ final class SessionBuilderViewModel {
                 mode = .manual
             }
 
-            if mode == .smart && !targetMuscleGroups.isEmpty {
+            let needsGeneration = editingWorkout == nil || movements.isEmpty || initialDraft?.mode != .smart
+                || initialDraft?.targets != Set(targetMuscleGroups)
+                || initialDraft?.durationMinutes != durationMinutes || initialDraft?.restSeconds != restSeconds
+            if mode == .smart && !targetMuscleGroups.isEmpty && needsGeneration {
                 let config = SmartWorkoutConfiguration(
                     targetMuscleGroups: targetMuscleGroups,
-                    durationMinutes: 30
+                    durationMinutes: durationMinutes,
+                    restSeconds: restSeconds
                 )
                 let generated = smartGenerator.generate(config: config, from: allExercises)
 
@@ -166,6 +184,8 @@ final class SessionBuilderViewModel {
                 ? "My Session"
                 : name.trimmingCharacters(in: .whitespacesAndNewlines)
             workout.mode = mode.rawValue
+            workout.durationMinutes = durationMinutes
+            workout.restSeconds = restSeconds
             workout.scheduledDays = scheduledDays
             workout.targetMuscleGroups = targetMuscleGroups
 
@@ -196,6 +216,9 @@ final class SessionBuilderViewModel {
         mode = WorkoutMode(rawValue: workout.mode) ?? .manual
         targetMuscleGroups = workout.targetMuscleGroups
         scheduledDays = workout.scheduledDays
+        durationMinutes = workout.durationMinutes ?? 30
+        let savedRests = Set(workout.items.map(\.restSeconds))
+        restSeconds = workout.restSeconds ?? (savedRests.count == 1 ? savedRests.first ?? 45 : 45)
 
         movements = workout.items.sorted { $0.order < $1.order }.compactMap { item in
             guard let exercise = item.exercise else { return nil }

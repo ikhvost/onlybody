@@ -1,6 +1,8 @@
 import SwiftUI
 
 enum Theme {
+    static let timingPickerHeight: CGFloat = 340
+    static let timingWheelHeight: CGFloat = 210
     static let brandBackground = Color(white: 0.02)
     static let brandPrimary = Color(white: 0.94)
     static let brandSecondary = Color(white: 0.52)

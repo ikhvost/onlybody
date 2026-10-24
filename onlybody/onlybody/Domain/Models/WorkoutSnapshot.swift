@@ -7,6 +7,8 @@ nonisolated struct WorkoutSnapshot: Identifiable, Sendable, Equatable {
     var mode: String = WorkoutMode.smart.rawValue
     var targetMuscleGroups: [String] = []
     var scheduledDays: [String] = []
+    var durationMinutes: Int?
+    var restSeconds: Int?
     var items: [WorkoutItemSnapshot] = []
 
 }

@@ -49,6 +49,8 @@ final class SwiftDataWorkoutRepository: WorkoutRepository {
             model.mode = value.mode
             model.targetMuscleGroups = value.targetMuscleGroups
             model.scheduledDays = value.scheduledDays
+            model.durationMinutes = value.durationMinutes
+            model.restSeconds = value.restSeconds
             for item in model.items ?? [] { context.delete(item) }
             model.items = []
             for valueItem in value.items {

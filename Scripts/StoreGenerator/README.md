@@ -29,3 +29,9 @@ Each uses the existing offline muscle map and an official embedded YouTube demon
 On 2026-10-24, `Scripts/validate.sh` passed: architecture boundaries, generated media/difficulty coverage, SwiftLint with zero violations, 166 Swift Testing tests in 22 suites, all five E2E journeys, Release build and temporary seed generation. Repeated generation was separately checked to retain exactly 65 unique exercises. Upgrade tests verify preserved exercise IDs, old workouts/history, file-store reopening, on-demand insertion and rollback.
 
 Manual iPhone 17 Simulator review used the previous isolated 49-exercise store without resetting it: Library showed the expanded levels and new Bird Dog details while the underlying store still contained 49 exercise rows. Advanced filtering, level badges, muscle highlights and absence of frequency controls were checked. The E2E navigation journey additionally exercises combined search and difficulty selection, keyboard dismissal and navigation after opening the new movement.
+
+## Workout timing
+
+Workout templates now persist optional `durationMinutes` and `restSeconds` alongside their per-movement settings. Optional fields permit lightweight migration of older stores: the editor defaults an absent target to 30 minutes, retains existing movement rest values and derives a uniform default rest when possible. Explicitly choosing a global rest updates existing movements and the default for added/generated movements. Historical sessions retain their actual elapsed duration and per-set results.
+
+The duration wheel offers 15–60 minutes in five-minute steps; rest offers 15–180 seconds in fifteen-second steps. Duration is a Smart-generation budget or a manual planning target, never a forced end timer. The estimate remains based on configured sets and rest, so it can differ from the target. Draft comparison includes both timing settings.

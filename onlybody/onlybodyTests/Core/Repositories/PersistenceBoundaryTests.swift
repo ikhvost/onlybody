@@ -18,10 +18,12 @@ struct PersistenceBoundaryTests {
         let repository = SwiftDataWorkoutRepository(context: context)
         let exercise = ExerciseSnapshot(name: "Push-Up")
         try await exercises.save(exercise)
-        let original = WorkoutSnapshot(name: "Original", items: [WorkoutItemSnapshot(exercise: exercise)])
+        let original = WorkoutSnapshot(name: "Original", durationMinutes: 35, restSeconds: 90, items: [WorkoutItemSnapshot(exercise: exercise)])
         try await repository.save(original)
         var changed = original
         changed.name = "Changed"
+        changed.durationMinutes = 45
+        changed.restSeconds = 60
         changed.items = [WorkoutItemSnapshot(exercise: ExerciseSnapshot(name: "Missing"))]
         await #expect(throws: PersistenceError.self) { try await repository.save(changed) }
         let restored = try #require(try await repository.workout(by: original.id))

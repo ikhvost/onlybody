@@ -29,12 +29,25 @@ final class WorkoutJourneyTests: XCTestCase {
     }
 
     func testCreateSurvivesRelaunch() {
-        createWorkout()
+        createWorkout(duration: "35 min", rest: "90 sec")
         app.terminate()
         app.launch()
         tap("workout.edit.E2E Workout")
         XCTAssertEqual(app.textFields["builder.name"].value as? String, "E2E Workout")
-        XCTAssertTrue(app.staticTexts["1 SETS · 12 REPS · 45S REST"].exists)
+        XCTAssertTrue(app.buttons["builder.duration"].label.contains("35 minutes"))
+        XCTAssertTrue(app.buttons["builder.rest"].label.contains("90 seconds"))
+        tap("builder.duration")
+        app.pickerWheels.firstMatch.adjust(toPickerWheelValue: "45 min")
+        tap("timing.done")
+        tap("builder.rest")
+        app.pickerWheels.firstMatch.adjust(toPickerWheelValue: "60 sec")
+        tap("timing.done")
+        tap("builder.save")
+        app.terminate()
+        app.launch()
+        tap("workout.edit.E2E Workout")
+        XCTAssertTrue(app.buttons["builder.duration"].label.contains("45 minutes"))
+        XCTAssertTrue(app.buttons["builder.rest"].label.contains("60 seconds"))
     }
 
     func testEditSurvivesRelaunch() {
@@ -267,13 +280,23 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertFalse(app.buttons["tab.train"].isHittable)
     }
 
-    private func createWorkout(sets: Int = 1) {
+    private func createWorkout(sets: Int = 1, duration: String? = nil, rest: String? = nil) {
         tap("workout.create")
         tap("picker.manual")
         let name = app.textFields["builder.name"]
         XCTAssertTrue(name.waitForExistence(timeout: 10))
         name.tap()
         name.typeText("E2E Workout\n")
+        if let duration {
+            tap("builder.duration")
+            app.pickerWheels.firstMatch.adjust(toPickerWheelValue: duration)
+            tap("timing.done")
+        }
+        if let rest {
+            tap("builder.rest")
+            app.pickerWheels.firstMatch.adjust(toPickerWheelValue: rest)
+            tap("timing.done")
+        }
         tap("builder.add")
         selectExercise()
         for _ in sets..<3 { tap("stepper.Sets.decrease") }

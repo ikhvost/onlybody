@@ -8,6 +8,8 @@ final class Workout {
     var mode: String = WorkoutMode.smart.rawValue
     var targetMuscleGroups: [String] = []
     var scheduledDays: [String] = []
+    var durationMinutes: Int?
+    var restSeconds: Int?
     @Relationship(deleteRule: .cascade) var items: [WorkoutItem]?
 
     init() {}

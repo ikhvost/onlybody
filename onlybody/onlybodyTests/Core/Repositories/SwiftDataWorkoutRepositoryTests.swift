@@ -19,6 +19,8 @@ struct SwiftDataWorkoutRepositoryTests {
         fullBody.name = "Full Body"
         fullBody.mode = WorkoutMode.smart.rawValue
         fullBody.scheduledDays = ["Mon", "Wed", "Fri"]
+        fullBody.durationMinutes = 35
+        fullBody.restSeconds = 90
 
         var upperBody = WorkoutSnapshot()
         upperBody.name = "Upper Body"
@@ -30,6 +32,8 @@ struct SwiftDataWorkoutRepositoryTests {
 
         let all = try await repository.allWorkouts()
         #expect(all.map(\.name) == ["Full Body", "Upper Body"])
+        #expect(all.first?.durationMinutes == 35)
+        #expect(all.first?.restSeconds == 90)
         #expect(all.first { $0.name == "Full Body" }?.scheduledDays == ["Mon", "Wed", "Fri"])
     }
 

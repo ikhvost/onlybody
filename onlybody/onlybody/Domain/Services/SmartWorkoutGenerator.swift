@@ -25,14 +25,15 @@ nonisolated struct SmartWorkoutGenerator: Sendable {
             return []
         }
 
-        let items = buildMovements(pool: pool, timeBudget: config.durationMinutes * 60)
+        let items = buildMovements(pool: pool, timeBudget: config.durationMinutes * 60, restSeconds: config.restSeconds)
 
         guard items.count >= 2 else {
             return buildMovements(
                 pool: filteredPool(from: exercises.filter { exercise in
                     exercise.equipment.contains("None")
                 }, matching: expanded),
-                timeBudget: config.durationMinutes * 60
+                timeBudget: config.durationMinutes * 60,
+                restSeconds: config.restSeconds
             )
         }
 
@@ -48,14 +49,14 @@ nonisolated struct SmartWorkoutGenerator: Sendable {
 
     }
 
-    private func buildMovements(pool: [ExerciseSnapshot], timeBudget: Int) -> [GeneratedMovement] {
+    private func buildMovements(pool: [ExerciseSnapshot], timeBudget: Int, restSeconds: Int?) -> [GeneratedMovement] {
         var items: [GeneratedMovement] = []
         var totalSeconds = 0
 
         for exercise in pool {
             let sets = randomSets(3...4)
             let reps = randomReps(8...15)
-            let rest = randomRest([30, 45, 60, 90])
+            let rest = restSeconds ?? randomRest([30, 45, 60, 90])
             let estDuration = sets * 30 + (sets - 1) * rest
 
             guard totalSeconds + estDuration <= timeBudget || items.isEmpty else {
