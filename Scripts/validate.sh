@@ -12,6 +12,7 @@ fi
 output="${VALIDATION_OUTPUT:-/tmp/onlybody-validation-$(date +%Y%m%d-%H%M%S)}"
 mkdir -p "$output"
 python3 Scripts/Validation/check-boundaries.py
+python3 Scripts/ExerciseMedia/generate.py --check
 swiftlint lint --strict --no-cache
 xcodebuild test -project onlybody/onlybody.xcodeproj -scheme onlybody \
     -destination "$DESTINATION" -parallel-testing-enabled NO \

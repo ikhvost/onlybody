@@ -22,6 +22,7 @@ struct MovementDetailView: View {
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel("Back to library")
+                    .accessibilityIdentifier("movement.back")
                 }
 
                 ScrollView {
@@ -33,6 +34,8 @@ struct MovementDetailView: View {
                                 .foregroundStyle(Theme.text)
 
                         }
+
+                        MovementDemonstrationView(viewModel: viewModel)
 
                         Rectangle()
                             .fill(Theme.border)
@@ -147,7 +150,9 @@ struct MovementDetailView: View {
     return MovementDetailView(
         viewModel: MovementDetailViewModel(
             exercise: exercise,
-            exercises: PreviewExerciseRepository()
+            exercises: PreviewExerciseRepository(exercises: [exercise]),
+            demonstration: ExerciseDemonstrationCatalog.demonstration(for: exercise.name),
+            allowsVideoLoading: false
         )
     )
     .preferredColorScheme(.dark)

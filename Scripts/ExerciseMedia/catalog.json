@@ -1,0 +1,443 @@
+[
+  {
+    "key": "wall-push-ups",
+    "exerciseName": "Wall Push-Ups",
+    "videoID": "Yw9RPfBRjx0",
+    "author": "Community Health System",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "incline-push-ups",
+    "exerciseName": "Incline Push-Ups",
+    "videoID": "E--Ls5QtFqI",
+    "author": "OPEX Fitness",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "knee-push-ups",
+    "exerciseName": "Knee Push-Ups",
+    "videoID": "8XQ-okb5NWE",
+    "author": "OPEX Fitness",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "standard-push-ups",
+    "exerciseName": "Standard Push-Ups",
+    "videoID": "WDIpL0pjun0",
+    "author": "National Academy of Sports Medicine (NASM)",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "decline-push-ups",
+    "exerciseName": "Decline Push-Ups",
+    "videoID": "QBlYp-EwHlo",
+    "author": "PureGym",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "archer-push-ups",
+    "exerciseName": "Archer Push-Ups",
+    "videoID": "_Qbz_54_9Sw",
+    "author": "Functional Bodybuilding",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "superman",
+    "exerciseName": "Superman",
+    "videoID": "v4nNlF3WDs0",
+    "author": "OPEX Fitness",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "prone-y-raises",
+    "exerciseName": "Prone Y Raises",
+    "videoID": "w1AWGKubE5U",
+    "author": "Performance Course",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "reverse-snow-angels",
+    "exerciseName": "Reverse Snow Angels",
+    "videoID": "R4iO4gXC_TY",
+    "author": "Advanced Spine & Sports Care",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "inverted-rows",
+    "exerciseName": "Inverted Rows",
+    "videoID": "9fItzuh9Iok",
+    "author": "The Active Life",
+    "startSeconds": 16,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "foot-assisted-pull-ups",
+    "exerciseName": "Foot-Assisted Pull-Ups",
+    "videoID": "jwFirnEhSX8",
+    "author": "Champion Physical Therapy and Performance",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "negative-pull-ups",
+    "exerciseName": "Negative Pull-Ups",
+    "videoID": "jBSMDqs7OzM",
+    "author": "PureGym",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "chin-ups",
+    "exerciseName": "Chin-Ups",
+    "videoID": "e1YSApl-QcM",
+    "author": "Simonster Strength",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "pull-ups",
+    "exerciseName": "Pull-Ups",
+    "videoID": "jgFel4wZl3I",
+    "author": "OPEX Fitness",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "archer-pull-ups",
+    "exerciseName": "Archer Pull-Ups",
+    "videoID": "Z7GdTkOEe5Y",
+    "author": "Testosterone Nation",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "pike-push-ups",
+    "exerciseName": "Pike Push-Ups",
+    "videoID": "XckEEwa1BPI",
+    "author": "National Academy of Sports Medicine (NASM)",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "feet-elevated-pike-push-ups",
+    "exerciseName": "Feet-Elevated Pike Push-Ups",
+    "videoID": "8URA3YSur2M",
+    "author": "Tom Peto Training",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "wall-handstand-push-ups",
+    "exerciseName": "Wall Handstand Push-Ups",
+    "videoID": "0wDEO6shVjc",
+    "author": "CrossFit",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "foot-assisted-dips",
+    "exerciseName": "Foot-Assisted Dips",
+    "videoID": "zhWiCuzhISE",
+    "author": "Ethos Fitness & Performance",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "diamond-push-ups",
+    "exerciseName": "Diamond Push-Ups",
+    "videoID": "XtU2VQVuLYs",
+    "author": "Marcus Filly",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "dips",
+    "exerciseName": "Dips",
+    "videoID": "U7HeutDqS_w",
+    "author": "Live Lean TV Daily Exercises",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "dead-bug",
+    "exerciseName": "Dead Bug",
+    "videoID": "o4GKiEoYClI",
+    "author": "Pursuit Physical Therapy",
+    "startSeconds": 8,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "plank",
+    "exerciseName": "Plank",
+    "videoID": "3QZlgJ40LfU",
+    "author": "Hospital for Special Surgery",
+    "startSeconds": 8,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "side-plank",
+    "exerciseName": "Side Plank",
+    "videoID": "44ND4bOB-T0",
+    "author": "National Academy of Sports Medicine (NASM)",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "reverse-crunch",
+    "exerciseName": "Reverse Crunch",
+    "videoID": "TJO19eOmax0",
+    "author": "PrayFit",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "hanging-leg-raises",
+    "exerciseName": "Hanging Leg Raises",
+    "videoID": "_jLskVdzS4o",
+    "author": "The Movement Collective",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "assisted-squats",
+    "exerciseName": "Assisted Squats",
+    "videoID": "Qa96tmsPlLU",
+    "author": "Girls Gone Strong",
+    "startSeconds": 50,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "squats",
+    "exerciseName": "Squats",
+    "videoID": "l83R5PblSMA",
+    "author": "PureGym",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "split-squats",
+    "exerciseName": "Split Squats",
+    "videoID": "REflwhg0jNs",
+    "author": "Horton Barbell",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "reverse-lunges",
+    "exerciseName": "Reverse Lunges",
+    "videoID": "xrPteyQLGAo",
+    "author": "PureGym",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "step-ups",
+    "exerciseName": "Step-Ups",
+    "videoID": "91xCEkwXxv0",
+    "author": "Baptist Health",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "bulgarian-split-squats",
+    "exerciseName": "Bulgarian Split Squats",
+    "videoID": "beqcqA6I0oM",
+    "author": "Range Physio",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "assisted-pistol-squats",
+    "exerciseName": "Assisted Pistol Squats",
+    "videoID": "tiA23NSUm7A",
+    "author": "The Barbell Physio",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "cossack-squats",
+    "exerciseName": "Cossack Squats",
+    "videoID": "iPZNB5GsOnM",
+    "author": "The Active Life",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "pistol-squats",
+    "exerciseName": "Pistol Squats",
+    "videoID": "qDcniqddTeE",
+    "author": "CrossFit",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "glute-bridge",
+    "exerciseName": "Glute Bridge",
+    "videoID": "sh63qy5EV_8",
+    "author": "Redefined Health",
+    "startSeconds": 28,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "side-lying-hip-abduction",
+    "exerciseName": "Side-Lying Hip Abduction",
+    "videoID": "g9FtnmsIYgI",
+    "author": "Baptist Health",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "single-leg-glute-bridge",
+    "exerciseName": "Single-Leg Glute Bridge",
+    "videoID": "sVfp4LN9niA",
+    "author": "PureGym",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "single-leg-hip-thrusts",
+    "exerciseName": "Single-Leg Hip Thrusts",
+    "videoID": "GoqoWSAiOsA",
+    "author": "ashleybordenfitness",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "single-leg-romanian-deadlift",
+    "exerciseName": "Single-Leg Romanian Deadlift",
+    "videoID": "JQZqPsmeesc",
+    "author": "ConstantlyVariedFitness",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "hamstring-walkouts",
+    "exerciseName": "Hamstring Walkouts",
+    "videoID": "jQ9BcglfyVo",
+    "author": "OPEX Fitness",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "sliding-leg-curls",
+    "exerciseName": "Sliding Leg Curls",
+    "videoID": "cWSsWpuxmYM",
+    "author": "Nick Brattain",
+    "startSeconds": 32,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "nordic-curls",
+    "exerciseName": "Nordic Curls",
+    "videoID": "kjv4WQXWl_A",
+    "author": "Onnit Academy",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "calf-raises",
+    "exerciseName": "Calf Raises",
+    "videoID": "eMTy3qylqnE",
+    "author": "Redefined Health",
+    "startSeconds": 10,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "single-leg-calf-raises",
+    "exerciseName": "Single-Leg Calf Raises",
+    "videoID": "qPd73snQfUs",
+    "author": "Hospital for Special Surgery",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "walking-jacks",
+    "exerciseName": "Walking Jacks",
+    "videoID": "JHdVMkRBuRA",
+    "author": "DAREBEE",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "jumping-jacks",
+    "exerciseName": "Jumping Jacks",
+    "videoID": "uLVt6u15L98",
+    "author": "National Academy of Sports Medicine (NASM)",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "mountain-climbers",
+    "exerciseName": "Mountain Climbers",
+    "videoID": "hq_0YlyfqGM",
+    "author": "Group HIIT",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  },
+  {
+    "key": "burpees",
+    "exerciseName": "Burpees",
+    "videoID": "auBLPXO8Fww",
+    "author": "CrossFit",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-10-24"
+  }
+]

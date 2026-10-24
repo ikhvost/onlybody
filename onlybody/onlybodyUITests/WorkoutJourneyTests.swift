@@ -11,6 +11,7 @@ final class WorkoutJourneyTests: XCTestCase {
             app = XCUIApplication()
             app.launchEnvironment["ONLYBODY_UI_FIXTURE"] = "catalog"
             app.launchEnvironment["ONLYBODY_UI_STORE"] = UUID().uuidString
+            app.launchEnvironment["ONLYBODY_DEMONSTRATION_FIXTURE"] = "ready"
             app.launch()
         }
     }
@@ -78,6 +79,15 @@ final class WorkoutJourneyTests: XCTestCase {
     func testNavigationAndFullscreenWorkout() {
         createWorkout()
         tap("tab.library")
+        let movement = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "library.exercise.")).firstMatch
+        XCTAssertTrue(movement.waitForExistence(timeout: 10))
+        movement.tap()
+        XCTAssertTrue(app.descendants(matching: .any)["demonstration.preview"].waitForExistence(timeout: 10))
+        XCTAssertFalse(app.buttons["demonstration.load"].exists)
+        XCTAssertTrue(app.staticTexts["demonstration.author"].exists)
+        XCTAssertTrue(app.buttons["demonstration.openYouTube"].exists)
+        XCTAssertEqual(app.webViews.count, 0, "The test fixture must not contact YouTube")
+        tap("movement.back")
         tap("tab.log")
         tap("tab.train")
         tap("workout.edit.E2E Workout")

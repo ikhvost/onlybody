@@ -18,6 +18,22 @@ struct AppComposition {
         ActiveWorkoutViewModel(workouts: workouts, sessions: sessions, workoutId: workoutID)
     }
     func movement(_ exercise: ExerciseSnapshot) -> MovementDetailViewModel {
-        MovementDetailViewModel(exercise: exercise, exercises: exercises)
+        var allowsVideoLoading = true
+        #if DEBUG
+        let environment = ProcessInfo.processInfo.environment
+        let isPreview = environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
+        let isOfflineUITest = environment["ONLYBODY_DEMONSTRATION_FIXTURE"] == "ready"
+            && environment["ONLYBODY_UI_FIXTURE"] == "catalog"
+            && environment["ONLYBODY_UI_STORE"].flatMap(UUID.init(uuidString:)) != nil
+        allowsVideoLoading = !isPreview && !isOfflineUITest
+        #endif
+        return MovementDetailViewModel(
+            exercise: exercise,
+            exercises: exercises,
+            demonstration: ExerciseDemonstrationCatalog.demonstration(for: exercise.name),
+            bundleIdentifier: Bundle.main.bundleIdentifier ?? "",
+            allowsVideoLoading: allowsVideoLoading,
+            network: SystemNetworkAvailabilitySource()
+        )
     }
 }

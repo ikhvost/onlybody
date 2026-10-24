@@ -27,6 +27,7 @@ struct BundledExerciseCatalogTests {
         #expect(exercises.count == 49)
         #expect(Set(exercises.map(\.id)).count == exercises.count)
         #expect(Set(exercises.map(\.name)).count == exercises.count)
+        #expect(Set(exercises.map(\.name)) == Set(ExerciseDemonstrationCatalog.all.map(\.exerciseName)))
         #expect(try context.fetchCount(FetchDescriptor<Workout>()) == 0)
         #expect(try context.fetchCount(FetchDescriptor<WorkoutItem>()) == 0)
         #expect(try context.fetchCount(FetchDescriptor<Session>()) == 0)

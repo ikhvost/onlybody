@@ -29,5 +29,6 @@ struct LibraryExerciseRow: View {
             .contentShape(.rect)
         }
         .buttonStyle(.plain)
+        .accessibilityIdentifier("library.exercise.\(exercise.name)")
     }
 }

@@ -19,6 +19,8 @@ enum Theme {
     static let cornerRadius: CGFloat = 4
     static let chipCornerRadius: CGFloat = 4
     static let typographyScale: CGFloat = 1.1
+    static let demonstrationMinimumWidth: CGFloat = 200
+    static let demonstrationHeight: CGFloat = 240
 
     static func fontSans(_ size: CGFloat, _ weight: Font.Weight = .regular) -> Font {
         .custom("DM Sans", size: size * typographyScale).weight(weight)
