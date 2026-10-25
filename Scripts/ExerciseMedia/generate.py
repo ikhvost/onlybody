@@ -32,7 +32,9 @@ def render(catalog_path, seed_path, require_complete):
         assert re.fullmatch(r'[A-Za-z0-9_-]{11}', row['videoID'])
         assert isinstance(row['startSeconds'], int) and row['startSeconds'] >= 0
         assert row['author'].strip()
-        assert row['reviewStatus'] == 'browser-embed-and-visual-sample'
+        assert row['reviewStatus'] in {'browser-embed-and-visual-sample', 'partial-review-user-deferred'}
+        if row['reviewStatus'] == 'partial-review-user-deferred':
+            assert (catalog_path.parent / row['reviewReference']).is_file(), 'Missing partial review record'
         assert re.fullmatch(r'\d{4}-\d{2}-\d{2}', row['reviewedOn'])
         quote = lambda key: json.dumps(row[key], ensure_ascii=False)
         output.extend([

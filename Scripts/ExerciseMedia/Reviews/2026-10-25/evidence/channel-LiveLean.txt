@@ -1,0 +1,45 @@
+URL: https://www.youtube.com/@LiveLean/about
+container about-container
+							603 heading Description, Value: 2
+								604 text Description
+							605 text The Live Lean TV Daily Exercises YouTube channel is your go-to destination for quick, effective, and clear, step-by-step exercise demonstrations, ensuring you learn how to perform each movement correctly and effectively.
+
+Whether you're a beginner looking for no equipment bodyweight exercises or you're an experienced fitness enthusiast looking for advanced barbell, dumbbell, or kettlebell exercises, we've got you covered. 
+
+Coach Brad Gouthro and Jessica Gouthro focus on delivering daily exercises, targeting your biceps, triceps, chest, back, shoulders, quads, glutes, hamstring, calves, and abs. 
+
+You'll find a variety of exercises targeting all muscle groups to add to your full body workouts, upper body workouts, or lower body workouts. Whether your goal is weight loss, muscle building, or simply maintaining a healthy lifestyle, our channel is here to support you with daily movement and active living.
+
+							606 container links-section
+								607 heading Links, Value: 2
+									608 text Links
+								609 container link-list-container
+									610 text Live Lean TV (main channel)
+									611 link Description: youtube.com/subscription_center?add_user=bradgouthrofitness, Value: youtube.com/subscription_center
+									612 text Website
+									613 link Description: liveleantv.com, Value: youtube.com/redirect
+									614 text Facebook
+									615 link Description: facebook.com/liveleantv, Value: youtube.com/redirect
+									616 text Instagram
+									617 link Description: instagram.com/liveleantv, Value: youtube.com/redirect
+									618 text Twitter
+									619 link Description: twitter.com/liveleantv, Value: youtube.com/redirect
+									620 text Snapchat
+									621 link Description: snapchat.com/liveleantv, Value: youtube.com/redirect
+							622 container additional-info-container
+								623 heading More info, Value: 2
+									624 text More info
+								625 link Description: Sign in, Value: [sign-in link omitted]
+								626 text  to see email address
+								627 link Description: www.youtube.com/@LiveLean, Value: youtube.com/@LiveLean
+								628 text United States
+								629 text Joined 31 Aug 2016
+								630 text 25k subscribers
+								631 text 2,308 videos
+								632 text 16,937,739 views
+							633 container button-container
+								634 container
+									635 button Share channel
+										636 text Share channel
+
+The focused UI element is 592 container

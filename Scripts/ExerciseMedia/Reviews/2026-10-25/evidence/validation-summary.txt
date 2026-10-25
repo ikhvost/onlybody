@@ -1,0 +1,37 @@
+Validation date: 2026-10-25; reviewer: Codex.
+OnlyBody from validate.sh; OnlyWeights resumed after fixing the new test macro and generated doc-comment formatting.
+All remaining validate.sh stages completed with exit code 0.
+
+onlyweights-video-validation.log
+Architecture boundaries passed.
+OnlyBody: 65 bundled exercises match authoring data.
+OnlyWeights: 60 bundled exercises match authoring data.
+Done linting! Found 0 violations, 0 serious in 266 files.
+✔ Test run with 241 tests in 41 suites passed after 0.502 seconds.
+Test Case '-[onlybodyUITests.WorkoutJourneyTests testCompleteWritesOneSession]' passed (114.671 seconds).
+Test Case '-[onlybodyUITests.WorkoutJourneyTests testCreateSurvivesRelaunch]' passed (57.958 seconds).
+Test Case '-[onlybodyUITests.WorkoutJourneyTests testEarlyFinishPreservesCompletedSets]' passed (58.175 seconds).
+Test Case '-[onlybodyUITests.WorkoutJourneyTests testEditSurvivesRelaunch]' passed (46.878 seconds).
+Test Case '-[onlybodyUITests.WorkoutJourneyTests testNavigationAndFullscreenWorkout]' passed (180.113 seconds).
+** TEST SUCCEEDED **
+** BUILD SUCCEEDED **
+
+onlyweights-video-validation-resume.log
+Architecture boundaries passed.
+OnlyBody: 65 bundled exercises match authoring data.
+OnlyWeights: 60 bundled exercises match authoring data.
+Done linting! Found 0 violations, 0 serious in 266 files.
+✔ Test run with 216 tests in 36 suites passed after 0.551 seconds.
+Test Case '-[onlyweightsUITests.WorkoutJourneyTests testCompleteWritesOneSession]' passed (115.839 seconds).
+Test Case '-[onlyweightsUITests.WorkoutJourneyTests testCreateSurvivesRelaunch]' passed (57.557 seconds).
+Test Case '-[onlyweightsUITests.WorkoutJourneyTests testEarlyFinishPreservesCompletedSets]' passed (57.922 seconds).
+Test Case '-[onlyweightsUITests.WorkoutJourneyTests testEditSurvivesRelaunch]' passed (47.559 seconds).
+Test Case '-[onlyweightsUITests.WorkoutJourneyTests testNavigationAndFullscreenWorkout]' passed (182.044 seconds).
+** TEST SUCCEEDED **
+** BUILD SUCCEEDED **
+OnlyBody: bundle identity, icon, launch screen and isolated seed verified.
+OnlyWeights: unapproved review videos are absent from Release binaries.
+OnlyWeights: bundle identity, icon, launch screen and isolated seed verified.
+Generated store at /tmp/onlyweights-video-validation/onlybody-generated.store with 65 exercises.
+Generated store at /tmp/onlyweights-video-validation/onlyweights-generated.store with 60 exercises.
+

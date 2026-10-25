@@ -1,0 +1,231 @@
+Browser tab: 2, Title: "How To: Seated Leg Curl (Cybex) - YouTube", URL: "https://www.youtube.com/watch?v=ELOCsoDSmrg".
+1 AXWebArea How To: Seated Leg Curl (Cybex) - YouTube, URL: youtube.com/watch
+	2 container
+		3 container content
+			4 container masthead
+				5 container container
+					6 container start
+						7 container guide-button
+							8 button Description: Guide, ID: button
+						9 container logo
+							10 link Description: YouTube Home, Value: youtube.com/, ID: logo
+							11 text PL
+						12 container
+							13 button Skip navigation
+								14 text Skip navigation
+					15 container
+						16 combo box (expanded, settable) Secondary Actions: Collapse
+						17 button Search
+					18 container buttons
+						19 container button
+							20 button Description: Settings, ID: button
+						21 container
+			23 container
+				24 container columns
+					25 container primary-inner
+						26 container player
+							27 container player-container-inner
+								28 container Description: YouTube Video Player, ID: movie_player
+									29 container
+										30 button Play
+											31 image
+									32 container
+										33 button Channel watermark
+											34 image Channel watermark
+									35 container
+										36 slider Description: Seek slider, Value: 0
+										37 slider Description: Click or scroll the panel for precise seeking., Value: 0
+										38 button Play (k)
+											39 image
+										40 button Mute (m)
+											41 image
+										42 slider Description: Volume, Value: 100
+										43 container
+											44 button 0 Minutes 0 Seconds of 3 Minutes 9 Seconds
+												45 text 0:00
+												46 text  / 
+												47 text 3:09
+										48 button Introduction
+											49 container Description: Introduction, Help: View chapter
+												50 text Introduction
+										51 button Auto-play is on
+										52 checkbox Description: Subtitles/closed captions unavailable, Value: 0
+										53 pop up button (collapsed) Description: Settings, Secondary Actions: Expand
+											54 image
+										55 button Cinema mode (t)
+											56 image
+										57 button Full screen (f)
+											58 image
+						59 container below
+							60 container above-the-fold
+								61 heading How To: Seated Leg Curl (Cybex), Value: 1
+									62 text How To: Seated Leg Curl (Cybex)
+								63 container top-row
+									64 container owner
+										65 container
+											66 link Description: ScottHermanFitness, Value: youtube.com/@ScottHermanFitness
+											67 container upload-info
+												68 container channel-name
+													69 link Description: ScottHermanFitness, Value: youtube.com/@ScottHermanFitness
+													70 image Verified
+												71 container Description: 2.84 million subscribers, ID: owner-sub-count
+													72 text 2.84m subscribers
+											73 container
+												74 button Join this channel
+													75 text Join
+										76 container
+											77 image
+											78 button Subscribe to ScottHermanFitness.
+												79 text Subscribe
+									80 container
+										81 container top-level-buttons-computed
+											82 container
+												83 checkbox Description: like this video along with 9,846 other people, Value: 0
+													84 text 9.8k
+												85 checkbox Description: Dislike this video, Value: 0
+											86 button Share
+										87 button Save to playlist
+										88 button More actions
+								89 container bottom-row
+									90 container description
+										91 container description-inner
+											151 container info-container
+												152 container info
+													153 text 1,961,582 views 5 Oct 2009
+													154 link Description: #Bodybuilding, Value: youtube.com/hashtag/bodybuilding
+													155 link Description: #MuscleGain, Value: youtube.com/hashtag/musclegain
+													156 link Description: #ScottHerman, Value: youtube.com/hashtag/scottherman
+											100 container description-inline-expander
+												157 container expanded
+													158 text PUSH, PULL, LEGS (12 Weeks Program) - 
+													159 link Description: http://goo.gl/X8HeL5, Value: youtube.com/redirect
+													160 text 
+
+4 DAY SPLIT Muscle Building 12 Week Program: 
+													161 link Description: http://goo.gl/6AlH84, Value: youtube.com/redirect
+													162 text 
+
+Twitter: 
+													163 link Description: Twitter Channel Link: Scott_Herman, Value: youtube.com/redirect
+													164 text 
+Facebook: 
+													165 link Description: Facebook Channel Link: ScottHermanFitness, Value: youtube.com/redirect
+													166 text 
+Instagram: 
+													167 link Description: Instagram Channel Link: ScottHermanFitness, Value: youtube.com/redirect
+													168 text 
+----------------------------------------
+🏆 GET MY FREE PROGRAM NOW:  
+													169 link Description: https://muscularstrength.com/guarante..., Value: youtube.com/redirect
+													170 text  
+
+📨 Join My MAILING LIST: 
+													171 link Description: https://muscularstrength.com/mailing-..., Value: youtube.com/redirect
+													172 text 
+
+💪🏻 CHECK OUT MY HOME & GYM WORKOUT PROGRAMS: 
+													173 link Description: https://muscularstrength.com/program-..., Value: youtube.com/redirect
+													174 text  
+
+💯🏋️ONLINE COACHING: 
+													175 link Description: https://muscularstrength.com/consulta..., Value: youtube.com/redirect
+													176 text  
+
+📱 INSTAGRAM: 
+													177 link Description: Instagram Channel Link: scotthermanfitness, Value: youtube.com/redirect
+													178 text  
+📱 TIKTOK: 
+													179 link Description: TikTok Channel Link: scotthermanfitness, Value: youtube.com/redirect
+													180 text  
+----------------------------------------
+DOWNLOAD MY APP! – iPhone & Android! 
+
+													181 link Description: https://muscularstrength.com/phoneapp, Value: youtube.com/redirect
+													182 text  
+----------------------------------------
+
+													183 link Description: #ScottHerman, Value: youtube.com/hashtag/scottherman
+													184 link Description: #Bodybuilding, Value: youtube.com/hashtag/bodybuilding
+													185 link Description: #MuscleGain, Value: youtube.com/hashtag/musclegain
+												186 container structured-description
+													187 container items
+														188 container
+															189 text How this was made
+															190 text Auto-dubbed
+															191 text Audio tracks for some languages were automatically generated. 
+															192 link Description: Learn more, Value: support.google.com/youtube/answer/15569972
+														193 container dismissible
+															194 container header-container
+																195 heading Chapters View all, Value: 2, ID: header
+																	196 text Chapters
+																	197 container
+																		198 button View all
+																			199 text View all
+															200 container items
+																201 link Description: Introduction 0:00, Value: youtube.com/watch, ID: endpoint
+																202 link Description: Machine adjustments 0:12, Value: youtube.com/watch, ID: endpoint
+																203 link Description: Execution and form 1:21, Value: youtube.com/watch, ID: endpoint
+																204 link Description: Pro tips and closing 2:15, Value: youtube.com/watch, ID: endpoint
+														205 text Transcript
+														206 text Follow along using the transcript.
+														207 container
+															208 button Show transcript
+																209 text Show transcript
+														210 link Description: ScottHermanFitness 2.84m subscribers, Value: youtube.com/@ScottHermanFitness, ID: header
+														211 container items
+															212 container
+																213 link Description: Videos, Value: youtube.com/channel/UCEtMRF1ywKMc4sf3EXYyDzw/videos
+															214 container
+																215 link Description: About, Value: youtube.com/channel/UCEtMRF1ywKMc4sf3EXYyDzw/about
+															216 link Description: Facebook, Value: youtube.com/redirect
+															217 link Description: Instagram, Value: youtube.com/redirect
+															218 link Description: Twitter, Value: youtube.com/redirect
+												219 button Show less , ID: collapse
+													220 text Show less
+							221 container sections
+								222 container header
+									223 container title
+										224 heading 210 Comments, Value: 2, ID: count
+											225 container
+												226 text 210  Comments
+										227 container
+											228 button (collapsed) Secondary Actions: Expand
+									229 container simple-box
+										230 text field (settable)
+								231 container contents
+									232 container
+										233 container
+											234 container
+												235 button
+											236 container
+												237 container
+													238 heading 3
+														239 link youtube.com/@Engelhafen
+													240 link youtube.com/watch
+												241 container
+													242 checkbox 0
+													243 checkbox 0
+													244 button
+											245 container
+												246 button
+										247 container
+											248 container
+												249 button
+									250 container
+										251 button
+										252 container
+											253 container
+												254 heading 3
+													255 link youtube.com/@ClodaghHhHh
+												256 link youtube.com/watch
+											257 container
+												258 checkbox 0
+												259 checkbox 0
+												260 button
+										261 container
+											262 button
+					110 container secondary-inner
+						111 container related
+							112 container items
+								113 container contents
+									114 container

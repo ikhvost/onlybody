@@ -1,0 +1,130 @@
+Browser tab: 2, Title: "How To Do A Barbell Incline Bench Press - YouTube", URL: "https://www.youtube.com/watch?v=2jFFCy8JBU8".
+1 AXWebArea How To Do A Barbell Incline Bench Press - YouTube, URL: youtube.com/watch?v=2jFFCy8JBU8
+	2 container
+		3 container content
+			4 container masthead
+				5 container container
+					6 container start
+						7 container guide-button
+							8 button Description: Guide, ID: button
+						9 container logo
+							10 link Description: YouTube Home, Value: youtube.com/, ID: logo
+							11 text PL
+						12 container
+							13 button Skip navigation
+								14 text Skip navigation
+					15 container
+						16 combo box (expanded, settable) Secondary Actions: Collapse
+						17 button Search
+					18 container buttons
+						19 container button
+							20 button Description: Settings, ID: button
+						21 container
+			23 container
+				24 container columns
+					25 container primary-inner
+						26 container player
+							27 container player-container-inner
+								28 container Description: YouTube Video Player, ID: movie_player
+									29 container
+										30 button Play
+											31 image
+									32 container
+										33 button Channel watermark
+											34 image Channel watermark
+									35 container
+										36 slider Description: Seek slider, Value: 0
+										37 slider Description: Click or scroll the panel for precise seeking., Value: 0
+										38 button Play (k)
+											39 image
+										40 button Mute (m)
+											41 image
+										42 slider Description: Volume, Value: 100
+										43 container
+											44 button 0 Minutes 0 Seconds of 0 Minutes 15 Seconds
+												45 text 0:00
+												46 text  / 
+												47 text 0:15
+										48 button Auto-play is on
+										49 checkbox Description: Subtitles/closed captions unavailable, Value: 0
+										50 pop up button (collapsed) Description: Settings, Secondary Actions: Expand
+											51 image
+										52 button Cinema mode (t)
+											53 image
+										54 button Full screen (f)
+											55 image
+						56 container below
+							57 container above-the-fold
+								58 heading How To Do A Barbell Incline Bench Press, Value: 1
+									59 text How To Do A Barbell Incline Bench Press
+								60 container top-row
+									61 container owner
+										62 container
+											63 link Description: PureGym, Value: youtube.com/@PureGymVideo
+											64 container upload-info
+												65 link Description: PureGym, Value: youtube.com/@PureGymVideo
+												66 container Description: 105 thousand subscribers, ID: owner-sub-count
+													67 text 105k subscribers
+										68 container
+											69 button Subscribe to PureGym.
+												70 text Subscribe
+									71 container
+										72 container top-level-buttons-computed
+											73 container
+												74 checkbox Description: Like, Value: 0
+													75 text Like
+												76 checkbox Description: Dislike this video, Value: 0
+											77 button Share
+												78 text Share
+										79 button Save to playlist
+											80 text Save
+										81 button More actions
+								82 container bottom-row
+									83 container description
+										84 container description-inner
+											232 container info-container
+												233 container info
+													234 text 212,612 views 26 Nov 2021
+											90 container description-inline-expander
+												235 container expanded
+													236 text The incline bench press has a greater focus on the upper part of the pectorial muscles and anterior deltoids than the standard bench press. Both variations are great compound exercises and can play a part in a balanced routine. Watch our Personal Trainer for how to do an incline barbell bench press.
+
+Getting the form right ensures that the incline bench press works the right muscles, and can prevent injuries. 
+
+1. If you are not using an incline press rack, you will need to set up your bench at 30 - 45 degree angle
+2. Lie back on the bench and grip the barbell with your hands slightly wider than shoulder-width apart 
+3. Lift the bar off the rack and press it towards the ceiling by extending your arms straight above your shoulders
+4. Slowly lower the bar, stopping it just above your chest
+5. Repeat
+
+Find more exercise demonstrations here 👉 
+													237 link Description: https://puregym.com/exercises/, Value: https://puregym.com/exercises/
+												238 container structured-description
+													239 container items
+														240 link Description: PureGym 105k subscribers, Value: youtube.com/@PureGymVideo, ID: header
+														241 container items
+															242 container
+																243 link Description: Videos, Value: youtube.com/channel/UCBbB-PR9CsGcMnswP04TbhQ/videos
+															244 container
+																245 link Description: About, Value: youtube.com/channel/UCBbB-PR9CsGcMnswP04TbhQ/about
+												246 button Show less , ID: collapse
+													247 text Show less
+							248 container sections
+								249 container header
+									250 container title
+										251 heading 0 Comments, Value: 2, ID: count
+											252 container
+												253 text 0  Comments
+										254 container
+											255 container tooltip
+											256 button (collapsed) Description: Sort comments, ID: label, Secondary Actions: Expand
+												257 text Sort by
+									258 container simple-box
+										259 image Description: Default profile photo, ID: img
+										260 text field (settable) Value: Add a comment…, ID: simplebox-placeholder
+											261 text Add a comment…
+					96 container secondary-inner
+						97 container related
+							98 container items
+								99 container contents
+									100 container

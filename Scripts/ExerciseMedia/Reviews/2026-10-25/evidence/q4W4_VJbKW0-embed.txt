@@ -1,0 +1,152 @@
+Browser tab: 2, Title: "How To Do A 45 Degree Leg Press - YouTube", URL: "https://www.youtube.com/watch?v=q4W4_VJbKW0".
+1 AXWebArea How To Do A 45 Degree Leg Press - YouTube, URL: youtube.com/watch?v=q4W4_VJbKW0
+	2 container
+		3 container content
+			4 container masthead
+				5 container container
+					6 container start
+						7 container guide-button
+							8 button Description: Guide, ID: button
+						9 container logo
+							10 link Description: YouTube Home, Value: youtube.com/, ID: logo
+							11 text PL
+						12 container
+							13 button Skip navigation
+								14 text Skip navigation
+					15 container
+						16 combo box (expanded, settable) Secondary Actions: Collapse
+						17 button Search
+					18 container buttons
+						19 container button
+							20 button Description: Settings, ID: button
+						21 container
+			23 container
+				24 container columns
+					25 container primary-inner
+						26 container player
+							27 container player-container-inner
+								28 container Description: YouTube Video Player, ID: movie_player
+									29 container
+										30 button Play
+											31 image
+									32 container
+										33 button Channel watermark
+											34 image Channel watermark
+									35 container
+										36 slider Description: Seek slider, Value: 0
+										37 slider Description: Click or scroll the panel for precise seeking., Value: 0
+										38 button Play (k)
+											39 image
+										40 button Mute (m)
+											41 image
+										42 slider Description: Volume, Value: 100
+										43 container
+											44 button 0 Minutes 0 Seconds of 0 Minutes 10 Seconds
+												45 text 0:00
+												46 text  / 
+												47 text 0:10
+										48 button Auto-play is on
+										49 pop up button (collapsed) Description: Settings, Secondary Actions: Expand
+											50 image
+										51 button Cinema mode (t)
+											52 image
+										53 button Full screen (f)
+											54 image
+						55 container below
+							56 container above-the-fold
+								57 heading How To Do A 45 Degree Leg Press, Value: 1
+									58 text How To Do A 45 Degree Leg Press
+								59 container top-row
+									60 container owner
+										61 container
+											62 link Description: PureGym, Value: youtube.com/@PureGymVideo
+											63 container upload-info
+												64 link Description: PureGym, Value: youtube.com/@PureGymVideo
+												65 container Description: 105 thousand subscribers, ID: owner-sub-count
+													66 text 105k subscribers
+										67 container
+											68 button Subscribe to PureGym.
+												69 text Subscribe
+									70 container
+										71 container top-level-buttons-computed
+											72 container
+												73 checkbox Description: Like, Value: 0
+													74 text Like
+												75 checkbox Description: Dislike this video, Value: 0
+											76 button Share
+												77 text Share
+										78 button Save to playlist
+											79 text Save
+										80 button More actions
+								81 container bottom-row
+									82 container description
+										83 container description-inner
+											205 container info-container
+												206 container info
+													207 text 178,052 views 26 Jun 2023
+											89 container description-inline-expander
+												208 container expanded
+													209 text The 45-degree leg press, also known as an incline or angled leg press, is a variation of the seated leg press where the plate is pushed at a 45-degree angle, instead of towards the wall. This exercise primarily works the quads, hamstrings, and glutes, with some involvement from the calves and adductors.
+
+How To Do 45 Degree Leg Press
+1. Load the leg press with your desired weights and then adjust the back support if needed. 
+2. Sit with your back and head flat against the back support and place your feet on the foot plate around shoulder-width apart, toes slightly turned out. 
+3. Grab the handles and then press the foot plate slightly to unrack the plate off the safety hooks.
+4. Engage the core then lower the plate until your knees are between 45 and 90 degrees, ensuring your glutes and lower back stay still throughout. This is your starting position.
+5. Press the plate up by extending your legs out straight, taking care not to lock your knees. 
+6. Slowly return back to the starting position and repeat for desired reps.
+
+Find more exercise demonstrations here 👉 
+													210 link Description: https://puregym.com/exercises/, Value: https://puregym.com/exercises/
+												211 container structured-description
+													212 container items
+														213 link Description: PureGym 105k subscribers, Value: youtube.com/@PureGymVideo, ID: header
+														214 container items
+															215 container
+																216 link Description: Videos, Value: youtube.com/channel/UCBbB-PR9CsGcMnswP04TbhQ/videos
+															217 container
+																218 link Description: About, Value: youtube.com/channel/UCBbB-PR9CsGcMnswP04TbhQ/about
+												219 button Show less , ID: collapse
+													220 text Show less
+							221 container sections
+								222 container
+									308 container title
+										309 heading Comments, Value: 2, ID: count
+											310 text Comments
+					95 container secondary-inner
+						96 container related
+							97 container items
+								98 container contents
+									99 container
+						331 text Embed Video
+					332 container scrollable
+						333 container basic
+							334 container embed-code
+								335 text entry area (settable) ID: textarea, Value: <iframe width="560" height="315" src="https://www.youtube.com/embed/q4W4_VJbKW0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+							336 container start-at-wrapper
+								337 checkbox Start at, Value: 0, ID: start-at-checkbox
+									338 text Start at
+								339 container Description: 0 seconds, ID: start-at-timestamp
+									340 container container
+										341 text field (disabled) 0:00
+						342 container embed-options
+							343 text EMBED OPTIONS
+							344 checkbox Show player controls., Value: 1, ID: player-controls-option
+								345 text Show player controls.
+							346 container privacy-mode-wrapper
+								347 checkbox Value: 0, ID: privacy-mode-option, When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.
+									348 container When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.
+										349 text Enable privacy-enhanced mode.
+								350 container Description: tooltip, ID: privacy-tooltip
+						351 container additional-info
+							352 container additional-links
+								353 link Description: API Reference, Value: developers.google.com/youtube/iframe_api_reference
+								354 link Description: Developer Sample, Value: developers.google.com/youtube/youtube_player_demo
+							355 container legal-info
+								356 text By embedding YouTube videos on your site, you are agreeing to 
+								357 link Description: YouTube API Terms of Service, Value: developers.google.com/youtube/terms/api-services-terms-of-service
+					358 container
+						359 button Copy
+							360 text Copy
+
+The focused UI element is 311 container

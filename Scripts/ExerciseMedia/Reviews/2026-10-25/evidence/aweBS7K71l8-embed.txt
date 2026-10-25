@@ -1,0 +1,158 @@
+Browser tab: 2, Title: "How To Do A Barbell Hip Thrust - YouTube", URL: "https://www.youtube.com/watch?v=aweBS7K71l8".
+1 AXWebArea How To Do A Barbell Hip Thrust - YouTube, URL: youtube.com/watch?v=aweBS7K71l8
+	2 container
+		3 container content
+			4 container masthead
+				5 container container
+					6 container start
+						7 container guide-button
+							8 button Description: Guide, ID: button
+						9 container logo
+							10 link Description: YouTube Home, Value: youtube.com/, ID: logo
+							11 text PL
+						12 container
+							13 button Skip navigation
+								14 text Skip navigation
+					15 container
+						16 combo box (expanded, settable) Secondary Actions: Collapse
+						17 button Search
+					18 container buttons
+						19 container button
+							20 button Description: Settings, ID: button
+						21 container
+			23 container
+				24 container columns
+					25 container primary-inner
+						26 container player
+							27 container player-container-inner
+								28 container Description: YouTube Video Player, ID: movie_player
+									29 container
+										30 button Play
+											31 image
+									32 container
+										33 button Channel watermark
+											34 image Channel watermark
+									35 container
+										36 slider Description: Seek slider, Value: 0
+										37 slider Description: Click or scroll the panel for precise seeking., Value: 0
+										38 button Play (k)
+											39 image
+										40 button Mute (m)
+											41 image
+										42 slider Description: Volume, Value: 100
+										43 container
+											44 button 0 Minutes 0 Seconds of 0 Minutes 16 Seconds
+												45 text 0:00
+												46 text  / 
+												47 text 0:16
+										48 button Auto-play is on
+										49 checkbox Description: Subtitles/closed captions unavailable, Value: 0
+										50 pop up button (collapsed) Description: Settings, Secondary Actions: Expand
+											51 image
+										52 button Cinema mode (t)
+											53 image
+										54 button Full screen (f)
+											55 image
+						56 container below
+							57 container above-the-fold
+								58 heading How To Do A Barbell Hip Thrust, Value: 1
+									59 text How To Do A Barbell Hip Thrust
+								60 container top-row
+									61 container owner
+										62 container
+											63 link Description: PureGym, Value: youtube.com/@PureGymVideo
+											64 container upload-info
+												65 link Description: PureGym, Value: youtube.com/@PureGymVideo
+												66 container Description: 105 thousand subscribers, ID: owner-sub-count
+													67 text 105k subscribers
+										68 container
+											69 button Subscribe to PureGym.
+												70 text Subscribe
+									71 container
+										72 container top-level-buttons-computed
+											73 container
+												74 checkbox Description: Like, Value: 0
+													75 text Like
+												76 checkbox Description: Dislike this video, Value: 0
+											77 button Share
+										78 button Save to playlist
+										79 button More actions
+								80 container bottom-row
+									81 container description
+										82 container description-inner
+											226 container info-container
+												227 container info
+													228 text 239,944 views 13 Oct 2020
+											88 container description-inline-expander
+												229 container expanded
+													230 text Once you've mastered the bodyweight hip thrust, adding weight can help to overload the glutes and hamstrings and continue to build strength and size. The barbell is the most popular way to add weight to hip thrusts.
+
+1. Sit with your shoulders and back against the bench.
+2. Position the barbell above so it's in line with your hip.
+3. Bend the knees with feet firmly planted on the floor. Make sure your feet are at a distance, that allows you to extend your hip whilst keeping your upper back in contact with the bench.
+4. Place your hands over the barbell about shoulder width apart. Brace your core and lift your hips up to the ceiling by squeezing your glutes.
+5. Pause as you hit the top and then slowly lower back to starting position.
+
+Find more exercise demonstrations here 👉 
+													231 link Description: https://puregym.com/exercises/, Value: https://puregym.com/exercises/
+												232 container structured-description
+													233 container items
+														234 link Description: PureGym 105k subscribers, Value: youtube.com/@PureGymVideo, ID: header
+														235 container items
+															236 container
+																237 link Description: Videos, Value: youtube.com/channel/UCBbB-PR9CsGcMnswP04TbhQ/videos
+															238 container
+																239 link Description: About, Value: youtube.com/channel/UCBbB-PR9CsGcMnswP04TbhQ/about
+												240 button Show less , ID: collapse
+													241 text Show less
+							242 container sections
+								243 container header
+									244 container title
+										245 heading 0 Comments, Value: 2, ID: count
+											246 container
+												247 text 0  Comments
+										248 container
+											249 container tooltip
+											250 button (collapsed) Description: Sort comments, ID: label, Secondary Actions: Expand
+												251 text Sort by
+									252 container simple-box
+										253 image Description: Default profile photo, ID: img
+										254 text field (settable) Value: Add a comment…, ID: simplebox-placeholder
+											255 text Add a comment…
+					94 container secondary-inner
+						95 container related
+							96 container items
+								97 container contents
+									98 container
+						348 text Embed Video
+					349 container scrollable
+						350 container basic
+							351 container embed-code
+								352 text entry area (settable) ID: textarea, Value: <iframe width="560" height="315" src="https://www.youtube.com/embed/aweBS7K71l8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+							353 container start-at-wrapper
+								354 checkbox Start at, Value: 0, ID: start-at-checkbox
+									355 text Start at
+								356 container Description: 0 seconds, ID: start-at-timestamp
+									357 container container
+										358 text field (disabled) 0:00
+						359 container embed-options
+							360 text EMBED OPTIONS
+							361 checkbox Show player controls., Value: 1, ID: player-controls-option
+								362 text Show player controls.
+							363 container privacy-mode-wrapper
+								364 checkbox Value: 0, ID: privacy-mode-option, When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.
+									365 container When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.
+										366 text Enable privacy-enhanced mode.
+								367 container Description: tooltip, ID: privacy-tooltip
+						368 container additional-info
+							369 container additional-links
+								370 link Description: API Reference, Value: developers.google.com/youtube/iframe_api_reference
+								371 link Description: Developer Sample, Value: developers.google.com/youtube/youtube_player_demo
+							372 container legal-info
+								373 text By embedding YouTube videos on your site, you are agreeing to 
+								374 link Description: YouTube API Terms of Service, Value: developers.google.com/youtube/terms/api-services-terms-of-service
+					375 container
+						376 button Copy
+							377 text Copy
+
+The focused UI element is 329 container

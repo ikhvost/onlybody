@@ -1,0 +1,152 @@
+Browser tab: 2, Title: "How To Use The Seated Thigh Adduction (Hip Adduction) Machine - YouTube", URL: "https://www.youtube.com/watch?v=CjAVezAggkI".
+1 AXWebArea How To Use The Seated Thigh Adduction (Hip Adduction) Machine - YouTube, URL: youtube.com/watch?v=CjAVezAggkI
+	2 container
+		3 container content
+			4 container masthead
+				5 container container
+					6 container start
+						7 container guide-button
+							8 button Description: Guide, ID: button
+						9 container logo
+							10 link Description: YouTube Home, Value: youtube.com/, ID: logo
+							11 text PL
+						12 container
+							13 button Skip navigation
+								14 text Skip navigation
+					15 container
+						16 combo box (expanded, settable) Secondary Actions: Collapse
+						17 button Search
+					18 container buttons
+						19 container button
+							20 button Description: Settings, ID: button
+						21 container
+			23 container
+				24 container columns
+					25 container primary-inner
+						26 container player
+							27 container player-container-inner
+								28 container Description: YouTube Video Player, ID: movie_player
+									29 container
+										30 button Play
+											31 image
+									32 container
+										33 button Channel watermark
+											34 image Channel watermark
+									35 container
+										36 slider Description: Seek slider, Value: 0
+										37 slider Description: Click or scroll the panel for precise seeking., Value: 0
+										38 button Play (k)
+											39 image
+										40 button Mute (m)
+											41 image
+										42 slider Description: Volume, Value: 100
+										43 container
+											44 button 0 Minutes 0 Seconds of 0 Minutes 15 Seconds
+												45 text 0:00
+												46 text  / 
+												47 text 0:15
+										48 button Auto-play is on
+										49 checkbox Description: Subtitles/closed captions unavailable, Value: 0
+										50 pop up button (collapsed) Description: Settings, Secondary Actions: Expand
+											51 image
+										52 button Cinema mode (t)
+											53 image
+										54 button Full screen (f)
+											55 image
+						56 container below
+							57 container above-the-fold
+								58 heading How To Use The Seated Thigh Adduction (Hip Adduction) Machine, Value: 1
+									59 text How To Use The Seated Thigh Adduction (Hip Adduction) Machine
+								60 container top-row
+									61 container owner
+										62 container
+											63 link Description: PureGym, Value: youtube.com/@PureGymVideo
+											64 container upload-info
+												65 link Description: PureGym, Value: youtube.com/@PureGymVideo
+												66 container Description: 105 thousand subscribers, ID: owner-sub-count
+													67 text 105k subscribers
+										68 container
+											69 button Subscribe to PureGym.
+												70 text Subscribe
+									71 container
+										72 container top-level-buttons-computed
+											73 container
+												74 checkbox Description: Like, Value: 0
+													75 text Like
+												76 checkbox Description: Dislike this video, Value: 0
+											77 button Share
+												78 text Share
+										79 button Save to playlist
+											80 text Save
+										81 button More actions
+								82 container bottom-row
+									83 container description
+										84 container description-inner
+											146 container info-container
+												147 container info
+													148 text 482,298 views 23 May 2022
+											90 container description-inline-expander
+												149 container expanded
+													150 text Your hip adductors are the muscles in your inner thigh that help to pull your thighs in towards your body. They help to stabilise the pelvis, rotate the legs, and play a part in walking and many functional movements.
+
+The seated thigh/ hip adductor machine can help to strengthen these muscles. Watch our PT and Gym Manager Tom demonstrate how to use the seated hip adduction machine here. 
+
+1. Select your weight and use the lever to close the knee pads together. Sit with your back against the support, feet on the foot rests, and knees on the outside of the knee pads. 
+2. Use the lever to open the pads out until you feel a light stretch in your inner thighs. 
+3. Holding on to the handles for support, squeeze your thighs together to bring the knee pads back to the middle, stopping just before they collide. 
+4. Hold this position for a few seconds before slowly returning back to the start.
+
+For more exercise demonstrations and advice, visit our site 👉🏻 
+													151 link Description: https://www.puregym.com/exercises/, Value: https://www.puregym.com/exercises/
+												152 container structured-description
+													153 container items
+														154 link Description: PureGym 105k subscribers, Value: youtube.com/@PureGymVideo, ID: header
+														155 container items
+															156 container
+																157 link Description: Videos, Value: youtube.com/channel/UCBbB-PR9CsGcMnswP04TbhQ/videos
+															158 container
+																159 link Description: About, Value: youtube.com/channel/UCBbB-PR9CsGcMnswP04TbhQ/about
+												160 button Show less , ID: collapse
+													161 text Show less
+							162 container sections
+								163 container
+									164 container title
+										165 heading Comments, Value: 2, ID: count
+											166 text Comments
+					96 container secondary-inner
+						97 container related
+							98 container items
+								99 container contents
+									100 container
+						358 text Embed Video
+					359 container scrollable
+						360 container basic
+							361 container embed-code
+								362 text entry area (settable) ID: textarea, Value: <iframe width="560" height="315" src="https://www.youtube.com/embed/CjAVezAggkI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+							363 container start-at-wrapper
+								364 checkbox Start at, Value: 0, ID: start-at-checkbox
+									365 text Start at
+								366 container Description: 0 seconds, ID: start-at-timestamp
+									367 container container
+										368 text field (disabled) 0:00
+						369 container embed-options
+							370 text EMBED OPTIONS
+							371 checkbox Show player controls., Value: 1, ID: player-controls-option
+								372 text Show player controls.
+							373 container privacy-mode-wrapper
+								374 checkbox Value: 0, ID: privacy-mode-option, When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.
+									375 container When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.
+										376 text Enable privacy-enhanced mode.
+								377 container Description: tooltip, ID: privacy-tooltip
+						378 container additional-info
+							379 container additional-links
+								380 link Description: API Reference, Value: developers.google.com/youtube/iframe_api_reference
+								381 link Description: Developer Sample, Value: developers.google.com/youtube/youtube_player_demo
+							382 container legal-info
+								383 text By embedding YouTube videos on your site, you are agreeing to 
+								384 link Description: YouTube API Terms of Service, Value: developers.google.com/youtube/terms/api-services-terms-of-service
+					385 container
+						386 button Copy
+							387 text Copy
+
+The focused UI element is 338 container

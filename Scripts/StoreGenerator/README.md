@@ -38,7 +38,7 @@ The duration wheel offers 15â€“60 minutes in five-minute steps; rest offers 15â€
 
 ## Product catalogs
 
-OnlyBody keeps its 65-entry authoring file and bundled store. OnlyWeights's initial 16-entry authoring file is `OnlyWeights/SeedData.json`; the two product stores are generated independently. Equipment and metadata use the shared domain taxonomy. Difficulty is a qualitative editorial classification of technique complexity, not a load prescription.
+OnlyBody keeps its 65-entry authoring file and bundled store. OnlyWeights's 60-entry authoring file is `OnlyWeights/SeedData.json`; the two product stores are generated independently. Equipment and metadata use the shared domain taxonomy. Difficulty is a qualitative editorial classification of technique complexity, not a load prescription.
 
 OnlyWeights examples were checked against [NASM's bench press reference](https://www.nasm.org/resource-center/exercise-library/barbell-bench-press) and [seated leg curl reference](https://www.nasm.org/workout-exercise-guidance/how-to-seated-leg-curl). Muscle highlights represent selected primary and supporting groups in the app's coarse taxonomy, not measured activation or an exhaustive list of stabilizers. No videos are supplied in the initial Gym catalog.
 

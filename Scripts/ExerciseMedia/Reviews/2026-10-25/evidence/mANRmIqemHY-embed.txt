@@ -1,0 +1,276 @@
+Browser tab: 2, Title: "How To Do A STANDING EZ BAR CURL | Exercise Demonstration Video and Guide - YouTube", URL: "https://www.youtube.com/watch?v=mANRmIqemHY".
+1 AXWebArea How To Do A STANDING EZ BAR CURL | Exercise Demonstration Video and Guide - YouTube, URL: youtube.com/watch
+	2 container
+		3 container content
+			4 container masthead
+				5 container container
+					6 container start
+						7 container guide-button
+							8 button Description: Guide, ID: button
+						9 container logo
+							10 link Description: YouTube Home, Value: youtube.com/, ID: logo
+							11 text PL
+						12 container
+							13 button Skip navigation
+								14 text Skip navigation
+					15 container
+						16 combo box (expanded, settable) Secondary Actions: Collapse
+						17 button Search
+					18 container buttons
+						19 container button
+							20 button Description: Settings, ID: button
+						21 container
+			23 container
+				24 container columns
+					25 container primary-inner
+						26 container player
+							27 container player-container-inner
+								28 container Description: YouTube Video Player, ID: movie_player
+									29 container
+										30 button Play
+											31 image
+									32 container
+										33 pop up button Show cards
+										34 button Channel watermark
+											35 image Channel watermark
+									36 container
+										37 slider Description: Seek slider, Value: 0
+										38 slider Description: Click or scroll the panel for precise seeking., Value: 0
+										39 button Play (k)
+											40 image
+										41 button Mute (m)
+											42 image
+										43 slider Description: Volume, Value: 100
+										44 container
+											45 button 0 Minutes 0 Seconds of 0 Minutes 34 Seconds
+												46 text 0:00
+												47 text  / 
+												48 text 0:34
+										49 button Auto-play is on
+										50 checkbox Description: Subtitles/closed captions unavailable, Value: 0
+										51 pop up button (collapsed) Description: Settings, Secondary Actions: Expand
+											52 image
+										53 button Cinema mode (t)
+											54 image
+										55 button Full screen (f)
+											56 image
+						57 container below
+							58 container above-the-fold
+								59 heading How To Do A STANDING EZ BAR CURL | Exercise Demonstration Video and Guide, Value: 1
+									60 text How To Do A STANDING EZ BAR CURL | Exercise Demonstration Video and Guide
+								61 container top-row
+									62 container owner
+										63 container
+											64 link Description: Live Lean TV Daily Exercises, Value: youtube.com/@LiveLean
+											65 container upload-info
+												66 link Description: Live Lean TV Daily Exercises, Value: youtube.com/@LiveLean
+												67 container Description: 25 thousand subscribers, ID: owner-sub-count
+													68 text 25k subscribers
+										69 container
+											70 button Subscribe to Live Lean TV Daily Exercises.
+												71 text Subscribe
+									72 container
+										73 container top-level-buttons-computed
+											74 container
+												75 checkbox Description: like this video along with 25 other people, Value: 0
+													76 text 25
+												77 checkbox Description: Dislike this video, Value: 0
+											78 button Share
+										79 button Save to playlist
+										80 button More actions
+								81 container bottom-row
+									82 container description
+										83 container description-inner
+											225 container info-container
+												226 container info
+													227 text 8,826 views 15 Sept 2016
+													228 link Description: #Biceps, Value: youtube.com/hashtag/biceps
+													229 link Description: #EZBarCurl, Value: youtube.com/hashtag/ezbarcurl
+													230 link Description: #LiveLeanTV, Value: youtube.com/hashtag/liveleantv
+											92 container description-inline-expander
+												231 container expanded
+													232 text The Standing EZ Bar Curl is a great strength and mass building exercise to target your biceps.
+► Try Our Workout App For Free: 
+													233 link Description: https://bit.ly/3R5ZSA4, Value: youtube.com/redirect
+													234 text 
+
+To get started:
+1. Grab an EZ bar curl with a shoulder width grip while keeping your elbows close to your torso.
+2. Contract the biceps and curl the bar forward while limiting any momentum.
+3. Once the barbell reaches shoulder height, under control, lower the bar back to starting position maintaining tension on the biceps at all time.
+4. Repeat.
+
+Standing EZ Bar Curl:
+► MUSCLES WORKED: Biceps
+► TYPE: Strength
+► EQUIPMENT: EZ Bar
+► EXPERIENCE: Intermediate
+
+Follow Us On Social Media:
+► INSTAGRAM: 
+													235 link Description: Instagram Channel Link: bradgouthro, Value: youtube.com/redirect
+													236 text 
+► INSTAGRAM: 
+													237 link Description: Instagram Channel Link: LiveLeanTV, Value: youtube.com/redirect
+													238 text 
+► FACEBOOK: 
+													239 link Description: Facebook Channel Link: LiveLeanTV, Value: youtube.com/redirect
+													240 text 
+► TWITTER: 
+													241 link Description: Twitter Channel Link: bradgouthro, Value: youtube.com/redirect
+													242 text 
+► TWITTER: 
+													243 link Description: Twitter Channel Link: LiveLeanTV, Value: youtube.com/redirect
+													244 text 
+► TIK-TOK: 
+													245 link Description: TikTok Channel Link: bradgouthro, Value: youtube.com/redirect
+													246 text  
+► TIK-TOK: 
+													247 link Description: TikTok Channel Link: liveleantv, Value: youtube.com/redirect
+													248 text 
+► SNAPCHAT: 
+													249 link Description: Snapchat Channel Link: bradgouthro, Value: youtube.com/redirect
+													250 link Description: #Biceps, Value: youtube.com/hashtag/biceps
+													251 link Description: #EZBarCurl, Value: youtube.com/hashtag/ezbarcurl
+													252 link Description: #LiveLeanTV, Value: youtube.com/hashtag/liveleantv
+													253 text 
+
+Business Enquiries: info@LiveLeanTV.com
+												254 container structured-description
+													255 container items
+														256 text Transcript
+														257 text Follow along using the transcript.
+														258 container
+															259 button Show transcript
+																260 text Show transcript
+														261 link Description: Live Lean TV Daily Exercises 25k subscribers, Value: youtube.com/@LiveLean, ID: header
+														262 container items
+															263 container
+																264 link Description: Videos, Value: youtube.com/channel/UCHcFIpm8rD9IrlDrw4Ted-Q/videos
+															265 container
+																266 link Description: About, Value: youtube.com/channel/UCHcFIpm8rD9IrlDrw4Ted-Q/about
+															267 link Description: Live Lean TV (main channel), Value: youtube.com/subscription_center
+															268 link Description: Facebook, Value: youtube.com/redirect
+															269 link Description: Instagram, Value: youtube.com/redirect
+															270 link Description: Twitter, Value: youtube.com/redirect
+															271 link Description: Snapchat, Value: youtube.com/redirect
+														272 link Description: Try Our Workout App For Free Try Our Workout App For Free, Value: youtube.com/redirect, ID: lockup-container
+												273 button Show less , ID: collapse
+													274 text Show less
+							275 container sections
+								276 container header
+									277 container title
+										278 heading 4 Comments, Value: 2, ID: count
+											279 container
+												280 text 4  Comments
+										281 container
+											282 container tooltip
+											283 button (collapsed) Description: Sort comments, ID: label, Secondary Actions: Expand
+												284 text Sort by
+									285 container simple-box
+										286 text field (settable) Value: Add a comment…, ID: simplebox-placeholder
+											287 text Add a comment…
+								288 container contents
+									289 container comment
+										290 container body
+											291 button Description: @LiveLean, ID: author-thumbnail-button
+											292 container main
+												293 container header
+													294 text Pinned by @LiveLean
+													295 container header-author
+														296 heading 3
+														297 link Description: @LiveLean, Value: youtube.com/@LiveLean, ID: name
+														298 link Description: 3 years ago, Value: youtube.com/watch
+												299 container content-text
+													300 text ► Try Our Workout App For Free: 
+													301 link Description: https://bit.ly/3R5ZSA4, Value: youtube.com/redirect
+													302 text 
+Which exercise demonstration do you want to see next?
+												303 container action-buttons
+													304 container toolbar
+														305 container like-button
+															306 checkbox Description: Like this comment along with 0 other people, Value: 0
+															307 container tooltip
+														308 container dislike-button
+															309 checkbox Description: Dislike this comment, Value: 0
+															310 container tooltip
+														311 container reply-button-end
+															312 button Reply
+																313 text Reply
+											314 container action-menu
+												315 container button
+													316 button Description: Action menu, ID: button
+									317 container
+										318 container comment
+											319 container body
+												320 container author-thumbnail
+													321 button Description: @indawarrior, ID: author-thumbnail-button
+												322 container main
+													323 container header-author
+														324 heading @indawarrior, Value: 3
+															325 link Description: @indawarrior, Value: youtube.com/@indawarrior, ID: author-text
+														326 link Description: 1 year ago, Value: youtube.com/watch
+													327 container content-text
+														328 text Chat gpt suggested me this
+													329 container action-buttons
+														330 container toolbar
+															331 container like-button
+																332 checkbox Description: Like this comment along with 2 other people, Value: 0
+																333 container tooltip
+															334 text 2
+															335 container dislike-button
+																336 checkbox Description: Dislike this comment, Value: 0
+																337 container tooltip
+															338 container
+																339 container creator-heart-button
+																	340 button (disabled) Description: Heart, ID: button
+																341 container tooltip
+															342 container reply-button-end
+																343 button Reply
+																	344 text Reply
+												345 container action-menu
+													346 container button
+														347 button Description: Action menu, ID: button
+										348 container
+											349 text ·
+											350 container more-replies-sub-thread
+												351 button 2 replies
+													352 text 2 replies
+									433 text Top is selected, so you'll see featured comments
+					100 container secondary-inner
+						101 container related
+							102 container items
+								103 container contents
+									104 container
+						454 text Embed Video
+					455 container scrollable
+						456 container basic
+							457 container embed-code
+								458 text entry area (settable) ID: textarea, Value: <iframe width="560" height="315" src="https://www.youtube.com/embed/mANRmIqemHY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+							459 container start-at-wrapper
+								460 checkbox Start at, Value: 0, ID: start-at-checkbox
+									461 text Start at
+								462 container Description: 0 seconds, ID: start-at-timestamp
+									463 container container
+										464 text field (disabled) 0:00
+						465 container embed-options
+							466 text EMBED OPTIONS
+							467 checkbox Show player controls., Value: 1, ID: player-controls-option
+								468 text Show player controls.
+							469 container privacy-mode-wrapper
+								470 checkbox Value: 0, ID: privacy-mode-option, When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.
+									471 container When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.
+										472 text Enable privacy-enhanced mode.
+								473 container Description: tooltip, ID: privacy-tooltip
+						474 container additional-info
+							475 container additional-links
+								476 link Description: API Reference, Value: developers.google.com/youtube/iframe_api_reference
+								477 link Description: Developer Sample, Value: developers.google.com/youtube/youtube_player_demo
+							478 container legal-info
+								479 text By embedding YouTube videos on your site, you are agreeing to 
+								480 link Description: YouTube API Terms of Service, Value: developers.google.com/youtube/terms/api-services-terms-of-service
+					481 container
+						482 button Copy
+							483 text Copy
+
+The focused UI element is 434 container

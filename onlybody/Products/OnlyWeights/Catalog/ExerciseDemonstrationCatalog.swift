@@ -2,6 +2,246 @@
 /// Release-managed YouTube demonstrations, keyed independently of seed-store UUIDs.
 nonisolated enum ExerciseDemonstrationCatalog {
     static let all: [ExerciseDemonstration] = [
+        ExerciseDemonstration(
+            id: "barbell-bench-press", exerciseName: "Barbell Bench Press",
+            videoID: "CjHIKDQ4RQo", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "incline-dumbbell-press", exerciseName: "Incline Dumbbell Press",
+            videoID: "oZVCBM9f8Eo", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "lat-pulldown", exerciseName: "Lat Pulldown",
+            videoID: "JGeRYIZdojU", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "seated-cable-row", exerciseName: "Seated Cable Row",
+            videoID: "lJoozxC0Rns", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "dumbbell-shoulder-press", exerciseName: "Dumbbell Shoulder Press",
+            videoID: "aI2hGzsAMXs", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "dumbbell-lateral-raise", exerciseName: "Dumbbell Lateral Raise",
+            videoID: "8aUc9snLOxU", author: "OPEX Fitness", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "cable-face-pull", exerciseName: "Cable Face Pull",
+            videoID: "0Po47vvj9g4", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "dumbbell-curl", exerciseName: "Dumbbell Curl",
+            videoID: "MtXdEcW3Eog", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "cable-triceps-pushdown", exerciseName: "Cable Triceps Pushdown",
+            videoID: "LXkCrxn3caQ", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "barbell-back-squat", exerciseName: "Barbell Back Squat",
+            videoID: "rrJIyZGlK8c", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "leg-press", exerciseName: "Leg Press",
+            videoID: "q4W4_VJbKW0", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "barbell-romanian-deadlift", exerciseName: "Barbell Romanian Deadlift",
+            videoID: "zU-f6DMCdAI", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "leg-extension", exerciseName: "Leg Extension",
+            videoID: "4ZDm5EbiFI8", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "seated-leg-curl", exerciseName: "Seated Leg Curl",
+            videoID: "ELOCsoDSmrg", author: "ScottHermanFitness", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "standing-calf-raise", exerciseName: "Standing Calf Raise",
+            videoID: "yYBAQGtpIyM", author: "Live Lean TV Daily Exercises", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "cable-crunch", exerciseName: "Cable Crunch",
+            videoID: "dkGwcfo9zto", author: "Kade Howell", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "incline-barbell-bench-press", exerciseName: "Incline Barbell Bench Press",
+            videoID: "2jFFCy8JBU8", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "dumbbell-bench-press", exerciseName: "Dumbbell Bench Press",
+            videoID: "AduT4Eq-iP0", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "dumbbell-fly", exerciseName: "Dumbbell Fly",
+            videoID: "Nhvz9EzdJ4U", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "cable-chest-fly", exerciseName: "Cable Chest Fly",
+            videoID: "QcTcWpkn_bw", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "machine-chest-press", exerciseName: "Machine Chest Press",
+            videoID: "CIykDiF4sfg", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "pec-deck-fly", exerciseName: "Pec Deck Fly",
+            videoID: "eGjt4lk6g34", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "barbell-bent-over-row", exerciseName: "Barbell Bent-Over Row",
+            videoID: "FsK19s8eGFs", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "one-arm-dumbbell-row", exerciseName: "One-Arm Dumbbell Row",
+            videoID: "ZRSGpBUVcNw", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "chest-supported-dumbbell-row", exerciseName: "Chest-Supported Dumbbell Row",
+            videoID: "Nx0TzjgsI-0", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "straight-arm-cable-pulldown", exerciseName: "Straight-Arm Cable Pulldown",
+            videoID: "ey9Fv3FGrRg", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "weighted-pull-ups", exerciseName: "Weighted Pull-Ups",
+            videoID: "GzT3B9MXDuk", author: "Live Lean TV Daily Exercises", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "weighted-chin-ups", exerciseName: "Weighted Chin-Ups",
+            videoID: "Ly7C0nkZ7AA", author: "Live Lean TV Daily Exercises", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "barbell-overhead-press", exerciseName: "Barbell Overhead Press",
+            videoID: "Y0Bxr57uPbk", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "arnold-press", exerciseName: "Arnold Press",
+            videoID: "jeJttN2EWCo", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "cable-lateral-raise", exerciseName: "Cable Lateral Raise",
+            videoID: "Z9KwFXXxkKQ", author: "Live Lean TV Daily Exercises", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "dumbbell-reverse-fly", exerciseName: "Dumbbell Reverse Fly",
+            videoID: "hYXnvBRA_SE", author: "OPEX Abbotsford", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "barbell-curl", exerciseName: "Barbell Curl",
+            videoID: "N5x5M1x1Gd0", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "ez-bar-curl", exerciseName: "EZ-Bar Curl",
+            videoID: "mANRmIqemHY", author: "Live Lean TV Daily Exercises", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "hammer-curl", exerciseName: "Hammer Curl",
+            videoID: "B4RznoFvTl4", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "incline-dumbbell-curl", exerciseName: "Incline Dumbbell Curl",
+            videoID: "XVQBeug_9LU", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "cable-curl", exerciseName: "Cable Curl",
+            videoID: "GNlopToAZyg", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "overhead-cable-triceps-extension", exerciseName: "Overhead Cable Triceps Extension",
+            videoID: "NJScewjG7AI", author: "Live Lean TV Daily Exercises", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "ez-bar-skull-crusher", exerciseName: "EZ-Bar Skull Crusher",
+            videoID: "BDAMt_LnmMM", author: "OriGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "close-grip-barbell-bench-press", exerciseName: "Close-Grip Barbell Bench Press",
+            videoID: "DzA2xZhDGeo", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "weighted-dips", exerciseName: "Weighted Dips",
+            videoID: "hVVVEPB2ntw", author: "Live Lean TV Daily Exercises", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "barbell-front-squat", exerciseName: "Barbell Front Squat",
+            videoID: "Q1Ypb8ZNzI4", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "barbell-deadlift", exerciseName: "Barbell Deadlift",
+            videoID: "GxsLrTzyGUU", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "sumo-barbell-deadlift", exerciseName: "Sumo Barbell Deadlift",
+            videoID: "JbY72Him34Q", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "dumbbell-goblet-squat", exerciseName: "Dumbbell Goblet Squat",
+            videoID: "Xjo_fY9Hl9w", author: "Live Lean TV Daily Exercises", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "dumbbell-bulgarian-split-squat", exerciseName: "Dumbbell Bulgarian Split Squat",
+            videoID: "TEXl2b3__S4", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "dumbbell-reverse-lunge", exerciseName: "Dumbbell Reverse Lunge",
+            videoID: "xrPteyQLGAo", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "dumbbell-walking-lunge", exerciseName: "Dumbbell Walking Lunge",
+            videoID: "mAgbXQdd4LM", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "dumbbell-step-up", exerciseName: "Dumbbell Step-Up",
+            videoID: "DxUNi119Qzs", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "dumbbell-romanian-deadlift", exerciseName: "Dumbbell Romanian Deadlift",
+            videoID: "gW-7wKSAhEY", author: "Live Lean TV Daily Exercises", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "barbell-hip-thrust", exerciseName: "Barbell Hip Thrust",
+            videoID: "aweBS7K71l8", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "hack-squat", exerciseName: "Hack Squat",
+            videoID: "scs5XcsZuc8", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "lying-leg-curl", exerciseName: "Lying Leg Curl",
+            videoID: "SbSNUXPRkc8", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "hip-abduction-machine", exerciseName: "Hip Abduction Machine",
+            videoID: "G_8LItOiZ0Q", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "hip-adduction-machine", exerciseName: "Hip Adduction Machine",
+            videoID: "CjAVezAggkI", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "seated-calf-raise", exerciseName: "Seated Calf Raise",
+            videoID: "3ZRe_QpvRPg", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "hanging-knee-raise", exerciseName: "Hanging Knee Raise",
+            videoID: "O7iDA3ory-w", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "hanging-leg-raise", exerciseName: "Hanging Leg Raise",
+            videoID: "Yrtvs-nEnk0", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "ab-wheel-rollout", exerciseName: "Ab Wheel Rollout",
+            videoID: "SBO5aFR09D4", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "cable-woodchop", exerciseName: "Cable Woodchop",
+            videoID: "he4IhLc1d5k", author: "Live Lean TV Daily Exercises", startSeconds: 0
+        )
     ]
 
     /// Exact names deliberately make catalog renames an explicit content migration.

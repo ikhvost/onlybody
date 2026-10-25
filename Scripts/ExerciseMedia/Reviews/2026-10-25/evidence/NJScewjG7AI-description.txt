@@ -1,0 +1,247 @@
+Browser tab: 2, Title: "How To Do A Standing Low Pulley Overhead Cable Triceps Extension With Rope | Exercise Demo Video - YouTube", URL: "https://www.youtube.com/watch?v=NJScewjG7AI".
+1 AXWebArea URL: youtube.com/watch?v=NJScewjG7AI, How To Do A Standing Low Pulley Overhead Cable Triceps Extension With Rope | Exercise Demo Video - YouTube
+	2 container
+		3 container content
+			4 container masthead
+				5 container container
+					6 container start
+						7 container guide-button
+							8 button Description: Guide, ID: button
+						9 container logo
+							10 link Description: YouTube Home, Value: youtube.com/, ID: logo
+							11 text PL
+						12 container
+							13 button Skip navigation
+								14 text Skip navigation
+					15 container
+						16 combo box (expanded, settable) Secondary Actions: Collapse
+						17 button Search
+					18 container buttons
+						19 container button
+							20 button Description: Settings, ID: button
+						21 container
+			23 container
+				24 container columns
+					25 container primary-inner
+						26 container player
+							27 container player-container-inner
+								28 container Description: YouTube Video Player, ID: movie_player
+									29 container
+										30 button Play
+											31 image
+									32 container
+										33 pop up button Show cards
+										34 button Channel watermark
+											35 image Channel watermark
+									36 container
+										37 slider Description: Seek slider, Value: 0
+										38 slider Description: Click or scroll the panel for precise seeking., Value: 0
+										39 button Play (k)
+											40 image
+										41 button Mute (m)
+											42 image
+										43 slider Description: Volume, Value: 100
+										44 container
+											45 button 0 Minutes 0 Seconds of 0 Minutes 42 Seconds
+												46 text 0:00
+												47 text  / 
+												48 text 0:42
+										49 button Auto-play is on
+										50 checkbox Description: Subtitles/closed captions unavailable, Value: 0
+										51 pop up button (collapsed) Description: Settings, Secondary Actions: Expand
+											52 image
+										53 button Cinema mode (t)
+											54 image
+										55 button Full screen (f)
+											56 image
+						57 container below
+							58 container above-the-fold
+								59 heading How To Do A Standing Low Pulley Overhead Cable Triceps Extension With Rope | Exercise Demo Video, Value: 1
+									60 text How To Do A Standing Low Pulley Overhead Cable Triceps Extension With Rope | Exercise Demo Video
+								61 container top-row
+									62 container owner
+										63 container
+											64 link Description: Live Lean TV Daily Exercises, Value: youtube.com/@LiveLean
+											65 container upload-info
+												66 link Description: Live Lean TV Daily Exercises, Value: youtube.com/@LiveLean
+												67 container Description: 25 thousand subscribers, ID: owner-sub-count
+													68 text 25k subscribers
+										69 container
+											70 image
+											71 button Subscribe to Live Lean TV Daily Exercises.
+												72 text Subscribe
+									73 container
+										74 container top-level-buttons-computed
+											75 container
+												76 checkbox Description: like this video along with 24 other people, Value: 0
+													77 text 24
+												78 checkbox Description: Dislike this video, Value: 0
+											79 button Share
+												80 text Share
+										81 button Save to playlist
+											82 text Save
+										83 button More actions
+								84 container bottom-row
+									85 container description
+										86 container description-inner
+											231 container info-container
+												232 container info
+													233 text 4,781 views 9 Mar 2017
+													234 link Description: #triceps, Value: youtube.com/hashtag/triceps
+													235 link Description: #tricepsexercises, Value: youtube.com/hashtag/tricepsexercises
+													236 link Description: #LiveLeanTV, Value: youtube.com/hashtag/liveleantv
+											95 container description-inline-expander
+												237 container expanded
+													238 text Let's dive into the Standing Low Pulley Overhead Cable Triceps Extension With Rope—a killer variation of the cable triceps extension that's going to target those triceps from a different angle.
+► Try Our Workout App For Free: 
+													239 link Description: https://www.liveleantv.com, Value: https://www.liveleantv.com/
+													240 text 
+
+Here's how to it properly:
+1. Get yourself set up by attaching a rope to the low pulley of your trusty cable machine.
+2. Face that machine head-on, grab hold of that rope with both hands, and then pivot so you're facing away from the machine. Keep those elbows bent, and the rope should be positioned behind you and overhead.
+3. Now, lock those elbows into place—you want to keep them nice and steady throughout.
+4. Time to activate those triceps! Straighten those arms up vertically overhead, really squeezing those triceps and pulling that rope apart as you extend.
+5. Once you've hit the top, slowly bring those arms back down to the starting position with control.
+
+And there you have it—repeat for that killer triceps burn. Let's crush it!
+
+Standing Low Pulley Overhead Cable Triceps Extension With Rope:
+► MUSCLES WORKED: Triceps
+► TYPE: Strength
+► EQUIPMENT: Cable Machine, Rope Attachment
+► EXPERIENCE: Intermediate
+
+Follow Us On Social Media:
+► INSTAGRAM: 
+													241 link Description: Instagram Channel Link: bradgouthro, Value: https://www.instagram.com/bradgouthro
+													242 text 
+► INSTAGRAM: 
+													243 link Description: Instagram Channel Link: LiveLeanTV, Value: https://www.instagram.com/LiveLeanTV
+													244 text 
+► FACEBOOK: 
+													245 link Description: Facebook Channel Link: liveleantv, Value: https://www.facebook.com/liveleantv
+													246 text 
+► TWITTER: 
+													247 link Description: Twitter Channel Link: bradgouthro, Value: https://www.twitter.com/bradgouthro
+													248 text 
+► TWITTER: 
+													249 link Description: Twitter Channel Link: liveleantv, Value: https://www.twitter.com/liveleantv
+													250 text 
+► TIK-TOK: 
+													251 link Description: TikTok Channel Link: bradgouthro, Value: https://www.tiktok.com/@bradgouthro
+													252 text  
+► TIK-TOK: 
+													253 link Description: TikTok Channel Link: liveleantv, Value: https://www.tiktok.com/@liveleantv
+													254 text 
+► SNAPCHAT: 
+													255 link Description: Snapchat Channel Link: bradgouthro, Value: https://www.snapchat.com/add/bradgouthro
+													256 link Description: #triceps, Value: youtube.com/hashtag/triceps
+													257 link Description: #tricepsexercises, Value: youtube.com/hashtag/tricepsexercises
+													258 link Description: #LiveLeanTV, Value: youtube.com/hashtag/liveleantv
+													259 text 
+
+Business Enquiries: info@LiveLeanTV.com
+												260 container structured-description
+													261 container items
+														262 text Transcript
+														263 text Follow along using the transcript.
+														264 container
+															265 button Show transcript
+																266 text Show transcript
+														267 link Description: Live Lean TV Daily Exercises 25k subscribers, Value: youtube.com/@LiveLean, ID: header
+														268 container items
+															269 container
+																270 link Description: Videos, Value: youtube.com/channel/UCHcFIpm8rD9IrlDrw4Ted-Q/videos
+															271 container
+																272 link Description: About, Value: youtube.com/channel/UCHcFIpm8rD9IrlDrw4Ted-Q/about
+															273 link Description: Live Lean TV (main channel), Value: youtube.com/subscription_center?add_user=bradgouthrofitness
+															274 link Description: Facebook, Value: http://www.facebook.com/liveleantv
+															275 link Description: Instagram, Value: http://www.instagram.com/liveleantv
+															276 link Description: Twitter, Value: …
+															277 link Description: Snapchat, Value: …
+														278 link Description: Try Our Workout App For Free Try Our Workout App For Free, Value: …, ID: lockup-container
+												279 button Show less , ID: collapse
+													280 text Show less
+							281 container sections
+								282 container header
+									283 container title
+										284 heading 3 Comments, Value: 2, ID: count
+											285 container
+												286 text 3  Comments
+										287 container
+											288 container tooltip
+											289 button (collapsed) Description: Sort comments, ID: label, Secondary Actions: Expand
+												290 text Sort by
+									291 container simple-box
+										292 text field (settable) Value: Add a comment…, ID: simplebox-placeholder
+											293 text Add a comment…
+								294 container contents
+									295 container comment
+										296 container body
+											297 button Description: @LiveLean, ID: author-thumbnail-button
+											298 container main
+												299 container header
+													300 text Pinned by @LiveLean
+													301 container header-author
+														302 heading 3
+														303 link Description: @LiveLean, Value: youtube.com/@LiveLean, ID: name
+														304 link Description: 2 years ago, Value: youtube.com/watch?v=NJScewjG7AI&lc=UgxGW5dPKFOwiUEBsiB4AaABAg
+												305 container content-text
+													306 text ► Try Our Workout App For Free: 
+													307 link Description: https://www.liveleantv.com, Value: …
+													308 text 
+Which exercise demonstration video do you want to see next?
+												309 container action-buttons
+													310 container toolbar
+														311 container like-button
+															312 checkbox Description: Like this comment along with 0 other people, Value: 0
+															313 container tooltip
+														314 container dislike-button
+															315 checkbox Description: Dislike this comment, Value: 0
+															316 container tooltip
+														317 container reply-button-end
+															318 button Reply
+																319 text Reply
+											320 container action-menu
+												321 container button
+													322 button Description: Action menu, ID: button
+									323 container
+										324 container comment
+											325 container body
+												326 container author-thumbnail
+													327 button Description: @ximaginecaringx6602, ID: author-thumbnail-button
+												328 container main
+													329 container header-author
+														330 heading @ximaginecaringx6602, Value: 3
+															331 link Description: @ximaginecaringx6602, Value: youtube.com/@ximaginecaringx6602, ID: author-text
+														332 link Description: 2 years ago, Value: …
+													333 text thank you
+													334 container action-buttons
+														335 container toolbar
+															336 container like-button
+																337 checkbox Description: Like this comment along with 0 other people, Value: 0
+																338 container tooltip
+															339 container dislike-button
+																340 checkbox Description: Dislike this comment, Value: 0
+																341 container tooltip
+															342 container
+																343 container creator-heart-button
+																	344 button (disabled) Description: Heart, ID: button
+																345 container tooltip
+															346 container reply-button-end
+																347 button Reply
+																	348 text Reply
+												349 container action-menu
+													350 container button
+														351 button Description: Action menu, ID: button
+										352 container
+											353 text ·
+											354 container more-replies-sub-thread
+												355 button 1 reply
+													356 text 1 reply
+					103 container secondary-inner
+						104 container related
+							105 container items
+								106 container contents
+									107 container

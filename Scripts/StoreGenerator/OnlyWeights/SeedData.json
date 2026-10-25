@@ -11,7 +11,8 @@
     ],
     "equipment": [
       "Barbell",
-      "Flat Bench"
+      "Flat Bench",
+      "Squat Rack"
     ],
     "frequencyPreference": "normal",
     "difficulty": "intermediate",
@@ -259,6 +260,768 @@
     ],
     "frequencyPreference": "normal",
     "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Incline Barbell Bench Press",
+    "primaryMuscle": "Chest",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "equipment": [
+      "Barbell",
+      "Incline Bench",
+      "Squat Rack"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Dumbbell Bench Press",
+    "primaryMuscle": "Chest",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "equipment": [
+      "Dumbbells",
+      "Flat Bench"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Dumbbell Fly",
+    "primaryMuscle": "Chest",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders"
+    ],
+    "equipment": [
+      "Dumbbells",
+      "Flat Bench"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Cable Chest Fly",
+    "primaryMuscle": "Chest",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders"
+    ],
+    "equipment": [
+      "Cable Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Machine Chest Press",
+    "primaryMuscle": "Chest",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "equipment": [
+      "Chest Press Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Pec Deck Fly",
+    "primaryMuscle": "Chest",
+    "primaryMuscles": [
+      "Chest"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "Pec Deck Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Barbell Bent-Over Row",
+    "primaryMuscle": "Back",
+    "primaryMuscles": [
+      "Back"
+    ],
+    "secondaryMuscles": [
+      "Biceps",
+      "Shoulders",
+      "Forearms",
+      "Core"
+    ],
+    "equipment": [
+      "Barbell"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "One-Arm Dumbbell Row",
+    "primaryMuscle": "Back",
+    "primaryMuscles": [
+      "Back"
+    ],
+    "secondaryMuscles": [
+      "Biceps",
+      "Shoulders",
+      "Forearms"
+    ],
+    "equipment": [
+      "Dumbbells",
+      "Flat Bench"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Chest-Supported Dumbbell Row",
+    "primaryMuscle": "Back",
+    "primaryMuscles": [
+      "Back"
+    ],
+    "secondaryMuscles": [
+      "Biceps",
+      "Shoulders",
+      "Forearms"
+    ],
+    "equipment": [
+      "Dumbbells",
+      "Incline Bench"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Straight-Arm Cable Pulldown",
+    "primaryMuscle": "Back",
+    "primaryMuscles": [
+      "Back"
+    ],
+    "secondaryMuscles": [
+      "Triceps",
+      "Core"
+    ],
+    "equipment": [
+      "Cable Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Weighted Pull-Ups",
+    "primaryMuscle": "Back",
+    "primaryMuscles": [
+      "Back"
+    ],
+    "secondaryMuscles": [
+      "Biceps",
+      "Forearms",
+      "Core"
+    ],
+    "equipment": [
+      "Pull-up Bar",
+      "Dip Belt",
+      "Weight Plates"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "advanced",
+    "isFullBody": false
+  },
+  {
+    "name": "Weighted Chin-Ups",
+    "primaryMuscle": "Back",
+    "primaryMuscles": [
+      "Back",
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Forearms",
+      "Core"
+    ],
+    "equipment": [
+      "Pull-up Bar",
+      "Dip Belt",
+      "Weight Plates"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "advanced",
+    "isFullBody": false
+  },
+  {
+    "name": "Barbell Overhead Press",
+    "primaryMuscle": "Shoulders",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Triceps",
+      "Serratus",
+      "Core"
+    ],
+    "equipment": [
+      "Barbell",
+      "Squat Rack"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Arnold Press",
+    "primaryMuscle": "Shoulders",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [
+      "Triceps"
+    ],
+    "equipment": [
+      "Dumbbells",
+      "Incline Bench"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Cable Lateral Raise",
+    "primaryMuscle": "Shoulders",
+    "primaryMuscles": [
+      "Shoulders"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "Cable Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Dumbbell Reverse Fly",
+    "primaryMuscle": "Shoulders",
+    "primaryMuscles": [
+      "Shoulders",
+      "Back"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "Dumbbells"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Barbell Curl",
+    "primaryMuscle": "Biceps",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "equipment": [
+      "Barbell"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "EZ-Bar Curl",
+    "primaryMuscle": "Biceps",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "equipment": [
+      "EZ-Bar"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Hammer Curl",
+    "primaryMuscle": "Biceps",
+    "primaryMuscles": [
+      "Biceps",
+      "Forearms"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "Dumbbells"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Incline Dumbbell Curl",
+    "primaryMuscle": "Biceps",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "equipment": [
+      "Dumbbells",
+      "Incline Bench"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Cable Curl",
+    "primaryMuscle": "Biceps",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "equipment": [
+      "Cable Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Overhead Cable Triceps Extension",
+    "primaryMuscle": "Triceps",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "Cable Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "EZ-Bar Skull Crusher",
+    "primaryMuscle": "Triceps",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "EZ-Bar",
+      "Flat Bench"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Close-Grip Barbell Bench Press",
+    "primaryMuscle": "Triceps",
+    "primaryMuscles": [
+      "Triceps",
+      "Chest"
+    ],
+    "secondaryMuscles": [
+      "Shoulders"
+    ],
+    "equipment": [
+      "Barbell",
+      "Flat Bench",
+      "Squat Rack"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Weighted Dips",
+    "primaryMuscle": "Chest",
+    "primaryMuscles": [
+      "Chest",
+      "Triceps"
+    ],
+    "secondaryMuscles": [
+      "Shoulders"
+    ],
+    "equipment": [
+      "Dip Bar",
+      "Dip Belt",
+      "Weight Plates"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "advanced",
+    "isFullBody": false
+  },
+  {
+    "name": "Barbell Front Squat",
+    "primaryMuscle": "Quads",
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Adductors",
+      "Core",
+      "Back"
+    ],
+    "equipment": [
+      "Barbell",
+      "Squat Rack"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "advanced",
+    "isFullBody": false
+  },
+  {
+    "name": "Barbell Deadlift",
+    "primaryMuscle": "Glutes",
+    "primaryMuscles": [
+      "Glutes",
+      "Hamstrings"
+    ],
+    "secondaryMuscles": [
+      "Quads",
+      "Back",
+      "Forearms",
+      "Core"
+    ],
+    "equipment": [
+      "Barbell"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "advanced",
+    "isFullBody": false
+  },
+  {
+    "name": "Sumo Barbell Deadlift",
+    "primaryMuscle": "Glutes",
+    "primaryMuscles": [
+      "Glutes",
+      "Quads",
+      "Adductors"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Back",
+      "Forearms",
+      "Core"
+    ],
+    "equipment": [
+      "Barbell"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "advanced",
+    "isFullBody": false
+  },
+  {
+    "name": "Dumbbell Goblet Squat",
+    "primaryMuscle": "Quads",
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Adductors",
+      "Core"
+    ],
+    "equipment": [
+      "Dumbbells"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Dumbbell Bulgarian Split Squat",
+    "primaryMuscle": "Quads",
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Adductors",
+      "Core"
+    ],
+    "equipment": [
+      "Dumbbells",
+      "Flat Bench"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Dumbbell Reverse Lunge",
+    "primaryMuscle": "Quads",
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Adductors",
+      "Core"
+    ],
+    "equipment": [
+      "Dumbbells"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Dumbbell Walking Lunge",
+    "primaryMuscle": "Quads",
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Adductors",
+      "Core"
+    ],
+    "equipment": [
+      "Dumbbells"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Dumbbell Step-Up",
+    "primaryMuscle": "Quads",
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Core"
+    ],
+    "equipment": [
+      "Dumbbells",
+      "Step Platform"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Dumbbell Romanian Deadlift",
+    "primaryMuscle": "Hamstrings",
+    "primaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Back",
+      "Forearms",
+      "Core"
+    ],
+    "equipment": [
+      "Dumbbells"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Barbell Hip Thrust",
+    "primaryMuscle": "Glutes",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Core"
+    ],
+    "equipment": [
+      "Barbell",
+      "Flat Bench"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Hack Squat",
+    "primaryMuscle": "Quads",
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Adductors"
+    ],
+    "equipment": [
+      "Hack Squat Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Lying Leg Curl",
+    "primaryMuscle": "Hamstrings",
+    "primaryMuscles": [
+      "Hamstrings"
+    ],
+    "secondaryMuscles": [
+      "Calves"
+    ],
+    "equipment": [
+      "Lying Leg Curl Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Hip Abduction Machine",
+    "primaryMuscle": "Glutes",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "Hip Abduction Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Hip Adduction Machine",
+    "primaryMuscle": "Adductors",
+    "primaryMuscles": [
+      "Adductors"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "Hip Adduction Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Seated Calf Raise",
+    "primaryMuscle": "Calves",
+    "primaryMuscles": [
+      "Calves"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "Seated Calf Raise Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Hanging Knee Raise",
+    "primaryMuscle": "Core",
+    "primaryMuscles": [
+      "Core",
+      "Hip Flexors"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "equipment": [
+      "Pull-up Bar"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Hanging Leg Raise",
+    "primaryMuscle": "Core",
+    "primaryMuscles": [
+      "Core",
+      "Hip Flexors"
+    ],
+    "secondaryMuscles": [
+      "Forearms"
+    ],
+    "equipment": [
+      "Pull-up Bar"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "advanced",
+    "isFullBody": false
+  },
+  {
+    "name": "Ab Wheel Rollout",
+    "primaryMuscle": "Core",
+    "primaryMuscles": [
+      "Core"
+    ],
+    "secondaryMuscles": [
+      "Serratus",
+      "Shoulders",
+      "Back"
+    ],
+    "equipment": [
+      "Ab Wheel"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "advanced",
+    "isFullBody": false
+  },
+  {
+    "name": "Cable Woodchop",
+    "primaryMuscle": "Core",
+    "primaryMuscles": [
+      "Core"
+    ],
+    "secondaryMuscles": [
+      "Shoulders"
+    ],
+    "equipment": [
+      "Cable Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
     "isFullBody": false
   }
 ]

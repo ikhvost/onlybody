@@ -1,0 +1,41 @@
+URL: https://www.youtube.com/@ScottHermanFitness/about
+container about-container
+							1112 heading Description, Value: 2
+								1113 text Description
+							1114 text I focus on keeping things simple.  The basics work and all you need to do is stick to them and be consistent to have your dream body and live your best life.
+
+🏆 GET MY FREE PROGRAM NOW:  https://muscularstrength.com/guaranteed_gains_sign_up_FREE 
+
+📨 Join My MAILING LIST: https://muscularstrength.com/mailing-list
+
+							1115 container links-section
+								1116 heading Links, Value: 2
+									1117 text Links
+								1118 container link-list-container
+									1119 text Workout Programs!
+									1120 link Description: muscularstrength.com/Full-Workout-Programs, Value: …
+									1121 text 1 on 1 Training
+									1122 link Description: muscularstrength.com/consultations-scottherman, Value: …
+									1123 text Facebook
+									1124 link Description: facebook.com/ScottHermanFitness, Value: …
+									1125 text Instagram
+									1126 link Description: instagram.com/ScottHermanFitness, Value: …
+									1127 text Twitter
+									1128 link Description: twitter.com/scott_herman, Value: …
+							1129 container additional-info-container
+								1130 heading More info, Value: 2
+									1131 text More info
+								1132 link Description: Sign in, Value: …
+								1133 text  to see email address
+								1134 link Description: www.youtube.com/@ScottHermanFitness, Value: …
+								1135 text United States
+								1136 text Joined 25 May 2009
+								1137 text 2.84m subscribers
+								1138 text 2,095 videos
+								1139 text 723,039,743 views
+							1140 container button-container
+								1141 container
+									1142 button Share channel
+										1143 text Share channel
+
+The focused UI element is 1144 container

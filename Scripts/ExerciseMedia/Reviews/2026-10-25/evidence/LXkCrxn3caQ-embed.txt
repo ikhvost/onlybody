@@ -1,0 +1,161 @@
+Browser tab: 2, Title: "How To Do A Tricep Pushdown - YouTube", URL: "https://www.youtube.com/watch?v=LXkCrxn3caQ".
+1 AXWebArea How To Do A Tricep Pushdown - YouTube, URL: youtube.com/watch?v=LXkCrxn3caQ
+	2 container
+		3 container content
+			4 container masthead
+				5 container container
+					6 container start
+						7 container guide-button
+							8 button Description: Guide, ID: button
+						9 container logo
+							10 link Description: YouTube Home, Value: youtube.com/, ID: logo
+							11 text PL
+						12 container
+							13 button Skip navigation
+								14 text Skip navigation
+					15 container
+						16 combo box (expanded, settable) Secondary Actions: Collapse
+						17 button Search
+					18 container buttons
+						19 container button
+							20 button Description: Settings, ID: button
+						21 container
+			23 container
+				24 container columns
+					25 container primary-inner
+						26 container player
+							27 container player-container-inner
+								28 container Description: YouTube Video Player, ID: movie_player
+									29 container
+										30 button Play
+											31 image
+									32 container
+										33 button Channel watermark
+											34 image Channel watermark
+									35 container
+										36 slider Description: Seek slider, Value: 0
+										37 slider Description: Click or scroll the panel for precise seeking., Value: 0
+										38 button Play (k)
+											39 image
+										40 button Mute (m)
+											41 image
+										42 slider Description: Volume, Value: 100
+										43 container
+											44 button 0 Minutes 0 Seconds of 0 Minutes 15 Seconds
+												45 text 0:00
+												46 text  / 
+												47 text 0:15
+										48 button Auto-play is on
+										49 checkbox Description: Subtitles/closed captions unavailable, Value: 0
+										50 pop up button (collapsed) Description: Settings, Secondary Actions: Expand
+											51 image
+										52 button Cinema mode (t)
+											53 image
+										54 button Full screen (f)
+											55 image
+						56 container below
+							57 container above-the-fold
+								58 heading How To Do A Tricep Pushdown, Value: 1
+									59 text How To Do A Tricep Pushdown
+								60 container top-row
+									61 container owner
+										62 container
+											63 link Description: PureGym, Value: youtube.com/@PureGymVideo
+											64 container upload-info
+												65 link Description: PureGym, Value: youtube.com/@PureGymVideo
+												66 container Description: 105 thousand subscribers, ID: owner-sub-count
+													67 text 105k subscribers
+										68 container
+											69 button Subscribe to PureGym.
+												70 text Subscribe
+									71 container
+										72 container top-level-buttons-computed
+											73 container
+												74 checkbox Description: Like, Value: 0
+													75 text Like
+												76 checkbox Description: Dislike this video, Value: 0
+											77 button Share
+												78 text Share
+										79 button Save to playlist
+											80 text Save
+										81 button More actions
+								82 container bottom-row
+									83 container description
+										84 container description-inner
+											226 container info-container
+												227 container info
+													228 text 700,613 views 26 Nov 2020
+											90 container description-inline-expander
+												229 container expanded
+													230 text The tricep pushdown is a variation of the tricep extension, an isolation exercise which targets the tricep muscles on the back of your upper arm. This variation uses the cable pulley machine which places a constant source of tension on the muscle, which is great for hypertrophy.
+
+1. Connect a cable bar attachment to the cable machine.
+2. Stand with feet hip width apart with a slight bend in the knees.
+3. Grip the bar with palms facing downwards, about shoulder width apart. 
+4. Keeping your elbows close to your body, take a slight forward lean, and exhale as you push the bar down till your arms full extended. When doing this, focus on just using your triceps to push the bar down whilst keeping your shoulders and arms still. 
+5. Allow the muscles to sufficiently contract by holding for a pause, then slowly release the bar back to starting position as you inhale.
+6. Repeat the exercise for however many repetitions required.
+
+Find more exercise demonstrations here 👉 
+													231 link Description: https://puregym.com/exercises/, Value: https://puregym.com/exercises/
+												232 container structured-description
+													233 container items
+														234 link Description: PureGym 105k subscribers, Value: youtube.com/@PureGymVideo, ID: header
+														235 container items
+															236 container
+																237 link Description: Videos, Value: youtube.com/channel/UCBbB-PR9CsGcMnswP04TbhQ/videos
+															238 container
+																239 link Description: About, Value: youtube.com/channel/UCBbB-PR9CsGcMnswP04TbhQ/about
+												240 button Show less , ID: collapse
+													241 text Show less
+							242 container sections
+								243 container header
+									244 container title
+										245 heading 0 Comments, Value: 2, ID: count
+											246 container
+												247 text 0  Comments
+										248 container
+											249 container tooltip
+											250 button (collapsed) Description: Sort comments, ID: label, Secondary Actions: Expand
+												251 text Sort by
+									252 container simple-box
+										253 image Description: Default profile photo, ID: img
+										254 text field (settable) Value: Add a comment…, ID: simplebox-placeholder
+											255 text Add a comment…
+					96 container secondary-inner
+						97 container related
+							98 container items
+								99 container contents
+									100 container
+						362 text Embed Video
+					363 container scrollable
+						364 container basic
+							365 container embed-code
+								366 text entry area (settable) ID: textarea, Value: <iframe width="560" height="315" src="https://www.youtube.com/embed/LXkCrxn3caQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+							367 container start-at-wrapper
+								368 checkbox Start at, Value: 0, ID: start-at-checkbox
+									369 text Start at
+								370 container Description: 0 seconds, ID: start-at-timestamp
+									371 container container
+										372 text field (disabled) 0:00
+						373 container embed-options
+							374 text EMBED OPTIONS
+							375 checkbox Show player controls., Value: 1, ID: player-controls-option
+								376 text Show player controls.
+							377 container privacy-mode-wrapper
+								378 checkbox Value: 0, ID: privacy-mode-option, When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.
+									379 container When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.
+										380 text Enable privacy-enhanced mode.
+								381 container Description: tooltip, ID: privacy-tooltip
+						382 container additional-info
+							383 container additional-links
+								384 link Description: API Reference, Value: developers.google.com/youtube/iframe_api_reference
+								385 link Description: Developer Sample, Value: developers.google.com/youtube/youtube_player_demo
+							386 container legal-info
+								387 text By embedding YouTube videos on your site, you are agreeing to 
+								388 link Description: YouTube API Terms of Service, Value: developers.google.com/youtube/terms/api-services-terms-of-service
+					389 container
+						390 button Copy
+							391 text Copy
+
+The focused UI element is 343 container

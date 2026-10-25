@@ -9,14 +9,13 @@ struct GymCatalogTests {
         let seed = try #require(Bundle.main.url(forResource: "default", withExtension: "store"))
         let original = try Data(contentsOf: seed)
         let exercises = try BundledExerciseCatalog.load(from: seed)
-        #expect(exercises.count == 16)
-        #expect(Set(exercises.map(\.id)).count == 16)
-        #expect(Set(exercises.map(\.name)).count == 16)
+        #expect(exercises.count == 60)
+        #expect(Set(exercises.map(\.id)).count == 60)
+        #expect(Set(exercises.map(\.name)).count == 60)
         #expect(try Data(contentsOf: seed) == original)
         #expect(Set(exercises.map(\.name)) == Set(ExerciseDifficultyCatalog.levels.keys))
         #expect(Set(exercises.map(\.name)) == Set(ExerciseMuscleCatalog.profiles.keys))
         #expect(!exercises.contains { $0.name == "Standard Push-Ups" })
-        #expect(ExerciseDemonstrationCatalog.all.isEmpty)
         for exercise in exercises {
             #expect(exercise.difficulty != .unrated)
             #expect(!exercise.equipment.isEmpty)
@@ -27,7 +26,6 @@ struct GymCatalogTests {
             #expect(diagram.hasHighlightedRegions)
             #expect(Set(diagram.primary.map(\.rawValue)) == Set(exercise.primaryMuscles))
             #expect(Set(diagram.secondary.map(\.rawValue)) == Set(exercise.supportingMuscles))
-            #expect(ExerciseDemonstrationCatalog.demonstration(for: exercise.name) == nil)
         }
     }
 
@@ -47,14 +45,22 @@ struct GymCatalogTests {
         let library = LibraryViewModel(exercises: SwiftDataExerciseRepository(context: context, catalog: catalog))
         await library.load()
         #expect(library.errorMessage == nil)
-        #expect(library.allExercises.count == 16)
+        #expect(library.allExercises.count == 60)
         #expect(try context.fetchCount(FetchDescriptor<Workout>()) == 0)
         #expect(try context.fetchCount(FetchDescriptor<Session>()) == 0)
         library.selectedFilter = "Quads"
-        #expect(Set(library.filteredExercises.map(\.name)) == ["Barbell Back Squat", "Leg Press", "Leg Extension"])
+        #expect(Set(library.filteredExercises.map(\.name)) == [
+            "Barbell Back Squat", "Leg Press", "Leg Extension", "Barbell Front Squat", "Sumo Barbell Deadlift",
+            "Dumbbell Goblet Squat", "Dumbbell Bulgarian Split Squat", "Dumbbell Reverse Lunge",
+            "Dumbbell Walking Lunge", "Dumbbell Step-Up", "Hack Squat"
+        ])
         library.searchText = "extension"
         #expect(library.filteredExercises.map(\.name) == ["Leg Extension"])
-        let exercise = try #require(catalog.first { $0.name == "Barbell Bench Press" })
+        library.selectedFilter = "Back"
+        library.selectedDifficulty = .advanced
+        library.searchText = "wEiGhTeD"
+        #expect(Set(library.filteredExercises.map(\.name)) == ["Weighted Pull-Ups", "Weighted Chin-Ups"])
+        let exercise = try #require(catalog.first { $0.name == "Weighted Dips" })
         let workout = WorkoutSnapshot(name: "Gym routine", items: [WorkoutItemSnapshot(exercise: exercise)])
         let workouts = SwiftDataWorkoutRepository(context: ModelContext(container), catalog: catalog)
         try await workouts.save(workout)
@@ -67,8 +73,7 @@ struct GymCatalogTests {
     }
 
     @Test func movementWithoutVideoNeverStartsLoading() async throws {
-        let seed = try #require(Bundle.main.url(forResource: "default", withExtension: "store"))
-        let exercise = try #require(try BundledExerciseCatalog.load(from: seed).first)
+        let exercise = ExerciseSnapshot(name: "Custom gym movement without demonstration", primaryMuscle: "Chest")
         let composition = AppComposition(
             configuration: .onlyWeights, exercises: MockExerciseRepository(),
             workouts: MockWorkoutRepository(), sessions: MockSessionRepository(), preferences: WorkoutPreferences(),
@@ -80,5 +85,27 @@ struct GymCatalogTests {
         model.loadDemonstration()
         #expect(model.demonstration == nil)
         #expect(model.demonstrationState == .idle)
+    }
+
+    @Test func releaseVideosCoverCatalogAndReachMovementDetails() throws {
+        let seed = try #require(Bundle.main.url(forResource: "default", withExtension: "store"))
+        let exercises = try BundledExerciseCatalog.load(from: seed)
+        let demonstrations = ExerciseDemonstrationCatalog.all
+        #expect(demonstrations.count == 60)
+        #expect(Set(demonstrations.map(\.id)).count == 60)
+        #expect(Set(demonstrations.map(\.exerciseName)) == Set(exercises.map(\.name)))
+        #expect(demonstrations.allSatisfy { $0.isValid })
+        let composition = AppComposition(
+            configuration: .onlyWeights, exercises: MockExerciseRepository(),
+            workouts: MockWorkoutRepository(), sessions: MockSessionRepository(), preferences: WorkoutPreferences(),
+            reminders: WorkoutReminderCoordinator(
+                preferences: WorkoutPreferences(), workouts: MockWorkoutRepository(), notifications: MockWorkoutNotificationClient()
+            )
+        )
+        for exercise in exercises {
+            let model = composition.movement(exercise)
+            #expect(model.demonstration?.exerciseName == exercise.name)
+            #expect(model.playerDocument?.baseURL.absoluteString == "https://ikhvost.onlyweights")
+        }
     }
 }

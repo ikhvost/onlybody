@@ -1,0 +1,127 @@
+Browser tab: 2, Title: "How To Do Bulgarian Split Squats - YouTube", URL: "https://www.youtube.com/watch?v=TEXl2b3__S4".
+1 AXWebArea How To Do Bulgarian Split Squats - YouTube, URL: youtube.com/watch?v=TEXl2b3__S4
+	2 container
+		3 container content
+			4 container masthead
+				5 container container
+					6 container start
+						7 container guide-button
+							8 button Description: Guide, ID: button
+						9 container logo
+							10 link Description: YouTube Home, Value: youtube.com/, ID: logo
+							11 text PL
+						12 container
+							13 button Skip navigation
+								14 text Skip navigation
+					15 container
+						16 combo box (expanded, settable) Secondary Actions: Collapse
+						17 button Search
+					18 container buttons
+						19 container button
+							20 button Description: Settings, ID: button
+						21 container
+			23 container
+				24 container columns
+					25 container primary-inner
+						26 container player
+							27 container player-container-inner
+								28 container Description: YouTube Video Player, ID: movie_player
+									29 container
+										30 button Play
+											31 image
+									32 container
+										33 button Channel watermark
+											34 image Channel watermark
+									35 container
+										36 slider Description: Seek slider, Value: 0
+										37 slider Description: Click or scroll the panel for precise seeking., Value: 0
+										38 button Play (k)
+											39 image
+										40 button Mute (m)
+											41 image
+										42 slider Description: Volume, Value: 100
+										43 container
+											44 button 0 Minutes 0 Seconds of 0 Minutes 15 Seconds
+												45 text 0:00
+												46 text  / 
+												47 text 0:15
+										48 button Auto-play is on
+										49 pop up button (collapsed) Description: Settings, Secondary Actions: Expand
+											50 image
+										51 button Cinema mode (t)
+											52 image
+										53 button Full screen (f)
+											54 image
+						55 container below
+							56 container above-the-fold
+								57 heading How To Do Bulgarian Split Squats, Value: 1
+									58 text How To Do Bulgarian Split Squats
+								59 container top-row
+									60 container owner
+										61 container
+											62 link Description: PureGym, Value: youtube.com/@PureGymVideo
+											63 container upload-info
+												64 link Description: PureGym, Value: youtube.com/@PureGymVideo
+												65 container Description: 105 thousand subscribers, ID: owner-sub-count
+													66 text 105k subscribers
+										67 container
+											68 button Subscribe to PureGym.
+												69 text Subscribe
+									70 container
+										71 container top-level-buttons-computed
+											72 container
+												73 checkbox Description: Like, Value: 0
+													74 text Like
+												75 checkbox Description: Dislike this video, Value: 0
+											76 button Share
+										77 button Save to playlist
+										78 button More actions
+								79 container bottom-row
+									80 container description
+										81 container description-inner
+											223 container info-container
+												224 container info
+													225 text 59,435 views 29 Mar 2022
+											87 container description-inline-expander
+												226 container expanded
+													227 text Bulgarian split squats are an advanced, unilateral, lower body compound exercise. The front leg performs a squat, while the back leg rests on an elevated surface to ensure the front leg does all the hard work. While it's difficult to master, it gives serious results - it's an exercise you'll love to hate! 
+
+The Bulgarian split squat works the quads, glutes, hamstrings, calves, abductors, and adductors, as well as your core. For greater emphasis on your quads, stand closer to the box. For more of a hamstring focus, stand further away.
+
+1. Stand in front of a bench, step, or plyo box. Raise your left leg back and rest your toes on the platform.  
+2. Engage your core, stand tall, and place your weight in your right foot. You can hold your arms in front for balance, or at your sides. 
+3. Keeping your torso upright, lower your hips down by bending your front leg, stopping when your knee is at a 90 degree angle. 
+4. Pause before returning to standing by driving up through your right foot and pushing your hips forward. 
+5. Repeat for desired reps then switch sides.
+
+Find more exercise demonstrations here 👉 
+													228 link Description: https://puregym.com/exercises/, Value: https://puregym.com/exercises/
+												229 container structured-description
+													230 container items
+														231 link Description: PureGym 105k subscribers, Value: youtube.com/@PureGymVideo, ID: header
+														232 container items
+															233 container
+																234 link Description: Videos, Value: youtube.com/channel/UCBbB-PR9CsGcMnswP04TbhQ/videos
+															235 container
+																236 link Description: About, Value: youtube.com/channel/UCBbB-PR9CsGcMnswP04TbhQ/about
+												237 button Show less , ID: collapse
+													238 text Show less
+							239 container sections
+								240 container header
+									241 container title
+										242 heading 0 Comments, Value: 2, ID: count
+											243 container
+												244 text 0  Comments
+										245 container
+											246 container tooltip
+											247 button (collapsed) Description: Sort comments, ID: label, Secondary Actions: Expand
+												248 text Sort by
+									249 container simple-box
+										250 image Description: Default profile photo, ID: img
+										251 text field (settable) Value: Add a comment…, ID: simplebox-placeholder
+											252 text Add a comment…
+					93 container secondary-inner
+						94 container related
+							95 container items
+								96 container contents
+									97 container

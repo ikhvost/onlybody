@@ -1,0 +1,217 @@
+Browser tab: 2, Title: "How To: Weighted Parallel Bar Dips With Weight Plate And Belt - YouTube", URL: "https://www.youtube.com/watch?v=hVVVEPB2ntw".
+1 AXWebArea How To: Weighted Parallel Bar Dips With Weight Plate And Belt - YouTube, URL: youtube.com/watch
+	2 container
+		3 container content
+			4 container masthead
+				5 container container
+					6 container start
+						7 container guide-button
+							8 button Description: Guide, ID: button
+						9 container logo
+							10 link Description: YouTube Home, Value: youtube.com/, ID: logo
+							11 text PL
+						12 container
+							13 button Skip navigation
+								14 text Skip navigation
+					15 container
+						16 combo box (expanded, settable) Secondary Actions: Collapse
+						17 button Search
+					18 container buttons
+						19 container button
+							20 button Description: Settings, ID: button
+						21 container
+			23 container
+				24 container columns
+					25 container primary-inner
+						26 container player
+							27 container player-container-inner
+								28 container Description: YouTube Video Player, ID: movie_player
+									29 container
+										30 button Play
+											31 image
+									32 container
+										33 pop up button Show cards
+										34 button Channel watermark
+											35 image Channel watermark
+									36 container
+										37 slider Description: Seek slider, Value: 0
+										38 slider Description: Click or scroll the panel for precise seeking., Value: 0
+										39 button Play (k)
+											40 image
+										41 button Mute (m)
+											42 image
+										43 slider Description: Volume, Value: 100
+										44 container
+											45 button 0 Minutes 0 Seconds of 0 Minutes 39 Seconds
+												46 text 0:00
+												47 text  / 
+												48 text 0:39
+										49 button Auto-play is on
+										50 checkbox Description: Subtitles/closed captions unavailable, Value: 0
+										51 pop up button (collapsed) Description: Settings, Secondary Actions: Expand
+											52 image
+										53 button Cinema mode (t)
+											54 image
+										55 button Full screen (f)
+											56 image
+						57 container below
+							58 container above-the-fold
+								59 heading How To: Weighted Parallel Bar Dips With Weight Plate And Belt, Value: 1
+									60 text How To: Weighted Parallel Bar Dips With Weight Plate And Belt
+								61 container top-row
+									62 container owner
+										63 container
+											64 link Description: Live Lean TV Daily Exercises, Value: youtube.com/@LiveLean
+											65 container upload-info
+												66 link Description: Live Lean TV Daily Exercises, Value: youtube.com/@LiveLean
+												67 container Description: 25 thousand subscribers, ID: owner-sub-count
+													68 text 25k subscribers
+										69 container
+											70 button Subscribe to Live Lean TV Daily Exercises.
+												71 text Subscribe
+									72 container
+										73 container top-level-buttons-computed
+											74 container
+												75 checkbox Description: like this video along with 11 other people, Value: 0
+													76 text 11
+												77 checkbox Description: Dislike this video, Value: 0
+											78 button Share
+												79 text Share
+										80 button Save to playlist
+											81 text Save
+										82 button More actions
+								83 container bottom-row
+									84 container description
+										85 container description-inner
+											232 container info-container
+												233 container info
+													234 text 3,657 views 15 Sept 2016
+													235 link Description: #Dips, Value: youtube.com/hashtag/dips
+													236 link Description: #WeightedDips, Value: youtube.com/hashtag/weighteddips
+													237 link Description: #LiveLeanTV, Value: youtube.com/hashtag/liveleantv
+											94 container description-inline-expander
+												238 container expanded
+													239 text Weighted parallel bar dips with weight plate and belt are a great exercise that primarily targets the triceps, but also the chest and shoulders.
+► Try Our Workout App For Free: 
+													240 link Description: https://bit.ly/44H5Qur, Value: youtube.com/redirect
+													241 text 
+
+I’m using a dip weight belt to add weight, but you can also add a dumbbell between your thighs or ankles.
+
+To get started:
+1. Grab the bars and lift yourself until your arms are straight.
+2. Bend your elbows, and slowly lower yourself under control until your upper arms go just below your elbows.
+3. Make sure you keep the tension on your triceps by keeping your elbows tucked to your sides.
+4. Pause then push yourself back up to the starting position.
+5. Repeat.
+
+Weighted Parallel Bar Dips With Weight Plate And Belt:
+► MUSCLES WORKED: Triceps, Chest, Shoulders
+► TYPE: Strength
+► EQUIPMENT: Parallel Bar Dip Machine, Weight Belt With Chain, Weight Plate
+► EXPERIENCE: Advanced
+
+Read more: 
+													242 link Description: https://www.liveleantv.com/how-to-do-..., Value: youtube.com/redirect
+													243 text 
+
+Follow Us On Social Media:
+► INSTAGRAM: 
+													244 link Description: Instagram Channel Link: bradgouthro, Value: youtube.com/redirect
+													245 text 
+► INSTAGRAM: 
+													246 link Description: Instagram Channel Link: LiveLeanTV, Value: youtube.com/redirect
+													247 text 
+► FACEBOOK: 
+													248 link Description: Facebook Channel Link: LiveLeanTV, Value: youtube.com/redirect
+													249 text 
+► TWITTER: 
+													250 link Description: Twitter Channel Link: bradgouthro, Value: youtube.com/redirect
+													251 text 
+► TWITTER: 
+													252 link Description: Twitter Channel Link: LiveLeanTV, Value: youtube.com/redirect
+													253 text 
+► TIK-TOK: 
+													254 link Description: TikTok Channel Link: bradgouthro, Value: youtube.com/redirect
+													255 text  
+► TIK-TOK: 
+													256 link Description: TikTok Channel Link: liveleantv, Value: youtube.com/redirect
+													257 text 
+► SNAPCHAT: 
+													258 link Description: Snapchat Channel Link: bradgouthro, Value: youtube.com/redirect
+													259 link Description: #WeightedDips, Value: youtube.com/hashtag/weighteddips
+													260 link Description: #Dips, Value: youtube.com/hashtag/dips
+													261 link Description: #LiveLeanTV, Value: youtube.com/hashtag/liveleantv
+													262 text 
+
+Business Enquiries: info@LiveLeanTV.com
+												263 container structured-description
+													264 container items
+														265 text Transcript
+														266 text Follow along using the transcript.
+														267 container
+															268 button Show transcript
+																269 text Show transcript
+														270 link Description: Live Lean TV Daily Exercises 25k subscribers, Value: youtube.com/@LiveLean, ID: header
+														271 container items
+															272 container
+																273 link Description: Videos, Value: youtube.com/channel/UCHcFIpm8rD9IrlDrw4Ted-Q/videos
+															274 container
+																275 link Description: About, Value: youtube.com/channel/UCHcFIpm8rD9IrlDrw4Ted-Q/about
+															276 link Description: Live Lean TV (main channel), Value: youtube.com/subscription_center
+															277 link Description: Facebook, Value: youtube.com/redirect
+															278 link Description: Instagram, Value: youtube.com/redirect
+															279 link Description: Twitter, Value: youtube.com/redirect
+															280 link Description: Snapchat, Value: youtube.com/redirect
+														281 link Description: Try Our Workout App For Free Try Our Workout App For Free, Value: youtube.com/redirect, ID: lockup-container
+												282 button Show less , ID: collapse
+													283 text Show less
+							284 container sections
+								285 container header
+									286 container title
+										287 heading 1 Comment, Value: 2, ID: count
+											288 container
+												289 text 1  Comment
+										290 container
+											291 container tooltip
+											292 button (collapsed) Description: Sort comments, ID: label, Secondary Actions: Expand
+												293 text Sort by
+									294 container simple-box
+										295 text field (settable) Value: Add a comment…, ID: simplebox-placeholder
+											296 text Add a comment…
+								297 container contents
+									298 container comment
+										299 container body
+											300 button Description: @LiveLean, ID: author-thumbnail-button
+											301 container main
+												302 container header
+													303 text Pinned by @LiveLean
+													304 container header-author
+														305 heading 3
+														306 link Description: @LiveLean, Value: youtube.com/@LiveLean, ID: name
+														307 link Description: 3 years ago, Value: youtube.com/watch
+												308 container content-text
+													309 text ► Try Our Workout App For Free: 
+													310 link Description: https://bit.ly/44H5Qur, Value: youtube.com/redirect
+													311 text 
+Which exercise demonstration video do you want to see next?
+												312 container action-buttons
+													313 container toolbar
+														314 container like-button
+															315 checkbox Description: Like this comment along with 0 other people, Value: 0
+															316 container tooltip
+														317 container dislike-button
+															318 checkbox Description: Dislike this comment, Value: 0
+															319 container tooltip
+														320 container reply-button-end
+															321 button Reply
+																322 text Reply
+											323 container action-menu
+												324 container button
+													325 button Description: Action menu, ID: button
+									326 text Top is selected, so you'll see featured comments
+					102 container secondary-inner
+						103 container related
+							104 container items
+								105 container contents
+									106 container

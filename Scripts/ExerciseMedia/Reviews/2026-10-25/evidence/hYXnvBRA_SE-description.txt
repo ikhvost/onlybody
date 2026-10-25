@@ -1,0 +1,108 @@
+Browser tab: 2, Title: "Dumbbell Reverse Fly - YouTube", URL: "https://www.youtube.com/watch?v=hYXnvBRA_SE".
+1 AXWebArea Dumbbell Reverse Fly - YouTube, URL: youtube.com/watch?v=hYXnvBRA_SE
+	2 container
+		3 container content
+			4 container masthead
+				5 container container
+					6 container start
+						7 container guide-button
+							8 button Description: Guide, ID: button
+						9 container logo
+							10 link Description: YouTube Home, Value: youtube.com/, ID: logo
+							11 text PL
+						12 container
+							13 button Skip navigation
+								14 text Skip navigation
+					15 container
+						16 combo box (expanded, settable) Secondary Actions: Collapse
+						17 button Search
+					18 container buttons
+						19 container button
+							20 button Description: Settings, ID: button
+						21 container
+			23 container
+				24 container columns
+					25 container primary-inner
+						26 container player
+							27 container player-container-inner
+								28 container Description: YouTube Video Player, ID: movie_player
+									29 container
+										30 button Play
+											31 image
+									32 container
+										33 slider Description: Seek slider, Value: 0
+										34 slider Description: Click or scroll the panel for precise seeking., Value: 0
+										35 button Play (k)
+											36 image
+										37 button Mute (m)
+											38 image
+										39 slider Description: Volume, Value: 100
+										40 container
+											41 button 0 Minutes 0 Seconds of 0 Minutes 18 Seconds
+												42 text 0:00
+												43 text  / 
+												44 text 0:18
+										45 button Auto-play is on
+										46 pop up button (collapsed) Description: Settings, Secondary Actions: Expand
+											47 image
+										48 button Cinema mode (t)
+											49 image
+										50 button Full screen (f)
+											51 image
+						52 container below
+							53 container above-the-fold
+								54 heading Dumbbell Reverse Fly, Value: 1
+									55 text Dumbbell Reverse Fly
+								56 container top-row
+									57 container owner
+										58 container
+											59 link Description: OPEX Abbotsford, Value: youtube.com/@opexabbotsford4917
+											60 container upload-info
+												61 link Description: OPEX Abbotsford, Value: youtube.com/@opexabbotsford4917
+												62 container Description: 107 subscribers, ID: owner-sub-count
+													63 text 107 subscribers
+										64 container
+											65 button Subscribe to OPEX Abbotsford.
+												66 text Subscribe
+									67 container
+										68 container top-level-buttons-computed
+											69 container
+												70 checkbox Description: like this video along with 9 other people, Value: 0
+													71 text 9
+												72 checkbox Description: Dislike this video, Value: 0
+											73 button Share
+										74 button Save to playlist
+										75 button More actions
+								76 container bottom-row
+									77 container description
+										78 container description-inner
+											224 container info-container
+												225 container info
+													226 text 9,657 views 2 Sept 2021
+													227 link Description: OPEX ABBOTSFORD, Value: youtube.com/results?search_query=OPEX+Abbotsford&sp=EiG4AQHCARtDaElKVVU1Z3ltdEtoRlFSeHFHend0cXFrLVE%253D
+											85 container description-inline-expander
+												228 container expanded
+													229 text Click the link below to book your consultation for your personalized plan here at OPEX ABBOTSFORD.
+
+
+													230 link Description: https://www.opexabbotsford.com/book-y..., Value: https://www.opexabbotsford.com/book-your-free-consult
+												231 container structured-description
+													232 container items
+														233 link Description: OPEX Abbotsford 107 subscribers, Value: youtube.com/@opexabbotsford4917, ID: header
+														234 container items
+															235 container
+																236 link Description: Videos, Value: youtube.com/channel/UCzt_ki13NeuOWR19vcKdGsg/videos
+															237 container
+																238 link Description: About, Value: youtube.com/channel/UCzt_ki13NeuOWR19vcKdGsg/about
+															239 link Description: Facebook, Value: https://www.facebook.com/jeromecarretas
+															240 link Description: Instagram, Value: https://www.instagram.com/jcarretas
+												241 button Show less , ID: collapse
+													242 text Show less
+							243 container
+								244 container
+									245 heading 2
+					92 container secondary-inner
+						93 container related
+							94 container items
+								95 container contents
+									96 container

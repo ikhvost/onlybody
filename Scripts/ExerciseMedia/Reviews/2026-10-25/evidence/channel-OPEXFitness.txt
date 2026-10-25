@@ -1,0 +1,39 @@
+URL: https://www.youtube.com/@OPEXFitness/about
+container about-container
+							867 heading Description, Value: 2
+								868 text Description
+							869 text Welcome to the OPEX Fitness & CoachRx YouTube Channel, where your journey to becoming a successful fitness coach begins. Our channel is dedicated to empowering coaches with the knowledge, skills, and inspiration needed to transform your passion for fitness into the career of your dreams. We aim to provide you with actionable insights, practical advice, and real-world examples that simplify your path and help you take action. Whether you're taking your first step towards coaching, looking to go full-time, or aiming to scale your existing practice, our videos are designed to guide, educate, and inspire you at every stage of your coaching journey. Join us to unlock your potential, connect with a like-minded community, and start writing your own success story in the world of fitness coaching. Subscribe and become a part of our mission to elevate the standards of coaching, one video at a time.
+
+OPEX Coaching Education - OPEXfit.com
+CoachRx - CoachRx.app
+							870 container links-section
+								871 heading Links, Value: 2
+									872 text Links
+								873 container link-list-container
+									874 text The OPEX Method
+									875 link Description: opexfit.com/ccp-level-1, Value: youtube.com/redirect
+									876 text CoachRx
+									877 link Description: coachrx.app, Value: youtube.com/redirect
+									878 text LearnRx
+									879 link Description: opexfit.com/learnrx, Value: youtube.com/redirect
+									880 text OPEX IG
+									881 link Description: instagram.com/opexfitness, Value: youtube.com/redirect
+									882 text CoachRx IG
+									883 link Description: instagram.com/coachrx.app, Value: youtube.com/redirect
+							884 container additional-info-container
+								885 heading More info, Value: 2
+									886 text More info
+								887 link Description: Sign in, Value: [sign-in link omitted]
+								888 text  to see email address
+								889 link Description: www.youtube.com/@OPEXFitness, Value: youtube.com/@OPEXFitness
+								890 text United States
+								891 text Joined 2 Mar 2015
+								892 text 39.8k subscribers
+								893 text 3,264 videos
+								894 text 47,600,821 views
+							895 container button-container
+								896 container
+									897 button Share channel
+										898 text Share channel
+
+The focused UI element is 903 container

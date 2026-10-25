@@ -1,0 +1,42 @@
+[
+  {
+    "url": "https://www.opexfit.com/",
+    "exitCode": 0,
+    "youtubeLinks": [
+      "https://www.youtube.com/@OPEXFitness"
+    ],
+    "reviewDate": "2026-10-25",
+    "reviewer": "Codex",
+    "scope": "Public HTML href/src links only; no video files downloaded"
+  },
+  {
+    "url": "https://www.origym.co.uk/",
+    "exitCode": 0,
+    "youtubeLinks": [
+      "https://www.youtube.com/c/OrigymPersonalTrainerCourses/videos"
+    ],
+    "reviewDate": "2026-10-25",
+    "reviewer": "Codex",
+    "scope": "Public HTML href/src links only; no video files downloaded"
+  },
+  {
+    "url": "https://www.scotthermanfitness.com/",
+    "exitCode": 0,
+    "youtubeLinks": [
+      "https://www.youtube.com/user/ScottHermanFitness?sub_confirmation=1"
+    ],
+    "reviewDate": "2026-10-25",
+    "reviewer": "Codex",
+    "scope": "Public HTML href/src links only; no video files downloaded"
+  },
+  {
+    "url": "https://opexabbotsford.com/",
+    "exitCode": 0,
+    "youtubeLinks": [
+      "https://www.youtube.com/embed/pBV1WFMvmY4?autoplay=1&mute=1&loop=1&playlist=pBV1WFMvmY4&controls=0&modestbranding=1&rel=0&iv_load_policy=3"
+    ],
+    "reviewDate": "2026-10-25",
+    "reviewer": "Codex",
+    "scope": "Public HTML href/src links only; no video files downloaded"
+  }
+]

@@ -1,0 +1,185 @@
+Browser tab: 2, Title: "How To Do A Weighted Wide Grip Pull Up With Weight Plate And Belt - YouTube", URL: "https://www.youtube.com/watch?v=GzT3B9MXDuk".
+1 AXWebArea How To Do A Weighted Wide Grip Pull Up With Weight Plate And Belt - YouTube, URL: youtube.com/watch?v=GzT3B9MXDuk
+	2 container
+		3 container content
+			4 container masthead
+				5 container container
+					6 container start
+						7 container guide-button
+							8 button Description: Guide, ID: button
+						9 container logo
+							10 link Description: YouTube Home, Value: youtube.com/, ID: logo
+							11 text PL
+						12 container
+							13 button Skip navigation
+								14 text Skip navigation
+					15 container
+						16 combo box (expanded, settable) Secondary Actions: Collapse
+						17 button Search
+					18 container buttons
+						19 container button
+							20 button Description: Settings, ID: button
+						21 container
+			23 container
+				24 container columns
+					25 container primary-inner
+						26 container player
+							27 container player-container-inner
+								28 container Description: YouTube Video Player, ID: movie_player
+									29 container
+										30 button Play
+											31 image
+									32 container
+										33 button Channel watermark
+											34 image Channel watermark
+									35 container
+										36 slider Description: Seek slider, Value: 0
+										37 slider Description: Click or scroll the panel for precise seeking., Value: 0
+										38 button Play (k)
+											39 image
+										40 button Mute (m)
+											41 image
+										42 slider Description: Volume, Value: 100
+										43 container
+											44 button 0 Minutes 0 Seconds of 0 Minutes 39 Seconds
+												45 text 0:00
+												46 text  / 
+												47 text 0:39
+										48 button Auto-play is on
+										49 checkbox Description: Subtitles/closed captions unavailable, Value: 0
+										50 pop up button (collapsed) Description: Settings, Secondary Actions: Expand
+											51 image
+										52 button Cinema mode (t)
+											53 image
+										54 button Full screen (f)
+											55 image
+						56 container below
+							57 container above-the-fold
+								58 heading How To Do A Weighted Wide Grip Pull Up With Weight Plate And Belt, Value: 1
+									59 text How To Do A Weighted Wide Grip Pull Up With Weight Plate And Belt
+								60 container top-row
+									61 container owner
+										62 container
+											63 link Description: Live Lean TV Daily Exercises, Value: youtube.com/@LiveLean
+											64 container upload-info
+												65 link Description: Live Lean TV Daily Exercises, Value: youtube.com/@LiveLean
+												66 container Description: 25 thousand subscribers, ID: owner-sub-count
+													67 text 25k subscribers
+										68 container
+											69 image
+											70 button Subscribe to Live Lean TV Daily Exercises.
+												71 text Subscribe
+									72 container
+										73 container top-level-buttons-computed
+											74 container
+												75 checkbox Description: like this video along with 13 other people, Value: 0
+													76 text 13
+												77 checkbox Description: Dislike this video, Value: 0
+											78 button Share
+												79 text Share
+										80 button Save to playlist
+											81 text Save
+										82 button More actions
+								83 container bottom-row
+									84 container description
+										85 container description-inner
+											220 container info-container
+												221 container info
+													222 text 2,168 views 19 Apr 2019
+											91 container description-inline-expander
+												223 container expanded
+													224 text The Wide Grip Weighted Pull Up is an excellent exercise to target the back. Using a wider grip makes it more challenging and can help build a wider back. You can add weight to your pull up in many different ways. In this exercise demo I’m adding weight to a dip belt.
+To get started:
+1. Once you have added the weight, grip the handles of pull up bar with a wide grip and hang at arm’s length.
+2. Contract your lats and think about pulling your elbows down to pull your chest to the bar. 
+3. Pause, then under control, lower your body and fully extend your arms back to the starting position. 
+4. Repeat for reps.
+
+DISCOVER THE WORKOUT PROGRAM SUITED FOR YOUR GOALS
+Live Lean Program Selector Quiz: 
+													225 link Description: http://www.liveleantv.com/quiz, Value: http://www.liveleantv.com/quiz
+													226 text 
+
+Don't forget to subscribe and check out our main channel: 
+													227 link Description: YouTube Channel Link: liveleantv, Value: youtube.com/liveleantv
+													228 text 
+
+Facebook: 
+													229 link Description: Facebook Channel Link: LiveLeanTV, Value: http://www.facebook.com/LiveLeanTV
+													230 text 
+Instagram: 
+													231 link Description: Instagram Channel Link: LiveLeanTV, Value: http://www.instagram.com/LiveLeanTV
+													232 text 
+Twitter: 
+													233 link Description: Twitter Channel Link: LiveLeanTV, Value: http://www.twitter.com/LiveLeanTV
+													234 text 
+Snapchat: 
+													235 link Description: Snapchat Channel Link: LiveLeanTV, Value: http://www.snapchat.com/add/LiveLeanTV
+												236 container structured-description
+													237 container items
+														238 text Transcript
+														239 text Follow along using the transcript.
+														240 container
+															241 button Show transcript
+																242 text Show transcript
+														243 link Description: Live Lean TV Daily Exercises 25k subscribers, Value: youtube.com/@LiveLean, ID: header
+														244 container items
+															245 container
+																246 link Description: Videos, Value: youtube.com/channel/UCHcFIpm8rD9IrlDrw4Ted-Q/videos
+															247 container
+																248 link Description: About, Value: youtube.com/channel/UCHcFIpm8rD9IrlDrw4Ted-Q/about
+															249 link Description: Live Lean TV (main channel), Value: youtube.com/subscription_center?add_user=bradgouthrofitness
+															250 link Description: Facebook, Value: http://www.facebook.com/liveleantv
+															251 link Description: Instagram, Value: http://www.instagram.com/liveleantv
+															252 link Description: Twitter, Value: http://www.twitter.com/liveleantv
+															253 link Description: Snapchat, Value: http://www.snapchat.com/liveleantv
+												254 button Show less , ID: collapse
+													255 text Show less
+							256 container sections
+								257 container header
+									258 container title
+										259 heading 1 Comment, Value: 2, ID: count
+											260 container
+												261 text 1  Comment
+										262 container
+											263 container tooltip
+											264 button (collapsed) Description: Sort comments, ID: label, Secondary Actions: Expand
+												265 text Sort by
+									266 container simple-box
+										267 image Description: Default profile photo, ID: img
+										268 text field (settable) Value: Add a comment…, ID: simplebox-placeholder
+											269 text Add a comment…
+								270 container contents
+									271 container comment
+										272 container body
+											273 button Description: @mrsj9548, ID: author-thumbnail-button
+											274 container main
+												275 container header-author
+													276 heading @mrsj9548, Value: 3
+														277 link Description: @mrsj9548, Value: youtube.com/@mrsj9548, ID: author-text
+													278 link Description: 7 years ago (edited), Value: youtube.com/watch?v=GzT3B9MXDuk&lc=UgwX-LWYXBSxZgDi2e94AaABAg
+												279 container content-text
+													280 text Hello 
+													281 text  what work out does Jessica do to keep her back in good working condition 
+													282 text ? Brad thank you for the video 
+													283 text .
+												284 container action-buttons
+													285 container toolbar
+														286 container like-button
+															287 checkbox Description: Like this comment along with 0 other people, Value: 0
+															288 container tooltip
+														289 container dislike-button
+															290 checkbox Description: Dislike this comment, Value: 0
+															291 container tooltip
+														292 container reply-button-end
+															293 button Reply
+																294 text Reply
+											295 container action-menu
+												296 container button
+													297 button Description: Action menu, ID: button
+									298 text Top is selected, so you'll see featured comments
+					97 container secondary-inner
+						98 container related
+							99 container items
+								100 container contents
+									101 container

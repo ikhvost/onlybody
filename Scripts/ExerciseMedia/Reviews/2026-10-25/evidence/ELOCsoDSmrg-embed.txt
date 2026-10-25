@@ -1,0 +1,740 @@
+Browser tab: 2, Title: "How To: Seated Leg Curl (Cybex) - YouTube", URL: "https://www.youtube.com/watch?v=ELOCsoDSmrg".
+1 AXWebArea How To: Seated Leg Curl (Cybex) - YouTube, URL: youtube.com/watch
+	2 container
+		3 container content
+			4 container masthead
+				5 container container
+					6 container start
+						7 container guide-button
+							8 button Description: Guide, ID: button
+						9 container logo
+							10 link Description: YouTube Home, Value: youtube.com/, ID: logo
+							11 text PL
+						12 container
+							13 button Skip navigation
+								14 text Skip navigation
+					15 container
+						16 combo box (expanded, settable) Secondary Actions: Collapse
+						17 button Search
+					18 container buttons
+						19 container button
+							20 button Description: Settings, ID: button
+						21 container
+			23 container
+				24 container columns
+					25 container primary-inner
+						26 container player
+							27 container player-container-inner
+								28 container Description: YouTube Video Player, ID: movie_player
+									29 container
+										30 button Play
+											31 image
+									32 container
+										33 button Channel watermark
+											34 image Channel watermark
+									35 container
+										36 slider Description: Seek slider, Value: 0
+										37 slider Description: Click or scroll the panel for precise seeking., Value: 0
+										38 button Play (k)
+											39 image
+										40 button Mute (m)
+											41 image
+										42 slider Description: Volume, Value: 100
+										43 container
+											44 button 0 Minutes 0 Seconds of 3 Minutes 9 Seconds
+												45 text 0:00
+												46 text  / 
+												47 text 3:09
+										48 button Introduction
+											49 container Description: Introduction, Help: View chapter
+												50 text Introduction
+										51 button Auto-play is on
+										52 checkbox Description: Subtitles/closed captions unavailable, Value: 0
+										53 pop up button (collapsed) Description: Settings, Secondary Actions: Expand
+											54 image
+										55 button Cinema mode (t)
+											56 image
+										57 button Full screen (f)
+											58 image
+						59 container below
+							60 container above-the-fold
+								61 heading How To: Seated Leg Curl (Cybex), Value: 1
+									62 text How To: Seated Leg Curl (Cybex)
+								63 container top-row
+									64 container owner
+										65 container
+											66 link Description: ScottHermanFitness, Value: youtube.com/@ScottHermanFitness
+											67 container upload-info
+												68 container channel-name
+													69 link Description: ScottHermanFitness, Value: youtube.com/@ScottHermanFitness
+													70 image Verified
+												71 container Description: 2.84 million subscribers, ID: owner-sub-count
+													72 text 2.84m subscribers
+											73 container
+												74 button Join this channel
+													75 text Join
+										76 container
+											77 image
+											78 button Subscribe to ScottHermanFitness.
+												79 text Subscribe
+									80 container
+										81 container top-level-buttons-computed
+											82 container
+												83 checkbox Description: like this video along with 9,846 other people, Value: 0
+													84 text 9.8k
+												85 checkbox Description: Dislike this video, Value: 0
+											86 button Share
+										87 button Save to playlist
+										88 button More actions
+								89 container bottom-row
+									90 container description
+										91 container description-inner
+											151 container info-container
+												152 container info
+													153 text 1,961,582 views 5 Oct 2009
+													154 link Description: #Bodybuilding, Value: youtube.com/hashtag/bodybuilding
+													155 link Description: #MuscleGain, Value: youtube.com/hashtag/musclegain
+													156 link Description: #ScottHerman, Value: youtube.com/hashtag/scottherman
+											100 container description-inline-expander
+												157 container expanded
+													158 text PUSH, PULL, LEGS (12 Weeks Program) - 
+													159 link Description: http://goo.gl/X8HeL5, Value: youtube.com/redirect
+													160 text 
+
+4 DAY SPLIT Muscle Building 12 Week Program: 
+													161 link Description: http://goo.gl/6AlH84, Value: youtube.com/redirect
+													162 text 
+
+Twitter: 
+													163 link Description: Twitter Channel Link: Scott_Herman, Value: youtube.com/redirect
+													164 text 
+Facebook: 
+													165 link Description: Facebook Channel Link: ScottHermanFitness, Value: youtube.com/redirect
+													166 text 
+Instagram: 
+													167 link Description: Instagram Channel Link: ScottHermanFitness, Value: youtube.com/redirect
+													168 text 
+----------------------------------------
+🏆 GET MY FREE PROGRAM NOW:  
+													169 link Description: https://muscularstrength.com/guarante..., Value: youtube.com/redirect
+													170 text  
+
+📨 Join My MAILING LIST: 
+													171 link Description: https://muscularstrength.com/mailing-..., Value: youtube.com/redirect
+													172 text 
+
+💪🏻 CHECK OUT MY HOME & GYM WORKOUT PROGRAMS: 
+													173 link Description: https://muscularstrength.com/program-..., Value: youtube.com/redirect
+													174 text  
+
+💯🏋️ONLINE COACHING: 
+													175 link Description: https://muscularstrength.com/consulta..., Value: youtube.com/redirect
+													176 text  
+
+📱 INSTAGRAM: 
+													177 link Description: Instagram Channel Link: scotthermanfitness, Value: youtube.com/redirect
+													178 text  
+📱 TIKTOK: 
+													179 link Description: TikTok Channel Link: scotthermanfitness, Value: youtube.com/redirect
+													180 text  
+----------------------------------------
+DOWNLOAD MY APP! – iPhone & Android! 
+
+													181 link Description: https://muscularstrength.com/phoneapp, Value: youtube.com/redirect
+													182 text  
+----------------------------------------
+
+													183 link Description: #ScottHerman, Value: youtube.com/hashtag/scottherman
+													184 link Description: #Bodybuilding, Value: youtube.com/hashtag/bodybuilding
+													185 link Description: #MuscleGain, Value: youtube.com/hashtag/musclegain
+												186 container structured-description
+													187 container items
+														188 container
+															189 text How this was made
+															190 text Auto-dubbed
+															191 text Audio tracks for some languages were automatically generated. 
+															192 link Description: Learn more, Value: support.google.com/youtube/answer/15569972
+														193 container dismissible
+															194 container header-container
+																195 heading Chapters View all, Value: 2, ID: header
+																	196 text Chapters
+																	197 container
+																		198 button View all
+																			199 text View all
+															200 container items
+																201 link Description: Introduction 0:00, Value: youtube.com/watch, ID: endpoint
+																202 link Description: Machine adjustments 0:12, Value: youtube.com/watch, ID: endpoint
+																203 link Description: Execution and form 1:21, Value: youtube.com/watch, ID: endpoint
+																204 link Description: Pro tips and closing 2:15, Value: youtube.com/watch, ID: endpoint
+														205 text Transcript
+														206 text Follow along using the transcript.
+														207 container
+															208 button Show transcript
+																209 text Show transcript
+														210 link Description: ScottHermanFitness 2.84m subscribers, Value: youtube.com/@ScottHermanFitness, ID: header
+														211 container items
+															212 container
+																213 link Description: Videos, Value: youtube.com/channel/UCEtMRF1ywKMc4sf3EXYyDzw/videos
+															214 container
+																215 link Description: About, Value: youtube.com/channel/UCEtMRF1ywKMc4sf3EXYyDzw/about
+															216 link Description: Facebook, Value: youtube.com/redirect
+															217 link Description: Instagram, Value: youtube.com/redirect
+															218 link Description: Twitter, Value: youtube.com/redirect
+												219 button Show less , ID: collapse
+													220 text Show less
+							221 container sections
+								222 container header
+									223 container title
+										224 heading 210 Comments, Value: 2, ID: count
+											225 container
+												226 text 210  Comments
+										227 container
+											251 container tooltip
+											228 button (collapsed) Description: Sort comments, ID: label, Secondary Actions: Expand
+												252 text Sort by
+									229 container simple-box
+										230 text field (settable) Value: Add a comment…, ID: simplebox-placeholder
+											253 text Add a comment…
+								231 container contents
+									232 container
+										233 container comment
+											254 container body
+												255 container author-thumbnail
+													256 button Description: @Engelhafen, ID: author-thumbnail-button
+												257 container main
+													258 container header-author
+														259 heading @Engelhafen, Value: 3
+															260 link Description: @Engelhafen, Value: youtube.com/@Engelhafen, ID: author-text
+														261 link Description: 12 years ago, Value: youtube.com/watch
+													262 text Does it help to do it shirtless? :D
+													263 container action-buttons
+														264 container toolbar
+															265 container like-button
+																266 checkbox Description: Like this comment along with 723 other people, Value: 0
+																267 container tooltip
+															268 text 723
+															269 container dislike-button
+																270 checkbox Description: Dislike this comment, Value: 0
+																271 container tooltip
+															272 container reply-button-end
+																273 button Reply
+																	274 text Reply
+												275 container action-menu
+													276 container button
+														277 button Description: Action menu, ID: button
+										247 container
+											248 container more-replies-sub-thread
+												249 button 18 replies
+													278 text 18 replies
+									250 container comment
+										279 container body
+											280 button Description: @ClodaghHhHh, ID: author-thumbnail-button
+											281 container main
+												282 container header-author
+													283 heading @ClodaghHhHh, Value: 3
+														284 link Description: @ClodaghHhHh, Value: youtube.com/@ClodaghHhHh, ID: author-text
+													285 link Description: 4 years ago, Value: youtube.com/watch
+												286 text 3 times I’ve gone up to this machine, can’t pull the adjustments properly and just left in shame
+												287 container action-buttons
+													288 container toolbar
+														289 container like-button
+															290 checkbox Description: Like this comment along with 8 other people, Value: 0
+															291 container tooltip
+														292 text 8
+														293 container dislike-button
+															294 checkbox Description: Dislike this comment, Value: 0
+															295 container tooltip
+														296 container reply-button-end
+															297 button Reply
+																298 text Reply
+											299 container action-menu
+												300 container button
+													301 button Description: Action menu, ID: button
+									302 container
+										303 container comment
+											304 container body
+												305 container author-thumbnail
+													306 button Description: @vinny2474, ID: author-thumbnail-button
+												307 container main
+													308 container header-author
+														309 heading @vinny2474, Value: 3
+															310 link Description: @vinny2474, Value: youtube.com/@vinny2474, ID: author-text
+														311 link Description: 5 years ago, Value: youtube.com/watch
+													312 text I can't believe I'm watching a video of yours from 11 years ago lol. The point is that I needed this information, and it's still good ! Thanks again scott!
+													313 container action-buttons
+														314 container toolbar
+															315 container like-button
+																316 checkbox Description: Like this comment along with 191 other people, Value: 0
+																317 container tooltip
+															318 text 191
+															319 container dislike-button
+																320 checkbox Description: Dislike this comment, Value: 0
+																321 container tooltip
+															322 container reply-button-end
+																323 button Reply
+																	324 text Reply
+												325 container action-menu
+													326 container button
+														327 button Description: Action menu, ID: button
+										328 container
+											329 container more-replies-sub-thread
+												330 button 4 replies
+													331 text 4 replies
+									332 container
+										333 container comment
+											334 container body
+												335 container author-thumbnail
+													336 button Description: @Alababm, ID: author-thumbnail-button
+												337 container main
+													338 container header-author
+														339 heading @Alababm, Value: 3
+															340 link Description: @Alababm, Value: youtube.com/@Alababm, ID: author-text
+														341 link Description: 3 years ago, Value: youtube.com/watch
+													342 text My dumbass have been doing it with my calves.
+													343 container action-buttons
+														344 container toolbar
+															345 container like-button
+																346 checkbox Description: Like this comment along with 3 other people, Value: 0
+																347 container tooltip
+															348 text 3
+															349 container dislike-button
+																350 checkbox Description: Dislike this comment, Value: 0
+																351 container tooltip
+															352 container reply-button-end
+																353 button Reply
+																	354 text Reply
+												355 container action-menu
+													356 container button
+														357 button Description: Action menu, ID: button
+										358 container
+											359 container more-replies-sub-thread
+												360 button 1 reply
+													361 text 1 reply
+									362 container
+										363 container comment
+											364 container body
+												365 container author-thumbnail
+													366 button Description: @Mazemaster18, ID: author-thumbnail-button
+												367 container main
+													368 container header-author
+														369 heading @Mazemaster18, Value: 3
+															370 link Description: @Mazemaster18, Value: youtube.com/@Mazemaster18, ID: author-text
+														371 link Description: 11 years ago, Value: youtube.com/watch
+													372 text ofcourse we all like it tight.
+													373 container action-buttons
+														374 container toolbar
+															375 container like-button
+																376 checkbox Description: Like this comment along with 65 other people, Value: 0
+																377 container tooltip
+															378 text 65
+															379 container dislike-button
+																380 checkbox Description: Dislike this comment, Value: 0
+																381 container tooltip
+															382 container reply-button-end
+																383 button Reply
+																	384 text Reply
+												385 container action-menu
+													386 container button
+														387 button Description: Action menu, ID: button
+										388 container
+											389 container more-replies-sub-thread
+												390 button 2 replies
+													391 text 2 replies
+									392 container comment
+										393 container body
+											394 button Description: @ulisescastro677, ID: author-thumbnail-button
+											395 container main
+												396 container header-author
+													397 heading @ulisescastro677, Value: 3
+														398 link Description: @ulisescastro677, Value: youtube.com/@ulisescastro677, ID: author-text
+													399 link Description: 4 years ago, Value: youtube.com/watch
+												400 text Thank you, Scott. 12 years later
+												401 container action-buttons
+													402 container toolbar
+														403 container like-button
+															404 checkbox Description: Like this comment along with 1 other person, Value: 0
+															405 container tooltip
+														406 text 1
+														407 container dislike-button
+															408 checkbox Description: Dislike this comment, Value: 0
+															409 container tooltip
+														410 container reply-button-end
+															411 button Reply
+																412 text Reply
+											413 container action-menu
+												414 container button
+													415 button Description: Action menu, ID: button
+									416 container comment
+										417 container body
+											418 button Description: @Alex-cv2mz, ID: author-thumbnail-button
+											419 container main
+												420 container header-author
+													421 heading @Alex-cv2mz, Value: 3
+														422 link Description: @Alex-cv2mz, Value: youtube.com/@Alex-cv2mz, ID: author-text
+													423 link Description: 9 months ago, Value: youtube.com/watch
+												424 text The trick with the hands is gold. I kept sliding forward, now I really feel my hamstrings burn.
+												425 container action-buttons
+													426 container toolbar
+														427 container like-button
+															428 checkbox Description: Like this comment along with 0 other people, Value: 0
+															429 container tooltip
+														430 container dislike-button
+															431 checkbox Description: Dislike this comment, Value: 0
+															432 container tooltip
+														433 container reply-button-end
+															434 button Reply
+																435 text Reply
+											436 container action-menu
+												437 container button
+													438 button Description: Action menu, ID: button
+									439 container comment
+										440 container body
+											441 button Description: @TimeLapse54321, ID: author-thumbnail-button
+											442 container main
+												443 container header-author
+													444 heading @TimeLapse54321, Value: 3
+														445 link Description: @TimeLapse54321, Value: youtube.com/@TimeLapse54321, ID: author-text
+													446 link Description: 10 years ago, Value: youtube.com/watch
+												447 text Thanks for that trick you do with your hands! I keep sliding forward on the seat now that my weights have been increasing. I'll try this method next time I'm at the gym.
+												448 container action-buttons
+													449 container toolbar
+														450 container like-button
+															451 checkbox Description: Like this comment along with 10 other people, Value: 0
+															452 container tooltip
+														453 text 10
+														454 container dislike-button
+															455 checkbox Description: Dislike this comment, Value: 0
+															456 container tooltip
+														457 container reply-button-end
+															458 button Reply
+																459 text Reply
+											460 container action-menu
+												461 container button
+													462 button Description: Action menu, ID: button
+									463 container comment
+										464 container body
+											465 button Description: @Give_Me_Rent, ID: author-thumbnail-button
+											466 container main
+												467 container header-author
+													468 heading @Give_Me_Rent, Value: 3
+														469 link Description: @Give_Me_Rent, Value: youtube.com/@Give_Me_Rent, ID: author-text
+													470 link Description: 4 years ago, Value: youtube.com/watch
+												471 text Scott is the GOAT of youtube fitness
+												472 container action-buttons
+													473 container toolbar
+														474 container like-button
+															475 checkbox Description: Like this comment along with 2 other people, Value: 0
+															476 container tooltip
+														477 text 2
+														478 container dislike-button
+															479 checkbox Description: Dislike this comment, Value: 0
+															480 container tooltip
+														481 container reply-button-end
+															482 button Reply
+																483 text Reply
+											484 container action-menu
+												485 container button
+													486 button Description: Action menu, ID: button
+									487 container comment
+										488 container body
+											489 button Description: @SteakNEggs24, ID: author-thumbnail-button
+											490 container main
+												491 container header-author
+													492 heading @SteakNEggs24, Value: 3
+														493 link Description: @SteakNEggs24, Value: youtube.com/@SteakNEggs24, ID: author-text
+													494 link Description: 3 years ago, Value: youtube.com/watch
+												495 text This machine hits the hamstring’s amazingly well
+												496 container action-buttons
+													497 container toolbar
+														498 container like-button
+															499 checkbox Description: Like this comment along with 0 other people, Value: 0
+															500 container tooltip
+														501 container dislike-button
+															502 checkbox Description: Dislike this comment, Value: 0
+															503 container tooltip
+														504 container reply-button-end
+															505 button Reply
+																506 text Reply
+											507 container action-menu
+												508 container button
+													509 button Description: Action menu, ID: button
+									510 container comment
+										511 container body
+											512 button Description: @Sabres2026, ID: author-thumbnail-button
+											513 container main
+												514 container header-author
+													515 heading @Sabres2026, Value: 3
+														516 link Description: @Sabres2026, Value: youtube.com/@Sabres2026, ID: author-text
+													517 link Description: 10 years ago, Value: youtube.com/watch
+												518 text Love your vids. Trying to watch them all.
+												519 container action-buttons
+													520 container toolbar
+														521 container like-button
+															522 checkbox Description: Like this comment along with 1 other person, Value: 0
+															523 container tooltip
+														524 text 1
+														525 container dislike-button
+															526 checkbox Description: Dislike this comment, Value: 0
+															527 container tooltip
+														528 container reply-button-end
+															529 button Reply
+																530 text Reply
+											531 container action-menu
+												532 container button
+													533 button Description: Action menu, ID: button
+									534 container comment
+										535 container body
+											536 button Description: @peppehgreens66, ID: author-thumbnail-button
+											537 container main
+												538 container header-author
+													539 heading @peppehgreens66, Value: 3
+														540 link Description: @peppehgreens66, Value: youtube.com/@peppehgreens66, ID: author-text
+													541 link Description: 5 years ago, Value: youtube.com/watch
+												542 text Thank god. I finally dont scoot foward while I do this exersice. I think it had to do with the pivot point of the machine not being inline with my knee
+												543 container action-buttons
+													544 container toolbar
+														545 container like-button
+															546 checkbox Description: Like this comment along with 2 other people, Value: 0
+															547 container tooltip
+														548 text 2
+														549 container dislike-button
+															550 checkbox Description: Dislike this comment, Value: 0
+															551 container tooltip
+														552 container reply-button-end
+															553 button Reply
+																554 text Reply
+											555 container action-menu
+												556 container button
+													557 button Description: Action menu, ID: button
+									558 container comment
+										559 container body
+											560 button Description: @lovacc_1967, ID: author-thumbnail-button
+											561 container main
+												562 container header-author
+													563 heading @lovacc_1967, Value: 3
+														564 link Description: @lovacc_1967, Value: youtube.com/@lovacc_1967, ID: author-text
+													565 link Description: 4 years ago, Value: youtube.com/watch
+												566 text thank you very much there are different sorts of machine in the gyms i visit so i always got confused how to do this one and avoided it
+												567 container action-buttons
+													568 container toolbar
+														569 container like-button
+															570 checkbox Description: Like this comment along with 1 other person, Value: 0
+															571 container tooltip
+														572 text 1
+														573 container dislike-button
+															574 checkbox Description: Dislike this comment, Value: 0
+															575 container tooltip
+														576 container reply-button-end
+															577 button Reply
+																578 text Reply
+											579 container action-menu
+												580 container button
+													581 button Description: Action menu, ID: button
+									582 container comment
+										583 container body
+											584 button Description: @themorningsky2632, ID: author-thumbnail-button
+											585 container main
+												586 container header-author
+													587 heading @themorningsky2632, Value: 3
+														588 link Description: @themorningsky2632, Value: youtube.com/@themorningsky2632, ID: author-text
+													589 link Description: 5 years ago, Value: youtube.com/watch
+												590 text Thank you for this video.  I was using the machine for the first time and I didn't know how to set it up properly, and it caused a very uncomfortable feeling on my legs.  This video helped me fix it perfectly ^^
+												591 container action-buttons
+													592 container toolbar
+														593 container like-button
+															594 checkbox Description: Like this comment along with 7 other people, Value: 0
+															595 container tooltip
+														596 text 7
+														597 container dislike-button
+															598 checkbox Description: Dislike this comment, Value: 0
+															599 container tooltip
+														600 container reply-button-end
+															601 button Reply
+																602 text Reply
+											603 container action-menu
+												604 container button
+													605 button Description: Action menu, ID: button
+									606 container comment
+										607 container body
+											608 button Description: @bohmad1, ID: author-thumbnail-button
+											609 container main
+												610 container header-author
+													611 heading @bohmad1, Value: 3
+														612 link Description: @bohmad1, Value: youtube.com/@bohmad1, ID: author-text
+													613 link Description: 9 years ago, Value: youtube.com/watch
+												614 text Beautiful and distinctive
+												615 container action-buttons
+													616 container toolbar
+														617 container like-button
+															618 checkbox Description: Like this comment along with 1 other person, Value: 0
+															619 container tooltip
+														620 text 1
+														621 container dislike-button
+															622 checkbox Description: Dislike this comment, Value: 0
+															623 container tooltip
+														624 container reply-button-end
+															625 button Reply
+																626 text Reply
+											627 container action-menu
+												628 container button
+													629 button Description: Action menu, ID: button
+									630 container comment
+										631 container body
+											632 button Description: @quandaledingle8960, ID: author-thumbnail-button
+											633 container main
+												634 container header-author
+													635 heading @quandaledingle8960, Value: 3
+														636 link Description: @quandaledingle8960, Value: youtube.com/@quandaledingle8960, ID: author-text
+													637 link Description: 3 years ago, Value: youtube.com/watch
+												638 text Lining knee up with pivot point is an awesome que to look for. Tybb
+												639 container action-buttons
+													640 container toolbar
+														641 container like-button
+															642 checkbox Description: Like this comment along with 0 other people, Value: 0
+															643 container tooltip
+														644 container dislike-button
+															645 checkbox Description: Dislike this comment, Value: 0
+															646 container tooltip
+														647 container reply-button-end
+															648 button Reply
+																649 text Reply
+											650 container action-menu
+												651 container button
+													652 button Description: Action menu, ID: button
+									653 container comment
+										654 container body
+											655 button Description: @MOHAMMEDABDULNADEEMAHMEDPASHA, ID: author-thumbnail-button
+											656 container main
+												657 container header-author
+													658 heading @MOHAMMEDABDULNADEEMAHMEDPASHA, Value: 3
+														659 link Description: @MOHAMMEDABDULNADEEMAHMEDPASHA, Value: youtube.com/@MOHAMMEDABDULNADEEMAHMEDPASHA, ID: author-text
+													660 link Description: 5 years ago, Value: youtube.com/watch
+												661 text simple  instructions and great way of explanation .., thank you !! for what your doing.
+												662 container action-buttons
+													663 container toolbar
+														664 container like-button
+															665 checkbox Description: Like this comment along with 5 other people, Value: 0
+															666 container tooltip
+														667 text 5
+														668 container dislike-button
+															669 checkbox Description: Dislike this comment, Value: 0
+															670 container tooltip
+														671 container reply-button-end
+															672 button Reply
+																673 text Reply
+											674 container action-menu
+												675 container button
+													676 button Description: Action menu, ID: button
+									677 container
+										678 container comment
+											679 container body
+												680 container author-thumbnail
+													681 button Description: @B_Badd, ID: author-thumbnail-button
+												682 container main
+													683 container header-author
+														684 heading @B_Badd, Value: 3
+															685 link Description: @B_Badd, Value: youtube.com/@B_Badd, ID: author-text
+														686 link Description: 6 years ago, Value: youtube.com/watch
+													687 text I'm starting to explore the weight section and every time I google certain exercises I don't know your vids always come up!  Thank you for such concise helpful tips, I feel so much more confident and prepared.  To the gym! :)
+													688 container action-buttons
+														689 container toolbar
+															690 container like-button
+																691 checkbox Description: Like this comment along with 110 other people, Value: 0
+																692 container tooltip
+															693 text 110
+															694 container dislike-button
+																695 checkbox Description: Dislike this comment, Value: 0
+																696 container tooltip
+															697 container reply-button-end
+																698 button Reply
+																	699 text Reply
+												700 container action-menu
+													701 container button
+														702 button Description: Action menu, ID: button
+										703 container
+											704 container more-replies-sub-thread
+												705 button 1 reply
+													706 text 1 reply
+									707 container comment
+										708 container body
+											709 button Description: @dougbutcher4452, ID: author-thumbnail-button
+											710 container main
+												711 container header-author
+													712 heading @dougbutcher4452, Value: 3
+														713 link Description: @dougbutcher4452, Value: youtube.com/@dougbutcher4452, ID: author-text
+													714 link Description: 2 years ago, Value: youtube.com/watch
+												715 text I never noticed the dot. Thanks
+												716 container action-buttons
+													717 container toolbar
+														718 container like-button
+															719 checkbox Description: Like this comment along with 0 other people, Value: 0
+															720 container tooltip
+														721 container dislike-button
+															722 checkbox Description: Dislike this comment, Value: 0
+															723 container tooltip
+														724 container reply-button-end
+															725 button Reply
+																726 text Reply
+											727 container action-menu
+												728 container button
+													729 button Description: Action menu, ID: button
+									730 container comment
+										731 container body
+											732 button Description: @brunokumar3163, ID: author-thumbnail-button
+											733 container main
+												734 container header-author
+													735 heading @brunokumar3163, Value: 3
+														736 link Description: @brunokumar3163, Value: youtube.com/@brunokumar3163, ID: author-text
+													737 link Description: 6 years ago, Value: youtube.com/watch
+												738 text Informative about pivot point..
+												739 container action-buttons
+													740 container toolbar
+														741 container like-button
+															742 checkbox Description: Like this comment along with 0 other people, Value: 0
+															743 container tooltip
+														744 container dislike-button
+															745 checkbox Description: Dislike this comment, Value: 0
+															746 container tooltip
+														747 container reply-button-end
+															748 button Reply
+																749 text Reply
+											750 container action-menu
+												751 container button
+													752 button Description: Action menu, ID: button
+					110 container secondary-inner
+						111 container related
+							112 container items
+								113 container contents
+									114 container
+						922 text Embed Video
+					923 container scrollable
+						924 container basic
+							925 container embed-code
+								926 text entry area (settable) ID: textarea, Value: <iframe width="560" height="315" src="https://www.youtube.com/embed/ELOCsoDSmrg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+							927 container start-at-wrapper
+								928 checkbox Start at, Value: 0, ID: start-at-checkbox
+									929 text Start at
+								930 container Description: 0 seconds, ID: start-at-timestamp
+									931 container container
+										932 text field (disabled) 0:00
+						933 container embed-options
+							934 text EMBED OPTIONS
+							935 checkbox Show player controls., Value: 1, ID: player-controls-option
+								936 text Show player controls.
+							937 container privacy-mode-wrapper
+								938 checkbox Value: 0, ID: privacy-mode-option, When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.
+									939 container When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.
+										940 text Enable privacy-enhanced mode.
+								941 container Description: tooltip, ID: privacy-tooltip
+						942 container additional-info
+							943 container additional-links
+								944 link Description: API Reference, Value: developers.google.com/youtube/iframe_api_reference
+								945 link Description: Developer Sample, Value: developers.google.com/youtube/youtube_player_demo
+							946 container legal-info
+								947 text By embedding YouTube videos on your site, you are agreeing to 
+								948 link Description: YouTube API Terms of Service, Value: developers.google.com/youtube/terms/api-services-terms-of-service
+					949 container
+						950 button Copy
+							951 text Copy
+
+The focused UI element is 903 container

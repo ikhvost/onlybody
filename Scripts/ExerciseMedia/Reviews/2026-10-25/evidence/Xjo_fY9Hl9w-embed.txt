@@ -1,0 +1,512 @@
+Browser tab: 2, Title: "How To Do A DUMBBELL GOBLET SQUAT | Exercise Demonstration Video and Guide - YouTube", URL: "https://www.youtube.com/watch?v=Xjo_fY9Hl9w".
+1 AXWebArea How To Do A DUMBBELL GOBLET SQUAT | Exercise Demonstration Video and Guide - YouTube, URL: youtube.com/watch
+	2 container
+		3 container content
+			4 container masthead
+				5 container container
+					6 container start
+						7 container guide-button
+							8 button Description: Guide, ID: button
+						9 container logo
+							10 link Description: YouTube Home, Value: youtube.com/, ID: logo
+							11 text PL
+						12 container
+							13 button Skip navigation
+								14 text Skip navigation
+					15 container
+						16 combo box (expanded, settable) Secondary Actions: Collapse
+						17 button Search
+					18 container buttons
+						19 container button
+							20 button Description: Settings, ID: button
+						21 container
+			23 container
+				24 container columns
+					25 container primary-inner
+						26 container player
+							27 container player-container-inner
+								28 container Description: YouTube Video Player, ID: movie_player
+									29 container
+										30 button Play
+											31 image
+									32 container
+										33 pop up button Show cards
+										34 button Channel watermark
+											35 image Channel watermark
+									36 container
+										37 slider Description: Seek slider, Value: 0
+										38 slider Description: Click or scroll the panel for precise seeking., Value: 0
+										39 button Play (k)
+											40 image
+										41 button Mute (m)
+											42 image
+										43 slider Description: Volume, Value: 100
+										44 container
+											45 button 0 Minutes 0 Seconds of 0 Minutes 42 Seconds
+												46 text 0:00
+												47 text  / 
+												48 text 0:42
+										49 button Auto-play is on
+										50 checkbox Description: Subtitles/closed captions unavailable, Value: 0
+										51 pop up button (collapsed) Description: Settings, Secondary Actions: Expand
+											52 image
+										53 button Cinema mode (t)
+											54 image
+										55 button Full screen (f)
+											56 image
+						57 container below
+							58 container above-the-fold
+								59 heading How To Do A DUMBBELL GOBLET SQUAT | Exercise Demonstration Video and Guide, Value: 1
+									60 text How To Do A DUMBBELL GOBLET SQUAT | Exercise Demonstration Video and Guide
+								61 container top-row
+									62 container owner
+										63 container
+											64 link Description: Live Lean TV Daily Exercises, Value: youtube.com/@LiveLean
+											65 container upload-info
+												66 link Description: Live Lean TV Daily Exercises, Value: youtube.com/@LiveLean
+												67 container Description: 25 thousand subscribers, ID: owner-sub-count
+													68 text 25k subscribers
+										69 container
+											70 button Subscribe to Live Lean TV Daily Exercises.
+												71 text Subscribe
+									72 container
+										73 container top-level-buttons-computed
+											74 container
+												75 checkbox Description: like this video along with 1,272 other people, Value: 0
+													76 text 1.2k
+												77 checkbox Description: Dislike this video, Value: 0
+											78 button Share
+												79 text Share
+										80 button Save to playlist
+											81 text Save
+										82 button More actions
+								83 container bottom-row
+									84 container description
+										85 container description-inner
+											242 container info-container
+												243 container info
+													244 text 387,457 views 15 Sept 2016
+													245 link Description: #legexercise, Value: youtube.com/hashtag/legexercise
+													246 link Description: #gobletsquat, Value: youtube.com/hashtag/gobletsquat
+													247 link Description: #LiveLeanTV, Value: youtube.com/hashtag/liveleantv
+											94 container description-inline-expander
+												248 container expanded
+													249 text The dumbbell goblet squat is an excellent squat variation that primarily targets your quadriceps, glutes, and hamstrings, and only requires one dumbbell.
+► Try Our Workout App For Free: 
+													250 link Description: https://bit.ly/44b8sl3, Value: youtube.com/redirect
+													251 text 
+
+To get started:
+1. Get in a slightly wider than shoulder width stance and hold a dumbbell vertically against your chest, using both hands to grasp the top portion of the weight.
+2. Push your hips back, bend your knees, and lower your body as low as you can go, while maintaining a natural arch in the back.
+3. Pause, then push your feet through the ground to rise back to standing.
+4. Repeat.
+
+Dumbbell Goblet Squat:
+► MUSCLES WORKED: Legs, Quadriceps, Hamstrings, Glutes
+► TYPE: Strength
+► EQUIPMENT: Dumbbell
+► EXPERIENCE: Intermediate
+
+Follow Us On Social Media:
+► INSTAGRAM: 
+													252 link Description: Instagram Channel Link: bradgouthro, Value: youtube.com/redirect
+													253 text 
+► INSTAGRAM: 
+													254 link Description: Instagram Channel Link: LiveLeanTV, Value: youtube.com/redirect
+													255 text 
+► FACEBOOK: 
+													256 link Description: Facebook Channel Link: LiveLeanTV, Value: youtube.com/redirect
+													257 text 
+► TWITTER: 
+													258 link Description: Twitter Channel Link: bradgouthro, Value: youtube.com/redirect
+													259 text 
+► TWITTER: 
+													260 link Description: Twitter Channel Link: LiveLeanTV, Value: youtube.com/redirect
+													261 text 
+► TIK-TOK: 
+													262 link Description: TikTok Channel Link: bradgouthro, Value: youtube.com/redirect
+													263 text  
+► TIK-TOK: 
+													264 link Description: TikTok Channel Link: liveleantv, Value: youtube.com/redirect
+													265 text 
+► SNAPCHAT: 
+													266 link Description: Snapchat Channel Link: bradgouthro, Value: youtube.com/redirect
+													267 link Description: #gobletsquat, Value: youtube.com/hashtag/gobletsquat
+													268 link Description: #legexercise, Value: youtube.com/hashtag/legexercise
+													269 link Description: #LiveLeanTV, Value: youtube.com/hashtag/liveleantv
+													270 text 
+
+Business Enquiries: info@LiveLeanTV.com
+												271 container structured-description
+													272 container items
+														273 text Transcript
+														274 text Follow along using the transcript.
+														275 container
+															276 button Show transcript
+																277 text Show transcript
+														278 link Description: Live Lean TV Daily Exercises 25k subscribers, Value: youtube.com/@LiveLean, ID: header
+														279 container items
+															280 container
+																281 link Description: Videos, Value: youtube.com/channel/UCHcFIpm8rD9IrlDrw4Ted-Q/videos
+															282 container
+																283 link Description: About, Value: youtube.com/channel/UCHcFIpm8rD9IrlDrw4Ted-Q/about
+															284 link Description: Live Lean TV (main channel), Value: youtube.com/subscription_center
+															285 link Description: Facebook, Value: youtube.com/redirect
+															286 link Description: Instagram, Value: youtube.com/redirect
+															287 link Description: Twitter, Value: youtube.com/redirect
+															288 link Description: Snapchat, Value: youtube.com/redirect
+														289 link Description: Try Our Workout App For Free Try Our Workout App For Free, Value: youtube.com/redirect, ID: lockup-container
+												290 button Show less , ID: collapse
+													291 text Show less
+							292 container sections
+								293 container header
+									294 container title
+										295 heading 19 Comments, Value: 2, ID: count
+											296 container
+												297 text 19  Comments
+										298 container
+											448 container tooltip
+											299 button (collapsed) Description: Sort comments, ID: label, Secondary Actions: Expand
+												449 text Sort by
+									300 container simple-box
+										301 text field (settable) Value: Add a comment…, ID: simplebox-placeholder
+											450 text Add a comment…
+								302 container contents
+									303 container comment
+										451 container body
+											452 button Description: @LiveLean, ID: author-thumbnail-button
+											453 container main
+												454 container header
+													455 text Pinned by @LiveLean
+													456 container header-author
+														457 heading 3
+														458 link Description: @LiveLean, Value: youtube.com/@LiveLean, ID: name
+														459 link Description: 3 years ago, Value: youtube.com/watch
+												460 container content-text
+													461 text ► Try Our Workout App For Free: 
+													462 link Description: https://bit.ly/44b8sl3, Value: youtube.com/redirect
+													463 text 
+Which exercise demonstration video do you want to see next?
+												464 container action-buttons
+													465 container toolbar
+														466 container like-button
+															467 checkbox Description: Like this comment along with 1 other person, Value: 0
+															468 container tooltip
+														469 text 1
+														470 container dislike-button
+															471 checkbox Description: Dislike this comment, Value: 0
+															472 container tooltip
+														473 container reply-button-end
+															474 button Reply
+																475 text Reply
+											476 container action-menu
+												477 container button
+													478 button Description: Action menu, ID: button
+									318 container
+										319 container comment
+											479 container body
+												480 container author-thumbnail
+													481 button Description: @spm_hcmc, ID: author-thumbnail-button
+												482 container main
+													483 container header-author
+														484 heading @spm_hcmc, Value: 3
+															485 link Description: @spm_hcmc, Value: youtube.com/@spm_hcmc, ID: author-text
+														486 link Description: 2 years ago, Value: youtube.com/watch
+													487 text I've always learned that his feet should be pointed outward to some degree, not straightforward
+													488 container action-buttons
+														489 container toolbar
+															490 container like-button
+																491 checkbox Description: Like this comment along with 3 other people, Value: 0
+																492 container tooltip
+															493 text 3
+															494 container dislike-button
+																495 checkbox Description: Dislike this comment, Value: 0
+																496 container tooltip
+															497 container
+																498 container creator-heart-button
+																	499 button (disabled) Description: Heart, ID: button
+																500 container tooltip
+															501 container reply-button-end
+																502 button Reply
+																	503 text Reply
+												504 container action-menu
+													505 container button
+														506 button Description: Action menu, ID: button
+										334 container
+											507 text ·
+											335 container more-replies-sub-thread
+												336 button 1 reply
+													508 text 1 reply
+									337 container
+										338 container comment
+											509 container body
+												510 container author-thumbnail
+													511 button Description: @ai.mathoholic, ID: author-thumbnail-button
+												512 container main
+													513 container header-author
+														514 heading @ai.mathoholic, Value: 3
+															515 link Description: @ai.mathoholic, Value: youtube.com/@ai.mathoholic, ID: author-text
+														516 link Description: 1 year ago, Value: youtube.com/watch
+													517 text Thanks Sir
+													518 container action-buttons
+														519 container toolbar
+															520 container like-button
+																521 checkbox Description: Like this comment along with 0 other people, Value: 0
+																522 container tooltip
+															523 container dislike-button
+																524 checkbox Description: Dislike this comment, Value: 0
+																525 container tooltip
+															526 container
+																527 container creator-heart-button
+																	528 button (disabled) Description: Heart, ID: button
+																529 container tooltip
+															530 container reply-button-end
+																531 button Reply
+																	532 text Reply
+												533 container action-menu
+													534 container button
+														535 button Description: Action menu, ID: button
+										353 container
+											536 text ·
+											354 container more-replies-sub-thread
+												355 button 1 reply
+													537 text 1 reply
+									356 container
+										357 container comment
+											538 container body
+												539 container author-thumbnail
+													540 button Description: @Titletown23, ID: author-thumbnail-button
+												541 container main
+													542 container header-author
+														543 heading @Titletown23, Value: 3
+															544 link Description: @Titletown23, Value: youtube.com/@Titletown23, ID: author-text
+														545 link Description: 8 years ago, Value: youtube.com/watch
+													546 text Great form and vid thanks
+													547 container action-buttons
+														548 container toolbar
+															549 container like-button
+																550 checkbox Description: Like this comment along with 5 other people, Value: 0
+																551 container tooltip
+															552 text 5
+															553 container dislike-button
+																554 checkbox Description: Dislike this comment, Value: 0
+																555 container tooltip
+															556 container
+																557 container creator-heart-button
+																	558 button (disabled) Description: Heart, ID: button
+																559 container tooltip
+															560 container reply-button-end
+																561 button Reply
+																	562 text Reply
+												563 container action-menu
+													564 container button
+														565 button Description: Action menu, ID: button
+										372 container
+											566 text ·
+											373 container more-replies-sub-thread
+												374 button 1 reply
+													567 text 1 reply
+									568 container
+										569 container comment
+											570 container body
+												571 container author-thumbnail
+													572 button Description: @akesson9768, ID: author-thumbnail-button
+												573 container main
+													574 container header-author
+														575 heading @akesson9768, Value: 3
+															576 link Description: @akesson9768, Value: youtube.com/@akesson9768, ID: author-text
+														577 link Description: 3 years ago, Value: youtube.com/watch
+													578 text Thanks
+													579 container action-buttons
+														580 container toolbar
+															581 container like-button
+																582 checkbox Description: Like this comment along with 1 other person, Value: 0
+																583 container tooltip
+															584 text 1
+															585 container dislike-button
+																586 checkbox Description: Dislike this comment, Value: 0
+																587 container tooltip
+															588 container
+																589 container creator-heart-button
+																	590 button (disabled) Description: Heart, ID: button
+																591 container tooltip
+															592 container reply-button-end
+																593 button Reply
+																	594 text Reply
+												595 container action-menu
+													596 container button
+														597 button Description: Action menu, ID: button
+										598 container
+											599 text ·
+											600 container more-replies-sub-thread
+												601 button 1 reply
+													602 text 1 reply
+									603 container
+										604 container comment
+											605 container body
+												606 container author-thumbnail
+													607 button Description: @ToTheBitterEnd313, ID: author-thumbnail-button
+												608 container main
+													609 container header-author
+														610 heading @ToTheBitterEnd313, Value: 3
+															611 link Description: @ToTheBitterEnd313, Value: youtube.com/@ToTheBitterEnd313, ID: author-text
+														612 link Description: 7 years ago, Value: youtube.com/watch
+													613 text Excellent form. I do these as well.
+													614 container action-buttons
+														615 container toolbar
+															616 container like-button
+																617 checkbox Description: Like this comment along with 6 other people, Value: 0
+																618 container tooltip
+															619 text 6
+															620 container dislike-button
+																621 checkbox Description: Dislike this comment, Value: 0
+																622 container tooltip
+															623 container
+																624 container creator-heart-button
+																	625 button (disabled) Description: Heart, ID: button
+																626 container tooltip
+															627 container reply-button-end
+																628 button Reply
+																	629 text Reply
+												630 container action-menu
+													631 container button
+														632 button Description: Action menu, ID: button
+										633 container
+											634 text ·
+											635 container more-replies-sub-thread
+												636 button 1 reply
+													637 text 1 reply
+									638 container
+										639 container comment
+											640 container body
+												641 container author-thumbnail
+													642 button Description: @audienceinsights9855, ID: author-thumbnail-button
+												643 container main
+													644 container header-author
+														645 heading @audienceinsights9855, Value: 3
+															646 link Description: @audienceinsights9855, Value: youtube.com/@audienceinsights9855, ID: author-text
+														647 link Description: 4 years ago, Value: youtube.com/watch
+													648 text Why is the wide stance recommended?
+													649 container action-buttons
+														650 container toolbar
+															651 container like-button
+																652 checkbox Description: Like this comment along with 3 other people, Value: 0
+																653 container tooltip
+															654 text 3
+															655 container dislike-button
+																656 checkbox Description: Dislike this comment, Value: 0
+																657 container tooltip
+															658 container reply-button-end
+																659 button Reply
+																	660 text Reply
+												661 container action-menu
+													662 container button
+														663 button Description: Action menu, ID: button
+										664 container
+											665 container more-replies-sub-thread
+												666 button 1 reply
+													667 text 1 reply
+									668 container
+										669 container comment
+											670 container body
+												671 container author-thumbnail
+													672 button Description: @DiscipleshipwithPauline, ID: author-thumbnail-button
+												673 container main
+													674 container header-author
+														675 heading @DiscipleshipwithPauline, Value: 3
+															676 link Description: @DiscipleshipwithPauline, Value: youtube.com/@DiscipleshipwithPauline, ID: author-text
+														677 link Description: 2 years ago, Value: youtube.com/watch
+													678 text I have been doing this exercise this week, but my mid-lower back hurts when I do. What am I doing wrong?
+													679 container action-buttons
+														680 container toolbar
+															681 container like-button
+																682 checkbox Description: Like this comment along with 1 other person, Value: 0
+																683 container tooltip
+															684 text 1
+															685 container dislike-button
+																686 checkbox Description: Dislike this comment, Value: 0
+																687 container tooltip
+															688 container
+																689 container creator-heart-button
+																	690 button (disabled) Description: Heart, ID: button
+																691 container tooltip
+															692 container reply-button-end
+																693 button Reply
+																	694 text Reply
+												695 container action-menu
+													696 container button
+														697 button Description: Action menu, ID: button
+										698 container
+											699 text ·
+											700 container more-replies-sub-thread
+												701 button 2 replies
+													702 text 2 replies
+									703 container
+										704 container comment
+											705 container body
+												706 container author-thumbnail
+													707 button Description: @charleslongstreet5367, ID: author-thumbnail-button
+												708 container main
+													709 container header-author
+														710 heading @charleslongstreet5367, Value: 3
+															711 link Description: @charleslongstreet5367, Value: youtube.com/@charleslongstreet5367, ID: author-text
+														712 link Description: 7 years ago, Value: youtube.com/watch
+													713 text Can you go heavy on this
+													714 container action-buttons
+														715 container toolbar
+															716 container like-button
+																717 checkbox Description: Like this comment along with 3 other people, Value: 0
+																718 container tooltip
+															719 text 3
+															720 container dislike-button
+																721 checkbox Description: Dislike this comment, Value: 0
+																722 container tooltip
+															723 container reply-button-end
+																724 button Reply
+																	725 text Reply
+												726 container action-menu
+													727 container button
+														728 button Description: Action menu, ID: button
+										729 container
+											730 container more-replies-sub-thread
+												731 button 1 reply
+													732 text 1 reply
+									733 text Top is selected, so you'll see featured comments
+					102 container secondary-inner
+						103 container related
+							104 container items
+								105 container contents
+									106 container
+						754 text Embed Video
+					755 container scrollable
+						756 container basic
+							757 container embed-code
+								758 text entry area (settable) ID: textarea, Value: <iframe width="560" height="315" src="https://www.youtube.com/embed/Xjo_fY9Hl9w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+							759 container start-at-wrapper
+								760 checkbox Start at, Value: 0, ID: start-at-checkbox
+									761 text Start at
+								762 container Description: 0 seconds, ID: start-at-timestamp
+									763 container container
+										764 text field (disabled) 0:00
+						765 container embed-options
+							766 text EMBED OPTIONS
+							767 checkbox Show player controls., Value: 1, ID: player-controls-option
+								768 text Show player controls.
+							769 container privacy-mode-wrapper
+								770 checkbox Value: 0, ID: privacy-mode-option, When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.
+									771 container When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.
+										772 text Enable privacy-enhanced mode.
+								773 container Description: tooltip, ID: privacy-tooltip
+						774 container additional-info
+							775 container additional-links
+								776 link Description: API Reference, Value: developers.google.com/youtube/iframe_api_reference
+								777 link Description: Developer Sample, Value: developers.google.com/youtube/youtube_player_demo
+							778 container legal-info
+								779 text By embedding YouTube videos on your site, you are agreeing to 
+								780 link Description: YouTube API Terms of Service, Value: developers.google.com/youtube/terms/api-services-terms-of-service
+					781 container
+						782 button Copy
+							783 text Copy
+
+The focused UI element is 734 container

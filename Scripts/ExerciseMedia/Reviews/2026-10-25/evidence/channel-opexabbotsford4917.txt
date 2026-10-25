@@ -1,0 +1,25 @@
+URL: https://www.youtube.com/@opexabbotsford4917/about
+container about-container
+							198 heading 2
+							199 container links-section
+								200 heading Links, Value: 2
+									201 text Links
+								202 container link-list-container
+									203 text Facebook
+									204 link Description: facebook.com/jeromecarretas, Value: https://www.facebook.com/jeromecarretas
+									205 text Instagram
+									206 link Description: instagram.com/jcarretas, Value: https://www.instagram.com/jcarretas
+							207 container additional-info-container
+								208 heading More info, Value: 2
+									209 text More info
+								210 link Description: www.youtube.com/@opexabbotsford4917, Value: youtube.com/@opexabbotsford4917
+								211 text Joined 26 May 2020
+								212 text 107 subscribers
+								213 text 193 videos
+								214 text 138,082 views
+							215 container button-container
+								216 container
+									217 button Share channel
+										218 text Share channel
+
+The focused UI element is 219 container

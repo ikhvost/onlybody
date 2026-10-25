@@ -9,7 +9,7 @@ Open `onlybody/onlybody.xcodeproj` and choose the **onlybody** or **onlyweights*
 | Product | Bundle ID | Catalog | Branding |
 | --- | --- | --- | --- |
 | OnlyBody | `ikhvost.onlybody` | 65 bodyweight exercises, existing demonstrations | OB |
-| OnlyWeights | `ikhvost.onlyweights` | 16 gym exercises, no demonstrations yet | OW |
+| OnlyWeights | `ikhvost.onlyweights` | 60 gym exercises; 60 videos in Debug and Release, content review incomplete | OW |
 
 - Shared code, fonts, anatomy artwork and launch storyboard: `onlybody/onlybody/`.
 - Product content and brand assets: `onlybody/Products/OnlyBody/` and `onlybody/Products/OnlyWeights/`. Each target includes only its own product folder.
@@ -57,7 +57,7 @@ An active workout has one session UUID and explicit idle/saving/saved/failed sta
 
 ## Validation
 
-Before adding or replacing YouTube demonstrations in **either app**, complete the mandatory [video checklist](Scripts/ExerciseMedia/CHECKLIST.md) and retain dated evidence. The [current audit](Scripts/ExerciseMedia/Reviews/2026-10-24/REPORT.md) distinguishes code checks, per-video Embed availability and unresolved privacy/device/content review items. Automated validation does not certify these manual checks.
+Before adding or replacing YouTube demonstrations in **either app**, complete the mandatory [video checklist](Scripts/ExerciseMedia/CHECKLIST.md) and retain dated evidence. The [OnlyWeights candidate review](Scripts/ExerciseMedia/Reviews/2026-10-25/REPORT.md) and [OnlyBody audit](Scripts/ExerciseMedia/Reviews/2026-10-24/REPORT.md) distinguish code checks, per-video Embed availability and unresolved privacy/device/content review items. Automated validation does not certify these manual checks.
 
 ```sh
 DESTINATION='platform=iOS Simulator,name=iPhone 17 Pro' Scripts/validate.sh

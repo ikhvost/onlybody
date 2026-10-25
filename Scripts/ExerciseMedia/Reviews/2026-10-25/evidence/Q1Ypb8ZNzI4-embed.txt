@@ -1,0 +1,151 @@
+Browser tab: 2, Title: "How To Do A Barbell front squat - YouTube", URL: "https://www.youtube.com/watch?v=Q1Ypb8ZNzI4".
+1 AXWebArea How To Do A Barbell front squat - YouTube, URL: youtube.com/watch?v=Q1Ypb8ZNzI4
+	2 container
+		3 container content
+			4 container masthead
+				5 container container
+					6 container start
+						7 container guide-button
+							8 button Description: Guide, ID: button
+						9 container logo
+							10 link Description: YouTube Home, Value: youtube.com/, ID: logo
+							11 text PL
+						12 container
+							13 button Skip navigation
+								14 text Skip navigation
+					15 container
+						16 combo box (expanded, settable) Secondary Actions: Collapse
+						17 button Search
+					18 container buttons
+						19 container button
+							20 button Description: Settings, ID: button
+						21 container
+			23 container
+				24 container columns
+					25 container primary-inner
+						26 container player
+							27 container player-container-inner
+								28 container Description: YouTube Video Player, ID: movie_player
+									29 container
+										30 button Play
+											31 image
+									32 container
+										33 button Channel watermark
+											34 image Channel watermark
+									35 container
+										36 slider Description: Seek slider, Value: 0
+										37 slider Description: Click or scroll the panel for precise seeking., Value: 0
+										38 button Play (k)
+											39 image
+										40 button Mute (m)
+											41 image
+										42 slider Description: Volume, Value: 100
+										43 container
+											44 button 0 Minutes 0 Seconds of 0 Minutes 13 Seconds
+												45 text 0:00
+												46 text  / 
+												47 text 0:13
+										48 button Auto-play is on
+										49 checkbox Description: Subtitles/closed captions unavailable, Value: 0
+										50 pop up button (collapsed) Description: Settings, Secondary Actions: Expand
+											51 image
+										52 button Cinema mode (t)
+											53 image
+										54 button Full screen (f)
+											55 image
+						56 container below
+							57 container above-the-fold
+								58 heading How To Do A Barbell front squat, Value: 1
+									59 text How To Do A Barbell front squat
+								60 container top-row
+									61 container owner
+										62 container
+											63 link Description: PureGym, Value: youtube.com/@PureGymVideo
+											64 container upload-info
+												65 link Description: PureGym, Value: youtube.com/@PureGymVideo
+												66 container Description: 105 thousand subscribers, ID: owner-sub-count
+													67 text 105k subscribers
+										68 container
+											69 button Subscribe to PureGym.
+												70 text Subscribe
+									71 container
+										72 container top-level-buttons-computed
+											73 container
+												74 checkbox Description: Like, Value: 0
+													75 text Like
+												76 checkbox Description: Dislike this video, Value: 0
+											77 button Share
+										78 button Save to playlist
+										79 button More actions
+								80 container bottom-row
+									81 container description
+										82 container description-inner
+											220 container info-container
+												221 container info
+													222 text 74,485 views 26 Jan 2018
+											88 container description-inline-expander
+												223 container expanded
+													224 text The front squat puts less pressure on the spine and knees than standard barbell spots, making it a great option if you find barbell back squats tough on your body. Watch our PT demonstrate how to do a barbell front squat and try it out!
+
+1. Set up the squat rack or Olympic lifting platform so the barbell is rested at the right level for you based on your height. 
+2. Once you are happy with your set up, bring your arms up to the bar with an underhand grip, whilst keeping the elbows high and pointing forwards. The bar should be able to rest on either sides of your shoulders in this position.
+3. Looking straight ahead of you, take a few steps away from the rack whilst keeping your arms locked in that same position.
+4. Position your feet slightly wider than hip distance apart, with toes slightly pointed out. Breathe in and lock your abs.
+5. Lower your body into a squat position whilst keeping your head up and chest proud at all times.
+6. Straighten your knees and extend your hips back up to starting position. Maintain a tall spine and tight core throughout the whole movement.
+7. Exhale out and repeat however many repetitions, then take a few steps forward to rest the bar on the rack.
+
+Find more exercise demonstrations here 👉 
+													225 link Description: https://puregym.com/exercises/, Value: https://puregym.com/exercises/
+												226 container structured-description
+													227 container items
+														228 link Description: PureGym 105k subscribers, Value: youtube.com/@PureGymVideo, ID: header
+														229 container items
+															230 container
+																231 link Description: Videos, Value: youtube.com/channel/UCBbB-PR9CsGcMnswP04TbhQ/videos
+															232 container
+																233 link Description: About, Value: youtube.com/channel/UCBbB-PR9CsGcMnswP04TbhQ/about
+												234 button Show less , ID: collapse
+													235 text Show less
+							236 container sections
+								237 container contents
+									238 container message
+										239 text Comments are turned off. 
+										240 link Description: Learn more, Value: support.google.com/youtube/answer/9706180?hl=en-GB
+					94 container secondary-inner
+						95 container related
+							96 container items
+								97 container contents
+									98 container
+						335 text Embed Video
+					336 container scrollable
+						337 container basic
+							338 container embed-code
+								339 text entry area (settable) ID: textarea, Value: <iframe width="560" height="315" src="https://www.youtube.com/embed/Q1Ypb8ZNzI4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+							340 container start-at-wrapper
+								341 checkbox Start at, Value: 0, ID: start-at-checkbox
+									342 text Start at
+								343 container Description: 0 seconds, ID: start-at-timestamp
+									344 container container
+										345 text field (disabled) 0:00
+						346 container embed-options
+							347 text EMBED OPTIONS
+							348 checkbox Show player controls., Value: 1, ID: player-controls-option
+								349 text Show player controls.
+							350 container privacy-mode-wrapper
+								351 checkbox Value: 0, ID: privacy-mode-option, When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.
+									352 container When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.
+										353 text Enable privacy-enhanced mode.
+								354 container Description: tooltip, ID: privacy-tooltip
+						355 container additional-info
+							356 container additional-links
+								357 link Description: API Reference, Value: developers.google.com/youtube/iframe_api_reference
+								358 link Description: Developer Sample, Value: developers.google.com/youtube/youtube_player_demo
+							359 container legal-info
+								360 text By embedding YouTube videos on your site, you are agreeing to 
+								361 link Description: YouTube API Terms of Service, Value: developers.google.com/youtube/terms/api-services-terms-of-service
+					362 container
+						363 button Copy
+							364 text Copy
+
+The focused UI element is 315 container

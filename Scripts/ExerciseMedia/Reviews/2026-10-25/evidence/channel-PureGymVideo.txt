@@ -1,0 +1,76 @@
+URL: https://www.youtube.com/@PureGymVideo/about
+		1026 container
+			1027 container
+				1028 container
+					1029 container header
+						1030 heading Description: PureGym, Value: 2, ID: title
+							1031 text PureGym
+						1032 container
+							1033 button Close
+				1034 container content
+					1035 container contents
+						1036 container about-container
+							1037 heading Description, Value: 2
+								1038 text Description
+							1039 text Lots of gyms help people feel good, we help you Feel PureGym Good. 
+
+For more feel-good content, visit our website and follow us on socials 👇
+
+Website: https://www.puregym.com
+Instagram: https://www.instagram.com/puregymofficial
+Facebook: https://www.facebook.com/puregym/
+TikTok: https://www.tiktok.com/@puregymofficial
+
+#PureGym #GymMotivation #FeelPureGymGood
+
+
+							1040 container additional-info-container
+								1041 heading More info, Value: 2
+									1042 text More info
+								1043 link Description: www.youtube.com/@PureGymVideo, Value: …
+								1044 text Joined 15 Mar 2011
+								1045 text 105k subscribers
+								1046 text 1,371 videos
+								1047 text 60,686,661 views
+							1048 container button-container
+								1049 container
+									1050 button Share channel
+										1051 text Share channel
+			1052 container
+				1053 container
+					1054 container header
+						1055 heading Description: PureGym, Value: 2, ID: title
+							1056 text PureGym
+						1057 container
+							1058 button Close
+				1059 container content
+					1060 container contents
+						1061 container about-container
+							1062 heading Description, Value: 2
+								1063 text Description
+							1064 text Lots of gyms help people feel good, we help you Feel PureGym Good. 
+
+For more feel-good content, visit our website and follow us on socials 👇
+
+Website: https://www.puregym.com
+Instagram: https://www.instagram.com/puregymofficial
+Facebook: https://www.facebook.com/puregym/
+TikTok: https://www.tiktok.com/@puregymofficial
+
+#PureGym #GymMotivation #FeelPureGymGood
+
+
+							1065 container additional-info-container
+								1066 heading More info, Value: 2
+									1067 text More info
+								1068 link Description: www.youtube.com/@PureGymVideo, Value: …
+								1069 text Joined 15 Mar 2011
+								1070 text 105k subscribers
+								1071 text 1,371 videos
+								1072 text 60,686,661 views
+							1073 container button-container
+								1074 container
+									1075 button Share channel
+										1076 text Share channel
+
+The focused UI element is 1077 container

@@ -1,0 +1,152 @@
+Browser tab: 2, Title: "How To Do Ab Wheel Roll Outs - YouTube", URL: "https://www.youtube.com/watch?v=SBO5aFR09D4".
+1 AXWebArea How To Do Ab Wheel Roll Outs - YouTube, URL: youtube.com/watch?v=SBO5aFR09D4
+	2 container
+		3 container content
+			4 container masthead
+				5 container container
+					6 container start
+						7 container guide-button
+							8 button Description: Guide, ID: button
+						9 container logo
+							10 link Description: YouTube Home, Value: youtube.com/, ID: logo
+							11 text PL
+						12 container
+							13 button Skip navigation
+								14 text Skip navigation
+					15 container
+						16 combo box (expanded, settable) Secondary Actions: Collapse
+						17 button Search
+					18 container buttons
+						19 container button
+							20 button Description: Settings, ID: button
+						21 container
+			23 container
+				24 container columns
+					25 container primary-inner
+						26 container player
+							27 container player-container-inner
+								28 container Description: YouTube Video Player, ID: movie_player
+									29 container
+										30 button Play
+											31 image
+									32 container
+										33 button Channel watermark
+											34 image Channel watermark
+									35 container
+										36 slider Description: Seek slider, Value: 0
+										37 slider Description: Click or scroll the panel for precise seeking., Value: 0
+										38 button Play (k)
+											39 image
+										40 button Mute (m)
+											41 image
+										42 slider Description: Volume, Value: 100
+										43 container
+											44 button 0 Minutes 0 Seconds of 0 Minutes 11 Seconds
+												45 text 0:00
+												46 text  / 
+												47 text 0:11
+										48 button Auto-play is on
+										49 checkbox Description: Subtitles/closed captions unavailable, Value: 0
+										50 pop up button (collapsed) Description: Settings, Secondary Actions: Expand
+											51 image
+										52 button Cinema mode (t)
+											53 image
+										54 button Full screen (f)
+											55 image
+						56 container below
+							57 container above-the-fold
+								58 heading How To Do Ab Wheel Roll Outs, Value: 1
+									59 text How To Do Ab Wheel Roll Outs
+								60 container top-row
+									61 container owner
+										62 container
+											63 link Description: PureGym, Value: youtube.com/@PureGymVideo
+											64 container upload-info
+												65 link Description: PureGym, Value: youtube.com/@PureGymVideo
+												66 container Description: 105 thousand subscribers, ID: owner-sub-count
+													67 text 105k subscribers
+										68 container
+											69 button Subscribe to PureGym.
+												70 text Subscribe
+									71 container
+										72 container top-level-buttons-computed
+											73 container
+												74 checkbox Description: Like, Value: 0
+													75 text Like
+												76 checkbox Description: Dislike this video, Value: 0
+											77 button Share
+												78 text Share
+										79 button Save to playlist
+											80 text Save
+										81 button More actions
+								82 container bottom-row
+									83 container description
+										84 container description-inner
+											204 container info-container
+												205 container info
+													206 text 3,689 views 22 Jun 2023
+											90 container description-inline-expander
+												207 container expanded
+													208 text The ab wheel rollout is a challenging core exercise that involves maintaining a neutral spine while rolling the ab wheel forward and back. This exercise challenges the rectus abdominis, obliques, spinae erector, and glutes, and can also help to improve flexibility in the shoulders and hips.
+
+How To Do Ab Wheel Rollouts
+1. Kneel on the floor both hands on the ab wheel with hands, elbows and shoulders stacked in a line, and knees under hips. 
+2. Engage the core by pulling your bellow button in towards the spine.
+3. Slowly push the ab wheel forward while keeping your back and arms straight, so your arms come in front of your shoulders. 
+4. Stop when you feel a stretch in the abdominals or when you reach parallel to the floor with arms fully extended overhead. If you are unable to maintain a neutral spine, stop at this point instead. 
+5. Pause for a second before rolling the wheel back towards the starting position, keeping the core engaged throughout. 
+
+Find more exercise demonstrations here 👉 
+													209 link Description: https://puregym.com/exercises/, Value: https://puregym.com/exercises/
+												210 container structured-description
+													211 container items
+														212 link Description: PureGym 105k subscribers, Value: youtube.com/@PureGymVideo, ID: header
+														213 container items
+															214 container
+																215 link Description: Videos, Value: youtube.com/channel/UCBbB-PR9CsGcMnswP04TbhQ/videos
+															216 container
+																217 link Description: About, Value: youtube.com/channel/UCBbB-PR9CsGcMnswP04TbhQ/about
+												218 button Show less , ID: collapse
+													219 text Show less
+							220 container sections
+								221 container
+									303 container title
+										304 heading Comments, Value: 2, ID: count
+											305 text Comments
+					96 container secondary-inner
+						97 container related
+							98 container items
+								99 container contents
+									100 container
+						326 text Embed Video
+					327 container scrollable
+						328 container basic
+							329 container embed-code
+								330 text entry area (settable) ID: textarea, Value: <iframe width="560" height="315" src="https://www.youtube.com/embed/SBO5aFR09D4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+							331 container start-at-wrapper
+								332 checkbox Start at, Value: 0, ID: start-at-checkbox
+									333 text Start at
+								334 container Description: 0 seconds, ID: start-at-timestamp
+									335 container container
+										336 text field (disabled) 0:00
+						337 container embed-options
+							338 text EMBED OPTIONS
+							339 checkbox Show player controls., Value: 1, ID: player-controls-option
+								340 text Show player controls.
+							341 container privacy-mode-wrapper
+								342 checkbox Value: 0, ID: privacy-mode-option, When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.
+									343 container When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.
+										344 text Enable privacy-enhanced mode.
+								345 container Description: tooltip, ID: privacy-tooltip
+						346 container additional-info
+							347 container additional-links
+								348 link Description: API Reference, Value: developers.google.com/youtube/iframe_api_reference
+								349 link Description: Developer Sample, Value: developers.google.com/youtube/youtube_player_demo
+							350 container legal-info
+								351 text By embedding YouTube videos on your site, you are agreeing to 
+								352 link Description: YouTube API Terms of Service, Value: developers.google.com/youtube/terms/api-services-terms-of-service
+					353 container
+						354 button Copy
+							355 text Copy
+
+The focused UI element is 306 container

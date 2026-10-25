@@ -1,12 +1,12 @@
 # Exercise demonstration catalog
 
-All 65 seed exercises use the official YouTube IFrame player. Only IDs, author names and start offsets ship in the app; no video files are copied. The compiled catalog has stable media keys independent of seed UUIDs. Exercise name matching is exact.
+All 65 OnlyBody seed exercises use the official YouTube IFrame player. Only IDs, author names and start offsets ship in the app; no video files are copied. The compiled catalog has stable media keys independent of seed UUIDs. Exercise name matching is exact.
 
 ## Content review
 
 **Before adding or replacing any video in either app, complete [CHECKLIST.md](CHECKLIST.md).** It covers provenance, license evidence, physical-iPhone playback, player requirements, privacy and App Review evidence. Store dated results and screenshots in `Reviews/`; cite them in the change description. Do not equate catalog validation or browser playback with full approval.
 
-The [2026-10-24 checklist audit](Reviews/2026-10-24/REPORT.md) records all 65 OnlyBody entries, live Share → Embed evidence and remaining gaps. OnlyWeights currently has no videos. The historical review below is a playback/variant review only; it does not establish licensing, a complete audio review or App Store readiness.
+The [2026-10-24 checklist audit](Reviews/2026-10-24/REPORT.md) records all 65 OnlyBody entries, live Share → Embed evidence and remaining gaps. OnlyWeights includes 60 videos in Debug and Release at the user’s explicit request on 2026-10-25; remaining review checks are deferred. Its expanded 60-exercise library has a [candidate register and partial review](Reviews/2026-10-25/REPORT.md), with per-video description/Embed evidence and explicit outstanding checks. The production media catalog records their status as `partial-review-user-deferred`, not completed review. The historical review below is a playback/variant review only; it does not establish licensing, a complete audio review or App Store readiness.
 
 On 2026-10-24 all 65 entries played in a signed-out browser using the official IFrame API. Visual samples were inspected for exercise variant, equipment and framing, including additional positions in longer clips. This is a browser playback and sampled visual review, not a full-length review of every clip or a physical iPhone sign-off. Availability can change by time, region or network.
 
@@ -114,3 +114,18 @@ Use through the official player follows [YouTube Terms of Service](https://www.y
 The 65-entry release adds difficulty metadata and removes the frequency controls. The persistent schema remains unchanged; the seed store is regenerated. Existing installations read the expanded bundled catalog without replacing their workout/history store; see `Scripts/StoreGenerator/README.md`. The validation and iPhone notes above describe the earlier video-player release, not physical-device verification of this catalog update.
 
 The expanded release passed `Scripts/validate.sh` on 2026-10-24: 166 Swift Testing tests, all five E2E journeys, lint, architecture checks, generated-catalog checks, Release build and temporary generation of 65 seed exercises.
+
+
+## OnlyWeights media catalog
+
+`onlyweights.json` generates all 60 demonstrations for both Debug and Release, using the existing official player, author caption and error handling. There is no separate Debug candidate array, runtime JSON loading or persistence change. The user explicitly requested Release integration on 2026-10-25 and deferred the remaining checks. Each entry records `partial-review-user-deferred` and links to the dated report; this status does not establish completed review.
+
+```bash
+python3 Scripts/ExerciseMedia/generate.py \
+  --seed Scripts/StoreGenerator/OnlyWeights/SeedData.json \
+  --catalog Scripts/ExerciseMedia/onlyweights.json \
+  --output onlybody/Products/OnlyWeights/Catalog/ExerciseDemonstrationCatalog.swift \
+  --allow-missing
+```
+
+Append `--check` to verify without writing. `check-catalogs.py` uses the same inputs. Release bundle validation checks that all catalog video IDs are present in the executable or bundled dynamic libraries and that the review register is not bundled. The [dated review](Reviews/2026-10-25/REPORT.md#release-enablement) preserves the explicit decision and outstanding checks.

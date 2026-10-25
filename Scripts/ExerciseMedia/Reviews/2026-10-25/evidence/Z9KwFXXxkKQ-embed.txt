@@ -1,0 +1,248 @@
+Browser tab: 2, Title: "How To: Standing Cable Lateral Raise - YouTube", URL: "https://www.youtube.com/watch?v=Z9KwFXXxkKQ".
+1 AXWebArea How To: Standing Cable Lateral Raise - YouTube, URL: youtube.com/watch
+	2 container
+		3 container content
+			4 container masthead
+				5 container container
+					6 container start
+						7 container guide-button
+							8 button Description: Guide, ID: button
+						9 container logo
+							10 link Description: YouTube Home, Value: youtube.com/, ID: logo
+							11 text PL
+						12 container
+							13 button Skip navigation
+								14 text Skip navigation
+					15 container
+						16 combo box (expanded, settable) Secondary Actions: Collapse
+						17 button Search
+					18 container buttons
+						19 container button
+							20 button Description: Settings, ID: button
+						21 container
+			23 container
+				24 container columns
+					25 container primary-inner
+						26 container player
+							27 container player-container-inner
+								28 container Description: YouTube Video Player, ID: movie_player
+									29 container
+										30 button Play
+											31 image
+									32 container
+										33 pop up button Show cards
+										34 button Channel watermark
+											35 image Channel watermark
+									36 container
+										37 slider Description: Seek slider, Value: 0
+										38 slider Description: Click or scroll the panel for precise seeking., Value: 0
+										39 button Play (k)
+											40 image
+										41 button Mute (m)
+											42 image
+										43 slider Description: Volume, Value: 100
+										44 container
+											45 button 0 Minutes 0 Seconds of 0 Minutes 47 Seconds
+												46 text 0:00
+												47 text  / 
+												48 text 0:47
+										49 button Auto-play is on
+										50 checkbox Description: Subtitles/closed captions unavailable, Value: 0
+										51 pop up button (collapsed) Description: Settings, Secondary Actions: Expand
+											52 image
+										53 button Cinema mode (t)
+											54 image
+										55 button Full screen (f)
+											56 image
+						57 container below
+							58 container above-the-fold
+								59 heading How To: Standing Cable Lateral Raise, Value: 1
+									60 text How To: Standing Cable Lateral Raise
+								61 container top-row
+									62 container owner
+										63 container
+											64 link Description: Live Lean TV Daily Exercises, Value: youtube.com/@LiveLean
+											65 container upload-info
+												66 link Description: Live Lean TV Daily Exercises, Value: youtube.com/@LiveLean
+												67 container Description: 25 thousand subscribers, ID: owner-sub-count
+													68 text 25k subscribers
+										69 container
+											70 image
+											71 button Subscribe to Live Lean TV Daily Exercises.
+												72 text Subscribe
+									73 container
+										74 container top-level-buttons-computed
+											75 container
+												76 checkbox Description: like this video along with 30 other people, Value: 0
+													77 text 30
+												78 checkbox Description: Dislike this video, Value: 0
+											79 button Share
+										80 button Save to playlist
+										81 button More actions
+								82 container bottom-row
+									83 container description
+										84 container description-inner
+											150 container info-container
+												151 container info
+													152 text 8,528 views 1 May 2017
+													153 link Description: #shoulders, Value: youtube.com/hashtag/shoulders
+													154 link Description: #sidedelts, Value: youtube.com/hashtag/sidedelts
+													155 link Description: #LiveLeanTV, Value: youtube.com/hashtag/liveleantv
+											93 container description-inline-expander
+												156 container expanded
+													157 text Alright, let's break down the standing cable lateral raise, a fantastic move for hitting those shoulder muscles, especially the outer medial part of the deltoids.
+► Try Our Workout App For Free: 
+													158 link Description: https://www.liveleantv.com, Value: youtube.com/redirect
+													159 text 
+
+Here's how to do it properly:
+1. Position yourself in the center of a cable machine setup with handles attached to low pulleys.
+2. Grab each handle with an overhand grip using the opposite hand, so your arms form a crossed position in front of you.
+3. Engage your core, keep your chest up, and maintain a stable stance.
+4. Lift both handles with your arms extended until they're slightly above parallel to the ground.
+5. Focus on maintaining a position where your pinkie fingers are higher than your thumbs, as if you're pouring water out of a jar.
+6. Under control, lower the handles back down without releasing tension in your shoulders.
+7. Repeat this movement for a great shoulder workout!
+
+Standing Cable Lateral Raise:
+► MUSCLES WORKED: Shoulders, Medial Side Deltoids
+► TYPE: Strength
+► EQUIPMENT: Cable Machine, D Handle Attachment
+► EXPERIENCE: Intermediate
+
+Read more: 
+													160 link Description: https://www.liveleantv.com/standing-c..., Value: youtube.com/redirect
+													161 text 
+
+Follow Us On Social Media:
+► INSTAGRAM: 
+													162 link Description: Instagram Channel Link: bradgouthro, Value: youtube.com/redirect
+													163 text 
+► INSTAGRAM: 
+													164 link Description: Instagram Channel Link: LiveLeanTV, Value: youtube.com/redirect
+													165 text 
+► FACEBOOK: 
+													166 link Description: Facebook Channel Link: liveleantv, Value: youtube.com/redirect
+													167 text 
+► TWITTER: 
+													168 link Description: Twitter Channel Link: bradgouthro, Value: youtube.com/redirect
+													169 text 
+► TWITTER: 
+													170 link Description: Twitter Channel Link: liveleantv, Value: youtube.com/redirect
+													171 text 
+► TIK-TOK: 
+													172 link Description: TikTok Channel Link: bradgouthro, Value: youtube.com/redirect
+													173 text  
+► TIK-TOK: 
+													174 link Description: TikTok Channel Link: liveleantv, Value: youtube.com/redirect
+													175 text 
+► SNAPCHAT: 
+													176 link Description: Snapchat Channel Link: bradgouthro, Value: youtube.com/redirect
+													177 link Description: #sidedelts, Value: youtube.com/hashtag/sidedelts
+													178 link Description: #shoulders, Value: youtube.com/hashtag/shoulders
+													179 link Description: #LiveLeanTV, Value: youtube.com/hashtag/liveleantv
+													180 text 
+
+Business Enquiries: info@LiveLeanTV.com
+												181 container structured-description
+													182 container items
+														183 text Transcript
+														184 text Follow along using the transcript.
+														185 container
+															186 button Show transcript
+																187 text Show transcript
+														188 link Description: Live Lean TV Daily Exercises 25k subscribers, Value: youtube.com/@LiveLean, ID: header
+														189 container items
+															190 container
+																191 link Description: Videos, Value: youtube.com/channel/UCHcFIpm8rD9IrlDrw4Ted-Q/videos
+															192 container
+																193 link Description: About, Value: youtube.com/channel/UCHcFIpm8rD9IrlDrw4Ted-Q/about
+															194 link Description: Live Lean TV (main channel), Value: youtube.com/subscription_center
+															195 link Description: Facebook, Value: youtube.com/redirect
+															196 link Description: Instagram, Value: youtube.com/redirect
+															197 link Description: Twitter, Value: youtube.com/redirect
+															198 link Description: Snapchat, Value: youtube.com/redirect
+														199 link Description: Try Our Workout App For Free Try Our Workout App For Free, Value: youtube.com/redirect, ID: lockup-container
+												200 button Show less , ID: collapse
+													201 text Show less
+							202 container sections
+								203 container header
+									204 container title
+										205 heading 1 Comment, Value: 2, ID: count
+											206 container
+												207 text 1  Comment
+										208 container
+											209 container tooltip
+											210 button (collapsed) Description: Sort comments, ID: label, Secondary Actions: Expand
+												211 text Sort by
+									212 container simple-box
+										213 text field (settable) Value: Add a comment…, ID: simplebox-placeholder
+											214 text Add a comment…
+								215 container contents
+									216 container comment
+										217 container body
+											218 button Description: @LiveLean, ID: author-thumbnail-button
+											219 container main
+												220 container header
+													221 text Pinned by @LiveLean
+													222 container header-author
+														223 heading 3
+														224 link Description: @LiveLean, Value: youtube.com/@LiveLean, ID: name
+														225 link Description: 2 years ago, Value: youtube.com/watch
+												226 container content-text
+													227 text ► Try Our Workout App For Free: 
+													228 link Description: https://www.liveleantv.com, Value: youtube.com/redirect
+													229 text 
+Which exercise demonstration video do you want to see next?
+												230 container action-buttons
+													231 container toolbar
+														232 container like-button
+															233 checkbox Description: Like this comment along with 0 other people, Value: 0
+															234 container tooltip
+														235 container dislike-button
+															236 checkbox Description: Dislike this comment, Value: 0
+															237 container tooltip
+														238 container reply-button-end
+															239 button Reply
+																240 text Reply
+											241 container action-menu
+												242 container button
+													243 button Description: Action menu, ID: button
+									244 text Top is selected, so you'll see featured comments
+					101 container secondary-inner
+						102 container related
+							103 container items
+								104 container contents
+									105 container
+						422 text Embed Video
+					423 container scrollable
+						424 container basic
+							425 container embed-code
+								426 text entry area (settable) ID: textarea, Value: <iframe width="560" height="315" src="https://www.youtube.com/embed/Z9KwFXXxkKQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+							427 container start-at-wrapper
+								428 checkbox Start at, Value: 0, ID: start-at-checkbox
+									429 text Start at
+								430 container Description: 0 seconds, ID: start-at-timestamp
+									431 container container
+										432 text field (disabled) 0:00
+						433 container embed-options
+							434 text EMBED OPTIONS
+							435 checkbox Show player controls., Value: 1, ID: player-controls-option
+								436 text Show player controls.
+							437 container privacy-mode-wrapper
+								438 checkbox Value: 0, ID: privacy-mode-option, When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.
+									439 container When you turn on privacy-enhanced mode, YouTube won't store information about visitors on your website unless they play the video.
+										440 text Enable privacy-enhanced mode.
+								441 container Description: tooltip, ID: privacy-tooltip
+						442 container additional-info
+							443 container additional-links
+								444 link Description: API Reference, Value: developers.google.com/youtube/iframe_api_reference
+								445 link Description: Developer Sample, Value: developers.google.com/youtube/youtube_player_demo
+							446 container legal-info
+								447 text By embedding YouTube videos on your site, you are agreeing to 
+								448 link Description: YouTube API Terms of Service, Value: developers.google.com/youtube/terms/api-services-terms-of-service
+					449 container
+						450 button Copy
+							451 text Copy
+
+The focused UI element is 402 container
