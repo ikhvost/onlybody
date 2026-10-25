@@ -8,6 +8,7 @@ struct ActiveWorkoutExerciseContent: View {
     let currentSetIndex: Int
     let reps: Int
     let weight: Double
+    let weightUnit: String
     let canGoPrevious: Bool
     let canSkip: Bool
     let nextExerciseName: String
@@ -53,6 +54,7 @@ struct ActiveWorkoutExerciseContent: View {
                     ActiveWorkoutStepperCards(
                         reps: reps,
                         weight: weight,
+                        weightUnit: weightUnit,
                         onIncrementReps: onIncrementReps,
                         onDecrementReps: onDecrementReps,
                         onIncrementWeight: onIncrementWeight,

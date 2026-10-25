@@ -43,7 +43,7 @@ struct AppComposition {
         )
     }
     func exerciseHistory(exerciseName: String) -> ExerciseHistoryViewModel {
-        ExerciseHistoryViewModel(exerciseName: exerciseName, sessions: sessions)
+        ExerciseHistoryViewModel(exerciseName: exerciseName, sessions: sessions, preferences: preferences)
     }
     func movement(_ exercise: ExerciseSnapshot) -> MovementDetailViewModel {
         var allowsVideoLoading = true

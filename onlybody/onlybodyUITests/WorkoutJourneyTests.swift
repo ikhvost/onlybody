@@ -69,12 +69,17 @@ final class WorkoutJourneyTests: XCTestCase {
     }
 
     func testCompleteWritesOneSession() {
+        tap("train.settings")
+        selectWeightUnit("Pounds (lb)")
+        tap("settings.back")
         createWorkout(sets: 2)
         tap("workout.start.E2E Workout")
-        tap("stepper.Added kg.increase")
+        tap("stepper.Added lb.increase")
+        XCTAssertEqual(app.staticTexts["stepper.Added lb.value"].label, "5")
         tap("active.markSetDone")
         tap("rest.skip")
-        tap("stepper.Added kg.increase")
+        tap("stepper.Added lb.increase")
+        XCTAssertEqual(app.staticTexts["stepper.Added lb.value"].label, "10")
         tap("active.markSetDone")
         tap("active.close")
         tap("workout.start.E2E Workout")
@@ -87,14 +92,15 @@ final class WorkoutJourneyTests: XCTestCase {
         let firstSet = app.staticTexts["exerciseHistory.set.0"]
         let secondSet = app.staticTexts["exerciseHistory.set.1"]
         XCTAssertTrue(firstSet.label.contains("12 reps"))
-        XCTAssertTrue(firstSet.label.contains("2.5 kg"))
+        XCTAssertTrue(firstSet.label.contains("5 lb"))
         XCTAssertTrue(secondSet.label.contains("12 reps"))
-        XCTAssertTrue(secondSet.label.contains("5 kg"))
+        XCTAssertTrue(secondSet.label.contains("10 lb"))
         tap("exerciseHistory.back")
         tap("active.end")
         tap("Continue")
         app.terminate()
         app.launch()
+        verifyConvertedWeightHistory()
         verifyHistory(reps: 24, firstSetReps: 12)
         swipeBack()
         XCTAssertTrue(app.buttons["session.row"].waitForExistence(timeout: 10))
@@ -228,6 +234,7 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertFalse(app.buttons["tab.train"].isHittable)
         verifyTimerSoundPreference()
         verifyNotificationPreferences()
+        verifyWeightUnitPreference()
         for identifier in ["settings.feedback", "settings.rate", "settings.privacy", "settings.terms"] {
             XCTAssertTrue(app.buttons[identifier].exists)
             XCTAssertFalse(app.buttons[identifier].isEnabled)
@@ -258,6 +265,39 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertEqual(timerSound.value as? String, "0")
         timerSound.tap()
         XCTAssertEqual(timerSound.value as? String, "1")
+    }
+
+    private func selectWeightUnit(_ title: String) {
+        tap("settings.weightUnit")
+        tap(title)
+        XCTAssertEqual(app.buttons["settings.weightUnit"].value as? String, title)
+    }
+
+    private func verifyWeightUnitPreference() {
+        XCTAssertEqual(app.buttons["settings.weightUnit"].value as? String, "Kilograms (kg)")
+        selectWeightUnit("Pounds (lb)")
+        app.terminate()
+        app.launch()
+        tap("train.settings")
+        XCTAssertEqual(app.buttons["settings.weightUnit"].value as? String, "Pounds (lb)")
+        selectWeightUnit("Kilograms (kg)")
+    }
+
+    private func verifyConvertedWeightHistory() {
+        tap("train.settings")
+        XCTAssertEqual(app.buttons["settings.weightUnit"].value as? String, "Pounds (lb)")
+        selectWeightUnit("Kilograms (kg)")
+        tap("settings.back")
+        tap("workout.start.E2E Workout")
+        tap("active.history")
+        XCTAssertTrue(app.staticTexts["exerciseHistory.date"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["exerciseHistory.set.0"].label.contains("2.27 kg"))
+        XCTAssertTrue(app.staticTexts["exerciseHistory.set.1"].label.contains("4.54 kg"))
+        tap("exerciseHistory.back")
+        tap("stepper.Added kg.increase")
+        XCTAssertEqual(app.staticTexts["stepper.Added kg.value"].label, "2.5")
+        tap("active.end")
+        tap("End Without Saving")
     }
 
     private func verifyNotificationPreferences() {

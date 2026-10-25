@@ -54,7 +54,7 @@ struct ExerciseHistoryView: View {
                             MonoLabel(text: "Sessions", size: Theme.type11, color: Theme.text2)
                             LazyVStack(spacing: Theme.space14) {
                                 ForEach(viewModel.entries) { entry in
-                                    ExerciseHistoryRow(entry: entry)
+                                    ExerciseHistoryRow(entry: entry, weightText: viewModel.weightText)
                                 }
                             }
                         }

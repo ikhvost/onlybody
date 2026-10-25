@@ -6,6 +6,7 @@ import Observation
 final class ActiveWorkoutViewModel {
     private let workoutsRepository: any WorkoutRepository
     private let sessionsRepository: any SessionRepository
+    private let preferences: WorkoutPreferences
 
     let workoutId: UUID
 
@@ -61,6 +62,9 @@ final class ActiveWorkoutViewModel {
         weights[currentExerciseIndex] ?? 0
     }
 
+    var displayedWeight: Double { preferences.weightUnit.value(fromKilograms: currentWeight) }
+    var weightUnitSymbol: String { preferences.weightUnit.rawValue }
+
     var completedSetsForCurrent: Int {
         countCompletedSets(for: currentExerciseIndex)
     }
@@ -96,6 +100,7 @@ final class ActiveWorkoutViewModel {
         self.sessionsRepository = sessions
         self.workoutId = workoutId
         self.time = time
+        self.preferences = preferences
         self.restTimer = RestTimer(time: time) {
             if preferences.isTimerSoundEnabled { playRestCue() }
         }
@@ -188,12 +193,11 @@ final class ActiveWorkoutViewModel {
     }
 
     func incrementWeight() {
-        weights[currentExerciseIndex] = currentWeight + 2.5
+        weights[currentExerciseIndex] = preferences.weightUnit.stepping(kilograms: currentWeight, increasing: true)
     }
 
     func decrementWeight() {
-        let value = max(0, currentWeight - 2.5)
-        weights[currentExerciseIndex] = value
+        weights[currentExerciseIndex] = preferences.weightUnit.stepping(kilograms: currentWeight, increasing: false)
     }
 
     func cleanup() {

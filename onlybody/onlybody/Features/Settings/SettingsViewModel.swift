@@ -7,6 +7,12 @@ final class SettingsViewModel {
     let appName: String
     let version: String
     private let preferences: WorkoutPreferences
+    let weightUnits = WeightUnit.allCases
+
+    var weightUnit: WeightUnit {
+        get { preferences.weightUnit }
+        set { preferences.weightUnit = newValue }
+    }
 
     var isTimerSoundEnabled: Bool {
         get { preferences.isTimerSoundEnabled }

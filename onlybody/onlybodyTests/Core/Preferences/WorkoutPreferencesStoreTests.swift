@@ -8,6 +8,23 @@ import Testing
 
 @MainActor
 struct WorkoutPreferencesStoreTests {
+    @Test func weightUnitsPersistWithIsolatedNamespacesAndSafeDefaults() throws {
+        let suite = "WorkoutPreferencesTests.\(UUID().uuidString)"
+        let defaults = try #require(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let store = WorkoutPreferencesStore(defaults: defaults, namespace: "UI-test")
+        let preferences = store.makePreferences()
+        #expect(preferences.weightUnit == .kilograms)
+        preferences.weightUnit = .pounds
+        #expect(store.makePreferences().weightUnit == .pounds)
+        #expect(WorkoutPreferencesStore(defaults: defaults).makePreferences().weightUnit == .kilograms)
+        #expect(WorkoutPreferencesStore(defaults: defaults, namespace: "Other-test").makePreferences().weightUnit == .kilograms)
+        preferences.weightUnit = .kilograms
+        #expect(store.makePreferences().weightUnit == .kilograms)
+        defaults.set("unknown", forKey: "UI-test.weightUnit")
+        #expect(store.makePreferences().weightUnit == .kilograms)
+    }
+
     @Test func remindersPersistTimeIndependentlyOfEnabledAndTimerSound() throws {
         let suite = "WorkoutPreferencesTests.\(UUID().uuidString)"
         let defaults = try #require(UserDefaults(suiteName: suite))

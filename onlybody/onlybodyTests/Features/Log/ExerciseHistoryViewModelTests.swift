@@ -8,6 +8,23 @@ import Testing
 
 @MainActor
 struct ExerciseHistoryViewModelTests {
+    @Test func changingUnitsConvertsHistoryWithoutRewritingIt() async {
+        let repository = MockSessionRepository()
+        let item = SessionItemSnapshot(exerciseName: "Squats", setReps: [12], setWeightsKg: [20])
+        repository.stubbedSessions = [SessionSnapshot(items: [item])]
+        let preferences = WorkoutPreferences()
+        let model = ExerciseHistoryViewModel(exerciseName: "Squats", sessions: repository, preferences: preferences)
+        await model.load()
+        #expect(model.weightText(kilograms: 20) == "20 kg")
+        preferences.weightUnit = .pounds
+        #expect(model.weightText(kilograms: 20) == WeightUnit.pounds.formatted(kilograms: 20))
+        #expect(model.entries.first?.items == [item])
+        preferences.weightUnit = .kilograms
+        #expect(model.weightText(kilograms: 20) == "20 kg")
+        #expect(repository.stubbedSessions.first?.items == [item])
+        #expect(repository.savedSessions.isEmpty)
+    }
+
     @Test func showsAllCompletedMatchingSessionsNewestFirst() async {
         let repo = MockSessionRepository()
         let completed = SessionItemSnapshot(order: 1, exerciseName: "Squats", setReps: [12, 8], weightKg: 2.5)

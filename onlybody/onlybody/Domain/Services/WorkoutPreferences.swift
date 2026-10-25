@@ -14,6 +14,14 @@ final class WorkoutPreferences {
     private let saveTimerSound: @MainActor (Bool) -> Void
     private let saveRemindersEnabled: @MainActor (Bool) -> Void
     private let saveReminderTime: @MainActor (WorkoutReminderTime) -> Void
+    private let saveWeightUnit: @MainActor (WeightUnit) -> Void
+
+    var weightUnit: WeightUnit {
+        didSet {
+            guard weightUnit != oldValue else { return }
+            saveWeightUnit(weightUnit)
+        }
+    }
 
     var areWorkoutRemindersEnabled: Bool {
         didSet {
@@ -35,7 +43,9 @@ final class WorkoutPreferences {
         areWorkoutRemindersEnabled: Bool = false,
         workoutReminderTime: WorkoutReminderTime = WorkoutReminderTime(),
         saveRemindersEnabled: @escaping @MainActor (Bool) -> Void = { _ in },
-        saveReminderTime: @escaping @MainActor (WorkoutReminderTime) -> Void = { _ in }
+        saveReminderTime: @escaping @MainActor (WorkoutReminderTime) -> Void = { _ in },
+        weightUnit: WeightUnit = .kilograms,
+        saveWeightUnit: @escaping @MainActor (WeightUnit) -> Void = { _ in }
     ) {
         self.isTimerSoundEnabled = isTimerSoundEnabled
         self.saveTimerSound = saveTimerSound
@@ -43,5 +53,7 @@ final class WorkoutPreferences {
         self.workoutReminderTime = workoutReminderTime
         self.saveRemindersEnabled = saveRemindersEnabled
         self.saveReminderTime = saveReminderTime
+        self.weightUnit = weightUnit
+        self.saveWeightUnit = saveWeightUnit
     }
 }

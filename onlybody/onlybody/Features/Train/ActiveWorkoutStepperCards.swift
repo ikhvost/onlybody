@@ -3,6 +3,7 @@ import SwiftUI
 struct ActiveWorkoutStepperCards: View {
     let reps: Int
     let weight: Double
+    let weightUnit: String
     let onIncrementReps: () -> Void
     let onDecrementReps: () -> Void
     let onIncrementWeight: () -> Void
@@ -17,6 +18,7 @@ struct ActiveWorkoutStepperCards: View {
             )
             ActiveWorkoutWeightCard(
                 weight: weight,
+                weightUnit: weightUnit,
                 onIncrement: onIncrementWeight,
                 onDecrement: onDecrementWeight
             )

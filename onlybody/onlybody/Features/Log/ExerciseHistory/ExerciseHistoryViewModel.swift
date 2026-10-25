@@ -7,14 +7,18 @@ import Observation
 final class ExerciseHistoryViewModel {
     let exerciseName: String
     private let sessions: any SessionRepository
+    private let preferences: WorkoutPreferences
     private(set) var entries: [ExerciseHistoryEntry] = []
     private(set) var isLoading = false
     private(set) var errorMessage: String?
 
-    init(exerciseName: String, sessions: any SessionRepository) {
+    init(exerciseName: String, sessions: any SessionRepository, preferences: WorkoutPreferences = WorkoutPreferences()) {
         self.exerciseName = exerciseName
         self.sessions = sessions
+        self.preferences = preferences
     }
+
+    func weightText(kilograms: Double) -> String { preferences.weightUnit.formatted(kilograms: kilograms) }
 
     func load() async {
         guard !isLoading else { return }

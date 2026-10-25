@@ -2,13 +2,14 @@ import SwiftUI
 
 struct ActiveWorkoutWeightCard: View {
     let weight: Double
+    let weightUnit: String
     let onIncrement: () -> Void
     let onDecrement: () -> Void
 
     var body: some View {
         StepperView(
-            label: "Added kg",
-            valueText: weight.formatted(.number.precision(.fractionLength(0...1)).grouping(.never)),
+            label: "Added \(weightUnit)",
+            valueText: weight.formatted(.number.precision(.fractionLength(0...2)).grouping(.never)),
             canDecrement: weight > 0,
             onIncrement: onIncrement,
             onDecrement: onDecrement

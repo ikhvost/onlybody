@@ -33,6 +33,8 @@ struct SettingsView: View {
                             SettingsSoundToggle(isEnabled: $viewModel.isTimerSoundEnabled)
                             Rectangle().fill(Theme.border).frame(height: Theme.dividerThickness)
                             SettingsNotificationsLink(action: onNotifications)
+                            Rectangle().fill(Theme.border).frame(height: Theme.dividerThickness)
+                            SettingsWeightUnitPicker(viewModel: viewModel)
                         }
 
                         SettingsSection(title: "Support") {

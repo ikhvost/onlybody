@@ -11,6 +11,7 @@ struct ActiveWorkoutBody: View {
     let currentSetIndex: Int
     let reps: Int
     let weight: Double
+    let weightUnit: String
     let errorMessage: String?
     let canGoPrevious: Bool
     let canSkip: Bool
@@ -65,6 +66,7 @@ struct ActiveWorkoutBody: View {
                     currentSetIndex: currentSetIndex,
                     reps: reps,
                     weight: weight,
+                    weightUnit: weightUnit,
                     canGoPrevious: canGoPrevious,
                     canSkip: canSkip,
                     nextExerciseName: nextExerciseName,
