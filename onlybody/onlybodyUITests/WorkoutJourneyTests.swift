@@ -150,6 +150,7 @@ final class WorkoutJourneyTests: XCTestCase {
         app.terminate()
         app.launchEnvironment["ONLYBODY_DEMONSTRATION_FIXTURE"] = "web"
         app.launch()
+        verifySettingsNavigation()
         createWorkout()
         verifyOtherBackScreens()
         verifyTabSwipesAndDraftProtection()
@@ -213,6 +214,48 @@ final class WorkoutJourneyTests: XCTestCase {
         tap("active.end")
         tap("End & Save")
         XCTAssertTrue(app.buttons["tab.train"].waitForExistence(timeout: 10))
+    }
+
+    private func verifySettingsNavigation() {
+        XCTAssertTrue(app.buttons["train.settings"].waitForExistence(timeout: 10))
+        let header = XCTAttachment(screenshot: app.screenshot())
+        header.name = "\(JourneyProduct.name) train settings entry"
+        header.lifetime = .keepAlways
+        add(header)
+        tap("train.settings")
+        XCTAssertTrue(app.buttons["settings.back"].waitForExistence(timeout: 10))
+        XCTAssertFalse(app.buttons["tab.train"].isHittable)
+        verifyTimerSoundPreference()
+        for identifier in ["settings.feedback", "settings.rate", "settings.privacy", "settings.terms"] {
+            XCTAssertTrue(app.buttons[identifier].exists)
+            XCTAssertFalse(app.buttons[identifier].isEnabled)
+        }
+        XCTAssertTrue(app.staticTexts["settings.version"].label.contains(JourneyProduct.name))
+        XCTAssertFalse(app.staticTexts["settings.version"].label.contains("—"))
+        let settings = XCTAttachment(screenshot: app.screenshot())
+        settings.name = "\(JourneyProduct.name) settings"
+        settings.lifetime = .keepAlways
+        add(settings)
+        tap("settings.back")
+        XCTAssertTrue(app.buttons["tab.train"].waitForExistence(timeout: 10))
+        tap("train.settings")
+        swipeBack()
+        XCTAssertTrue(app.buttons["workout.create"].waitForExistence(timeout: 10))
+    }
+
+    private func verifyTimerSoundPreference() {
+        let timerSound = app.switches["settings.timerSound"]
+        XCTAssertTrue(timerSound.waitForExistence(timeout: 10))
+        XCTAssertEqual(timerSound.value as? String, "1")
+        timerSound.tap()
+        XCTAssertEqual(timerSound.value as? String, "0")
+        app.terminate()
+        app.launch()
+        tap("train.settings")
+        XCTAssertTrue(timerSound.waitForExistence(timeout: 10))
+        XCTAssertEqual(timerSound.value as? String, "0")
+        timerSound.tap()
+        XCTAssertEqual(timerSound.value as? String, "1")
     }
 
     private func verifyOtherBackScreens() {

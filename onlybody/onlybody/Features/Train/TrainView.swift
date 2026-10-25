@@ -2,6 +2,7 @@ import SwiftUI
 
 struct TrainView: View {
     let viewModel: TrainViewModel
+    let showSettings: () -> Void
     let showMusclePicker: () -> Void
     let showSessionBuilder: (UUID?) -> Void
     let onStartWorkout: (UUID) -> Void
@@ -21,6 +22,7 @@ struct TrainView: View {
                 TrainHeader(
                     appName: viewModel.appName,
                     dateDisplay: viewModel.dateDisplay,
+                    onSettingsTap: showSettings,
                     onCreateTap: {
                         showMusclePicker()
                     }
@@ -95,6 +97,7 @@ struct TrainView: View {
         viewModel: TrainViewModel(
             workouts: PreviewWorkoutRepository(), appName: AppConfiguration.current.displayName
         ),
+        showSettings: {},
         showMusclePicker: {},
         showSessionBuilder: { _ in },
         onStartWorkout: { _ in }
@@ -114,6 +117,7 @@ struct TrainView: View {
         viewModel: TrainViewModel(
             workouts: PreviewWorkoutRepository(workouts: [workout]), appName: AppConfiguration.current.displayName
         ),
+        showSettings: {},
         showMusclePicker: {},
         showSessionBuilder: { _ in },
         onStartWorkout: { _ in }

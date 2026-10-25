@@ -8,6 +8,7 @@ struct BodyweightApp: App {
     let exercises: any ExerciseRepository
     let workouts: any WorkoutRepository
     let sessions: any SessionRepository
+    let preferences: WorkoutPreferences
 
     init() {
         #if DEBUG
@@ -16,9 +17,18 @@ struct BodyweightApp: App {
             exercises = PreviewExerciseRepository()
             workouts = PreviewWorkoutRepository()
             sessions = PreviewSessionRepository()
+            preferences = WorkoutPreferences()
             return
         }
         #endif
+
+        #if DEBUG
+        let preferenceNamespace = ProcessInfo.processInfo.environment["ONLYBODY_UI_STORE"]
+            .flatMap(UUID.init(uuidString:))?.uuidString
+        #else
+        let preferenceNamespace: String? = nil
+        #endif
+        preferences = WorkoutPreferencesStore(namespace: preferenceNamespace).makePreferences()
 
         do {
             let storeURL = try AppStoreLocation.url()
@@ -47,7 +57,10 @@ struct BodyweightApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AppTabView(composition: AppComposition(configuration: configuration, exercises: exercises, workouts: workouts, sessions: sessions))
+            AppTabView(composition: AppComposition(
+                configuration: configuration, exercises: exercises, workouts: workouts,
+                sessions: sessions, preferences: preferences
+            ))
         }
     }
 }

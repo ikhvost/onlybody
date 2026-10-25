@@ -3,10 +3,11 @@ import SwiftUI
 struct TrainHeader: View {
     let appName: String
     let dateDisplay: String
+    let onSettingsTap: () -> Void
     let onCreateTap: () -> Void
 
     var body: some View {
-        HStack(alignment: .bottom) {
+        HStack(alignment: .bottom, spacing: Theme.space8) {
             VStack(alignment: .leading, spacing: Theme.space3) {
                 MonoLabel(text: dateDisplay, size: Theme.type10, color: Theme.text3, tracking: 1.2)
                 Text(appName)
@@ -17,16 +18,27 @@ struct TrainHeader: View {
 
             Spacer()
 
+            Button(action: onSettingsTap) {
+                SettingsIcon(color: Theme.text2, size: Theme.type20)
+                    .frame(width: Theme.space44, height: Theme.space44)
+                    .contentShape(.rect)
+            }
+            .accessibilityLabel("Settings")
+            .accessibilityIdentifier("train.settings")
+            .buttonStyle(PressableButtonStyle())
+
             Button {
                 onCreateTap()
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: Theme.cornerRadius)
                         .fill(Theme.accent)
-                        .frame(width: 38, height: 38)
+                        .frame(width: Theme.headerActionSize, height: Theme.headerActionSize)
 
                     PlusIcon(color: Theme.accentDark, size: Theme.type15)
                 }
+                .frame(width: Theme.space44, height: Theme.space44)
+                .contentShape(.rect)
             }
             .accessibilityLabel("Create workout")
             .accessibilityIdentifier("workout.create")

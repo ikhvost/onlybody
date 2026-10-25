@@ -7,10 +7,18 @@ struct AppComposition {
     let exercises: any ExerciseRepository
     let workouts: any WorkoutRepository
     let sessions: any SessionRepository
+    let preferences: WorkoutPreferences
 
     func train() -> TrainViewModel { TrainViewModel(workouts: workouts, appName: configuration.displayName) }
     func log() -> LogViewModel { LogViewModel(sessions: sessions) }
     func library() -> LibraryViewModel { LibraryViewModel(exercises: exercises) }
+    func settings() -> SettingsViewModel {
+        SettingsViewModel(
+            appName: configuration.displayName,
+            version: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "—",
+            preferences: preferences
+        )
+    }
     func builder(workout: WorkoutSnapshot?, targets: [String]) -> SessionBuilderViewModel {
         SessionBuilderViewModel(
             workouts: workouts, exercises: exercises, workout: workout, targetMuscleGroups: targets,
@@ -18,7 +26,12 @@ struct AppComposition {
         )
     }
     func active(workoutID: UUID) -> ActiveWorkoutViewModel {
-        ActiveWorkoutViewModel(workouts: workouts, sessions: sessions, workoutId: workoutID)
+        let cue = WorkoutCuePlayer()
+        return ActiveWorkoutViewModel(
+            workouts: workouts, sessions: sessions, workoutId: workoutID,
+            preferences: preferences,
+            playRestCue: { cue.play() }, stopRestCue: { cue.stop() }
+        )
     }
     func exerciseHistory(exerciseName: String) -> ExerciseHistoryViewModel {
         ExerciseHistoryViewModel(exerciseName: exerciseName, sessions: sessions)

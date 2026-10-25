@@ -56,6 +56,8 @@ enum Theme {
     }
 
     // Fixed metrics shared by screen components.
+    static let headerActionSize: CGFloat = 38
+    static let dividerThickness: CGFloat = 1
     static let space0: CGFloat = 0
     static let space2: CGFloat = 2
     static let space3: CGFloat = 3

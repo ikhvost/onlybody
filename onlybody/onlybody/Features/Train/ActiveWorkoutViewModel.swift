@@ -25,6 +25,7 @@ final class ActiveWorkoutViewModel {
 
     let restTimer: RestTimer
     private let time: any WorkoutTimeSource
+    private let stopRestCue: @MainActor () -> Void
     private var startedAt: Date?
     private var finishedAt: Date?
     private var isDiscarded = false
@@ -86,13 +87,19 @@ final class ActiveWorkoutViewModel {
         workouts: any WorkoutRepository,
         sessions: any SessionRepository,
         workoutId: UUID,
-        time: any WorkoutTimeSource = SystemWorkoutTimeSource()
+        time: any WorkoutTimeSource = SystemWorkoutTimeSource(),
+        preferences: WorkoutPreferences = WorkoutPreferences(),
+        playRestCue: @escaping @MainActor () -> Void = {},
+        stopRestCue: @escaping @MainActor () -> Void = {}
     ) {
         self.workoutsRepository = workouts
         self.sessionsRepository = sessions
         self.workoutId = workoutId
         self.time = time
-        self.restTimer = RestTimer(time: time)
+        self.restTimer = RestTimer(time: time) {
+            if preferences.isTimerSoundEnabled { playRestCue() }
+        }
+        self.stopRestCue = stopRestCue
     }
 
     func load() async {
@@ -133,6 +140,7 @@ final class ActiveWorkoutViewModel {
 
     func markSetDone() {
         guard currentItem != nil, !isComplete, !isDiscarded, saveState == .idle else { return }
+        stopRestCue()
 
         let reps = currentDisplayReps
         completedSets[currentKey] = reps
@@ -189,6 +197,7 @@ final class ActiveWorkoutViewModel {
     }
 
     func cleanup() {
+        stopRestCue()
         elapsedTask?.cancel()
         restTimer.skip()
         // saveTask intentionally not cancelled — in-flight save must complete.
@@ -206,6 +215,7 @@ final class ActiveWorkoutViewModel {
 
     func endSession() async {
         guard !items.isEmpty, !isDiscarded else { return }
+        stopRestCue()
         isComplete = true
         finishTiming()
         restTimer.skip()

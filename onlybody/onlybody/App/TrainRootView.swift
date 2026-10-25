@@ -18,6 +18,7 @@ struct TrainRootView: View {
         NavigationStack(path: $path) {
             TrainView(
                 viewModel: viewModel,
+                showSettings: { path.append(.settings) },
                 showMusclePicker: { path.append(.musclePicker) },
                 showSessionBuilder: { path.append(.sessionBuilder(workoutID: $0)) },
                 onStartWorkout: { activeWorkout = composition.active(workoutID: $0) }
@@ -25,6 +26,8 @@ struct TrainRootView: View {
             .toolbar(.hidden, for: .navigationBar)
             .navigationDestination(for: TrainRoute.self) { route in
                 switch route {
+                case .settings:
+                    SettingsView(viewModel: composition.settings())
                 case .musclePicker:
                     MusclePickerView(viewModel: MusclePickerViewModel(), onBuild: { targets in
                         path.append(.sessionBuilder(workoutID: nil, targetMuscleGroups: targets))
