@@ -34,7 +34,8 @@ def render(catalog_path, seed_path, require_complete):
         assert row['author'].strip()
         assert row['reviewStatus'] in {'browser-embed-and-visual-sample', 'partial-review-user-deferred'}
         if row['reviewStatus'] == 'partial-review-user-deferred':
-            assert (catalog_path.parent / row['reviewReference']).is_file(), 'Missing partial review record'
+            assert re.fullmatch(r'Reviews/\d{4}-\d{2}-\d{2}/REPORT\.md', row['reviewReference']), \
+                'Missing dated local review reference'
         assert re.fullmatch(r'\d{4}-\d{2}-\d{2}', row['reviewedOn'])
         quote = lambda key: json.dumps(row[key], ensure_ascii=False)
         output.extend([

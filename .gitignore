@@ -75,3 +75,6 @@ fastlane/test_output
 # SQLite transient files must never be bundled.
 onlybody/Products/*/Resources/SeedStore/*.store-wal
 onlybody/Products/*/Resources/SeedStore/*.store-shm
+
+# Local video review records and evidence; keep on disk, outside version control.
+Scripts/ExerciseMedia/Reviews/

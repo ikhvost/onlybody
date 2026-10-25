@@ -4,6 +4,8 @@ All 65 OnlyBody seed exercises use the official YouTube IFrame player. Only IDs,
 
 ## Content review
 
+`Reviews/` is a local, gitignored archive at the user's request. Dated report links below refer to files on the working machine and will not be available in a fresh checkout. Keep review status and dated references in the tracked authoring catalogs; generation and validation do not require the local evidence files. Back up this archive separately if needed.
+
 **Before adding or replacing any video in either app, complete [CHECKLIST.md](CHECKLIST.md).** It covers provenance, license evidence, physical-iPhone playback, player requirements, privacy and App Review evidence. Store dated results and screenshots in `Reviews/`; cite them in the change description. Do not equate catalog validation or browser playback with full approval.
 
 The [2026-10-24 checklist audit](Reviews/2026-10-24/REPORT.md) records all 65 OnlyBody entries, live Share → Embed evidence and remaining gaps. OnlyWeights includes 60 videos in Debug and Release at the user’s explicit request on 2026-10-25; remaining review checks are deferred. Its expanded 60-exercise library has a [candidate register and partial review](Reviews/2026-10-25/REPORT.md), with per-video description/Embed evidence and explicit outstanding checks. The production media catalog records their status as `partial-review-user-deferred`, not completed review. The historical review below is a playback/variant review only; it does not establish licensing, a complete audio review or App Store readiness.
