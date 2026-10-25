@@ -1,8 +1,9 @@
 import SwiftUI
 
 struct NotificationsView: View {
-    @Bindable var viewModel: NotificationsViewModel
+    @State var viewModel: NotificationsViewModel
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         ZStack {
@@ -32,15 +33,9 @@ struct NotificationsView: View {
                             .foregroundStyle(Theme.text2)
 
                         if viewModel.isPermissionDenied {
-                            VStack(alignment: .leading, spacing: Theme.space12) {
-                                Text("Notifications are disabled in iOS Settings. Allow notifications there, then turn on workout reminders here.")
-                                    .font(Theme.fontSans(Theme.type12))
-                                    .foregroundStyle(Theme.text2)
-                                Button("Open Settings") { Task { await viewModel.openSettings() } }
-                                    .font(Theme.fontSans(Theme.type14, .semibold))
-                                    .foregroundStyle(Theme.accent)
-                                    .accessibilityIdentifier("notifications.openSettings")
-                            }
+                            Text("Notifications are disabled in iOS Settings. Turn on Workout reminders to open Settings and allow notifications.")
+                                .font(Theme.fontSans(Theme.type12))
+                                .foregroundStyle(Theme.text2)
                         }
                         if viewModel.hasNoScheduledDays {
                             Text("Add training days to a workout to receive reminders.")
@@ -69,6 +64,9 @@ struct NotificationsView: View {
         .background(BackSwipeBridge().allowsHitTesting(false))
         .toolbar(.hidden, for: .navigationBar)
         .task { await viewModel.load() }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active { Task { await viewModel.load() } }
+        }
     }
 }
 

@@ -10,10 +10,12 @@ final class NotificationsViewModel {
     private let time: any WorkoutTimeSource
     private var timeUpdateTask: Task<Void, Never>?
     private var settingsOpenFailed = false
+    private var shouldEnableAfterSettings = false
+    private var isUpdatingEnabled = false
 
     let timeOptions = WorkoutReminderTime.options
     var isEnabled: Bool { preferences.areWorkoutRemindersEnabled }
-    var isRequestingPermission: Bool { reminders.isRequestingPermission }
+    var isRequestingPermission: Bool { isUpdatingEnabled || reminders.isRequestingPermission }
     var isPermissionDenied: Bool { reminders.authorization == .denied }
     var hasNoScheduledDays: Bool {
         isEnabled && !reminders.isRefreshing && reminders.errorMessage == nil && !reminders.hasScheduledDays
@@ -54,12 +56,31 @@ final class NotificationsViewModel {
     func load() async {
         timeUpdateTask?.cancel()
         await reminders.refresh()
+        guard shouldEnableAfterSettings else { return }
+        shouldEnableAfterSettings = false
+        if reminders.authorization == .authorized { await reminders.setEnabled(true) }
     }
     func setEnabled(_ enabled: Bool) async {
+        guard !isRequestingPermission else { return }
+        isUpdatingEnabled = true
+        defer { isUpdatingEnabled = false }
         timeUpdateTask?.cancel()
+        settingsOpenFailed = false
+        shouldEnableAfterSettings = false
+        if enabled {
+            await reminders.refresh()
+            if isPermissionDenied {
+                await openSettings()
+                return
+            }
+        }
         await reminders.setEnabled(enabled)
     }
-    func openSettings() async { settingsOpenFailed = !(await openSystemSettings()) }
+    private func openSettings() async {
+        shouldEnableAfterSettings = true
+        settingsOpenFailed = !(await openSystemSettings())
+        if settingsOpenFailed { shouldEnableAfterSettings = false }
+    }
     func retry() async {
         timeUpdateTask?.cancel()
         if settingsOpenFailed { await openSettings() } else { await reminders.retry() }
