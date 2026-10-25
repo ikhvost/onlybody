@@ -71,7 +71,10 @@ struct GymCatalogTests {
         let exercise = try #require(try BundledExerciseCatalog.load(from: seed).first)
         let composition = AppComposition(
             configuration: .onlyWeights, exercises: MockExerciseRepository(),
-            workouts: MockWorkoutRepository(), sessions: MockSessionRepository(), preferences: WorkoutPreferences()
+            workouts: MockWorkoutRepository(), sessions: MockSessionRepository(), preferences: WorkoutPreferences(),
+            reminders: WorkoutReminderCoordinator(
+                preferences: WorkoutPreferences(), workouts: MockWorkoutRepository(), notifications: MockWorkoutNotificationClient()
+            )
         )
         let model = composition.movement(exercise)
         model.loadDemonstration()

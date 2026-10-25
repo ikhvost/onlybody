@@ -27,7 +27,9 @@ struct TrainRootView: View {
             .navigationDestination(for: TrainRoute.self) { route in
                 switch route {
                 case .settings:
-                    SettingsView(viewModel: composition.settings())
+                    SettingsView(viewModel: composition.settings(), onNotifications: { path.append(.notifications) })
+                case .notifications:
+                    NotificationsView(viewModel: composition.notifications())
                 case .musclePicker:
                     MusclePickerView(viewModel: MusclePickerViewModel(), onBuild: { targets in
                         path.append(.sessionBuilder(workoutID: nil, targetMuscleGroups: targets))

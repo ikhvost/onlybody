@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @Bindable var viewModel: SettingsViewModel
+    let onNotifications: () -> Void
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -30,6 +31,8 @@ struct SettingsView: View {
                     VStack(alignment: .leading, spacing: Theme.space28) {
                         SettingsSection(title: "Training") {
                             SettingsSoundToggle(isEnabled: $viewModel.isTimerSoundEnabled)
+                            Rectangle().fill(Theme.border).frame(height: Theme.dividerThickness)
+                            SettingsNotificationsLink(action: onNotifications)
                         }
 
                         SettingsSection(title: "Support") {
@@ -70,12 +73,12 @@ struct SettingsView: View {
 
 #if DEBUG
 #Preview("Settings — OnlyBody") {
-    SettingsView(viewModel: SettingsViewModel(appName: "OnlyBody", version: "1.0"))
+    SettingsView(viewModel: SettingsViewModel(appName: "OnlyBody", version: "1.0"), onNotifications: {})
         .preferredColorScheme(.dark)
 }
 
 #Preview("Settings — OnlyWeights") {
-    SettingsView(viewModel: SettingsViewModel(appName: "OnlyWeights", version: "1.0"))
+    SettingsView(viewModel: SettingsViewModel(appName: "OnlyWeights", version: "1.0"), onNotifications: {})
         .preferredColorScheme(.dark)
 }
 #endif

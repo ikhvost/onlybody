@@ -3,12 +3,14 @@ import SwiftUI
 
 @main
 struct BodyweightApp: App {
+    @Environment(\.scenePhase) private var scenePhase
     let configuration = AppConfiguration.current
     let container: ModelContainer?
     let exercises: any ExerciseRepository
     let workouts: any WorkoutRepository
     let sessions: any SessionRepository
     let preferences: WorkoutPreferences
+    let reminders: WorkoutReminderCoordinator
 
     init() {
         #if DEBUG
@@ -18,6 +20,9 @@ struct BodyweightApp: App {
             workouts = PreviewWorkoutRepository()
             sessions = PreviewSessionRepository()
             preferences = WorkoutPreferences()
+            reminders = WorkoutReminderCoordinator(
+                preferences: preferences, workouts: workouts, notifications: PreviewWorkoutNotificationClient()
+            )
             return
         }
         #endif
@@ -50,6 +55,17 @@ struct BodyweightApp: App {
             exercises = SwiftDataExerciseRepository(context: ModelContext(storeContainer), catalog: catalog)
             workouts = SwiftDataWorkoutRepository(context: ModelContext(storeContainer), catalog: catalog)
             sessions = SwiftDataSessionRepository(context: ModelContext(storeContainer))
+            let notificationClient: any WorkoutNotificationClient
+            #if DEBUG
+            if preferenceNamespace != nil && ProcessInfo.processInfo.environment["ONLYBODY_NOTIFICATION_FIXTURE"] == "authorized" {
+                notificationClient = PreviewWorkoutNotificationClient()
+            } else {
+                notificationClient = SystemWorkoutNotificationClient()
+            }
+            #else
+            notificationClient = SystemWorkoutNotificationClient()
+            #endif
+            reminders = WorkoutReminderCoordinator(preferences: preferences, workouts: workouts, notifications: notificationClient)
         } catch {
             fatalError("ModelContainer failed: \(error)")
         }
@@ -59,8 +75,18 @@ struct BodyweightApp: App {
         WindowGroup {
             AppTabView(composition: AppComposition(
                 configuration: configuration, exercises: exercises, workouts: workouts,
-                sessions: sessions, preferences: preferences
+                sessions: sessions, preferences: preferences, reminders: reminders
             ))
+            .task { await reminders.refresh() }
+            .onChange(of: scenePhase) { _, phase in
+                if phase == .active { Task { await reminders.refresh() } }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .NSSystemTimeZoneDidChange)) { _ in
+                Task { await reminders.refresh() }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.significantTimeChangeNotification)) { _ in
+                Task { await reminders.refresh() }
+            }
         }
     }
 }

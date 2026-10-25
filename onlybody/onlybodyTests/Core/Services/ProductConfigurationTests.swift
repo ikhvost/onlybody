@@ -11,7 +11,10 @@ struct ProductConfigurationTests {
         for configuration in [AppConfiguration.onlyBody, .onlyWeights] {
             let composition = AppComposition(
                 configuration: configuration, exercises: MockExerciseRepository(),
-                workouts: MockWorkoutRepository(), sessions: MockSessionRepository(), preferences: WorkoutPreferences()
+                workouts: MockWorkoutRepository(), sessions: MockSessionRepository(), preferences: WorkoutPreferences(),
+                reminders: WorkoutReminderCoordinator(
+                    preferences: WorkoutPreferences(), workouts: MockWorkoutRepository(), notifications: MockWorkoutNotificationClient()
+                )
             )
             #expect(composition.train().appName == configuration.displayName)
         }
@@ -44,7 +47,10 @@ struct ProductConfigurationTests {
         exercises.stubbedAllExercises = [ExerciseSnapshot(name: "Test machine", primaryMuscle: "Quads", equipment: ["Machine"])]
         let composition = AppComposition(
             configuration: .onlyWeights, exercises: exercises,
-            workouts: MockWorkoutRepository(), sessions: MockSessionRepository(), preferences: WorkoutPreferences()
+            workouts: MockWorkoutRepository(), sessions: MockSessionRepository(), preferences: WorkoutPreferences(),
+            reminders: WorkoutReminderCoordinator(
+                preferences: WorkoutPreferences(), workouts: MockWorkoutRepository(), notifications: MockWorkoutNotificationClient()
+            )
         )
         let builder = composition.builder(workout: nil, targets: ["Quads"])
         await builder.loadExercises()

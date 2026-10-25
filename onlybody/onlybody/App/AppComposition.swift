@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 /// The app-level factory is the only layer wiring repositories to screens.
 @MainActor
@@ -8,6 +9,7 @@ struct AppComposition {
     let workouts: any WorkoutRepository
     let sessions: any SessionRepository
     let preferences: WorkoutPreferences
+    let reminders: WorkoutReminderCoordinator
 
     func train() -> TrainViewModel { TrainViewModel(workouts: workouts, appName: configuration.displayName) }
     func log() -> LogViewModel { LogViewModel(sessions: sessions) }
@@ -22,8 +24,15 @@ struct AppComposition {
     func builder(workout: WorkoutSnapshot?, targets: [String]) -> SessionBuilderViewModel {
         SessionBuilderViewModel(
             workouts: workouts, exercises: exercises, workout: workout, targetMuscleGroups: targets,
-            generator: SmartWorkoutGenerator(fallbackPolicy: configuration.workoutFallback)
+            generator: SmartWorkoutGenerator(fallbackPolicy: configuration.workoutFallback),
+            onScheduleChanged: { await reminders.refresh() }
         )
+    }
+    func notifications() -> NotificationsViewModel {
+        NotificationsViewModel(preferences: preferences, reminders: reminders, openSystemSettings: {
+            guard let url = URL(string: UIApplication.openSettingsURLString) else { return false }
+            return await UIApplication.shared.open(url)
+        })
     }
     func active(workoutID: UUID) -> ActiveWorkoutViewModel {
         let cue = WorkoutCuePlayer()

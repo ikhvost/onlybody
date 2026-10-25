@@ -7,6 +7,7 @@ final class SessionBuilderViewModel {
     private let workoutsRepository: any WorkoutRepository
     private let exercisesRepository: any ExerciseRepository
     private let smartGenerator: SmartWorkoutGenerator
+    private let onScheduleChanged: @MainActor () async -> Void
 
     private var initialDraft: BuilderDraft?
     var hasUnsavedChanges: Bool { initialDraft != draft }
@@ -53,11 +54,13 @@ final class SessionBuilderViewModel {
         exercises: any ExerciseRepository,
         workout: WorkoutSnapshot? = nil,
         targetMuscleGroups: [String] = [],
-        generator: SmartWorkoutGenerator = SmartWorkoutGenerator()
+        generator: SmartWorkoutGenerator = SmartWorkoutGenerator(),
+        onScheduleChanged: @escaping @MainActor () async -> Void = {}
     ) {
         self.workoutsRepository = workouts
         self.exercisesRepository = exercises
         self.smartGenerator = generator
+        self.onScheduleChanged = onScheduleChanged
         self.editingWorkout = workout
         self.targetMuscleGroups = targetMuscleGroups
 
@@ -129,6 +132,7 @@ final class SessionBuilderViewModel {
         defer { isSaving = false }
         do {
             try await workoutsRepository.delete(by: editingWorkout.id)
+            await onScheduleChanged()
             return true
         } catch {
             errorMessage = "Could not delete workout. Your training history is unchanged."
@@ -204,6 +208,7 @@ final class SessionBuilderViewModel {
 
             try await workoutsRepository.save(workout)
             initialDraft = draft
+            await onScheduleChanged()
             return true
         } catch {
             errorMessage = "Could not save session."

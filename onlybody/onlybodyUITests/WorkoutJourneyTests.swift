@@ -13,6 +13,7 @@ final class WorkoutJourneyTests: XCTestCase {
             app.launchEnvironment["ONLYBODY_UI_FIXTURE"] = "catalog"
             app.launchEnvironment["ONLYBODY_UI_STORE"] = UUID().uuidString
             app.launchEnvironment["ONLYBODY_DEMONSTRATION_FIXTURE"] = "ready"
+            app.launchEnvironment["ONLYBODY_NOTIFICATION_FIXTURE"] = "authorized"
             app.launch()
         }
     }
@@ -226,6 +227,7 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertTrue(app.buttons["settings.back"].waitForExistence(timeout: 10))
         XCTAssertFalse(app.buttons["tab.train"].isHittable)
         verifyTimerSoundPreference()
+        verifyNotificationPreferences()
         for identifier in ["settings.feedback", "settings.rate", "settings.privacy", "settings.terms"] {
             XCTAssertTrue(app.buttons[identifier].exists)
             XCTAssertFalse(app.buttons[identifier].isEnabled)
@@ -256,6 +258,41 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertEqual(timerSound.value as? String, "0")
         timerSound.tap()
         XCTAssertEqual(timerSound.value as? String, "1")
+    }
+
+    private func verifyNotificationPreferences() {
+        tap("settings.notifications")
+        XCTAssertFalse(app.buttons["tab.train"].isHittable)
+        let reminders = app.switches["notifications.enabled"]
+        XCTAssertTrue(reminders.waitForExistence(timeout: 10))
+        XCTAssertEqual(reminders.value as? String, "0")
+        XCTAssertFalse(app.pickerWheels.firstMatch.exists)
+        reminders.tap()
+        let time = app.pickerWheels.firstMatch
+        XCTAssertTrue(time.waitForExistence(timeout: 10))
+        XCTAssertEqual(time.value as? String, "13:00")
+        XCTAssertTrue(app.staticTexts["notifications.noDays"].exists)
+        time.adjust(toPickerWheelValue: "13:30")
+        let screenshot = XCTAttachment(screenshot: app.screenshot())
+        screenshot.name = "\(JourneyProduct.name) notifications"
+        screenshot.lifetime = .keepAlways
+        add(screenshot)
+        app.terminate()
+        app.launch()
+        tap("train.settings")
+        tap("settings.notifications")
+        XCTAssertTrue(time.waitForExistence(timeout: 10))
+        XCTAssertEqual(reminders.value as? String, "1")
+        XCTAssertEqual(time.value as? String, "13:30")
+        reminders.tap()
+        XCTAssertFalse(time.exists)
+        reminders.tap()
+        XCTAssertTrue(time.waitForExistence(timeout: 10))
+        XCTAssertEqual(time.value as? String, "13:30")
+        tap("notifications.back")
+        tap("settings.notifications")
+        swipeBack()
+        XCTAssertTrue(app.buttons["settings.back"].waitForExistence(timeout: 10))
     }
 
     private func verifyOtherBackScreens() {
