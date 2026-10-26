@@ -1,10 +1,11 @@
 import SwiftUI
 
-/// Opens a configured website or shows an unavailable destination.
+/// Opens a configured link or shows an unavailable destination.
 struct SettingsRow: View {
     let title: String
     let identifier: String
     var destination: URL?
+    var destinationDescription = "Opens in browser"
     @Environment(\.openURL) private var openURL
 
     var body: some View {
@@ -31,7 +32,7 @@ struct SettingsRow: View {
         .buttonStyle(.plain)
         .disabled(destination == nil)
         .accessibilityLabel(title)
-        .accessibilityValue(destination == nil ? "Coming soon" : "Opens in browser")
+        .accessibilityValue(destination == nil ? "Coming soon" : destinationDescription)
         .accessibilityIdentifier(identifier)
     }
 }

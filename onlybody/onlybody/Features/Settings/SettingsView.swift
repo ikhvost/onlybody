@@ -38,7 +38,12 @@ struct SettingsView: View {
                         }
 
                         SettingsSection(title: "Support") {
-                            SettingsRow(title: "Send feedback", identifier: "settings.feedback")
+                            SettingsRow(
+                                title: "Send feedback",
+                                identifier: "settings.feedback",
+                                destination: viewModel.feedbackURL,
+                                destinationDescription: "Opens email app"
+                            )
                             Rectangle().fill(Theme.border).frame(height: Theme.dividerThickness)
                             SettingsRow(title: "Rate the app", identifier: "settings.rate")
                         }

@@ -12,6 +12,14 @@ final class SettingsViewModel {
     private let preferences: WorkoutPreferences
     let weightUnits = WeightUnit.allCases
 
+    var feedbackURL: URL? {
+        var components = URLComponents()
+        components.scheme = "mailto"
+        components.path = "support@onlybody.app"
+        components.queryItems = [URLQueryItem(name: "subject", value: "\(appName) feedback")]
+        return components.url
+    }
+
     var weightUnit: WeightUnit {
         get { preferences.weightUnit }
         set { preferences.weightUnit = newValue }
