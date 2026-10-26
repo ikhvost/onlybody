@@ -44,9 +44,17 @@ struct SettingsView: View {
                         }
 
                         SettingsSection(title: "Legal") {
-                            SettingsRow(title: "Privacy Policy", identifier: "settings.privacy")
+                            SettingsRow(
+                                title: "Privacy Policy",
+                                identifier: "settings.privacy",
+                                destination: viewModel.privacyPolicyURL
+                            )
                             Rectangle().fill(Theme.border).frame(height: Theme.dividerThickness)
-                            SettingsRow(title: "Terms of Use", identifier: "settings.terms")
+                            SettingsRow(
+                                title: "Terms of Use",
+                                identifier: "settings.terms",
+                                destination: viewModel.termsOfUseURL
+                            )
                         }
 
                         VStack(spacing: Theme.space6) {

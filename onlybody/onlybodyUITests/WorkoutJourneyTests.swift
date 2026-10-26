@@ -235,10 +235,12 @@ final class WorkoutJourneyTests: XCTestCase {
         verifyTimerSoundPreference()
         verifyNotificationPreferences()
         verifyWeightUnitPreference()
-        for identifier in ["settings.feedback", "settings.rate", "settings.privacy", "settings.terms"] {
+        for identifier in ["settings.feedback", "settings.rate"] {
             XCTAssertTrue(app.buttons[identifier].exists)
             XCTAssertFalse(app.buttons[identifier].isEnabled)
         }
+        XCTAssertTrue(app.buttons["settings.privacy"].isEnabled)
+        XCTAssertTrue(app.buttons["settings.terms"].isEnabled)
         XCTAssertTrue(app.staticTexts["settings.version"].label.contains(JourneyProduct.name))
         XCTAssertFalse(app.staticTexts["settings.version"].label.contains("—"))
         let settings = XCTAttachment(screenshot: app.screenshot())

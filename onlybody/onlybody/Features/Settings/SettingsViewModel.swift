@@ -1,3 +1,4 @@
+import Foundation
 import Observation
 
 /// Product information and editable preferences for the shared settings screen.
@@ -6,6 +7,8 @@ import Observation
 final class SettingsViewModel {
     let appName: String
     let version: String
+    let privacyPolicyURL = URL(string: "https://onlybody.app/privacy/")
+    let termsOfUseURL = URL(string: "https://onlybody.app/terms/")
     private let preferences: WorkoutPreferences
     let weightUnits = WeightUnit.allCases
 
