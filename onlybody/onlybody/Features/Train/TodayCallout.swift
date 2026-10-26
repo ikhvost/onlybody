@@ -7,7 +7,7 @@ struct TodayCallout: View {
         Group {
             if todaysWorkouts.isEmpty {
                 HStack {
-                    Text("Rest day")
+                    Text(.uiRestDay)
                         .font(Theme.fontMono(Theme.type10))
                         .foregroundStyle(Theme.text3)
                         .tracking(1)
@@ -24,7 +24,7 @@ struct TodayCallout: View {
                 .padding(.bottom, Theme.space10)
             } else {
                 VStack(alignment: .leading, spacing: Theme.space2) {
-                    MonoLabel(text: "Today", size: Theme.type10, color: Theme.accent, tracking: 1)
+                    MonoLabel(text: String(localized: .uiToday), size: Theme.type10, color: Theme.accent, tracking: 1)
                     Text(todaysWorkouts.map(\.name).joined(separator: " · "))
                         .font(Theme.fontSans(Theme.type14, .bold))
                         .foregroundStyle(Theme.text)

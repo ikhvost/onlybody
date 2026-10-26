@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct StepperView: View {
+    let identifier: String
     let label: String
     let valueText: String
     let canDecrement: Bool
@@ -9,6 +10,7 @@ struct StepperView: View {
 
     init(
         label: String,
+        identifier: String? = nil,
         value: Int,
         step: Int,
         minValue: Int,
@@ -17,6 +19,7 @@ struct StepperView: View {
         onDecrement: @escaping () -> Void
     ) {
         self.label = label
+        self.identifier = identifier ?? label
         valueText = format(value)
         canDecrement = value - step >= minValue
         self.onIncrement = onIncrement
@@ -25,12 +28,14 @@ struct StepperView: View {
 
     init(
         label: String,
+        identifier: String? = nil,
         valueText: String,
         canDecrement: Bool,
         onIncrement: @escaping () -> Void,
         onDecrement: @escaping () -> Void
     ) {
         self.label = label
+        self.identifier = identifier ?? label
         self.valueText = valueText
         self.canDecrement = canDecrement
         self.onIncrement = onIncrement
@@ -58,13 +63,13 @@ struct StepperView: View {
                                 .stroke(Theme.border2, lineWidth: 1)
                         }
                 }
-                .accessibilityLabel("Decrease \(label)")
-                .accessibilityIdentifier("stepper.\(label).decrease")
+                .accessibilityLabel(String(localized: .uiDecrease(label)))
+                .accessibilityIdentifier("stepper.\(identifier).decrease")
                 .disabled(!canDecrement)
                 .buttonStyle(.plain)
 
                 Text(valueText)
-                    .accessibilityIdentifier("stepper.\(label).value")
+                    .accessibilityIdentifier("stepper.\(identifier).value")
                     .font(Theme.fontMono(Theme.type14, .bold))
                     .foregroundStyle(Theme.text)
                     .frame(maxWidth: .infinity)
@@ -79,8 +84,8 @@ struct StepperView: View {
                         .background(Theme.accent)
                         .clipShape(.rect(cornerRadius: Theme.chipCornerRadius))
                 }
-                .accessibilityLabel("Increase \(label)")
-                .accessibilityIdentifier("stepper.\(label).increase")
+                .accessibilityLabel(String(localized: .uiIncrease(label)))
+                .accessibilityIdentifier("stepper.\(identifier).increase")
                 .buttonStyle(.plain)
             }
         }

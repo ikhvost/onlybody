@@ -80,7 +80,7 @@ struct ActiveWorkoutExerciseContent: View {
                 ActiveWorkoutUpNextSection(nextExerciseName: nextExerciseName)
             }
 
-            PrimaryButton(title: "Mark Set Done") {
+            PrimaryButton(title: String(localized: .uiMarkSetDone)) {
                 onMarkSetDone()
             }
             .accessibilityIdentifier("active.markSetDone")

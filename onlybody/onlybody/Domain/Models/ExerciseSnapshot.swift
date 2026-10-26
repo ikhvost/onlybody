@@ -10,6 +10,18 @@ nonisolated struct ExerciseSnapshot: Identifiable, Sendable, Equatable {
     // Retained only for old-store round trips; generation ignores this legacy preference.
     var frequencyPreference: String = ExerciseFrequency.normal.rawValue
 
+    /// Translated display only; `name` remains the catalog and persistence key.
+    var displayName: String { CatalogLocalization.exercise(name) }
+
+    func matchesSearch(_ query: String) -> Bool {
+        query.isEmpty || displayName.localizedStandardContains(query) || name.localizedStandardContains(query)
+    }
+
+    var supportingMuscleLabel: String {
+        supportingMuscles.isEmpty ? CatalogLocalization.label("None")
+            : supportingMuscles.map { CatalogLocalization.label($0) }.joined(separator: ", ")
+    }
+
     var muscleProfile: ExerciseMuscleProfile {
         ExerciseMuscleCatalog.profiles[name] ?? ExerciseMuscleProfile(
             primary: primaryMuscle == "Full Body" ? [] : Self.expandedLegacyGroups([primaryMuscle]),
@@ -19,7 +31,7 @@ nonisolated struct ExerciseSnapshot: Identifiable, Sendable, Equatable {
 
     var primaryMuscles: [String] { muscleProfile.primary }
     var supportingMuscles: [String] { muscleProfile.secondary.filter { !primaryMuscles.contains($0) } }
-    var primaryMuscleLabel: String { primaryMuscles.joined(separator: ", ") }
+    var primaryMuscleLabel: String { primaryMuscles.map { CatalogLocalization.label($0) }.joined(separator: ", ") }
 
     func matchesMuscleFilter(_ filter: String) -> Bool {
         filter == "All" || primaryMuscles.contains(filter) || (filter == "Full Body" && muscleProfile.isFullBody)
@@ -32,6 +44,7 @@ nonisolated struct ExerciseSnapshot: Identifiable, Sendable, Equatable {
     var difficulty: ExerciseDifficulty { ExerciseDifficultyCatalog.levels[name] ?? .unrated }
 
     var equipmentLabel: String {
-        equipment.isEmpty ? "None" : equipment.joined(separator: ", ")
+        equipment.isEmpty ? CatalogLocalization.label("None")
+            : equipment.map { CatalogLocalization.label($0) }.joined(separator: ", ")
     }
 }

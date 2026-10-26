@@ -9,14 +9,14 @@ struct ActiveWorkoutExerciseNavigation: View {
     var body: some View {
         HStack(spacing: Theme.space8) {
             if canGoPrevious {
-                GhostButton(title: "\u{2190} Prev") {
+                GhostButton(title: String(localized: .uiPrev)) {
                     onPrevious()
                 }
                 .frame(maxWidth: .infinity)
             }
 
             if canSkip {
-                GhostButton(title: "Skip \u{2192}") {
+                GhostButton(title: String(localized: .uiSkip)) {
                     onSkip()
                 }
                 .frame(maxWidth: .infinity)

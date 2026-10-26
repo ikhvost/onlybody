@@ -24,7 +24,7 @@ struct ActiveWorkoutTopBar: View {
 
             Spacer()
 
-            GhostButton(title: "End", action: onEnd)
+            GhostButton(title: String(localized: .uiEnd), action: onEnd)
                 .accessibilityIdentifier("active.end")
         }
         .padding(.horizontal, Theme.horizontalPadding)

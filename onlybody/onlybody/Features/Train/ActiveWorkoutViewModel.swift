@@ -115,7 +115,7 @@ final class ActiveWorkoutViewModel {
 
         do {
             guard let workout = try await workoutsRepository.workout(by: workoutId) else {
-                errorMessage = "Workout not found."
+                errorMessage = String(localized: .uiWorkoutNotFound)
                 return
             }
 
@@ -123,7 +123,7 @@ final class ActiveWorkoutViewModel {
             items = (workout.items).sorted { $0.order < $1.order }
 
             if items.isEmpty {
-                errorMessage = "Workout has no exercises."
+                errorMessage = String(localized: .uiWorkoutHasNoExercises)
                 return
             }
 
@@ -139,7 +139,7 @@ final class ActiveWorkoutViewModel {
             startedAt = time.now
             startElapsedTimer()
         } catch {
-            errorMessage = "Could not load workout."
+            errorMessage = String(localized: .uiCouldNotLoadWorkout)
         }
     }
 
@@ -281,7 +281,7 @@ final class ActiveWorkoutViewModel {
             saveState = .saved
         } catch {
             saveState = .failed
-            errorMessage = "Could not save session."
+            errorMessage = String(localized: .uiCouldNotSaveSession)
         }
     }
 

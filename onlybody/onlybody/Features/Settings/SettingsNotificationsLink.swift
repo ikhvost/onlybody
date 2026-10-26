@@ -6,7 +6,7 @@ struct SettingsNotificationsLink: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: Theme.space16) {
-                Text("Notifications")
+                Text(.uiNotifications)
                     .font(Theme.fontSans(Theme.type14, .medium))
                     .foregroundStyle(Theme.text)
                 Spacer()

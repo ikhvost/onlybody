@@ -3,7 +3,7 @@ import SwiftUI
 struct MovementDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @State var viewModel: MovementDetailViewModel
-    var backLabel = "Back to library"
+    var backLabel = String(localized: .uiBackToLibrary)
 
     var body: some View {
         ZStack {
@@ -16,7 +16,7 @@ struct MovementDetailView: View {
                     } label: {
                         HStack(spacing: Theme.space4) {
                             ChevronIcon(isBack: true, color: Theme.accent, size: Theme.type16, inset: 8)
-                            Text("Back")
+                            Text(.uiBack)
                                 .font(Theme.fontSans(Theme.type15, .semibold))
                                 .foregroundStyle(Theme.accent)
                         }
@@ -32,7 +32,7 @@ struct MovementDetailView: View {
                             ExerciseDifficultyBadge(difficulty: viewModel.exercise.difficulty)
                                 .accessibilityIdentifier("movement.difficulty")
 
-                            Text(viewModel.exercise.name)
+                            Text(viewModel.exercise.displayName)
                                 .font(Theme.fontSans(Theme.type28, .heavy))
                                 .tracking(-0.8)
                                 .foregroundStyle(Theme.text)
@@ -46,7 +46,7 @@ struct MovementDetailView: View {
                             .frame(height: 1)
 
                         VStack(alignment: .leading, spacing: Theme.space8) {
-                            MonoLabel(text: "Primary muscles", size: Theme.type11, tracking: 0.8)
+                            MonoLabel(text: String(localized: .uiPrimaryMuscles), size: Theme.type11, tracking: 0.8)
 
                             HStack(spacing: Theme.space8) {
                                 Rectangle()
@@ -61,7 +61,7 @@ struct MovementDetailView: View {
                         }
 
                         VStack(alignment: .leading, spacing: Theme.space8) {
-                            MonoLabel(text: "Secondary", size: Theme.type11, tracking: 0.8)
+                            MonoLabel(text: String(localized: .uiSecondary), size: Theme.type11, tracking: 0.8)
 
                             HStack(alignment: .top, spacing: Theme.space8) {
                                 Rectangle()
@@ -70,7 +70,7 @@ struct MovementDetailView: View {
                                     .clipShape(.rect(cornerRadius: 1))
                                     .padding(.top, Theme.space4)
 
-                                Text(viewModel.exercise.supportingMuscles.isEmpty ? "None" : viewModel.exercise.supportingMuscles.joined(separator: ", "))
+                                Text(viewModel.exercise.supportingMuscleLabel)
                                     .font(Theme.fontSans(Theme.type14))
                                     .foregroundStyle(Theme.text2)
                             }
@@ -83,7 +83,7 @@ struct MovementDetailView: View {
                             .frame(height: 1)
 
                         HStack(spacing: Theme.space8) {
-                            Text("Equipment")
+                            Text(.uiEquipment)
                                 .font(Theme.fontSans(Theme.type14))
                                 .foregroundStyle(Theme.text2)
 

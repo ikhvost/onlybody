@@ -23,7 +23,7 @@ struct TrainHeader: View {
                     .frame(width: Theme.space44, height: Theme.space44)
                     .contentShape(.rect)
             }
-            .accessibilityLabel("Settings")
+            .accessibilityLabel(String(localized: .uiSettings))
             .accessibilityIdentifier("train.settings")
             .buttonStyle(PressableButtonStyle())
 
@@ -40,7 +40,7 @@ struct TrainHeader: View {
                 .frame(width: Theme.space44, height: Theme.space44)
                 .contentShape(.rect)
             }
-            .accessibilityLabel("Create workout")
+            .accessibilityLabel(String(localized: .uiCreateWorkout))
             .accessibilityIdentifier("workout.create")
             .buttonStyle(PressableButtonStyle())
         }

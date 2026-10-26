@@ -1,3 +1,5 @@
+import Foundation
+
 import Observation
 
 /// Serializes schedule updates so an older request cannot overwrite newer preferences.
@@ -48,7 +50,7 @@ final class WorkoutReminderCoordinator {
             preferences.areWorkoutRemindersEnabled = false
             await refresh()
             permissionRequestFailed = true
-            errorMessage = "Could not request notification permission. Please try again."
+            errorMessage = String(localized: .uiCouldNotRequestNotificationPermissionPleaseTryAgain)
         }
     }
 
@@ -106,7 +108,7 @@ final class WorkoutReminderCoordinator {
         } catch {
             await notifications.removePendingReminders()
             guard currentRevision == revision else { return }
-            errorMessage = "Reminders could not be updated. Please try again."
+            errorMessage = String(localized: .uiRemindersCouldNotBeUpdatedPleaseTryAgain)
         }
     }
 }

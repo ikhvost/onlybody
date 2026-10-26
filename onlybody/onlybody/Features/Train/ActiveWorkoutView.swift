@@ -35,8 +35,10 @@ struct ActiveWorkoutView: View {
                     currentIndex: viewModel.currentExerciseIndex,
                     totalCount: viewModel.items.count,
                     elapsedString: formatTime(viewModel.elapsedSeconds),
-                    exerciseName: viewModel.currentExerciseName,
-                    setLabel: "Set \(viewModel.currentSetIndex + 1) of \(viewModel.currentSetsTotal) \u{00B7} " + (viewModel.currentTargetReps > 0 ? "Target \(viewModel.currentTargetReps) reps" : "max hold"),
+                    exerciseName: CatalogLocalization.exercise(viewModel.currentExerciseName),
+                    setLabel: String(localized: .uiSetProgress(viewModel.currentSetIndex + 1, viewModel.currentSetsTotal))
+                        + " · " + (viewModel.currentTargetReps > 0
+                            ? String(localized: .uiTargetReps(viewModel.currentTargetReps)) : String(localized: .uiMaxHold)),
                     totalSets: viewModel.currentSetsTotal,
                     completedSets: viewModel.completedSetsForCurrent,
                     currentSetIndex: viewModel.currentSetIndex,
@@ -46,10 +48,10 @@ struct ActiveWorkoutView: View {
                     errorMessage: viewModel.errorMessage,
                     canGoPrevious: viewModel.canGoPrevious,
                     canSkip: viewModel.canSkip,
-                    nextExerciseName: viewModel.nextExerciseName,
+                    nextExerciseName: CatalogLocalization.exercise(viewModel.nextExerciseName),
                     isRestActive: viewModel.restTimer.isActive,
                     restSecondsString: formatTime(viewModel.restTimer.remainingSeconds),
-                    restNextName: viewModel.restTimer.nextExerciseName,
+                    restNextName: CatalogLocalization.exercise(viewModel.restTimer.nextExerciseName),
                     onEnd: { showEndPrompt = true },
                     onMarkSetDone: { viewModel.markSetDone(); setCompletedCount += 1 },
                     onIncrementReps: { viewModel.incrementReps() },
@@ -67,8 +69,8 @@ struct ActiveWorkoutView: View {
                 )
             }
         }
-        .alert("End workout?", isPresented: $showEndPrompt) {
-            Button("End & Save") {
+        .alert(String(localized: .uiEndWorkout), isPresented: $showEndPrompt) {
+            Button(String(localized: .uiEndSave)) {
                 Task {
                     await viewModel.endSession()
                     if viewModel.errorMessage == nil {
@@ -76,12 +78,12 @@ struct ActiveWorkoutView: View {
                     }
                 }
             }
-            Button("End Without Saving", role: .destructive) {
+            Button(String(localized: .uiEndWithoutSaving), role: .destructive) {
                 if viewModel.discardSession() { onEnd() }
             }
-            Button("Continue", role: .cancel) {}
+            Button(String(localized: .uiContinue), role: .cancel) {}
         } message: {
-            Text("Save your completed sets, or end without adding this workout to history.")
+            Text(.uiSaveYourCompletedSetsOrEndWithoutAddingThisWorkout)
         }
         .task {
             await viewModel.load()

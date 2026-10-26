@@ -11,12 +11,12 @@ struct WorkoutTimingPicker: View {
     var body: some View {
         VStack(spacing: Theme.space12) {
             HStack {
-                Button("Cancel") { dismiss() }
+                Button(String(localized: .uiCancel)) { dismiss() }
                     .foregroundStyle(Theme.text2)
                 Spacer()
                 Text(title).foregroundStyle(Theme.text)
                 Spacer()
-                Button("Done") { onSelect(selection); dismiss() }
+                Button(String(localized: .uiDone)) { onSelect(selection); dismiss() }
                     .foregroundStyle(Theme.accent)
                     .accessibilityIdentifier("timing.done")
             }

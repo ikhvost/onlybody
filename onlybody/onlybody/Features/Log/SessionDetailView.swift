@@ -20,13 +20,13 @@ struct SessionDetailView: View {
                     } label: {
                         HStack(spacing: Theme.space4) {
                             ChevronIcon(isBack: true, color: Theme.accent, size: Theme.type16, inset: 8)
-                            Text("Back")
+                            Text(.uiBack)
                                 .font(Theme.fontSans(Theme.type15, .semibold))
                                 .foregroundStyle(Theme.accent)
                         }
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("Back to log")
+                    .accessibilityLabel(String(localized: .uiBackToLog))
                 }
 
                 ScrollView {
@@ -39,7 +39,7 @@ struct SessionDetailView: View {
                                 Text(Duration.seconds(session.durationSeconds).formatted(.time(pattern: .minuteSecond)))
                                     .font(Theme.fontMono(Theme.type24, .medium))
                                     .foregroundStyle(Theme.accent)
-                                Text("min")
+                                Text(.uiMin)
                                     .font(Theme.fontMono(Theme.type13))
                                     .foregroundStyle(Theme.text2)
                             }
@@ -76,7 +76,7 @@ struct SessionDetailView: View {
                 .weekday(.wide)
                 .month(.wide)
                 .day()
-                .locale(Locale(identifier: "en_US"))
+                .locale(.current)
         ).uppercased()
     }
 }

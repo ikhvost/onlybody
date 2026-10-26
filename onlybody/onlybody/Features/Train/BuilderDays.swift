@@ -5,12 +5,12 @@ struct BuilderDays: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.space8) {
-            MonoLabel(text: "Training days", size: Theme.type11, color: Theme.text2, tracking: 0.5)
+            MonoLabel(text: String(localized: .uiTrainingDays), size: Theme.type11, color: Theme.text2, tracking: 0.5)
 
             HStack(spacing: Theme.space2) {
                 ForEach(viewModel.dayNames, id: \.self) { day in
                     ChipView(
-                        label: day,
+                        label: CatalogLocalization.label(day),
                         isActive: viewModel.scheduledDays.contains(day),
                         size: Theme.type12,
                         horizontalPadding: 8,
@@ -23,7 +23,7 @@ struct BuilderDays: View {
 
             if viewModel.scheduledDays.isEmpty {
                 MonoLabel(
-                    text: "No days scheduled",
+                    text: String(localized: .uiNoDaysScheduled),
                     size: Theme.type11,
                     color: Theme.text3,
                     tracking: 0.3

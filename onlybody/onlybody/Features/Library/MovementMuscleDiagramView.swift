@@ -6,9 +6,9 @@ struct MovementMuscleDiagramView: View {
     var body: some View {
         VStack(spacing: Theme.space12) {
             HStack(spacing: Theme.space0) {
-                MonoLabel(text: "Front", size: Theme.type10, tracking: 0.8)
+                MonoLabel(text: String(localized: .uiFront), size: Theme.type10, tracking: 0.8)
                     .frame(maxWidth: .infinity)
-                MonoLabel(text: "Back", size: Theme.type10, tracking: 0.8)
+                MonoLabel(text: String(localized: .uiRearView), size: Theme.type10, tracking: 0.8)
                     .frame(maxWidth: .infinity)
             }
 
@@ -16,20 +16,20 @@ struct MovementMuscleDiagramView: View {
 
             HStack(spacing: Theme.space16) {
                 if !viewModel.muscleDiagram.primary.isEmpty {
-                    MuscleDiagramLegendItem(title: "Primary", color: Theme.accent)
+                    MuscleDiagramLegendItem(title: String(localized: .uiPrimary), color: Theme.accent)
                 }
                 if !viewModel.muscleDiagram.secondary.isEmpty {
-                    MuscleDiagramLegendItem(title: "Secondary", color: Theme.muscleDiagramSecondary)
+                    MuscleDiagramLegendItem(title: String(localized: .uiSecondary), color: Theme.muscleDiagramSecondary)
                 }
             }
 
             if viewModel.muscleDiagram.isFullBody {
-                Text("Full-body movement · main groups shown")
+                Text(.uiFullBodyMovementMainGroupsShown)
                     .font(Theme.fontSans(Theme.type11))
                     .foregroundStyle(Theme.text2)
                     .multilineTextAlignment(.center)
             } else if !viewModel.muscleDiagram.hasHighlightedRegions {
-                Text("No muscle groups specified")
+                Text(.uiNoMuscleGroupsSpecified)
                     .font(Theme.fontSans(Theme.type12))
                     .foregroundStyle(Theme.text2)
             }

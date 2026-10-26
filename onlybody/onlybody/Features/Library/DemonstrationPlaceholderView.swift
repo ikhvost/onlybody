@@ -8,25 +8,25 @@ struct DemonstrationPlaceholderView: View {
     var body: some View {
         VStack(spacing: Theme.space12) {
             if state == .offline {
-                Text("Video unavailable offline")
+                Text(.uiVideoUnavailableOffline)
                     .accessibilityIdentifier("demonstration.offline")
             } else if case .failed(let failure) = state {
                 Text(failure.message)
                     .accessibilityIdentifier("demonstration.error")
-                Button("Retry", action: onRetry)
+                Button(String(localized: .uiRetry), action: onRetry)
                     .font(Theme.fontSans(Theme.type15, .semibold))
                     .foregroundStyle(Theme.accent)
                     .frame(minHeight: Theme.space44)
-                    .accessibilityLabel("Retry loading demonstration")
+                    .accessibilityLabel(String(localized: .uiRetryLoadingDemonstration))
                     .accessibilityIdentifier("demonstration.retry")
             } else if state == .loading || state == .idle {
                 ProgressView()
                     .tint(Theme.accent)
-                    .accessibilityLabel("Loading video")
-                Text("Loading video…")
+                    .accessibilityLabel(String(localized: .uiLoadingVideoMessageC189))
+                Text(.uiLoadingVideo)
             } else {
                 PlayIcon(color: Theme.accent, size: Theme.space48)
-                    .accessibilityLabel("Video preview")
+                    .accessibilityLabel(String(localized: .uiVideoPreview))
                     .accessibilityIdentifier("demonstration.preview")
             }
         }

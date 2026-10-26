@@ -16,21 +16,21 @@ struct SessionBuilderView: View {
             Theme.bg.ignoresSafeArea()
 
             VStack(spacing: Theme.space0) {
-                NavBarView(title: viewModel.isEditMode ? "Edit Session" : "New Session") {
+                NavBarView(title: viewModel.isEditMode ? String(localized: .uiEditSession) : String(localized: .uiNewSession)) {
                     Button {
                         requestBack()
                     } label: {
                         ChevronIcon(isBack: true, color: Theme.text, size: Theme.type18, inset: 8)
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("Back")
+                    .accessibilityLabel(String(localized: .uiBack))
                     .accessibilityIdentifier("builder.back")
                     .disabled(viewModel.isSaving)
                 } trailing: {
                     Button {
                         handleSave()
                     } label: {
-                        Text("Save")
+                        Text(.uiSave)
                         .font(Theme.fontSans(Theme.type15, .bold))
                             .foregroundStyle(Theme.accentDark)
                             .padding(.horizontal, Theme.space14)
@@ -54,7 +54,7 @@ struct SessionBuilderView: View {
                         BuilderDays(viewModel: viewModel)
                         BuilderDuration(viewModel: viewModel)
                         if viewModel.isEditMode {
-                            Button("Delete Workout", role: .destructive) { showDeletePrompt = true }
+                            Button(String(localized: .uiDeleteWorkout), role: .destructive) { showDeletePrompt = true }
                                 .font(Theme.fontSans(Theme.type15, .semibold))
                                 .foregroundStyle(Theme.danger)
                                 .padding(Theme.horizontalPadding)
@@ -79,11 +79,11 @@ struct SessionBuilderView: View {
         .task {
             await viewModel.loadExercises()
         }
-        .alert("Error", isPresented: Binding(
+        .alert(String(localized: .uiError), isPresented: Binding(
             get: { viewModel.errorMessage != nil },
             set: { if !$0 { viewModel.errorMessage = nil } }
         )) {
-            Button("OK") {
+            Button(String(localized: .uiOkUppercase)) {
                 viewModel.errorMessage = nil
             }
         } message: {
@@ -97,21 +97,21 @@ struct SessionBuilderView: View {
             }
             return true
         }.allowsHitTesting(false))
-        .alert("Discard unsaved changes?", isPresented: $showDiscardPrompt) {
-            Button("Discard changes", role: .destructive) { dismiss() }
-            Button("Stay", role: .cancel) {}
+        .alert(String(localized: .uiDiscardUnsavedChanges), isPresented: $showDiscardPrompt) {
+            Button(String(localized: .uiDiscardChanges), role: .destructive) { dismiss() }
+            Button(String(localized: .uiStay), role: .cancel) {}
         }
-        .alert("Delete workout?", isPresented: $showDeletePrompt) {
-            Button("Delete Workout", role: .destructive) {
+        .alert(String(localized: .uiDeleteWorkoutMessage4Dbb), isPresented: $showDeletePrompt) {
+            Button(String(localized: .uiDeleteWorkout), role: .destructive) {
                 Task {
                     if await viewModel.deleteWorkout() {
                         if let onSaved { onSaved() } else { dismiss() }
                     }
                 }
             }
-            Button("Cancel", role: .cancel) {}
+            Button(String(localized: .uiCancel), role: .cancel) {}
         } message: {
-            Text("This removes the saved workout template. Your training history, exercise results and activity will stay.")
+            Text(.uiThisRemovesTheSavedWorkoutTemplateYourTrainingHistoryExercise)
         }
         .toolbar(.hidden, for: .navigationBar)
     }

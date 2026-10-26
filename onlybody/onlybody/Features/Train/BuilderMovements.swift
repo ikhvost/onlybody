@@ -8,14 +8,14 @@ struct BuilderMovements: View {
         if viewModel.mode == .manual {
             VStack(alignment: .leading, spacing: Theme.space10) {
                 HStack {
-                    MonoLabel(text: "Movements", size: Theme.type11, color: Theme.text2, tracking: 0.5)
+                    MonoLabel(text: String(localized: .uiMovements), size: Theme.type11, color: Theme.text2, tracking: 0.5)
                     Spacer()
                     Button {
                         isShowingExercisePicker = true
                     } label: {
                         HStack(spacing: Theme.space5) {
                             PlusIcon(color: Theme.accentDark, size: Theme.type13)
-                            Text("Add")
+                            Text(.uiAdd)
                                 .font(Theme.fontSans(Theme.type14, .bold))
                                 .foregroundStyle(Theme.accentDark)
                         }
@@ -31,7 +31,7 @@ struct BuilderMovements: View {
 
                 if viewModel.movements.isEmpty {
                     MonoLabel(
-                        text: "No movements yet",
+                        text: String(localized: .uiNoMovementsYet),
                         size: Theme.type11,
                         color: Theme.text3,
                         tracking: 0.5

@@ -6,7 +6,7 @@ struct ExerciseDifficultyFilter: View {
     var body: some View {
         ScrollView(.horizontal) {
             HStack(spacing: Theme.space6) {
-                ChipView(label: "All levels", isActive: selection == nil, isSmall: true) {
+                ChipView(label: String(localized: .uiAllLevels), isActive: selection == nil, isSmall: true) {
                     selection = nil
                 }
                 .accessibilityIdentifier("difficulty.all")
@@ -14,7 +14,7 @@ struct ExerciseDifficultyFilter: View {
                     ChipView(label: level.label, isActive: selection == level, isSmall: true) {
                         selection = level
                     }
-                    .accessibilityLabel("Filter difficulty: \(level.label)")
+                    .accessibilityLabel(String(localized: .uiFilterDifficulty(level.label)))
                     .accessibilityIdentifier("difficulty.\(level.rawValue)")
                 }
             }

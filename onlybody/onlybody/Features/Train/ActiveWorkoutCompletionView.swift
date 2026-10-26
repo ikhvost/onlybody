@@ -11,7 +11,7 @@ struct ActiveWorkoutCompletionView: View {
     var body: some View {
         VStack(spacing: Theme.space0) {
             Spacer()
-            MonoLabel(text: "Session complete", size: Theme.type11, color: Theme.text3, tracking: 2)
+            MonoLabel(text: String(localized: .uiSessionComplete), size: Theme.type11, color: Theme.text3, tracking: 2)
 
             Text(elapsedString)
                 .font(Theme.fontMono(Theme.type72, .medium))
@@ -21,7 +21,7 @@ struct ActiveWorkoutCompletionView: View {
                 .padding(.top, Theme.space12)
 
             MonoLabel(
-                text: "\(exerciseCount) movements done",
+                text: String(localized: .uiCompletedMovements(exerciseCount)),
                 size: Theme.type12,
                 color: Theme.text2,
                 tracking: 1
@@ -39,10 +39,10 @@ struct ActiveWorkoutCompletionView: View {
             }
 
             if saveState == .failed {
-                GhostButton(title: "Retry save", action: onRetry)
+                GhostButton(title: String(localized: .uiRetrySave), action: onRetry)
             }
 
-            PrimaryButton(title: "Close") {
+            PrimaryButton(title: String(localized: .uiClose)) {
                 onEnd()
             }
             .accessibilityIdentifier("active.close")

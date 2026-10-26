@@ -7,24 +7,24 @@ struct LogActivityView: View {
         VStack(spacing: Theme.space20) {
             HStack(spacing: Theme.space8) {
                 StatCard(
-                    label: "STREAK",
+                    label: String(localized: .uiStreakUppercase),
                     value: "\(viewModel.stats.current)",
                     isAccent: false
                 )
                 StatCard(
-                    label: "BEST",
+                    label: String(localized: .uiBestUppercase),
                     value: "\(viewModel.stats.longest)",
                     isAccent: true
                 )
                 StatCard(
-                    label: "SESSIONS",
+                    label: String(localized: .uiSessionsUppercase),
                     value: "\(viewModel.stats.total)",
                     isAccent: true
                 )
             }
 
             VStack(alignment: .leading, spacing: Theme.space10) {
-                MonoLabel(text: "Activity — Last 20 weeks", size: Theme.type11, color: Theme.text3, tracking: 1)
+                MonoLabel(text: String(localized: .uiActivityLast20Weeks), size: Theme.type11, color: Theme.text3, tracking: 1)
 
                 VStack(spacing: Theme.space3) {
                     ForEach(0..<7, id: \.self) { row in
@@ -39,7 +39,7 @@ struct LogActivityView: View {
                     }
                 }
                 .accessibilityElement(children: .ignore)
-                .accessibilityLabel("Activity over the last 20 weeks: \(viewModel.activeDaysInHeatmap) training days")
+                .accessibilityLabel(String(localized: .uiActivityDays(viewModel.activeDaysInHeatmap)))
                 .padding(Theme.space10)
                 .background(Theme.surface)
                 .clipShape(.rect(cornerRadius: Theme.cornerRadius))

@@ -14,44 +14,44 @@ struct ExerciseHistoryView: View {
                     } label: {
                         HStack(spacing: Theme.space4) {
                             ChevronIcon(isBack: true, color: Theme.accent, size: Theme.type16, inset: 8)
-                            Text("Back")
+                            Text(.uiBack)
                                 .font(Theme.fontSans(Theme.type15, .semibold))
                                 .foregroundStyle(Theme.accent)
                         }
                         .frame(minHeight: Theme.space44)
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("Back to workout")
+                    .accessibilityLabel(String(localized: .uiBackToWorkout))
                     .accessibilityIdentifier("exerciseHistory.back")
                 }
                 ScrollView {
                     VStack(alignment: .leading, spacing: Theme.space20) {
-                        Text(viewModel.exerciseName)
+                        Text(CatalogLocalization.exercise(viewModel.exerciseName))
                             .font(Theme.fontSans(Theme.type28, .heavy))
                             .foregroundStyle(Theme.text)
                             .accessibilityAddTraits(.isHeader)
                             .accessibilityIdentifier("exerciseHistory.name")
 
                         if viewModel.isLoading {
-                            ProgressView("Loading history…")
+                            ProgressView(String(localized: .uiLoadingHistory))
                                 .tint(Theme.accent)
                                 .foregroundStyle(Theme.text2)
                         } else if let error = viewModel.errorMessage {
                             Text(error)
                                 .font(Theme.fontSans(Theme.type14))
                                 .foregroundStyle(Theme.text2)
-                            GhostButton(title: "Retry") { Task { await viewModel.load() } }
+                            GhostButton(title: String(localized: .uiRetry)) { Task { await viewModel.load() } }
                                 .accessibilityIdentifier("exerciseHistory.retry")
                         } else if viewModel.entries.isEmpty {
-                            Text("No completed sets yet")
+                            Text(.uiNoCompletedSetsYet)
                                 .font(Theme.fontSans(Theme.type18, .semibold))
                                 .foregroundStyle(Theme.text)
                                 .accessibilityIdentifier("exerciseHistory.empty")
-                            Text("After you save a workout with this exercise, its date, reps and added weight will appear here.")
+                            Text(.uiAfterYouSaveAWorkoutWithThisExerciseItsDate)
                                 .font(Theme.fontSans(Theme.type14))
                                 .foregroundStyle(Theme.text2)
                         } else {
-                            MonoLabel(text: "Sessions", size: Theme.type11, color: Theme.text2)
+                            MonoLabel(text: String(localized: .uiSessions), size: Theme.type11, color: Theme.text2)
                             LazyVStack(spacing: Theme.space14) {
                                 ForEach(viewModel.entries) { entry in
                                     ExerciseHistoryRow(entry: entry, weightText: viewModel.weightText)

@@ -9,14 +9,14 @@ struct NotificationsView: View {
         ZStack {
             Theme.bg.ignoresSafeArea()
             VStack(spacing: Theme.space0) {
-                NavBarView(title: "Notifications") {
+                NavBarView(title: String(localized: .uiNotifications)) {
                     Button { dismiss() } label: {
                         ChevronIcon(isBack: true, color: Theme.text, size: Theme.type18, inset: 8)
                             .frame(width: Theme.space44, height: Theme.space44)
                             .contentShape(.rect)
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("Back to settings")
+                    .accessibilityLabel(String(localized: .uiBackToSettings))
                     .accessibilityIdentifier("notifications.back")
                 } trailing: {
                     Color.clear.frame(width: Theme.space44, height: Theme.space44)
@@ -25,20 +25,20 @@ struct NotificationsView: View {
 
                 ScrollView {
                     VStack(alignment: .leading, spacing: Theme.space24) {
-                        SettingsSection(title: "Training") {
+                        SettingsSection(title: String(localized: .uiTraining)) {
                             NotificationReminderControls(viewModel: viewModel)
                         }
-                        Text("One reminder on your scheduled training days, even if you've already trained. Uses your device's local time.")
+                        Text(.uiOneReminderOnYourScheduledTrainingDaysEvenIfYou)
                             .font(Theme.fontSans(Theme.type12))
                             .foregroundStyle(Theme.text2)
 
                         if viewModel.isPermissionDenied {
-                            Text("Notifications are disabled in iOS Settings. Turn on Workout reminders to open Settings and allow notifications.")
+                            Text(.uiNotificationsAreDisabledInIosSettingsTurnOnWorkoutReminders)
                                 .font(Theme.fontSans(Theme.type12))
                                 .foregroundStyle(Theme.text2)
                         }
                         if viewModel.hasNoScheduledDays {
-                            Text("Add training days to a workout to receive reminders.")
+                            Text(.uiAddTrainingDaysToAWorkoutToReceiveReminders)
                                 .font(Theme.fontSans(Theme.type12))
                                 .foregroundStyle(Theme.text2)
                                 .accessibilityIdentifier("notifications.noDays")
@@ -48,7 +48,7 @@ struct NotificationsView: View {
                                 Text(message)
                                     .font(Theme.fontSans(Theme.type12))
                                     .foregroundStyle(Theme.danger)
-                                Button("Retry") { Task { await viewModel.retry() } }
+                                Button(String(localized: .uiRetry)) { Task { await viewModel.retry() } }
                                     .font(Theme.fontSans(Theme.type14, .semibold))
                                     .foregroundStyle(Theme.accent)
                                     .accessibilityIdentifier("notifications.retry")

@@ -19,7 +19,7 @@ final class LibraryViewModel {
         allExercises.filter {
             $0.matchesMuscleFilter(selectedFilter) &&
             (selectedDifficulty == nil || $0.difficulty == selectedDifficulty) &&
-            (searchText.isEmpty || $0.name.localizedStandardContains(searchText))
+            $0.matchesSearch(searchText)
         }
     }
 
@@ -27,7 +27,7 @@ final class LibraryViewModel {
         let filtered = filteredExercises
         return ExerciseDifficulty.allCases.compactMap { level in
             let matches = filtered.filter { $0.difficulty == level }
-                .sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
+                .sorted { $0.displayName.localizedStandardCompare($1.displayName) == .orderedAscending }
             return matches.isEmpty ? nil : LibraryDifficultySection(difficulty: level, exercises: matches)
         }
     }
@@ -52,7 +52,7 @@ final class LibraryViewModel {
         do {
             allExercises = try await exercisesRepository.allExercises()
         } catch {
-            errorMessage = "Could not load exercise library."
+            errorMessage = String(localized: .uiCouldNotLoadExerciseLibrary)
         }
     }
 }

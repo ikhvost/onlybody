@@ -1,3 +1,5 @@
+import Foundation
+
 import Observation
 
 /// Notification screen state; all system interactions are injected.
@@ -21,7 +23,7 @@ final class NotificationsViewModel {
         isEnabled && !reminders.isRefreshing && reminders.errorMessage == nil && !reminders.hasScheduledDays
     }
     var errorMessage: String? {
-        settingsOpenFailed ? "Could not open system settings. Please try again." : reminders.errorMessage
+        settingsOpenFailed ? String(localized: .uiCouldNotOpenSystemSettingsPleaseTryAgain) : reminders.errorMessage
     }
     var selectedTime: WorkoutReminderTime {
         get { preferences.workoutReminderTime }

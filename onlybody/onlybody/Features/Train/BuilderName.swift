@@ -5,10 +5,10 @@ struct BuilderName: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.space8) {
-            MonoLabel(text: "Session name", size: Theme.type11, color: Theme.text2, tracking: 0.5)
+            MonoLabel(text: String(localized: .uiSessionName), size: Theme.type11, color: Theme.text2, tracking: 0.5)
                 .padding(.horizontal, Theme.horizontalPadding)
 
-            TextField("e.g. Full Body", text: $viewModel.name)
+            TextField(String(localized: .uiEGFullBody), text: $viewModel.name)
                 .accessibilityIdentifier("builder.name")
                 .font(Theme.fontSans(Theme.type16))
                 .foregroundStyle(Theme.text)

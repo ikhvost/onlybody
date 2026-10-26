@@ -7,7 +7,8 @@ struct ActiveWorkoutRepsCard: View {
 
     var body: some View {
         StepperView(
-            label: "Reps",
+            label: String(localized: .uiReps),
+            identifier: "Reps",
             value: reps,
             step: 1,
             minValue: 0,

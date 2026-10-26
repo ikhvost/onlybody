@@ -8,7 +8,8 @@ struct ActiveWorkoutWeightCard: View {
 
     var body: some View {
         StepperView(
-            label: "Added \(weightUnit)",
+            label: String(localized: .uiAddedWeight(weightUnit)),
+            identifier: "Added \(weightUnit)",
             valueText: weight.formatted(.number.precision(.fractionLength(0...2)).grouping(.never)),
             canDecrement: weight > 0,
             onIncrement: onIncrement,

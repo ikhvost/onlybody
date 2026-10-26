@@ -7,7 +7,7 @@ struct MovementDemonstrationView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.space8) {
-            MonoLabel(text: "Demonstration", size: Theme.type11, tracking: 0.8)
+            MonoLabel(text: String(localized: .uiDemonstration), size: Theme.type11, tracking: 0.8)
 
             if let demonstration = viewModel.demonstration {
                 if viewModel.needsYouTubeConsent {
@@ -27,7 +27,7 @@ struct MovementDemonstrationView: View {
                     .accessibilityIdentifier("demonstration.player")
 
                     if viewModel.demonstrationState == .loading {
-                        Text("Loading video…")
+                        Text(.uiLoadingVideo)
                             .font(Theme.fontSans(Theme.type13))
                             .foregroundStyle(Theme.text2)
                             .accessibilityIdentifier("demonstration.loading")
@@ -36,12 +36,12 @@ struct MovementDemonstrationView: View {
                     DemonstrationPlaceholderView(state: viewModel.demonstrationState, onRetry: viewModel.loadDemonstration)
                 }
 
-                Text("Video by \(demonstration.author)")
+                Text(String(localized: .uiVideoBy(demonstration.author)))
                     .font(Theme.fontSans(Theme.type12))
                     .foregroundStyle(Theme.text2)
                     .accessibilityIdentifier("demonstration.author")
             } else {
-                Text("No demonstration is available for this exercise yet.")
+                Text(.uiNoDemonstrationIsAvailableForThisExerciseYet)
                     .accessibilityIdentifier("demonstration.unavailable")
                     .font(Theme.fontSans(Theme.type14))
                     .foregroundStyle(Theme.text2)

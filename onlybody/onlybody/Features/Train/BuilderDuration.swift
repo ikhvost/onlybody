@@ -6,13 +6,13 @@ struct BuilderDuration: View {
     var body: some View {
         if !viewModel.movements.isEmpty {
             HStack {
-                Text("Est. duration")
+                Text(.uiEstDuration)
                     .font(Theme.fontSans(Theme.type14))
                     .foregroundStyle(Theme.text2)
 
                 Spacer()
 
-                Text("~\(viewModel.estimatedDurationMinutes) min")
+                Text(String(localized: .uiEstimatedMinutes(viewModel.estimatedDurationMinutes)))
                     .font(Theme.fontMono(Theme.type14, .medium))
                     .foregroundStyle(Theme.accent)
             }

@@ -1,3 +1,5 @@
+import Foundation
+
 /// Relative strength, balance and coordination demands for the named variation.
 nonisolated enum ExerciseDifficulty: String, CaseIterable, Sendable {
     case beginner
@@ -7,10 +9,10 @@ nonisolated enum ExerciseDifficulty: String, CaseIterable, Sendable {
 
     var label: String {
         switch self {
-        case .beginner: "Beginner"
-        case .intermediate: "Intermediate"
-        case .advanced: "Advanced"
-        case .unrated: "Unrated"
+        case .beginner: String(localized: .uiBeginner)
+        case .intermediate: String(localized: .uiIntermediate)
+        case .advanced: String(localized: .uiAdvanced)
+        case .unrated: String(localized: .uiUnrated)
         }
     }
 

@@ -1,3 +1,5 @@
+import Foundation
+
 /// Recoverable failures never prevent viewing or editing the exercise details.
 nonisolated enum DemonstrationFailure: Equatable {
     case connection
@@ -6,9 +8,9 @@ nonisolated enum DemonstrationFailure: Equatable {
 
     var message: String {
         switch self {
-        case .connection: "The video could not load. Check your internet connection and try again."
-        case .unavailable: "This video is unavailable here. Try again or open it on YouTube."
-        case .configuration: "The video player could not start. Try again or open it on YouTube."
+        case .connection: String(localized: .uiTheVideoCouldNotLoadCheckYourInternetConnectionAnd)
+        case .unavailable: String(localized: .uiThisVideoIsUnavailableHereTryAgainOrOpenIt)
+        case .configuration: String(localized: .uiTheVideoPlayerCouldNotStartTryAgainOrOpen)
         }
     }
 

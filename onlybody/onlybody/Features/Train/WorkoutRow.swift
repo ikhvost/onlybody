@@ -14,7 +14,10 @@ struct WorkoutRow: View {
                     .foregroundStyle(Theme.text)
 
                 MonoLabel(
-                    text: "\(workout.scheduledDays.isEmpty ? "UNSCHEDULED" : workout.scheduledDays.joined(separator: " · "))  ·  \(workout.items.count) MVMTS",
+                    text: String(localized: .uiWorkoutSummary(
+                        workout.scheduledDays.isEmpty ? String(localized: .uiUnscheduled)
+                            : workout.scheduledDays.map { CatalogLocalization.label($0) }.joined(separator: " · "),
+                        workout.items.count)),
                     size: Theme.type9,
                     color: Theme.text3,
                     tracking: 0.5
@@ -29,20 +32,20 @@ struct WorkoutRow: View {
                 EditIcon(color: Theme.text3, size: Theme.type15)
             }
             .buttonStyle(PressableButtonStyle())
-            .accessibilityLabel("Edit \(workout.name)")
+            .accessibilityLabel(String(localized: .uiEditWorkout(workout.name)))
             .accessibilityIdentifier("workout.edit.\(workout.name)")
             .padding(Theme.space6)
 
             Button {
                 onStartTap()
             } label: {
-                Text("START →")
+                Text(.uiStartUppercase)
                     .tracking(1.2)
                     .font(Theme.fontMono(Theme.type12, .medium))
                     .foregroundStyle(Theme.accentDark)
             }
             .buttonStyle(PressableButtonStyle())
-            .accessibilityLabel("Start \(workout.name)")
+            .accessibilityLabel(String(localized: .uiStartWorkout(workout.name)))
             .accessibilityIdentifier("workout.start.\(workout.name)")
             .padding(.horizontal, Theme.space14)
             .frame(height: 40)

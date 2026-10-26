@@ -8,12 +8,12 @@ struct BuilderMovementCard: View {
         VStack(spacing: Theme.space0) {
             HStack(spacing: Theme.space10) {
                 VStack(alignment: .leading, spacing: Theme.space2) {
-                    Text(movement.exercise.name)
+                    Text(movement.exercise.displayName)
                         .font(Theme.fontSans(Theme.type14, .bold))
                         .foregroundStyle(Theme.text)
 
                     MonoLabel(
-                        text: "\(movement.sets) SETS · \(movement.reps) REPS · \(movement.restSeconds)S REST",
+                        text: String(localized: .uiMovementSummary(movement.sets, movement.reps, movement.restSeconds)),
                         size: Theme.type10,
                         color: Theme.text3,
                         tracking: 0.4
@@ -39,7 +39,8 @@ struct BuilderMovementCard: View {
 
             HStack(spacing: Theme.space10) {
                 StepperView(
-                    label: "Sets",
+                    label: String(localized: .uiSets),
+                        identifier: "Sets",
                     value: movement.sets,
                     step: 1,
                     minValue: 1,
@@ -49,7 +50,8 @@ struct BuilderMovementCard: View {
                 )
 
                 StepperView(
-                    label: "Reps",
+                    label: String(localized: .uiReps),
+                        identifier: "Reps",
                     value: movement.reps,
                     step: 1,
                     minValue: 1,
@@ -59,11 +61,12 @@ struct BuilderMovementCard: View {
                 )
 
                 StepperView(
-                    label: "Rest",
+                    label: String(localized: .uiRest),
+                        identifier: "Rest",
                     value: movement.restSeconds,
                     step: 15,
                     minValue: 15,
-                    format: { "\($0)s" },
+                    format: { String(localized: .uiSecondsCount($0)) },
                     onIncrement: { viewModel.setRest(movement.restSeconds + 15, forMovement: movement.id) },
                     onDecrement: { viewModel.setRest(movement.restSeconds - 15, forMovement: movement.id) }
                 )

@@ -13,7 +13,7 @@ struct LogRootView: View {
                     if let session = viewModel.sessions.first(where: { $0.id == id }) {
                         SessionDetailView(session: session)
                     } else {
-                        MonoLabel(text: "Session unavailable", size: Theme.type10, color: Theme.text2)
+                        MonoLabel(text: String(localized: .uiSessionUnavailable), size: Theme.type10, color: Theme.text2)
                     }
                 }
         }

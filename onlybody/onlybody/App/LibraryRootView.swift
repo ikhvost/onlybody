@@ -19,7 +19,7 @@ struct LibraryRootView: View {
                     if let exercise = viewModel.exercise(id: id) {
                         MovementDetailView(viewModel: composition.movement(exercise))
                     } else {
-                        MonoLabel(text: "Movement unavailable", size: Theme.type10, color: Theme.text2)
+                        MonoLabel(text: String(localized: .uiMovementUnavailable), size: Theme.type10, color: Theme.text2)
                     }
                 }
         }

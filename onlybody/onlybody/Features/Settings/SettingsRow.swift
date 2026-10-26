@@ -5,7 +5,7 @@ struct SettingsRow: View {
     let title: String
     let identifier: String
     var destination: URL?
-    var destinationDescription = "Opens in browser"
+    var destinationDescription = String(localized: .uiOpensInBrowser)
     @Environment(\.openURL) private var openURL
 
     var body: some View {
@@ -22,7 +22,7 @@ struct SettingsRow: View {
                 if destination != nil {
                     ChevronIcon(color: Theme.text2, size: Theme.type18)
                 } else {
-                    MonoLabel(text: "Soon", size: Theme.type10, color: Theme.text2, tracking: 0.5)
+                    MonoLabel(text: String(localized: .uiSoon), size: Theme.type10, color: Theme.text2, tracking: 0.5)
                 }
             }
             .frame(minHeight: Theme.space24)
@@ -32,7 +32,7 @@ struct SettingsRow: View {
         .buttonStyle(.plain)
         .disabled(destination == nil)
         .accessibilityLabel(title)
-        .accessibilityValue(destination == nil ? "Coming soon" : destinationDescription)
+        .accessibilityValue(destination == nil ? String(localized: .uiComingSoon) : destinationDescription)
         .accessibilityIdentifier(identifier)
     }
 }

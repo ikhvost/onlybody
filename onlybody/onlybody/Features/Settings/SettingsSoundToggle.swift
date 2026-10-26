@@ -6,10 +6,10 @@ struct SettingsSoundToggle: View {
     var body: some View {
         Toggle(isOn: $isEnabled) {
             VStack(alignment: .leading, spacing: Theme.space4) {
-                Text("Timer sound")
+                Text(.uiTimerSound)
                     .font(Theme.fontSans(Theme.type14, .medium))
                     .foregroundStyle(Theme.text)
-                Text("Play a sound when rest ends")
+                Text(.uiPlayASoundWhenRestEnds)
                     .font(Theme.fontSans(Theme.type11))
                     .foregroundStyle(Theme.text2)
             }

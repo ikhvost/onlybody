@@ -78,7 +78,7 @@ final class SessionBuilderViewModel {
         do {
             allExercises = try await exercisesRepository.allExercises()
         } catch {
-            errorMessage = "Could not load exercises."
+            errorMessage = String(localized: .uiCouldNotLoadExercises)
         }
     }
 
@@ -135,7 +135,7 @@ final class SessionBuilderViewModel {
             await onScheduleChanged()
             return true
         } catch {
-            errorMessage = "Could not delete workout. Your training history is unchanged."
+            errorMessage = String(localized: .uiCouldNotDeleteWorkoutYourTrainingHistoryIsUnchanged)
             return false
         }
     }
@@ -163,7 +163,7 @@ final class SessionBuilderViewModel {
                 let generated = smartGenerator.generate(config: config, from: allExercises)
 
                 guard !generated.isEmpty else {
-                    errorMessage = "No exercises match. Try different muscle groups."
+                    errorMessage = String(localized: .uiNoExercisesMatchTryDifferentMuscleGroups)
                     return false
                 }
 
@@ -185,7 +185,7 @@ final class SessionBuilderViewModel {
             }
 
             workout.name = name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-                ? "My Session"
+                ? String(localized: .uiMySession)
                 : name.trimmingCharacters(in: .whitespacesAndNewlines)
             workout.mode = mode.rawValue
             workout.durationMinutes = durationMinutes
@@ -211,7 +211,7 @@ final class SessionBuilderViewModel {
             await onScheduleChanged()
             return true
         } catch {
-            errorMessage = "Could not save session."
+            errorMessage = String(localized: .uiCouldNotSaveSession)
             return false
         }
     }

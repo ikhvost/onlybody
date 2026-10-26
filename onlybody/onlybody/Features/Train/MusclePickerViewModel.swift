@@ -11,6 +11,7 @@ final class MusclePickerViewModel {
     var selectionSummary: String {
         muscles
             .filter { selectedMuscles.contains($0) }
+            .map { CatalogLocalization.label($0) }
             .joined(separator: " + ")
     }
 

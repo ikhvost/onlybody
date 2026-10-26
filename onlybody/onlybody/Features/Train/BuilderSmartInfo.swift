@@ -6,7 +6,7 @@ struct BuilderSmartInfo: View {
     var body: some View {
         if viewModel.mode == .smart {
             VStack(alignment: .leading, spacing: Theme.space4) {
-                Text("Auto-selected movements")
+                Text(.uiAutoSelectedMovements)
                     .font(Theme.fontSans(Theme.type14, .bold))
                     .foregroundStyle(Theme.text)
 
@@ -29,10 +29,10 @@ struct BuilderSmartInfo: View {
     }
     private var smartInfoDescription: String {
         if viewModel.targetMuscleGroups.isEmpty {
-            return "Movements are picked daily from your targets. Switch to \"I choose\" to build manually."
+            return String(localized: .uiSmartDescription)
         }
 
-        let formatted = viewModel.targetMuscleGroups.joined(separator: ", ")
-        return "Movements are picked daily from your targets (\(formatted)). Switch to \"I choose\" to build manually."
+        let formatted = viewModel.targetMuscleGroups.map { CatalogLocalization.label($0) }.joined(separator: ", ")
+        return String(localized: .uiSmartDescriptionTargets(formatted))
     }
 }

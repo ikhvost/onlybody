@@ -8,7 +8,7 @@ struct LibraryExerciseRow: View {
         Button(action: action) {
             HStack(spacing: Theme.space10) {
                 VStack(alignment: .leading, spacing: Theme.space2) {
-                    Text(exercise.name)
+                    Text(exercise.displayName)
                         .font(Theme.fontSans(Theme.type16, .bold))
                         .foregroundStyle(Theme.text)
 

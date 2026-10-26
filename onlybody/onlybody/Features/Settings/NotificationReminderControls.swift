@@ -8,7 +8,7 @@ struct NotificationReminderControls: View {
             Toggle(isOn: Binding(get: { viewModel.isEnabled }, set: { enabled in
                 Task { await viewModel.setEnabled(enabled) }
             })) {
-                Text("Workout reminders")
+                Text(.uiWorkoutReminders)
                     .font(Theme.fontSans(Theme.type14, .medium))
                     .foregroundStyle(Theme.text)
             }
@@ -22,8 +22,8 @@ struct NotificationReminderControls: View {
             if viewModel.isEnabled {
                 Rectangle().fill(Theme.border).frame(height: Theme.dividerThickness)
                 VStack(alignment: .leading, spacing: Theme.space8) {
-                    MonoLabel(text: "Reminder time", size: Theme.type10, color: Theme.text2, tracking: 1)
-                    Picker("Reminder time", selection: $viewModel.selectedTime) {
+                    MonoLabel(text: String(localized: .uiReminderTime), size: Theme.type10, color: Theme.text2, tracking: 1)
+                    Picker(String(localized: .uiReminderTime), selection: $viewModel.selectedTime) {
                         ForEach(viewModel.timeOptions, id: \.self) { time in
                             Text(time.label)
                                 .font(Theme.fontMono(Theme.type20))

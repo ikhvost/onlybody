@@ -40,7 +40,7 @@ final class ExerciseHistoryViewModel {
                 return $0.id.uuidString < $1.id.uuidString
             }
         } catch {
-            errorMessage = "Could not load exercise history."
+            errorMessage = String(localized: .uiCouldNotLoadExerciseHistory)
         }
     }
 }

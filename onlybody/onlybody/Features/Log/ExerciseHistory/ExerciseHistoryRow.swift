@@ -19,10 +19,10 @@ struct ExerciseHistoryRow: View {
                 VStack(alignment: .leading, spacing: Theme.space8) {
                     ForEach(item.setReps.indices, id: \.self) { index in
                         HStack {
-                            Text("Set \(index + 1)")
+                            Text(String(localized: .uiSetNumber(index + 1)))
                                 .foregroundStyle(Theme.text2)
                             Spacer()
-                            Text("\(item.setReps[index]) reps")
+                            Text(String(localized: .uiRepsCount(item.setReps[index])))
                                 .foregroundStyle(Theme.text)
                             Text("· \(weightText(item.weightForSet(at: index) ?? 0))")
                                 .foregroundStyle(Theme.accent)

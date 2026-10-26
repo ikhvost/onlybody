@@ -42,7 +42,7 @@ struct TrainView: View {
                             Spacer()
                             VStack(spacing: Theme.space10) {
                                 MonoLabel(text: errorMessage, size: Theme.type10, color: Theme.text2, tracking: 0.4)
-                                Button("Retry") {
+                                Button(String(localized: .uiRetry)) {
                                     Task { await viewModel.load() }
                                 }
                                 .font(Theme.fontMono(Theme.type13, .medium))

@@ -43,7 +43,7 @@ final class LogViewModel {
             stats = StreakCalculator().calculate(sessions: sessions)
             heatmap = buildHeatmap(sessions: sessions)
         } catch {
-            errorMessage = "Could not load training history."
+            errorMessage = String(localized: .uiCouldNotLoadTrainingHistory)
         }
     }
 

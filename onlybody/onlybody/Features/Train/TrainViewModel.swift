@@ -49,7 +49,7 @@ final class TrainViewModel {
         do {
             workouts = try await workoutsRepository.allWorkouts()
         } catch {
-            errorMessage = "Could not load workouts."
+            errorMessage = String(localized: .uiCouldNotLoadWorkouts)
         }
     }
 }

@@ -7,8 +7,8 @@ nonisolated enum WeightUnit: String, CaseIterable, Sendable {
 
     var title: String {
         switch self {
-        case .kilograms: "Kilograms (kg)"
-        case .pounds: "Pounds (lb)"
+        case .kilograms: String(localized: .uiKilogramsKg)
+        case .pounds: String(localized: .uiPoundsLb)
         }
     }
 

@@ -13,7 +13,7 @@ struct TrainDayStrip: View {
 
                 VStack(spacing: Theme.space5) {
                     MonoLabel(
-                        text: day,
+                        text: CatalogLocalization.label(day),
                         size: Theme.type10,
                         color: isToday ? Theme.accent : Theme.text3,
                         tracking: 0.3

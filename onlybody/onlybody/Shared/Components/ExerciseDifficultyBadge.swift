@@ -10,6 +10,6 @@ struct ExerciseDifficultyBadge: View {
             .padding(.horizontal, Theme.space8)
             .padding(.vertical, Theme.space4)
             .background(Theme.accentDim, in: .rect(cornerRadius: Theme.chipCornerRadius))
-            .accessibilityLabel("Difficulty: \(difficulty.label)")
+            .accessibilityLabel(String(localized: .uiDifficulty(difficulty.label)))
     }
 }

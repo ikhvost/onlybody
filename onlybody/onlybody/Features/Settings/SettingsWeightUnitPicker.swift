@@ -5,14 +5,14 @@ struct SettingsWeightUnitPicker: View {
 
     var body: some View {
         Menu {
-            Picker("Weight units", selection: $viewModel.weightUnit) {
+            Picker(String(localized: .uiWeightUnits), selection: $viewModel.weightUnit) {
                 ForEach(viewModel.weightUnits, id: \.self) { unit in
                     Text(unit.title).tag(unit)
                 }
             }
         } label: {
             HStack(spacing: Theme.space12) {
-                Text("Weight units")
+                Text(.uiWeightUnits)
                     .font(Theme.fontSans(Theme.type14, .medium))
                     .foregroundStyle(Theme.text)
                 Spacer()
@@ -26,7 +26,7 @@ struct SettingsWeightUnitPicker: View {
             .padding(Theme.space16)
             .contentShape(.rect)
         }
-        .accessibilityLabel("Weight units")
+        .accessibilityLabel(String(localized: .uiWeightUnits))
         .accessibilityValue(viewModel.weightUnit.title)
         .accessibilityIdentifier("settings.weightUnit")
     }

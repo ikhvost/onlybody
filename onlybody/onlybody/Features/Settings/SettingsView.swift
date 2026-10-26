@@ -10,7 +10,7 @@ struct SettingsView: View {
             Theme.bg.ignoresSafeArea()
 
             VStack(spacing: Theme.space0) {
-                NavBarView(title: "Settings") {
+                NavBarView(title: String(localized: .uiSettings)) {
                     Button {
                         dismiss()
                     } label: {
@@ -19,7 +19,7 @@ struct SettingsView: View {
                             .contentShape(.rect)
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("Back to training")
+                    .accessibilityLabel(String(localized: .uiBackToTraining))
                     .accessibilityIdentifier("settings.back")
                 } trailing: {
                     Color.clear
@@ -29,7 +29,7 @@ struct SettingsView: View {
 
                 ScrollView {
                     VStack(alignment: .leading, spacing: Theme.space28) {
-                        SettingsSection(title: "Training") {
+                        SettingsSection(title: String(localized: .uiTraining)) {
                             SettingsSoundToggle(isEnabled: $viewModel.isTimerSoundEnabled)
                             Rectangle().fill(Theme.border).frame(height: Theme.dividerThickness)
                             SettingsNotificationsLink(action: onNotifications)
@@ -41,24 +41,24 @@ struct SettingsView: View {
                             SettingsYouTubeConsentView(viewModel: viewModel)
                         }
 
-                        SettingsSection(title: "Support") {
+                        SettingsSection(title: String(localized: .uiSupport)) {
                             SettingsRow(
-                                title: "Send feedback",
+                                title: String(localized: .uiSendFeedback),
                                 identifier: "settings.feedback",
                                 destination: viewModel.feedbackURL,
-                                destinationDescription: "Opens email app"
+                                destinationDescription: String(localized: .uiOpensEmailApp)
                             )
                         }
 
-                        SettingsSection(title: "Legal") {
+                        SettingsSection(title: String(localized: .uiLegal)) {
                             SettingsRow(
-                                title: "Privacy Policy",
+                                title: String(localized: .uiPrivacyPolicy),
                                 identifier: "settings.privacy",
                                 destination: viewModel.privacyPolicyURL
                             )
                             Rectangle().fill(Theme.border).frame(height: Theme.dividerThickness)
                             SettingsRow(
-                                title: "Terms of Use",
+                                title: String(localized: .uiTermsOfUse),
                                 identifier: "settings.terms",
                                 destination: viewModel.termsOfUseURL
                             )
@@ -68,7 +68,7 @@ struct SettingsView: View {
                             Text(viewModel.appName)
                                 .font(Theme.fontSans(Theme.type14, .bold))
                                 .foregroundStyle(Theme.text2)
-                            Text("Version \(viewModel.version)")
+                            Text(String(localized: .uiVersion(viewModel.version)))
                                 .font(Theme.fontMono(Theme.type10))
                                 .foregroundStyle(Theme.text3)
                         }

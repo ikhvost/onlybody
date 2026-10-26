@@ -49,15 +49,15 @@ final class MovementDetailViewModel {
 
     var muscleDiagramDescription: String {
         let diagram = muscleDiagram
-        var descriptions = ["Muscle groups, front and back views."]
-        if diagram.isFullBody { descriptions.append("Full-body exercise; primary and secondary groups are highlighted.") }
+        var descriptions = [String(localized: .uiMuscleGroupsFrontAndBackViews)]
+        if diagram.isFullBody { descriptions.append(String(localized: .uiFullBodyExercisePrimaryAndSecondaryGroupsAreHighlighted)) }
         if !diagram.primary.isEmpty {
-            descriptions.append("Primary: \(diagram.primary.map(\.rawValue).joined(separator: ", ")).")
+            descriptions.append(String(localized: .uiPrimaryGroups(diagram.primary.map { CatalogLocalization.label($0.rawValue) }.joined(separator: ", "))))
         }
         if !diagram.secondary.isEmpty {
-            descriptions.append("Secondary: \(diagram.secondary.map(\.rawValue).joined(separator: ", ")).")
+            descriptions.append(String(localized: .uiSecondaryGroups(diagram.secondary.map { CatalogLocalization.label($0.rawValue) }.joined(separator: ", "))))
         }
-        if !diagram.hasHighlightedRegions { descriptions.append("No muscle groups specified.") }
+        if !diagram.hasHighlightedRegions { descriptions.append(String(localized: .uiNoMuscleGroupsSpecifiedMessage08A1)) }
         return descriptions.joined(separator: " ")
     }
 

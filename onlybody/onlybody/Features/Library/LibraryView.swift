@@ -19,9 +19,9 @@ struct LibraryView: View {
             VStack(alignment: .leading, spacing: Theme.space0) {
                 HStack(alignment: .bottom) {
                     VStack(alignment: .leading, spacing: Theme.space3) {
-                        MonoLabel(text: "Movement catalog", size: Theme.type10, tracking: 1.2)
+                        MonoLabel(text: String(localized: .uiMovementCatalog), size: Theme.type10, tracking: 1.2)
 
-                        Text("Library")
+                        Text(.uiLibrary)
                             .font(Theme.fontSans(Theme.type28, .heavy))
                             .tracking(-1)
                             .foregroundStyle(Theme.text)
@@ -37,7 +37,7 @@ struct LibraryView: View {
                     HStack(spacing: Theme.space8) {
                         SearchIcon(color: Theme.text3, size: Theme.type15)
 
-                        TextField("Search...", text: $viewModel.searchText)
+                        TextField(String(localized: .uiSearch), text: $viewModel.searchText)
                             .accessibilityIdentifier("library.search")
                             .focused($isSearchFocused)
                             .submitLabel(.done)
@@ -59,7 +59,7 @@ struct LibraryView: View {
                     ScrollView(.horizontal) {
                         HStack(spacing: Theme.space6) {
                             ForEach(viewModel.filters, id: \.self) { filter in
-                                ChipView(label: filter, isActive: viewModel.selectedFilter == filter, isSmall: true) {
+                                ChipView(label: CatalogLocalization.label(filter), isActive: viewModel.selectedFilter == filter, isSmall: true) {
                                     viewModel.selectedFilter = filter
                                 }
                             }
@@ -80,7 +80,7 @@ struct LibraryView: View {
                 ZStack {
                     if viewModel.isLoading {
                         VStack(spacing: Theme.space8) {
-                            MonoLabel(text: "Loading library", size: Theme.type11, tracking: 1.0)
+                            MonoLabel(text: String(localized: .uiLoadingLibrary), size: Theme.type11, tracking: 1.0)
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .transition(.opacity)
@@ -93,7 +93,7 @@ struct LibraryView: View {
                         .transition(.opacity)
                     } else if viewModel.filteredExercises.isEmpty {
                         VStack(spacing: Theme.space8) {
-                            MonoLabel(text: "No movements found", size: Theme.type11, color: Theme.text2, tracking: 0.4)
+                            MonoLabel(text: String(localized: .uiNoMovementsFound), size: Theme.type11, color: Theme.text2, tracking: 0.4)
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .padding(.horizontal, Theme.horizontalPadding)

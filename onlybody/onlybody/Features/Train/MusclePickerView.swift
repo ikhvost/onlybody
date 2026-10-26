@@ -13,7 +13,7 @@ struct MusclePickerView: View {
             Theme.bg.ignoresSafeArea()
 
             VStack(spacing: Theme.space0) {
-                NavBarView(title: "New Session") {
+                NavBarView(title: String(localized: .uiNewSession)) {
                     Button {
                         dismiss()
                     } label: {
@@ -24,19 +24,19 @@ struct MusclePickerView: View {
 
                 ScrollView {
                     VStack(alignment: .leading, spacing: Theme.space0) {
-                        Text("What are you training?")
+                        Text(.uiWhatAreYouTraining)
                             .font(Theme.fontSans(Theme.type26, .bold))
                             .tracking(-0.8)
                             .foregroundStyle(Theme.text)
                             .padding(.bottom, Theme.space5)
 
-                        MonoLabel(text: "Select muscle groups", size: Theme.type11, color: Theme.text3, tracking: 1)
+                        MonoLabel(text: String(localized: .uiSelectMuscleGroups), size: Theme.type11, color: Theme.text3, tracking: 1)
                             .padding(.bottom, Theme.space24)
 
                         FlowLayout(spacing: Theme.space8) {
                             ForEach(viewModel.muscles, id: \.self) { muscle in
                                 ChipView(
-                                    label: muscle,
+                                    label: CatalogLocalization.label(muscle),
                                     isActive: viewModel.selectedMuscles.contains(muscle)
                                 ) {
                                     viewModel.toggle(muscle)
@@ -62,7 +62,7 @@ struct MusclePickerView: View {
                         onBuild(viewModel.selectedMuscles)
                     } label: {
                         HStack(spacing: Theme.space5) {
-                            Text("Build session")
+                            Text(.uiBuildSession)
                                 .font(Theme.fontSans(Theme.type14, .bold))
                                 .foregroundStyle(viewModel.canBuild ? Theme.accentDark : Theme.text3)
                             ChevronIcon(color: viewModel.canBuild ? Theme.accentDark : Theme.text3, size: Theme.type12, inset: 8)
@@ -78,7 +78,7 @@ struct MusclePickerView: View {
                     Button {
                         onSkip()
                     } label: {
-                        Text("Skip — pick movements myself")
+                        Text(.uiSkipPickMovementsMyself)
                             .font(Theme.fontSans(Theme.type14))
                             .foregroundStyle(Theme.text3)
                     }

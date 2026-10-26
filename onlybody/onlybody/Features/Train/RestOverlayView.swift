@@ -10,7 +10,7 @@ struct RestOverlayView: View {
             Theme.bg.ignoresSafeArea()
 
             VStack(spacing: Theme.space0) {
-                MonoLabel(text: "Recovery", size: Theme.type11, color: Theme.text3, tracking: 3)
+                MonoLabel(text: String(localized: .uiRecovery), size: Theme.type11, color: Theme.text3, tracking: 3)
                     .padding(.bottom, Theme.space18)
 
                 Text(remainingString)
@@ -21,7 +21,7 @@ struct RestOverlayView: View {
 
                 if !nextExerciseName.isEmpty {
                     MonoLabel(
-                        text: "next \u{2014} \(nextExerciseName)",
+                        text: String(localized: .uiNextExercise(nextExerciseName)),
                         size: Theme.type11,
                         color: Theme.text3,
                         tracking: 1.5
@@ -29,7 +29,7 @@ struct RestOverlayView: View {
                     .padding(.top, Theme.space18)
                 }
 
-                GhostButton(title: "Skip rest") {
+                GhostButton(title: String(localized: .uiSkipRest)) {
                     onSkip()
                 }
                 .accessibilityIdentifier("rest.skip")

@@ -11,27 +11,27 @@ struct ActiveWorkoutExerciseActions: View {
             Button(action: onGuide) {
                 HStack(spacing: Theme.space8) {
                     LibraryIcon(color: Theme.accent, size: Theme.type18)
-                    Text("Guide")
+                    Text(.uiGuide)
                 }
                 .frame(maxWidth: .infinity, minHeight: Theme.space48)
                 .background(Theme.surface2)
                 .clipShape(.rect(cornerRadius: Theme.cornerRadius))
             }
             .disabled(!canShowGuide)
-            .accessibilityLabel("Open exercise guide")
+            .accessibilityLabel(String(localized: .uiOpenExerciseGuide))
             .accessibilityIdentifier("active.guide")
 
             Button(action: onHistory) {
                 HStack(spacing: Theme.space8) {
                     LogIcon(color: Theme.accent, size: Theme.type18)
-                    Text("History")
+                    Text(.uiHistory)
                 }
                 .frame(maxWidth: .infinity, minHeight: Theme.space48)
                 .background(Theme.surface2)
                 .clipShape(.rect(cornerRadius: Theme.cornerRadius))
             }
             .disabled(!canShowHistory)
-            .accessibilityLabel("Show exercise history")
+            .accessibilityLabel(String(localized: .uiShowExerciseHistory))
             .accessibilityIdentifier("active.history")
         }
         .font(Theme.fontSans(Theme.type14, .semibold))

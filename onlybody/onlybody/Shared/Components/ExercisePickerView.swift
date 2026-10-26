@@ -15,14 +15,14 @@ struct ExercisePickerView: View {
     private var filteredExercises: [ExerciseSnapshot] {
         exercises.filter { exercise in
             let matchesFilter = exercise.matchesMuscleFilter(selectedFilter)
-            let matchesSearch = searchText.isEmpty || exercise.name.localizedStandardContains(searchText)
+            let matchesSearch = exercise.matchesSearch(searchText)
             return matchesFilter && matchesSearch && (selectedDifficulty == nil || exercise.difficulty == selectedDifficulty)
         }
     }
 
     var body: some View {
         VStack(spacing: Theme.space0) {
-            NavBarView(title: "Add Movement") {
+            NavBarView(title: String(localized: .uiAddMovement)) {
                 Button {
                     dismiss()
                 } label: {
@@ -35,7 +35,7 @@ struct ExercisePickerView: View {
                 HStack(spacing: Theme.space8) {
                     SearchIcon(color: Theme.text3, size: Theme.type15)
 
-                    TextField("Search movements...", text: $searchText)
+                    TextField(String(localized: .uiSearchMovements), text: $searchText)
                         .font(Theme.fontSans(Theme.type14))
                         .foregroundStyle(Theme.text)
                         .textInputAutocapitalization(.never)
@@ -54,7 +54,7 @@ struct ExercisePickerView: View {
                     HStack(spacing: Theme.space6) {
                         ForEach(filters, id: \.self) { filter in
                             ChipView(
-                                label: filter,
+                                label: CatalogLocalization.label(filter),
                                 isActive: selectedFilter == filter,
                                 isSmall: true
                             ) {
@@ -78,7 +78,7 @@ struct ExercisePickerView: View {
                 VStack(spacing: Theme.space8) {
                     Spacer()
                     MonoLabel(
-                        text: "No movements found",
+                        text: String(localized: .uiNoMovementsFound),
                         size: Theme.type11,
                         color: Theme.text2,
                         tracking: 0.4
@@ -96,7 +96,7 @@ struct ExercisePickerView: View {
                             } label: {
                                 HStack(spacing: Theme.space10) {
                                     VStack(alignment: .leading, spacing: Theme.space2) {
-                                        Text(exercise.name)
+                                        Text(exercise.displayName)
                                             .font(Theme.fontSans(Theme.type16, .bold))
                                             .foregroundStyle(Theme.text)
 

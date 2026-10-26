@@ -19,7 +19,7 @@ struct ActiveWorkoutRootView: View {
                 switch route {
                 case .guide(let exerciseID):
                     if let exercise = viewModel.items.compactMap(\.exercise).first(where: { $0.id == exerciseID }) {
-                        MovementDetailView(viewModel: composition.movement(exercise), backLabel: "Back to workout")
+                        MovementDetailView(viewModel: composition.movement(exercise), backLabel: String(localized: .uiBackToWorkout))
                     }
                 case .history(let exerciseName):
                     ExerciseHistoryView(viewModel: composition.exerciseHistory(exerciseName: exerciseName))
