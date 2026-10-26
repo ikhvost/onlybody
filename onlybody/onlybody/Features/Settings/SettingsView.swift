@@ -44,8 +44,6 @@ struct SettingsView: View {
                                 destination: viewModel.feedbackURL,
                                 destinationDescription: "Opens email app"
                             )
-                            Rectangle().fill(Theme.border).frame(height: Theme.dividerThickness)
-                            SettingsRow(title: "Rate the app", identifier: "settings.rate")
                         }
 
                         SettingsSection(title: "Legal") {
