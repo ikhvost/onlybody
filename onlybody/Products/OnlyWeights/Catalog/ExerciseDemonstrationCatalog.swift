@@ -188,7 +188,7 @@ nonisolated enum ExerciseDemonstrationCatalog {
         ),
         ExerciseDemonstration(
             id: "dumbbell-reverse-lunge", exerciseName: "Dumbbell Reverse Lunge",
-            videoID: "xrPteyQLGAo", author: "PureGym", startSeconds: 0
+            videoID: "Q2k3kYbtOcI", author: "OPEX Fitness", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "dumbbell-walking-lunge", exerciseName: "Dumbbell Walking Lunge",
