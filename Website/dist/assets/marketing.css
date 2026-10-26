@@ -1,0 +1,212 @@
+/* Homepage only. Legal pages keep the original site.css layout. */
+.marketing{--soft:#111210;--soft-line:#ffffff12;--subtle:#a9a79f;background:#0b0c0a;font-family:Arial,Helvetica,sans-serif;overflow-wrap:break-word}
+.marketing .wrap{max-width:1200px;padding-inline:32px}
+.marketing .header{background:#0b0c0af2;border-color:var(--soft-line)}
+.marketing .header-inner{min-height:88px}
+.marketing .brand{font-size:19px;letter-spacing:-.035em;gap:11px;white-space:nowrap}
+.marketing .brand img{width:36px;height:36px;border-radius:10px}
+.marketing .brand-divider{color:#66675f;padding-inline:4px;font-weight:400}
+.marketing .header nav{gap:25px;color:#cfcdc5}
+.marketing .header .contact{border-color:#ffffff29;border-radius:999px;padding:8px 18px;gap:12px}
+.marketing .eyebrow{font-size:11px;letter-spacing:.16em;line-height:1.7}
+.marketing h1{font-size:clamp(52px,7.1vw,98px);line-height:1.04;letter-spacing:-.065em;font-weight:750}
+.marketing h1 em{font-style:normal;color:#e9af58}
+.marketing h2{font-size:clamp(36px,4.5vw,62px);line-height:1.09;letter-spacing:-.055em}
+.marketing h3{letter-spacing:-.03em}
+.marketing .button{border-radius:999px;padding:15px 25px;gap:18px;min-height:52px;background:#e8a23a;color:#17130c;font-size:14px;transition:background .18s,border-color .18s,transform .18s}
+.marketing .button:hover{background:#f2b858;transform:translateY(-2px)}
+.marketing .button.secondary{background:#ffffff04;border:1px solid #ffffff30;color:#ece7dc}
+.marketing .button.secondary:hover{background:#ffffff0b;border-color:#e8a23a}
+.marketing .actions{justify-content:center;gap:13px;margin-top:30px}
+.marketing .availability{font-family:inherit;font-size:13px;color:#aaa89e;margin-top:22px;letter-spacing:0}
+.marketing .hero-scene{position:relative;padding:88px 0 56px;background:radial-gradient(ellipse 60% 39% at 50% 10%,#9f622424,transparent 100%),radial-gradient(ellipse 60% 35% at 50% 82%,#6c511b16,transparent 100%)}
+.marketing .hero-copy{text-align:center;max-width:950px;margin:0 auto}
+.marketing .hero-copy h1{margin:24px 0}
+.marketing .hero-lead{color:#b8b6ac;font-size:20px;line-height:1.65;max-width:660px;margin-inline:auto}
+.marketing .phone-composition{max-width:950px;margin:64px auto 0;display:grid;grid-template-columns:1fr 1.08fr 1fr;align-items:start;gap:36px;padding-bottom:42px}
+.marketing .phone-composition>.device-figure:nth-child(1),.marketing .phone-composition>.device-figure:nth-child(3){margin-top:60px}
+.marketing .device-figure{margin:0;min-width:0;text-align:center;position:relative}
+.marketing .device{position:relative;width:100%;max-width:318px;margin:0 auto;padding:8px;background:linear-gradient(135deg,#575851,#191a18 25%,#131410 75%,#41433c);border:1px solid #62625a;border-radius:43px;box-shadow:0 0 0 3px #191a16,0 24px 65px #0007;isolation:isolate}
+.marketing .device img{width:100%;height:auto;border-radius:34px;background:#0c0c0b;aspect-ratio:804/1748}
+.marketing .device:after{content:"";position:absolute;top:3.3%;left:35%;width:30%;height:3.35%;border-radius:999px;background:#000;pointer-events:none}
+.marketing .device-figure figcaption{margin-top:22px;font-size:12px;line-height:1.5;color:#b1afa6}
+.marketing .demo-note{text-align:center;font-size:12px;color:#a09e93;padding-inline:24px;margin:0}
+.marketing .facts{border-top:0;border-bottom:1px solid var(--soft-line);padding-block:28px;gap:24px}
+.marketing .facts div{justify-content:center;font-size:13px;color:#c5c3b9;gap:10px}
+.marketing .facts span{color:#dba657;font:20px/1 Arial,sans-serif}
+.marketing .section{padding-block:110px}
+.marketing .section-intro{text-align:center;max-width:760px;margin:0 auto 60px}
+.marketing .section-intro h2{margin:18px 0 22px}
+.marketing .section-intro>p:last-child:not(.eyebrow){font-size:18px;color:#aba99f;max-width:580px;margin-inline:auto;line-height:1.65}
+.marketing .product-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.marketing .app-card{padding:36px 36px 32px;border:1px solid var(--soft-line);border-radius:26px;background:radial-gradient(ellipse at 50% 80%,#aa77291a,transparent 60%),#131410;min-width:0}
+.marketing .app-card:nth-child(2){background:radial-gradient(ellipse at 50% 80%,#819d9c19,transparent 60%),#121411}
+.marketing .app-card-top{display:flex;align-items:center;gap:16px;margin-bottom:30px}
+.marketing .app-card-top img{border-radius:13px;width:56px;height:56px}
+.marketing .app-card-top .eyebrow{font-size:10px;letter-spacing:.1em;margin-bottom:6px}
+.marketing .app-card-top h3{font-size:27px}
+.marketing .app-pitch{font-size:36px;line-height:1.12;letter-spacing:-.04em;font-weight:700}
+.marketing .app-card>.muted{font-size:14px;margin-top:18px}
+.marketing .text-link{display:inline-flex;align-items:center;gap:18px;min-height:44px;color:#edbc73;font-size:15px;text-decoration:none;font-weight:600;margin-top:14px}
+.marketing .text-link:hover{text-decoration:underline}
+.marketing .journey{padding-block:55px 90px}
+.marketing .journey>.section-intro{margin-bottom:40px}
+.marketing .feature-row{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:100px;padding-block:64px}
+.marketing .feature-copy{max-width:450px}
+.marketing .feature-copy h2{margin:20px 0 25px}
+.marketing .feature-copy>p:not(.eyebrow){font-size:18px;line-height:1.7;color:#b0aea5}
+.marketing .feature-copy>p.small-copy{font-size:14px;color:#aaa89e;border-top:1px solid var(--soft-line);padding-top:20px;margin-top:24px}
+.marketing .feature-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.marketing .feature-tags span{border:1px solid #ffffff19;border-radius:999px;padding:7px 12px;color:#c8c5bb;font-size:12px}
+.marketing .screen-stage{padding:42px 30px 28px;background:radial-gradient(ellipse at 50% 45%,#9e6a2322,transparent 70%),#12130f;border:1px solid var(--soft-line);border-radius:30px;min-width:0}
+.marketing .feature-row.reverse .feature-copy{order:2}
+.marketing .feature-row.reverse .screen-stage{order:1}
+.marketing .recovery-section{padding-block:100px;background:#10110e;border-block:1px solid #ffffff09}
+.marketing .duo-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.marketing .duo-card{min-width:0;text-align:center;padding:38px 30px 30px;border:1px solid #ffffff0e;border-radius:26px;background:radial-gradient(ellipse at 50% 65%,#92733719,transparent 80%),#151610}
+.marketing .duo-card h3{font-size:25px;line-height:1.2}
+.marketing .duo-card>p{max-width:345px;font-size:16px;color:#b0aea5;margin:14px auto 34px;line-height:1.6}
+.marketing .duo-card .device-figure{max-width:290px;margin:auto}
+.marketing .anatomy-section{padding:112px 0 96px;background:radial-gradient(ellipse at 50% 50%,#8f65251b,transparent 70%)}
+.marketing .anatomy-section .section-intro{margin-bottom:28px}
+.marketing .muscle-legend{display:flex;justify-content:center;gap:25px;font-size:13px;color:#c2c0b6;margin-bottom:45px;flex-wrap:wrap}
+.marketing .muscle-legend span{display:flex;align-items:center;gap:8px}
+.marketing .muscle-legend i{display:block;width:8px;height:8px;border-radius:50%}
+.marketing .primary-dot{background:#e8a23a}
+.marketing .secondary-dot{background:#6b8587}
+.marketing .anatomy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.marketing .anatomy-card{margin:0;border:1px solid var(--soft-line);border-radius:24px;background:#13140f;padding:24px 12px;min-width:0}
+.marketing .anatomy-labels{display:flex;justify-content:space-around;color:#b0aea4;font:10px/1.5 ui-monospace,monospace;letter-spacing:.15em;margin-bottom:8px}
+.marketing .anatomy-card img{width:100%;height:auto}
+.marketing .anatomy-card figcaption{padding:14px 12px 0;text-align:center}
+.marketing .anatomy-card h3{font-size:18px;line-height:1.3;letter-spacing:-.02em}
+.marketing .anatomy-card figcaption p{font-size:13px;color:#c3a375;margin-top:7px}
+.marketing .muscle-index{max-width:850px;margin:48px auto 0;text-align:center}
+.marketing .muscle-index .eyebrow{font-size:10px;color:#aaa79b}
+.marketing .muscle-index ul{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;padding:0;margin:22px 0 0;list-style:none}
+.marketing .muscle-index li{border:1px solid #ffffff15;background:#ffffff03;border-radius:999px;padding:8px 16px;font-size:13px;color:#c9c5b9}
+.marketing .section-note{text-align:center;font-size:12px;color:#9a988e;margin-top:26px}
+.marketing .privacy-panel{display:grid;grid-template-columns:1.2fr 1fr;gap:42px 100px;border-top:1px solid var(--soft-line);padding-block:100px}
+.marketing .privacy-panel h2{font-size:clamp(35px,4vw,55px);margin:20px 0 24px}
+.marketing .privacy-panel>div>p:not(.eyebrow){font-size:17px;color:#b0aea5;max-width:470px}
+.marketing .privacy-points{padding-top:8px}
+.marketing .privacy-points>div{position:relative;padding:0 0 25px 45px;border-bottom:1px solid var(--soft-line);margin-bottom:25px}
+.marketing .privacy-points>div:last-child{margin-bottom:0}
+.marketing .privacy-points span{position:absolute;left:0;top:3px;color:#b89867;font:12px/1.5 ui-monospace,monospace}
+.marketing .privacy-points h3{font-size:24px;margin-bottom:8px}
+.marketing .privacy-points p{font-size:15px;color:#a6a499}
+.marketing .privacy-small{grid-column:1/-1;font-size:12px;line-height:1.7;color:#a4a298;margin:0!important;max-width:640px}
+.marketing .faq{max-width:850px;margin:auto;padding-block:50px 110px}
+.marketing .faq h2{font-size:48px;margin-bottom:35px}
+.marketing .faq summary{font-size:17px;padding-block:24px}
+.marketing .contact-section{border-color:var(--soft-line);padding-block:72px;background:radial-gradient(ellipse at 85% 50%,#a36d2220,transparent 70%),#10110e}
+.marketing .contact-section h2{font-size:40px;line-height:1.14;margin-top:18px}
+.marketing .contact-section .button{font-size:15px}
+.marketing .footer{border-color:var(--soft-line);background:#090a08}
+.marketing .footer strong{font-size:16px;font-weight:500}
+.marketing .footer .fine{line-height:1.8}
+@media(max-width:1000px){
+.marketing .header nav{gap:15px}
+.marketing .phone-composition{gap:24px}
+.marketing .feature-row{gap:45px}
+.marketing .feature-copy h2{font-size:42px}
+.marketing .feature-copy>p:not(.eyebrow){font-size:16px}
+.marketing .screen-stage{padding-inline:22px}
+.marketing .device{padding:6px;border-radius:35px}
+.marketing .device img{border-radius:29px}
+.marketing .app-card{padding:28px 24px}
+.marketing .app-pitch{font-size:31px}
+.marketing .privacy-panel{gap:40px}
+}
+@media(max-width:760px){
+.marketing .wrap{padding-inline:24px}
+.marketing .header-inner{flex-wrap:wrap;padding-block:18px;gap:12px}
+.marketing .header nav{width:100%;justify-content:space-between;font-size:13px;gap:8px}
+.marketing .hero-scene{padding-top:58px}
+.marketing .hero-copy h1{font-size:clamp(44px,7.6vw,62px)}
+.marketing .hero-lead{font-size:18px}
+.marketing .phone-composition{gap:18px}
+.marketing .phone-composition>.device-figure:nth-child(1),.marketing .phone-composition>.device-figure:nth-child(3){margin-top:35px}
+.marketing .phone-composition .device{border-radius:26px;padding:5px}
+.marketing .phone-composition .device img{border-radius:21px}
+.marketing .facts{gap:14px;grid-template-columns:1fr;padding-block:25px}
+.marketing .facts div{font-size:13px}
+.marketing .feature-row{gap:35px;padding-block:40px}
+.marketing .feature-copy h2{font-size:34px}
+.marketing .screen-stage{padding:26px 18px}
+.marketing .section{padding-block:75px}
+.marketing .section-intro{margin-bottom:40px}
+.marketing .section-intro>p:last-child:not(.eyebrow){font-size:16px}
+.marketing .duo-card{padding:28px 20px}
+.marketing .duo-card h3{font-size:23px}
+.marketing .duo-card>p{font-size:15px}
+.marketing .anatomy-grid{gap:12px}
+.marketing .anatomy-card{padding:18px 5px;border-radius:18px}
+.marketing .anatomy-card figcaption{padding-inline:8px}
+.marketing .anatomy-card h3{font-size:16px}
+.marketing .anatomy-card figcaption p{font-size:12px}
+.marketing .privacy-panel{grid-template-columns:1fr;padding-block:65px}
+}
+@media(max-width:580px){
+.marketing .wrap{padding-inline:22px}
+.marketing .brand{font-size:17px;gap:10px}
+.marketing .brand img{width:32px;height:32px}
+.marketing .brand-divider{padding-inline:2px}
+.marketing .header nav{font-size:12px}
+.marketing .header .contact{padding:6px 12px;gap:7px}
+.marketing h1,.marketing .hero-copy h1{font-size:clamp(42px,10vw,58px);letter-spacing:-.065em}
+.marketing .hero-scene{padding-top:44px}
+.marketing .hero-copy h1{margin:20px 0 22px}
+.marketing .hero-lead{font-size:17px}
+.marketing .hero-lead br{display:none}
+.marketing .actions{gap:10px;margin-top:25px}
+.marketing .button{padding:13px 20px;min-height:48px;font-size:13px}
+.marketing .phone-composition{display:flex;flex-direction:column;align-items:center;gap:34px;margin-top:44px;padding-bottom:30px}
+.marketing .phone-composition>.device-figure{width:100%;max-width:282px;margin-top:0!important}
+.marketing .phone-composition>.device-figure:nth-child(2){order:-1}
+.marketing .phone-composition .device{border-radius:37px;padding:7px}
+.marketing .phone-composition .device img{border-radius:30px}
+.marketing .device-figure figcaption{margin-top:17px}
+.marketing .product-grid,.marketing .duo-grid,.marketing .anatomy-grid,.marketing .feature-row{grid-template-columns:1fr}
+.marketing .app-card{padding:28px 24px}
+.marketing .app-pitch{font-size:34px}
+.marketing .app-card-top h3{font-size:26px}
+.marketing .app-card-top .eyebrow{font-size:9px}
+.marketing .app-card-top img{width:48px;height:48px}
+.marketing .journey{padding-block:30px 55px}
+.marketing .feature-row{gap:30px;padding-block:40px}
+.marketing .feature-row.reverse .feature-copy,.marketing .feature-row.reverse .screen-stage{order:initial}
+.marketing .feature-copy{max-width:none}
+.marketing .feature-copy h2{font-size:38px;margin:16px 0 20px}
+.marketing .screen-stage{padding:28px 24px 24px;border-radius:24px}
+.marketing .screen-stage .device-figure{max-width:276px;margin:auto}
+.marketing .recovery-section{padding-block:65px}
+.marketing .duo-card{padding:30px 24px 24px}
+.marketing .duo-card .device-figure{max-width:276px}
+.marketing .anatomy-section{padding-block:72px 60px}
+.marketing .anatomy-grid{gap:20px;max-width:390px;margin-inline:auto}
+.marketing .anatomy-card{padding:24px 12px;border-radius:24px}
+.marketing .anatomy-card h3{font-size:21px}
+.marketing .anatomy-card figcaption p{font-size:14px}
+.marketing .muscle-legend{gap:16px;font-size:12px}
+.marketing .muscle-index{margin-top:35px}
+.marketing .muscle-index ul{gap:8px}
+.marketing .muscle-index li{font-size:12px;padding:6px 12px}
+.marketing .section-note{font-size:11px}
+.marketing .privacy-panel h2{font-size:36px}
+.marketing .privacy-small{font-size:12px}
+.marketing .faq{padding-block:25px 65px}
+.marketing .faq h2{font-size:38px}
+.marketing .faq summary{font-size:16px;line-height:1.5;gap:22px}
+.marketing .contact-section{padding-block:50px}
+.marketing .contact-section h2{font-size:34px}
+.marketing .contact-section .button{font-size:13px;gap:10px;padding-inline:18px}
+.marketing .contact-section .wrap,.marketing .footer-inner{display:block}
+.marketing .footer nav{gap:8px 20px}
+}
+@media(prefers-reduced-motion:reduce){.marketing .button{transition:none}.marketing .button:hover{transform:none}}
+
+/* App Store destinations become available at launch. */
+.marketing .app-card .store-button{margin-top:26px;max-width:100%;font-family:inherit;line-height:1.5;text-align:center;white-space:normal}
+.marketing .store-button:disabled{color:#b8b6ac;border-color:#ffffff24;cursor:default;background:#ffffff03}
+.marketing .store-button:disabled:hover{transform:none;background:#ffffff03;border-color:#ffffff24}
