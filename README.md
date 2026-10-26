@@ -2,6 +2,10 @@
 
 Two on-device training apps built from the same SwiftUI and SwiftData source tree. No CloudKit or third-party application dependencies.
 
+## Website
+
+The static site for `onlybody.app` lives in `Website/dist`, with a homepage, separate product pages, and shared Privacy Policy and Terms of Use. Cloudflare Pages should publish only this folder. See [deployment instructions](Website/DEPLOY.uk.txt) for Git integration, the custom domain and remaining in-app legal-link integration. Edit the HTML/CSS directly; no website build dependencies are required.
+
 ## Working on both apps
 
 Open `onlybody/onlybody.xcodeproj` and choose the **onlybody** or **onlyweights** scheme. A shared feature edit is compiled into both apps; each is archived and released separately.

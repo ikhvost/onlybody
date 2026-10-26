@@ -1,0 +1,109 @@
+onlybody.app — сайт у спільному репозиторії
+
+Сайт готовий як статичні HTML/CSS-файли. Публікується лише Website/dist.
+Немає npm, генератора, JavaScript, зовнішніх шрифтів, форм або аналітики.
+Редагуйте HTML та assets/site.css безпосередньо. Іконки взято з власних застосунків.
+Приклади тренувань на сайті — позначені HTML-ілюстрації, не скриншоти застосунків.
+
+CLOUDFLARE PAGES: РЕКОМЕНДОВАНЕ ПІДКЛЮЧЕННЯ ДО ЦЬОГО РЕПОЗИТОРІЮ
+
+1. Закомітьте папку Website та виконайте push у свій GitHub/GitLab репозиторій.
+2. Cloudflare → Workers & Pages → створити Pages project → Connect to Git.
+3. Оберіть цей репозиторій. Надавайте доступ лише до потрібного репозиторію.
+4. Налаштування:
+   Production branch: main
+   Framework preset: None
+   Root directory: корінь репозиторію (порожнє значення)
+   Build command: exit 0
+   Build output directory: Website/dist
+5. Після першого deploy відкрийте адресу *.pages.dev і перевірте всі сторінки.
+6. Pages project → Custom domains → Set up a domain → onlybody.app.
+   Для кореневого домену Cloudflare Pages вимагає зону в Cloudflare та її nameservers.
+   Якщо DNS уже там, дотримуйтеся запропонованих налаштувань. Не змінюйте наосліп
+   MX, SPF, DKIM і DMARC: вони потрібні для support@onlybody.app.
+7. За бажанням додайте www.onlybody.app окремо та налаштуйте перенаправлення на основний домен.
+8. Подальші push у main публікуватимуть зміни. Можна налаштувати build watch paths
+   лише для Website/dist/*, щоб зміни Swift не запускали публікацію сайту.
+
+Вихідна папка обмежена Website/dist — Swift-код, seed SQLite і Reviews не публікуються.
+Репозиторій може залишатися приватним. Сторінки після публікації будуть публічними.
+Не вмикайте Cloudflare Web Analytics, Zaraz чи додаткові трекери без оновлення політики.
+_headers та _redirects обробляє Cloudflare Pages; звичайний локальний HTTP-сервер їх не застосовує.
+
+АЛЬТЕРНАТИВА: РУЧНИЙ DIRECT UPLOAD
+
+Створіть окремий Pages project типу Direct Upload і завантажте папку Website/dist.
+Для ZIP покладіть ВМІСТ dist в корінь архіву (index.html має бути на верхньому рівні).
+Git integration та Direct Upload — різні режими створення проєкту. Для цього
+репозиторію краще одразу обрати Git integration.
+
+ЛОКАЛЬНИЙ ПЕРЕГЛЯД
+
+З кореня репозиторію:
+  python3 -m http.server 8765 --bind 127.0.0.1 --directory Website/dist
+Відкрийте http://127.0.0.1:8765/ . Для зупинки — Ctrl+C.
+
+АДРЕСИ ПІСЛЯ ПУБЛІКАЦІЇ
+
+Головна: https://onlybody.app/
+OnlyBody: https://onlybody.app/onlybody/
+OnlyWeights: https://onlybody.app/onlyweights/
+Спільна Privacy Policy: https://onlybody.app/privacy/
+Спільні Terms of Use: https://onlybody.app/terms/
+Support URL для обох застосунків: https://onlybody.app/#support
+Контакт: support@onlybody.app
+
+ЗАВЕРШЕННЯ ІНТЕГРАЦІЇ ІЗ ЗАСТОСУНКАМИ
+
+- Перевірити фактичну доступність опублікованих сторінок і роботу email.
+- Замінити disabled Privacy/Terms у SettingsView на доступні посилання.
+- Додати належне ознайомлення/прийняття політики до доступу до YouTube API features.
+  Окремо визначити й реалізувати потрібний consent до необов'язкових cookies/processing.
+  Поточний WKWebView звертається до YouTube до Play; сам HTML цього не змінює.
+- Звірити App Store Connect Privacy labels з реальною інтеграцією YouTube.
+- Перед публікацією застосунків завершити відкладений відеоаудит і фізичні перевірки.
+- На виході застосунків замінити Coming soon на реальні App Store links і оновити Terms.
+- Політика описує поточний код. При появі акаунтів, синхронізації, аналітики,
+  платежів або зміні провайдера email/хостингу переглянути текст та підстави обробки.
+
+Власник: Illia Khvost, Poland; non-trader за повідомленням власника.
+Email-провайдер не встановлювався з DNS і не перевірявся; в політиці вказана категорія
+email service providers. Звірте його реальні строки зберігання, DPA та міжнародні
+передачі до запуску. Підстави й строки support-процесів у тексті потрібно виконувати.
+Документи не є підтвердженням повного GDPR/YouTube/App Review sign-off.
+
+ДЖЕРЕЛА, ПЕРЕВІРЕНІ 26.10.2026
+
+https://developers.cloudflare.com/pages/framework-guides/deploy-anything/
+https://developers.cloudflare.com/pages/get-started/git-integration/
+https://developers.cloudflare.com/pages/get-started/direct-upload/
+https://developers.cloudflare.com/pages/configuration/custom-domains/
+https://developers.google.com/youtube/terms/developer-policies
+https://policies.google.com/privacy
+https://policies.google.com/technologies/cookies
+https://www.cloudflare.com/privacypolicy/
+https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
+https://cnpd.public.lu/en/legislation/droit-europ/union-europeenne/rgpd/chapitre-3.html
+https://uodo.gov.pl/en/484
+
+ОСНОВА АНАЛІЗУ КОДУ
+
+onlybody/onlybody/Core/Persistence/Models — локальні Workout / Session та їх items.
+onlybody/onlybody/Core/Preferences/WorkoutPreferencesStore.swift — локальні налаштування.
+onlybody/onlybody/Core/Notifications/SystemWorkoutNotificationClient.swift — local notifications.
+onlybody/onlybody/Features/Library/YouTubePlayerView.swift — nonPersistent WKWebView.
+onlybody/onlybody/Features/Library/YouTubeEmbedDocument.swift — офіційний iframe API,
+ідентифікація застосунку та запити до натискання Play.
+onlybody/onlybody/Domain/Repositories/SessionRepository.swift — немає видалення окремої сесії.
+onlybody/onlybody/App/AppStoreLocation.swift — store у Documents, без явного backup exclusion.
+
+Не змінено код iOS, каталоги, seed або відео. До пакету сайту не включено локальні review evidence.
+
+ПЕРЕВІРКА ЛОКАЛЬНОГО САЙТУ 26.10.2026
+
+6 HTML-сторінок; 103 локальні посилання, ресурси й anchors перевірено.
+Sitemap XML валідний; один H1 на сторінку; дубльованих IDs і шаблонних полів немає.
+Перевірено браузером всі сторінки на 320 px: без горизонтального переповнення
+і зламаних зображень. Візуально перевірено 390 px, 768 px та звичайний viewport.
+Працюють переходи до каталогу, OnlyWeights, Privacy Policy і розкриття FAQ.
+Публікація, custom domain, Cloudflare headers/redirects і доставка email ще не перевірені.
