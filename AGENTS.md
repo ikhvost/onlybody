@@ -212,7 +212,7 @@ enum AppTab: String, CaseIterable { case train, log, library }
 - Keep recoverable handling of errors 100, 101, 150 and 153, network loss, timeout, deletion and embedding restrictions. Exercise details and workouts must remain usable without a video.
 - Before release, verify a user-accessible privacy policy and terms covering YouTube API Services, Google Privacy Policy, YouTube Terms, relevant data transfer/cookies/ads and applicable consent. A local draft or nonpersistent WebKit store is not proof of compliance. Keep an App Review evidence package; never promise approval.
 - Mark outcomes PASS, FAIL, UNCONFIRMED or justified N/A. A generated catalog, a historical browser review or green tests do not establish legal clearance or complete checklist approval. Resolve failures before adding a video; explicitly document every remaining unknown and never label a partial review complete.
-- Run shared `YouTubeIntegrationTests` for both app schemes after integration changes. OnlyBody additionally retains catalog and playback-state tests; OnlyWeights currently has no videos. The latest recorded audit is [Reviews/2026-10-24/REPORT.md](Scripts/ExerciseMedia/Reviews/2026-10-24/REPORT.md).
+- Run shared `YouTubeIntegrationTests` for both app schemes after integration changes. OnlyBody additionally retains catalog and playback-state tests; OnlyWeights videos retain partial review status. See [media review status](Scripts/ExerciseMedia/README.md) for the dated local audits.
 
 ## Testing
 

@@ -12,10 +12,7 @@ struct ExportMuscles {
         let examples: [(String, String, String)] = [
             ("Scripts/StoreGenerator/SeedData.json", "Standard Push-Ups", "push-ups"),
             ("Scripts/StoreGenerator/SeedData.json", "Squats", "squats"),
-            ("Scripts/StoreGenerator/SeedData.json", "Chin-Ups", "chin-ups"),
-            ("Scripts/StoreGenerator/OnlyWeights/SeedData.json", "Barbell Bench Press", "bench-press"),
-            ("Scripts/StoreGenerator/OnlyWeights/SeedData.json", "Lat Pulldown", "lat-pulldown"),
-            ("Scripts/StoreGenerator/OnlyWeights/SeedData.json", "Barbell Back Squat", "back-squat")
+            ("Scripts/StoreGenerator/SeedData.json", "Chin-Ups", "chin-ups")
         ]
         for (catalog, name, slug) in examples {
             let data = try Data(contentsOf: root.appending(path: catalog))
