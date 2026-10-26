@@ -12,6 +12,7 @@ nonisolated struct YouTubeEmbedDocument {
               identity.allSatisfy({ allowed.contains($0) }),
               let baseURL = URL(string: "https://\(identity)") else { return nil }
         let configuration: [String: Any] = [
+            "host": "https://www.youtube-nocookie.com",
             "videoId": demonstration.videoID,
             "width": "100%",
             "height": "100%",

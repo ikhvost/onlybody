@@ -25,6 +25,8 @@ struct YouTubeIntegrationTests {
         #expect(document.html.contains("strict-origin-when-cross-origin"))
         #expect(document.html.contains("https://www.youtube.com/iframe_api"))
         #expect(document.html.contains("\"controls\":1"))
+        #expect(document.html.contains("https:\\/\\/www.youtube-nocookie.com"))
+        #expect(document.html.contains("\"autoplay\":0"))
     }
 
     @Test func playerMeetsMinimumViewportDimensions() {

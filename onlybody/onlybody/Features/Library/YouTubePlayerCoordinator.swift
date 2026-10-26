@@ -50,7 +50,6 @@ final class YouTubePlayerCoordinator: NSObject, WKScriptMessageHandler, WKNaviga
         decidePolicyFor navigationAction: WKNavigationAction
     ) async -> WKNavigationActionPolicy {
         if navigationAction.navigationType == .linkActivated,
-           navigationAction.targetFrame?.isMainFrame != false,
            let url = navigationAction.request.url {
             openExternalURL(url)
             return .cancel

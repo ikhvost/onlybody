@@ -10,6 +10,7 @@ struct AppComposition {
     let sessions: any SessionRepository
     let preferences: WorkoutPreferences
     let reminders: WorkoutReminderCoordinator
+    var youtubeConsent = YouTubeConsent()
 
     func train() -> TrainViewModel { TrainViewModel(workouts: workouts, appName: configuration.displayName) }
     func log() -> LogViewModel { LogViewModel(sessions: sessions) }
@@ -18,7 +19,7 @@ struct AppComposition {
         SettingsViewModel(
             appName: configuration.displayName,
             version: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "—",
-            preferences: preferences
+            preferences: preferences, youtubeConsent: youtubeConsent
         )
     }
     func builder(workout: WorkoutSnapshot?, targets: [String]) -> SessionBuilderViewModel {
@@ -65,7 +66,8 @@ struct AppComposition {
             bundleIdentifier: Bundle.main.bundleIdentifier ?? "",
             allowsVideoLoading: allowsVideoLoading,
             localPlayerDocument: localPlayerDocument,
-            network: SystemNetworkAvailabilitySource()
+            network: SystemNetworkAvailabilitySource(),
+            youtubeConsent: youtubeConsent
         )
     }
 }

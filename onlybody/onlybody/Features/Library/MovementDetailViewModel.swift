@@ -9,11 +9,31 @@ final class MovementDetailViewModel {
     private let usesLocalPlayer: Bool
     private let network: any NetworkAvailabilitySource
     private var hasNetwork = true
+    private let youtubeConsent: YouTubeConsent
+    private var sessionConsentRevision: UUID?
+
+    var needsYouTubeConsent: Bool { allowsVideoLoading && !youtubeConsent.isAllowed }
+    var consentRevision: UUID { youtubeConsent.revision }
+    var playerSessionID: UUID? {
+        guard !needsYouTubeConsent, sessionConsentRevision == consentRevision else { return nil }
+        return preparedSessionID
+    }
+
+    func allowYouTube() {
+        youtubeConsent.allow()
+        refreshYouTubeConsent()
+    }
+
+    func refreshYouTubeConsent() {
+        guard needsYouTubeConsent || sessionConsentRevision != consentRevision else { return }
+        closeDemonstration()
+        prepareDemonstration()
+    }
 
     let demonstration: ExerciseDemonstration?
     let playerDocument: YouTubeEmbedDocument?
     private(set) var demonstrationState: DemonstrationPlaybackState = .idle
-    private(set) var playerSessionID: UUID?
+    private var preparedSessionID: UUID?
     private(set) var playerTimeoutID: UUID?
     private(set) var playerPauseRevision = 0
     private(set) var isPlayerActive = true
@@ -48,8 +68,10 @@ final class MovementDetailViewModel {
         allowsVideoLoading: Bool = true,
         localPlayerDocument: YouTubeEmbedDocument? = nil,
         network: any NetworkAvailabilitySource = SystemNetworkAvailabilitySource(),
-        timeSource: any WorkoutTimeSource = SystemWorkoutTimeSource()
+        timeSource: any WorkoutTimeSource = SystemWorkoutTimeSource(),
+        youtubeConsent: YouTubeConsent = YouTubeConsent()
     ) {
+        self.youtubeConsent = youtubeConsent
         self.exercise = exercise
         self.demonstration = demonstration
         usesLocalPlayer = localPlayerDocument != nil
@@ -62,9 +84,14 @@ final class MovementDetailViewModel {
     }
 
     func loadDemonstration() {
-        guard isPlayerActive, hasNetwork, let demonstration else { return }
+        guard !needsYouTubeConsent, isPlayerActive, let demonstration else { return }
+        guard hasNetwork else {
+            demonstrationState = .offline
+            return
+        }
+        sessionConsentRevision = consentRevision
         guard allowsVideoLoading else {
-            if usesLocalPlayer { playerSessionID = UUID() }
+            if usesLocalPlayer { preparedSessionID = UUID() }
             demonstrationState = .ready
             return
         }
@@ -72,7 +99,7 @@ final class MovementDetailViewModel {
             demonstrationState = .failed(.configuration)
             return
         }
-        playerSessionID = UUID()
+        preparedSessionID = UUID()
         playerTimeoutID = UUID()
         demonstrationState = .loading
     }
@@ -89,8 +116,12 @@ final class MovementDetailViewModel {
             guard !Task.isCancelled else { return }
             let wasAvailable = hasNetwork
             hasNetwork = available
+            guard !needsYouTubeConsent else {
+                closeDemonstration()
+                continue
+            }
             if !available {
-                playerSessionID = nil
+                preparedSessionID = nil
                 playerTimeoutID = nil
                 demonstrationState = .offline
             } else if !wasAvailable {
@@ -147,13 +178,14 @@ final class MovementDetailViewModel {
     }
 
     func closeDemonstration() {
-        playerSessionID = nil
+        preparedSessionID = nil
         playerTimeoutID = nil
+        sessionConsentRevision = nil
         demonstrationState = .idle
     }
 
     private func failDemonstration(_ failure: DemonstrationFailure) {
-        playerSessionID = nil
+        preparedSessionID = nil
         playerTimeoutID = nil
         demonstrationState = .failed(failure)
     }

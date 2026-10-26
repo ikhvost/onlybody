@@ -17,7 +17,8 @@ struct MovementDemonstrationTests {
             bundleIdentifier: "ikhvost.onlybody",
             allowsVideoLoading: allowsVideoLoading,
             network: network,
-            timeSource: clock
+            timeSource: clock,
+            youtubeConsent: YouTubeConsent(grantedAt: Date())
         )
     }
 

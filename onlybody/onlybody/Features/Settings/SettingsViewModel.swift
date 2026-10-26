@@ -10,6 +10,11 @@ final class SettingsViewModel {
     let privacyPolicyURL = URL(string: "https://onlybody.app/privacy/")
     let termsOfUseURL = URL(string: "https://onlybody.app/terms/")
     private let preferences: WorkoutPreferences
+    private let youtubeConsent: YouTubeConsent
+
+    var areYouTubeVideosAllowed: Bool { youtubeConsent.isAllowed }
+
+    func revokeYouTubeConsent() { youtubeConsent.revoke() }
     let weightUnits = WeightUnit.allCases
 
     var feedbackURL: URL? {
@@ -30,7 +35,11 @@ final class SettingsViewModel {
         set { preferences.isTimerSoundEnabled = newValue }
     }
 
-    init(appName: String, version: String, preferences: WorkoutPreferences = WorkoutPreferences()) {
+    init(
+        appName: String, version: String, preferences: WorkoutPreferences = WorkoutPreferences(),
+        youtubeConsent: YouTubeConsent = YouTubeConsent()
+    ) {
+        self.youtubeConsent = youtubeConsent
         self.appName = appName
         self.version = version
         self.preferences = preferences

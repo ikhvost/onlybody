@@ -37,6 +37,10 @@ struct SettingsView: View {
                             SettingsWeightUnitPicker(viewModel: viewModel)
                         }
 
+                        SettingsSection(title: "YouTube") {
+                            SettingsYouTubeConsentView(viewModel: viewModel)
+                        }
+
                         SettingsSection(title: "Support") {
                             SettingsRow(
                                 title: "Send feedback",

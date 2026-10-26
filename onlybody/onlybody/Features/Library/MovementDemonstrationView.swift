@@ -10,7 +10,9 @@ struct MovementDemonstrationView: View {
             MonoLabel(text: "Demonstration", size: Theme.type11, tracking: 0.8)
 
             if let demonstration = viewModel.demonstration {
-                if let sessionID = viewModel.playerSessionID, let document = viewModel.playerDocument {
+                if viewModel.needsYouTubeConsent {
+                    YouTubeConsentView(onAllow: viewModel.allowYouTube)
+                } else if let sessionID = viewModel.playerSessionID, let document = viewModel.playerDocument {
                     YouTubePlayerView(
                         document: document,
                         sessionID: sessionID,
@@ -51,6 +53,7 @@ struct MovementDemonstrationView: View {
                 await viewModel.waitForPlayerTimeout(timeoutID)
             }
         }
+        .onChange(of: viewModel.consentRevision) { _, _ in viewModel.refreshYouTubeConsent() }
         .onAppear { viewModel.setPlayerActive(scenePhase == .active) }
         .onChange(of: scenePhase) { _, phase in viewModel.setPlayerActive(phase == .active) }
         .onDisappear { viewModel.closeDemonstration() }
