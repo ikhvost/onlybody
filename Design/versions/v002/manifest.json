@@ -1,0 +1,47 @@
+{
+  "version": "v002",
+  "parent": "v001",
+  "date": "2026-10-31",
+  "title": "Огляд тренування",
+  "status": "proposed",
+  "nativeChanges": false,
+  "fixtureRevision": "7e0647e",
+  "products": [
+    "OnlyBody",
+    "OnlyWeights"
+  ],
+  "languages": [
+    "uk",
+    "en",
+    "pl",
+    "de",
+    "fr"
+  ],
+  "viewports": [
+    [
+      375,
+      812
+    ],
+    [
+      393,
+      852
+    ],
+    [
+      440,
+      956
+    ]
+  ],
+  "screens": 18,
+  "comparisonViewport": [
+    440,
+    956
+  ],
+  "screenshotViewport": [
+    393,
+    852
+  ],
+  "defaultClock": "frozen",
+  "entry": "../../runner.html?version=v002",
+  "decisions": "DECISIONS.md",
+  "verification": "verification.json"
+}

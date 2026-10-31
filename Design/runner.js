@@ -13,6 +13,7 @@ switch(runnerParams.get('scenario')){
 }
 let requested=runnerParams.get('screen')||'train';
 if(runnerParams.get('version')==='v000'&&['creation','statistics'].includes(requested))requested=requested==='creation'?'musclePicker':'log';
+if(runnerParams.get('version')!=='v002'&&requested==='workout')requested='train';
 direct(requested);
 // The adapter is also the narrow API used by reproducible prototype QA.
 window.mock={configure(options){product=options.product??product;language=options.language??language;states={};direct(options.screen??'train')},state:()=>state(),navigate:route=>direct(route),act:value=>action(value),render:()=>render()};
