@@ -79,10 +79,11 @@ struct SessionPersistenceRegressionTests {
         let workouts = MockWorkoutRepository()
         let sessions = MockSessionRepository()
         sessions.suspendSaves = true
-        let workout = WorkoutSnapshot(items: [WorkoutItemSnapshot()])
+        let workout = WorkoutSnapshot(items: [WorkoutItemSnapshot(sets: 2)])
         workouts.stubbedWorkouts = [workout]
         let model = ActiveWorkoutViewModel(workouts: workouts, sessions: sessions, workoutId: workout.id)
         await model.load()
+        model.markSetDone()
         var completions = 0
         let first = Task { await model.endSession(); completions += 1 }
         for _ in 0..<1_000 where !sessions.isWaitingToSave { await Task.yield() }

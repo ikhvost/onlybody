@@ -47,7 +47,7 @@ final class LocalizationSmokeTests: XCTestCase {
 
     private func tap(_ identifier: String, in app: XCUIApplication) {
         let button = app.buttons[identifier]
-        XCTAssertTrue(button.waitForExistence(timeout: 10))
+        XCTAssertTrue(button.exists || button.waitForExistence(timeout: 10))
         button.tap()
     }
 

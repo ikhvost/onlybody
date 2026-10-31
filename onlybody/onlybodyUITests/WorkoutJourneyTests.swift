@@ -30,12 +30,13 @@ final class WorkoutJourneyTests: XCTestCase {
     }
 
     func testCreateSurvivesRelaunch() {
-        XCTAssertTrue(app.staticTexts[JourneyProduct.name].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["train.settings"].waitForExistence(timeout: 10))
         createWorkout(duration: "35 min", rest: "90 sec")
         app.terminate()
         app.launch()
         tap("workout.edit.E2E Workout")
         XCTAssertEqual(app.textFields["builder.name"].value as? String, "E2E Workout")
+        showTimingOptions()
         XCTAssertTrue(app.buttons["builder.duration"].label.contains("35 min"))
         XCTAssertTrue(app.buttons["builder.rest"].label.contains("90 sec"))
         tap("builder.duration")
@@ -48,6 +49,7 @@ final class WorkoutJourneyTests: XCTestCase {
         app.terminate()
         app.launch()
         tap("workout.edit.E2E Workout")
+        showTimingOptions()
         XCTAssertTrue(app.buttons["builder.duration"].label.contains("45 min"))
         XCTAssertTrue(app.buttons["builder.rest"].label.contains("60 sec"))
     }
@@ -60,12 +62,12 @@ final class WorkoutJourneyTests: XCTestCase {
         app.terminate()
         app.launch()
         tap("workout.edit.E2E Workout")
-        XCTAssertTrue(app.staticTexts["SETS: 1 · REPS: 13 · REST: 45 SEC"].exists)
+        XCTAssertTrue(app.staticTexts["Sets: 1 · Reps: 13 · Rest: 45 sec"].exists)
         tap("builder.add")
         selectExercise()
         tap("builder.save")
         tap("workout.edit.E2E Workout")
-        XCTAssertEqual(app.staticTexts.matching(identifier: "stepper.Sets.value").count, 2)
+        XCTAssertEqual(app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "builder.movement.")).count, 2)
     }
 
     func testCompleteWritesOneSession() {
@@ -75,11 +77,14 @@ final class WorkoutJourneyTests: XCTestCase {
         createWorkout(sets: 2)
         tap("workout.start.E2E Workout")
         tap("stepper.Added lb.increase")
-        XCTAssertEqual(app.staticTexts["stepper.Added lb.value"].label, "5")
+        XCTAssertEqual(app.textFields["stepper.Added lb.value"].value as? String, "5")
+        app.textFields["stepper.Added lb.value"].tap()
+        XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 5))
         tap("active.markSetDone")
         tap("rest.skip")
+        XCTAssertFalse(app.keyboards.firstMatch.exists)
         tap("stepper.Added lb.increase")
-        XCTAssertEqual(app.staticTexts["stepper.Added lb.value"].label, "10")
+        XCTAssertEqual(app.textFields["stepper.Added lb.value"].value as? String, "10")
         tap("active.markSetDone")
         tap("active.close")
         tap("workout.start.E2E Workout")
@@ -137,6 +142,11 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertTrue(app.buttons["active.markSetDone"].exists)
         tap("active.end")
         tap("End Without Saving")
+        tap("workout.start.E2E Workout")
+        tap("active.end")
+        tap("End & Save")
+        XCTAssertTrue(app.staticTexts["completion.status"].waitForExistence(timeout: 10))
+        tap("active.close")
         tap("tab.log")
         XCTAssertEqual(app.buttons.matching(identifier: "session.row").count, 0)
         app.terminate()
@@ -149,8 +159,9 @@ final class WorkoutJourneyTests: XCTestCase {
         tap("rest.skip")
         tap("active.end")
         tap("End & Save")
+        tap("active.close")
         verifyHistory(reps: 12)
-        XCTAssertFalse(app.staticTexts["SET 2 · REPS: 12"].exists)
+        XCTAssertFalse(app.staticTexts["Set 2 · Reps: 12"].exists)
     }
 
     func testNavigationAndFullscreenWorkout() {
@@ -162,10 +173,13 @@ final class WorkoutJourneyTests: XCTestCase {
         verifyOtherBackScreens()
         verifyTabSwipesAndDraftProtection()
         tap("tab.library")
+        tap("catalog.filters")
         tap("difficulty.intermediate")
-        XCTAssertTrue(app.descendants(matching: .any)["library.section.intermediate"].exists)
-        XCTAssertFalse(app.descendants(matching: .any)["library.section.beginner"].exists)
+        tap("filters.done")
+        XCTAssertFalse(app.descendants(matching: .any)["library.section.intermediate"].exists)
+        tap("catalog.filters")
         tap("difficulty.beginner")
+        tap("filters.done")
         let search = app.textFields["library.search"]
         search.tap()
         search.typeText(JourneyProduct.libraryExercise)
@@ -184,7 +198,9 @@ final class WorkoutJourneyTests: XCTestCase {
         screenshot.lifetime = .keepAlways
         add(screenshot)
         if JourneyProduct.hasDemonstrations {
-            XCTAssertTrue(app.descendants(matching: .any)["demonstration.player"].waitForExistence(timeout: 10))
+            let player = app.descendants(matching: .any)["demonstration.player"]
+            for _ in 0..<5 where !player.isHittable { app.swipeUp() }
+            XCTAssertTrue(player.waitForExistence(timeout: 10))
             XCTAssertFalse(app.buttons["demonstration.load"].exists)
             XCTAssertTrue(app.staticTexts["demonstration.author"].exists)
             XCTAssertTrue(app.buttons["demonstration.openYouTube"].exists)
@@ -220,6 +236,7 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertTrue(app.buttons["active.markSetDone"].exists)
         tap("active.end")
         tap("End & Save")
+        tap("active.close")
         XCTAssertTrue(app.buttons["tab.train"].waitForExistence(timeout: 10))
     }
 
@@ -295,7 +312,7 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertTrue(app.staticTexts["exerciseHistory.set.1"].label.contains("4.54 kg"))
         tap("exerciseHistory.back")
         tap("stepper.Added kg.increase")
-        XCTAssertEqual(app.staticTexts["stepper.Added kg.value"].label, "2.5")
+        XCTAssertEqual(app.textFields["stepper.Added kg.value"].value as? String, "2.5")
         tap("active.end")
         tap("End Without Saving")
     }
@@ -337,7 +354,7 @@ final class WorkoutJourneyTests: XCTestCase {
 
     private func verifyOtherBackScreens() {
         tap("workout.create")
-        XCTAssertTrue(app.buttons["picker.manual"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["creation.manual"].waitForExistence(timeout: 10))
         swipeBack()
         XCTAssertTrue(app.buttons["workout.start.E2E Workout"].waitForExistence(timeout: 10))
         XCTAssertFalse(app.buttons["OnlyBody — show streak"].exists)
@@ -375,21 +392,22 @@ final class WorkoutJourneyTests: XCTestCase {
         start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .slow, thenHoldForDuration: 0.5)
         XCTAssertTrue(app.buttons["workout.start.E2E Workout"].exists)
         app.swipeLeft()
-        XCTAssertTrue(app.staticTexts["NO TRAINING HISTORY YET"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["No training history yet"].waitForExistence(timeout: 10))
         app.swipeLeft()
         XCTAssertTrue(app.textFields["library.search"].waitForExistence(timeout: 10))
         app.swipeRight()
-        XCTAssertTrue(app.staticTexts["NO TRAINING HISTORY YET"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["No training history yet"].waitForExistence(timeout: 10))
         app.swipeRight()
         tap("workout.edit.E2E Workout")
         tap("stepper.Reps.increase")
+        tap("builder.movement.done")
         swipeBack()
         tap("Stay")
         XCTAssertTrue(app.textFields["builder.name"].exists)
         tap("builder.back")
         tap("Discard changes")
         tap("workout.edit.E2E Workout")
-        XCTAssertTrue(app.staticTexts["SETS: 1 · REPS: 12 · REST: 45 SEC"].exists)
+        XCTAssertTrue(app.staticTexts["Sets: 1 · Reps: 12 · Rest: 45 sec"].exists)
         swipeBack()
         XCTAssertTrue(app.buttons["workout.start.E2E Workout"].waitForExistence(timeout: 10))
     }
@@ -402,7 +420,9 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertFalse(app.staticTexts["Movement"].exists)
         XCTAssertEqual(app.buttons["movement.back"].label, "Back to workout")
         if JourneyProduct.hasDemonstrations {
-            XCTAssertTrue(app.descendants(matching: .any)["demonstration.player"].waitForExistence(timeout: 10))
+            let player = app.descendants(matching: .any)["demonstration.player"]
+            for _ in 0..<5 where !player.isHittable { app.swipeUp() }
+            XCTAssertTrue(player.waitForExistence(timeout: 10))
             XCTAssertGreaterThan(app.webViews.count, 0)
             swipeBackOverPlayer()
         } else {
@@ -413,19 +433,21 @@ final class WorkoutJourneyTests: XCTestCase {
         tap("active.history")
         XCTAssertTrue(app.staticTexts["exerciseHistory.empty"].waitForExistence(timeout: 10))
         swipeBack()
-        XCTAssertEqual(app.staticTexts["stepper.Reps.value"].label, "13")
-        XCTAssertEqual(app.staticTexts["stepper.Added kg.value"].label, "2.5")
+        XCTAssertEqual(app.textFields["stepper.Reps.value"].value as? String, "13")
+        XCTAssertEqual(app.textFields["stepper.Added kg.value"].value as? String, "2.5")
         XCTAssertTrue(app.buttons["active.markSetDone"].exists)
         XCTAssertFalse(app.buttons["tab.train"].isHittable)
     }
 
     private func createWorkout(sets: Int = 1, duration: String? = nil, rest: String? = nil) {
         tap("workout.create")
-        tap("picker.manual")
+        tap("creation.manual")
+        selectExercise()
         let name = app.textFields["builder.name"]
         XCTAssertTrue(name.waitForExistence(timeout: 10))
         name.tap()
         name.typeText("E2E Workout\n")
+        if duration != nil || rest != nil { showTimingOptions() }
         if let duration {
             tap("builder.duration")
             app.pickerWheels.firstMatch.adjust(toPickerWheelValue: duration)
@@ -436,15 +458,25 @@ final class WorkoutJourneyTests: XCTestCase {
             app.pickerWheels.firstMatch.adjust(toPickerWheelValue: rest)
             tap("timing.done")
         }
-        tap("builder.add")
-        selectExercise()
+        if duration != nil || rest != nil { tap("builder.options") }
         for _ in sets..<3 { tap("stepper.Sets.decrease") }
         tap("builder.save")
         XCTAssertTrue(app.buttons["workout.start.E2E Workout"].waitForExistence(timeout: 10))
+        tap("workout.overview.E2E Workout")
+        XCTAssertTrue(app.staticTexts["overview.name"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["overview.muscles"].exists)
+        swipeBack()
+    }
+
+    private func showTimingOptions() {
+        tap("builder.options")
+        let duration = app.buttons["builder.duration"]
+        for _ in 0..<6 where !duration.exists || !duration.isHittable { app.swipeUp() }
+        XCTAssertTrue(duration.exists || duration.waitForExistence(timeout: 10), app.debugDescription)
     }
 
     private func selectExercise() {
-        let search = app.textFields["Search movements..."]
+        let search = app.textFields["exercisePicker.search"]
         XCTAssertTrue(search.waitForExistence(timeout: 10))
         search.tap()
         search.typeText(JourneyProduct.exercise)
@@ -462,13 +494,28 @@ final class WorkoutJourneyTests: XCTestCase {
         row.tap()
         let total = app.staticTexts["session.total.0"]
         XCTAssertTrue(total.waitForExistence(timeout: 10), app.debugDescription)
-        XCTAssertEqual(total.label, "TOTAL REPS: \(reps)")
-        XCTAssertEqual(app.staticTexts["session.set.0.0"].label, "SET 1 · REPS: \(firstSetReps ?? reps)")
+        XCTAssertEqual(total.label, "Total reps: \(reps)")
+        XCTAssertEqual(app.staticTexts["session.set.0.0"].label, "Set 1 · Reps: \(firstSetReps ?? reps)")
     }
 
     private func tap(_ identifier: String) {
-        let button = app.buttons[identifier]
-        XCTAssertTrue(button.waitForExistence(timeout: 10), "Missing button: \(identifier)")
+        if identifier.hasPrefix("stepper.Added"), app.buttons["active.addWeight"].exists { tap("active.addWeight") }
+        if identifier.hasPrefix("stepper."), !app.buttons[identifier].exists, app.textFields["builder.name"].exists {
+            let movement = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "builder.movement.")).firstMatch
+            XCTAssertTrue(movement.waitForExistence(timeout: 10))
+            for _ in 0..<5 where !movement.isHittable { app.swipeUp() }
+            movement.tap()
+        }
+        if ["builder.save", "builder.add"].contains(identifier), app.buttons["builder.movement.done"].exists {
+            tap("builder.movement.done")
+        }
+        let button = app.buttons[identifier].firstMatch
+        if ["builder.duration", "builder.rest"].contains(identifier) {
+            for _ in 0..<6 where !button.exists || !button.isHittable { app.swipeUp() }
+        }
+        XCTAssertTrue(button.exists || button.waitForExistence(timeout: 10), "Missing button: \(identifier)")
+        for _ in 0..<6 where !button.isHittable { app.swipeUp() }
+        XCTAssertTrue(button.isHittable, "Not reachable: \(identifier)")
         button.tap()
     }
 }

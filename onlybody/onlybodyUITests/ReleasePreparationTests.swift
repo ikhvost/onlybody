@@ -37,7 +37,8 @@ final class ReleasePreparationTests: XCTestCase {
             app.terminate()
         }
         tap("workout.create", in: app)
-        tap("picker.manual", in: app)
+        tap("creation.manual", in: app)
+        tap("exercisePicker.close", in: app)
         let name = app.textFields["builder.name"]
         XCTAssertTrue(name.waitForExistence(timeout: 10))
         name.tap()
@@ -48,7 +49,7 @@ final class ReleasePreparationTests: XCTestCase {
         pickerSearch.tap()
         pickerSearch.typeText(JourneyProduct.exercise)
         tap("exercise.pick.\(JourneyProduct.exercise)", in: app)
-        XCTAssertTrue(app.staticTexts["stepper.Sets.value"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "builder.movement.")).firstMatch.waitForExistence(timeout: 10))
         let save = app.buttons["builder.save"]
         XCTAssertTrue(save.isHittable)
         XCTAssertGreaterThan(save.frame.width, save.frame.height, "Localized Save must remain a horizontal button")
@@ -60,7 +61,11 @@ final class ReleasePreparationTests: XCTestCase {
         XCTAssertTrue(app.buttons["workout.start.\(workoutName)"].waitForExistence(timeout: 10))
         capture("01-train", app: app)
         tap("workout.edit.\(workoutName)", in: app)
+        let movement = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "builder.movement.")).firstMatch
+        for _ in 0..<5 where !movement.isHittable { app.swipeUp() }
+        movement.tap()
         tap("stepper.Reps.increase", in: app)
+        tap("builder.movement.done", in: app)
         tap("builder.save", in: app)
         tap("workout.start.\(workoutName)", in: app)
         XCTAssertTrue(app.buttons["active.markSetDone"].waitForExistence(timeout: 10))
@@ -114,7 +119,8 @@ final class ReleasePreparationTests: XCTestCase {
 
     private func tap(_ identifier: String, in app: XCUIApplication) {
         let button = app.buttons[identifier]
-        XCTAssertTrue(button.waitForExistence(timeout: 10), "Missing button: \(identifier)")
+        XCTAssertTrue(button.exists || button.waitForExistence(timeout: 10), "Missing button: \(identifier)")
+        for _ in 0..<6 where !button.isHittable { app.swipeUp() }
         button.tap()
     }
 

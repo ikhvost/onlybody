@@ -79,8 +79,8 @@ struct LogViewModelTests {
         #expect(sections.count == 2)
 
         let currentYear = Calendar.current.component(.year, from: Date())
-        let currentMay = Calendar.current.monthSymbols[4].uppercased()
-        let currentApril = Calendar.current.monthSymbols[3].uppercased()
+        let currentMay = Calendar.current.monthSymbols[4]
+        let currentApril = Calendar.current.monthSymbols[3]
 
         if currentYear == 2026 {
             #expect(sections[0].label == currentMay)
@@ -140,7 +140,7 @@ struct LogViewModelTests {
 
         let sections = viewModel.monthSections
         #expect(sections.count == 1)
-        #expect(sections[0].label == "DECEMBER 2024")
+        #expect(sections[0].label == "\(Calendar.current.monthSymbols[11]) 2024")
     }
 
     @Test

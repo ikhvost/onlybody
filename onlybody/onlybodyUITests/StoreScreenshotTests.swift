@@ -74,7 +74,8 @@ final class StoreScreenshotTests: XCTestCase {
 
     private func tap(_ identifier: String, in app: XCUIApplication) {
         let button = app.buttons[identifier]
-        XCTAssertTrue(button.waitForExistence(timeout: 10), "Missing button: \(identifier)")
+        XCTAssertTrue(button.exists || button.waitForExistence(timeout: 10), "Missing button: \(identifier)")
+        for _ in 0..<6 where !button.isHittable { app.swipeUp() }
         button.tap()
     }
 

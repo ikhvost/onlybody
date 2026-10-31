@@ -85,6 +85,26 @@ struct WorkoutTimingTests {
         #expect(saved.items.map(\.sets) == [4, 2])
     }
 
+    @Test func loadingSmartEditorPreservesSavedIndividualParameters() async throws {
+        let exercise = ExerciseSnapshot(name: "Fixture chest", primaryMuscle: "Chest")
+        let original = WorkoutSnapshot(name: "Original", mode: "smart", targetMuscleGroups: ["Chest"], items: [
+            WorkoutItemSnapshot(sets: 7, targetReps: 19, restSeconds: 90, exercise: exercise)
+        ])
+        let workouts = MockWorkoutRepository()
+        workouts.stubbedWorkouts = [original]
+        let exercises = MockExerciseRepository()
+        exercises.stubbedAllExercises = [exercise]
+        let model = SessionBuilderViewModel(workouts: workouts, exercises: exercises, workoutID: original.id)
+        await model.loadExercises()
+        #expect(!model.hasUnsavedChanges)
+        model.name = "Renamed"
+        #expect(await model.save())
+        #expect(workouts.savedWorkouts.first?.items.first?.id == original.items.first?.id)
+        #expect(workouts.savedWorkouts.first?.items.first?.sets == 7)
+        #expect(workouts.savedWorkouts.first?.items.first?.targetReps == 19)
+        #expect(workouts.savedWorkouts.first?.items.first?.restSeconds == 90)
+    }
+
     @Test func invalidSelectionsDoNotMutateDraft() {
         let model = SessionBuilderViewModel(workouts: MockWorkoutRepository(), exercises: MockExerciseRepository())
         model.setDurationMinutes(0)
