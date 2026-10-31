@@ -288,17 +288,14 @@ final class ActiveWorkoutViewModel {
             sessionItem.plannedReps = item.targetReps
             sessionItem.weightKg = weights[index] ?? 0
 
-            var setReps: [Int] = []
-            var setWeights: [Double] = []
-            for setIndex in 0..<max(0, item.sets) {
-                let k = key(for: index, set: setIndex)
-                if let reps = completedSets[k] {
-                    setReps.append(reps)
-                    setWeights.append(completedWeights[k] ?? 0)
-                }
-            }
-            sessionItem.setReps = setReps
-            sessionItem.setWeightsKg = setWeights
+            let completed = completedSets.compactMap { entry -> (set: Int, reps: Int, weight: Double)? in
+                let parts = entry.key.split(separator: "-")
+                guard parts.count == 2, Int(parts[0]) == index, let set = Int(parts[1]),
+                      set >= 0, set < item.sets else { return nil }
+                return (set, entry.value, completedWeights[entry.key] ?? 0)
+            }.sorted { $0.set < $1.set }
+            sessionItem.setReps = completed.map(\.reps)
+            sessionItem.setWeightsKg = completed.map(\.weight)
 
             result.append(sessionItem)
         }
@@ -357,11 +354,11 @@ final class ActiveWorkoutViewModel {
 
     private func countCompletedSets(for exerciseIndex: Int) -> Int {
         guard items.indices.contains(exerciseIndex) else { return 0 }
-        let exercise = items[exerciseIndex]
-        var count = 0
-        for set in 0..<max(0, exercise.sets) where completedSets[key(for: exerciseIndex, set: set)] != nil {
-            count += 1
-        }
-        return count
+        let total = items[exerciseIndex].sets
+        return completedSets.keys.filter { key in
+            let parts = key.split(separator: "-")
+            guard parts.count == 2, Int(parts[0]) == exerciseIndex, let set = Int(parts[1]) else { return false }
+            return set >= 0 && set < total
+        }.count
     }
 }

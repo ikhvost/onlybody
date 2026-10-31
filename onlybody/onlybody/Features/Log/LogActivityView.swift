@@ -7,17 +7,17 @@ struct LogActivityView: View {
         VStack(spacing: Theme.space20) {
             HStack(spacing: Theme.space8) {
                 StatCard(
-                    label: String(localized: .uiStreakUppercase),
+                    label: String(localized: .uiDesignStreak),
                     value: "\(viewModel.stats.current)",
                     isAccent: false
                 )
                 StatCard(
-                    label: String(localized: .uiBestUppercase),
+                    label: String(localized: .uiDesignBest),
                     value: "\(viewModel.stats.longest)",
                     isAccent: true
                 )
                 StatCard(
-                    label: String(localized: .uiSessionsUppercase),
+                    label: String(localized: .uiDesignSessions),
                     value: "\(viewModel.stats.total)",
                     isAccent: true
                 )

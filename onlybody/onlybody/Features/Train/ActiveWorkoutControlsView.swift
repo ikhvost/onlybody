@@ -24,12 +24,14 @@ struct ActiveWorkoutControlsView: View {
                             .font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.text2)
                         WorkoutNumberInput(title: String(localized: .uiReps), identifier: "Reps",
                                            text: Binding(get: { viewModel.repsText }, set: viewModel.enterReps),
-                                           hasError: viewModel.invalidNumbers.contains("reps"), canDecrease: viewModel.currentDisplayReps > 0,
+                                           editingID: viewModel.currentKey, hasError: viewModel.invalidNumbers.contains("reps"),
+                                           canDecrease: viewModel.currentDisplayReps > 0,
                                            onDecrease: viewModel.decrementReps, onIncrease: viewModel.incrementReps)
                         if viewModel.showsWeight {
                             WorkoutNumberInput(title: String(localized: .uiAddedWeight(viewModel.weightUnitSymbol)),
                                                identifier: "Added \(viewModel.weightUnitSymbol)",
                                                text: Binding(get: { viewModel.weightText }, set: { viewModel.enterWeight($0) }), isDecimal: true,
+                                               editingID: viewModel.currentKey,
                                                hasError: viewModel.invalidNumbers.contains("weight"), canDecrease: viewModel.currentWeight > 0,
                                                onDecrease: viewModel.decrementWeight, onIncrease: viewModel.incrementWeight)
                         } else {

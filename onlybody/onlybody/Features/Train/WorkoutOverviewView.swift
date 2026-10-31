@@ -48,8 +48,8 @@ struct WorkoutOverviewView: View {
                 .scrollIndicators(.hidden)
                 .safeAreaInset(edge: .bottom, spacing: Theme.space0) {
                     HStack(spacing: Theme.space12) {
-                        GhostButton(title: String(localized: .uiEditSession), action: onEdit)
-                        PrimaryButton(title: String(localized: .uiStartUppercase), action: onStart, disabled: workout.items.isEmpty)
+                        GhostButton(title: String(localized: .uiDesignEdit), action: onEdit)
+                        PrimaryButton(title: String(localized: .uiDesignStart), action: onStart, disabled: workout.items.isEmpty)
                     }
                     .padding(Theme.cardInset).background(Theme.bg)
                 }

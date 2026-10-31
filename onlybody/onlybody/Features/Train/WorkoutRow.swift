@@ -24,10 +24,10 @@ struct WorkoutRow: View {
             }
             .buttonStyle(.plain).accessibilityIdentifier("workout.overview.\(workout.name)")
             HStack(spacing: Theme.space12) {
-                GhostButton(title: String(localized: .uiEditSession), action: onEditTap)
+                GhostButton(title: String(localized: .uiDesignEdit), action: onEditTap)
                     .accessibilityLabel(String(localized: .uiEditWorkout(workout.name)))
                     .accessibilityIdentifier("workout.edit.\(workout.name)")
-                PrimaryButton(title: String(localized: .uiStartUppercase), action: onStartTap, disabled: workout.items.isEmpty)
+                PrimaryButton(title: String(localized: .uiDesignStart), action: onStartTap, disabled: workout.items.isEmpty)
                     .accessibilityLabel(String(localized: .uiStartWorkout(workout.name)))
                     .accessibilityIdentifier("workout.start.\(workout.name)")
             }

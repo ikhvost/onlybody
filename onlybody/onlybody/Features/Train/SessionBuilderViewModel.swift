@@ -46,9 +46,14 @@ final class SessionBuilderViewModel {
 
     var estimatedDurationSeconds: Int {
         movements.reduce(0) { total, movement in
-            let perSetTime = 30
-            let restTime = max(0, movement.sets - 1) * movement.restSeconds
-            return total + movement.sets * perSetTime + restTime
+            let sets = max(0, movement.sets)
+            let work = sets.multipliedReportingOverflow(by: 30)
+            let rest = max(0, sets - 1).multipliedReportingOverflow(by: movement.restSeconds)
+            guard !work.overflow, !rest.overflow else { return Int.max }
+            let exercise = work.partialValue.addingReportingOverflow(rest.partialValue)
+            guard !exercise.overflow else { return Int.max }
+            let sum = total.addingReportingOverflow(exercise.partialValue)
+            return sum.overflow ? Int.max : sum.partialValue
         }
     }
 

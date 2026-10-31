@@ -6,6 +6,7 @@ struct WorkoutNumberInput: View {
     let identifier: String
     @Binding var text: String
     var isDecimal = false
+    var editingID = ""
     let hasError: Bool
     let canDecrease: Bool
     let onDecrease: () -> Void
@@ -49,6 +50,8 @@ struct WorkoutNumberInput: View {
         }
         .padding(Theme.cardInset).foregroundStyle(Theme.text)
         .background(Theme.surface, in: .rect(cornerRadius: Theme.cornerRadius))
+        .onChange(of: editingID) { _, _ in focused = false }
+        .onDisappear { focused = false }
         .toolbar {
             if focused {
                 ToolbarItemGroup(placement: .keyboard) {
