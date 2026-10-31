@@ -45,12 +45,18 @@ struct SessionBuilderView: View {
                         }
                         BuilderSmartInfo(viewModel: viewModel)
                         BuilderMovements(viewModel: viewModel, isShowingExercisePicker: $isShowingExercisePicker)
-                        DisclosureGroup(String(localized: .uiDesignSchedule)) { BuilderDays(viewModel: viewModel) }
-                            .font(Theme.fontSans(Theme.typeBody)).padding(Theme.horizontalPadding)
+                        DisclosureGroup {
+                            BuilderDays(viewModel: viewModel)
+                        } label: {
+                            Text(.uiDesignSchedule).frame(maxWidth: .infinity, minHeight: Theme.touchSize, alignment: .leading)
+                        }
+                        .font(Theme.fontSans(Theme.typeBody)).padding(Theme.horizontalPadding)
                         DisclosureGroup {
                             BuilderTiming(viewModel: viewModel)
                         } label: {
-                            Text(.uiDesignOptions).accessibilityIdentifier("builder.options")
+                            Text(.uiDesignOptions)
+                                .frame(maxWidth: .infinity, minHeight: Theme.touchSize, alignment: .leading)
+                                .accessibilityIdentifier("builder.options")
                         }
                         .font(Theme.fontSans(Theme.typeBody)).padding(Theme.horizontalPadding)
                         BuilderDuration(viewModel: viewModel)

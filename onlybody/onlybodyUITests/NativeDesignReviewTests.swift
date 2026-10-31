@@ -48,6 +48,7 @@ final class NativeDesignReviewTests: XCTestCase {
             if index == 4 {
                 assertHitArea(app.buttons["builder.back"], minimum: 44)
                 assertHitArea(app.buttons["builder.add"], minimum: 44)
+                assertHitArea(app.buttons["builder.options"], minimum: 44)
                 assertHitArea(app.buttons["builder.save"], minimum: 56)
             }
             if index == 7 {

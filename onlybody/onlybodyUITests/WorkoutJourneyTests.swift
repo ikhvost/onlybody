@@ -530,7 +530,15 @@ final class WorkoutJourneyTests: XCTestCase {
             if button.isHittable && !belowEditorFooter { break }
             app.swipeUp()
         }
-        XCTAssertTrue(button.isHittable, "Not reachable: \(identifier)")
+        XCTAssertTrue(button.isHittable, "Not reachable: \(identifier)\n\(app.debugDescription)")
         button.tap()
+        if identifier == "builder.movement.done" {
+            let dismissed = NSPredicate(format: "exists == false")
+            if XCTWaiter.wait(for: [XCTNSPredicateExpectation(predicate: dismissed, object: button)], timeout: 3) != .completed {
+                button.tap()
+                XCTAssertEqual(XCTWaiter.wait(for: [XCTNSPredicateExpectation(predicate: dismissed, object: button)], timeout: 3), .completed,
+                               "Numeric sheet must close before interacting with its parent")
+            }
+        }
     }
 }

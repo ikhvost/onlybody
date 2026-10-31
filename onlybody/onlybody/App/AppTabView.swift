@@ -11,6 +11,7 @@ struct AppTabView: View {
     @State private var pageWidth: CGFloat = 0
     @State private var dragOffset: CGFloat = 0
     @State private var isSettling = false
+    @State private var settlingID = UUID()
 
     private var showsBottomNav: Bool {
         switch selectedTab {
@@ -65,13 +66,14 @@ struct AppTabView: View {
     }
 
     private func settle(on tab: AppTab) {
-        guard !isSettling else { return }
+        let transitionID = UUID()
+        settlingID = transitionID
         isSettling = true
         withAnimation(reduceMotion ? nil : .smooth(duration: Theme.tabTransitionDuration)) {
             selectedTab = tab
             dragOffset = 0
         } completion: {
-            isSettling = false
+            if settlingID == transitionID { isSettling = false }
         }
     }
 }

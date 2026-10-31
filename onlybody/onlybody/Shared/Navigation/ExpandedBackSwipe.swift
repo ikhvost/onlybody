@@ -8,6 +8,7 @@ final class ExpandedBackSwipe: NSObject, UIGestureRecognizerDelegate, UINavigati
     private var interaction: UIPercentDrivenInteractiveTransition?
     private var shouldBegin: () -> Bool = { true }
     private var detachAfterTransition = false
+    private var permitsNavigation = false
     private weak var source: UIViewController?
 
     func attach(to navigation: UINavigationController?, shouldBegin: @escaping () -> Bool) {
@@ -17,6 +18,7 @@ final class ExpandedBackSwipe: NSObject, UIGestureRecognizerDelegate, UINavigati
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         pan.delegate = self
         pan.maximumNumberOfTouches = 1
+        pan.cancelsTouchesInView = true
         if let edge = navigation.interactivePopGestureRecognizer { pan.require(toFail: edge) }
         navigation.view.addGestureRecognizer(pan)
         self.pan = pan
@@ -47,7 +49,7 @@ final class ExpandedBackSwipe: NSObject, UIGestureRecognizerDelegate, UINavigati
               navigation.transitionCoordinator == nil,
               navigation.presentedViewController == nil else { return false }
         let velocity = pan.velocity(in: pan.view)
-        return velocity.x * direction > abs(velocity.y) * Theme.swipeDirectionRatio && shouldBegin()
+        return velocity.x * direction > abs(velocity.y) * Theme.swipeDirectionRatio
     }
 
     func gestureRecognizer(
@@ -63,6 +65,12 @@ final class ExpandedBackSwipe: NSObject, UIGestureRecognizerDelegate, UINavigati
 
     @objc private func handlePan(_ pan: UIPanGestureRecognizer) {
         guard let navigation else { return }
+        if pan.state == .began {
+            // Consume the drag before asking the screen to show a discard confirmation.
+            // Rejecting it in the delegate would let the underlying card receive a tap.
+            permitsNavigation = shouldBegin()
+        }
+        guard permitsNavigation else { return }
         let progress = min(1, max(0, pan.translation(in: pan.view).x * direction / navigation.view.bounds.width))
         switch pan.state {
         case .began:
