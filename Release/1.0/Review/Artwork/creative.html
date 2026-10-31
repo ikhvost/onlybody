@@ -1,0 +1,36 @@
+<!doctype html><html lang="uk"><meta charset="utf-8"><title>OnlyBody / OnlyWeights — Header & Search review</title>
+<style>@font-face{font-family:DM;src:url(fonts/DMSans-Variable.ttf);font-weight:100 1000}*{box-sizing:border-box}body{background:#171715;color:#f0ede7;font:17px DM,Arial,sans-serif;margin:32px}h1{font-size:30px}p{max-width:980px;line-height:1.5;color:#bbb9b2}select,button{font:inherit;padding:12px;margin:0 10px 12px 0;border-radius:8px;border:1px solid #69685d}button{background:#e8a23a;color:#171715;cursor:pointer}canvas{display:block;max-width:100%;height:auto;border-radius:12px;margin-top:12px}#status{padding:12px 0}a{color:#e8a23a}</style>
+<h1>Обкладинка та пошуковий банер</h1><p>Чернетки на погодження: 2 апки × 5 мов × 2 формати. Реальний інтерфейс із підготовлених скриншотів. Header — 3840 × 1646, Search — 1920 × 1280. Перед публікацією потрібна перевірка обрізання в Preview App Store Connect.</p>
+<select id="card" aria-label="Макет"></select><button id="save">Експортувати 20 PNG</button><div id="status" role="status">Завантаження…</div><canvas id="preview"></canvas>
+<p><a href="https://developer.apple.com/app-store/asset-best-practices/">Рекомендації Apple</a> · <a href="https://developer.apple.com/help/app-store-connect/reference/app-information/creative-assets-specifications">Специфікації</a></p>
+<script>
+const select=document.querySelector('#card'),status=document.querySelector('#status'),canvas=document.querySelector('#preview');
+let cards=[],copy={};const images=new Map();
+function loadImage(url){if(!images.has(url))images.set(url,new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>resolve(image);image.onerror=reject;image.src=url}));return images.get(url)}
+function lines(ctx,text,width){if(text.includes('\n'))return text.split('\n').flatMap(part=>lines(ctx,part,width));let result=[],line='';for(const word of text.replaceAll('\n',' ').split(' ')){const next=line?line+' '+word:word;if(ctx.measureText(next).width>width&&line){result.push(line);line=word}else line=next}if(line)result.push(line);return result}
+function round(ctx,x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r)}
+async function render(card){
+ const header=card.placement==='Header';canvas.width=header?3840:1920;canvas.height=header?1646:1280;
+ const c=canvas.getContext('2d',{alpha:false}),w=canvas.width,h=canvas.height;
+ c.fillStyle='#f0ede7';c.fillRect(0,0,w,h);
+ c.save();c.translate(w*.83,h*.88);c.rotate(-.54);c.strokeStyle='#e8a23a';c.lineWidth=header?150:88;c.beginPath();c.ellipse(0,0,w*.31,h*.75,0,0,Math.PI*2);c.stroke();c.restore();
+ const left=header?340:140,max=header?1910:890;
+ c.fillStyle='#55554e';c.font=`750 ${header?70:42}px DM,Arial,sans-serif`;c.fillText(card.product,left,header?390:310);
+ let [normal,accent]=copy[card.product][card.language][0];if(card.product==='OnlyWeights'&&card.language==='uk')normal='Тренування\nв залі.';let size=header?204:108,normalLines,accentLines;
+ do{c.font=`850 ${size}px DM,Arial,sans-serif`;normalLines=lines(c,normal,max);accentLines=lines(c,accent,max);if(normalLines.length+accentLines.length<=4&&[...normalLines,...accentLines].every(line=>c.measureText(line).width<=max))break;size-=2}while(size>(header?140:76));
+ if([...normalLines,...accentLines].some(line=>c.measureText(line).width>max))throw Error('Headline exceeds width: '+card.file);
+ let y=header?680:490;const lineHeight=size*1.12;
+ c.fillStyle='#171715';for(const line of normalLines){c.fillText(line,left,y);y+=lineHeight}
+ c.fillStyle='#a36109';for(const line of accentLines){c.fillText(line,left,y);y+=lineHeight}
+ if(y-lineHeight+size*.24>h-140)throw Error('Headline outside safe margin: '+card.file);
+ const dw=header?1060:624,dx=header?2440:1170,dy=header?180:130,bezel=header?26:16,sw=dw-bezel*2,sh=sw*2868/1320,dh=sh+bezel*2,r=dw*.13;
+ c.save();c.shadowColor='#17171555';c.shadowBlur=header?58:32;c.shadowOffsetY=20;c.fillStyle='#20201e';round(c,dx,dy,dw,dh,r);c.fill();c.restore();c.strokeStyle='#6a6a62';c.lineWidth=3;round(c,dx,dy,dw,dh,r);c.stroke();
+ const image=await loadImage('../../../'+card.source.replace(/^Release\//,''));c.save();round(c,dx+bezel,dy+bezel,sw,sh,r-bezel);c.clip();c.drawImage(image,dx+bezel,dy+bezel,sw,sh);c.restore();
+ c.fillStyle='#030303';round(c,dx+dw*.375,dy+dw*.052,dw*.25,dw*.07,dw*.04);c.fill();
+ return {file:card.file,width:w,height:h,headlineLines:normalLines.length+accentLines.length,fontSize:size,source:card.source};
+}
+async function preview(){status.textContent='Візуалізація…';const report=await render(cards[Number(select.value)]);status.textContent='Чернетка: '+report.file}
+select.onchange=preview;
+document.querySelector('#save').onclick=async()=>{const button=document.querySelector('#save');button.disabled=true;try{for(const [index,card]of cards.entries()){status.textContent=`Експорт ${index+1}/20: ${card.file}`;await render(card);const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));const response=await fetch('/export/'+card.file,{method:'POST',body:blob});if(!response.ok)throw Error(await response.text())}status.textContent='Готово: експортовано 20 PNG. Очікують погодження.'}catch(error){status.textContent='Помилка: '+error.message}finally{button.disabled=false}};
+(async()=>{await document.fonts.load('850 204px DM');copy=await(await fetch('../screenshot-copy.json')).json();const manifest=await(await fetch('manifest.json')).json();cards=manifest.filter(card=>card.index===1).flatMap(card=>['Header','Search'].map(placement=>({...card,placement,file:`${card.product}-${card.language}-${placement}.png`})));for(const [index,card]of cards.entries())select.append(new Option(`${card.product} · ${card.language} · ${card.placement}`,index));await preview()})();
+</script></html>

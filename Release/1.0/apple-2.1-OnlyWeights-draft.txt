@@ -1,0 +1,29 @@
+Hello App Review Team,
+
+Thank you for your message. Please find the requested information for OnlyWeights below.
+
+1. Physical-device demonstration and testing
+Device: iPhone 15 Pro; iOS: 27
+App version/build: 1.0 (2); test date: 29.09.2026
+
+2. Purpose and target audience
+OnlyWeights is a personal gym workout planner and strength-training log for people who train with free weights, cables and machines. It helps users organize reusable routines, record repetitions and weight, time rest periods, and review completed sessions and exercise history. Exercise guides include equipment requirements, muscle diagrams and optional demonstrations.
+
+3. Setup and main features
+No registration, login, demo credentials or sample files are required. There are no public posts, messaging or content uploads; user-created routines and training records are private on-device data. The app has no subscriptions, in-app purchases or paid feature unlocks.
+
+From Train, use the create button, select muscle groups and build a session, or choose to pick movements manually. Set the name, movements, sets, repetitions, rest and optional training days, then save. Start the saved workout, record sets, use the rest timer and finish the session. Open Log to review the completed workout and exercise history. Library provides searchable exercise details and muscle diagrams. Settings provides weight units, timer sound, reminders and policy links.
+
+Optional YouTube playback requires internet access, in-app consent and system tracking authorization. If authorization is declined, embedded playback stays disabled and an external YouTube link is available. Planning, logging and exercise details remain usable without video. Video consent can be withdrawn in Settings.
+
+4. External services
+Google/YouTube supplies optional exercise demonstrations through the official YouTube IFrame Player in WKWebView, or through external YouTube links. Workout storage uses Apple's on-device SwiftData framework; reminders use local system notifications. Routine generation runs locally and uses no external AI service. There is no developer-operated account server, authentication provider, cloud workout synchronization or payment processor. Policy pages are hosted at https://onlybody.app/privacy/ and https://onlybody.app/terms/.
+
+5. Regional behavior
+The app applies no region-based feature or exercise-catalog restrictions. Its interface supports English, Ukrainian, Polish, German and French. YouTube availability, individual videos, advertising and video language may vary by region or provider restrictions. Local planning and logging do not depend on YouTube availability.
+
+6. Regulated services and third-party material
+The app is intended for general fitness planning and record keeping and does not offer diagnosis or medical treatment. Optional demonstration videos are third-party YouTube content shown through the official player with source attribution. The app does not download, rehost or sell access to those videos.
+The basis for embedding is YouTube's Terms of Service: https://www.youtube.com/t/terms, subject to its conditions and the applicable API policies. This is not a claim of ownership or an individual license from each creator.
+
+Thank you.

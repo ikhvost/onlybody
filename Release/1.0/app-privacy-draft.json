@@ -1,0 +1,118 @@
+{
+  "status": "LOCAL_PRIVACY_ASSESSMENT_MEDIA_REVIEW_PARTIAL",
+  "applies_to": [
+    "ikhvost.onlybody",
+    "ikhvost.onlyweights"
+  ],
+  "configuration": "Official IFrame API with youtube-nocookie.com, autoplay off, ephemeral WKWebView, local versioned opt-in before player creation, settings withdrawal, no Google login/IDFA/native ad SDK",
+  "privacy_policy_url": "https://onlybody.app/privacy/",
+  "collection_answer": true,
+  "collection_basis": "Google documents receiving technical request data and retaining server logs. Privacy-enhanced mode limits personalization, not all collection. Apple includes embedded WebView collection.",
+  "not_collected_by_native_app": [
+    "Workout history, repetitions and weights: stored on device",
+    "Consent date/version: stored on device",
+    "Contact list, photos, microphone, precise location: no native access in source"
+  ],
+  "category_review": [
+    {
+      "category": "Product Interaction",
+      "select": true,
+      "purposes": [
+        "Third-Party Advertising",
+        "Analytics",
+        "App Functionality"
+      ],
+      "linked_to_user": true,
+      "tracking": true,
+      "basis": "YouTube documents playback data; Google partner-sites notice covers embedded YouTube and measurement, including contextual video activity. Policy permits cross-service measurement; privacy-enhanced mode does not expressly exclude it."
+    },
+    {
+      "category": "Advertising Data",
+      "select": true,
+      "purposes": [
+        "Third-Party Advertising",
+        "Analytics",
+        "App Functionality"
+      ],
+      "linked_to_user": true,
+      "tracking": true,
+      "basis": "YouTube embedded-player ads retain creator ad settings. Google documents ad impressions/interactions, measurement and invalid-impression detection. Conservative inclusion covers ads when served, not a claim all catalog videos show ads."
+    },
+    {
+      "category": "Device ID",
+      "select": true,
+      "purposes": [
+        "Third-Party Advertising",
+        "Analytics",
+        "App Functionality"
+      ],
+      "linked_to_user": true,
+      "tracking": true,
+      "basis": "Google documents signed-out browser/app/device identifiers. This covers third-party browser identifiers, not native IDFA access. Temporary storage does not establish anonymization before collection."
+    },
+    {
+      "category": "Coarse Location",
+      "select": true,
+      "purposes": [
+        "Third-Party Advertising",
+        "Analytics",
+        "App Functionality"
+      ],
+      "linked_to_user": true,
+      "tracking": true,
+      "basis": "Google partner-sites notice expressly includes YouTube embeds and use of IP for general location, advertising measurement and service purposes. No GPS/precise-location collection is asserted."
+    },
+    {
+      "category": "Other Diagnostic Data",
+      "select": true,
+      "purposes": [
+        "Analytics",
+        "App Functionality"
+      ],
+      "linked_to_user": true,
+      "tracking": false,
+      "basis": "Technical request/browser/device logs used for service reliability, troubleshooting and fraud/abuse. No advertising purpose assigned to this diagnostic-only category; revisit if evidence shows such reuse."
+    }
+  ],
+  "att": "Build 1.0 (2) includes ATTrackingManager and a five-language NSUserTrackingUsageDescription. Embedded playback requires system authorization and versioned local consent. Denial or restriction keeps the player disabled while exercises, workouts and external YouTube links remain available. This implementation and simulator tests do not establish a complete provider data inventory or current physical-device playback.",
+  "publication_blockers": [
+    "Provider-specific retained data, purposes, linkage and advertising measurement behavior not fully documented",
+    "Owner reports YouTube tested on iPhone 15 Pro, iOS 26; exact build and per-video playback evidence remain unconfirmed",
+    "Google embed guidance limits privacy-enhanced mode to websites; public policy assurances for the iOS WebView need verification or correction",
+    "Made for Kids status has not been checked for each embedded video"
+  ],
+  "sources": {
+    "Apple disclosure": "https://developer.apple.com/app-store/app-privacy-details/",
+    "Apple ATT": "https://developer.apple.com/app-store/user-privacy-and-data-use/",
+    "YouTube privacy-enhanced mode": "https://support.google.com/youtube/answer/171780?hl=en",
+    "YouTube developer policy": "https://developers.google.com/youtube/terms/developer-policies",
+    "Google general privacy": "https://policies.google.com/privacy",
+    "Google partner sites including YouTube": "https://policies.google.com/technologies/partner-sites",
+    "YouTube embedded advertising": "https://support.google.com/youtube/answer/132596?hl=en",
+    "Google cookies": "https://policies.google.com/technologies/cookies?hl=en",
+    "WebKit tracking prevention": "https://webkit.org/tracking-prevention/",
+    "WebKit ITP in WKWebView": "https://webkit.org/blog/10882/app-bound-domains/"
+  },
+  "review_date": "2026-10-28",
+  "notes": "Last recorded local checkpoint, not a live App Store Connect check: both 1.0 (2) builds were uploaded and selected, and all five localized privacy URLs were saved per app. The latest publication entry records OnlyWeights App Privacy as published by the owner and OnlyBody as unpublished. Both questionnaires contain five configured categories. Content Rights remained unset for both products and neither app was recorded as submitted. Historical validation passed after targeted retry; see ../Artifacts/2026-10-28-privacy-build/validation-summary.json. Current physical-device playback and the full media checklist remain unconfirmed.",
+  "public_policy_verification": {
+    "date": "2026-10-26",
+    "url": "https://onlybody.app/privacy/",
+    "result": "Public policy reachable; its claims about non-personalization in the iOS player need provider confirmation or correction."
+  },
+  "account_status": "Last recorded: developer account active; both version 1.0 (2) iPhone-only builds uploaded 2026-10-28",
+  "assessment_scope": "Document-based conservative disclosure proposal for both products, not a measured inventory of Google server-side processing. Tracking Yes reflects documented permitted advertising measurement and absence of an applicable exclusion; it is not proof that every playback is tracked.",
+  "app_store_connect_state": {
+    "OnlyBody": {
+      "categories_complete": 5,
+      "published": false,
+      "submitted": false
+    },
+    "OnlyWeights": {
+      "categories_complete": 5,
+      "published": true,
+      "submitted": false
+    }
+  },
+  "store_status_scope": "Reconciled from the last saved local checkpoint and owner publication entry; not rechecked live on 2026-10-31"
+}

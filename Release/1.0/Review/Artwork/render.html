@@ -1,0 +1,31 @@
+<!doctype html><html lang="uk"><meta charset="utf-8"><title>App Store artwork renderer</title>
+<style>@font-face{font-family:DM;src:url(fonts/DMSans-Variable.ttf);font-weight:100 1000}body{background:#171715;color:#eee;font:16px DM,Arial,sans-serif;margin:24px}select,button{font:inherit;padding:10px;margin-right:10px}canvas{display:block;margin-top:20px;width:min(440px,95vw);height:auto}#status{padding:15px 0}</style>
+<h1>Макети App Store</h1><select id="card" aria-label="Картка"></select><button id="save">Експортувати всі PNG</button><div id="status" role="status">Завантаження…</div><canvas id="preview"></canvas>
+<script>
+const state={cards:[],copy:{},checks:[]};
+const select=document.querySelector('#card'),status=document.querySelector('#status');
+const imageCache=new Map();
+function loadImage(url){if(!imageCache.has(url))imageCache.set(url,new Promise((resolve,reject)=>{const i=new Image;i.onload=()=>resolve(i);i.onerror=reject;i.src=url}));return imageCache.get(url)}
+function round(ctx,x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r)}
+function linesFor(ctx,text,max){if(text.includes('\n'))return text.split('\n').flatMap(line=>linesFor(ctx,line,max));const words=text.split(' '),lines=[];let line='';for(const word of words){const next=line?line+' '+word:word;if(ctx.measureText(next).width>max&&line){lines.push(line);line=word}else line=next}if(line)lines.push(line);return lines}
+async function render(card,canvas){
+ canvas.width=card.width;canvas.height=card.height;const c=canvas.getContext('2d',{alpha:false});const w=canvas.width,h=canvas.height;
+ c.fillStyle='#f0ede7';c.fillRect(0,0,w,h);
+ // A single gold loop carries the accent behind the device, keeping the app pixels untouched.
+ c.save();c.translate(w*.50,h*.64);c.rotate((card.index%2?-.55:.48));c.strokeStyle='#e8a23a';c.lineWidth=80;c.beginPath();c.ellipse(0,0,w*.76,h*.23,0,0,Math.PI*2);c.stroke();c.restore();
+ c.textAlign='center';c.textBaseline='alphabetic';c.fillStyle='#171715';c.font=`750 ${43}px DM,Arial,sans-serif`;c.fillText(card.product,w/2,131);
+ const [normal,accent]=state.copy[card.product][card.language][card.index-1];const max=w-150;let size=140,normalLines,accentLines;
+ do{c.font=`850 ${size}px DM,Arial,sans-serif`;normalLines=linesFor(c,normal,max);accentLines=linesFor(c,accent,max);if(normalLines.length+accentLines.length<=3&&[...normalLines,...accentLines].every(line=>c.measureText(line).width<=max))break;size-=2}while(size>100);
+ if([...normalLines,...accentLines].some(line=>c.measureText(line).width>max))throw Error('Headline exceeds width: '+card.file);
+ const lineHeight=size*1.06;let y=310;c.fillStyle='#141412';for(const line of normalLines){c.fillText(line,w/2,y);y+=lineHeight}c.fillStyle='#aa660b';for(const line of accentLines){c.fillText(line,w/2,y);y+=lineHeight}
+ const dw=1020,dx=(w-dw)/2,dy=720,bezel=28,sw=dw-bezel*2,sh=sw*card.height/card.width,dh=sh+bezel*2,r=150;
+ c.save();c.shadowColor='#17171455';c.shadowBlur=48;c.shadowOffsetY=22;const grad=c.createLinearGradient(dx,dy,dx+dw,dy+dh);grad.addColorStop(0,'#71716c');grad.addColorStop(.24,'#141414');grad.addColorStop(.65,'#4d4d47');grad.addColorStop(1,'#181818');c.fillStyle=grad;round(c,dx,dy,dw,dh,r);c.fill();c.restore();c.strokeStyle='#66665f';c.lineWidth=3;round(c,dx,dy,dw,dh,r);c.stroke();
+ const source='../../../'+card.source.replace(/^Release\//,'');const img=await loadImage(source);c.save();round(c,dx+bezel,dy+bezel,sw,sh,122);c.clip();c.drawImage(img,dx+bezel,dy+bezel,sw,sh);c.restore();
+ {c.fillStyle='#030303';round(c,w/2-135,dy+52,270,73,45);c.fill();const lens=c.createRadialGradient(w/2+99,dy+86,1,w/2+99,dy+86,13);lens.addColorStop(0,'#243447');lens.addColorStop(1,'#080b13');c.fillStyle=lens;c.beginPath();c.arc(w/2+99,dy+86,12,0,Math.PI*2);c.fill()}
+ const report={file:card.file,lines:normalLines.length+accentLines.length,fontSize:size,headlineBottom:y-lineHeight+size*.22,deviceTop:dy,imageLoaded:img.naturalWidth>0};if(report.headlineBottom>dy-40)throw Error('Headline overlaps phone: '+card.file);return report;
+}
+async function preview(){status.textContent='Візуалізація…';const check=await render(state.cards[Number(select.value)],document.querySelector('#preview'));status.textContent='Готово: '+check.file}
+select.onchange=preview;
+document.querySelector('#save').onclick=async()=>{const button=document.querySelector('#save');button.disabled=true;state.checks=[];try{for(const [i,card] of state.cards.entries()){status.textContent=`Експорт ${i+1} / ${state.cards.length}: ${card.file}`;const canvas=document.querySelector('#preview');state.checks.push(await render(card,canvas));const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));const result=await fetch('/export/'+card.file,{method:'POST',body:blob});if(!result.ok)throw Error(await result.text())}status.textContent=`Готово: експортовано ${state.cards.length} PNG`;document.body.dataset.exported=state.cards.length}catch(e){status.textContent='Помилка: '+e.message}finally{button.disabled=false}};
+(async()=>{await document.fonts.load('850 140px DM');state.copy=await(await fetch('../screenshot-copy.json')).json();state.cards=await(await fetch('manifest.json')).json();for(const [i,card] of state.cards.entries()){const o=new Option(`${card.product} · ${card.language} · ${card.device} · ${card.index}`,i);select.append(o)}await preview()})();
+</script></html>

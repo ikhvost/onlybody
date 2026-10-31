@@ -1,0 +1,14 @@
+6. Third-party material: YouTube exercise demonstrations
+
+OnlyWeights is a general fitness workout planner and training log. Optional third-party exercise demonstrations are displayed using the official YouTube IFrame Player in WKWebView. The app does not download or rehost the videos, extract video streams, or charge for access to playback. Standard YouTube controls, branding and links remain available, and the source channel is credited.
+
+Our basis for embedding is the "Permissions and Restrictions" section of YouTube's Terms of Service, which permits showing videos through the embeddable YouTube player, subject to the applicable terms and API policies. We do not claim ownership of the videos.
+
+YouTube Terms of Service:
+https://www.youtube.com/t/terms
+
+YouTube embedded-player requirements:
+https://developers.google.com/youtube/terms/required-minimum-functionality
+
+App Privacy Policy: https://onlybody.app/privacy/
+App Terms of Use: https://onlybody.app/terms/

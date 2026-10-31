@@ -1,0 +1,38 @@
+OnlyBody and OnlyWeights: response to Apple's Guideline 2.1 information request
+Prepared 29 October 2026. Preparation only: no physical test or submission is claimed.
+
+RECORD EACH APP SEPARATELY
+
+Use a physical iPhone running the latest publicly released compatible iOS. Install the exact submitted build through TestFlight, or explicitly identify a replacement build if fixes are required. Use ordinary app data, not simulator footage or Debug screenshot/player fixtures. Note the model, exact iOS, app version/build and date. Do not record private notifications or credentials.
+
+Suggested walkthrough (roughly 3-5 minutes if practical; Apple did not specify a duration):
+1. Start screen recording before tapping the app icon, so the recording begins with launching the app.
+2. Show Train. Create a small routine, selecting muscle groups or picking movements manually. Show editable sets, reps, rest and scheduling; save it.
+3. Start the routine. Record sets, show weight entry where appropriate and the rest timer. Finish the small workout normally.
+4. Open Log and show the resulting session and exercise history.
+5. Open Library, search, and inspect an exercise's equipment and muscle diagram.
+6. Show the optional YouTube consent and ATT flow. If permitted on the test device, play an actual demonstration using the official player, with attribution visible. Do not imply a fixture or external browser playback is embedded playback. If permission was already decided, describe that state accurately; do not remove meaningful steps from the recording.
+7. Show Settings, privacy/terms links and withdrawing video consent. If practical, demonstrate that training remains usable without video or network access. A supplemental clip can show the permission-denied/external-link path.
+8. Relaunch and show that the saved routine and history persist.
+
+Do not add registration, account deletion, purchases or moderation screens: neither app has those flows. Private routines are user-created local records; explain that there is no publishing or social content.
+
+PHYSICAL QA BEFORE REPLY
+
+Check create/edit/save, completed and early-finished sessions, history after relaunch, navigation, rest-timer background/foreground behavior, offline planning/logging, video permissions allowed/denied, real video playback and recovery, reminders, and live policy links. Record only results actually observed. Earlier automated validation and the historical owner-reported iPhone check do not prove current submitted-build QA. If a defect is found, fix it, validate and record the corrected build.
+
+CONTENT EVIDENCE FOR ITEM 6
+
+Follow Scripts/ExerciseMedia/CHECKLIST.md. Keep per-video evidence in the local gitignored Scripts/ExerciseMedia/Reviews/<date>/ archive; do not force-add it. Select a reviewer-readable evidence package for the corresponding app: video register, URLs/channels, exact review scope, actual Share > Embed evidence, playback results, relevant dated official terms/policies, and any additional permissions actually obtained. Distinguish embed availability from proof of uploader rights. Do not claim Standard YouTube License means Creative Commons, or that an embed button establishes complete rights clearance. Additional creator permission is not automatically required solely because the license is Standard. Current repository records mark the media reviews partial; close gaps or describe them accurately. An explanatory paragraph alone is not the requested supporting evidence and does not guarantee Apple's acceptance.
+
+SEND IN APP STORE CONNECT
+
+Replace every bracketed placeholder in the app's draft, verify it against the submitted build, and remove drafting instructions. Attach the corresponding physical recording and supporting documents in that app's App Review conversation. If using a recording link, ensure reviewers can open it without requesting access. Paste the same six answers and persistent recording/evidence references into App Review Information > Notes for that app. Reply separately for both apps. No response has been sent or App Store Connect field changed by this preparation.
+
+The official reply UI documentation shows a 4,000-character indicator. Keep the completed response within the actual field limit; put detailed evidence in an attachment if needed. These drafts require final editing after evidence is supplied.
+
+Sources checked 29 October 2026:
+https://developer.apple.com/help/app-store-connect/manage-submissions-to-app-review/reply-to-app-review-messages/
+https://developer.apple.com/app-store/review/guidelines/ (2.1 and 5.2)
+https://www.youtube.com/t/terms
+https://developers.google.com/youtube/terms/developer-policies

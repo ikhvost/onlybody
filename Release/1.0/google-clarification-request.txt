@@ -1,0 +1,13 @@
+DRAFT ONLY — NOT SENT
+
+Subject: App Store privacy disclosures for consent-gated YouTube privacy-enhanced iOS embeds
+
+We are preparing two iOS fitness apps with the official YouTube IFrame Player API in WKWebView. Both use youtube-nocookie.com, autoplay=0, standard controls, the required app-level Referer/origin, and WKWebsiteDataStore.nonPersistent(). No YouTube resources load until the user opts in. Users can withdraw permission in Settings. Activated player links open outside the embedded view. We do not supply app user IDs, IDFA or workout data, and do not integrate Google sign-in or advertising SDKs.
+
+Please clarify for this configuration:
+1. Which technical, identifier, interaction, diagnostic, location and advertising data are retained beyond servicing the request, including before Play and after playback starts?
+2. What are the purposes of each retained category, and which identifiers can link it to a user, device or account?
+3. Does any advertising measurement combine this app's data with data from other companies, even for non-personalized ads? How is consent/ATT denial supported without suppressing required player context or ads?
+4. Which published documentation describes retention and these data uses specifically for iOS WKWebView embeds using youtube-nocookie.com? Your embed guidance says privacy-enhanced mode is available only on websites: do its viewing and non-personalized advertising assurances apply to this iOS WebView configuration?
+
+We are seeking technical facts for Apple's App Privacy and ATT definitions, not a guarantee of App Review approval.

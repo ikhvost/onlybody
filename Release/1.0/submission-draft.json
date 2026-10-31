@@ -1,0 +1,38 @@
+{
+  "status": "BUILD_2_SELECTED_VALIDATED_DECLARATIONS_PENDING",
+  "products": [
+    "OnlyBody",
+    "OnlyWeights"
+  ],
+  "devices": [
+    "iPhone"
+  ],
+  "age_rating_questionnaire": {
+    "advertising": true,
+    "health_or_wellness_topics": true,
+    "medical_or_treatment_advice": false,
+    "messaging_chat": false,
+    "user_uploads_or_posts": false,
+    "parental_controls": false,
+    "age_assurance": false,
+    "gambling": false,
+    "contests": false,
+    "unrestricted_in_app_web_access": "Review final player navigation; native app has no browser/address bar, links open externally",
+    "third_party_content": "Curated YouTube exercise demonstrations; video audit remains partial",
+    "final_age_rating": "Assigned by Apple after complete questionnaire; do not hardcode"
+  },
+  "encryption_assessment": {
+    "uses_only_os_encryption": "Source inspection: WebKit/HTTPS; no custom crypto or third-party encryption libraries found",
+    "non_exempt_encryption": "No — ITSAppUsesNonExemptEncryption=false added to shared Info.plist. Uses OS-provided networking encryption only; reassess if dependencies or crypto features change.",
+    "source": "https://developer.apple.com/documentation/Security/complying-with-encryption-export-regulations"
+  },
+  "owner_inputs_needed": [
+    "Content Rights declaration for both products",
+    "App Privacy publication for OnlyBody"
+  ],
+  "submission": "Last recorded: both 1.0 (2) builds uploaded and selected. Automated tests, Release builds, bundle checks and seed generation passed after test-only fixes and targeted retry. All five localized privacy URLs were saved per app. The latest local publication entry records OnlyWeights App Privacy as published by the owner and OnlyBody as unpublished. Content Rights remained unset for both products; neither app was recorded as submitted. This is a local checkpoint, not a live verification of release or approval.",
+  "store_status_scope": "Reconciled from the last saved local checkpoint and owner publication entry; not rechecked live on 2026-10-31",
+  "distribution_intent": "All available countries and regions; the 2026-10-28 local audit records 175 regions for each product",
+  "pricing": "Free; recorded in the 2026-10-28 local audit",
+  "release_mode": "Automatic after approval; recorded in the 2026-10-28 local audit"
+}

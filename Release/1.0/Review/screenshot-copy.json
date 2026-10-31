@@ -1,0 +1,266 @@
+{
+  "OnlyBody": {
+    "en": [
+      [
+        "Bodyweight training.",
+        "Your way."
+      ],
+      [
+        "Your exercises.",
+        "Your plan."
+      ],
+      [
+        "Every set.",
+        "Every rep."
+      ],
+      [
+        "Consistency",
+        "you can see."
+      ],
+      [
+        "Find your",
+        "next exercise."
+      ],
+      [
+        "Know the muscles",
+        "you train."
+      ]
+    ],
+    "uk": [
+      [
+        "Тренування\nз вагою тіла.",
+        "По-твоєму."
+      ],
+      [
+        "Твої вправи.",
+        "Твій план."
+      ],
+      [
+        "Кожен підхід.",
+        "Кожен повтор."
+      ],
+      [
+        "Регулярність",
+        "видно."
+      ],
+      [
+        "Знайди свою",
+        "наступну вправу."
+      ],
+      [
+        "Знай, які м’язи",
+        "працюють."
+      ]
+    ],
+    "pl": [
+      [
+        "Trening z masą ciała.",
+        "Po Twojemu."
+      ],
+      [
+        "Twoje ćwiczenia.",
+        "Twój plan."
+      ],
+      [
+        "Każda seria.",
+        "Każde powtórzenie."
+      ],
+      [
+        "Regularność,",
+        "którą widać."
+      ],
+      [
+        "Znajdź swoje",
+        "kolejne ćwiczenie."
+      ],
+      [
+        "Poznaj mięśnie,",
+        "które ćwiczysz."
+      ]
+    ],
+    "de": [
+      [
+        "Bodyweight-Training.",
+        "Auf deine Art."
+      ],
+      [
+        "Deine Übungen.",
+        "Dein Plan."
+      ],
+      [
+        "Jeder Satz.",
+        "Jede Wiederholung."
+      ],
+      [
+        "Dranbleiben",
+        "wird sichtbar."
+      ],
+      [
+        "Finde deine",
+        "nächste Übung."
+      ],
+      [
+        "Wisse, welche",
+        "Muskeln du trainierst."
+      ]
+    ],
+    "fr": [
+      [
+        "Au poids du corps.",
+        "À votre rythme."
+      ],
+      [
+        "Vos exercices.",
+        "Votre programme."
+      ],
+      [
+        "Chaque série.",
+        "Chaque répétition."
+      ],
+      [
+        "La régularité",
+        "se voit."
+      ],
+      [
+        "Trouvez votre",
+        "prochain exercice."
+      ],
+      [
+        "Découvrez les muscles",
+        "que vous travaillez."
+      ]
+    ]
+  },
+  "OnlyWeights": {
+    "en": [
+      [
+        "Your gym training.",
+        "All planned."
+      ],
+      [
+        "Build your",
+        "strength routine."
+      ],
+      [
+        "Sets. Reps.",
+        "Weights."
+      ],
+      [
+        "Consistency",
+        "you can see."
+      ],
+      [
+        "Find your",
+        "next exercise."
+      ],
+      [
+        "Know the muscles",
+        "you train."
+      ]
+    ],
+    "uk": [
+      [
+        "Тренування в залі.",
+        "Усе за планом."
+      ],
+      [
+        "Створи свій",
+        "силовий план."
+      ],
+      [
+        "Підходи. Повтори.",
+        "Робоча вага."
+      ],
+      [
+        "Регулярність",
+        "видно."
+      ],
+      [
+        "Знайди свою",
+        "наступну вправу."
+      ],
+      [
+        "Знай, які м’язи",
+        "працюють."
+      ]
+    ],
+    "pl": [
+      [
+        "Twój trening na siłowni.",
+        "Gotowy plan."
+      ],
+      [
+        "Zbuduj swój",
+        "plan siłowy."
+      ],
+      [
+        "Serie. Powtórzenia.",
+        "Ciężary."
+      ],
+      [
+        "Regularność,",
+        "którą widać."
+      ],
+      [
+        "Znajdź swoje",
+        "kolejne ćwiczenie."
+      ],
+      [
+        "Poznaj mięśnie,",
+        "które ćwiczysz."
+      ]
+    ],
+    "de": [
+      [
+        "Dein Training im Gym.",
+        "Alles geplant."
+      ],
+      [
+        "Erstelle deinen",
+        "Krafttrainingsplan."
+      ],
+      [
+        "Sätze. Wiederholungen.",
+        "Gewichte."
+      ],
+      [
+        "Dranbleiben",
+        "wird sichtbar."
+      ],
+      [
+        "Finde deine",
+        "nächste Übung."
+      ],
+      [
+        "Wisse, welche",
+        "Muskeln du trainierst."
+      ]
+    ],
+    "fr": [
+      [
+        "Vos séances en salle.",
+        "Tout est prévu."
+      ],
+      [
+        "Créez votre",
+        "programme de force."
+      ],
+      [
+        "Séries. Répétitions.",
+        "Charges."
+      ],
+      [
+        "La régularité",
+        "se voit."
+      ],
+      [
+        "Trouvez votre",
+        "prochain exercice."
+      ],
+      [
+        "Découvrez les muscles",
+        "que vous travaillez."
+      ]
+    ]
+  }
+}
