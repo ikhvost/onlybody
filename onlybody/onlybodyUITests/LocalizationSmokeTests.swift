@@ -29,9 +29,11 @@ final class LocalizationSmokeTests: XCTestCase {
             let name = bodyName
             #endif
             search.tap()
+            XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 5))
             search.typeText(name)
+            XCTAssertEqual(search.value as? String, name, "The keyboard must enter the full localized query")
             let row = app.buttons["library.exercise.\(JourneyProduct.exercise)"]
-            XCTAssertTrue(row.waitForExistence(timeout: 10), "Translated search failed: \(language)")
+            XCTAssertTrue(row.waitForExistence(timeout: 10), "Translated search failed: \(language), input: \(search.value ?? "nil")\n\(app.debugDescription)")
             capture("\(language)-library")
             row.tap()
             XCTAssertTrue(app.staticTexts[name].waitForExistence(timeout: 10))

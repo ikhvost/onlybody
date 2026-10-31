@@ -13,7 +13,7 @@ struct ExerciseCatalogControls: View {
         VStack(alignment: .leading, spacing: Theme.space12) {
             HStack(spacing: Theme.space12) {
                 SearchIcon(color: Theme.text2)
-                TextField(String(localized: .uiSearch), text: $search)
+                TextField(String(localized: .uiSearch), text: $search, prompt: Text(.uiSearch).foregroundStyle(Theme.text3))
                     .font(Theme.fontSans(Theme.typeBody)).foregroundStyle(Theme.text)
                     .textInputAutocapitalization(.never).autocorrectionDisabled()
                     .accessibilityIdentifier(searchIdentifier)

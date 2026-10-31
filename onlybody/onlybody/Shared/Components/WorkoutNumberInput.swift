@@ -25,7 +25,7 @@ struct WorkoutNumberInput: View {
                 .disabled(!canDecrease || hasError).buttonStyle(PressableButtonStyle(animates: false))
                 .accessibilityLabel(String(localized: .uiDecrease(title)))
                 .accessibilityIdentifier("stepper.\(identifier).decrease")
-                TextField(title, text: $text)
+                TextField(title, text: $text, prompt: Text(title).foregroundStyle(Theme.text3))
                     .keyboardType(isDecimal ? .decimalPad : .numberPad).focused($focused)
                     .onSubmit { if !hasError { focused = false } }
                     .font(Theme.fontMono(Theme.typeNumber, .medium)).multilineTextAlignment(.center)

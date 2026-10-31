@@ -9,7 +9,8 @@ struct BuilderName: View {
             MonoLabel(text: String(localized: .uiSessionName), size: Theme.typeMeta, color: Theme.text2, tracking: 0.5)
                 .padding(.horizontal, Theme.horizontalPadding)
 
-            TextField(String(localized: .uiEGFullBody), text: $viewModel.name)
+            TextField(String(localized: .uiEGFullBody), text: $viewModel.name,
+                      prompt: Text(.uiEGFullBody).foregroundStyle(Theme.text3))
                 .accessibilityIdentifier("builder.name")
                 .focused($isFocused).submitLabel(.done)
                 .onSubmit { isFocused = false }
