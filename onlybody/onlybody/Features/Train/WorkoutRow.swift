@@ -22,7 +22,7 @@ struct WorkoutRow: View {
                     ChevronIcon(color: Theme.text2)
                 }.frame(minHeight: Theme.touchSize).contentShape(.rect)
             }
-            .buttonStyle(.plain).accessibilityIdentifier("workout.overview.\(workout.name)")
+            .buttonStyle(PressableButtonStyle(animates: false)).accessibilityIdentifier("workout.overview.\(workout.name)")
             HStack(spacing: Theme.space12) {
                 GhostButton(title: String(localized: .uiDesignEdit), action: onEditTap)
                     .accessibilityLabel(String(localized: .uiEditWorkout(workout.name)))

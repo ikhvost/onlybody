@@ -46,6 +46,6 @@ struct ChipView: View {
                 .clipShape(.rect(cornerRadius: cornerRadius))
         }
         .accessibilityAddTraits(isActive ? .isSelected : [])
-        .buttonStyle(.plain)
+        .buttonStyle(PressableButtonStyle(animates: false))
     }
 }

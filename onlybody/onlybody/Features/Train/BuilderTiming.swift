@@ -36,7 +36,7 @@ struct BuilderTiming: View {
                     : String(localized: .uiSetRestSeconds(viewModel.restSeconds)))
                 .accessibilityIdentifier("builder.rest")
             }
-            .buttonStyle(.plain)
+            .buttonStyle(PressableButtonStyle(animates: false))
             .disabled(viewModel.isSaving)
             Text(viewModel.mode == .smart
                  ? String(localized: .uiSmartSelectionUsesThisTimeBudgetChangingSetRestApplies)

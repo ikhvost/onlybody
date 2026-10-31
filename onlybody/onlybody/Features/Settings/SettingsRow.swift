@@ -29,7 +29,7 @@ struct SettingsRow: View {
             .padding(Theme.space16)
             .contentShape(.rect)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(PressableButtonStyle(animates: false))
         .disabled(destination == nil)
         .accessibilityLabel(title)
         .accessibilityValue(destination == nil ? String(localized: .uiComingSoon) : destinationDescription)

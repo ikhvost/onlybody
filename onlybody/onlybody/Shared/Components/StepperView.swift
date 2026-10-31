@@ -66,7 +66,7 @@ struct StepperView: View {
                 .accessibilityLabel(String(localized: .uiDecrease(label)))
                 .accessibilityIdentifier("stepper.\(identifier).decrease")
                 .disabled(!canDecrement)
-                .buttonStyle(.plain)
+                .buttonStyle(PressableButtonStyle(animates: false))
 
                 Text(valueText)
                     .accessibilityIdentifier("stepper.\(identifier).value")
@@ -86,7 +86,7 @@ struct StepperView: View {
                 }
                 .accessibilityLabel(String(localized: .uiIncrease(label)))
                 .accessibilityIdentifier("stepper.\(identifier).increase")
-                .buttonStyle(.plain)
+                .buttonStyle(PressableButtonStyle(animates: false))
             }
         }
         .frame(maxWidth: .infinity)

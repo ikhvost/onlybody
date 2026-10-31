@@ -22,11 +22,12 @@ struct WorkoutNumberInput: View {
                         .frame(width: Theme.stepSize, height: Theme.stepSize)
                         .background(Theme.surface2, in: .rect(cornerRadius: Theme.buttonRadius))
                 }
-                .disabled(!canDecrease || hasError).buttonStyle(.plain)
+                .disabled(!canDecrease || hasError).buttonStyle(PressableButtonStyle(animates: false))
                 .accessibilityLabel(String(localized: .uiDecrease(title)))
                 .accessibilityIdentifier("stepper.\(identifier).decrease")
                 TextField(title, text: $text)
                     .keyboardType(isDecimal ? .decimalPad : .numberPad).focused($focused)
+                    .onSubmit { if !hasError { focused = false } }
                     .font(Theme.fontMono(Theme.typeNumber, .medium)).multilineTextAlignment(.center)
                     .frame(minHeight: Theme.stepSize)
                     .overlay(alignment: .bottom) {
@@ -39,7 +40,7 @@ struct WorkoutNumberInput: View {
                         .frame(width: Theme.stepSize, height: Theme.stepSize)
                         .background(Theme.surface2, in: .rect(cornerRadius: Theme.buttonRadius))
                 }
-                .disabled(hasError).buttonStyle(.plain)
+                .disabled(hasError).buttonStyle(PressableButtonStyle(animates: false))
                 .accessibilityLabel(String(localized: .uiIncrease(title)))
                 .accessibilityIdentifier("stepper.\(identifier).increase")
             }
@@ -52,13 +53,5 @@ struct WorkoutNumberInput: View {
         .background(Theme.surface, in: .rect(cornerRadius: Theme.cornerRadius))
         .onChange(of: editingID) { _, _ in focused = false }
         .onDisappear { focused = false }
-        .toolbar {
-            if focused {
-                ToolbarItemGroup(placement: .keyboard) {
-                    Spacer()
-                    Button(String(localized: .uiDone)) { focused = false }.disabled(hasError)
-                }
-            }
-        }
     }
 }

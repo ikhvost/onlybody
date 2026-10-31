@@ -18,7 +18,7 @@ struct SettingsView: View {
                             .frame(width: Theme.space44, height: Theme.space44)
                             .contentShape(.rect)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(PressableButtonStyle(animates: false))
                     .accessibilityLabel(String(localized: .uiBackToTraining))
                     .accessibilityIdentifier("settings.back")
                 } trailing: {

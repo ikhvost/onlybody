@@ -14,7 +14,8 @@ struct ActiveWorkoutProgressBar: View {
                 .fill(Theme.accent)
                 .frame(height: 2)
                 .containerRelativeFrame(.horizontal) { width, _ in
-                    width * CGFloat(currentIndex) / CGFloat(max(1, totalCount))
+                    guard width.isFinite, width > 0 else { return 0 }
+                    return width * CGFloat(max(0, min(currentIndex, totalCount))) / CGFloat(max(1, totalCount))
                 }
                 .animation(.easeInOut(duration: 0.4), value: currentIndex)
         }

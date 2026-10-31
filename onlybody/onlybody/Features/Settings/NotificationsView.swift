@@ -15,7 +15,7 @@ struct NotificationsView: View {
                             .frame(width: Theme.space44, height: Theme.space44)
                             .contentShape(.rect)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(PressableButtonStyle(animates: false))
                     .accessibilityLabel(String(localized: .uiBackToSettings))
                     .accessibilityIdentifier("notifications.back")
                 } trailing: {

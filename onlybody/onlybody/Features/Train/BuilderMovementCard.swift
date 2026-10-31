@@ -19,7 +19,7 @@ struct BuilderMovementCard: View {
             .frame(minHeight: Theme.touchSize).padding(Theme.cardInset)
             .background(Theme.surface, in: .rect(cornerRadius: Theme.cornerRadius))
         }
-        .buttonStyle(.plain).accessibilityIdentifier("builder.movement.\(movement.id)")
+        .buttonStyle(PressableButtonStyle(animates: false)).accessibilityIdentifier("builder.movement.\(movement.id)")
         .sheet(isPresented: $showingEditor) {
             BuilderMovementEditor(viewModel: viewModel, movementID: movement.id)
                 .presentationDetents([.large]).presentationDragIndicator(.visible)

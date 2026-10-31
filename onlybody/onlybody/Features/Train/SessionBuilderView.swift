@@ -24,8 +24,10 @@ struct SessionBuilderView: View {
                         requestBack()
                     } label: {
                         ChevronIcon(isBack: true, color: Theme.text, size: Theme.type18, inset: 8)
+                            .frame(width: Theme.touchSize, height: Theme.touchSize)
+                            .contentShape(.rect)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(PressableButtonStyle(animates: false))
                     .accessibilityLabel(String(localized: .uiBack))
                     .accessibilityIdentifier("builder.back")
                     .disabled(viewModel.isSaving)

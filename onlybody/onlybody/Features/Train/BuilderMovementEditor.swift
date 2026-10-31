@@ -20,7 +20,7 @@ struct BuilderMovementEditor: View {
                 }.padding(Theme.horizontalPadding)
             }
         }
-        .scrollIndicators(.hidden)
+        .scrollIndicators(.hidden).scrollDismissesKeyboard(.interactively)
         .safeAreaInset(edge: .bottom) {
             PrimaryButton(title: String(localized: .uiDone), action: { dismiss() }, disabled: viewModel.hasInvalidNumbers)
                 .accessibilityIdentifier("builder.movement.done").padding(Theme.cardInset).background(Theme.bg)

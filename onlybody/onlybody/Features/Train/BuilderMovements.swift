@@ -22,10 +22,12 @@ struct BuilderMovements: View {
                         }
                         .padding(.horizontal, Theme.space12)
                         .padding(.vertical, Theme.space5)
+                        .frame(minHeight: Theme.touchSize)
+                        .contentShape(.rect)
                         .background(Theme.accent)
                         .clipShape(.rect(cornerRadius: Theme.chipCornerRadius))
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(PressableButtonStyle(animates: false))
                     .accessibilityIdentifier("builder.add")
                     .frame(minHeight: Theme.touchSize)
                     }

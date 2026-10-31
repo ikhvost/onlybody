@@ -14,13 +14,15 @@ struct ExerciseHistoryView: View {
                     } label: {
                         HStack(spacing: Theme.space4) {
                             ChevronIcon(isBack: true, color: Theme.accent, size: Theme.type16, inset: 8)
+                                .frame(width: Theme.touchSize, height: Theme.touchSize)
+                                .contentShape(.rect)
                             Text(.uiBack)
                                 .font(Theme.fontSans(Theme.type15, .semibold))
                                 .foregroundStyle(Theme.accent)
                         }
                         .frame(minHeight: Theme.space44)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(PressableButtonStyle(animates: false))
                     .accessibilityLabel(String(localized: .uiBackToWorkout))
                     .accessibilityIdentifier("exerciseHistory.back")
                 }

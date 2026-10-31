@@ -18,7 +18,7 @@ struct WorkoutOverviewExerciseRow: View {
             .frame(maxWidth: .infinity, minHeight: Theme.touchSize, alignment: .leading)
             .padding(Theme.cardInset).background(Theme.surface, in: .rect(cornerRadius: Theme.cornerRadius))
         }
-        .buttonStyle(.plain).disabled(item.exercise == nil)
+        .buttonStyle(PressableButtonStyle(animates: false)).disabled(item.exercise == nil)
         .accessibilityIdentifier("overview.exercise.\(item.id)")
     }
 }

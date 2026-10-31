@@ -28,7 +28,7 @@ struct LibraryExerciseRow: View {
             .padding(.vertical, Theme.cardInset)
             .contentShape(.rect)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(PressableButtonStyle(animates: false))
         .accessibilityIdentifier("library.exercise.\(exercise.name)")
     }
 }

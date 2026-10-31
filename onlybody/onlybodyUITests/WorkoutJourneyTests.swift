@@ -58,11 +58,17 @@ final class WorkoutJourneyTests: XCTestCase {
         createWorkout()
         tap("workout.edit.E2E Workout")
         tap("stepper.Reps.increase")
+        let reps = app.textFields["stepper.Reps.value"]
+        reps.coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.5)).tap()
+        reps.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: 2))
+        XCTAssertFalse(app.buttons["builder.movement.done"].isEnabled)
+        reps.typeText("130")
+        XCTAssertTrue(app.buttons["builder.movement.done"].isEnabled)
         tap("builder.save")
         app.terminate()
         app.launch()
         tap("workout.edit.E2E Workout")
-        XCTAssertTrue(app.staticTexts["Sets: 1 · Reps: 13 · Rest: 45 sec"].exists)
+        XCTAssertTrue(app.staticTexts["Sets: 1 · Reps: 130 · Rest: 45 sec"].exists)
         tap("builder.add")
         selectExercise()
         tap("builder.save")
@@ -116,13 +122,10 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertEqual(app.buttons.matching(identifier: "session.row").count, 1)
         tap("tab.train")
         tap("workout.edit.E2E Workout")
-        let delete = app.buttons["builder.delete"]
-        for _ in 0..<6 where !delete.isHittable { app.swipeUp() }
-        XCTAssertTrue(delete.isHittable)
-        delete.tap()
+        tap("builder.delete")
         tap("Cancel")
         XCTAssertTrue(app.buttons["builder.save"].exists)
-        delete.tap()
+        tap("builder.delete")
         app.alerts.buttons["Delete Workout"].tap()
         XCTAssertTrue(app.buttons["workout.create"].waitForExistence(timeout: 10))
         XCTAssertFalse(app.buttons["workout.start.E2E Workout"].exists)
@@ -513,8 +516,14 @@ final class WorkoutJourneyTests: XCTestCase {
         if ["builder.duration", "builder.rest"].contains(identifier) {
             for _ in 0..<6 where !button.exists || !button.isHittable { app.swipeUp() }
         }
-        XCTAssertTrue(button.exists || button.waitForExistence(timeout: 10), "Missing button: \(identifier)")
-        for _ in 0..<6 where !button.isHittable { app.swipeUp() }
+        XCTAssertTrue(button.exists || button.waitForExistence(timeout: 10), "Missing button: \(identifier)\n\(app.debugDescription)")
+        for _ in 0..<6 {
+            let save = app.buttons["builder.save"]
+            let belowEditorFooter = identifier.hasPrefix("builder.") && identifier != "builder.save"
+                && !identifier.hasPrefix("builder.movement.") && save.exists && button.frame.maxY > save.frame.minY
+            if button.isHittable && !belowEditorFooter { break }
+            app.swipeUp()
+        }
         XCTAssertTrue(button.isHittable, "Not reachable: \(identifier)")
         button.tap()
     }
