@@ -32,7 +32,11 @@ final class LocalizationSmokeTests: XCTestCase {
             XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 5))
             search.typeText(name)
             XCTAssertEqual(search.value as? String, name, "The keyboard must enter the full localized query")
+            search.typeText("\n")
+            XCTAssertEqual(XCTWaiter.wait(for: [XCTNSPredicateExpectation(predicate: NSPredicate(format: "exists == false"),
+                                                                        object: app.keyboards.firstMatch)], timeout: 5), .completed)
             let row = app.buttons["library.exercise.\(JourneyProduct.exercise)"]
+            for _ in 0..<5 where !row.exists || !row.isHittable { app.swipeUp() }
             XCTAssertTrue(row.waitForExistence(timeout: 10), "Translated search failed: \(language), input: \(search.value ?? "nil")\n\(app.debugDescription)")
             capture("\(language)-library")
             row.tap()
