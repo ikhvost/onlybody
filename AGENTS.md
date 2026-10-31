@@ -98,9 +98,9 @@ Key constants:
 - `Theme.danger`, `Theme.iconDim`
 - `Theme.fontSans(_ size: CGFloat, _ weight: Font.Weight)` — DM Sans
 - `Theme.fontMono(_ size: CGFloat, _ weight: Font.Weight)` — DM Mono
-- `Theme.horizontalPadding` — 22
-- `Theme.cornerRadius` — 4
-- `Theme.chipCornerRadius` — 4
+- `Theme.horizontalPadding` — 20
+- `Theme.cornerRadius` — 16
+- `Theme.chipCornerRadius` — 12
 
 ---
 
