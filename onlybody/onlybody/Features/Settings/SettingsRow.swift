@@ -16,16 +16,16 @@ struct SettingsRow: View {
         } label: {
             HStack(spacing: Theme.space16) {
                 Text(title)
-                    .font(Theme.fontSans(Theme.type14, .medium))
+                    .font(Theme.fontSans(Theme.typeBody, .medium))
                     .foregroundStyle(Theme.text)
                 Spacer(minLength: Theme.space8)
                 if destination != nil {
                     ChevronIcon(color: Theme.text2, size: Theme.type18)
                 } else {
-                    MonoLabel(text: String(localized: .uiSoon), size: Theme.type10, color: Theme.text2, tracking: 0.5)
+                    MonoLabel(text: String(localized: .uiSoon), size: Theme.typeMeta, color: Theme.text2, tracking: 0.5)
                 }
             }
-            .frame(minHeight: Theme.space24)
+            .frame(minHeight: Theme.touchSize)
             .padding(Theme.space16)
             .contentShape(.rect)
         }

@@ -26,5 +26,6 @@ struct ActiveWorkoutRootView: View {
                 }
             }
         }
+        .font(Theme.fontSans(Theme.typeBody))
     }
 }

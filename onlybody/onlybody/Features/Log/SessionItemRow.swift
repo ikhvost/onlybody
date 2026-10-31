@@ -9,14 +9,14 @@ struct SessionItemRow: View {
         VStack(alignment: .leading, spacing: Theme.space0) {
             HStack(alignment: .top) {
                 Text(CatalogLocalization.exercise(item.exerciseName))
-                    .font(Theme.fontSans(Theme.type15, .bold))
+                    .font(Theme.fontSans(Theme.typeCard, .bold))
                     .foregroundStyle(Theme.text)
 
                 Spacer()
 
                 MonoLabel(
                     text: String(localized: .uiTotalReps(item.setReps.reduce(0, +))),
-                    size: Theme.type10,
+                    size: Theme.typeMeta,
                     color: Theme.text3,
                     tracking: 0.3
                 )
@@ -27,7 +27,7 @@ struct SessionItemRow: View {
             ForEach(item.setReps.indices, id: \.self) { setIndex in
                 MonoLabel(
                     text: String(localized: .uiSetReps(setIndex + 1, item.setReps[setIndex])),
-                    size: Theme.type10,
+                    size: Theme.typeMeta,
                     color: Theme.text3,
                     tracking: 0.3
                 )

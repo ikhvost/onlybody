@@ -39,14 +39,24 @@ struct MovementDetailView: View {
 
                         }
 
-                        MovementDemonstrationView(viewModel: viewModel)
-
                         Rectangle()
                             .fill(Theme.border)
                             .frame(height: 1)
 
+                        HStack(spacing: Theme.space8) {
+                            Text(.uiEquipment)
+                                .font(Theme.fontSans(Theme.typeMeta))
+                                .foregroundStyle(Theme.text2)
+
+                            Spacer()
+
+                            Text(viewModel.exercise.equipmentLabel)
+                                .font(Theme.fontMono(Theme.typeMeta, .bold))
+                                .foregroundStyle(Theme.text)
+                        }
+
                         VStack(alignment: .leading, spacing: Theme.space8) {
-                            MonoLabel(text: String(localized: .uiPrimaryMuscles), size: Theme.type11, tracking: 0.8)
+                            MonoLabel(text: String(localized: .uiPrimaryMuscles), size: Theme.typeMeta, tracking: 0.8)
 
                             HStack(spacing: Theme.space8) {
                                 Rectangle()
@@ -61,7 +71,7 @@ struct MovementDetailView: View {
                         }
 
                         VStack(alignment: .leading, spacing: Theme.space8) {
-                            MonoLabel(text: String(localized: .uiSecondary), size: Theme.type11, tracking: 0.8)
+                            MonoLabel(text: String(localized: .uiSecondary), size: Theme.typeMeta, tracking: 0.8)
 
                             HStack(alignment: .top, spacing: Theme.space8) {
                                 Rectangle()
@@ -71,7 +81,7 @@ struct MovementDetailView: View {
                                     .padding(.top, Theme.space4)
 
                                 Text(viewModel.exercise.supportingMuscleLabel)
-                                    .font(Theme.fontSans(Theme.type14))
+                                    .font(Theme.fontSans(Theme.typeMeta))
                                     .foregroundStyle(Theme.text2)
                             }
 
@@ -82,17 +92,7 @@ struct MovementDetailView: View {
                             .fill(Theme.border)
                             .frame(height: 1)
 
-                        HStack(spacing: Theme.space8) {
-                            Text(.uiEquipment)
-                                .font(Theme.fontSans(Theme.type14))
-                                .foregroundStyle(Theme.text2)
-
-                            Spacer()
-
-                            Text(viewModel.exercise.equipmentLabel)
-                                .font(Theme.fontMono(Theme.type14, .bold))
-                                .foregroundStyle(Theme.text)
-                        }
+                        MovementDemonstrationView(viewModel: viewModel)
 
                     }
                     .padding(.horizontal, Theme.horizontalPadding)

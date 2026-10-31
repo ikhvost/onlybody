@@ -8,11 +8,11 @@ struct ExerciseHistoryRow: View {
         VStack(alignment: .leading, spacing: Theme.space12) {
             VStack(alignment: .leading, spacing: Theme.space4) {
                 Text(entry.date.formatted(date: .abbreviated, time: .shortened))
-                    .font(Theme.fontSans(Theme.type15, .bold))
+                    .font(Theme.fontSans(Theme.typeCard, .bold))
                     .foregroundStyle(Theme.text)
                     .accessibilityIdentifier("exerciseHistory.date")
                 Text(entry.workoutName)
-                    .font(Theme.fontSans(Theme.type13))
+                    .font(Theme.fontSans(Theme.typeMeta))
                     .foregroundStyle(Theme.text2)
             }
             ForEach(entry.items) { item in
@@ -31,7 +31,7 @@ struct ExerciseHistoryRow: View {
                         .accessibilityIdentifier("exerciseHistory.set.\(index)")
                     }
                 }
-                .font(Theme.fontMono(Theme.type12))
+                .font(Theme.fontMono(Theme.typeMeta))
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)

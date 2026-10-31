@@ -7,12 +7,12 @@ struct SettingsNotificationsLink: View {
         Button(action: action) {
             HStack(spacing: Theme.space16) {
                 Text(.uiNotifications)
-                    .font(Theme.fontSans(Theme.type14, .medium))
+                    .font(Theme.fontSans(Theme.typeBody, .medium))
                     .foregroundStyle(Theme.text)
                 Spacer()
-                ChevronIcon(color: Theme.text2, size: Theme.type14)
+                ChevronIcon(color: Theme.text2, size: Theme.typeMeta)
             }
-            .frame(minHeight: Theme.space24)
+            .frame(minHeight: Theme.touchSize)
             .padding(Theme.space16)
             .contentShape(.rect)
         }

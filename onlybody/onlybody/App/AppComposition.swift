@@ -12,6 +12,10 @@ struct AppComposition {
     let reminders: WorkoutReminderCoordinator
     var youtubeConsent = YouTubeConsent()
 
+    func overview(workoutID: UUID) -> WorkoutOverviewViewModel {
+        WorkoutOverviewViewModel(workoutID: workoutID, workouts: workouts)
+    }
+
     func train() -> TrainViewModel { TrainViewModel(workouts: workouts, appName: configuration.displayName) }
     func log() -> LogViewModel { LogViewModel(sessions: sessions) }
     func library() -> LibraryViewModel { LibraryViewModel(exercises: exercises) }
@@ -22,9 +26,9 @@ struct AppComposition {
             preferences: preferences, youtubeConsent: youtubeConsent
         )
     }
-    func builder(workout: WorkoutSnapshot?, targets: [String]) -> SessionBuilderViewModel {
+    func builder(workout: WorkoutSnapshot?, targets: [String], workoutID: UUID? = nil) -> SessionBuilderViewModel {
         SessionBuilderViewModel(
-            workouts: workouts, exercises: exercises, workout: workout, targetMuscleGroups: targets,
+            workouts: workouts, exercises: exercises, workout: workout, targetMuscleGroups: targets, workoutID: workoutID,
             generator: SmartWorkoutGenerator(fallbackPolicy: configuration.workoutFallback),
             onScheduleChanged: { await reminders.refresh() }
         )
@@ -39,7 +43,7 @@ struct AppComposition {
         let cue = WorkoutCuePlayer()
         return ActiveWorkoutViewModel(
             workouts: workouts, sessions: sessions, workoutId: workoutID,
-            preferences: preferences,
+            preferences: preferences, alwaysShowsWeight: configuration.alwaysShowsWeight,
             playRestCue: { cue.play() }, stopRestCue: { cue.stop() }
         )
     }

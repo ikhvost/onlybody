@@ -23,6 +23,12 @@ final class LibraryViewModel {
         }
     }
 
+    var displayedExercises: [ExerciseSnapshot] {
+        filteredExercises.sorted { $0.displayName.localizedStandardCompare($1.displayName) == .orderedAscending }
+    }
+
+    func clearFilters() { selectedFilter = "All"; selectedDifficulty = nil; searchText = "" }
+
     var sections: [LibraryDifficultySection] {
         let filtered = filteredExercises
         return ExerciseDifficulty.allCases.compactMap { level in

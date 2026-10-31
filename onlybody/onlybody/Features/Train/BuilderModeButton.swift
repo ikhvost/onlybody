@@ -10,11 +10,12 @@ struct BuilderModeButton: View {
             viewModel.mode = mode
         } label: {
             Text(label)
-                .font(Theme.fontSans(Theme.type14, .semibold))
-                .foregroundStyle(viewModel.mode == mode ? Theme.accentDark : Theme.text2)
+                .font(Theme.fontSans(Theme.typeMeta, .semibold))
+                .foregroundStyle(viewModel.mode == mode ? Theme.accent : Theme.text2)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, Theme.space10)
-                .background(viewModel.mode == mode ? Theme.accent : Theme.surface2)
+                .frame(minHeight: Theme.touchSize)
+                .background(viewModel.mode == mode ? Theme.accentDim : Theme.surface2)
                 .clipShape(.rect(cornerRadius: Theme.cornerRadius))
                 .overlay {
                     RoundedRectangle(cornerRadius: Theme.cornerRadius)
@@ -25,5 +26,6 @@ struct BuilderModeButton: View {
                 }
         }
         .buttonStyle(.plain)
+        .accessibilityAddTraits(viewModel.mode == mode ? .isSelected : [])
     }
 }

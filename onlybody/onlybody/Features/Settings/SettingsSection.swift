@@ -6,7 +6,7 @@ struct SettingsSection<Content: View>: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.space10) {
-            MonoLabel(text: title, size: Theme.type10, color: Theme.text2, tracking: 1.2)
+            MonoLabel(text: title, size: Theme.typeMeta, color: Theme.text2, tracking: 1.2)
                 .accessibilityAddTraits(.isHeader)
 
             VStack(spacing: Theme.space0) {

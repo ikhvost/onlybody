@@ -9,8 +9,9 @@ struct StatCard: View {
         VStack(spacing: Theme.space3) {
             Text(value)
                 .font(Theme.fontMono(Theme.type28, .medium))
-                .foregroundStyle(isAccent ? Theme.accent : Theme.text3)
-            MonoLabel(text: label, size: Theme.type9, color: Theme.text3, tracking: 1.2)
+                .foregroundStyle(isAccent ? Theme.accent : Theme.text)
+            Text(label).font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.text2)
+                .multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
         }
         .accessibilityElement(children: .combine)
         .frame(maxWidth: .infinity)

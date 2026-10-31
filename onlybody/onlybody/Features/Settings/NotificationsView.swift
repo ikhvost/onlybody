@@ -29,27 +29,27 @@ struct NotificationsView: View {
                             NotificationReminderControls(viewModel: viewModel)
                         }
                         Text(.uiOneReminderOnYourScheduledTrainingDaysEvenIfYou)
-                            .font(Theme.fontSans(Theme.type12))
+                            .font(Theme.fontSans(Theme.typeMeta))
                             .foregroundStyle(Theme.text2)
 
                         if viewModel.isPermissionDenied {
                             Text(.uiNotificationsAreDisabledInIosSettingsTurnOnWorkoutReminders)
-                                .font(Theme.fontSans(Theme.type12))
+                                .font(Theme.fontSans(Theme.typeMeta))
                                 .foregroundStyle(Theme.text2)
                         }
                         if viewModel.hasNoScheduledDays {
                             Text(.uiAddTrainingDaysToAWorkoutToReceiveReminders)
-                                .font(Theme.fontSans(Theme.type12))
+                                .font(Theme.fontSans(Theme.typeMeta))
                                 .foregroundStyle(Theme.text2)
                                 .accessibilityIdentifier("notifications.noDays")
                         }
                         if let message = viewModel.errorMessage {
                             VStack(alignment: .leading, spacing: Theme.space12) {
                                 Text(message)
-                                    .font(Theme.fontSans(Theme.type12))
+                                    .font(Theme.fontSans(Theme.typeMeta))
                                     .foregroundStyle(Theme.danger)
                                 Button(String(localized: .uiRetry)) { Task { await viewModel.retry() } }
-                                    .font(Theme.fontSans(Theme.type14, .semibold))
+                                    .font(Theme.fontSans(Theme.typeMeta, .semibold))
                                     .foregroundStyle(Theme.accent)
                                     .accessibilityIdentifier("notifications.retry")
                             }

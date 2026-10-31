@@ -4,37 +4,26 @@ struct RestOverlayView: View {
     let remainingString: String
     let nextExerciseName: String
     let onSkip: () -> Void
+    var setLabel = ""
 
     var body: some View {
-        ZStack {
-            Theme.bg.ignoresSafeArea()
-
-            VStack(spacing: Theme.space0) {
-                MonoLabel(text: String(localized: .uiRecovery), size: Theme.type11, color: Theme.text3, tracking: 3)
-                    .padding(.bottom, Theme.space18)
-
-                Text(remainingString)
-                    .font(Theme.fontMono(Theme.type84, .medium))
-                    .foregroundStyle(Theme.accent)
-                    .tracking(-4)
-                    .lineLimit(1)
-
-                if !nextExerciseName.isEmpty {
-                    MonoLabel(
-                        text: String(localized: .uiNextExercise(nextExerciseName)),
-                        size: Theme.type11,
-                        color: Theme.text3,
-                        tracking: 1.5
-                    )
-                    .padding(.top, Theme.space18)
-                }
-
-                GhostButton(title: String(localized: .uiSkipRest)) {
-                    onSkip()
-                }
-                .accessibilityIdentifier("rest.skip")
-                .padding(.top, Theme.space44)
-            }
+        VStack(spacing: Theme.sectionGap) {
+            Spacer()
+            Text(.uiRecovery).font(Theme.fontSans(Theme.typeHeading, .bold)).foregroundStyle(Theme.text)
+            Text(remainingString).font(Theme.fontMono(Theme.typeTimer, .medium)).foregroundStyle(Theme.accent)
+                .accessibilityIdentifier("rest.timer")
+            VStack(spacing: Theme.space12) {
+                Text(setLabel).font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.text2)
+                Text(nextExerciseName).font(Theme.fontSans(Theme.typeExercise, .bold)).foregroundStyle(Theme.text)
+            }.padding(Theme.cardInset).frame(maxWidth: .infinity)
+                .background(Theme.surface, in: .rect(cornerRadius: Theme.cornerRadius))
+            Spacer()
         }
+        .padding(Theme.horizontalPadding).frame(maxWidth: .infinity, maxHeight: .infinity).background(Theme.bg.ignoresSafeArea())
+        .safeAreaInset(edge: .bottom) {
+            PrimaryButton(title: String(localized: .uiSkipRest), action: onSkip)
+                .accessibilityIdentifier("rest.skip").padding(Theme.cardInset).background(Theme.bg)
+        }
+        .accessibilityAddTraits(.isModal)
     }
 }

@@ -11,19 +11,19 @@ struct BottomNav: View {
                 .frame(height: 1)
 
             HStack(spacing: Theme.space0) {
-                BottomNavButton(isSelected: selectedTab == .train, action: { setTab(.train) }, label: String(localized: .uiTrainUppercase), icon: {
+                BottomNavButton(isSelected: selectedTab == .train, action: { setTab(.train) }, label: String(localized: .uiDesignTrain), icon: {
                     TrainIcon(color: selectedTab == .train ? Theme.accent : Theme.iconDim, size: Theme.type19)
                 })
                 .accessibilityLabel(String(localized: .uiTrainTab))
                 .accessibilityIdentifier("tab.train")
 
-                BottomNavButton(isSelected: selectedTab == .log, action: { setTab(.log) }, label: String(localized: .uiLogUppercase), icon: {
+                BottomNavButton(isSelected: selectedTab == .log, action: { setTab(.log) }, label: String(localized: .uiDesignLog), icon: {
                     LogIcon(color: selectedTab == .log ? Theme.accent : Theme.iconDim, size: Theme.type19)
                 })
                 .accessibilityLabel(String(localized: .uiLogTab))
                 .accessibilityIdentifier("tab.log")
 
-                BottomNavButton(isSelected: selectedTab == .library, action: { setTab(.library) }, label: String(localized: .uiLibraryUppercase), icon: {
+                BottomNavButton(isSelected: selectedTab == .library, action: { setTab(.library) }, label: String(localized: .uiDesignExercises), icon: {
                     LibraryIcon(color: selectedTab == .library ? Theme.accent : Theme.iconDim, size: Theme.type19)
                 })
                 .accessibilityLabel(String(localized: .uiLibraryTab))

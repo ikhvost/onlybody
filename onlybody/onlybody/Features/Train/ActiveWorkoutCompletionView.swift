@@ -2,56 +2,45 @@ import SwiftUI
 
 struct ActiveWorkoutCompletionView: View {
     let elapsedString: String
-    let exerciseCount: Int
+    let completedSets: Int
     let saveState: SessionSaveState
     let onRetry: () -> Void
     let errorMessage: String?
     let onEnd: () -> Void
 
     var body: some View {
-        VStack(spacing: Theme.space0) {
-            Spacer()
-            MonoLabel(text: String(localized: .uiSessionComplete), size: Theme.type11, color: Theme.text3, tracking: 2)
-
-            Text(elapsedString)
-                .font(Theme.fontMono(Theme.type72, .medium))
-                .foregroundStyle(Theme.accent)
-                .tracking(-3)
-                .lineLimit(1)
-                .padding(.top, Theme.space12)
-
-            MonoLabel(
-                text: String(localized: .uiCompletedMovements(exerciseCount)),
-                size: Theme.type12,
-                color: Theme.text2,
-                tracking: 1
-            )
-            .padding(.top, Theme.space10)
-
-            if let error = errorMessage {
-                MonoLabel(
-                    text: error,
-                    size: Theme.type10,
-                    color: Theme.danger,
-                    tracking: 0.4
-                )
-                .padding(.top, Theme.space10)
-            }
-
-            if saveState == .failed {
-                GhostButton(title: String(localized: .uiRetrySave), action: onRetry)
-            }
-
-            PrimaryButton(title: String(localized: .uiClose)) {
-                onEnd()
-            }
-            .accessibilityIdentifier("active.close")
-            .disabled(saveState != .saved)
-            .frame(maxWidth: 200)
-            .padding(.top, Theme.space48)
-
-            Spacer()
+        ScrollView {
+            VStack(spacing: Theme.sectionGap) {
+                Text(.uiSessionComplete).font(Theme.fontSans(Theme.typeHeading, .bold))
+                Text(elapsedString).font(Theme.fontMono(Theme.typeTimer)).foregroundStyle(Theme.accent)
+                Text(.uiDesignCompletedSets).font(Theme.fontSans(Theme.typeBody))
+                Text(completedSets, format: .number).font(Theme.fontMono(Theme.typeNumber))
+                    .accessibilityIdentifier("completion.sets")
+                Text(status).font(Theme.fontSans(Theme.typeBody)).foregroundStyle(saveState == .failed ? Theme.danger : Theme.text2)
+                    .accessibilityIdentifier("completion.status")
+            }.padding(Theme.horizontalPadding)
+        }.scrollIndicators(.hidden)
+        .safeAreaInset(edge: .bottom) {
+            VStack(spacing: Theme.space12) {
+                if saveState == .failed {
+                    PrimaryButton(title: String(localized: .uiRetrySave), action: onRetry)
+                        .accessibilityIdentifier("completion.retry")
+                } else {
+                    PrimaryButton(title: String(localized: .uiClose), action: onEnd,
+                                  disabled: saveState != .saved && saveState != .noCompletedSets)
+                        .accessibilityIdentifier("active.close")
+                }
+            }.padding(Theme.cardInset).background(Theme.bg)
         }
-        .padding(.horizontal, Theme.horizontalPadding)
+        .foregroundStyle(Theme.text).background(Theme.bg)
+    }
+
+    private var status: String {
+        switch saveState {
+        case .saved: String(localized: .uiDesignSaved)
+        case .failed: errorMessage ?? String(localized: .uiCouldNotSaveSession)
+        case .noCompletedSets: String(localized: .uiDesignNoSets)
+        case .idle, .saving: String(localized: .uiDesignSaving)
+        }
     }
 }

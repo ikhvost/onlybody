@@ -9,9 +9,9 @@ struct TrainHeader: View {
     var body: some View {
         HStack(alignment: .bottom, spacing: Theme.space8) {
             VStack(alignment: .leading, spacing: Theme.space3) {
-                MonoLabel(text: dateDisplay, size: Theme.type10, color: Theme.text3, tracking: 1.2)
-                Text(appName)
-                    .font(Theme.fontSans(Theme.type28, .heavy))
+                MonoLabel(text: appName + " · " + dateDisplay, size: Theme.typeMeta, color: Theme.text3, tracking: 1.2)
+                Text(.uiDesignTrain)
+                    .font(Theme.fontSans(Theme.typeHeading, .heavy))
                     .tracking(-1)
                     .foregroundStyle(Theme.text)
             }

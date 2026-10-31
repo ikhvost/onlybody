@@ -66,10 +66,10 @@ struct SettingsView: View {
 
                         VStack(spacing: Theme.space6) {
                             Text(viewModel.appName)
-                                .font(Theme.fontSans(Theme.type14, .bold))
+                                .font(Theme.fontSans(Theme.typeMeta, .bold))
                                 .foregroundStyle(Theme.text2)
                             Text(String(localized: .uiVersion(viewModel.version)))
-                                .font(Theme.fontMono(Theme.type10))
+                                .font(Theme.fontMono(Theme.typeMeta))
                                 .foregroundStyle(Theme.text3)
                         }
                         .frame(maxWidth: .infinity)

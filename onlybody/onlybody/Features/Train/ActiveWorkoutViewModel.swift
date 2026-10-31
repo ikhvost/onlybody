@@ -10,6 +10,37 @@ final class ActiveWorkoutViewModel {
 
     let workoutId: UUID
 
+    private let alwaysShowsWeight: Bool
+    private var revealedWeightExercises: Set<Int> = []
+    var repsInput: String?
+    var weightInput: String?
+    var invalidNumbers: Set<String> = []
+    var hasInvalidNumbers: Bool { !invalidNumbers.isEmpty }
+    var showsWeight: Bool { alwaysShowsWeight || currentWeight > 0 || revealedWeightExercises.contains(currentExerciseIndex) }
+    var completedSetCount: Int { completedSets.count }
+    var repsText: String { repsInput ?? String(currentDisplayReps) }
+    var weightText: String { weightInput ?? displayedWeight.formatted(.number.precision(.fractionLength(0...2)).grouping(.never)) }
+    var canClose: Bool { saveState == .saved || saveState == .noCompletedSets }
+
+    func revealWeight() { revealedWeightExercises.insert(currentExerciseIndex) }
+
+    func enterReps(_ text: String) {
+        repsInput = text
+        guard let value = WorkoutNumberParser().integer(text, minimum: 0) else { invalidNumbers.insert("reps"); return }
+        invalidNumbers.remove("reps")
+        actualReps[currentKey] = value
+    }
+
+    func enterWeight(_ text: String, locale: Locale = .current) {
+        weightInput = text
+        guard let value = WorkoutNumberParser().weight(text, locale: locale) else { invalidNumbers.insert("weight"); return }
+        invalidNumbers.remove("weight")
+        weights[currentExerciseIndex] = preferences.weightUnit.kilograms(from: value)
+        revealWeight()
+    }
+
+    private func clearNumberInputs() { repsInput = nil; weightInput = nil; invalidNumbers = [] }
+
     var workoutName: String = ""
     var items: [WorkoutItemSnapshot] = []
     var currentExerciseIndex: Int = 0
@@ -93,9 +124,11 @@ final class ActiveWorkoutViewModel {
         workoutId: UUID,
         time: any WorkoutTimeSource = SystemWorkoutTimeSource(),
         preferences: WorkoutPreferences = WorkoutPreferences(),
+        alwaysShowsWeight: Bool = false,
         playRestCue: @escaping @MainActor () -> Void = {},
         stopRestCue: @escaping @MainActor () -> Void = {}
     ) {
+        self.alwaysShowsWeight = alwaysShowsWeight
         self.workoutsRepository = workouts
         self.sessionsRepository = sessions
         self.workoutId = workoutId
@@ -144,13 +177,14 @@ final class ActiveWorkoutViewModel {
     }
 
     func markSetDone() {
-        guard currentItem != nil, !isComplete, !isDiscarded, saveState == .idle else { return }
+        guard !hasInvalidNumbers, currentItem != nil, !isComplete, !isDiscarded, saveState == .idle else { return }
         stopRestCue()
 
         let reps = currentDisplayReps
         completedSets[currentKey] = reps
         completedWeights[currentKey] = currentWeight
 
+        clearNumberInputs()
         let nextSet = currentSetIndex + 1
 
         if nextSet < currentSetsTotal {
@@ -172,31 +206,43 @@ final class ActiveWorkoutViewModel {
     }
 
     func previousExercise() {
-        guard canGoPrevious else { return }
+        guard canGoPrevious, !hasInvalidNumbers else { return }
+        clearNumberInputs()
         currentExerciseIndex -= 1
         currentSetIndex = 0
     }
 
     func skipExercise() {
-        guard canSkip else { return }
+        guard canSkip, !hasInvalidNumbers else { return }
+        clearNumberInputs()
         currentExerciseIndex += 1
         currentSetIndex = 0
     }
 
     func incrementReps() {
-        actualReps[currentKey] = currentDisplayReps + 1
+        guard !hasInvalidNumbers else { return }
+        actualReps[currentKey] = min(Int(Int32.max), currentDisplayReps + 1)
+        repsInput = nil
     }
 
     func decrementReps() {
+        guard !hasInvalidNumbers else { return }
+        repsInput = nil
         let value = max(0, currentDisplayReps - 1)
         actualReps[currentKey] = value
     }
 
     func incrementWeight() {
+        guard !hasInvalidNumbers else { return }
+        weightInput = nil
+        revealWeight()
         weights[currentExerciseIndex] = preferences.weightUnit.stepping(kilograms: currentWeight, increasing: true)
     }
 
     func decrementWeight() {
+        guard !hasInvalidNumbers else { return }
+        weightInput = nil
+        revealWeight()
         weights[currentExerciseIndex] = preferences.weightUnit.stepping(kilograms: currentWeight, increasing: false)
     }
 
@@ -218,7 +264,7 @@ final class ActiveWorkoutViewModel {
     }
 
     func endSession() async {
-        guard !items.isEmpty, !isDiscarded else { return }
+        guard !items.isEmpty, !isDiscarded, !hasInvalidNumbers else { return }
         stopRestCue()
         isComplete = true
         finishTiming()
@@ -261,7 +307,8 @@ final class ActiveWorkoutViewModel {
     }
 
     private func beginSave() {
-        guard !isDiscarded, saveState != .saving, saveState != .saved else { return }
+        guard !isDiscarded, saveState != .saving, saveState != .saved, saveState != .noCompletedSets else { return }
+        guard !completedSets.isEmpty else { saveState = .noCompletedSets; return }
         saveState = .saving
         errorMessage = nil
         saveTask = Task { [self] in await saveSession() }

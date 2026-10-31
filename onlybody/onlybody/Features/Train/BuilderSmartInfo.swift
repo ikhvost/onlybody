@@ -7,11 +7,11 @@ struct BuilderSmartInfo: View {
         if viewModel.mode == .smart {
             VStack(alignment: .leading, spacing: Theme.space4) {
                 Text(.uiAutoSelectedMovements)
-                    .font(Theme.fontSans(Theme.type14, .bold))
+                    .font(Theme.fontSans(Theme.typeMeta, .bold))
                     .foregroundStyle(Theme.text)
 
                 Text(smartInfoDescription)
-                    .font(Theme.fontSans(Theme.type14))
+                    .font(Theme.fontSans(Theme.typeMeta))
                     .foregroundStyle(Theme.text2)
                     .lineSpacing(4)
             }

@@ -5,9 +5,9 @@ struct ActiveWorkoutUpNextSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.space2) {
-            MonoLabel(text: String(localized: .uiUpNext), size: Theme.type10, color: Theme.text3, tracking: 0.5)
+            MonoLabel(text: String(localized: .uiUpNext), size: Theme.typeMeta, color: Theme.text3, tracking: 0.5)
             Text(nextExerciseName)
-                .font(Theme.fontSans(Theme.type14, .semibold))
+                .font(Theme.fontSans(Theme.typeMeta, .semibold))
                 .foregroundStyle(Theme.text2)
         }
         .frame(maxWidth: .infinity, alignment: .leading)

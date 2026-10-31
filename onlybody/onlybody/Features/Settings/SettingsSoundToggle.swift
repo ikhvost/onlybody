@@ -7,10 +7,10 @@ struct SettingsSoundToggle: View {
         Toggle(isOn: $isEnabled) {
             VStack(alignment: .leading, spacing: Theme.space4) {
                 Text(.uiTimerSound)
-                    .font(Theme.fontSans(Theme.type14, .medium))
+                    .font(Theme.fontSans(Theme.typeBody, .medium))
                     .foregroundStyle(Theme.text)
                 Text(.uiPlayASoundWhenRestEnds)
-                    .font(Theme.fontSans(Theme.type11))
+                    .font(Theme.fontSans(Theme.typeMeta))
                     .foregroundStyle(Theme.text2)
             }
         }

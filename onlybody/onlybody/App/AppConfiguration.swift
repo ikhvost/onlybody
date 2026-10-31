@@ -1,10 +1,11 @@
 /// Immutable product choices assembled at the application boundary.
 nonisolated struct AppConfiguration: Sendable {
     let displayName: String
+    var alwaysShowsWeight = false
     let workoutFallback: WorkoutFallbackPolicy
 
     static let onlyBody = AppConfiguration(displayName: "OnlyBody", workoutFallback: .bodyweight)
-    static let onlyWeights = AppConfiguration(displayName: "OnlyWeights", workoutFallback: .matchingCatalog)
+    static let onlyWeights = AppConfiguration(displayName: "OnlyWeights", alwaysShowsWeight: true, workoutFallback: .matchingCatalog)
 
     static var current: AppConfiguration {
         #if ONLYWEIGHTS

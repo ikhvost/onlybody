@@ -34,7 +34,7 @@ struct ActiveWorkoutExerciseActions: View {
             .accessibilityLabel(String(localized: .uiShowExerciseHistory))
             .accessibilityIdentifier("active.history")
         }
-        .font(Theme.fontSans(Theme.type14, .semibold))
+        .font(Theme.fontSans(Theme.typeMeta, .semibold))
         .foregroundStyle(Theme.text)
         .buttonStyle(PressableButtonStyle())
     }

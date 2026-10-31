@@ -9,12 +9,12 @@ struct LibraryExerciseRow: View {
             HStack(spacing: Theme.space10) {
                 VStack(alignment: .leading, spacing: Theme.space2) {
                     Text(exercise.displayName)
-                        .font(Theme.fontSans(Theme.type16, .bold))
+                        .font(Theme.fontSans(Theme.typeCard, .bold))
                         .foregroundStyle(Theme.text)
 
                     MonoLabel(
                         text: "\(exercise.primaryMuscleLabel) · \(exercise.equipmentLabel)",
-                        size: Theme.type10,
+                        size: Theme.typeMeta,
                         color: Theme.text3,
                         tracking: 0.3
                     )
@@ -22,10 +22,10 @@ struct LibraryExerciseRow: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                ChevronIcon(color: Theme.text3, size: Theme.type14)
+                ChevronIcon(color: Theme.text3, size: Theme.typeMeta)
             }
             .padding(.horizontal, Theme.horizontalPadding)
-            .padding(.vertical, Theme.space13)
+            .padding(.vertical, Theme.cardInset)
             .contentShape(.rect)
         }
         .buttonStyle(.plain)

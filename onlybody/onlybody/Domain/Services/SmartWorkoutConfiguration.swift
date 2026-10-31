@@ -1,6 +1,6 @@
 import Foundation
 
-nonisolated struct SmartWorkoutConfiguration: Sendable {
+nonisolated struct SmartWorkoutConfiguration: Sendable, Equatable {
     let targetMuscleGroups: [String]
     let durationMinutes: Int
     let restSeconds: Int?

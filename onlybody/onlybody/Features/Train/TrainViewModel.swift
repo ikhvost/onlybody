@@ -10,12 +10,15 @@ final class TrainViewModel {
     var isLoading = false
     var errorMessage: String?
 
+    private let now: () -> Date
+    private let calendar: Calendar
+
     let appName: String
 
     let dayNames = Weekdays.shortNames
 
     var todayIndex: Int {
-        Calendar.current.component(.weekday, from: Date()) - 1
+        calendar.component(.weekday, from: now()) - 1
     }
 
     var todayName: String {
@@ -26,16 +29,22 @@ final class TrainViewModel {
         workouts.filter { $0.scheduledDays.contains(todayName) }
     }
 
+    var otherWorkouts: [WorkoutSnapshot] {
+        workouts.filter { !$0.scheduledDays.contains(todayName) }
+    }
+
     var dateDisplay: String {
-        Date.now.formatted(
+        now().formatted(
             .dateTime
                 .weekday(.abbreviated)
                 .month(.abbreviated)
                 .day()
-        ).uppercased()
+        )
     }
 
-    init(workouts: any WorkoutRepository, appName: String) {
+    init(workouts: any WorkoutRepository, appName: String, now: @escaping () -> Date = Date.init, calendar: Calendar = .current) {
+        self.now = now
+        self.calendar = calendar
         self.workoutsRepository = workouts
         self.appName = appName
     }

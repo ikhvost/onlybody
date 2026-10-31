@@ -11,7 +11,7 @@ struct MuscleDiagramLegendItem: View {
                 .frame(width: Theme.muscleLegendMarkerSize, height: Theme.muscleLegendMarkerSize)
                 .clipShape(.rect(cornerRadius: Theme.space2))
             Text(title)
-                .font(Theme.fontSans(Theme.type12))
+                .font(Theme.fontSans(Theme.typeMeta))
                 .foregroundStyle(Theme.text2)
         }
     }

@@ -19,10 +19,10 @@ struct LibraryView: View {
             VStack(alignment: .leading, spacing: Theme.space0) {
                 HStack(alignment: .bottom) {
                     VStack(alignment: .leading, spacing: Theme.space3) {
-                        MonoLabel(text: String(localized: .uiMovementCatalog), size: Theme.type10, tracking: 1.2)
+                        MonoLabel(text: String(localized: .uiMovementCatalog), size: Theme.typeMeta, tracking: 1.2)
 
-                        Text(.uiLibrary)
-                            .font(Theme.fontSans(Theme.type28, .heavy))
+                        Text(.uiDesignExercises)
+                            .font(Theme.fontSans(Theme.typeHeading, .heavy))
                             .tracking(-1)
                             .foregroundStyle(Theme.text)
                     }
@@ -33,45 +33,8 @@ struct LibraryView: View {
                 .padding(.top, Theme.space16)
                 .padding(.bottom, Theme.space10)
 
-                VStack(spacing: Theme.space8) {
-                    HStack(spacing: Theme.space8) {
-                        SearchIcon(color: Theme.text3, size: Theme.type15)
-
-                        TextField(String(localized: .uiSearch), text: $viewModel.searchText)
-                            .accessibilityIdentifier("library.search")
-                            .focused($isSearchFocused)
-                            .submitLabel(.done)
-                            .onSubmit { isSearchFocused = false }
-                            .font(Theme.fontSans(Theme.type14))
-                            .foregroundStyle(Theme.text)
-                            .textInputAutocapitalization(.never)
-                            .autocorrectionDisabled()
-                    }
-                    .padding(.horizontal, Theme.space10)
-                    .padding(.vertical, Theme.space9)
-                    .background(Theme.surface)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: Theme.cornerRadius)
-                            .stroke(Theme.border2, lineWidth: 1)
-                    }
-                    .clipShape(.rect(cornerRadius: Theme.cornerRadius))
-
-                    ScrollView(.horizontal) {
-                        HStack(spacing: Theme.space6) {
-                            ForEach(viewModel.filters, id: \.self) { filter in
-                                ChipView(label: CatalogLocalization.label(filter), isActive: viewModel.selectedFilter == filter, isSmall: true) {
-                                    viewModel.selectedFilter = filter
-                                }
-                            }
-                        }
-                        .padding(.bottom, Theme.space2)
-                    }
-                    .scrollIndicators(.hidden)
-
-                    ExerciseDifficultyFilter(selection: $viewModel.selectedDifficulty)
-                }
-                .padding(.horizontal, Theme.horizontalPadding)
-                .padding(.bottom, Theme.space10)
+                ExerciseCatalogControls(search: $viewModel.searchText, muscle: $viewModel.selectedFilter,
+                                        difficulty: $viewModel.selectedDifficulty, searchFocus: $isSearchFocused)
 
                 Rectangle()
                     .fill(Theme.border)
@@ -80,20 +43,22 @@ struct LibraryView: View {
                 ZStack {
                     if viewModel.isLoading {
                         VStack(spacing: Theme.space8) {
-                            MonoLabel(text: String(localized: .uiLoadingLibrary), size: Theme.type11, tracking: 1.0)
+                            MonoLabel(text: String(localized: .uiLoadingLibrary), size: Theme.typeMeta, tracking: 1.0)
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .transition(.opacity)
                     } else if let errorMessage = viewModel.errorMessage {
                         VStack(spacing: Theme.space8) {
-                            MonoLabel(text: errorMessage, size: Theme.type11, color: Theme.text2, tracking: 0.4)
+                            MonoLabel(text: errorMessage, size: Theme.typeMeta, color: Theme.text2, tracking: 0.4)
+                            GhostButton(title: String(localized: .uiRetry)) { Task { await viewModel.load() } }
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .padding(.horizontal, Theme.horizontalPadding)
                         .transition(.opacity)
                     } else if viewModel.filteredExercises.isEmpty {
                         VStack(spacing: Theme.space8) {
-                            MonoLabel(text: String(localized: .uiNoMovementsFound), size: Theme.type11, color: Theme.text2, tracking: 0.4)
+                            MonoLabel(text: String(localized: .uiNoMovementsFound), size: Theme.typeMeta, color: Theme.text2, tracking: 0.4)
+                            GhostButton(title: String(localized: .uiDesignClearFilters), action: viewModel.clearFilters)
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .padding(.horizontal, Theme.horizontalPadding)
@@ -101,16 +66,10 @@ struct LibraryView: View {
                     } else {
                         ScrollView {
                             LazyVStack(alignment: .leading, spacing: Theme.space0) {
-                                ForEach(viewModel.sections) { section in
-                                    LibraryDifficultyHeader(section: section)
-                                    ForEach(section.exercises) { exercise in
-                                        LibraryExerciseRow(exercise: exercise) {
-                                            isSearchFocused = false
-                                            showMovement(exercise)
-                                        }
-                                        Rectangle()
-                                            .fill(Theme.border)
-                                            .frame(height: 1)
+                                ForEach(viewModel.displayedExercises) { exercise in
+                                    LibraryExerciseRow(exercise: exercise) {
+                                        isSearchFocused = false
+                                        showMovement(exercise)
                                     }
                                 }
                             }

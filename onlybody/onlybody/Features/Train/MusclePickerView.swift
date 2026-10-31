@@ -30,7 +30,7 @@ struct MusclePickerView: View {
                             .foregroundStyle(Theme.text)
                             .padding(.bottom, Theme.space5)
 
-                        MonoLabel(text: String(localized: .uiSelectMuscleGroups), size: Theme.type11, color: Theme.text3, tracking: 1)
+                        MonoLabel(text: String(localized: .uiSelectMuscleGroups), size: Theme.typeMeta, color: Theme.text3, tracking: 1)
                             .padding(.bottom, Theme.space24)
 
                         FlowLayout(spacing: Theme.space8) {
@@ -41,12 +41,13 @@ struct MusclePickerView: View {
                                 ) {
                                     viewModel.toggle(muscle)
                                 }
+                                .accessibilityIdentifier("picker.muscle.\(muscle)")
                             }
                         }
 
                         if !viewModel.selectedMuscles.isEmpty {
                             Text(viewModel.selectionSummary)
-                                .font(Theme.fontMono(Theme.type12, .medium))
+                                .font(Theme.fontMono(Theme.typeMeta, .medium))
                                 .foregroundStyle(Theme.accent)
                                 .tracking(0.5)
                                 .padding(.top, Theme.space24)
@@ -58,30 +59,18 @@ struct MusclePickerView: View {
                 .scrollIndicators(.hidden)
 
                 VStack(spacing: Theme.space10) {
-                    Button {
-                        onBuild(viewModel.selectedMuscles)
-                    } label: {
-                        HStack(spacing: Theme.space5) {
-                            Text(.uiBuildSession)
-                                .font(Theme.fontSans(Theme.type14, .bold))
-                                .foregroundStyle(viewModel.canBuild ? Theme.accentDark : Theme.text3)
-                            ChevronIcon(color: viewModel.canBuild ? Theme.accentDark : Theme.text3, size: Theme.type12, inset: 8)
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, Theme.space12)
-                        .background(viewModel.canBuild ? Theme.accent : Theme.surface2)
-                        .clipShape(.rect(cornerRadius: Theme.cornerRadius))
-                    }
-                    .buttonStyle(.plain)
-                    .disabled(!viewModel.canBuild)
+                    PrimaryButton(title: String(localized: .uiBuildSession),
+                                  action: { onBuild(viewModel.selectedMuscles) }, disabled: !viewModel.canBuild)
+                        .accessibilityIdentifier("picker.build")
 
                     Button {
                         onSkip()
                     } label: {
                         Text(.uiSkipPickMovementsMyself)
-                            .font(Theme.fontSans(Theme.type14))
+                            .font(Theme.fontSans(Theme.typeMeta))
                             .foregroundStyle(Theme.text3)
                     }
+                    .frame(minHeight: Theme.touchSize)
                     .accessibilityIdentifier("picker.manual")
                     .buttonStyle(.plain)
                 }

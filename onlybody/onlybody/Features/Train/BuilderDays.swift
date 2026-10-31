@@ -5,16 +5,16 @@ struct BuilderDays: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.space8) {
-            MonoLabel(text: String(localized: .uiTrainingDays), size: Theme.type11, color: Theme.text2, tracking: 0.5)
+            MonoLabel(text: String(localized: .uiTrainingDays), size: Theme.typeMeta, color: Theme.text2, tracking: 0.5)
 
-            HStack(spacing: Theme.space2) {
+            FlowLayout(spacing: Theme.space8) {
                 ForEach(viewModel.dayNames, id: \.self) { day in
                     ChipView(
                         label: CatalogLocalization.label(day),
                         isActive: viewModel.scheduledDays.contains(day),
-                        size: Theme.type12,
-                        horizontalPadding: 8,
-                        verticalPadding: 6
+                        size: Theme.typeMeta,
+                        horizontalPadding: Theme.space12,
+                        verticalPadding: Theme.space12
                     ) {
                         viewModel.toggleDay(day)
                     }
@@ -24,7 +24,7 @@ struct BuilderDays: View {
             if viewModel.scheduledDays.isEmpty {
                 MonoLabel(
                     text: String(localized: .uiNoDaysScheduled),
-                    size: Theme.type11,
+                    size: Theme.typeMeta,
                     color: Theme.text3,
                     tracking: 0.3
                 )

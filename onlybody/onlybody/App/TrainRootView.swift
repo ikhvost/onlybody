@@ -5,6 +5,7 @@ struct TrainRootView: View {
     @Binding var path: [TrainRoute]
     let onSessionSaved: () -> Void
     @State private var viewModel: TrainViewModel
+    @State private var selectedExercise: ExerciseSnapshot?
     @State private var activeWorkout: ActiveWorkoutViewModel?
 
     init(composition: AppComposition, path: Binding<[TrainRoute]>, onSessionSaved: @escaping () -> Void) {
@@ -19,13 +20,28 @@ struct TrainRootView: View {
             TrainView(
                 viewModel: viewModel,
                 showSettings: { path.append(.settings) },
-                showMusclePicker: { path.append(.musclePicker) },
+                showMusclePicker: { path.append(.creation) },
                 showSessionBuilder: { path.append(.sessionBuilder(workoutID: $0)) },
-                onStartWorkout: { activeWorkout = composition.active(workoutID: $0) }
+                onStartWorkout: { activeWorkout = composition.active(workoutID: $0) },
+                onOverview: { path.append(.overview(workoutID: $0)) }
             )
             .toolbar(.hidden, for: .navigationBar)
             .navigationDestination(for: TrainRoute.self) { route in
                 switch route {
+                case .creation:
+                    WorkoutCreationView(onManual: { path.append(.sessionBuilder(workoutID: nil)) },
+                                        onSmart: { path.append(.musclePicker) })
+                case .overview(let id):
+                    WorkoutOverviewView(viewModel: composition.overview(workoutID: id),
+                                        onEdit: { path.append(.sessionBuilder(workoutID: id)) },
+                                        onStart: { activeWorkout = composition.active(workoutID: id) },
+                                        onExercise: { selectedExercise = $0; path.append(.guide(exerciseID: $0.id)) })
+                case .guide(let id):
+                    if let selectedExercise, selectedExercise.id == id {
+                        MovementDetailView(viewModel: composition.movement(selectedExercise), backLabel: String(localized: .uiDesignOverview))
+                    } else {
+                        Text(.uiMovementUnavailable).foregroundStyle(Theme.text2)
+                    }
                 case .settings:
                     SettingsView(viewModel: composition.settings(), onNotifications: { path.append(.notifications) })
                 case .notifications:
@@ -36,8 +52,13 @@ struct TrainRootView: View {
                     }, onSkip: { path.append(.sessionBuilder(workoutID: nil)) })
                 case .sessionBuilder(let id, let targets):
                     SessionBuilderView(
-                        viewModel: composition.builder(workout: viewModel.workouts.first { $0.id == id }, targets: targets),
-                        onSaved: { path = [] }
+                        viewModel: composition.builder(workout: nil, targets: targets, workoutID: id),
+                        onSaved: {
+                            if path.contains(where: { if case .overview = $0 { return true }; return false }) {
+                                path.removeLast()
+                            } else { path = [] }
+                        },
+                        onDeleted: { path = [] }
                     )
                 }
             }

@@ -7,13 +7,13 @@ struct BuilderDuration: View {
         if !viewModel.movements.isEmpty {
             HStack {
                 Text(.uiEstDuration)
-                    .font(Theme.fontSans(Theme.type14))
+                    .font(Theme.fontSans(Theme.typeMeta))
                     .foregroundStyle(Theme.text2)
 
                 Spacer()
 
                 Text(String(localized: .uiEstimatedMinutes(viewModel.estimatedDurationMinutes)))
-                    .font(Theme.fontMono(Theme.type14, .medium))
+                    .font(Theme.fontMono(Theme.typeMeta, .medium))
                     .foregroundStyle(Theme.accent)
             }
             .padding(.horizontal, Theme.horizontalPadding)

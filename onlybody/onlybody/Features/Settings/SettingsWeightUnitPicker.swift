@@ -13,11 +13,11 @@ struct SettingsWeightUnitPicker: View {
         } label: {
             HStack(spacing: Theme.space12) {
                 Text(.uiWeightUnits)
-                    .font(Theme.fontSans(Theme.type14, .medium))
+                    .font(Theme.fontSans(Theme.typeBody, .medium))
                     .foregroundStyle(Theme.text)
                 Spacer()
                 Text(viewModel.weightUnit.rawValue)
-                    .font(Theme.fontMono(Theme.type14))
+                    .font(Theme.fontMono(Theme.typeMeta))
                     .foregroundStyle(Theme.accent)
                 ChevronIcon(color: Theme.text3, size: Theme.type16)
                     .rotationEffect(.degrees(90))

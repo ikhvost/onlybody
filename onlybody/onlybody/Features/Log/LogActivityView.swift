@@ -24,7 +24,7 @@ struct LogActivityView: View {
             }
 
             VStack(alignment: .leading, spacing: Theme.space10) {
-                MonoLabel(text: String(localized: .uiActivityLast20Weeks), size: Theme.type11, color: Theme.text3, tracking: 1)
+                MonoLabel(text: String(localized: .uiActivityLast20Weeks), size: Theme.typeMeta, color: Theme.text3, tracking: 1)
 
                 VStack(spacing: Theme.space3) {
                     ForEach(0..<7, id: \.self) { row in

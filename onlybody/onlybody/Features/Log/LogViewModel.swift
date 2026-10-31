@@ -27,7 +27,9 @@ final class LogViewModel {
         }
     }
 
-    init(sessions: any SessionRepository) {
+    init(sessions: any SessionRepository, now: @escaping () -> Date = Date.init, calendar: Calendar = .current) {
+        self.now = now
+        self.calendar = calendar
         self.sessionsRepository = sessions
     }
 
@@ -40,7 +42,7 @@ final class LogViewModel {
         do {
             sessions = try await sessionsRepository.allSessions()
                 .sorted { $0.date > $1.date }
-            stats = StreakCalculator().calculate(sessions: sessions)
+            stats = StreakCalculator().calculate(sessions: sessions, today: now(), calendar: calendar)
             heatmap = buildHeatmap(sessions: sessions)
         } catch {
             errorMessage = String(localized: .uiCouldNotLoadTrainingHistory)
@@ -60,7 +62,8 @@ final class LogViewModel {
             .formatted(.time(pattern: .minuteSecond))
     }
 
-    private let calendar = Calendar.current
+    private let calendar: Calendar
+    private let now: () -> Date
 
     private func monthKey(for date: Date) -> String {
         let components = calendar.dateComponents([.year, .month], from: date)
@@ -76,8 +79,8 @@ final class LogViewModel {
               let year = Int(parts[0]),
               let month = Int(parts[1]) else { return key }
 
-        let monthName = calendar.monthSymbols[month - 1].uppercased()
-        let currentYear = calendar.component(.year, from: Date())
+        let monthName = calendar.monthSymbols[month - 1]
+        let currentYear = calendar.component(.year, from: now())
 
         if year == currentYear {
             return monthName
@@ -85,8 +88,7 @@ final class LogViewModel {
         return "\(monthName) \(year)"
     }
     private func buildHeatmap(sessions: [SessionSnapshot]) -> [[Bool]] {
-        let calendar = Calendar.current
-        let todayStart = calendar.startOfDay(for: Date())
+        let todayStart = calendar.startOfDay(for: now())
 
         let weekday = calendar.component(.weekday, from: todayStart)
         let daysSinceMonday = weekday >= 2 ? weekday - 2 : 6

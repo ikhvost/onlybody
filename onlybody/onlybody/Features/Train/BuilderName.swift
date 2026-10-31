@@ -5,15 +5,15 @@ struct BuilderName: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.space8) {
-            MonoLabel(text: String(localized: .uiSessionName), size: Theme.type11, color: Theme.text2, tracking: 0.5)
+            MonoLabel(text: String(localized: .uiSessionName), size: Theme.typeMeta, color: Theme.text2, tracking: 0.5)
                 .padding(.horizontal, Theme.horizontalPadding)
 
             TextField(String(localized: .uiEGFullBody), text: $viewModel.name)
                 .accessibilityIdentifier("builder.name")
-                .font(Theme.fontSans(Theme.type16))
+                .font(Theme.fontSans(Theme.typeBody))
                 .foregroundStyle(Theme.text)
                 .padding(.horizontal, Theme.space13)
-                .padding(.vertical, Theme.space11)
+                .padding(.vertical, Theme.cardInset)
                 .background(Theme.surface)
                 .clipShape(.rect(cornerRadius: Theme.cornerRadius))
                 .overlay {

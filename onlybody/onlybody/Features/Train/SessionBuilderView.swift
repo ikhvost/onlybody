@@ -4,9 +4,12 @@ struct SessionBuilderView: View {
     @State var viewModel: SessionBuilderViewModel
 
     var onSaved: (() -> Void)?
+    var onDeleted: (() -> Void)?
 
     @Environment(\.dismiss) private var dismiss
 
+    @State private var openedInitialPicker = false
+    @State private var showTargets = false
     @State private var showDeletePrompt = false
     @State private var showDiscardPrompt = false
     @State private var isShowingExercisePicker = false
@@ -26,32 +29,25 @@ struct SessionBuilderView: View {
                     .accessibilityLabel(String(localized: .uiBack))
                     .accessibilityIdentifier("builder.back")
                     .disabled(viewModel.isSaving)
-                } trailing: {
-                    Button {
-                        handleSave()
-                    } label: {
-                        Text(.uiSave)
-                        .font(Theme.fontSans(Theme.type15, .bold))
-                            .foregroundStyle(Theme.accentDark)
-                            .padding(.horizontal, Theme.space14)
-                            .padding(.vertical, Theme.space6)
-                            .background(Theme.accent)
-                            .clipShape(.rect(cornerRadius: Theme.cornerRadius))
-                    }
-                    .buttonStyle(.plain)
-                    .disabled(viewModel.isSaving)
-                    .accessibilityIdentifier("builder.save")
                 }
 
                 ScrollView {
                     VStack(alignment: .leading, spacing: Theme.space0) {
-                        BuilderTargets(viewModel: viewModel)
                         BuilderName(viewModel: viewModel)
                         BuilderStyle(viewModel: viewModel)
-                        BuilderTiming(viewModel: viewModel)
+                        if viewModel.mode == .smart {
+                            BuilderTargets(viewModel: viewModel)
+                            Button(String(localized: .uiSelectMuscleGroups)) { showTargets = true }
+                                .frame(minHeight: Theme.touchSize).padding(.horizontal, Theme.horizontalPadding)
+                                .foregroundStyle(Theme.accent)
+                        }
                         BuilderSmartInfo(viewModel: viewModel)
                         BuilderMovements(viewModel: viewModel, isShowingExercisePicker: $isShowingExercisePicker)
-                        BuilderDays(viewModel: viewModel)
+                        DisclosureGroup(String(localized: .uiDesignSchedule)) { BuilderDays(viewModel: viewModel) }
+                            .font(Theme.fontSans(Theme.typeBody)).padding(Theme.horizontalPadding)
+                        DisclosureGroup(String(localized: .uiDesignOptions)) { BuilderTiming(viewModel: viewModel) }
+                            .font(Theme.fontSans(Theme.typeBody)).padding(Theme.horizontalPadding)
+                            .accessibilityIdentifier("builder.options")
                         BuilderDuration(viewModel: viewModel)
                         if viewModel.isEditMode {
                             Button(String(localized: .uiDeleteWorkout), role: .destructive) { showDeletePrompt = true }
@@ -65,19 +61,32 @@ struct SessionBuilderView: View {
                     .padding(.bottom, Theme.space28)
                 }
                 .scrollIndicators(.hidden)
+                .safeAreaInset(edge: .bottom, spacing: Theme.space0) {
+                    PrimaryButton(title: viewModel.isSaving ? String(localized: .uiDesignSaving) : String(localized: .uiSave),
+                                  action: handleSave, disabled: viewModel.isLoading || viewModel.isSaving || viewModel.hasInvalidNumbers)
+                        .accessibilityIdentifier("builder.save").padding(Theme.cardInset).background(Theme.bg)
+                }
             }
         }
         .sheet(isPresented: $isShowingExercisePicker) {
             ExercisePickerView(
-                exercises: viewModel.allExercises
+                viewModel: ExercisePickerViewModel(exercises: viewModel.allExercises)
             ) { exercise in
                 viewModel.addMovement(exercise)
             }
             .presentationDetents([.large])
             .presentationDragIndicator(.hidden)
         }
+        .sheet(isPresented: $showTargets) {
+            BuilderTargetPicker(viewModel: viewModel)
+                .presentationDetents([.large])
+        }
         .task {
             await viewModel.loadExercises()
+            if !viewModel.isEditMode, viewModel.mode == .manual, !openedInitialPicker, viewModel.errorMessage == nil {
+                openedInitialPicker = true
+                isShowingExercisePicker = true
+            }
         }
         .alert(String(localized: .uiError), isPresented: Binding(
             get: { viewModel.errorMessage != nil },
@@ -89,6 +98,7 @@ struct SessionBuilderView: View {
         } message: {
             Text(viewModel.errorMessage ?? "")
         }
+        .foregroundStyle(Theme.text)
         .background(BackSwipeBridge {
             guard !viewModel.isSaving else { return false }
             if viewModel.hasUnsavedChanges {
@@ -105,7 +115,7 @@ struct SessionBuilderView: View {
             Button(String(localized: .uiDeleteWorkout), role: .destructive) {
                 Task {
                     if await viewModel.deleteWorkout() {
-                        if let onSaved { onSaved() } else { dismiss() }
+                        if let onDeleted { onDeleted() } else if let onSaved { onSaved() } else { dismiss() }
                     }
                 }
             }

@@ -7,7 +7,7 @@ struct MovementDemonstrationView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.space8) {
-            MonoLabel(text: String(localized: .uiDemonstration), size: Theme.type11, tracking: 0.8)
+            MonoLabel(text: String(localized: .uiDemonstration), size: Theme.typeMeta, tracking: 0.8)
 
             if let demonstration = viewModel.demonstration {
                 if viewModel.needsVideoPermission {
@@ -33,7 +33,7 @@ struct MovementDemonstrationView: View {
 
                     if viewModel.demonstrationState == .loading {
                         Text(.uiLoadingVideo)
-                            .font(Theme.fontSans(Theme.type13))
+                            .font(Theme.fontSans(Theme.typeMeta))
                             .foregroundStyle(Theme.text2)
                             .accessibilityIdentifier("demonstration.loading")
                     }
@@ -43,20 +43,20 @@ struct MovementDemonstrationView: View {
 
                 if let url = viewModel.externalVideoURL {
                     Button(String(localized: .uiWatchOnYoutube)) { openURL(url) }
-                        .font(Theme.fontSans(Theme.type14, .semibold))
+                        .font(Theme.fontSans(Theme.typeMeta, .semibold))
                         .foregroundStyle(Theme.accent)
                         .frame(minHeight: Theme.space44)
                         .accessibilityIdentifier("demonstration.openYouTube")
                 }
 
                 Text(String(localized: .uiVideoBy(demonstration.author)))
-                    .font(Theme.fontSans(Theme.type12))
+                    .font(Theme.fontSans(Theme.typeMeta))
                     .foregroundStyle(Theme.text2)
                     .accessibilityIdentifier("demonstration.author")
             } else {
                 Text(.uiNoDemonstrationIsAvailableForThisExerciseYet)
                     .accessibilityIdentifier("demonstration.unavailable")
-                    .font(Theme.fontSans(Theme.type14))
+                    .font(Theme.fontSans(Theme.typeMeta))
                     .foregroundStyle(Theme.text2)
             }
         }

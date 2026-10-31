@@ -45,7 +45,11 @@ struct AppTabView: View {
                 BottomNav(selectedTab: selectedTab, setTab: settle(on:))
             }
         }
+        .font(Theme.fontSans(Theme.typeBody))
         .background(Theme.bg)
+        .transaction { transaction in
+            if reduceMotion { transaction.animation = nil; transaction.disablesAnimations = true }
+        }
         .preferredColorScheme(.dark)
     }
 

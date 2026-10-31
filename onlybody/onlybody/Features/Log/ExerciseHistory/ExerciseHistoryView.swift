@@ -38,7 +38,7 @@ struct ExerciseHistoryView: View {
                                 .foregroundStyle(Theme.text2)
                         } else if let error = viewModel.errorMessage {
                             Text(error)
-                                .font(Theme.fontSans(Theme.type14))
+                                .font(Theme.fontSans(Theme.typeMeta))
                                 .foregroundStyle(Theme.text2)
                             GhostButton(title: String(localized: .uiRetry)) { Task { await viewModel.load() } }
                                 .accessibilityIdentifier("exerciseHistory.retry")
@@ -48,10 +48,10 @@ struct ExerciseHistoryView: View {
                                 .foregroundStyle(Theme.text)
                                 .accessibilityIdentifier("exerciseHistory.empty")
                             Text(.uiAfterYouSaveAWorkoutWithThisExerciseItsDate)
-                                .font(Theme.fontSans(Theme.type14))
+                                .font(Theme.fontSans(Theme.typeMeta))
                                 .foregroundStyle(Theme.text2)
                         } else {
-                            MonoLabel(text: String(localized: .uiSessions), size: Theme.type11, color: Theme.text2)
+                            MonoLabel(text: String(localized: .uiSessions), size: Theme.typeMeta, color: Theme.text2)
                             LazyVStack(spacing: Theme.space14) {
                                 ForEach(viewModel.entries) { entry in
                                     ExerciseHistoryRow(entry: entry, weightText: viewModel.weightText)

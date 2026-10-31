@@ -15,7 +15,7 @@ struct BodyweightApp: App {
 
     init() {
         #if DEBUG
-        if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+        if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" || NativeDesignReviewRootView.isEnabled {
             container = nil
             exercises = PreviewExerciseRepository()
             workouts = PreviewWorkoutRepository()
@@ -79,7 +79,7 @@ struct BodyweightApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AppTabView(composition: AppComposition(
+            AppContentView(composition: AppComposition(
                 configuration: configuration, exercises: exercises, workouts: workouts,
                 sessions: sessions, preferences: preferences, reminders: reminders, youtubeConsent: youtubeConsent
             ))

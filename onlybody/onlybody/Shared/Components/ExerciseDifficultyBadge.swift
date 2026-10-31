@@ -5,7 +5,7 @@ struct ExerciseDifficultyBadge: View {
 
     var body: some View {
         Text(difficulty.label)
-            .font(Theme.fontMono(Theme.type10, .medium))
+            .font(Theme.fontMono(Theme.typeMeta, .medium))
             .foregroundStyle(Theme.accent)
             .padding(.horizontal, Theme.space8)
             .padding(.vertical, Theme.space4)

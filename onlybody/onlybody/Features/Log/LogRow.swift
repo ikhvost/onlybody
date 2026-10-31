@@ -10,18 +10,18 @@ struct LogRow: View {
 
             VStack(alignment: .leading, spacing: Theme.space3) {
                 Text(session.workoutName)
-                    .font(Theme.fontSans(Theme.type15, .bold))
+                    .font(Theme.fontSans(Theme.typeCard, .bold))
                     .foregroundStyle(Theme.text)
-                    .lineLimit(1)
+                    .fixedSize(horizontal: false, vertical: true)
 
                 HStack(spacing: Theme.space6) {
                     Text(viewModel.weekdayText(for: session))
                     Text("·")
                     Text(viewModel.durationText(for: session))
                 }
-                .font(Theme.fontMono(Theme.type10))
+                .font(Theme.fontMono(Theme.typeMeta))
                 .foregroundStyle(Theme.text2)
-                .lineLimit(1)
+                .fixedSize(horizontal: false, vertical: true)
             }
 
             Spacer()

@@ -30,7 +30,7 @@ struct DemonstrationPlaceholderView: View {
                     .accessibilityIdentifier("demonstration.preview")
             }
         }
-        .font(Theme.fontSans(Theme.type14))
+        .font(Theme.fontSans(Theme.typeMeta))
         .foregroundStyle(Theme.text2)
         .multilineTextAlignment(.center)
         .padding(.horizontal, Theme.space16)

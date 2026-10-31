@@ -4,4 +4,5 @@ enum SessionSaveState {
     case saving
     case saved
     case failed
+    case noCompletedSets
 }

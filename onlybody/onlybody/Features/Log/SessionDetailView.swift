@@ -31,7 +31,7 @@ struct SessionDetailView: View {
 
                 ScrollView {
                     VStack(alignment: .leading, spacing: Theme.space0) {
-                        MonoLabel(text: formattedDate(session.date), size: Theme.type10, color: Theme.text3, tracking: 1.0)
+                        MonoLabel(text: formattedDate(session.date), size: Theme.typeMeta, color: Theme.text3, tracking: 1.0)
                             .padding(.bottom, Theme.space6)
 
                         HStack(spacing: Theme.space10) {
@@ -40,7 +40,7 @@ struct SessionDetailView: View {
                                     .font(Theme.fontMono(Theme.type24, .medium))
                                     .foregroundStyle(Theme.accent)
                                 Text(.uiMin)
-                                    .font(Theme.fontMono(Theme.type13))
+                                    .font(Theme.fontMono(Theme.typeMeta))
                                     .foregroundStyle(Theme.text2)
                             }
 
@@ -77,7 +77,7 @@ struct SessionDetailView: View {
                 .month(.wide)
                 .day()
                 .locale(.current)
-        ).uppercased()
+        )
     }
 }
 

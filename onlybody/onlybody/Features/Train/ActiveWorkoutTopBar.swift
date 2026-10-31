@@ -10,7 +10,7 @@ struct ActiveWorkoutTopBar: View {
         HStack(spacing: Theme.space0) {
             MonoLabel(
                 text: "\(currentIndex + 1)/\(totalCount)",
-                size: Theme.type12,
+                size: Theme.typeMeta,
                 color: Theme.text3,
                 tracking: 0.5
             )
@@ -24,7 +24,7 @@ struct ActiveWorkoutTopBar: View {
 
             Spacer()
 
-            GhostButton(title: String(localized: .uiEnd), action: onEnd)
+            GhostButton(title: String(localized: .uiDesignEndWorkout), action: onEnd)
                 .accessibilityIdentifier("active.end")
         }
         .padding(.horizontal, Theme.horizontalPadding)

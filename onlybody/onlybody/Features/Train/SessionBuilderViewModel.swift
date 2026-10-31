@@ -9,6 +9,8 @@ final class SessionBuilderViewModel {
     private let smartGenerator: SmartWorkoutGenerator
     private let onScheduleChanged: @MainActor () async -> Void
 
+    private var isPopulating = false
+    private var generatedConfiguration: SmartWorkoutConfiguration?
     private var initialDraft: BuilderDraft?
     var hasUnsavedChanges: Bool { initialDraft != draft }
 
@@ -17,16 +19,21 @@ final class SessionBuilderViewModel {
                      movements: movements, durationMinutes: durationMinutes, restSeconds: restSeconds, days: Set(scheduledDays))
     }
 
-    let editingWorkout: WorkoutSnapshot?
+    private let requestedWorkoutID: UUID?
+    private(set) var editingWorkout: WorkoutSnapshot?
 
+    var numberInputs: [String: String] = [:]
+    var numberErrors: Set<String> = []
+    var hasInvalidNumbers: Bool { !numberErrors.isEmpty }
     var name: String = ""
-    var mode: WorkoutMode = .smart
-    var targetMuscleGroups: [String] = []
+    var mode: WorkoutMode = .smart { didSet { refreshSmartMovements() } }
+    var targetMuscleGroups: [String] = [] { didSet { refreshSmartMovements() } }
     var movements: [MovementConfig] = []
     var scheduledDays: [String] = []
     private(set) var durationMinutes = 30
     private(set) var restSeconds = 45
     var hasMixedRest: Bool { movements.contains { $0.restSeconds != restSeconds } }
+    private(set) var isLoading = false
     var isSaving = false
     var errorMessage: String?
     var allExercises: [ExerciseSnapshot] = []
@@ -34,7 +41,7 @@ final class SessionBuilderViewModel {
     let dayNames = Weekdays.shortNames
 
     var isEditMode: Bool {
-        editingWorkout != nil
+        editingWorkout != nil || requestedWorkoutID != nil
     }
 
     var estimatedDurationSeconds: Int {
@@ -54,9 +61,11 @@ final class SessionBuilderViewModel {
         exercises: any ExerciseRepository,
         workout: WorkoutSnapshot? = nil,
         targetMuscleGroups: [String] = [],
+        workoutID: UUID? = nil,
         generator: SmartWorkoutGenerator = SmartWorkoutGenerator(),
         onScheduleChanged: @escaping @MainActor () async -> Void = {}
     ) {
+        self.requestedWorkoutID = workoutID
         self.workoutsRepository = workouts
         self.exercisesRepository = exercises
         self.smartGenerator = generator
@@ -72,11 +81,31 @@ final class SessionBuilderViewModel {
             mode = .manual
         }
         initialDraft = draft
+        if editingWorkout != nil {
+            generatedConfiguration = SmartWorkoutConfiguration(targetMuscleGroups: self.targetMuscleGroups,
+                                                                durationMinutes: durationMinutes, restSeconds: restSeconds)
+        }
     }
 
     func loadExercises() async {
+        guard !isLoading else { return }
+        isLoading = true
+        errorMessage = nil
+        defer { isLoading = false }
         do {
             allExercises = try await exercisesRepository.allExercises()
+            if let requestedWorkoutID, editingWorkout == nil {
+                guard let saved = try await workoutsRepository.workout(by: requestedWorkoutID) else {
+                    errorMessage = String(localized: .uiWorkoutNotFound)
+                    return
+                }
+                editingWorkout = saved
+                populateFrom(saved)
+                initialDraft = draft
+                generatedConfiguration = SmartWorkoutConfiguration(targetMuscleGroups: targetMuscleGroups,
+                                                                    durationMinutes: durationMinutes, restSeconds: restSeconds)
+            }
+            refreshSmartMovements()
         } catch {
             errorMessage = String(localized: .uiCouldNotLoadExercises)
         }
@@ -90,16 +119,22 @@ final class SessionBuilderViewModel {
     func setDurationMinutes(_ value: Int) {
         guard WorkoutTimingOptions.durations.contains(value) else { return }
         durationMinutes = value
+        refreshSmartMovements()
     }
 
     func setDefaultRestSeconds(_ value: Int) {
         guard WorkoutTimingOptions.rests.contains(value) else { return }
         restSeconds = value
         for index in movements.indices { movements[index].restSeconds = value }
+        numberInputs = numberInputs.filter { !$0.key.hasSuffix(".Rest") }
+        numberErrors = numberErrors.filter { !$0.hasSuffix(".Rest") }
+        refreshSmartMovements()
     }
 
     func removeMovement(_ id: UUID) {
         movements.removeAll { $0.id == id }
+        numberInputs = numberInputs.filter { !$0.key.hasPrefix(id.uuidString) }
+        numberErrors = numberErrors.filter { !$0.hasPrefix(id.uuidString) }
     }
 
     func setSets(_ value: Int, forMovement id: UUID) {
@@ -115,6 +150,36 @@ final class SessionBuilderViewModel {
     func setRest(_ value: Int, forMovement id: UUID) {
         guard let index = movements.firstIndex(where: { $0.id == id }) else { return }
         movements[index].restSeconds = max(15, value)
+    }
+
+    func numberText(_ field: String, movement: MovementConfig) -> String {
+        let value = field == "Sets" ? movement.sets : field == "Reps" ? movement.reps : movement.restSeconds
+        return numberInputs["\(movement.id).\(field)"] ?? String(value)
+    }
+
+    func numberHasError(_ field: String, id: UUID) -> Bool { numberErrors.contains("\(id).\(field)") }
+
+    func enterNumber(_ text: String, field: String, id: UUID) {
+        let key = "\(id).\(field)"
+        numberInputs[key] = text
+        guard let value = WorkoutNumberParser().integer(text, minimum: field == "Rest" ? 15 : 1) else {
+            numberErrors.insert(key)
+            return
+        }
+        numberErrors.remove(key)
+        switch field {
+        case "Sets": setSets(value, forMovement: id)
+        case "Reps": setReps(value, forMovement: id)
+        default: setRest(value, forMovement: id)
+        }
+    }
+
+    func stepNumber(_ field: String, id: UUID, increasing: Bool) {
+        guard let movement = movements.first(where: { $0.id == id }) else { return }
+        let value = field == "Sets" ? movement.sets : field == "Reps" ? movement.reps : movement.restSeconds
+        let step = field == "Rest" ? 15 : 1
+        let next = max(field == "Rest" ? 15 : 1, min(Int(Int32.max), value + (increasing ? step : -step)))
+        enterNumber(String(next), field: field, id: id)
     }
 
     func toggleDay(_ day: String) {
@@ -141,7 +206,7 @@ final class SessionBuilderViewModel {
     }
 
     func save() async -> Bool {
-        guard !isSaving else { return false }
+        guard !isLoading, !isSaving, !hasInvalidNumbers, requestedWorkoutID == nil || editingWorkout != nil else { return false }
         isSaving = true
         errorMessage = nil
         defer { isSaving = false }
@@ -151,30 +216,10 @@ final class SessionBuilderViewModel {
                 mode = .manual
             }
 
-            let needsGeneration = editingWorkout == nil || movements.isEmpty || initialDraft?.mode != .smart
-                || initialDraft?.targets != Set(targetMuscleGroups)
-                || initialDraft?.durationMinutes != durationMinutes || initialDraft?.restSeconds != restSeconds
-            if mode == .smart && !targetMuscleGroups.isEmpty && needsGeneration {
-                let config = SmartWorkoutConfiguration(
-                    targetMuscleGroups: targetMuscleGroups,
-                    durationMinutes: durationMinutes,
-                    restSeconds: restSeconds
-                )
-                let generated = smartGenerator.generate(config: config, from: allExercises)
-
-                guard !generated.isEmpty else {
-                    errorMessage = String(localized: .uiNoExercisesMatchTryDifferentMuscleGroups)
-                    return false
-                }
-
-                movements = generated.map {
-                    MovementConfig(
-                        exercise: $0.exercise,
-                        sets: $0.sets,
-                        reps: $0.reps,
-                        restSeconds: $0.restSeconds
-                    )
-                }
+            refreshSmartMovements()
+            if mode == .smart && movements.isEmpty {
+                errorMessage = String(localized: .uiNoExercisesMatchTryDifferentMuscleGroups)
+                return false
             }
 
             var workout: WorkoutSnapshot
@@ -216,7 +261,22 @@ final class SessionBuilderViewModel {
         }
     }
 
+    func refreshSmartMovements() {
+        guard !isPopulating, mode == .smart, !targetMuscleGroups.isEmpty, !allExercises.isEmpty else { return }
+        let config = SmartWorkoutConfiguration(targetMuscleGroups: targetMuscleGroups,
+                                               durationMinutes: durationMinutes, restSeconds: restSeconds)
+        guard generatedConfiguration != config || movements.isEmpty else { return }
+        movements = smartGenerator.generate(config: config, from: allExercises).map {
+            MovementConfig(exercise: $0.exercise, sets: $0.sets, reps: $0.reps, restSeconds: $0.restSeconds)
+        }
+        generatedConfiguration = config
+        numberInputs = [:]
+        numberErrors = []
+    }
+
     private func populateFrom(_ workout: WorkoutSnapshot) {
+        isPopulating = true
+        defer { isPopulating = false }
         name = workout.name
         mode = WorkoutMode(rawValue: workout.mode) ?? .manual
         targetMuscleGroups = workout.targetMuscleGroups

@@ -5,18 +5,19 @@ struct BuilderMovements: View {
     @Binding var isShowingExercisePicker: Bool
 
     var body: some View {
-        if viewModel.mode == .manual {
+        if viewModel.mode == .manual || !viewModel.movements.isEmpty {
             VStack(alignment: .leading, spacing: Theme.space10) {
                 HStack {
-                    MonoLabel(text: String(localized: .uiMovements), size: Theme.type11, color: Theme.text2, tracking: 0.5)
+                    MonoLabel(text: String(localized: .uiMovements), size: Theme.typeMeta, color: Theme.text2, tracking: 0.5)
                     Spacer()
+                    if viewModel.mode == .manual {
                     Button {
                         isShowingExercisePicker = true
                     } label: {
                         HStack(spacing: Theme.space5) {
-                            PlusIcon(color: Theme.accentDark, size: Theme.type13)
+                            PlusIcon(color: Theme.accentDark, size: Theme.typeMeta)
                             Text(.uiAdd)
-                                .font(Theme.fontSans(Theme.type14, .bold))
+                                .font(Theme.fontSans(Theme.typeMeta, .bold))
                                 .foregroundStyle(Theme.accentDark)
                         }
                         .padding(.horizontal, Theme.space12)
@@ -26,13 +27,15 @@ struct BuilderMovements: View {
                     }
                     .buttonStyle(.plain)
                     .accessibilityIdentifier("builder.add")
+                    .frame(minHeight: Theme.touchSize)
+                    }
                 }
                 .padding(.horizontal, Theme.horizontalPadding)
 
                 if viewModel.movements.isEmpty {
                     MonoLabel(
                         text: String(localized: .uiNoMovementsYet),
-                        size: Theme.type11,
+                        size: Theme.typeMeta,
                         color: Theme.text3,
                         tracking: 0.5
                     )

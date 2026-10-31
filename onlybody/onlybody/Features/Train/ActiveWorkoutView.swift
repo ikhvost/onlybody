@@ -24,47 +24,18 @@ struct ActiveWorkoutView: View {
             } else if viewModel.isComplete {
                 ActiveWorkoutCompletionView(
                     elapsedString: formatTime(viewModel.elapsedSeconds),
-                    exerciseCount: viewModel.items.count,
+                    completedSets: viewModel.completedSetCount,
                     saveState: viewModel.saveState,
                     onRetry: { Task { await viewModel.retrySave() } },
                     errorMessage: viewModel.errorMessage,
                     onEnd: onEnd
                 )
             } else if !viewModel.items.isEmpty {
-                ActiveWorkoutBody(
-                    currentIndex: viewModel.currentExerciseIndex,
-                    totalCount: viewModel.items.count,
-                    elapsedString: formatTime(viewModel.elapsedSeconds),
-                    exerciseName: CatalogLocalization.exercise(viewModel.currentExerciseName),
-                    setLabel: String(localized: .uiSetProgress(viewModel.currentSetIndex + 1, viewModel.currentSetsTotal))
-                        + " · " + (viewModel.currentTargetReps > 0
-                            ? String(localized: .uiTargetReps(viewModel.currentTargetReps)) : String(localized: .uiMaxHold)),
-                    totalSets: viewModel.currentSetsTotal,
-                    completedSets: viewModel.completedSetsForCurrent,
-                    currentSetIndex: viewModel.currentSetIndex,
-                    reps: viewModel.currentDisplayReps,
-                    weight: viewModel.displayedWeight,
-                    weightUnit: viewModel.weightUnitSymbol,
-                    errorMessage: viewModel.errorMessage,
-                    canGoPrevious: viewModel.canGoPrevious,
-                    canSkip: viewModel.canSkip,
-                    nextExerciseName: CatalogLocalization.exercise(viewModel.nextExerciseName),
-                    isRestActive: viewModel.restTimer.isActive,
-                    restSecondsString: formatTime(viewModel.restTimer.remainingSeconds),
-                    restNextName: CatalogLocalization.exercise(viewModel.restTimer.nextExerciseName),
-                    onEnd: { showEndPrompt = true },
-                    onMarkSetDone: { viewModel.markSetDone(); setCompletedCount += 1 },
-                    onIncrementReps: { viewModel.incrementReps() },
-                    onDecrementReps: { viewModel.decrementReps() },
-                    onIncrementWeight: { viewModel.incrementWeight() },
-                    onDecrementWeight: { viewModel.decrementWeight() },
-                    onPreviousExercise: { viewModel.previousExercise(); navigationCount += 1 },
-                    onSkipExercise: { viewModel.skipExercise(); navigationCount += 1 },
-                    onSkipRest: { viewModel.restTimer.skip() },
-                    canShowGuide: viewModel.currentItem?.exercise != nil,
-                    onGuide: {
-                        if let exercise = viewModel.currentItem?.exercise { onGuide(exercise) }
-                    },
+                ActiveWorkoutControlsView(
+                    viewModel: viewModel,
+                    onEnd: { if !viewModel.hasInvalidNumbers { showEndPrompt = true } },
+                    onCompleteSet: { viewModel.markSetDone(); setCompletedCount += 1 },
+                    onGuide: { if let exercise = viewModel.currentItem?.exercise { onGuide(exercise) } },
                     onHistory: { onHistory(viewModel.currentExerciseName) }
                 )
             }
@@ -73,9 +44,7 @@ struct ActiveWorkoutView: View {
             Button(String(localized: .uiEndSave)) {
                 Task {
                     await viewModel.endSession()
-                    if viewModel.errorMessage == nil {
-                        onEnd()
-                    }
+                    // Keep the result screen visible for success, failure, and empty completion.
                 }
             }
             Button(String(localized: .uiEndWithoutSaving), role: .destructive) {

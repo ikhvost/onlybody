@@ -5,10 +5,10 @@ struct LibraryDifficultyHeader: View {
 
     var body: some View {
         HStack {
-            MonoLabel(text: section.difficulty.label, size: Theme.type12, color: Theme.text2, tracking: 1)
+            MonoLabel(text: section.difficulty.label, size: Theme.typeMeta, color: Theme.text2, tracking: 1)
             Spacer()
             Text(section.exercises.count, format: .number)
-                .font(Theme.fontMono(Theme.type11))
+                .font(Theme.fontMono(Theme.typeMeta))
                 .foregroundStyle(Theme.text3)
         }
         .padding(.horizontal, Theme.horizontalPadding)

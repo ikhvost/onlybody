@@ -7,6 +7,8 @@ struct TrainView: View {
     let showSessionBuilder: (UUID?) -> Void
     let onStartWorkout: (UUID) -> Void
 
+    var onOverview: (UUID) -> Void = { _ in }
+
     private var contentState: String {
         if viewModel.isLoading { return "loading" }
         if viewModel.errorMessage != nil { return "error" }
@@ -41,11 +43,11 @@ struct TrainView: View {
                         VStack {
                             Spacer()
                             VStack(spacing: Theme.space10) {
-                                MonoLabel(text: errorMessage, size: Theme.type10, color: Theme.text2, tracking: 0.4)
+                                MonoLabel(text: errorMessage, size: Theme.typeMeta, color: Theme.text2, tracking: 0.4)
                                 Button(String(localized: .uiRetry)) {
                                     Task { await viewModel.load() }
                                 }
-                                .font(Theme.fontMono(Theme.type13, .medium))
+                                .font(Theme.fontMono(Theme.typeMeta, .medium))
                                 .foregroundStyle(Theme.accent)
                                 .buttonStyle(PressableButtonStyle())
                             }
@@ -55,20 +57,12 @@ struct TrainView: View {
                     } else if viewModel.workouts.isEmpty {
                         VStack {
                             Spacer()
-                            TrainEmptyState()
+                            TrainEmptyState(onCreate: showMusclePicker)
                             Spacer()
                         }
                         .transition(.opacity)
                     } else {
                         VStack(spacing: Theme.space0) {
-                            TrainDayStrip(
-                                dayNames: viewModel.dayNames,
-                                todayIndex: viewModel.todayIndex,
-                                workouts: viewModel.workouts
-                            )
-                            TodayCallout(
-                                todaysWorkouts: viewModel.todaysWorkouts
-                            )
                             WorkoutList(
                                 workouts: viewModel.workouts,
                                 todayName: viewModel.todayName,
@@ -77,7 +71,8 @@ struct TrainView: View {
                                 },
                                 onStart: { workout in
                                     onStartWorkout(workout.id)
-                                }
+                                },
+                                onOverview: { onOverview($0.id) }
                             )
                         }
                         .transition(.opacity)
