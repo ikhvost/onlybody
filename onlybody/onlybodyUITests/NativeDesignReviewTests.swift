@@ -22,7 +22,7 @@ final class NativeDesignReviewTests: XCTestCase {
                 screenshot.name = "v002-\(JourneyProduct.name)-\(Int(app.frame.width))-\(language)-\(index)"
                 screenshot.lifetime = .keepAlways
                 add(screenshot)
-                app.buttons["designReview.next"].tap()
+                advance(app, from: index)
             }
             app.terminate()
         }
@@ -56,6 +56,17 @@ final class NativeDesignReviewTests: XCTestCase {
             }
             app.buttons["designReview.next"].tap()
         }
+    }
+
+    private func advance(_ app: XCUIApplication, from index: Int) {
+        let counter = app.staticTexts["designReview.index"]
+        let next = NSPredicate(format: "label == %@", String((index + 1) % 20))
+        for _ in 0..<3 {
+            app.buttons["designReview.next"].tap()
+            if XCTWaiter.wait(for: [XCTNSPredicateExpectation(predicate: next, object: counter)], timeout: 2) == .completed { return }
+            XCTAssertEqual(counter.label, String(index), "Gallery must advance one state at a time")
+        }
+        XCTFail("Gallery did not advance after bounded retries: \(index)")
     }
 
     private func assertHitArea(_ button: XCUIElement, minimum: CGFloat) {

@@ -204,6 +204,12 @@ final class WorkoutJourneyTests: XCTestCase {
             let player = app.descendants(matching: .any)["demonstration.player"]
             for _ in 0..<5 where !player.isHittable { app.swipeUp() }
             XCTAssertTrue(player.waitForExistence(timeout: 10))
+            XCTAssertGreaterThanOrEqual(player.frame.width, 200)
+            XCTAssertGreaterThanOrEqual(player.frame.height, 200)
+            let viewport = XCTAttachment(string: "Native fixture viewport: \(player.frame)")
+            viewport.name = "YouTube fixture viewport"
+            viewport.lifetime = .keepAlways
+            add(viewport)
             XCTAssertFalse(app.buttons["demonstration.load"].exists)
             XCTAssertTrue(app.staticTexts["demonstration.author"].exists)
             XCTAssertTrue(app.buttons["demonstration.openYouTube"].exists)
