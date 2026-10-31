@@ -27,3 +27,7 @@ Focused tests: LocalizationTests, LibraryViewModelTests and
 ExerciseHistoryViewModelTests; LocalizationSmokeTests captures each language.
 Capture localized Store screenshots before upload.
 The localization QA screenshots are verification evidence, not final Store art.
+
+Terminology and UI copy audit: Reviews/2026-10-31/README.txt.
+The accompanying audit.json records before/after values and graded web evidence;
+an editorial review is not equivalent to exact-name confirmation in every locale.

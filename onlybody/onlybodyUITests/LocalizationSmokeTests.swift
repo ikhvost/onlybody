@@ -6,11 +6,11 @@ final class LocalizationSmokeTests: XCTestCase {
     func testSupportedLanguages() {
         continueAfterFailure = false
         let translations = [
-            ("en", "en_US", "Standard Push-Ups", "Barbell Bench Press"),
-            ("uk", "uk_UA", "Класичні віджимання", "Жим штанги лежачи"),
-            ("pl", "pl_PL", "Pompki klasyczne", "Wyciskanie sztangi leżąc"),
-            ("de", "de_DE", "Klassische Liegestütze", "Langhantel-Bankdrücken"),
-            ("fr", "fr_FR", "Pompes classiques", "Développé couché à la barre")
+            ("en", "en_US", "Hollow Body Hold", "Dumbbell Reverse Fly"),
+            ("uk", "uk_UA", "Утримання «човника» на спині", "Розведення гантелей у нахилі"),
+            ("pl", "pl_PL", "Utrzymanie pozycji hollow body", "Odwrotne rozpiętki z hantlami"),
+            ("de", "de_DE", "Hollow Body Hold", "Reverse Flys mit Kurzhanteln"),
+            ("fr", "fr_FR", "Gainage hollow body", "Oiseau avec haltères")
         ]
         for (language, locale, bodyName, weightsName) in translations {
             let app = XCUIApplication()
@@ -25,17 +25,22 @@ final class LocalizationSmokeTests: XCTestCase {
             XCTAssertTrue(search.waitForExistence(timeout: 10))
             #if ONLYWEIGHTS
             let name = weightsName
+            let canonicalName = "Dumbbell Reverse Fly"
             #else
             let name = bodyName
+            let canonicalName = "Hollow Body Hold"
             #endif
             search.tap()
             XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 5))
+            search.typeText(canonicalName)
+            let row = app.buttons["library.exercise.\(canonicalName)"]
+            XCTAssertTrue(row.waitForExistence(timeout: 10), "Canonical search failed: \(language)")
+            search.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: canonicalName.count))
             search.typeText(name)
             XCTAssertEqual(search.value as? String, name, "The keyboard must enter the full localized query")
             search.typeText("\n")
             XCTAssertEqual(XCTWaiter.wait(for: [XCTNSPredicateExpectation(predicate: NSPredicate(format: "exists == false"),
                                                                         object: app.keyboards.firstMatch)], timeout: 5), .completed)
-            let row = app.buttons["library.exercise.\(JourneyProduct.exercise)"]
             for _ in 0..<5 where !row.exists || !row.isHittable { app.swipeUp() }
             XCTAssertTrue(row.waitForExistence(timeout: 10), "Translated search failed: \(language), input: \(search.value ?? "nil")\n\(app.debugDescription)")
             capture("\(language)-library")

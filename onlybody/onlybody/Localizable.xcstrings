@@ -486,7 +486,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ouvre l’app de messagerie"
+            "value": "Ouvre l’app de courrier électronique"
           }
         }
       }
@@ -713,7 +713,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Кілограми (кг)"
+            "value": "Кілограми (kg)"
           }
         },
         "pl": {
@@ -748,7 +748,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Фунти (фн)"
+            "value": "Фунти (lb)"
           }
         },
         "pl": {
@@ -1186,7 +1186,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Un rappel les jours d’entraînement prévus, même si vous avez déjà fait votre séance. Utilise l’heure locale de l’appareil."
+            "value": "Un rappel les jours d’entraînement prévus, même si vous avez déjà fait votre séance. À l’heure locale de votre appareil."
           }
         }
       }
@@ -1238,7 +1238,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Додайте дні тренувань, щоб отримувати нагадування."
+            "value": "Укажіть дні в розкладі тренування, щоб отримувати нагадування."
           }
         },
         "pl": {
@@ -1320,7 +1320,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Die Berechtigung für Mitteilungen konnte nicht angefragt werden. Versuche es erneut."
+            "value": "Die Berechtigung für Mitteilungen konnte nicht angefordert werden. Versuche es erneut."
           }
         },
         "fr": {
@@ -2037,7 +2037,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Movement catalog"
+            "value": "Exercise catalog"
           }
         },
         "uk": {
@@ -2107,7 +2107,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Search..."
+            "value": "Search…"
           }
         },
         "uk": {
@@ -2142,7 +2142,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Search movements..."
+            "value": "Search exercises…"
           }
         },
         "uk": {
@@ -2212,7 +2212,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "No movements found"
+            "value": "No exercises found"
           }
         },
         "uk": {
@@ -2492,7 +2492,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Full-body movement · main groups shown"
+            "value": "Full-body exercise · main groups shown"
           }
         },
         "uk": {
@@ -2982,7 +2982,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "New Session"
+            "value": "New workout"
           }
         },
         "uk": {
@@ -3017,7 +3017,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Edit Session"
+            "value": "Edit workout"
           }
         },
         "uk": {
@@ -3122,7 +3122,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Build session"
+            "value": "Build workout"
           }
         },
         "uk": {
@@ -3157,7 +3157,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Skip — pick movements myself"
+            "value": "Skip — pick exercises myself"
           }
         },
         "uk": {
@@ -3198,7 +3198,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Повтори"
+            "value": "Повторення"
           }
         },
         "pl": {
@@ -3402,7 +3402,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Set style"
+            "value": "Exercise selection"
           }
         },
         "uk": {
@@ -3618,7 +3618,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Відхилити незбережені зміни?"
+            "value": "Скасувати незбережені зміни?"
           }
         },
         "pl": {
@@ -3636,7 +3636,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abandonner les modifications ?"
+            "value": "Abandonner les modifications non enregistrées ?"
           }
         }
       }
@@ -3653,7 +3653,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Відхилити зміни"
+            "value": "Скасувати зміни"
           }
         },
         "pl": {
@@ -3997,7 +3997,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Session name"
+            "value": "Workout name"
           }
         },
         "uk": {
@@ -4032,7 +4032,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "My Session"
+            "value": "My Workout"
           }
         },
         "uk": {
@@ -4207,7 +4207,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Auto-selected movements"
+            "value": "Auto-selected exercises"
           }
         },
         "uk": {
@@ -4627,7 +4627,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Movements"
+            "value": "Exercises"
           }
         },
         "uk": {
@@ -4662,7 +4662,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "No movements yet"
+            "value": "No exercises yet"
           }
         },
         "uk": {
@@ -4697,7 +4697,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Add Movement"
+            "value": "Add Exercise"
           }
         },
         "uk": {
@@ -4826,7 +4826,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "SÉRIE DE JOURS"
+            "value": "JOURS CONSÉCUTIFS"
           }
         }
       }
@@ -5158,7 +5158,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Після збереження тренування з цією вправою тут з’являться дата, повтори й додаткова вага."
+            "value": "Після збереження тренування з цією вправою тут з’являться дата, повторення й додаткова вага."
           }
         },
         "pl": {
@@ -5922,7 +5922,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Movement unavailable"
+            "value": "Exercise unavailable"
           }
         },
         "uk": {
@@ -6681,7 +6681,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pompes en équilibre contre un mur"
+            "value": "Pompes en équilibre sur les mains contre un mur"
           }
         }
       }
@@ -6914,7 +6914,7 @@
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Spięcia brzucha odwrotne"
+            "value": "Odwrotne spięcia brzucha"
           }
         },
         "de": {
@@ -6961,7 +6961,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Relevés de jambes suspendu"
+            "value": "Relevés de jambes tendues en suspension"
           }
         }
       }
@@ -7089,7 +7089,7 @@
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wykroki w tył"
+            "value": "Zakroki"
           }
         },
         "de": {
@@ -7118,7 +7118,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Зашагування на підвищення"
+            "value": "Заходження на підвищення"
           }
         },
         "pl": {
@@ -7346,7 +7346,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abduction de hanche couché sur le côté"
+            "value": "Abduction de hanche en position latérale"
           }
         }
       }
@@ -7474,7 +7474,7 @@
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wychodzenie piętami z mostu"
+            "value": "Hamstring walkout"
           }
         },
         "de": {
@@ -7515,13 +7515,13 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Gleitende Beinbeuger"
+            "value": "Beinbeugen mit gleitenden Fersen"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Flexions des jambes glissées"
+            "value": "Leg curl glissé au sol"
           }
         }
       }
@@ -7538,7 +7538,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Нордичні згинання"
+            "value": "Нордичні згинання ніг"
           }
         },
         "pl": {
@@ -7550,7 +7550,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nordische Beinbeuger"
+            "value": "Nordic Curls"
           }
         },
         "fr": {
@@ -7643,7 +7643,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Кроки з розведенням рук"
+            "value": "Кроки вбік із розведенням рук"
           }
         },
         "pl": {
@@ -7853,7 +7853,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Віджимання вузьким хватом"
+            "value": "Віджимання з вузькою постановкою рук"
           }
         },
         "pl": {
@@ -7923,7 +7923,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Утримання порожнистої позиції"
+            "value": "Утримання «човника» на спині"
           }
         },
         "pl": {
@@ -7935,7 +7935,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hollow-Body-Halten"
+            "value": "Hollow Body Hold"
           }
         },
         "fr": {
@@ -7958,13 +7958,13 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Скручування велосипед"
+            "value": "Скручування «велосипед»"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Brzuszki rowerowe"
+            "value": "Rowerek"
           }
         },
         "de": {
@@ -8046,7 +8046,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Relevés de genoux suspendu"
+            "value": "Relevés de genoux en suspension"
           }
         }
       }
@@ -8699,7 +8699,7 @@
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wypychanie nóg na suwnicy"
+            "value": "Wypychanie nogami na suwnicy"
           }
         },
         "de": {
@@ -8816,7 +8816,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Flexions des jambes assis"
+            "value": "Leg curl assis"
           }
         }
       }
@@ -9078,7 +9078,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Зведення рук у тренажері метелик"
+            "value": "Зведення рук у тренажері «метелик»"
           }
         },
         "pl": {
@@ -9189,7 +9189,7 @@
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wiosłowanie hantlami z podparciem klatki"
+            "value": "Wiosłowanie hantlami z podparciem klatki piersiowej"
           }
         },
         "de": {
@@ -9224,13 +9224,13 @@
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ściąganie wyciągu prostymi ramionami"
+            "value": "Ściąganie drążka wyciągu prostymi ramionami"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kabelzug mit gestreckten Armen"
+            "value": "Überzüge am Kabelzug im Stehen"
           }
         },
         "fr": {
@@ -9428,7 +9428,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Зворотне розведення гантелей"
+            "value": "Розведення гантелей у нахилі"
           }
         },
         "pl": {
@@ -9446,7 +9446,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Écartés inversés aux haltères"
+            "value": "Oiseau avec haltères"
           }
         }
       }
@@ -9726,7 +9726,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Développé couché prise serrée"
+            "value": "Développé couché à la barre prise serrée"
           }
         }
       }
@@ -9959,7 +9959,7 @@
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wykrok w tył z hantlami"
+            "value": "Zakroki z hantlami"
           }
         },
         "de": {
@@ -10023,7 +10023,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Зашагування з гантелями"
+            "value": "Заходження на підвищення з гантелями"
           }
         },
         "pl": {
@@ -10181,7 +10181,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Flexions des jambes couché"
+            "value": "Leg curl couché"
           }
         }
       }
@@ -10303,7 +10303,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Підйом колін у висі"
+            "value": "Підйоми колін у висі"
           }
         },
         "pl": {
@@ -10321,7 +10321,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Relevé de genoux suspendu"
+            "value": "Relevés de genoux en suspension"
           }
         }
       }
@@ -10338,7 +10338,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Підйом прямих ніг у висі"
+            "value": "Підйоми прямих ніг у висі"
           }
         },
         "pl": {
@@ -10356,7 +10356,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Relevé de jambes suspendu"
+            "value": "Relevés de jambes tendues en suspension"
           }
         }
       }
@@ -10379,19 +10379,19 @@
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rolowanie kółkiem do brzucha"
+            "value": "Rollout z kółkiem na kolanach"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bauchroller"
+            "value": "Ab-Rollout auf den Knien"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Déploiement à la roue abdominale"
+            "value": "Rollout à genoux à la roue abdominale"
           }
         }
       }
@@ -10426,7 +10426,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rotation diagonale à la poulie"
+            "value": "Rotation diagonale à la poulie haute"
           }
         }
       }
@@ -10758,7 +10758,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "М’язи корпуса"
+            "value": "М’язи кора"
           }
         },
         "pl": {
@@ -10875,7 +10875,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hintere Oberschenkel"
+            "value": "Hintere Oberschenkelmuskulatur"
           }
         },
         "fr": {
@@ -11931,7 +11931,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Machine de flexion des jambes couché"
+            "value": "Machine à leg curl couché"
           }
         }
       }
@@ -11948,7 +11948,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Тренажер метелик"
+            "value": "Тренажер «метелик»"
           }
         },
         "pl": {
@@ -12036,7 +12036,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Machine de flexion des jambes assis"
+            "value": "Machine à leg curl assis"
           }
         }
       }
@@ -12543,7 +12543,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Повтори: %lld"
+            "value": "Повторення: %lld"
           }
         },
         "pl": {
@@ -12788,7 +12788,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Підходи: %1$lld · Повтори: %2$lld · Відпочинок: %3$lld с"
+            "value": "Підходи: %1$lld · Повторення: %2$lld · Відпочинок: %3$lld с"
           }
         },
         "pl": {
@@ -12823,7 +12823,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Усього повторів: %lld"
+            "value": "Усього повторень: %lld"
           }
         },
         "pl": {
@@ -12858,7 +12858,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Підхід %1$lld · Повтори: %2$lld"
+            "value": "Підхід %1$lld · Повторення: %2$lld"
           }
         },
         "pl": {
@@ -12928,13 +12928,13 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ціль повторів: %lld"
+            "value": "Цільова кількість повторень: %lld"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cel powtórzeń: %lld"
+            "value": "Docelowa liczba powtórzeń: %lld"
           }
         },
         "de": {
@@ -12963,25 +12963,25 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "максимальне утримання"
+            "value": "утримуйте якнайдовше"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "maksymalne utrzymanie"
+            "value": "utrzymuj jak najdłużej"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "maximal halten"
+            "value": "so lange wie möglich halten"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "maintien maximal"
+            "value": "maintenez le plus longtemps possible"
           }
         }
       }
@@ -13447,7 +13447,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Movements are picked daily from your targets. Switch to “I choose” to build manually."
+            "value": "Exercises are picked daily from your targets. Switch to “I choose” to build manually."
           }
         },
         "uk": {
@@ -13482,7 +13482,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Movements are picked daily from your targets (%@). Switch to “I choose” to build manually."
+            "value": "Exercises are picked daily from your targets (%@). Switch to “I choose” to build manually."
           }
         },
         "uk": {
@@ -13937,7 +13937,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Складіть власну програму"
+            "value": "Складіть власне тренування"
           }
         },
         "en": {
@@ -13984,7 +13984,7 @@
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Automatyczny dobór"
+            "value": "Dobór automatyczny"
           }
         },
         "de": {
@@ -13996,7 +13996,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sélection automatique"
+            "value": "Choix automatique"
           }
         }
       }
@@ -14252,25 +14252,25 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Дані частини вправ недоступні. Їхні м’язи не враховано."
+            "value": "Дані деяких вправ недоступні. Відповідні групи м’язів не враховано."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Some exercise data is unavailable. Its muscles are not included."
+            "value": "Some exercise data is unavailable. The affected muscle groups are not included."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dane części ćwiczeń są niedostępne. Ich mięśnie nie są uwzględnione."
+            "value": "Dane niektórych ćwiczeń są niedostępne. Powiązane grupy mięśni nie są uwzględnione."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Einige Übungsdaten fehlen. Ihre Muskeln wurden nicht berücksichtigt."
+            "value": "Einige Übungsdaten fehlen. Die betroffenen Muskelgruppen wurden nicht berücksichtigt."
           }
         },
         "fr": {
@@ -14532,7 +14532,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Немає завершених підходів. Заняття не додано в журнал."
+            "value": "Немає виконаних підходів. Тренування не додано в журнал."
           }
         },
         "en": {
@@ -14637,7 +14637,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Завершені підходи"
+            "value": "Виконані підходи"
           }
         },
         "en": {
@@ -14847,7 +14847,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Серія"
+            "value": "Серія днів"
           }
         },
         "en": {
@@ -14859,7 +14859,7 @@
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Seria"
+            "value": "Seria dni"
           }
         },
         "de": {
@@ -14871,7 +14871,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Série"
+            "value": "Jours consécutifs"
           }
         }
       }
@@ -14894,7 +14894,7 @@
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rekord"
+            "value": "Najlepsza"
           }
         },
         "de": {
@@ -14917,7 +14917,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Заняття"
+            "value": "Тренування"
           }
         },
         "en": {

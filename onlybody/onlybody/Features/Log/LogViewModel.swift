@@ -79,7 +79,7 @@ final class LogViewModel {
               let year = Int(parts[0]),
               let month = Int(parts[1]) else { return key }
 
-        let monthName = calendar.monthSymbols[month - 1]
+        let monthName = calendar.standaloneMonthSymbols[month - 1]
         let currentYear = calendar.component(.year, from: now())
 
         if year == currentYear {

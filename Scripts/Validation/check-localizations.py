@@ -8,7 +8,9 @@ root = Path(__file__).resolve().parents[2]
 source = root / 'onlybody/onlybody'
 strings = json.loads((source / 'Localizable.xcstrings').read_text())['strings']
 languages = {'en', 'uk', 'pl', 'de', 'fr'}
-for key, entry in strings.items():
+info_strings = json.loads((source / 'InfoPlist.xcstrings').read_text())['strings']
+assert not strings.keys() & info_strings.keys(), 'Resource keys must be unambiguous across catalogs'
+for key, entry in (strings | info_strings).items():
     assert set(entry['localizations']) == languages, key
     original = entry['localizations']['en']['stringUnit']['value']
     def parameters(value):
@@ -32,4 +34,4 @@ for product, path in [('OnlyBody', 'Scripts/StoreGenerator/SeedData.json'),
     print(f'{product}: {len(rows)} exercises have translation coverage.')
 for symbol in re.findall(r': \.(\w+)', lookup):
     assert symbol in strings, symbol
-print(f'{len(strings)} resources complete in {", ".join(sorted(languages))}; parameters and policy links match.')
+print(f'{len(strings) + len(info_strings)} resources complete in {", ".join(sorted(languages))}; parameters and policy links match.')

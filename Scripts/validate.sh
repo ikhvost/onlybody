@@ -13,6 +13,7 @@ output="${VALIDATION_OUTPUT:-/tmp/onlybody-validation-$(date +%Y%m%d-%H%M%S)}"
 mkdir -p "$output"
 python3 Scripts/Validation/check-boundaries.py
 python3 Scripts/Validation/check-catalogs.py
+python3 Scripts/Validation/check-localizations.py
 swiftlint lint --strict --no-cache
 for product in onlybody onlyweights; do
     xcodebuild test -project onlybody/onlybody.xcodeproj -scheme "$product" \

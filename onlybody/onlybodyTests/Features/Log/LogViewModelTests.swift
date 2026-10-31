@@ -79,8 +79,8 @@ struct LogViewModelTests {
         #expect(sections.count == 2)
 
         let currentYear = Calendar.current.component(.year, from: Date())
-        let currentMay = Calendar.current.monthSymbols[4]
-        let currentApril = Calendar.current.monthSymbols[3]
+        let currentMay = Calendar.current.standaloneMonthSymbols[4]
+        let currentApril = Calendar.current.standaloneMonthSymbols[3]
 
         if currentYear == 2026 {
             #expect(sections[0].label == currentMay)
@@ -140,7 +140,32 @@ struct LogViewModelTests {
 
         let sections = viewModel.monthSections
         #expect(sections.count == 1)
-        #expect(sections[0].label == "\(Calendar.current.monthSymbols[11]) 2024")
+        #expect(sections[0].label == "\(Calendar.current.standaloneMonthSymbols[11]) 2024")
+    }
+
+    @Test(arguments: [
+        ("en_US", "October"),
+        ("uk_UA", "жовтень"),
+        ("pl_PL", "październik"),
+        ("de_DE", "Oktober"),
+        ("fr_FR", "octobre")
+    ])
+    func monthHeadersUseStandaloneNames(localeID: String, expectedMonth: String) async throws {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.locale = Locale(identifier: localeID)
+        let today = try #require(calendar.date(from: DateComponents(year: 2026, month: 10, day: 31)))
+        let pastDate = try #require(calendar.date(from: DateComponents(year: 2025, month: 10, day: 15)))
+        var current = SessionSnapshot()
+        current.date = today
+        var past = SessionSnapshot()
+        past.date = pastDate
+        let repository = MockSessionRepository()
+        repository.stubbedSessions = [past, current]
+        let viewModel = LogViewModel(sessions: repository, now: { today }, calendar: calendar)
+
+        await viewModel.load()
+
+        #expect(viewModel.monthSections.map(\.label) == [expectedMonth, "\(expectedMonth) 2025"])
     }
 
     @Test

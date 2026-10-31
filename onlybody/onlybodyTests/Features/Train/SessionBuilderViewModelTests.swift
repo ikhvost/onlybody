@@ -401,7 +401,7 @@ struct SessionBuilderViewModelTests {
 
         #expect(success == true)
         let savedWorkout = workoutRepo.savedWorkouts.first!
-        #expect(savedWorkout.name == "My Session")
+        #expect(savedWorkout.name == String(localized: .uiMySession))
     }
 
     @Test
