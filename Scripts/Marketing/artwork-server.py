@@ -7,14 +7,14 @@ from pathlib import Path
 import re
 import struct
 
-root = Path(__file__).resolve().parents[2] / 'Release'
-output = root / '1.0/Review/Artwork'
+root = Path(__file__).resolve().parents[2] / 'Assets/Marketing'
+output = root / 'Artwork'
 
 
 class ArtworkHandler(SimpleHTTPRequestHandler):
     def do_POST(self):
         name = self.path.removeprefix('/export/')
-        if not self.path.startswith('/export/') or not re.fullmatch(r'Only(?:Body|Weights)-(?:en|uk|pl|de|fr)-(?:iPhone-0[1-6]|Header|Search)\.png', name):
+        if not self.path.startswith('/export/') or not re.fullmatch(r'Only(?:Body|Weights)-[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*-(?:iPhone-0[1-6]|Header|Search)\.png', name):
             self.send_error(400)
             return
         length = int(self.headers.get('Content-Length', '0'))

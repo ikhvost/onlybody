@@ -1,7 +1,6 @@
 {
-  "status": "MARKETING_COPY_LAST_RECORDED_UPLOADED",
+  "status": "EDITABLE_MARKETING_SOURCE",
   "date": "2026-10-27",
-  "distribution_intent": "All countries and regions available to this account and app; regional prerequisites must be resolved before enabling distribution.",
   "primary_language": "en-US",
   "supported_app_languages": [
     "en",
@@ -141,6 +140,5 @@
       "marketing_url": "https://onlybody.app/",
       "privacy_policy_url": "https://onlybody.app/privacy/"
     }
-  ],
-  "status_scope": "Copy source; upload history is recorded in the local release checkpoint, not checked live by the generator"
+  ]
 }

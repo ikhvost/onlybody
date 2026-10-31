@@ -25,8 +25,5 @@ all five translations, and its entry in CatalogLocalization.swift.
 Validate with python3 Scripts/Validation/check-localizations.py.
 Focused tests: LocalizationTests, LibraryViewModelTests and
 ExerciseHistoryViewModelTests; LocalizationSmokeTests captures each language.
-For this change, only focused checks were requested.
-
-Existing Release/Artifacts/1.0 archives and Store screenshots predate these
-changes. Rebuild archives and capture localized Store screenshots before upload.
+Capture localized Store screenshots before upload.
 The localization QA screenshots are verification evidence, not final Store art.

@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="uk">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OnlyBody / OnlyWeights — artwork gallery</title>
+<style>body{margin:24px;background:#171715;color:#f0ede7;font:16px system-ui,sans-serif}select{font:inherit;padding:10px;margin:12px}.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}img{width:100%;border-radius:12px}figure{margin:0}figcaption{padding:8px 0}#status{color:#bcb8ac}</style>
+<h1>Маркетингові картки</h1>
+<label>Застосунок <select id="product"><option>OnlyBody</option><option>OnlyWeights</option></select></label>
+<label>Мова <select id="language"></select></label>
+<p id="status" role="status"></p><main class="row" id="cards"></main>
+<script>
+let copy={};
+const product=document.querySelector('#product'),language=document.querySelector('#language');
+function updateLanguages(){const previous=language.value;language.replaceChildren();for(const tag of Object.keys(copy[product.value]))language.append(new Option(tag,tag));if([...language.options].some(option=>option.value===previous))language.value=previous}
+function render(){const cards=document.querySelector('#cards');cards.replaceChildren();const headlines=copy[product.value][language.value];document.querySelector('#status').textContent='Експортовані PNG. Відсутні картки потрібно створити в render.html.';headlines.forEach(([headline,accent],index)=>{const figure=document.createElement('figure'),image=new Image(),caption=document.createElement('figcaption');image.src=`${product.value}-${language.value}-iPhone-${String(index+1).padStart(2,'0')}.png`;image.alt=headline+' '+accent;caption.textContent=image.alt;image.onerror=()=>{image.remove();caption.textContent+=' — PNG ще не експортовано'};figure.append(image,caption);cards.append(figure)})}
+product.onchange=()=>{updateLanguages();render()};language.onchange=render;
+(async()=>{copy=await(await fetch('../screenshot-copy.json')).json();updateLanguages();render()})();
+</script></html>

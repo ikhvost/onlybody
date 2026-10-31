@@ -33,6 +33,8 @@ Full validation runs lint, catalog/boundary checks, tests and Release simulator 
 
 ## Maintenance
 
+- [Version and build history](CHANGELOG.md)
+- [Marketing copy, artwork templates and localization](Assets/Marketing/README.md)
 - [Catalog and seed generation](Scripts/StoreGenerator/README.md)
 - [YouTube catalogs and review status](Scripts/ExerciseMedia/README.md) · [mandatory review checklist](Scripts/ExerciseMedia/CHECKLIST.md)
 - [Muscle artwork and classification](Scripts/MuscleDiagrams/README.md)

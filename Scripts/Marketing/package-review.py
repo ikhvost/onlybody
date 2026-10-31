@@ -7,10 +7,14 @@ import struct
 import zipfile
 
 root = Path(__file__).resolve().parents[2]
-review = root / 'Release/1.0/Review'
+review = root / 'Assets/Marketing'
 artwork = review / 'Artwork'
 cards = json.loads((artwork / 'manifest.json').read_text())
-assert len(cards) == 60
+copy = json.loads((review / 'screenshot-copy.json').read_text())
+expected = {(product, language, index) for product, languages in copy.items()
+            for language, headlines in languages.items() for index in range(1, len(headlines) + 1)}
+assert len(cards) == len(expected) and {(card['product'], card['language'], card['index']) for card in cards} == expected, 'Capture every localized card before packaging'
+assert (review / 'localizations').is_dir(), 'Run build-review.py before packaging'
 checks = []
 archive = review / 'app-store-iphone-review.zip'
 with zipfile.ZipFile(archive, 'w', compression=zipfile.ZIP_DEFLATED) as package:
@@ -21,7 +25,7 @@ with zipfile.ZipFile(archive, 'w', compression=zipfile.ZIP_DEFLATED) as package:
         assert data[:8] == b'\x89PNG\r\n\x1a\n'
         assert struct.unpack('>II', data[16:24]) == (1320, 2868)
         assert data[25] == 2, 'Artwork must be opaque RGB'
-        source = root / card['source']
+        source = review / card['source']
         check = {'file': card['file'], 'sha256': hashlib.sha256(data).hexdigest(),
                  'source_sha256': hashlib.sha256(source.read_bytes()).hexdigest(), 'bytes': len(data)}
         checks.append(check)
@@ -30,10 +34,9 @@ with zipfile.ZipFile(archive, 'w', compression=zipfile.ZIP_DEFLATED) as package:
         if path.is_file():
             package.write(path, 'metadata/' + str(path.relative_to(review / 'localizations')))
     package.write(review / 'screenshot-copy.json', 'screenshot-copy.json')
-    package.writestr('README.txt', 'Owner-review drafts, not submitted.\n60 iPhone PNGs at 1320 x 2868.\n'
-                    'Two products, five languages, six feature cards each.\n'
-                    'Real simulator screens with fictional demonstration history.\n'
-                    'Marketing uploaded with owner authorization. See the dated store audit for remaining release blockers.\n')
+    package.writestr('README.txt', f'Marketing drafts for review.\n{len(cards)} iPhone PNGs at 1320 x 2868.\n'
+                    'Localized metadata and six feature cards per product/language.\n'
+                    'This package does not publish or upload materials.\n')
 verification = {'count': len(checks), 'dimensions': '1320x2868', 'format': 'PNG RGB opaque', 'files': checks}
 (artwork / 'export-verification.json').write_text(json.dumps(verification, indent=2) + '\n')
-print(f'Packaged {len(cards)} iPhone cards and ten metadata drafts: {archive}')
+print(f'Packaged {len(cards)} iPhone cards and localized metadata: {archive}')

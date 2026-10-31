@@ -14,8 +14,10 @@ parser.add_argument('result', type=Path)
 parser.add_argument('output', type=Path)
 parser.add_argument('--product', choices=['OnlyBody', 'OnlyWeights'], required=True)
 parser.add_argument('--device', choices=['iPhone', 'iPad'], required=True)
-parser.add_argument('--language', choices=['en', 'uk', 'pl', 'de', 'fr'], default='en')
+parser.add_argument('--language', default='en', help='Language tag used by the screenshot attachment names')
 args = parser.parse_args()
+if not re.fullmatch(r'[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*', args.language):
+    parser.error('Use a language tag such as en, uk or pt-BR.')
 prefix = args.product if args.language == 'en' else args.product + '-' + args.language
 summary = json.loads(subprocess.check_output([
     'xcrun', 'xcresulttool', 'get', 'test-results', 'summary', '--path', str(args.result), '--compact'
