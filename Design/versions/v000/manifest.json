@@ -1,0 +1,696 @@
+{
+  "date": "2026-10-31",
+  "revision": "7e0647e",
+  "source": "Current SwiftUI source and same-code simulator captures; HTML behavior is simulated",
+  "device": "iPhone 17 Pro Max / iOS 26.4",
+  "references": [
+    {
+      "product": "OnlyBody",
+      "lang": "fr",
+      "screen": "settings",
+      "file": "references/OnlyBody/fr/settings.png",
+      "capturedAt": "2026-10-31T01:18:38.860000+01:00",
+      "test": "ReleasePreparationTests/testLocalizedStoreScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "de",
+      "screen": "settings",
+      "file": "references/OnlyBody/de/settings.png",
+      "capturedAt": "2026-10-31T01:17:35.694000+01:00",
+      "test": "ReleasePreparationTests/testLocalizedStoreScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "pl",
+      "screen": "settings",
+      "file": "references/OnlyBody/pl/settings.png",
+      "capturedAt": "2026-10-31T01:16:32.353000+01:00",
+      "test": "ReleasePreparationTests/testLocalizedStoreScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "uk",
+      "screen": "settings",
+      "file": "references/OnlyBody/uk/settings.png",
+      "capturedAt": "2026-10-31T01:15:29.956000+01:00",
+      "test": "ReleasePreparationTests/testLocalizedStoreScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "en",
+      "screen": "settings",
+      "file": "references/OnlyBody/en/settings.png",
+      "capturedAt": "2026-10-31T01:19:42.043000+01:00",
+      "test": "ReleasePreparationTests/testStoreScreenshotsAndCoreFlow()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "fr",
+      "screen": "movement-scrolled",
+      "file": "references/OnlyBody/fr/movement-scrolled.png",
+      "capturedAt": "2026-10-31T01:23:15.957000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "fr",
+      "screen": "movement",
+      "file": "references/OnlyBody/fr/movement.png",
+      "capturedAt": "2026-10-31T01:23:11.962000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "fr",
+      "screen": "library",
+      "file": "references/OnlyBody/fr/library.png",
+      "capturedAt": "2026-10-31T01:23:06.340000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "fr",
+      "screen": "log",
+      "file": "references/OnlyBody/fr/log.png",
+      "capturedAt": "2026-10-31T01:23:03.184000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "fr",
+      "screen": "active",
+      "file": "references/OnlyBody/fr/active.png",
+      "capturedAt": "2026-10-31T01:22:54.828000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "fr",
+      "screen": "builder",
+      "file": "references/OnlyBody/fr/builder.png",
+      "capturedAt": "2026-10-31T01:22:46.386000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "fr",
+      "screen": "train",
+      "file": "references/OnlyBody/fr/train.png",
+      "capturedAt": "2026-10-31T01:22:42.686000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "de",
+      "screen": "movement-scrolled",
+      "file": "references/OnlyBody/de/movement-scrolled.png",
+      "capturedAt": "2026-10-31T01:22:32.446000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "de",
+      "screen": "movement",
+      "file": "references/OnlyBody/de/movement.png",
+      "capturedAt": "2026-10-31T01:22:28.430000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "de",
+      "screen": "library",
+      "file": "references/OnlyBody/de/library.png",
+      "capturedAt": "2026-10-31T01:22:22.784000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "de",
+      "screen": "log",
+      "file": "references/OnlyBody/de/log.png",
+      "capturedAt": "2026-10-31T01:22:19.631000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "de",
+      "screen": "active",
+      "file": "references/OnlyBody/de/active.png",
+      "capturedAt": "2026-10-31T01:22:11.243000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "de",
+      "screen": "builder",
+      "file": "references/OnlyBody/de/builder.png",
+      "capturedAt": "2026-10-31T01:22:02.821000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "de",
+      "screen": "train",
+      "file": "references/OnlyBody/de/train.png",
+      "capturedAt": "2026-10-31T01:21:59.092000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "pl",
+      "screen": "movement-scrolled",
+      "file": "references/OnlyBody/pl/movement-scrolled.png",
+      "capturedAt": "2026-10-31T01:21:48.888000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "pl",
+      "screen": "movement",
+      "file": "references/OnlyBody/pl/movement.png",
+      "capturedAt": "2026-10-31T01:21:44.864000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "pl",
+      "screen": "library",
+      "file": "references/OnlyBody/pl/library.png",
+      "capturedAt": "2026-10-31T01:21:39.166000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "pl",
+      "screen": "log",
+      "file": "references/OnlyBody/pl/log.png",
+      "capturedAt": "2026-10-31T01:21:36.021000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "pl",
+      "screen": "active",
+      "file": "references/OnlyBody/pl/active.png",
+      "capturedAt": "2026-10-31T01:21:27.750000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "pl",
+      "screen": "builder",
+      "file": "references/OnlyBody/pl/builder.png",
+      "capturedAt": "2026-10-31T01:21:19.356000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "pl",
+      "screen": "train",
+      "file": "references/OnlyBody/pl/train.png",
+      "capturedAt": "2026-10-31T01:21:15.648000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "uk",
+      "screen": "movement-scrolled",
+      "file": "references/OnlyBody/uk/movement-scrolled.png",
+      "capturedAt": "2026-10-31T01:21:05.575000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "uk",
+      "screen": "movement",
+      "file": "references/OnlyBody/uk/movement.png",
+      "capturedAt": "2026-10-31T01:21:01.556000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "uk",
+      "screen": "library",
+      "file": "references/OnlyBody/uk/library.png",
+      "capturedAt": "2026-10-31T01:20:55.945000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "uk",
+      "screen": "log",
+      "file": "references/OnlyBody/uk/log.png",
+      "capturedAt": "2026-10-31T01:20:52.776000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "uk",
+      "screen": "active",
+      "file": "references/OnlyBody/uk/active.png",
+      "capturedAt": "2026-10-31T01:20:44.080000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "uk",
+      "screen": "builder",
+      "file": "references/OnlyBody/uk/builder.png",
+      "capturedAt": "2026-10-31T01:20:35.677000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "uk",
+      "screen": "train",
+      "file": "references/OnlyBody/uk/train.png",
+      "capturedAt": "2026-10-31T01:20:31.956000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "en",
+      "screen": "movement-scrolled",
+      "file": "references/OnlyBody/en/movement-scrolled.png",
+      "capturedAt": "2026-10-31T01:20:21.806000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "en",
+      "screen": "movement",
+      "file": "references/OnlyBody/en/movement.png",
+      "capturedAt": "2026-10-31T01:20:17.800000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "en",
+      "screen": "library",
+      "file": "references/OnlyBody/en/library.png",
+      "capturedAt": "2026-10-31T01:20:12.362000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "en",
+      "screen": "log",
+      "file": "references/OnlyBody/en/log.png",
+      "capturedAt": "2026-10-31T01:20:09.188000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "en",
+      "screen": "active",
+      "file": "references/OnlyBody/en/active.png",
+      "capturedAt": "2026-10-31T01:20:00.887000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "en",
+      "screen": "builder",
+      "file": "references/OnlyBody/en/builder.png",
+      "capturedAt": "2026-10-31T01:19:52.427000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "en",
+      "screen": "train",
+      "file": "references/OnlyBody/en/train.png",
+      "capturedAt": "2026-10-31T01:19:48.267000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "en",
+      "screen": "session",
+      "file": "references/OnlyBody/en/session.png",
+      "capturedAt": "2026-10-31T01:25:13.145000+01:00",
+      "test": "WorkoutJourneyTests/testCompleteWritesOneSession()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "en",
+      "screen": "notifications",
+      "file": "references/OnlyBody/en/notifications.png",
+      "capturedAt": "2026-10-31T01:28:28.565000+01:00",
+      "test": "WorkoutJourneyTests/testNavigationAndFullscreenWorkout()"
+    },
+    {
+      "product": "OnlyBody",
+      "lang": "en",
+      "screen": "train-empty",
+      "file": "references/OnlyBody/en/train-empty.png",
+      "capturedAt": "2026-10-31T01:28:02.693000+01:00",
+      "test": "WorkoutJourneyTests/testNavigationAndFullscreenWorkout()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "fr",
+      "screen": "settings",
+      "file": "references/OnlyWeights/fr/settings.png",
+      "capturedAt": "2026-10-31T01:37:28.609000+01:00",
+      "test": "ReleasePreparationTests/testLocalizedStoreScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "de",
+      "screen": "settings",
+      "file": "references/OnlyWeights/de/settings.png",
+      "capturedAt": "2026-10-31T01:36:28.340000+01:00",
+      "test": "ReleasePreparationTests/testLocalizedStoreScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "pl",
+      "screen": "settings",
+      "file": "references/OnlyWeights/pl/settings.png",
+      "capturedAt": "2026-10-31T01:35:28.063000+01:00",
+      "test": "ReleasePreparationTests/testLocalizedStoreScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "uk",
+      "screen": "settings",
+      "file": "references/OnlyWeights/uk/settings.png",
+      "capturedAt": "2026-10-31T01:34:28.213000+01:00",
+      "test": "ReleasePreparationTests/testLocalizedStoreScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "en",
+      "screen": "settings",
+      "file": "references/OnlyWeights/en/settings.png",
+      "capturedAt": "2026-10-31T01:38:28.485000+01:00",
+      "test": "ReleasePreparationTests/testStoreScreenshotsAndCoreFlow()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "fr",
+      "screen": "movement-scrolled",
+      "file": "references/OnlyWeights/fr/movement-scrolled.png",
+      "capturedAt": "2026-10-31T01:41:47.505000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "fr",
+      "screen": "movement",
+      "file": "references/OnlyWeights/fr/movement.png",
+      "capturedAt": "2026-10-31T01:41:43.737000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "fr",
+      "screen": "library",
+      "file": "references/OnlyWeights/fr/library.png",
+      "capturedAt": "2026-10-31T01:41:38.623000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "fr",
+      "screen": "log",
+      "file": "references/OnlyWeights/fr/log.png",
+      "capturedAt": "2026-10-31T01:41:35.672000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "fr",
+      "screen": "active",
+      "file": "references/OnlyWeights/fr/active.png",
+      "capturedAt": "2026-10-31T01:41:27.514000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "fr",
+      "screen": "builder",
+      "file": "references/OnlyWeights/fr/builder.png",
+      "capturedAt": "2026-10-31T01:41:19.712000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "fr",
+      "screen": "train",
+      "file": "references/OnlyWeights/fr/train.png",
+      "capturedAt": "2026-10-31T01:41:15.934000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "de",
+      "screen": "movement-scrolled",
+      "file": "references/OnlyWeights/de/movement-scrolled.png",
+      "capturedAt": "2026-10-31T01:41:06.907000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "de",
+      "screen": "movement",
+      "file": "references/OnlyWeights/de/movement.png",
+      "capturedAt": "2026-10-31T01:41:03.158000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "de",
+      "screen": "library",
+      "file": "references/OnlyWeights/de/library.png",
+      "capturedAt": "2026-10-31T01:40:58.008000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "de",
+      "screen": "log",
+      "file": "references/OnlyWeights/de/log.png",
+      "capturedAt": "2026-10-31T01:40:55.018000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "de",
+      "screen": "active",
+      "file": "references/OnlyWeights/de/active.png",
+      "capturedAt": "2026-10-31T01:40:46.851000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "de",
+      "screen": "builder",
+      "file": "references/OnlyWeights/de/builder.png",
+      "capturedAt": "2026-10-31T01:40:39.076000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "de",
+      "screen": "train",
+      "file": "references/OnlyWeights/de/train.png",
+      "capturedAt": "2026-10-31T01:40:35.314000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "pl",
+      "screen": "movement-scrolled",
+      "file": "references/OnlyWeights/pl/movement-scrolled.png",
+      "capturedAt": "2026-10-31T01:40:26.305000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "pl",
+      "screen": "movement",
+      "file": "references/OnlyWeights/pl/movement.png",
+      "capturedAt": "2026-10-31T01:40:22.506000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "pl",
+      "screen": "library",
+      "file": "references/OnlyWeights/pl/library.png",
+      "capturedAt": "2026-10-31T01:40:17.330000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "pl",
+      "screen": "log",
+      "file": "references/OnlyWeights/pl/log.png",
+      "capturedAt": "2026-10-31T01:40:14.351000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "pl",
+      "screen": "active",
+      "file": "references/OnlyWeights/pl/active.png",
+      "capturedAt": "2026-10-31T01:40:06.169000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "pl",
+      "screen": "builder",
+      "file": "references/OnlyWeights/pl/builder.png",
+      "capturedAt": "2026-10-31T01:39:58.380000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "pl",
+      "screen": "train",
+      "file": "references/OnlyWeights/pl/train.png",
+      "capturedAt": "2026-10-31T01:39:54.596000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "uk",
+      "screen": "movement-scrolled",
+      "file": "references/OnlyWeights/uk/movement-scrolled.png",
+      "capturedAt": "2026-10-31T01:39:45.576000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "uk",
+      "screen": "movement",
+      "file": "references/OnlyWeights/uk/movement.png",
+      "capturedAt": "2026-10-31T01:39:41.771000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "uk",
+      "screen": "library",
+      "file": "references/OnlyWeights/uk/library.png",
+      "capturedAt": "2026-10-31T01:39:36.682000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "uk",
+      "screen": "log",
+      "file": "references/OnlyWeights/uk/log.png",
+      "capturedAt": "2026-10-31T01:39:33.701000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "uk",
+      "screen": "active",
+      "file": "references/OnlyWeights/uk/active.png",
+      "capturedAt": "2026-10-31T01:39:25.511000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "uk",
+      "screen": "builder",
+      "file": "references/OnlyWeights/uk/builder.png",
+      "capturedAt": "2026-10-31T01:39:17.764000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "uk",
+      "screen": "train",
+      "file": "references/OnlyWeights/uk/train.png",
+      "capturedAt": "2026-10-31T01:39:13.934000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "en",
+      "screen": "movement-scrolled",
+      "file": "references/OnlyWeights/en/movement-scrolled.png",
+      "capturedAt": "2026-10-31T01:39:04.942000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "en",
+      "screen": "movement",
+      "file": "references/OnlyWeights/en/movement.png",
+      "capturedAt": "2026-10-31T01:39:01.162000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "en",
+      "screen": "library",
+      "file": "references/OnlyWeights/en/library.png",
+      "capturedAt": "2026-10-31T01:38:56.202000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "en",
+      "screen": "log",
+      "file": "references/OnlyWeights/en/log.png",
+      "capturedAt": "2026-10-31T01:38:53.240000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "en",
+      "screen": "active",
+      "file": "references/OnlyWeights/en/active.png",
+      "capturedAt": "2026-10-31T01:38:45.076000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "en",
+      "screen": "builder",
+      "file": "references/OnlyWeights/en/builder.png",
+      "capturedAt": "2026-10-31T01:38:37.395000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "en",
+      "screen": "train",
+      "file": "references/OnlyWeights/en/train.png",
+      "capturedAt": "2026-10-31T01:38:33.691000+01:00",
+      "test": "StoreScreenshotTests/testPopulatedScreenshots()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "en",
+      "screen": "session",
+      "file": "references/OnlyWeights/en/session.png",
+      "capturedAt": "2026-10-31T01:43:38.917000+01:00",
+      "test": "WorkoutJourneyTests/testCompleteWritesOneSession()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "en",
+      "screen": "notifications",
+      "file": "references/OnlyWeights/en/notifications.png",
+      "capturedAt": "2026-10-31T01:46:43.420000+01:00",
+      "test": "WorkoutJourneyTests/testNavigationAndFullscreenWorkout()"
+    },
+    {
+      "product": "OnlyWeights",
+      "lang": "en",
+      "screen": "train-empty",
+      "file": "references/OnlyWeights/en/train-empty.png",
+      "capturedAt": "2026-10-31T01:46:18.541000+01:00",
+      "test": "WorkoutJourneyTests/testNavigationAndFullscreenWorkout()"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+/* The host controls viewport and scale; the app always renders at 1 CSS px/pt. */
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+.workspace-sidebar,.workspace-topbar,.preview-caption{display:none!important}
+.workspace-main,.preview-stage{margin:0!important;padding:0!important;display:block!important;width:100%;height:100%;min-height:0;background:none}
+.device-slot{width:100%!important;height:100%!important}
+.device{width:100%!important;height:100%!important;transform:none!important;border-radius:0!important;box-shadow:none}
+.app{height:calc(100% - 62px)}

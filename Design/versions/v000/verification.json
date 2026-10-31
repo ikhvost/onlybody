@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "date": "2026-10-31",
+  "base_revision": "7e0647e",
+  "mock_screens": 15,
+  "products": [
+    "OnlyBody",
+    "OnlyWeights"
+  ],
+  "languages": [
+    "uk",
+    "en",
+    "pl",
+    "de",
+    "fr"
+  ],
+  "catalog_exercises": {
+    "OnlyBody": 65,
+    "OnlyWeights": 60
+  },
+  "reference_screenshots": 86,
+  "browser_checks": {
+    "direct_screen_navigation": 30,
+    "language_layout_checks": 40,
+    "unintended_horizontal_overflow": 0,
+    "console_warnings_or_errors": 0,
+    "reference_png_loaded": {
+      "width": 1320,
+      "height": 2868
+    }
+  },
+  "interactive_flows": [
+    "Create manual workout; add exercise through search; change sets/reps and duration; save",
+    "Complete saved workout and verify log session count increases from 55 to 56",
+    "Mark set complete; rest screen; skip rest; end/discard dialog",
+    "Settings sound toggle and unit selection"
+  ],
+  "scope": "HTML prototype QA; native app code unchanged"
+}
