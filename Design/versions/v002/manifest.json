@@ -3,7 +3,7 @@
   "parent": "v001",
   "date": "2026-10-31",
   "title": "Огляд тренування",
-  "status": "proposed",
+  "status": "approved",
   "nativeChanges": false,
   "fixtureRevision": "7e0647e",
   "products": [
@@ -43,5 +43,7 @@
   "defaultClock": "frozen",
   "entry": "../../runner.html?version=v002",
   "decisions": "DECISIONS.md",
-  "verification": "verification.json"
+  "verification": "verification.json",
+  "approvalScope": "Clickable design prototype; native implementation is a separate step",
+  "screenshotStorage": "local-only, gitignored"
 }

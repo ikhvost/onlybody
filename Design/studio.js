@@ -20,7 +20,7 @@ function redraw(){
   const comparisonBase=get('compare-base').value===chosen?'v000':get('compare-base').value;
   const versions=compare?[comparisonBase,chosen]:[chosen];
   get('title').textContent=screens.find(([id])=>id===selected)[1];
-  document.querySelector('.status').textContent=baseline&&!compare?'v000 · Зафіксована база':`${chosen} · Запропоновано`;
+  document.querySelector('.status').textContent=baseline&&!compare?'v000 · Зафіксована база':chosen==='v002'?'v002 · Погоджено':`${chosen} · Попередня пропозиція`;
   get('screens').innerHTML=screens.map(([id,label],i)=>`<button data-route="${id}" class="${id===selected?'selected':''}" ${id===selected?'aria-current="page"':''}><span>${String(i+1).padStart(2,'0')}</span>${label}</button>`).join('');
   const args=new URLSearchParams({product:get('product').value,language:get('language').value,screen:selected,scenario:get('scenario').value,live:String(get('live').checked)});
   get('stage').innerHTML=versions.map(v=>`<section class="preview"><h3>${v==='v000'?'v000 · Початковий стан':v==='v001'?'v001 · М’який спортивний':'v002 · Огляд тренування'}<span>${width} × ${height}</span></h3><div class="frame-space"><iframe title="${v} ${get('product').value}" src="runner.html?${args}&version=${v}" width="${width}" height="${height}"></iframe></div></section>`).join('');

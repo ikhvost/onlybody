@@ -33,3 +33,9 @@ Scripts/ExerciseMedia/Reviews/
 /Assets/Marketing/index.html
 /Assets/Marketing/verification.json
 /Assets/Marketing/*.zip
+
+# Design screenshots are local QA evidence; keep runnable sources and assets in Git.
+/Design/studio.png
+/Design/versions/*/studio.png
+/Design/versions/*/screenshots/
+/Design/versions/*/references/
