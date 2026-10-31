@@ -44,7 +44,7 @@ struct StepperView: View {
 
     var body: some View {
         VStack(spacing: Theme.space6) {
-            MonoLabel(text: label, size: Theme.type10, color: Theme.text3, tracking: 0.5)
+            MonoLabel(text: label, size: Theme.typeMeta, color: Theme.text3, tracking: 0.5)
 
             HStack(spacing: Theme.space4) {
                 Button {
@@ -53,9 +53,9 @@ struct StepperView: View {
                     }
                 } label: {
                     Text("−")
-                        .font(Theme.fontMono(Theme.type14, .medium))
+                        .font(Theme.fontMono(Theme.typeMeta, .medium))
                         .foregroundStyle(canDecrement ? Theme.text : Theme.text3)
-                        .frame(width: 32, height: 32)
+                        .frame(width: Theme.stepSize, height: Theme.stepSize)
                         .background(Theme.surface2)
                         .clipShape(.rect(cornerRadius: Theme.chipCornerRadius))
                         .overlay {
@@ -70,7 +70,7 @@ struct StepperView: View {
 
                 Text(valueText)
                     .accessibilityIdentifier("stepper.\(identifier).value")
-                    .font(Theme.fontMono(Theme.type14, .bold))
+                    .font(Theme.fontMono(Theme.typeMeta, .bold))
                     .foregroundStyle(Theme.text)
                     .frame(maxWidth: .infinity)
 
@@ -78,10 +78,10 @@ struct StepperView: View {
                     onIncrement()
                 } label: {
                     Text("+")
-                        .font(Theme.fontMono(Theme.type14, .medium))
-                        .foregroundStyle(Theme.accentDark)
-                        .frame(width: 32, height: 32)
-                        .background(Theme.accent)
+                        .font(Theme.fontMono(Theme.typeMeta, .medium))
+                        .foregroundStyle(Theme.text)
+                        .frame(width: Theme.stepSize, height: Theme.stepSize)
+                        .background(Theme.surface2)
                         .clipShape(.rect(cornerRadius: Theme.chipCornerRadius))
                 }
                 .accessibilityLabel(String(localized: .uiIncrease(label)))

@@ -15,8 +15,8 @@ struct BottomNavButton<Icon: View>: View {
 
                 MonoLabel(
                     text: label,
-                    size: Theme.type10,
-                    color: isSelected ? Theme.accent : Theme.text3,
+                    size: Theme.typeMeta,
+                    color: isSelected ? Theme.accent : Theme.text2,
                     tracking: 1.2
                 )
 
@@ -26,7 +26,9 @@ struct BottomNavButton<Icon: View>: View {
                     .clipShape(.rect(cornerRadius: 1))
             }
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, minHeight: Theme.buttonHeight)
+        .background(isSelected ? Theme.accentDim : .clear, in: .rect(cornerRadius: Theme.buttonRadius))
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
         .buttonStyle(PressableButtonStyle())
     }
 }

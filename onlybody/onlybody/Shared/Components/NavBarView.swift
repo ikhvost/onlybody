@@ -18,14 +18,15 @@ struct NavBarView<Leading: View, Trailing: View>: View {
     var body: some View {
         HStack(spacing: Theme.space10) {
             leading
+                .frame(minWidth: Theme.touchSize, minHeight: Theme.touchSize)
                 .fixedSize(horizontal: true, vertical: false)
 
             if let title {
                 Text(title)
-                    .font(Theme.fontSans(Theme.type16, .bold))
+                    .font(Theme.fontSans(Theme.typeCard, .bold))
                     .tracking(-0.2)
                     .foregroundStyle(Theme.text)
-                    .lineLimit(1)
+                    .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity)
             } else {
                 Spacer(minLength: Theme.space0)

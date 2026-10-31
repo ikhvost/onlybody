@@ -7,15 +7,15 @@ struct GhostButton: View {
     var body: some View {
         Button(action: action) {
             Text(title)
-                .font(Theme.fontSans(Theme.type14, .medium))
+                .font(Theme.fontSans(Theme.typeBody, .medium))
                 .foregroundStyle(Theme.text2)
                 .padding(.horizontal, Theme.space15)
-                .padding(.vertical, Theme.space14)
+                .frame(minHeight: Theme.buttonHeight)
                 .overlay {
-                    RoundedRectangle(cornerRadius: Theme.cornerRadius)
+                    RoundedRectangle(cornerRadius: Theme.buttonRadius)
                         .stroke(Theme.border2, lineWidth: 1)
                 }
-                .clipShape(.rect(cornerRadius: Theme.cornerRadius))
+                .clipShape(.rect(cornerRadius: Theme.buttonRadius))
         }
         .buttonStyle(PressableButtonStyle())
     }

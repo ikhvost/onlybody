@@ -3,17 +3,19 @@ import SwiftUI
 struct PrimaryButton: View {
     let title: String
     let action: () -> Void
+    var minimumHeight: CGFloat = Theme.buttonHeight
     var disabled: Bool = false
 
     var body: some View {
         Button(action: action) {
             Text(title)
-                .font(Theme.fontSans(Theme.type16, .bold))
+                .font(Theme.fontSans(Theme.typeBody, .bold))
                 .foregroundStyle(disabled ? Theme.text3 : Theme.accentDark)
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, Theme.space19)
+                .frame(minHeight: minimumHeight)
+                .padding(.horizontal, Theme.cardInset)
                 .background(disabled ? Theme.surface2 : Theme.accent)
-                .clipShape(.rect(cornerRadius: Theme.cornerRadius))
+                .clipShape(.rect(cornerRadius: Theme.buttonRadius))
         }
         .disabled(disabled)
         .buttonStyle(PressableButtonStyle())

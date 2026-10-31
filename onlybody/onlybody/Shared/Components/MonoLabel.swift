@@ -2,14 +2,14 @@ import SwiftUI
 
 struct MonoLabel: View {
     let text: String
-    var size: CGFloat = Theme.type11
+    var size: CGFloat = Theme.typeMeta
     var color: Color = Theme.text3
     var tracking: CGFloat = 1.0
 
     var body: some View {
-        Text(text.uppercased())
-            .font(Theme.fontMono(size))
+        Text(text)
+            .font(Theme.fontSans(size))
             .foregroundStyle(color)
-            .tracking(tracking)
+            .tracking(0)
     }
 }
