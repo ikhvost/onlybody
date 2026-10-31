@@ -19,3 +19,20 @@ onlybody/Products/*/Resources/SeedStore/*.store-shm
 
 # Local video review records and evidence; keep on disk, outside version control.
 Scripts/ExerciseMedia/Reviews/
+
+# Local release archives, screenshots and verification evidence.
+/Release/Artifacts/
+
+# Generated release exports stay on disk; retain editable sources and copy.
+/Release/*/Review/Artwork/**/*.png
+/Release/*/Review/Artwork/**/*.jpg
+/Release/*/Review/Artwork/manifest.json
+/Release/*/Review/Artwork/*verification.json
+/Release/*/Review/Artwork/Creative/*verification.json
+/Release/*/Review/index.html
+/Release/*/Review/localizations/
+/Release/*/Review/verification.json
+/Release/*/Review/*.zip
+
+# Superseded English copy exports; current copy lives in Review/metadata.json.
+/Release/1.0/en-US/

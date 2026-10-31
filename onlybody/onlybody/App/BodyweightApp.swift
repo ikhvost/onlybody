@@ -54,6 +54,9 @@ struct BodyweightApp: App {
                 for: Exercise.self, Workout.self, WorkoutItem.self, Session.self, SessionItem.self,
                 configurations: config
             )
+            #if DEBUG
+            try ScreenshotStoreFixture.populateIfRequested(storeContainer, product: configuration.displayName)
+            #endif
             container = storeContainer
             exercises = SwiftDataExerciseRepository(context: ModelContext(storeContainer), catalog: catalog)
             workouts = SwiftDataWorkoutRepository(context: ModelContext(storeContainer), catalog: catalog)
