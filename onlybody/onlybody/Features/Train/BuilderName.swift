@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct BuilderName: View {
+    @FocusState private var isFocused: Bool
     @Bindable var viewModel: SessionBuilderViewModel
 
     var body: some View {
@@ -10,6 +11,8 @@ struct BuilderName: View {
 
             TextField(String(localized: .uiEGFullBody), text: $viewModel.name)
                 .accessibilityIdentifier("builder.name")
+                .focused($isFocused).submitLabel(.done)
+                .onSubmit { isFocused = false }
                 .font(Theme.fontSans(Theme.typeBody))
                 .foregroundStyle(Theme.text)
                 .padding(.horizontal, Theme.space13)

@@ -45,9 +45,12 @@ struct SessionBuilderView: View {
                         BuilderMovements(viewModel: viewModel, isShowingExercisePicker: $isShowingExercisePicker)
                         DisclosureGroup(String(localized: .uiDesignSchedule)) { BuilderDays(viewModel: viewModel) }
                             .font(Theme.fontSans(Theme.typeBody)).padding(Theme.horizontalPadding)
-                        DisclosureGroup(String(localized: .uiDesignOptions)) { BuilderTiming(viewModel: viewModel) }
-                            .font(Theme.fontSans(Theme.typeBody)).padding(Theme.horizontalPadding)
-                            .accessibilityIdentifier("builder.options")
+                        DisclosureGroup {
+                            BuilderTiming(viewModel: viewModel)
+                        } label: {
+                            Text(.uiDesignOptions).accessibilityIdentifier("builder.options")
+                        }
+                        .font(Theme.fontSans(Theme.typeBody)).padding(Theme.horizontalPadding)
                         BuilderDuration(viewModel: viewModel)
                         if viewModel.isEditMode {
                             Button(String(localized: .uiDeleteWorkout), role: .destructive) { showDeletePrompt = true }
@@ -61,6 +64,7 @@ struct SessionBuilderView: View {
                     .padding(.bottom, Theme.space28)
                 }
                 .scrollIndicators(.hidden)
+                .scrollDismissesKeyboard(.interactively)
                 .safeAreaInset(edge: .bottom, spacing: Theme.space0) {
                     PrimaryButton(title: viewModel.isSaving ? String(localized: .uiDesignSaving) : String(localized: .uiSave),
                                   action: handleSave, disabled: viewModel.isLoading || viewModel.isSaving || viewModel.hasInvalidNumbers)
