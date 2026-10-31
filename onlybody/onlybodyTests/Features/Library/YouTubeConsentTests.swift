@@ -18,7 +18,8 @@ struct YouTubeConsentTests {
             ),
             bundleIdentifier: "ikhvost.onlybody",
             network: network,
-            youtubeConsent: consent
+            youtubeConsent: consent,
+            trackingAuthorization: MockTrackingAuthorizationSource()
         )
     }
 
@@ -111,7 +112,7 @@ struct YouTubeConsentTests {
         #expect(!weightsStore.makeConsent().isAllowed)
         consent.revoke()
         #expect(!bodyStore.makeConsent().isAllowed)
-        defaults.set(["version": 0, "grantedAt": Date()], forKey: "body.youtubeConsent")
+        defaults.set(["version": 1, "grantedAt": Date()], forKey: "body.youtubeConsent")
         #expect(!bodyStore.makeConsent().isAllowed)
     }
 }

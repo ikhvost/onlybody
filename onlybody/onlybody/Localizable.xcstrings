@@ -1512,31 +1512,31 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "YouTube videos allowed"
+            "value": "In-app video consent saved"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Відео YouTube дозволені"
+            "value": "Згоду на вбудовані відео збережено"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Filmy YouTube dozwolone"
+            "value": "Zapisano zgodę na filmy w aplikacji"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "YouTube-Videos erlaubt"
+            "value": "Einwilligung für Videos in der App gespeichert"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vidéos YouTube autorisées"
+            "value": "Consentement aux vidéos intégrées enregistré"
           }
         }
       }
@@ -1652,31 +1652,31 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Google processes technical data and video activity for playback, security, measurement and non-personalized ads. Turning videos off stops embedded YouTube connections; it does not delete data already received by Google."
+            "value": "Google processes technical data and video activity for playback, security, analytics and advertising. The in-app player also requires system tracking permission. You can always open videos on YouTube instead."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Google обробляє технічні дані й дані переглядів для відтворення, безпеки, вимірювання та неперсоналізованої реклами. Вимкнення відео зупиняє підключення до YouTube, але не видаляє вже отримані Google дані."
+            "value": "Google обробляє технічні дані та активність перегляду для відтворення, безпеки, аналітики й реклами. Вбудований плеєр також потребує системного дозволу на відстеження. Натомість ви завжди можете відкрити відео на YouTube."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Google przetwarza dane techniczne i aktywność oglądania na potrzeby odtwarzania, bezpieczeństwa, pomiarów i reklam niespersonalizowanych. Wyłączenie filmów zatrzymuje połączenia z YouTube, ale nie usuwa danych już otrzymanych przez Google."
+            "value": "Google przetwarza dane techniczne i aktywność oglądania na potrzeby odtwarzania, bezpieczeństwa, analityki i reklam. Odtwarzacz w aplikacji wymaga również systemowej zgody na śledzenie. Zawsze możesz otworzyć film w YouTube."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Google verarbeitet technische Daten und Videoaktivitäten für Wiedergabe, Sicherheit, Messungen und nicht personalisierte Werbung. Das Deaktivieren beendet eingebettete YouTube-Verbindungen, löscht aber keine bereits von Google empfangenen Daten."
+            "value": "Google verarbeitet technische Daten und Videoaktivitäten für Wiedergabe, Sicherheit, Analysen und Werbung. Der Player in der App benötigt auch die Systemberechtigung für Tracking. Du kannst Videos jederzeit stattdessen auf YouTube öffnen."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Google traite les données techniques et l’activité vidéo pour la lecture, la sécurité, les mesures et les publicités non personnalisées. Désactiver les vidéos coupe les connexions YouTube intégrées, sans supprimer les données déjà reçues par Google."
+            "value": "Google traite les données techniques et l’activité vidéo pour la lecture, la sécurité, les analyses et la publicité. Le lecteur intégré nécessite aussi l’autorisation système de suivi. Vous pouvez toujours ouvrir les vidéos sur YouTube."
           }
         }
       }
@@ -13612,6 +13612,146 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vous avez un entraînement prévu aujourd’hui."
+          }
+        }
+      }
+    },
+    "uiWatchOnYoutube": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Watch on YouTube"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дивитися на YouTube"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oglądaj w YouTube"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf YouTube ansehen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voir sur YouTube"
+          }
+        }
+      }
+    },
+    "uiContinueToVideoPermission": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Продовжити"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dalej"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weiter"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continuer"
+          }
+        }
+      }
+    },
+    "uiYoutubeTrackingExplanation": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YouTube (Google) processes device and viewing data for playback, security, analytics and advertising, and may link it with activity from other apps and websites to measure ads. Continue to review the system permission, or watch on YouTube below without enabling the in-app player."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YouTube (Google) обробляє дані пристрою та переглядів для відтворення, безпеки, аналітики й реклами та може пов’язувати їх з активністю в інших застосунках і на сайтах для вимірювання реклами. Продовжте, щоб переглянути системний запит дозволу, або дивіться на YouTube за кнопкою нижче без увімкнення вбудованого плеєра."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YouTube (Google) przetwarza dane urządzenia i oglądania na potrzeby odtwarzania, bezpieczeństwa, analityki i reklam. Może łączyć je z aktywnością w innych aplikacjach i witrynach w celu pomiaru reklam. Przejdź dalej, aby zobaczyć systemowe pytanie o zgodę, lub obejrzyj film w YouTube poniżej bez włączania odtwarzacza w aplikacji."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YouTube (Google) verarbeitet Geräte- und Wiedergabedaten für Wiedergabe, Sicherheit, Analysen und Werbung und kann sie zur Werbemessung mit Aktivitäten in anderen Apps und auf Websites verknüpfen. Fahre fort, um die Systemabfrage anzuzeigen, oder sieh das Video unten auf YouTube an, ohne den Player in der App zu aktivieren."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YouTube (Google) traite les données de l’appareil et de visionnage pour la lecture, la sécurité, les analyses et la publicité, et peut les associer à l’activité dans d’autres apps et sites pour mesurer les publicités. Continuez pour consulter la demande système, ou regardez la vidéo sur YouTube ci-dessous sans activer le lecteur intégré."
+          }
+        }
+      }
+    },
+    "uiYoutubeExternalPlayback": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Watch this demonstration on YouTube using the button below. The in-app player is off. Your exercises and workouts remain available."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дивіться цю демонстрацію на YouTube за кнопкою нижче. Вбудований плеєр вимкнений. Вправи та тренування залишаються доступними."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obejrzyj demonstrację w YouTube za pomocą przycisku poniżej. Odtwarzacz w aplikacji jest wyłączony. Ćwiczenia i treningi pozostają dostępne."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sieh diese Übung über die Schaltfläche unten auf YouTube an. Der Player in der App ist deaktiviert. Übungen und Workouts bleiben verfügbar."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regardez cette démonstration sur YouTube avec le bouton ci-dessous. Le lecteur intégré est désactivé. Vos exercices et séances restent disponibles."
           }
         }
       }

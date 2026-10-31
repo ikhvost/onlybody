@@ -115,6 +115,7 @@ struct ExercisePickerView: View {
                                 }
                                 .padding(.vertical, Theme.space13)
                                 .padding(.horizontal, Theme.horizontalPadding)
+                                .contentShape(.rect)
                             }
                             .buttonStyle(.plain)
                             .accessibilityIdentifier("exercise.pick.\(exercise.name)")

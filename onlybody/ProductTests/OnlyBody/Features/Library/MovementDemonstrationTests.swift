@@ -18,7 +18,8 @@ struct MovementDemonstrationTests {
             allowsVideoLoading: allowsVideoLoading,
             network: network,
             timeSource: clock,
-            youtubeConsent: YouTubeConsent(grantedAt: Date())
+            youtubeConsent: YouTubeConsent(grantedAt: Date()),
+            trackingAuthorization: MockTrackingAuthorizationSource()
         )
     }
 

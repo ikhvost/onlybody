@@ -18,18 +18,21 @@ struct NavBarView<Leading: View, Trailing: View>: View {
     var body: some View {
         HStack(spacing: Theme.space10) {
             leading
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .fixedSize(horizontal: true, vertical: false)
 
             if let title {
                 Text(title)
                     .font(Theme.fontSans(Theme.type16, .bold))
                     .tracking(-0.2)
                     .foregroundStyle(Theme.text)
+                    .lineLimit(1)
                     .frame(maxWidth: .infinity)
+            } else {
+                Spacer(minLength: Theme.space0)
             }
 
             trailing
-                .frame(maxWidth: .infinity, alignment: .trailing)
+                .fixedSize(horizontal: true, vertical: false)
         }
         .padding(.horizontal, Theme.horizontalPadding)
         .padding(.vertical, Theme.space10)

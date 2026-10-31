@@ -36,8 +36,8 @@ final class WorkoutJourneyTests: XCTestCase {
         app.launch()
         tap("workout.edit.E2E Workout")
         XCTAssertEqual(app.textFields["builder.name"].value as? String, "E2E Workout")
-        XCTAssertTrue(app.buttons["builder.duration"].label.contains("35 minutes"))
-        XCTAssertTrue(app.buttons["builder.rest"].label.contains("90 seconds"))
+        XCTAssertTrue(app.buttons["builder.duration"].label.contains("35 min"))
+        XCTAssertTrue(app.buttons["builder.rest"].label.contains("90 sec"))
         tap("builder.duration")
         app.pickerWheels.firstMatch.adjust(toPickerWheelValue: "45 min")
         tap("timing.done")
@@ -48,8 +48,8 @@ final class WorkoutJourneyTests: XCTestCase {
         app.terminate()
         app.launch()
         tap("workout.edit.E2E Workout")
-        XCTAssertTrue(app.buttons["builder.duration"].label.contains("45 minutes"))
-        XCTAssertTrue(app.buttons["builder.rest"].label.contains("60 seconds"))
+        XCTAssertTrue(app.buttons["builder.duration"].label.contains("45 min"))
+        XCTAssertTrue(app.buttons["builder.rest"].label.contains("60 sec"))
     }
 
     func testEditSurvivesRelaunch() {
@@ -60,7 +60,7 @@ final class WorkoutJourneyTests: XCTestCase {
         app.terminate()
         app.launch()
         tap("workout.edit.E2E Workout")
-        XCTAssertTrue(app.staticTexts["1 SETS · 13 REPS · 45S REST"].exists)
+        XCTAssertTrue(app.staticTexts["SETS: 1 · REPS: 13 · REST: 45 SEC"].exists)
         tap("builder.add")
         selectExercise()
         tap("builder.save")
@@ -91,9 +91,9 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertFalse(app.staticTexts["History"].exists)
         let firstSet = app.staticTexts["exerciseHistory.set.0"]
         let secondSet = app.staticTexts["exerciseHistory.set.1"]
-        XCTAssertTrue(firstSet.label.contains("12 reps"))
+        XCTAssertTrue(firstSet.label.contains("Reps: 12"))
         XCTAssertTrue(firstSet.label.contains("5 lb"))
-        XCTAssertTrue(secondSet.label.contains("12 reps"))
+        XCTAssertTrue(secondSet.label.contains("Reps: 12"))
         XCTAssertTrue(secondSet.label.contains("10 lb"))
         tap("exerciseHistory.back")
         tap("active.end")
@@ -150,7 +150,7 @@ final class WorkoutJourneyTests: XCTestCase {
         tap("active.end")
         tap("End & Save")
         verifyHistory(reps: 12)
-        XCTAssertFalse(app.staticTexts["SET 2 · 12 REPS"].exists)
+        XCTAssertFalse(app.staticTexts["SET 2 · REPS: 12"].exists)
     }
 
     func testNavigationAndFullscreenWorkout() {
@@ -187,7 +187,7 @@ final class WorkoutJourneyTests: XCTestCase {
             XCTAssertTrue(app.descendants(matching: .any)["demonstration.player"].waitForExistence(timeout: 10))
             XCTAssertFalse(app.buttons["demonstration.load"].exists)
             XCTAssertTrue(app.staticTexts["demonstration.author"].exists)
-            XCTAssertFalse(app.buttons["demonstration.openYouTube"].exists)
+            XCTAssertTrue(app.buttons["demonstration.openYouTube"].exists)
             XCTAssertGreaterThan(app.webViews.count, 0, "The player uses local HTML and must not contact YouTube")
             let play = app.buttons["Play demonstration"].firstMatch
             XCTAssertTrue(play.waitForExistence(timeout: 10))
@@ -389,7 +389,7 @@ final class WorkoutJourneyTests: XCTestCase {
         tap("builder.back")
         tap("Discard changes")
         tap("workout.edit.E2E Workout")
-        XCTAssertTrue(app.staticTexts["1 SETS · 12 REPS · 45S REST"].exists)
+        XCTAssertTrue(app.staticTexts["SETS: 1 · REPS: 12 · REST: 45 SEC"].exists)
         swipeBack()
         XCTAssertTrue(app.buttons["workout.start.E2E Workout"].waitForExistence(timeout: 10))
     }
@@ -462,8 +462,8 @@ final class WorkoutJourneyTests: XCTestCase {
         row.tap()
         let total = app.staticTexts["session.total.0"]
         XCTAssertTrue(total.waitForExistence(timeout: 10), app.debugDescription)
-        XCTAssertEqual(total.label, "\(reps) REPS TOTAL")
-        XCTAssertEqual(app.staticTexts["session.set.0.0"].label, "SET 1 · \(firstSetReps ?? reps) REPS")
+        XCTAssertEqual(total.label, "TOTAL REPS: \(reps)")
+        XCTAssertEqual(app.staticTexts["session.set.0.0"].label, "SET 1 · REPS: \(firstSetReps ?? reps)")
     }
 
     private func tap(_ identifier: String) {

@@ -1,0 +1,41 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "NSUserTrackingUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YouTube may link device and viewing data with activity from other apps and websites to measure advertising. Your workouts stay on this device."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YouTube може пов’язувати дані пристрою та переглядів з активністю в інших застосунках і на сайтах для вимірювання реклами. Ваші тренування залишаються на цьому пристрої."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YouTube może łączyć dane urządzenia i oglądania z aktywnością w innych aplikacjach i witrynach w celu pomiaru reklam. Twoje treningi pozostają na tym urządzeniu."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YouTube kann Geräte- und Wiedergabedaten zur Werbemessung mit Aktivitäten in anderen Apps und auf Websites verknüpfen. Deine Trainingsdaten bleiben auf diesem Gerät."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YouTube peut associer les données de l’appareil et de visionnage à l’activité dans d’autres apps et sites pour mesurer les publicités. Vos séances restent sur cet appareil."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

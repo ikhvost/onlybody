@@ -10,9 +10,14 @@ struct MovementDemonstrationView: View {
             MonoLabel(text: String(localized: .uiDemonstration), size: Theme.type11, tracking: 0.8)
 
             if let demonstration = viewModel.demonstration {
-                if viewModel.needsYouTubeConsent {
-                    YouTubeConsentView(onAllow: viewModel.allowYouTube)
-                } else if let sessionID = viewModel.playerSessionID, let document = viewModel.playerDocument {
+                if viewModel.needsVideoPermission {
+                    YouTubeConsentView(
+                        canRequestPermission: viewModel.canRequestVideoPermission,
+                        isRequestingPermission: viewModel.isRequestingVideoPermission,
+                        onAllow: { Task { await viewModel.enableYouTubePlayback() } }
+                    )
+                } else if viewModel.isPlayerActive,
+                          let sessionID = viewModel.playerSessionID, let document = viewModel.playerDocument {
                     YouTubePlayerView(
                         document: document,
                         sessionID: sessionID,
@@ -36,6 +41,14 @@ struct MovementDemonstrationView: View {
                     DemonstrationPlaceholderView(state: viewModel.demonstrationState, onRetry: viewModel.loadDemonstration)
                 }
 
+                if let url = viewModel.externalVideoURL {
+                    Button(String(localized: .uiWatchOnYoutube)) { openURL(url) }
+                        .font(Theme.fontSans(Theme.type14, .semibold))
+                        .foregroundStyle(Theme.accent)
+                        .frame(minHeight: Theme.space44)
+                        .accessibilityIdentifier("demonstration.openYouTube")
+                }
+
                 Text(String(localized: .uiVideoBy(demonstration.author)))
                     .font(Theme.fontSans(Theme.type12))
                     .foregroundStyle(Theme.text2)
@@ -56,6 +69,9 @@ struct MovementDemonstrationView: View {
         .onChange(of: viewModel.consentRevision) { _, _ in viewModel.refreshYouTubeConsent() }
         .onAppear { viewModel.setPlayerActive(scenePhase == .active) }
         .onChange(of: scenePhase) { _, phase in viewModel.setPlayerActive(phase == .active) }
-        .onDisappear { viewModel.closeDemonstration() }
+        .onDisappear {
+            viewModel.setPlayerActive(false)
+            viewModel.closeDemonstration()
+        }
     }
 }

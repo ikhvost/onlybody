@@ -5,7 +5,7 @@ import Observation
 @MainActor
 @Observable
 final class YouTubeConsent {
-    static let policyVersion = 1
+    static let policyVersion = 2
     private(set) var revision = UUID()
     private(set) var grantedAt: Date?
     private let save: (Date?) -> Void

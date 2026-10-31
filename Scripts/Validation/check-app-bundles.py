@@ -14,6 +14,8 @@ for product in ('OnlyBody', 'OnlyWeights'):
     info = plistlib.loads((bundle / 'Info.plist').read_bytes())
     assert info['CFBundleIdentifier'] == f'ikhvost.{product.lower()}', product
     assert info['CFBundleDisplayName'] == product, product
+    assert info.get('CFBundlePackageType') == 'APPL', f'{product}: invalid application package type'
+    assert info.get('UIDeviceFamily') == [1], f'{product}: release must target iPhone only'
     assert info['UILaunchStoryboardName'] == 'LaunchScreen', product
     stores = list(bundle.rglob('*.store'))
     assert len(stores) == 1, stores
