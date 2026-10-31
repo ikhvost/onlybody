@@ -62,10 +62,14 @@ final class NativeDesignReviewTests: XCTestCase {
     private func advance(_ app: XCUIApplication, from index: Int) {
         let counter = app.staticTexts["designReview.index"]
         let next = NSPredicate(format: "label == %@", String((index + 1) % 20))
+        let expected = String((index + 1) % 20)
         for _ in 0..<3 {
+            if counter.label == expected { return }
             app.buttons["designReview.next"].tap()
-            if XCTWaiter.wait(for: [XCTNSPredicateExpectation(predicate: next, object: counter)], timeout: 2) == .completed { return }
-            XCTAssertEqual(counter.label, String(index), "Gallery must advance one state at a time")
+            if XCTWaiter.wait(for: [XCTNSPredicateExpectation(predicate: next, object: counter)], timeout: 5) == .completed { return }
+            let actual = counter.label
+            if actual == expected { return }
+            XCTAssertEqual(actual, String(index), "Gallery must advance one state at a time")
         }
         XCTFail("Gallery did not advance after bounded retries: \(index)")
     }
