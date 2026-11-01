@@ -444,10 +444,11 @@ final class WorkoutJourneyTests: XCTestCase {
         start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .slow, thenHoldForDuration: 0.5)
     }
 
-    private func swipeBack() {
-        let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0.5))
-            .withOffset(CGVector(dx: 56, dy: 0))
-        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.85, dy: 0.5))
+    private func swipeBack(atY y: CGFloat? = nil) {
+        let height = y ?? app.frame.height * 0.5
+        let origin = app.coordinate(withNormalizedOffset: .zero)
+        let start = origin.withOffset(CGVector(dx: 56, dy: height))
+        let end = origin.withOffset(CGVector(dx: app.frame.width * 0.85, dy: height))
         start.press(forDuration: 0.05, thenDragTo: end)
     }
 
@@ -466,14 +467,21 @@ final class WorkoutJourneyTests: XCTestCase {
         tap("workout.edit.E2E Workout")
         tap("stepper.Reps.increase")
         tap("builder.movement.done")
-        swipeBack()
+        XCTAssertTrue(app.staticTexts["Sets: 1 · Reps: 13 · Rest: 45 sec"].waitForExistence(timeout: 5))
+        let nameLabel = app.staticTexts["builder.name.label"]
+        XCTAssertTrue(nameLabel.waitForExistence(timeout: 5))
+        // The screen midpoint overlaps the exercise reorder handle on compact layouts.
+        // Start over the name label so this tests back navigation, not reordering.
+        swipeBack(atY: nameLabel.frame.midY)
+        XCTAssertTrue(app.alerts.firstMatch.waitForExistence(timeout: 5), "Back swipe must protect the changed draft")
         tap("Stay")
         XCTAssertTrue(app.textFields["builder.name"].exists)
+        XCTAssertTrue(app.staticTexts["Sets: 1 · Reps: 13 · Rest: 45 sec"].exists)
         tap("builder.back")
         tap("Discard changes")
         tap("workout.edit.E2E Workout")
         XCTAssertTrue(app.staticTexts["Sets: 1 · Reps: 12 · Rest: 45 sec"].exists)
-        swipeBack()
+        swipeBack(atY: nameLabel.frame.midY)
         XCTAssertTrue(app.buttons["workout.start.E2E Workout"].waitForExistence(timeout: 10))
     }
 

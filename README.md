@@ -31,6 +31,27 @@ DESTINATION='platform=iOS Simulator,name=iPhone 17 Pro' Scripts/validate.sh
 
 Full validation runs lint, catalog/boundary checks, tests and Release simulator builds for both products, bundle isolation checks and temporary seed generation. Results go to a unique `/tmp/onlybody-validation-*` directory; override with `VALIDATION_OUTPUT`. Select another Xcode with `DEVELOPER_DIR` if needed.
 
+## Release archives
+
+Use the release script from the repository root for either product:
+
+```sh
+DESTINATION='platform=iOS Simulator,name=iPhone 17 Pro' \
+  Scripts/Release/prepare.sh onlybody 1.2.0 42
+DESTINATION='platform=iOS Simulator,name=iPhone 17 Pro' \
+  Scripts/Release/prepare.sh onlyweights 1.2.0 42
+```
+
+Arguments are the scheme, three-component marketing version and positive integer build number (1–9999). Choose a new build number for each upload. The script requires the exact Xcode in `.xcode-version`, SwiftLint and an installed simulator. It always runs `Scripts/validate.sh` for both products before archiving the selected app for iPhone. Version overrides apply only to the archive; tracked configuration and bundled seed stores are not rewritten.
+
+If Xcode cannot resolve the simulator by name, use `DESTINATION='platform=iOS Simulator,id=<simulator UUID>'`. Find available destinations with `xcodebuild -showdestinations -project onlybody/onlybody.xcodeproj -scheme onlybody`; use the simulator ID, not a physical device ID.
+
+Signing uses the project's automatic signing and configured team. Install the required signing identity and provisioning profile in advance, or set `ALLOW_PROVISIONING_UPDATES=1` to let Xcode manage provisioning using an authenticated Xcode account. An archive may use a development signing identity; App Store distribution signing happens during export/distribution in Organizer.
+
+Artifacts are retained in a unique gitignored `Release/<product>-<version>-<build>-*` directory: validation results, logs, build provenance, `Archive.xcresult` and `<product>.xcarchive`. Set `RELEASE_OUTPUT` to a new directory to choose another location; existing directories are rejected. A `PREPARED` marker is written only after validation, archive metadata checks and signature verification succeed. Failed runs retain their diagnostics without this marker.
+
+Open the archive in Xcode Organizer to distribute it. This script does not export an IPA, upload to Apple or submit for review. Automated success does not complete the [manual YouTube release checklist](Scripts/ExerciseMedia/CHECKLIST.md), physical-device playback review or App Store metadata preparation.
+
 ## Maintenance
 
 - [Version and build history](CHANGELOG.md)

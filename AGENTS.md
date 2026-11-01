@@ -199,6 +199,15 @@ enum AppTab: String, CaseIterable { case train, log, library }
 - Do not regenerate OnlyBody's seed or rename existing exercises for a branding/build-structure change. Existing database path and model identities must remain stable.
 - Build settings exclude SQLite WAL/SHM sidecars from both app bundles.
 
+## Release preparation
+
+- Use `Scripts/Release/prepare.sh <onlybody|onlyweights> <version> <build>` for release archives. Set `DESTINATION` to an installed iOS Simulator destination; for example `DESTINATION='platform=iOS Simulator,name=iPhone 17 Pro' Scripts/Release/prepare.sh onlybody 1.2.0 42`.
+- The script runs the full `Scripts/validate.sh` for both products, then creates a signed Release device archive for the selected scheme and verifies its identity, version, provisioning profile and signature. Do not bypass validation or substitute a simulator Release build for a distribution archive.
+- Use the exact Xcode version in `.xcode-version`. Release preparation does not accept `ALLOW_OLDER_XCODE`. Supply a three-component marketing version and a positive integer build number (1–9999); choose a new build number for each upload. Version overrides belong to the archive command, not edits to shared `App.xcconfig` just to prepare an archive.
+- Signing requires the configured team's signing identity and provisioning profile. Set `ALLOW_PROVISIONING_UPDATES=1` only when Xcode should manage provisioning using its authenticated account. Never commit signing credentials.
+- Keep archives and logs in the default gitignored `Release/` directory or a new `RELEASE_OUTPUT` directory. Preserve failure diagnostics; only a successful run writes `PREPARED`. Report actual validation/archive results and any blockers, never infer success from the existence of a partial archive.
+- This script prepares an archive only; export, upload and App Review submission are separate actions. Complete the manual release checks below before distribution. A successful archive does not establish completed content review or App Store readiness.
+
 ## Mandatory YouTube content and integration review
 
 - **Always read and complete [Scripts/ExerciseMedia/CHECKLIST.md](Scripts/ExerciseMedia/CHECKLIST.md) before adding or replacing any video in either product.** Apply it also to video ID/author/start-offset changes, player changes and release review. This is a required repository workflow, not an optional suggestion.
