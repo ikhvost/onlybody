@@ -26,5 +26,6 @@ nonisolated enum ExerciseEquipmentCatalog {
         "Hip Adduction Machine",
         "Seated Calf Raise Machine",
         "Ab Wheel",
+        "Seated Row Machine",
     ]
 }

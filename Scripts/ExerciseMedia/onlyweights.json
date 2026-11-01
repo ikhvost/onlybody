@@ -598,5 +598,25 @@
     "reviewStatus": "partial-review-user-deferred",
     "reviewedOn": "2026-10-25",
     "reviewReference": "Reviews/2026-10-25/REPORT.md"
+  },
+  {
+    "key": "machine-row",
+    "exerciseName": "Machine Row",
+    "videoID": "TeFo51Q_Nsc",
+    "author": "PureGym",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-11-01",
+    "reviewReference": "Reviews/2026-11-01/REPORT.md"
+  },
+  {
+    "key": "barbell-upright-row",
+    "exerciseName": "Barbell Upright Row",
+    "videoID": "8UvsRWUb0YU",
+    "author": "PureGym",
+    "startSeconds": 0,
+    "reviewStatus": "browser-embed-and-visual-sample",
+    "reviewedOn": "2026-11-01",
+    "reviewReference": "Reviews/2026-11-01/REPORT.md"
   }
 ]

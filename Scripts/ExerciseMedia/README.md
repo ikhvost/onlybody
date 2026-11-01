@@ -28,7 +28,7 @@ Use through the official player follows [YouTube Terms of Service](https://www.y
 
 ## OnlyWeights media catalog
 
-`onlyweights.json` generates all 60 demonstrations for both Debug and Release, using the existing official player, author caption and error handling. There is no separate Debug candidate array, runtime JSON loading or persistence change. The user explicitly requested Release integration on 2026-10-25 and deferred the remaining checks. Each entry records `partial-review-user-deferred` and links to the dated report; this status does not establish completed review.
+`onlyweights.json` generates all 62 demonstrations for both Debug and Release, using the existing official player, author caption and error handling. There is no separate Debug candidate array, runtime JSON loading or persistence change. The original 60 entries record `partial-review-user-deferred` following the user's 2026-10-25 decision. Machine Row and Barbell Upright Row were added on 2026-11-01 with `browser-embed-and-visual-sample` and a [dated partial review](Reviews/2026-11-01/REPORT.md): expanded descriptions, channel provenance, Share → Embed and visual browser samples were inspected. Their license labels, full audiovisual review and physical-iPhone playback remain unconfirmed; no new user deferral or completed review is claimed.
 
 ```bash
 python3 Scripts/ExerciseMedia/generate.py \

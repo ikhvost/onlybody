@@ -1,14 +1,15 @@
 # OnlyWeights exercise catalog
 
-The release contains **60 exercises**: the original 16 names plus 44 gym movements. Names are compatibility keys and must not be renamed without an alias migration. Metadata and the bundled seed are generated from `SeedData.json`; no JSON is loaded at runtime.
+The release contains **62 exercises**: the original 16 names plus 46 gym movements. Names are compatibility keys and must not be renamed without an alias migration. Metadata and the bundled seed are generated from `SeedData.json`; no JSON is loaded at runtime.
 
 ## Editorial conventions
 
-- Difficulty describes coordination, support and technique complexity, not a prescribed load: 31 beginner, 20 intermediate and 9 advanced entries. Existing levels are preserved.
+- Difficulty describes coordination, support and technique complexity, not a prescribed load: 32 beginner, 21 intermediate and 9 advanced entries. Existing levels are preserved.
 - Muscle groups are qualitative selections in the shared coarse taxonomy, not activation percentages or an exhaustive list of stabilizers. The primary filtering group is one of the highlighted primary groups.
 - Weighted Pull-Ups use a pronated grip; Weighted Chin-Ups use a supinated grip. Weighted Dips use parallel bars. These three variants use a dip belt and weight plates.
 - Dumbbell Shoulder Press and Dumbbell Reverse Fly are standing variants. Arnold Press is seated on an upright adjustable bench. Ab Wheel Rollout starts from the knees. Cable Woodchop is standing high-to-low. Single-leg exercises use the named dumbbell load, not bodyweight-only footage.
 - Barbell and EZ-Bar equipment labels cover the bar setup; belt exercises explicitly list loose plates. Bench pressing requires a rack as well as the bench. The original Barbell Bench Press equipment was corrected to include Squat Rack without changing its name or level.
+- Machine Row is a seated resistance machine with a chest pad, distinct from Seated Cable Row and Chest-Supported Dumbbell Row. It uses Seated Row Machine equipment. Barbell Upright Row is a standing straight-bar variant; primary Shoulders/Back and supporting Biceps/Forearms/Core follow the shared coarse taxonomy. Its intermediate level reflects technique and range-of-motion control. Added 2026-11-01; references: [PureGym machine setup and technique](https://www.puregym.com/blog/how-to-use-gym-equipment/) and [PureGym upright-row guide](https://www.puregym.com/exercises/arms-and-shoulders/upright-rows/barbell-upright-row/).
 - Main references: [NASM exercise library](https://www.nasm.org/workout-exercise-guidance), [NASM deadlift](https://www.nasm.org/resource-center/exercise-library/barbell-deadlift), [PureGym exercise library](https://www.puregym.com/exercises/), plus the per-movement sources below. Reviewed 2026-10-25. External classifications need not equal our editorial difficulty scale.
 
 ## Movement references
@@ -75,5 +76,10 @@ Metadata lives in `SeedData.json`; these references identify the intended varian
 - advanced: Pull-up Bar
 - advanced: Ab Wheel
 - intermediate: Cable Machine
+
+2026-11-01 additions:
+
+- Machine Row — beginner: Seated Row Machine
+- Barbell Upright Row — intermediate: Barbell
 
 See [catalog generation](../README.md) and [video review status](../../ExerciseMedia/README.md).

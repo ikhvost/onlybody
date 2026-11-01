@@ -5,13 +5,38 @@ import Testing
 
 @MainActor
 struct GymCatalogTests {
+    @Test func requestedUpperBodyMovementsHaveDemonstrationsAndEquipmentFilters() async throws {
+        let seed = try #require(Bundle.main.url(forResource: "default", withExtension: "store"))
+        let exercises = try BundledExerciseCatalog.load(from: seed)
+        let names = [
+            "Machine Chest Press", "Lat Pulldown", "Pec Deck Fly", "Chest-Supported Dumbbell Row",
+            "Machine Row", "Barbell Upright Row", "Cable Face Pull", "EZ-Bar Curl",
+            "Cable Triceps Pushdown", "Overhead Cable Triceps Extension"
+        ]
+        for name in names {
+            #expect(exercises.contains { $0.name == name })
+            #expect(ExerciseDemonstrationCatalog.demonstration(for: name)?.isValid == true)
+        }
+        let repository = MockExerciseRepository()
+        repository.stubbedAllExercises = exercises
+        let library = LibraryViewModel(exercises: repository)
+        await library.load()
+        library.selectedFilter = "Back"
+        library.selectedEquipment = "Seated Row Machine"
+        #expect(library.filteredExercises.map(\.name) == ["Machine Row"])
+        library.selectedFilter = "Shoulders"
+        library.selectedEquipment = "Barbell"
+        library.searchText = "uPrIgHt"
+        #expect(library.filteredExercises.map(\.name) == ["Barbell Upright Row"])
+    }
+
     @Test func bundledCatalogIsCompleteAndDoesNotMutateSeed() throws {
         let seed = try #require(Bundle.main.url(forResource: "default", withExtension: "store"))
         let original = try Data(contentsOf: seed)
         let exercises = try BundledExerciseCatalog.load(from: seed)
-        #expect(exercises.count == 60)
-        #expect(Set(exercises.map(\.id)).count == 60)
-        #expect(Set(exercises.map(\.name)).count == 60)
+        #expect(exercises.count == 62)
+        #expect(Set(exercises.map(\.id)).count == 62)
+        #expect(Set(exercises.map(\.name)).count == 62)
         #expect(try Data(contentsOf: seed) == original)
         #expect(Set(exercises.map(\.name)) == Set(ExerciseDifficultyCatalog.levels.keys))
         #expect(Set(exercises.map(\.name)) == Set(ExerciseMuscleCatalog.profiles.keys))
@@ -45,7 +70,7 @@ struct GymCatalogTests {
         let library = LibraryViewModel(exercises: SwiftDataExerciseRepository(context: context, catalog: catalog))
         await library.load()
         #expect(library.errorMessage == nil)
-        #expect(library.allExercises.count == 60)
+        #expect(library.allExercises.count == 62)
         #expect(try context.fetchCount(FetchDescriptor<Workout>()) == 0)
         #expect(try context.fetchCount(FetchDescriptor<Session>()) == 0)
         library.selectedFilter = "Quads"
@@ -60,7 +85,7 @@ struct GymCatalogTests {
         library.selectedEquipment = "Pull-up Bar"
         library.searchText = "wEiGhTeD"
         #expect(Set(library.filteredExercises.map(\.name)) == ["Weighted Pull-Ups", "Weighted Chin-Ups"])
-        let exercise = try #require(catalog.first { $0.name == "Weighted Dips" })
+        let exercise = try #require(catalog.first { $0.name == "Machine Row" })
         let workout = WorkoutSnapshot(name: "Gym routine", items: [WorkoutItemSnapshot(exercise: exercise)])
         let workouts = SwiftDataWorkoutRepository(context: ModelContext(container), catalog: catalog)
         try await workouts.save(workout)
@@ -91,8 +116,8 @@ struct GymCatalogTests {
         let seed = try #require(Bundle.main.url(forResource: "default", withExtension: "store"))
         let exercises = try BundledExerciseCatalog.load(from: seed)
         let demonstrations = ExerciseDemonstrationCatalog.all
-        #expect(demonstrations.count == 60)
-        #expect(Set(demonstrations.map(\.id)).count == 60)
+        #expect(demonstrations.count == 62)
+        #expect(Set(demonstrations.map(\.id)).count == 62)
         #expect(Set(demonstrations.map(\.exerciseName)) == Set(exercises.map(\.name)))
         #expect(demonstrations.allSatisfy { $0.isValid })
         let composition = AppComposition(

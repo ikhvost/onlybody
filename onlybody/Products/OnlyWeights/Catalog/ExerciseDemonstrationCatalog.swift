@@ -241,6 +241,14 @@ nonisolated enum ExerciseDemonstrationCatalog {
         ExerciseDemonstration(
             id: "cable-woodchop", exerciseName: "Cable Woodchop",
             videoID: "he4IhLc1d5k", author: "Live Lean TV Daily Exercises", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "machine-row", exerciseName: "Machine Row",
+            videoID: "TeFo51Q_Nsc", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "barbell-upright-row", exerciseName: "Barbell Upright Row",
+            videoID: "8UvsRWUb0YU", author: "PureGym", startSeconds: 0
         )
     ]
 

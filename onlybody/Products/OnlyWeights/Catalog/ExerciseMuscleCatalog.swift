@@ -242,5 +242,13 @@ nonisolated enum ExerciseMuscleCatalog {
             primary: ["Core"],
             secondary: ["Shoulders"],
             isFullBody: false),
+        "Machine Row": ExerciseMuscleProfile(
+            primary: ["Back"],
+            secondary: ["Biceps", "Shoulders", "Forearms"],
+            isFullBody: false),
+        "Barbell Upright Row": ExerciseMuscleProfile(
+            primary: ["Shoulders", "Back"],
+            secondary: ["Biceps", "Forearms", "Core"],
+            isFullBody: false),
     ]
 }

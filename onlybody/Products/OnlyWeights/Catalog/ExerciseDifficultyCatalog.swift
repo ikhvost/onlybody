@@ -62,5 +62,7 @@ nonisolated enum ExerciseDifficultyCatalog {
         "Hanging Leg Raise": .advanced,
         "Ab Wheel Rollout": .advanced,
         "Cable Woodchop": .intermediate,
+        "Machine Row": .beginner,
+        "Barbell Upright Row": .intermediate,
     ]
 }

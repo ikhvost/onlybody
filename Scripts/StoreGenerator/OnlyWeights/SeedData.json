@@ -1023,5 +1023,42 @@
     "frequencyPreference": "normal",
     "difficulty": "intermediate",
     "isFullBody": false
+  },
+  {
+    "name": "Machine Row",
+    "primaryMuscle": "Back",
+    "primaryMuscles": [
+      "Back"
+    ],
+    "secondaryMuscles": [
+      "Biceps",
+      "Shoulders",
+      "Forearms"
+    ],
+    "equipment": [
+      "Seated Row Machine"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Barbell Upright Row",
+    "primaryMuscle": "Shoulders",
+    "primaryMuscles": [
+      "Shoulders",
+      "Back"
+    ],
+    "secondaryMuscles": [
+      "Biceps",
+      "Forearms",
+      "Core"
+    ],
+    "equipment": [
+      "Barbell"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
   }
 ]
