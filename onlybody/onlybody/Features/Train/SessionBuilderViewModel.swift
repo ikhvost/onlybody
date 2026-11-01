@@ -142,6 +142,17 @@ final class SessionBuilderViewModel {
         numberErrors = numberErrors.filter { !$0.hasPrefix(id.uuidString) }
     }
 
+    func moveMovement(_ id: UUID, to targetID: UUID) {
+        guard !isSaving, !hasInvalidNumbers, let from = movements.firstIndex(where: { $0.id == id }),
+              let to = movements.firstIndex(where: { $0.id == targetID }), from != to else { return }
+        movements.insert(movements.remove(at: from), at: to)
+    }
+
+    func replaceMovement(_ id: UUID, with exercise: ExerciseSnapshot) {
+        guard !isSaving, !hasInvalidNumbers, let index = movements.firstIndex(where: { $0.id == id }) else { return }
+        movements[index].exercise = exercise
+    }
+
     func setSets(_ value: Int, forMovement id: UUID) {
         guard let index = movements.firstIndex(where: { $0.id == id }) else { return }
         movements[index].sets = max(1, value)

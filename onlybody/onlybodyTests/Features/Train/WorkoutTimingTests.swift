@@ -122,6 +122,7 @@ struct WorkoutTimingTests {
         let model = ActiveWorkoutViewModel(workouts: repository, sessions: MockSessionRepository(), workoutId: workout.id,
                                           time: ManualWorkoutTimeSource())
         await model.load()
+        model.beginSession()
         defer { model.cleanup() }
         model.markSetDone()
         #expect(model.restTimer.remainingSeconds == 90)

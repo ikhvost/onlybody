@@ -18,10 +18,12 @@ final class NativeDesignReviewTests: XCTestCase {
                     expectation(for: expected, evaluatedWith: counter)
                     waitForExpectations(timeout: 10)
                 }
-                let screenshot = XCTAttachment(screenshot: app.screenshot())
-                screenshot.name = "v002-\(JourneyProduct.name)-\(Int(app.frame.width))-\(language)-\(index)"
-                screenshot.lifetime = .keepAlways
-                add(screenshot)
+                autoreleasepool {
+                    let screenshot = XCTAttachment(screenshot: app.screenshot())
+                    screenshot.name = "v003-\(JourneyProduct.name)-\(Int(app.frame.width))-\(language)-\(index)"
+                    screenshot.lifetime = .keepAlways
+                    add(screenshot)
+                }
                 advance(app, from: index)
             }
             app.terminate()
@@ -52,8 +54,8 @@ final class NativeDesignReviewTests: XCTestCase {
                 assertHitArea(app.buttons["builder.save"], minimum: 56)
             }
             if index == 7 {
-                assertHitArea(app.buttons["active.markSetDone"], minimum: 64)
-                assertHitArea(app.buttons["stepper.Reps.increase"], minimum: 48)
+                assertHitArea(app.buttons["active.set.0.done"], minimum: 48)
+                assertHitArea(app.textFields["active.set.0.reps"], minimum: 48)
             }
             app.buttons["designReview.next"].tap()
         }

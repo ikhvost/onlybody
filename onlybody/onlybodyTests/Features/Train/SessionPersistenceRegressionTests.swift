@@ -19,10 +19,11 @@ struct SessionPersistenceRegressionTests {
         let time = ManualWorkoutTimeSource()
         let model = ActiveWorkoutViewModel(workouts: workouts, sessions: sessions, workoutId: workout.id, time: time)
         await model.load()
+        model.beginSession()
         time.advance(seconds: 125)
         sessions.shouldThrow = true
         model.markSetDone()
-        await model.saveTask?.value
+        await model.endSession()
         #expect(model.saveState == .failed)
         #expect(model.elapsedSeconds == 125)
         sessions.shouldThrow = false
@@ -56,6 +57,7 @@ struct SessionPersistenceRegressionTests {
         let time = ManualWorkoutTimeSource()
         let model = ActiveWorkoutViewModel(workouts: workouts, sessions: MockSessionRepository(), workoutId: workout.id, time: time)
         await model.load()
+        model.beginSession()
         await time.waitForSleepers(1)
         model.cleanup()
         await time.waitForSleepers(0)
@@ -83,6 +85,7 @@ struct SessionPersistenceRegressionTests {
         workouts.stubbedWorkouts = [workout]
         let model = ActiveWorkoutViewModel(workouts: workouts, sessions: sessions, workoutId: workout.id)
         await model.load()
+        model.beginSession()
         model.markSetDone()
         var completions = 0
         let first = Task { await model.endSession(); completions += 1 }

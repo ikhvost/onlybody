@@ -15,6 +15,7 @@ struct WorkoutDiscardTests {
         let sessions = MockSessionRepository()
         let model = ActiveWorkoutViewModel(workouts: workouts, sessions: sessions, workoutId: workout.id, time: time)
         await model.load()
+        model.beginSession()
         model.markSetDone()
         await time.waitForSleepers(2)
         time.advance(seconds: 10)
@@ -40,6 +41,7 @@ struct WorkoutDiscardTests {
         let sessions = MockSessionRepository()
         let model = ActiveWorkoutViewModel(workouts: workouts, sessions: sessions, workoutId: workout.id)
         await model.load()
+        model.beginSession()
         #expect(model.discardSession())
         await model.endSession()
         #expect(sessions.savedSessions.isEmpty)
@@ -53,12 +55,14 @@ struct WorkoutDiscardTests {
         sessions.suspendSaves = true
         let model = ActiveWorkoutViewModel(workouts: workouts, sessions: sessions, workoutId: workout.id)
         await model.load()
+        model.beginSession()
         model.markSetDone()
+        let finish = Task { await model.endSession() }
         for _ in 0..<1_000 where !sessions.isWaitingToSave { await Task.yield() }
         #expect(sessions.isWaitingToSave)
         #expect(!model.discardSession())
         sessions.resumeSave()
-        await model.saveTask?.value
+        await finish.value
         #expect(sessions.savedSessions.count == 1)
     }
 }

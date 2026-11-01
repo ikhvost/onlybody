@@ -37,9 +37,11 @@ final class StoreScreenshotTests: XCTestCase {
         capture("02-workout-builder", language: language)
         tap("builder.back", in: app)
         tap("workout.start.\(workout)", in: app)
-        tap("active.markSetDone", in: app)
+        tap("active.start", in: app)
+        tap("active.set.0.done", in: app)
         tap("rest.skip", in: app)
         capture("03-active-workout", language: language)
+        tap("active.list", in: app)
         tap("active.end", in: app)
         let discardTitles = [
             "en": "End Without Saving", "uk": "Завершити без збереження", "pl": "Zakończ bez zapisywania",

@@ -16,6 +16,7 @@ struct DesignWorkoutInputsTests {
         let model = ActiveWorkoutViewModel(workouts: repo, sessions: sessions, workoutId: workout.id,
                                            time: ManualWorkoutTimeSource())
         await model.load()
+        model.beginSession()
         defer { model.cleanup() }
         #expect(!model.showsWeight)
         model.revealWeight()
@@ -45,6 +46,7 @@ struct DesignWorkoutInputsTests {
         let model = ActiveWorkoutViewModel(workouts: repo, sessions: sessions, workoutId: workout.id,
                                            time: ManualWorkoutTimeSource(), alwaysShowsWeight: true)
         await model.load()
+        model.beginSession()
         #expect(model.showsWeight)
         await model.endSession()
         await model.retrySave()
@@ -80,11 +82,16 @@ struct DesignWorkoutInputsTests {
         let repository = MockWorkoutRepository()
         let exercise = ExerciseSnapshot(name: "Fixture")
         let item = WorkoutItemSnapshot(sets: Int(Int32.max), restSeconds: Int(Int32.max), exercise: exercise)
-        let workout = WorkoutSnapshot(items: [item, item, item])
+        var second = item
+        second.id = UUID()
+        var third = item
+        third.id = UUID()
+        let workout = WorkoutSnapshot(items: [item, second, third])
         repository.stubbedWorkouts = [workout]
         let model = ActiveWorkoutViewModel(workouts: repository, sessions: MockSessionRepository(), workoutId: workout.id,
                                            time: ManualWorkoutTimeSource())
         await model.load()
+        model.beginSession()
         defer { model.cleanup() }
         model.markSetDone()
         #expect(model.completedSetsForCurrent == 1)

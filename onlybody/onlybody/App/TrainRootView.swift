@@ -23,7 +23,7 @@ struct TrainRootView: View {
                 showMusclePicker: { path.append(.creation) },
                 showSessionBuilder: { path.append(.sessionBuilder(workoutID: $0)) },
                 onStartWorkout: { activeWorkout = composition.active(workoutID: $0) },
-                onOverview: { path.append(.overview(workoutID: $0)) }
+                onOverview: { activeWorkout = composition.active(workoutID: $0) }
             )
             .toolbar(.hidden, for: .navigationBar)
             .navigationDestination(for: TrainRoute.self) { route in

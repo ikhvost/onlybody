@@ -6,244 +6,220 @@ import Observation
 final class ActiveWorkoutViewModel {
     private let workoutsRepository: any WorkoutRepository
     private let sessionsRepository: any SessionRepository
+    private let exercisesRepository: (any ExerciseRepository)?
     private let preferences: WorkoutPreferences
-
-    let workoutId: UUID
-
     private let alwaysShowsWeight: Bool
-    private var revealedWeightExercises: Set<Int> = []
-    var repsInput: String?
-    var weightInput: String?
-    var invalidNumbers: Set<String> = []
-    var hasInvalidNumbers: Bool { !invalidNumbers.isEmpty }
-    var showsWeight: Bool { alwaysShowsWeight || currentWeight > 0 || revealedWeightExercises.contains(currentExerciseIndex) }
-    var completedSetCount: Int { completedSets.count }
-    var repsText: String { repsInput ?? String(currentDisplayReps) }
-    var weightText: String { weightInput ?? displayedWeight.formatted(.number.precision(.fractionLength(0...2)).grouping(.never)) }
-    var canClose: Bool { saveState == .saved || saveState == .noCompletedSets }
-
-    func revealWeight() { revealedWeightExercises.insert(currentExerciseIndex) }
-
-    func enterReps(_ text: String) {
-        repsInput = text
-        guard let value = WorkoutNumberParser().integer(text, minimum: 0) else { invalidNumbers.insert("reps"); return }
-        invalidNumbers.remove("reps")
-        actualReps[currentKey] = value
-    }
-
-    func enterWeight(_ text: String, locale: Locale = .current) {
-        weightInput = text
-        guard let value = WorkoutNumberParser().weight(text, locale: locale) else { invalidNumbers.insert("weight"); return }
-        invalidNumbers.remove("weight")
-        weights[currentExerciseIndex] = preferences.weightUnit.kilograms(from: value)
-        revealWeight()
-    }
-
-    private func clearNumberInputs() { repsInput = nil; weightInput = nil; invalidNumbers = [] }
-
-    var workoutName: String = ""
-    var items: [WorkoutItemSnapshot] = []
-    var currentExerciseIndex: Int = 0
-    var currentSetIndex: Int = 0
-
-    var completedSets: [String: Int] = [:]
-    private var completedWeights: [String: Double] = [:]
-    var actualReps: [String: Int] = [:]
-    var weights: [Int: Double] = [:]
-
-    var isComplete: Bool = false
-    var isLoading: Bool = false
-    var errorMessage: String?
-
-    let restTimer: RestTimer
     private let time: any WorkoutTimeSource
     private let stopRestCue: @MainActor () -> Void
     private var startedAt: Date?
     private var finishedAt: Date?
+    private var hasLoaded = false
     private var isDiscarded = false
     private let sessionID = UUID()
-    private(set) var saveState: SessionSaveState = .idle
-
     private var elapsedTask: Task<Void, Never>?
-    var saveTask: Task<Void, Never>?
-    var elapsedSeconds: Int = 0
+    private var rows: [WorkoutSetID: WorkoutSetDraft] = [:]
+    private var revealedWeightExercises: Set<UUID> = []
 
-    var currentItem: WorkoutItemSnapshot? {
-        guard items.indices.contains(currentExerciseIndex) else { return nil }
-        return items[currentExerciseIndex]
+    let workoutId: UUID
+    let restTimer: RestTimer
+    private(set) var workoutName = ""
+    private(set) var items: [WorkoutItemSnapshot] = []
+    private(set) var currentItemID: UUID?
+    private(set) var viewedItemID: UUID?
+    private(set) var hasStarted = false
+    private(set) var showsExerciseList = true
+    private(set) var isComplete = false
+    private(set) var isLoading = false
+    private(set) var elapsedSeconds = 0
+    private(set) var saveState: SessionSaveState = .idle
+    private(set) var saveTask: Task<Void, Never>?
+    var errorMessage: String?
+    private(set) var allExercises: [ExerciseSnapshot] = []
+    private(set) var isLoadingExercises = false
+    var replacementError: String?
+
+    var currentItem: WorkoutItemSnapshot? { items.first { $0.id == viewedItemID } }
+    var currentExerciseIndex: Int { items.firstIndex { $0.id == viewedItemID } ?? 0 }
+    var currentExerciseName: String { currentItem?.exercise?.name ?? "" }
+    var currentSetsTotal: Int { currentItem?.sets ?? 0 }
+    var currentTargetReps: Int { currentItem?.targetReps ?? 0 }
+    var currentSetIndex: Int {
+        guard let item = currentItem else { return 0 }
+        var index = 0
+        let completed = Set(rows.filter { $0.key.itemID == item.id && $0.value.isDone }.map { $0.key.index })
+        while completed.contains(index) { index += 1 }
+        return min(index, max(0, item.sets - 1))
     }
-
-    var currentExerciseName: String {
-        currentItem?.exercise?.name ?? ""
-    }
-
-    var currentTargetReps: Int {
-        currentItem?.targetReps ?? 0
-    }
-
-    var currentSetsTotal: Int {
-        currentItem?.sets ?? 0
-    }
-
-    var currentDisplayReps: Int {
-        actualReps[currentKey] ?? currentTargetReps
-    }
-
-    var currentWeight: Double {
-        weights[currentExerciseIndex] ?? 0
-    }
-
-    var displayedWeight: Double { preferences.weightUnit.value(fromKilograms: currentWeight) }
+    var currentKey: WorkoutSetID { WorkoutSetID(itemID: viewedItemID ?? workoutId, index: currentSetIndex) }
+    var completedSets: [WorkoutSetID: Int] { rows.filter { $0.value.isDone }.mapValues(\.reps) }
+    var completedSetCount: Int { rows.values.filter(\.isDone).count }
+    var completedSetsForCurrent: Int { completedCount(for: viewedItemID) }
+    var allSetsCompleted: Bool { !items.isEmpty && items.allSatisfy { completedCount(for: $0.id) == $0.sets } }
+    var hasInvalidNumbers: Bool { rows.values.contains { $0.invalidReps || $0.invalidWeight } }
+    var canClose: Bool { saveState == .saved || saveState == .noCompletedSets }
+    var canEdit: Bool { !isComplete && !isDiscarded && saveState == .idle }
+    var showsWeight: Bool { alwaysShowsWeight || viewedItemID.map { revealedWeightExercises.contains($0) } == true }
+    var isRestActive: Bool { restTimer.isActive }
+    var remainingRestSeconds: Int { restTimer.remainingSeconds }
+    func extendRest() { restTimer.add(seconds: 15) }
+    func skipRest() { stopRestCue(); restTimer.skip() }
     var weightUnitSymbol: String { preferences.weightUnit.rawValue }
-
-    var completedSetsForCurrent: Int {
-        countCompletedSets(for: currentExerciseIndex)
-    }
-
-    var canGoPrevious: Bool {
-        currentExerciseIndex > 0
-    }
-
-    var canSkip: Bool {
-        currentExerciseIndex < items.count - 1
-    }
-
-    var nextExerciseName: String {
-        let nextIndex = currentExerciseIndex + 1
-        guard items.indices.contains(nextIndex) else { return "" }
-        return items[nextIndex].exercise?.name ?? ""
-    }
-
-    var currentKey: String {
-        key(for: currentExerciseIndex, set: currentSetIndex)
-    }
+    var currentWeight: Double { row(currentKey).weightKg }
+    var displayedWeight: Double { preferences.weightUnit.value(fromKilograms: currentWeight) }
+    var currentDisplayReps: Int { row(currentKey).reps }
 
     init(
-        workouts: any WorkoutRepository,
-        sessions: any SessionRepository,
-        workoutId: UUID,
-        time: any WorkoutTimeSource = SystemWorkoutTimeSource(),
-        preferences: WorkoutPreferences = WorkoutPreferences(),
-        alwaysShowsWeight: Bool = false,
-        playRestCue: @escaping @MainActor () -> Void = {},
+        workouts: any WorkoutRepository, sessions: any SessionRepository, workoutId: UUID,
+        exercises: (any ExerciseRepository)? = nil,
+        time: any WorkoutTimeSource = SystemWorkoutTimeSource(), preferences: WorkoutPreferences = WorkoutPreferences(),
+        alwaysShowsWeight: Bool = false, playRestCue: @escaping @MainActor () -> Void = {},
         stopRestCue: @escaping @MainActor () -> Void = {}
     ) {
-        self.alwaysShowsWeight = alwaysShowsWeight
         self.workoutsRepository = workouts
         self.sessionsRepository = sessions
+        self.exercisesRepository = exercises
         self.workoutId = workoutId
         self.time = time
         self.preferences = preferences
-        self.restTimer = RestTimer(time: time) {
-            if preferences.isTimerSoundEnabled { playRestCue() }
-        }
+        self.alwaysShowsWeight = alwaysShowsWeight
+        self.restTimer = RestTimer(time: time) { if preferences.isTimerSoundEnabled { playRestCue() } }
         self.stopRestCue = stopRestCue
     }
 
     func load() async {
-        guard !isLoading, startedAt == nil else { return }
+        guard !isLoading, !hasLoaded else { return }
         isLoading = true
         errorMessage = nil
         defer { isLoading = false }
-
         do {
             guard let workout = try await workoutsRepository.workout(by: workoutId) else {
                 errorMessage = String(localized: .uiWorkoutNotFound)
                 return
             }
-
             workoutName = workout.name
-            items = (workout.items).sorted { $0.order < $1.order }
+            items = workout.items.sorted { $0.order < $1.order }
+            guard !items.isEmpty else { errorMessage = String(localized: .uiWorkoutHasNoExercises); return }
+            viewedItemID = items.first?.id
+            hasLoaded = true
+        } catch { errorMessage = String(localized: .uiCouldNotLoadWorkout) }
+    }
 
-            if items.isEmpty {
-                errorMessage = String(localized: .uiWorkoutHasNoExercises)
-                return
-            }
+    func beginSession() {
+        guard hasLoaded, !hasStarted, canEdit else { return }
+        hasStarted = true
+        currentItemID = items.first?.id
+        viewedItemID = currentItemID
+        showsExerciseList = false
+        startedAt = time.now
+        startElapsedTimer()
+    }
 
-            currentExerciseIndex = 0
-            currentSetIndex = 0
-            completedSets = [:]
-            completedWeights = [:]
-            actualReps = [:]
-            weights = [:]
-            isComplete = false
-            elapsedSeconds = 0
+    func showExercise(_ id: UUID) {
+        guard canEdit, !hasInvalidNumbers, items.contains(where: { $0.id == id }) else { return }
+        viewedItemID = id
+        showsExerciseList = false
+    }
 
-            startedAt = time.now
-            startElapsedTimer()
-        } catch {
-            errorMessage = String(localized: .uiCouldNotLoadWorkout)
+    func showList() {
+        guard !hasInvalidNumbers else { return }
+        showsExerciseList = true
+    }
+
+    func resume() { if let currentItemID { showExercise(currentItemID) } }
+
+    func row(_ id: WorkoutSetID) -> WorkoutSetDraft {
+        rows[id] ?? WorkoutSetDraft(reps: items.first { $0.id == id.itemID }?.targetReps ?? 0)
+    }
+
+    func repsText(for id: WorkoutSetID) -> String { row(id).repsInput ?? String(row(id).reps) }
+    func weightText(for id: WorkoutSetID) -> String {
+        row(id).weightInput ?? preferences.weightUnit.value(fromKilograms: row(id).weightKg)
+            .formatted(.number.precision(.fractionLength(0...2)).grouping(.never))
+    }
+
+    func enterReps(_ text: String, for id: WorkoutSetID? = nil) {
+        let key = id ?? currentKey
+        guard canEdit, contains(key) else { return }
+        var draft = row(key)
+        draft.repsInput = text
+        if let value = WorkoutNumberParser().integer(text, minimum: 0) { draft.reps = value; draft.invalidReps = false } else { draft.invalidReps = true }
+        rows[key] = draft
+    }
+
+    func enterWeight(_ text: String, for id: WorkoutSetID? = nil, locale: Locale = .current) {
+        let key = id ?? currentKey
+        guard canEdit, contains(key) else { return }
+        var draft = row(key)
+        draft.weightInput = text
+        if let value = WorkoutNumberParser().weight(text, locale: locale) {
+            draft.weightKg = preferences.weightUnit.kilograms(from: value)
+            draft.invalidWeight = false
+        } else { draft.invalidWeight = true }
+        rows[key] = draft
+        revealedWeightExercises.insert(key.itemID)
+    }
+
+    func revealWeight() { if let viewedItemID { revealedWeightExercises.insert(viewedItemID) } }
+
+    func completedCount(for id: UUID?) -> Int { rows.filter { $0.key.itemID == id && $0.value.isDone }.count }
+    func canReplace(_ id: UUID) -> Bool { canEdit && completedCount(for: id) == 0 }
+
+    func moveExercise(_ id: UUID, to targetID: UUID) {
+        guard canEdit, !hasInvalidNumbers, let from = items.firstIndex(where: { $0.id == id }),
+              let to = items.firstIndex(where: { $0.id == targetID }), from != to else { return }
+        items.insert(items.remove(at: from), at: to)
+        for index in items.indices { items[index].order = index }
+    }
+
+    func replaceExercise(_ id: UUID, with exercise: ExerciseSnapshot) {
+        guard canReplace(id), !hasInvalidNumbers, let index = items.firstIndex(where: { $0.id == id }) else { return }
+        items[index].exercise = exercise
+        rows = rows.filter { $0.key.itemID != id }
+        revealedWeightExercises.remove(id)
+    }
+
+    func loadReplacementExercises() async {
+        guard !isLoadingExercises else { return }
+        isLoadingExercises = true
+        replacementError = nil
+        defer { isLoadingExercises = false }
+        do { allExercises = try await exercisesRepository?.allExercises() ?? [] } catch { replacementError = String(localized: .uiCouldNotLoadExercises) }
+    }
+
+    func toggleSet(_ id: WorkoutSetID) {
+        guard hasStarted, canEdit, !hasInvalidNumbers, contains(id),
+              let item = items.first(where: { $0.id == id.itemID }) else { return }
+        var draft = row(id)
+        draft.isDone.toggle()
+        rows[id] = draft
+        if draft.isDone {
+            stopRestCue()
+            restTimer.start(seconds: item.restSeconds)
+            if currentItemID == id.itemID, completedCount(for: item.id) == item.sets { advance(after: item.id) }
         }
+        if currentItemID == nil, !allSetsCompleted { currentItemID = items.first { completedCount(for: $0.id) < $0.sets }?.id }
+        if allSetsCompleted { showsExerciseList = true }
     }
 
-    func markSetDone() {
-        guard !hasInvalidNumbers, currentItem != nil, !isComplete, !isDiscarded, saveState == .idle else { return }
-        stopRestCue()
+    private func advance(after id: UUID) {
+        guard let index = items.firstIndex(where: { $0.id == id }) else { return }
+        let order = Array(items.dropFirst(index + 1)) + Array(items.prefix(index))
+        currentItemID = order.first { completedCount(for: $0.id) < $0.sets }?.id
+        if let currentItemID { viewedItemID = currentItemID }
+    }
 
-        let reps = currentDisplayReps
-        completedSets[currentKey] = reps
-        completedWeights[currentKey] = currentWeight
+    private func contains(_ id: WorkoutSetID) -> Bool {
+        items.contains { $0.id == id.itemID && id.index >= 0 && id.index < $0.sets }
+    }
 
-        clearNumberInputs()
-        let nextSet = currentSetIndex + 1
-
-        if nextSet < currentSetsTotal {
-            currentSetIndex = nextSet
-            actualReps[currentKey] = reps
-            restTimer.start(seconds: currentItem?.restSeconds ?? 45)
-        } else if currentExerciseIndex + 1 < items.count {
-            let nextName = nextExerciseName
-            currentExerciseIndex += 1
-            currentSetIndex = 0
-            restTimer.start(seconds: currentItem?.restSeconds ?? 60, nextExercise: nextName)
-        } else {
-            isComplete = true
-            finishTiming()
-            elapsedTask?.cancel()
-            restTimer.skip()
-            beginSave()
+    func buildSessionItems() -> [SessionItemSnapshot] {
+        items.enumerated().map { index, item in
+            let completed = rows.filter { $0.key.itemID == item.id && $0.value.isDone }.sorted { $0.key.index < $1.key.index }
+            return SessionItemSnapshot(order: index, exerciseName: item.exercise?.name ?? "", plannedSets: item.sets,
+                                       plannedReps: item.targetReps, setReps: completed.map { $0.value.reps },
+                                       weightKg: completed.last?.value.weightKg ?? 0,
+                                       setWeightsKg: completed.map { $0.value.weightKg })
         }
-    }
-
-    func previousExercise() {
-        guard canGoPrevious, !hasInvalidNumbers else { return }
-        clearNumberInputs()
-        currentExerciseIndex -= 1
-        currentSetIndex = 0
-    }
-
-    func skipExercise() {
-        guard canSkip, !hasInvalidNumbers else { return }
-        clearNumberInputs()
-        currentExerciseIndex += 1
-        currentSetIndex = 0
-    }
-
-    func incrementReps() {
-        guard !hasInvalidNumbers else { return }
-        actualReps[currentKey] = min(Int(Int32.max), currentDisplayReps + 1)
-        repsInput = nil
-    }
-
-    func decrementReps() {
-        guard !hasInvalidNumbers else { return }
-        repsInput = nil
-        let value = max(0, currentDisplayReps - 1)
-        actualReps[currentKey] = value
-    }
-
-    func incrementWeight() {
-        guard !hasInvalidNumbers else { return }
-        weightInput = nil
-        revealWeight()
-        weights[currentExerciseIndex] = preferences.weightUnit.stepping(kilograms: currentWeight, increasing: true)
-    }
-
-    func decrementWeight() {
-        guard !hasInvalidNumbers else { return }
-        weightInput = nil
-        revealWeight()
-        weights[currentExerciseIndex] = preferences.weightUnit.stepping(kilograms: currentWeight, increasing: false)
     }
 
     func cleanup() {
@@ -264,7 +240,7 @@ final class ActiveWorkoutViewModel {
     }
 
     func endSession() async {
-        guard !items.isEmpty, !isDiscarded, !hasInvalidNumbers else { return }
+        guard hasStarted, !items.isEmpty, !isDiscarded, !hasInvalidNumbers else { return }
         stopRestCue()
         isComplete = true
         finishTiming()
@@ -275,32 +251,6 @@ final class ActiveWorkoutViewModel {
 
     func retrySave() async {
         await endSession()
-    }
-
-    func buildSessionItems() -> [SessionItemSnapshot] {
-        var result: [SessionItemSnapshot] = []
-
-        for (index, item) in items.enumerated() {
-            var sessionItem = SessionItemSnapshot()
-            sessionItem.order = item.order
-            sessionItem.exerciseName = item.exercise?.name ?? ""
-            sessionItem.plannedSets = item.sets
-            sessionItem.plannedReps = item.targetReps
-            sessionItem.weightKg = weights[index] ?? 0
-
-            let completed = completedSets.compactMap { entry -> (set: Int, reps: Int, weight: Double)? in
-                let parts = entry.key.split(separator: "-")
-                guard parts.count == 2, Int(parts[0]) == index, let set = Int(parts[1]),
-                      set >= 0, set < item.sets else { return nil }
-                return (set, entry.value, completedWeights[entry.key] ?? 0)
-            }.sorted { $0.set < $1.set }
-            sessionItem.setReps = completed.map(\.reps)
-            sessionItem.setWeightsKg = completed.map(\.weight)
-
-            result.append(sessionItem)
-        }
-
-        return result
     }
 
     private func beginSave() {
@@ -348,17 +298,4 @@ final class ActiveWorkoutViewModel {
         }
     }
 
-    private func key(for exerciseIndex: Int, set setIndex: Int) -> String {
-        "\(exerciseIndex)-\(setIndex)"
-    }
-
-    private func countCompletedSets(for exerciseIndex: Int) -> Int {
-        guard items.indices.contains(exerciseIndex) else { return 0 }
-        let total = items[exerciseIndex].sets
-        return completedSets.keys.filter { key in
-            let parts = key.split(separator: "-")
-            guard parts.count == 2, Int(parts[0]) == exerciseIndex, let set = Int(parts[1]) else { return false }
-            return set >= 0 && set < total
-        }.count
-    }
 }

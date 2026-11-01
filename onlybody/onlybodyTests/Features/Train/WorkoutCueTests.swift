@@ -19,6 +19,7 @@ struct WorkoutCueTests {
             preferences: preferences, playRestCue: { cues += 1 }
         )
         await model.load()
+        model.beginSession()
         model.markSetDone()
         await time.waitForSleepers(2)
         preferences.isTimerSoundEnabled = false
@@ -54,6 +55,7 @@ struct WorkoutCueTests {
             playRestCue: { cues += 1 }
         )
         await model.load()
+        model.beginSession()
         model.markSetDone()
         #expect(cues == 0)
         #expect(model.currentExerciseIndex == (betweenExercises ? 1 : 0))
@@ -79,6 +81,7 @@ struct WorkoutCueTests {
             playRestCue: { cues += 1 }, stopRestCue: { stops += 1 }
         )
         await model.load()
+        model.beginSession()
         model.markSetDone()
         await time.waitForSleepers(2)
         stops = 0

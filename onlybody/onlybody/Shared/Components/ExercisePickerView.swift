@@ -2,13 +2,14 @@ import SwiftUI
 
 struct ExercisePickerView: View {
     @State var viewModel: ExercisePickerViewModel
+    var title = String(localized: .uiAddMovement)
     let onAdd: (ExerciseSnapshot) -> Void
     @FocusState private var isSearchFocused: Bool
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         VStack(spacing: Theme.space0) {
-            NavBarView(title: String(localized: .uiAddMovement)) {
+            NavBarView(title: title) {
                 Button { dismiss() } label: {
                     ChevronIcon(isBack: true).frame(width: Theme.touchSize, height: Theme.touchSize)
                 }.accessibilityLabel(String(localized: .uiBack)).accessibilityIdentifier("exercisePicker.close")

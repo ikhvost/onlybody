@@ -42,7 +42,7 @@ struct AppComposition {
     func active(workoutID: UUID) -> ActiveWorkoutViewModel {
         let cue = WorkoutCuePlayer()
         return ActiveWorkoutViewModel(
-            workouts: workouts, sessions: sessions, workoutId: workoutID,
+            workouts: workouts, sessions: sessions, workoutId: workoutID, exercises: exercises,
             preferences: preferences, alwaysShowsWeight: configuration.alwaysShowsWeight,
             playRestCue: { cue.play() }, stopRestCue: { cue.stop() }
         )

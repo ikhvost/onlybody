@@ -7,8 +7,6 @@ struct ActiveWorkoutView: View {
     let onHistory: (String) -> Void
 
     @State private var showEndPrompt = false
-    @State private var setCompletedCount = 0
-    @State private var navigationCount = 0
 
     var body: some View {
         ZStack {
@@ -31,13 +29,15 @@ struct ActiveWorkoutView: View {
                     onEnd: onEnd
                 )
             } else if !viewModel.items.isEmpty {
-                ActiveWorkoutControlsView(
-                    viewModel: viewModel,
-                    onEnd: { if !viewModel.hasInvalidNumbers { showEndPrompt = true } },
-                    onCompleteSet: { viewModel.markSetDone(); setCompletedCount += 1 },
-                    onGuide: { if let exercise = viewModel.currentItem?.exercise { onGuide(exercise) } },
-                    onHistory: { onHistory(viewModel.currentExerciseName) }
-                )
+                if viewModel.showsExerciseList {
+                    ActiveWorkoutSessionList(viewModel: viewModel, onClose: onEnd, onEnd: { showEndPrompt = true })
+                } else {
+                    ActiveWorkoutContentView(
+                        viewModel: viewModel,
+                        onGuide: { if let exercise = viewModel.currentItem?.exercise { onGuide(exercise) } },
+                        onHistory: { onHistory(viewModel.currentExerciseName) }
+                    )
+                }
             }
         }
         .alert(String(localized: .uiEndWorkout), isPresented: $showEndPrompt) {
@@ -57,8 +57,8 @@ struct ActiveWorkoutView: View {
         .task {
             await viewModel.load()
         }
-        .sensoryFeedback(.impact(weight: .medium), trigger: setCompletedCount)
-        .sensoryFeedback(.selection, trigger: navigationCount)
+        .sensoryFeedback(.impact(weight: .medium), trigger: viewModel.completedSetCount)
+        .sensoryFeedback(.selection, trigger: viewModel.viewedItemID)
     }
 
     private func formatTime(_ seconds: Int) -> String {

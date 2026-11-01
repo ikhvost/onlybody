@@ -21,6 +21,7 @@ struct WorkoutWeightUnitTests {
         )
         defer { model.cleanup() }
         await model.load()
+        model.beginSession()
         model.decrementWeight()
         #expect(model.currentWeight == 0)
         model.incrementWeight()
@@ -29,8 +30,9 @@ struct WorkoutWeightUnitTests {
         model.markSetDone()
         model.restTimer.skip()
         model.incrementWeight()
+        model.incrementWeight()
         model.markSetDone()
-        await model.saveTask?.value
+        await model.endSession()
         let saved = try #require(sessions.savedSessions.first?.items.first)
         let weights = try #require(saved.setWeightsKg)
         #expect(weights.count == 2)
@@ -42,13 +44,19 @@ struct WorkoutWeightUnitTests {
 
     @Test func unitChangesOnlyPresentationAndLeaveCompletedSetsUntouched() async {
         let preferences = WorkoutPreferences()
+        let repository = MockWorkoutRepository()
+        let workout = WorkoutSnapshot(items: [WorkoutItemSnapshot(sets: 2)])
+        repository.stubbedWorkouts = [workout]
         let model = ActiveWorkoutViewModel(
-            workouts: MockWorkoutRepository(), sessions: MockSessionRepository(), workoutId: UUID(),
+            workouts: repository, sessions: MockSessionRepository(), workoutId: workout.id,
             time: ManualWorkoutTimeSource(), preferences: preferences
         )
-        model.items = [WorkoutItemSnapshot(sets: 2)]
-        model.weights[0] = 20
+        await model.load()
+        model.beginSession()
+        model.enterWeight("20")
         model.markSetDone()
+        model.showExercise(workout.items[0].id)
+        model.enterWeight("20")
         defer { model.cleanup() }
         let before = model.buildSessionItems().map(\.setWeightsKg)
         preferences.weightUnit = .pounds

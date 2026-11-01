@@ -53,6 +53,7 @@ struct NativeDesignReviewFixture {
         await emptyTrain.load()
         await builder.loadExercises()
         await active.load()
+        active.beginSession()
         await library.load()
         await log.load()
         await overview.load()
@@ -82,8 +83,9 @@ struct NativeDesignReviewFixture {
         switch index {
         case 5: BuilderMovementEditor(viewModel: builder, movementID: builder.movements.first?.id ?? UUID())
         case 6: ExercisePickerView(viewModel: ExercisePickerViewModel(exercises: [exercise]), onAdd: { _ in })
-        case 7: ActiveWorkoutControlsView(viewModel: active, onEnd: {}, onCompleteSet: {}, onGuide: {}, onHistory: {})
-        case 8: RestOverlayView(remainingString: "00:35", nextExerciseName: exercise.displayName, onSkip: {}, setLabel: "2 / 3")
+        case 7: ActiveWorkoutContentView(viewModel: active, onGuide: {}, onHistory: {})
+        case 8: ActiveWorkoutContentView(viewModel: active, onGuide: {}, onHistory: {})
+                .onAppear { active.restTimer.start(seconds: 35) }
         default: ActiveWorkoutCompletionView(elapsedString: "04:00", completedSets: 2, saveState: .saved, onRetry: {}, errorMessage: nil, onEnd: {})
         }
     }
@@ -104,7 +106,7 @@ struct NativeDesignReviewFixture {
         case 15: MovementDetailView(viewModel: MovementDetailViewModel(exercise: exercise, allowsVideoLoading: false))
         case 16: SettingsView(viewModel: settings, onNotifications: {})
         case 17: NotificationsView(viewModel: notifications)
-        case 18: WorkoutOverviewView(viewModel: overview, onEdit: {}, onStart: {}, onExercise: { _ in })
+        case 18: ActiveWorkoutSessionList(viewModel: active, onClose: {}, onEnd: {})
         default: ExerciseFilterSheet(muscle: .constant("Chest"), difficulty: .constant(nil))
         }
     }

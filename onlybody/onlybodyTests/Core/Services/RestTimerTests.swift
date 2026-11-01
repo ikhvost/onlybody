@@ -76,4 +76,28 @@ struct RestTimerTests {
         #expect(!timer.isActive)
         #expect(finishes == 1)
     }
+    @Test func extensionMovesDeadlineWithoutRestartingOrPlayingCue() async {
+        let time = ManualWorkoutTimeSource()
+        var cues = 0
+        let timer = RestTimer(time: time, onFinished: { cues += 1 })
+        timer.start(seconds: 30)
+        await time.waitForSleepers(1)
+        time.advance(seconds: 10)
+        timer.add(seconds: 15)
+        #expect(timer.remainingSeconds == 35)
+        for _ in 0..<100 { await Task.yield() }
+        await time.waitForSleepers(1)
+        time.advance(seconds: 20)
+        for _ in 0..<100 { await Task.yield() }
+        #expect(timer.isActive)
+        #expect(cues == 0)
+        await time.waitForSleepers(1)
+        time.advance(seconds: 15)
+        for _ in 0..<100 where timer.isActive { await Task.yield() }
+        #expect(!timer.isActive)
+        #expect(cues == 1)
+        timer.add(seconds: 15)
+        #expect(!timer.isActive)
+    }
+
 }

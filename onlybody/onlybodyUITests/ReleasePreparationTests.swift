@@ -68,7 +68,8 @@ final class ReleasePreparationTests: XCTestCase {
         tap("builder.movement.done", in: app)
         tap("builder.save", in: app)
         tap("workout.start.\(workoutName)", in: app)
-        XCTAssertTrue(app.buttons["active.markSetDone"].waitForExistence(timeout: 10))
+        tap("active.start", in: app)
+        XCTAssertTrue(app.buttons["active.set.0.done"].waitForExistence(timeout: 10))
         capture("03-active-workout", app: app)
         if UIDevice.current.userInterfaceIdiom == .pad {
             XCUIDevice.shared.orientation = .landscapeLeft
@@ -77,9 +78,11 @@ final class ReleasePreparationTests: XCTestCase {
             XCUIDevice.shared.orientation = .portrait
         }
         for index in 0..<3 {
-            tap("active.markSetDone", in: app)
+            tap("active.set.\(index).done", in: app)
             if index < 2 { tap("rest.skip", in: app) }
         }
+        tap("active.end", in: app)
+        tap(endAndSaveTitle(language), in: app)
         tap("active.close", in: app)
         tap("tab.log", in: app)
         XCTAssertTrue(app.buttons["session.row"].waitForExistence(timeout: 10))
@@ -117,9 +120,15 @@ final class ReleasePreparationTests: XCTestCase {
         waitForExpectations(timeout: 10)
     }
 
+    private func endAndSaveTitle(_ language: String) -> String {
+        let titles = ["en": "End & Save", "uk": "Завершити й зберегти", "pl": "Zakończ i zapisz",
+                      "de": "Beenden und speichern", "fr": "Terminer et enregistrer"]
+        return titles[language] ?? "End & Save"
+    }
+
     private func tap(_ identifier: String, in app: XCUIApplication) {
         let button = app.buttons[identifier]
-        XCTAssertTrue(button.exists || button.waitForExistence(timeout: 10), "Missing button: \(identifier)")
+        XCTAssertTrue(button.exists || button.waitForExistence(timeout: 10), "Missing button: \(identifier)\n\(app.debugDescription)")
         for _ in 0..<6 where !button.isHittable { app.swipeUp() }
         button.tap()
     }
