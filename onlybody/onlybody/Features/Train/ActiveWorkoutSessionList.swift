@@ -4,7 +4,7 @@ struct ActiveWorkoutSessionList: View {
     let viewModel: ActiveWorkoutViewModel
     let onClose: () -> Void
     let onEnd: () -> Void
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var dragLocation: CGPoint?
     @State private var replacementItem: WorkoutItemSnapshot?
 
     var body: some View {
@@ -32,20 +32,26 @@ struct ActiveWorkoutSessionList: View {
             }
             CompactRestTimerView(viewModel: viewModel)
             ScrollView {
-                LazyVStack(alignment: .leading, spacing: Theme.space12) {
+                VStack(alignment: .leading, spacing: Theme.space12) {
                     Text(viewModel.workoutName).font(Theme.fontSans(Theme.typeExercise, .bold))
                     Text(.uiWorkoutSessionOnly).font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.text2)
                     if viewModel.allSetsCompleted {
                         Text(.uiWorkoutReady).foregroundStyle(Theme.accent)
                             .padding(Theme.cardInset).background(Theme.accentDim, in: .rect(cornerRadius: Theme.cornerRadius))
                     }
-                    ForEach(viewModel.items.enumerated(), id: \.element.id) { index, item in
-                        ActiveWorkoutSessionCard(viewModel: viewModel, item: item, index: index) { replacementItem = item }
+                    ExerciseReorderStack(items: viewModel.items, spacing: Theme.space12, isEnabled: !viewModel.hasInvalidNumbers,
+                                         dragLocation: $dragLocation, onMove: viewModel.moveExercise) { item, handle in
+                        if let index = viewModel.items.firstIndex(where: { $0.id == item.id }) {
+                            ActiveWorkoutSessionCard(viewModel: viewModel, item: item, index: index, reorderHandle: handle) {
+                                replacementItem = item
+                            }
+                        }
                     }
                 }
                 .padding(Theme.horizontalPadding)
-                .animation(reduceMotion ? nil : .smooth(duration: Theme.exerciseReorderDuration), value: viewModel.items.map(\.id))
-            }.scrollIndicators(.hidden)
+            }
+            .scrollIndicators(.hidden)
+            .modifier(ExerciseReorderAutoScroll(location: $dragLocation))
             if viewModel.hasStarted {
                 PrimaryButton(title: String(localized: .uiEndWorkout), action: onEnd)
                     .accessibilityIdentifier("active.end").padding(Theme.cardInset).background(Theme.bg)

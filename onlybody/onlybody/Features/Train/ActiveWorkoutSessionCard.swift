@@ -4,14 +4,13 @@ struct ActiveWorkoutSessionCard: View {
     let viewModel: ActiveWorkoutViewModel
     let item: WorkoutItemSnapshot
     let index: Int
+    let reorderHandle: ExerciseReorderHandle
     let onReplace: () -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.space8) {
             HStack(spacing: Theme.space8) {
-                ReorderIcon().frame(width: Theme.touchSize, height: Theme.touchSize)
-                    .contentShape(.rect).draggable(item.id.uuidString)
-                    .accessibilityLabel(String(localized: .uiWorkoutReorder))
+                reorderHandle.accessibilityIdentifier("active.exercise.\(index).drag")
                 Button { viewModel.showExercise(item.id) } label: {
                     VStack(alignment: .leading, spacing: Theme.space6) {
                         Text(viewModel.completedCount(for: item.id) == item.sets ? .uiWorkoutCompleted
@@ -39,9 +38,6 @@ struct ActiveWorkoutSessionCard: View {
         .overlay {
             RoundedRectangle(cornerRadius: Theme.cornerRadius)
                 .stroke(viewModel.currentItemID == item.id ? Theme.accent : Theme.border)
-        }
-        .dropDestination(for: String.self) { values, _ in
-            if let value = values.first, let id = UUID(uuidString: value) { viewModel.moveExercise(id, to: item.id) }
         }
         .disabled(viewModel.hasInvalidNumbers)
     }

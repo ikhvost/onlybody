@@ -84,6 +84,7 @@ final class WorkoutJourneyTests: XCTestCase {
         replacementSearch.tap()
         replacementSearch.typeText(JourneyProduct.libraryExercise)
         tap("exercise.pick.\(JourneyProduct.libraryExercise)")
+        verifySessionDragReordering()
         tap("active.exercise.0.down")
         XCTAssertTrue(app.buttons["active.exercise.1"].label.contains(JourneyProduct.libraryExercise))
         tap("active.exercise.1.up")
@@ -561,6 +562,30 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertGreaterThan(app.buttons[firstID].frame.midY, app.buttons[secondID].frame.midY)
         tap(up)
         XCTAssertLessThan(app.buttons[firstID].frame.midY, app.buttons[secondID].frame.midY)
+        let firstHandle = firstID.replacing("builder.movement.", with: "builder.drag.")
+        let secondHandle = secondID.replacing("builder.movement.", with: "builder.drag.")
+        dragExercise(firstHandle, to: secondHandle, extraDistance: 30)
+        XCTAssertGreaterThan(app.buttons[firstID].frame.midY, app.buttons[secondID].frame.midY)
+        dragExercise(firstHandle, to: secondHandle, extraDistance: -30)
+        XCTAssertLessThan(app.buttons[firstID].frame.midY, app.buttons[secondID].frame.midY)
+    }
+
+    private func verifySessionDragReordering() {
+        dragExercise("active.exercise.0.drag", to: "active.exercise.1.drag", extraDistance: 30)
+        XCTAssertTrue(app.buttons["active.exercise.1"].label.contains(JourneyProduct.libraryExercise))
+        dragExercise("active.exercise.1.drag", to: "active.exercise.0.drag", extraDistance: -30)
+        XCTAssertTrue(app.buttons["active.exercise.0"].label.contains(JourneyProduct.libraryExercise))
+    }
+
+    private func dragExercise(_ sourceID: String, to targetID: String, extraDistance: CGFloat) {
+        let source = app.descendants(matching: .any).matching(identifier: sourceID).firstMatch
+        let target = app.descendants(matching: .any).matching(identifier: targetID).firstMatch
+        XCTAssertTrue(source.waitForExistence(timeout: 5))
+        XCTAssertTrue(target.waitForExistence(timeout: 5))
+        let destination = target.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+            .withOffset(CGVector(dx: 0, dy: extraDistance))
+        source.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+            .press(forDuration: 0.7, thenDragTo: destination, withVelocity: XCUIGestureVelocity(rawValue: 120), thenHoldForDuration: 1)
     }
 
     private func verifyLibraryOutsideDismissal() {

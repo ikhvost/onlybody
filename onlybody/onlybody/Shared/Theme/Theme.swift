@@ -36,6 +36,15 @@ enum Theme {
     static let tabSwipeThresholds = TabSwipeThresholds(minimum: 16, distance: 72, fastDistance: 24, speed: 500, ratio: swipeDirectionRatio)
     static let tabTransitionDuration: Double = 0.25
     static let exerciseReorderDuration: Double = 0.35
+    static let exerciseLiftDelay: Double = 0.25
+    static let exerciseLiftDuration: Double = 0.18
+    static let exerciseLiftScale: CGFloat = 1.025
+    static let exerciseLiftBorder: CGFloat = 1.5
+    static let exerciseLiftShadow = Color.black.opacity(0.4)
+    static let exerciseLiftShadowRadius: CGFloat = 18
+    static let exerciseLiftShadowOffset: CGFloat = 8
+    static let exerciseReorderScrollEdge: CGFloat = 64
+    static let exerciseReorderScrollStep: CGFloat = 7
 
     static let accent = Color(red: 232 / 255, green: 162 / 255, blue: 58 / 255)
     static let accentDim = Color(red: 232 / 255, green: 162 / 255, blue: 58 / 255, opacity: 0.13)

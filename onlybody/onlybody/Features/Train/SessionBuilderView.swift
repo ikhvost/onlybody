@@ -13,6 +13,7 @@ struct SessionBuilderView: View {
     @State private var showDeletePrompt = false
     @State private var showDiscardPrompt = false
     @State private var isShowingExercisePicker = false
+    @State private var dragLocation: CGPoint?
 
     var body: some View {
         ZStack {
@@ -44,7 +45,7 @@ struct SessionBuilderView: View {
                                 .foregroundStyle(Theme.accent)
                         }
                         BuilderSmartInfo(viewModel: viewModel)
-                        BuilderMovements(viewModel: viewModel, isShowingExercisePicker: $isShowingExercisePicker)
+                        BuilderMovements(viewModel: viewModel, isShowingExercisePicker: $isShowingExercisePicker, dragLocation: $dragLocation)
                         DisclosureGroup {
                             BuilderDays(viewModel: viewModel)
                         } label: {
@@ -72,6 +73,7 @@ struct SessionBuilderView: View {
                     .padding(.bottom, Theme.space28)
                 }
                 .scrollIndicators(.hidden)
+                .modifier(ExerciseReorderAutoScroll(location: $dragLocation))
                 .scrollDismissesKeyboard(.interactively)
                 .safeAreaInset(edge: .bottom, spacing: Theme.space0) {
                     PrimaryButton(title: viewModel.isSaving ? String(localized: .uiDesignSaving) : String(localized: .uiSave),

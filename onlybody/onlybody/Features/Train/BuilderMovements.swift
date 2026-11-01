@@ -3,7 +3,7 @@ import SwiftUI
 struct BuilderMovements: View {
     @Bindable var viewModel: SessionBuilderViewModel
     @Binding var isShowingExercisePicker: Bool
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Binding var dragLocation: CGPoint?
 
     var body: some View {
         if viewModel.mode == .manual || !viewModel.movements.isEmpty {
@@ -53,13 +53,12 @@ struct BuilderMovements: View {
                     }
                     .padding(.horizontal, Theme.horizontalPadding)
                 } else {
-                    VStack(spacing: Theme.space6) {
-                        ForEach(viewModel.movements) { movement in
-                            BuilderMovementCard(viewModel: viewModel, movement: movement)
-                        }
+                    ExerciseReorderStack(items: viewModel.movements, spacing: Theme.space6,
+                                         isEnabled: !viewModel.hasInvalidNumbers && !viewModel.isSaving,
+                                         dragLocation: $dragLocation, onMove: viewModel.moveMovement) { movement, handle in
+                        BuilderMovementCard(viewModel: viewModel, movement: movement, reorderHandle: handle)
                     }
                     .padding(.horizontal, Theme.horizontalPadding)
-                    .animation(reduceMotion ? nil : .smooth(duration: Theme.exerciseReorderDuration), value: viewModel.movements.map(\.id))
                 }
             }
             .padding(.top, Theme.space16)

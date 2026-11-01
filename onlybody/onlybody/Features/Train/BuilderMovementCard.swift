@@ -3,15 +3,14 @@ import SwiftUI
 struct BuilderMovementCard: View {
     let viewModel: SessionBuilderViewModel
     let movement: MovementConfig
+    let reorderHandle: ExerciseReorderHandle
     @State private var showingEditor = false
     @State private var showingReplacement = false
 
     var body: some View {
         VStack(spacing: Theme.space8) {
             HStack(spacing: Theme.space8) {
-                ReorderIcon().frame(width: Theme.touchSize, height: Theme.touchSize)
-                    .contentShape(.rect).draggable(movement.id.uuidString)
-                    .accessibilityLabel(String(localized: .uiWorkoutReorder))
+                reorderHandle.accessibilityIdentifier("builder.drag.\(movement.id)")
                 Button { showingEditor = true } label: {
                     VStack(alignment: .leading, spacing: Theme.space8) {
                         Text(movement.exercise.displayName).font(Theme.fontSans(Theme.typeCard, .bold)).foregroundStyle(Theme.text)
@@ -31,9 +30,6 @@ struct BuilderMovementCard: View {
         }
         .padding(Theme.cardInset).background(Theme.surface, in: .rect(cornerRadius: Theme.cornerRadius))
         .buttonStyle(PressableButtonStyle(animates: false)).disabled(viewModel.hasInvalidNumbers || viewModel.isSaving)
-        .dropDestination(for: String.self) { values, _ in
-            if let value = values.first, let id = UUID(uuidString: value) { viewModel.moveMovement(id, to: movement.id) }
-        }
         .sheet(isPresented: $showingEditor) {
             BuilderMovementEditor(viewModel: viewModel, movementID: movement.id)
                 .presentationDetents([.large]).presentationDragIndicator(.visible)
