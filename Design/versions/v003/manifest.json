@@ -1,0 +1,49 @@
+{
+  "version": "v003",
+  "parent": "v002",
+  "date": "2026-11-01",
+  "title": "Вільне тренування",
+  "status": "proposed",
+  "nativeChanges": false,
+  "fixtureRevision": "7e0647e",
+  "products": [
+    "OnlyBody",
+    "OnlyWeights"
+  ],
+  "languages": [
+    "uk",
+    "en",
+    "pl",
+    "de",
+    "fr"
+  ],
+  "viewports": [
+    [
+      375,
+      812
+    ],
+    [
+      393,
+      852
+    ],
+    [
+      440,
+      956
+    ]
+  ],
+  "screens": 18,
+  "comparisonViewport": [
+    440,
+    956
+  ],
+  "screenshotViewport": [
+    393,
+    852
+  ],
+  "defaultClock": "frozen",
+  "entry": "../../runner.html?version=v003",
+  "decisions": "DECISIONS.md",
+  "verification": "verification.json",
+  "approvalScope": "Clickable design prototype; native implementation is a separate step",
+  "screenshotStorage": "local-only, gitignored"
+}

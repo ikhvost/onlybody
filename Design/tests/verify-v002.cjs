@@ -134,13 +134,13 @@ async function screenshot(page,product,route){const name=`versions/v002/screensh
   if(scenario==='empty')assert.equal(await page.locator('[data-action="create"]').count(),2);
  }
  await page.goto(origin+'/runner.html?version=v002&scenario=empty&screen=workout');assert.equal(await page.locator('.workout-overview').count(),0);assert.equal(await page.locator('[data-action^="start:"]').count(),0);
- await page.goto(origin+'/?compare=true&screen=active');await page.waitForSelector('iframe');await page.waitForFunction(()=>[...document.querySelectorAll('iframe')].every(f=>f.contentWindow.mock));assert.equal(await page.locator('iframe').count(),2);
+ await page.goto(origin+'/?version=v002&compare=true&screen=active&compare-base=v001');await page.waitForSelector('iframe');await page.waitForFunction(()=>[...document.querySelectorAll('iframe')].every(f=>f.contentWindow.mock));assert.equal(await page.locator('iframe').count(),2);
  assert.deepEqual(await page.evaluate(()=>[...document.querySelectorAll('iframe')].map(f=>f.contentWindow.mock.state().active.reps)),[12,12]);
  report.flows.push('Frozen clock, fixture scenarios and 440pt comparison');
  await page.setViewportSize({width:1440,height:1120});await page.waitForTimeout(300);await page.screenshot({path:path.join(root,'versions/v002/studio.png')});
  report.status=report.issues.length?'FAIL':'PASS';
  }catch(error){report.status='FAIL';report.issues.push({kind:'test-failure',message:error.stack});console.error(error)}finally{
-  fs.writeFileSync(path.join(root,'versions/v002/verification.json'),JSON.stringify(report,null,2)+'\n');await browser.close();
+  fs.writeFileSync(process.env.DESIGN_REPORT||path.join(root,'versions/v002/verification.json'),JSON.stringify(report,null,2)+'\n');await browser.close();
  }
  console.log(JSON.stringify({status:report.status,matrix:report.matrix,flows:report.flows.length,issues:report.issues.slice(0,15)},null,2));
  if(report.status!=='PASS')process.exitCode=1;
