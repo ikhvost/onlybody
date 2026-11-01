@@ -45,5 +45,9 @@
   "decisions": "DECISIONS.md",
   "verification": "verification.json",
   "approvalScope": "Clickable design prototype; native implementation is a separate step",
-  "screenshotStorage": "local-only, gitignored"
+  "screenshotStorage": "local-only, gitignored",
+  "nativeParityRevision": "d812d78",
+  "nativeParityDate": "2026-11-01",
+  "syncNotes": "SYNC.md",
+  "initialVerification": "verification-initial.json"
 }

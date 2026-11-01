@@ -40,3 +40,24 @@
 .device .replacement-sheet .search-box{margin:12px 20px;flex-shrink:0}
 .device .replacement-sheet .search-box input{width:100%;min-width:0}
 .device .replacement-sheet .exercise-row{width:100%;text-align:left;padding:16px 20px}
+
+/* Native follow-up parity: live lift, planning, history and touch navigation. */
+.device .session-card{position:relative}
+.device .session-card.is-dragging{z-index:5;border-color:var(--accent);box-shadow:0 16px 36px #0008;cursor:grabbing;will-change:transform}
+.device.is-reordering,.device.is-reordering *{user-select:none;cursor:grabbing}
+.device.is-reordering .scroll{scroll-behavior:auto;overflow-anchor:none}
+.device .timing-grid.rest-only{grid-template-columns:minmax(0,1fr)}
+.device .history-set{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);font-family:'DM Sans',sans-serif;font-size:var(--type-meta)}
+.device .history-set span{min-width:0;color:var(--text2)}
+.device .history-set strong{flex-shrink:0;font-family:'DM Mono',monospace;font-size:var(--type-meta);color:var(--accent);font-weight:500}
+.device .history-entry h2{font-size:18px;margin:8px 0 12px}
+.device .legacy-weight{margin:12px 0}
+.device .history-notice{padding:12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);margin:12px 0}
+.device .history-notice p{font-size:15px;color:var(--text2);margin:0 0 10px}
+.device .replacement-controls{display:flex;align-items:center;gap:8px;margin:12px 20px;flex-shrink:0}
+.device .replacement-controls .search-box{margin:0;min-width:0;flex:1}
+.device .replacement-controls .filter-button{flex-shrink:0;padding:8px;min-height:48px}
+.device .app,.device .sheet,.device .scroll{touch-action:pan-y}
+@media(prefers-reduced-motion:reduce){.device .session-card{transition:none;animation:none}}
+
+.device .permission-button{min-width:44px}
