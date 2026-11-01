@@ -137,6 +137,25 @@ final class ActiveWorkoutViewModel {
             .formatted(.number.precision(.fractionLength(0...2)).grouping(.never))
     }
 
+    /// Replace a pristine zero on focus without changing its committed numeric value.
+    func beginWeightEditing(_ id: WorkoutSetID) {
+        guard canEdit, contains(id) else { return }
+        var draft = row(id)
+        guard draft.weightKg == 0, !draft.invalidWeight else { return }
+        draft.weightInput = ""
+        draft.isReplacingInitialZero = true
+        rows[id] = draft
+    }
+
+    /// An untouched zero is restored; a user-cleared invalid value remains editable.
+    func endWeightEditing(_ id: WorkoutSetID) {
+        guard var draft = rows[id], draft.isReplacingInitialZero else { return }
+        draft.isReplacingInitialZero = false
+        draft.weightInput = nil
+        draft.invalidWeight = false
+        rows[id] = draft
+    }
+
     func enterReps(_ text: String, for id: WorkoutSetID? = nil) {
         let key = id ?? currentKey
         guard canEdit, contains(key) else { return }
@@ -150,6 +169,9 @@ final class ActiveWorkoutViewModel {
         let key = id ?? currentKey
         guard canEdit, contains(key) else { return }
         var draft = row(key)
+        // TextField can echo the programmatic clearing before the first keystroke.
+        if draft.isReplacingInitialZero, text.isEmpty { return }
+        draft.isReplacingInitialZero = false
         draft.weightInput = text
         if let value = WorkoutNumberParser().weight(text, locale: locale) {
             draft.weightKg = preferences.weightUnit.kilograms(from: value)

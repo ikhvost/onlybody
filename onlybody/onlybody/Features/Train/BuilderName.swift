@@ -29,5 +29,9 @@ struct BuilderName: View {
                 .autocorrectionDisabled()
         }
         .padding(.top, Theme.space16)
+        .toolbar {
+            if isFocused { KeyboardDismissToolbar { isFocused = false } }
+        }
+        .onDisappear { isFocused = false }
     }
 }

@@ -4,6 +4,7 @@ struct ActiveWorkoutContentView: View {
     let viewModel: ActiveWorkoutViewModel
     let onGuide: () -> Void
     let onHistory: () -> Void
+    @FocusState private var focusedField: WorkoutSetField?
 
     var body: some View {
         VStack(spacing: Theme.space0) {
@@ -44,7 +45,8 @@ struct ActiveWorkoutContentView: View {
                     }.font(Theme.fontSans(Theme.type13)).foregroundStyle(Theme.text2)
                     if let item = viewModel.currentItem {
                         ForEach(0..<max(0, item.sets), id: \.self) { index in
-                            ActiveWorkoutSetRow(viewModel: viewModel, setID: WorkoutSetID(itemID: item.id, index: index))
+                            ActiveWorkoutSetRow(viewModel: viewModel, setID: WorkoutSetID(itemID: item.id, index: index),
+                                                focusedField: $focusedField, onDismissKeyboard: dismissKeyboard)
                         }
                     }
                     if viewModel.hasInvalidNumbers {
@@ -53,6 +55,19 @@ struct ActiveWorkoutContentView: View {
                 }.padding(Theme.horizontalPadding)
             }.scrollIndicators(.hidden).scrollDismissesKeyboard(.interactively)
         }
+        .toolbar { KeyboardDismissToolbar(onDismiss: dismissKeyboard) }
+        .onChange(of: focusedField) { old, new in
+            if case .weight(let id)? = old { viewModel.endWeightEditing(id) }
+            if case .weight(let id)? = new { viewModel.beginWeightEditing(id) }
+        }
+        .onDisappear(perform: dismissKeyboard)
         .id(viewModel.viewedItemID)
     }
+
+    private func dismissKeyboard() {
+        let previous = focusedField
+        focusedField = nil
+        if case .weight(let id)? = previous { viewModel.endWeightEditing(id) }
+    }
+
 }

@@ -51,6 +51,9 @@ struct WorkoutNumberInput: View {
         }
         .padding(Theme.cardInset).foregroundStyle(Theme.text)
         .background(Theme.surface, in: .rect(cornerRadius: Theme.cornerRadius))
+        .toolbar {
+            if focused { KeyboardDismissToolbar { focused = false } }
+        }
         .onChange(of: editingID) { _, _ in focused = false }
         .onDisappear { focused = false }
     }

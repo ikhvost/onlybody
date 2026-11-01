@@ -22,7 +22,7 @@ struct ExerciseCatalogControls: View {
             }
             .padding(Theme.cardInset).frame(minHeight: Theme.buttonHeight)
             .background(Theme.surface, in: .rect(cornerRadius: Theme.buttonRadius))
-            Button { showingFilters = true } label: {
+            Button { searchFocus.wrappedValue = false; showingFilters = true } label: {
                 HStack {
                     Text(.uiDesignFilters)
                     Text(count, format: .number).font(Theme.fontMono(Theme.typeBody))
@@ -36,6 +36,12 @@ struct ExerciseCatalogControls: View {
             }
         }
         .padding(Theme.horizontalPadding)
+        .toolbar {
+            if searchFocus.wrappedValue {
+                KeyboardDismissToolbar { searchFocus.wrappedValue = false }
+            }
+        }
+        .onDisappear { searchFocus.wrappedValue = false }
         .sheet(isPresented: $showingFilters) {
             ExerciseFilterSheet(muscle: $muscle, difficulty: $difficulty)
                 .presentationDetents([.large]).presentationDragIndicator(.visible)

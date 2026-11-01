@@ -63,6 +63,8 @@ final class WorkoutJourneyTests: XCTestCase {
         reps.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: 2))
         XCTAssertFalse(app.buttons["builder.movement.done"].isEnabled)
         reps.typeText("130")
+        tap("keyboard.dismiss")
+        XCTAssertFalse(app.keyboards.firstMatch.exists)
         XCTAssertTrue(app.buttons["builder.movement.done"].isEnabled)
         tap("builder.save")
         app.terminate()
@@ -106,7 +108,7 @@ final class WorkoutJourneyTests: XCTestCase {
         createWorkout(sets: 2)
         tap("workout.start.E2E Workout")
         tap("active.start")
-        setValue("5", field: "weight", index: 0)
+        replaceInitialZeroWithFive()
         tap("active.set.0.done")
         tap("rest.skip")
         XCTAssertFalse(app.keyboards.firstMatch.exists)
@@ -214,6 +216,8 @@ final class WorkoutJourneyTests: XCTestCase {
         let search = app.textFields["library.search"]
         search.tap()
         search.typeText(JourneyProduct.libraryExercise)
+        tap("keyboard.dismiss")
+        XCTAssertFalse(app.keyboards.firstMatch.exists)
         let movement = app.buttons["library.exercise.\(JourneyProduct.libraryExercise)"]
         XCTAssertTrue(movement.waitForExistence(timeout: 10))
         movement.tap()
@@ -520,6 +524,9 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertTrue(search.waitForExistence(timeout: 10))
         search.tap()
         search.typeText(JourneyProduct.exercise)
+        tap("keyboard.dismiss")
+        XCTAssertFalse(app.keyboards.firstMatch.exists)
+        XCTAssertEqual(search.value as? String, JourneyProduct.exercise)
         let exercise = app.buttons["exercise.pick.\(JourneyProduct.exercise)"]
         // Fixture uses the catalog's exact display name.
         XCTAssertTrue(exercise.waitForExistence(timeout: 10))
@@ -536,6 +543,23 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertTrue(total.waitForExistence(timeout: 10), app.debugDescription)
         XCTAssertEqual(total.label, "Total reps: \(reps)")
         XCTAssertEqual(app.staticTexts["session.set.0.0"].label, "Set 1 · Reps: \(firstSetReps ?? reps)")
+    }
+
+    private func replaceInitialZeroWithFive() {
+        if app.buttons["active.addWeight"].exists { tap("active.addWeight") }
+        let weight = app.textFields["active.set.0.weight"]
+        XCTAssertTrue(weight.waitForExistence(timeout: 10))
+        weight.tap()
+        XCTAssertEqual(app.buttons.matching(identifier: "keyboard.dismiss").count, 1)
+        tap("keyboard.dismiss")
+        XCTAssertFalse(app.keyboards.firstMatch.exists)
+        XCTAssertEqual(weight.value as? String, "0")
+        weight.tap()
+        weight.typeText("5")
+        XCTAssertEqual(weight.value as? String, "5")
+        tap("keyboard.dismiss")
+        XCTAssertFalse(app.keyboards.firstMatch.exists)
+        XCTAssertEqual(weight.value as? String, "5")
     }
 
     private func setValue(_ value: String, field: String, index: Int) {
