@@ -63,8 +63,7 @@ final class WorkoutJourneyTests: XCTestCase {
         reps.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: 2))
         XCTAssertFalse(app.buttons["builder.movement.done"].isEnabled)
         reps.typeText("130")
-        tap("keyboard.dismiss")
-        XCTAssertFalse(app.keyboards.firstMatch.exists)
+        dismissKeyboardOutside(reps)
         XCTAssertTrue(app.buttons["builder.movement.done"].isEnabled)
         tap("builder.save")
         app.terminate()
@@ -159,6 +158,7 @@ final class WorkoutJourneyTests: XCTestCase {
         app.launch()
         XCTAssertFalse(app.buttons["workout.start.E2E Workout"].exists)
         verifyHistory(reps: 24, firstSetReps: 12)
+        verifyLibraryOutsideDismissal()
     }
 
     func testEarlyFinishPreservesCompletedSets() {
@@ -216,8 +216,7 @@ final class WorkoutJourneyTests: XCTestCase {
         let search = app.textFields["library.search"]
         search.tap()
         search.typeText(JourneyProduct.libraryExercise)
-        tap("keyboard.dismiss")
-        XCTAssertFalse(app.keyboards.firstMatch.exists)
+        dismissKeyboardOutside(search)
         let movement = app.buttons["library.exercise.\(JourneyProduct.libraryExercise)"]
         XCTAssertTrue(movement.waitForExistence(timeout: 10))
         movement.tap()
@@ -490,7 +489,8 @@ final class WorkoutJourneyTests: XCTestCase {
         let name = app.textFields["builder.name"]
         XCTAssertTrue(name.waitForExistence(timeout: 10))
         name.tap()
-        name.typeText("E2E Workout\n")
+        name.typeText("E2E Workout")
+        dismissKeyboardOutside(name)
         if duration != nil || rest != nil { showTimingOptions() }
         if let duration {
             tap("builder.duration")
@@ -524,8 +524,7 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertTrue(search.waitForExistence(timeout: 10))
         search.tap()
         search.typeText(JourneyProduct.exercise)
-        tap("keyboard.dismiss")
-        XCTAssertFalse(app.keyboards.firstMatch.exists)
+        dismissKeyboardOutside(search)
         XCTAssertEqual(search.value as? String, JourneyProduct.exercise)
         let exercise = app.buttons["exercise.pick.\(JourneyProduct.exercise)"]
         // Fixture uses the catalog's exact display name.
@@ -545,20 +544,54 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertEqual(app.staticTexts["session.set.0.0"].label, "Set 1 · Reps: \(firstSetReps ?? reps)")
     }
 
+    private func verifyLibraryOutsideDismissal() {
+        swipeBack()
+        tap("tab.library")
+        let search = app.textFields["library.search"]
+        XCTAssertTrue(search.waitForExistence(timeout: 10))
+        search.tap()
+        search.typeText(JourneyProduct.libraryExercise)
+        dismissKeyboardOutside(search)
+        XCTAssertEqual(search.value as? String, JourneyProduct.libraryExercise)
+        XCTAssertTrue(app.buttons["library.exercise.\(JourneyProduct.libraryExercise)"].exists)
+    }
+
+    private func dismissKeyboardOutside(_ field: XCUIElement) {
+        XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 5))
+        let target: XCUIElement
+        if field.identifier.hasPrefix("active.set.") {
+            target = app.staticTexts["active.elapsed"]
+        } else if field.identifier == "builder.name" {
+            target = app.staticTexts["builder.name.label"]
+        } else if field.identifier == "library.search" {
+            target = app.staticTexts["library.title"]
+        } else if field.identifier.hasPrefix("stepper.") {
+            target = app.staticTexts["number.Reps.title"]
+        } else {
+            target = app.staticTexts["Add Exercise"].firstMatch
+        }
+        XCTAssertTrue(target.waitForExistence(timeout: 5))
+        let outside = app.coordinate(withNormalizedOffset: .zero)
+            .withOffset(CGVector(dx: app.frame.midX, dy: target.frame.midY))
+        outside.tap()
+        let hidden = XCTNSPredicateExpectation(predicate: NSPredicate(format: "exists == false"), object: app.keyboards.firstMatch)
+        XCTAssertEqual(XCTWaiter.wait(for: [hidden], timeout: 5), .completed)
+        XCTAssertFalse(app.buttons["keyboard.dismiss"].exists)
+    }
+
     private func replaceInitialZeroWithFive() {
         if app.buttons["active.addWeight"].exists { tap("active.addWeight") }
         let weight = app.textFields["active.set.0.weight"]
         XCTAssertTrue(weight.waitForExistence(timeout: 10))
         weight.tap()
-        XCTAssertEqual(app.buttons.matching(identifier: "keyboard.dismiss").count, 1)
-        tap("keyboard.dismiss")
-        XCTAssertFalse(app.keyboards.firstMatch.exists)
+        dismissKeyboardOutside(weight)
         XCTAssertEqual(weight.value as? String, "0")
         weight.tap()
+        weight.tap() // A second tap inside the field must keep editing active.
+        XCTAssertTrue(app.keyboards.firstMatch.exists)
         weight.typeText("5")
         XCTAssertEqual(weight.value as? String, "5")
-        tap("keyboard.dismiss")
-        XCTAssertFalse(app.keyboards.firstMatch.exists)
+        dismissKeyboardOutside(weight)
         XCTAssertEqual(weight.value as? String, "5")
     }
 

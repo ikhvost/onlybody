@@ -16,6 +16,7 @@ struct WorkoutNumberInput: View {
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.space12) {
             Text(title).font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.text2)
+                .accessibilityIdentifier("number.\(identifier).title")
             HStack(spacing: Theme.space12) {
                 Button(action: onDecrease) {
                     Text("−").font(Theme.fontSans(Theme.typeCard))
@@ -51,9 +52,7 @@ struct WorkoutNumberInput: View {
         }
         .padding(Theme.cardInset).foregroundStyle(Theme.text)
         .background(Theme.surface, in: .rect(cornerRadius: Theme.cornerRadius))
-        .toolbar {
-            if focused { KeyboardDismissToolbar { focused = false } }
-        }
+        .background(KeyboardOutsideTapBridge(isEnabled: focused) { focused = false }.allowsHitTesting(false))
         .onChange(of: editingID) { _, _ in focused = false }
         .onDisappear { focused = false }
     }

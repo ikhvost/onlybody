@@ -7,7 +7,7 @@ struct BuilderName: View {
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.space8) {
             MonoLabel(text: String(localized: .uiSessionName), size: Theme.typeMeta, color: Theme.text2, tracking: 0.5)
-                .padding(.horizontal, Theme.horizontalPadding)
+                .padding(.horizontal, Theme.horizontalPadding).accessibilityIdentifier("builder.name.label")
 
             TextField(String(localized: .uiEGFullBody), text: $viewModel.name,
                       prompt: Text(.uiEGFullBody).foregroundStyle(Theme.text3))
@@ -29,9 +29,7 @@ struct BuilderName: View {
                 .autocorrectionDisabled()
         }
         .padding(.top, Theme.space16)
-        .toolbar {
-            if isFocused { KeyboardDismissToolbar { isFocused = false } }
-        }
+        .background(KeyboardOutsideTapBridge(isEnabled: isFocused) { isFocused = false }.allowsHitTesting(false))
         .onDisappear { isFocused = false }
     }
 }

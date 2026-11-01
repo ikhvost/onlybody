@@ -16,7 +16,7 @@ struct ActiveWorkoutContentView: View {
                 .accessibilityIdentifier("active.list").disabled(viewModel.hasInvalidNumbers)
             } trailing: {
                 Text(Duration.seconds(viewModel.elapsedSeconds), format: .time(pattern: .minuteSecond(padMinuteToLength: 2)))
-                    .font(Theme.fontMono(Theme.typeMeta))
+                    .font(Theme.fontMono(Theme.typeMeta)).accessibilityIdentifier("active.elapsed")
             }
             CompactRestTimerView(viewModel: viewModel)
             ScrollView {
@@ -55,7 +55,7 @@ struct ActiveWorkoutContentView: View {
                 }.padding(Theme.horizontalPadding)
             }.scrollIndicators(.hidden).scrollDismissesKeyboard(.interactively)
         }
-        .toolbar { KeyboardDismissToolbar(onDismiss: dismissKeyboard) }
+        .background(KeyboardOutsideTapBridge(isEnabled: focusedField != nil, onDismiss: dismissKeyboard).allowsHitTesting(false))
         .onChange(of: focusedField) { old, new in
             if case .weight(let id)? = old { viewModel.endWeightEditing(id) }
             if case .weight(let id)? = new { viewModel.beginWeightEditing(id) }

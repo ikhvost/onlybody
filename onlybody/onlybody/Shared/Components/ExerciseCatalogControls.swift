@@ -36,11 +36,9 @@ struct ExerciseCatalogControls: View {
             }
         }
         .padding(Theme.horizontalPadding)
-        .toolbar {
-            if searchFocus.wrappedValue {
-                KeyboardDismissToolbar { searchFocus.wrappedValue = false }
-            }
-        }
+        .background(KeyboardOutsideTapBridge(isEnabled: searchFocus.wrappedValue) {
+            searchFocus.wrappedValue = false
+        }.allowsHitTesting(false))
         .onDisappear { searchFocus.wrappedValue = false }
         .sheet(isPresented: $showingFilters) {
             ExerciseFilterSheet(muscle: $muscle, difficulty: $difficulty)

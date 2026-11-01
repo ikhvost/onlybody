@@ -22,6 +22,7 @@ struct LibraryView: View {
                         MonoLabel(text: String(localized: .uiMovementCatalog), size: Theme.typeMeta, tracking: 1.2)
 
                         Text(.uiDesignExercises)
+                            .accessibilityIdentifier("library.title")
                             .font(Theme.fontSans(Theme.typeHeading, .heavy))
                             .tracking(-1)
                             .foregroundStyle(Theme.text)
