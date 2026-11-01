@@ -35,6 +35,7 @@ enum Theme {
     static let swipeDirectionRatio: Double = 1.5
     static let tabSwipeThresholds = TabSwipeThresholds(minimum: 16, distance: 72, fastDistance: 24, speed: 500, ratio: swipeDirectionRatio)
     static let tabTransitionDuration: Double = 0.25
+    static let exerciseReorderDuration: Double = 0.35
 
     static let accent = Color(red: 232 / 255, green: 162 / 255, blue: 58 / 255)
     static let accentDim = Color(red: 232 / 255, green: 162 / 255, blue: 58 / 255, opacity: 0.13)

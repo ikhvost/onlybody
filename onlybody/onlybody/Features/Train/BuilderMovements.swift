@@ -3,6 +3,7 @@ import SwiftUI
 struct BuilderMovements: View {
     @Bindable var viewModel: SessionBuilderViewModel
     @Binding var isShowingExercisePicker: Bool
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         if viewModel.mode == .manual || !viewModel.movements.isEmpty {
@@ -58,6 +59,7 @@ struct BuilderMovements: View {
                         }
                     }
                     .padding(.horizontal, Theme.horizontalPadding)
+                    .animation(reduceMotion ? nil : .smooth(duration: Theme.exerciseReorderDuration), value: viewModel.movements.map(\.id))
                 }
             }
             .padding(.top, Theme.space16)

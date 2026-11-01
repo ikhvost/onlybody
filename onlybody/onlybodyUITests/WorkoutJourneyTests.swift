@@ -75,6 +75,7 @@ final class WorkoutJourneyTests: XCTestCase {
         tap("builder.save")
         tap("workout.edit.E2E Workout")
         XCTAssertEqual(app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "builder.movement.")).count, 2)
+        verifyEditorReordering()
         tap("builder.save")
         tap("workout.start.E2E Workout")
         tap("active.exercise.0.replace")
@@ -83,6 +84,10 @@ final class WorkoutJourneyTests: XCTestCase {
         replacementSearch.tap()
         replacementSearch.typeText(JourneyProduct.libraryExercise)
         tap("exercise.pick.\(JourneyProduct.libraryExercise)")
+        tap("active.exercise.0.down")
+        XCTAssertTrue(app.buttons["active.exercise.1"].label.contains(JourneyProduct.libraryExercise))
+        tap("active.exercise.1.up")
+        XCTAssertTrue(app.buttons["active.exercise.0"].label.contains(JourneyProduct.libraryExercise))
         tap("active.exercise.0.down")
         XCTAssertTrue(app.buttons["active.exercise.1"].label.contains(JourneyProduct.libraryExercise))
         tap("active.start")
@@ -542,6 +547,20 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertTrue(total.waitForExistence(timeout: 10), app.debugDescription)
         XCTAssertEqual(total.label, "Total reps: \(reps)")
         XCTAssertEqual(app.staticTexts["session.set.0.0"].label, "Set 1 · Reps: \(firstSetReps ?? reps)")
+    }
+
+    private func verifyEditorReordering() {
+        let rows = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "builder.movement."))
+        let first = rows.element(boundBy: 0)
+        let second = rows.element(boundBy: 1)
+        let firstID = first.identifier
+        let secondID = second.identifier
+        let down = firstID.replacing("builder.movement.", with: "builder.order.") + ".down"
+        let up = firstID.replacing("builder.movement.", with: "builder.order.") + ".up"
+        tap(down)
+        XCTAssertGreaterThan(app.buttons[firstID].frame.midY, app.buttons[secondID].frame.midY)
+        tap(up)
+        XCTAssertLessThan(app.buttons[firstID].frame.midY, app.buttons[secondID].frame.midY)
     }
 
     private func verifyLibraryOutsideDismissal() {
