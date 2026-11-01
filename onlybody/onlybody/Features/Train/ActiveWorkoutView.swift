@@ -40,6 +40,15 @@ struct ActiveWorkoutView: View {
                 }
             }
         }
+        .safeAreaInset(edge: .top, spacing: Theme.space0) {
+            if let error = viewModel.historyErrorMessage, !viewModel.items.isEmpty, !viewModel.isComplete {
+                HStack(spacing: Theme.space12) {
+                    Text(error).font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.text2)
+                    Button(String(localized: .uiRetry)) { Task { await viewModel.loadPreviousPerformances() } }
+                        .font(Theme.fontSans(Theme.typeMeta, .bold)).frame(minHeight: Theme.touchSize)
+                }.padding(.horizontal, Theme.horizontalPadding).background(Theme.surface)
+            }
+        }
         .alert(String(localized: .uiEndWorkout), isPresented: $showEndPrompt) {
             Button(String(localized: .uiEndSave)) {
                 Task {

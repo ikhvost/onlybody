@@ -35,7 +35,8 @@ struct LibraryView: View {
                 .padding(.bottom, Theme.space10)
 
                 ExerciseCatalogControls(search: $viewModel.searchText, muscle: $viewModel.selectedFilter,
-                                        difficulty: $viewModel.selectedDifficulty, searchFocus: $isSearchFocused)
+                                        equipment: $viewModel.selectedEquipment, equipmentOptions: viewModel.equipmentOptions,
+                                        searchFocus: $isSearchFocused)
 
                 Rectangle()
                     .fill(Theme.border)

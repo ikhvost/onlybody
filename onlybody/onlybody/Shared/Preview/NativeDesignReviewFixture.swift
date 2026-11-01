@@ -96,7 +96,7 @@ struct NativeDesignReviewFixture {
                                            onRetry: {}, errorMessage: String(localized: .uiCouldNotSaveSession), onEnd: {})
         case 11: ExerciseHistoryView(viewModel: history)
         case 12: LogView(viewModel: log, showSessionDetail: { _ in })
-        case 13: SessionDetailView(session: session)
+        case 13: SessionDetailView(viewModel: SessionDetailViewModel(session: session))
         default: LibraryView(viewModel: library, showMovement: { _ in })
         }
     }
@@ -107,7 +107,7 @@ struct NativeDesignReviewFixture {
         case 16: SettingsView(viewModel: settings, onNotifications: {})
         case 17: NotificationsView(viewModel: notifications)
         case 18: ActiveWorkoutSessionList(viewModel: active, onClose: {}, onEnd: {})
-        default: ExerciseFilterSheet(muscle: .constant("Chest"), difficulty: .constant(nil))
+        default: ExerciseFilterSheet(muscle: .constant("Chest"), equipment: .constant("None"), equipmentOptions: ["None", "Dumbbells"])
         }
     }
 }

@@ -15505,6 +15505,41 @@
           }
         }
       }
+    },
+    "uiSmartTimeBudgetHint": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimated from repetitions (3 s each) and rest after every set. Smart Pick keeps the program within this time budget."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Оцінка враховує повтори (по 3 с) і відпочинок після кожного підходу. Смарт-підбір обмежує програму цим часом."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szacunek obejmuje powtórzenia (po 3 s) i odpoczynek po każdej serii. Inteligentny wybór mieści plan w tym czasie."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Schätzung berücksichtigt Wiederholungen (je 3 s) und Pausen nach jedem Satz. Die intelligente Auswahl hält den Plan innerhalb dieses Zeitbudgets."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimation selon les répétitions (3 s chacune) et le repos après chaque série. La sélection intelligente respecte cette durée."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

@@ -192,30 +192,28 @@ struct SmartWorkoutGeneratorTests {
             makeExercise(name: "Ex3", primaryMuscle: "Chest"),
             makeExercise(name: "Ex4", primaryMuscle: "Chest"),
         ]
-        // 3 sets * 30 + 2 * 45 = 180s per exercise
-        // Budget = 6 min = 360s → fits 2 exercises exactly
+        // Each exercise takes 3 * (10 * 3 + 45) = 225 seconds.
         let generator = deterministicGenerator(sets: 3, reps: 10, rest: 45)
         let config = SmartWorkoutConfiguration(targetMuscleGroups: ["Chest"], durationMinutes: 6)
 
         let result = generator.generate(config: config, from: exercises)
 
-        #expect(result.count == 2)
+        #expect(result.count == 1)
     }
 
     @Test
-    func firstItemAlwaysIncludedRegardlessOfBudget() {
+    func doesNotForceAnExerciseThatExceedsTheBudget() {
         let exercises = [
             makeExercise(name: "Ex1", primaryMuscle: "Chest"),
             makeExercise(name: "Ex2", primaryMuscle: "Chest"),
         ]
-        // Each exercise = 3*30 + 2*45 = 180s
-        // Budget = 1 min = 60s → only first fits (is always included)
+        // No complete exercise fits within one minute.
         let generator = deterministicGenerator(sets: 3, reps: 10, rest: 45)
         let config = SmartWorkoutConfiguration(targetMuscleGroups: ["Chest"], durationMinutes: 1)
 
         let result = generator.generate(config: config, from: exercises)
 
-        #expect(result.count == 1)
+        #expect(result.isEmpty)
     }
 
     @Test
@@ -224,10 +222,9 @@ struct SmartWorkoutGeneratorTests {
             makeExercise(name: "Ex1", primaryMuscle: "Chest"),
             makeExercise(name: "Ex2", primaryMuscle: "Chest"),
         ]
-        // 3*30 + 2*45 = 180s per exercise
-        // Budget = 360s = exactly 2 exercises
-        let generator = deterministicGenerator(sets: 3, reps: 10, rest: 45)
-        let config = SmartWorkoutConfiguration(targetMuscleGroups: ["Chest"], durationMinutes: 6)
+        // 3 * (20 * 3 + 60) = 360 seconds; two exercises exactly fit twelve minutes.
+        let generator = deterministicGenerator(sets: 3, reps: 20, rest: 60)
+        let config = SmartWorkoutConfiguration(targetMuscleGroups: ["Chest"], durationMinutes: 12)
 
         let result = generator.generate(config: config, from: exercises)
 

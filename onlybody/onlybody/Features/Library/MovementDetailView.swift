@@ -31,9 +31,6 @@ struct MovementDetailView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: Theme.space16) {
                         VStack(alignment: .leading, spacing: Theme.space4) {
-                            ExerciseDifficultyBadge(difficulty: viewModel.exercise.difficulty)
-                                .accessibilityIdentifier("movement.difficulty")
-
                             Text(viewModel.exercise.displayName)
                                 .font(Theme.fontSans(Theme.type28, .heavy))
                                 .tracking(-0.8)

@@ -26,6 +26,7 @@ struct BuilderModeButton: View {
                 }
         }
         .buttonStyle(PressableButtonStyle(animates: false))
+        .accessibilityIdentifier("builder.mode.\(mode.rawValue)")
         .accessibilityAddTraits(viewModel.mode == mode ? .isSelected : [])
     }
 }

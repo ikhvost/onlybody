@@ -28,14 +28,15 @@ nonisolated struct SmartWorkoutGenerator: Sendable {
             return []
         }
 
-        let items = buildMovements(pool: pool, timeBudget: config.durationMinutes * 60, restSeconds: config.restSeconds)
+        let budget = WorkoutDurationEstimator().budget(minutes: config.durationMinutes)
+        let items = buildMovements(pool: pool, timeBudget: budget, restSeconds: config.restSeconds)
 
         guard items.count >= 2 || fallbackPolicy == .matchingCatalog else {
             return buildMovements(
                 pool: filteredPool(from: exercises.filter { exercise in
                     exercise.equipment.contains("None")
                 }, matching: expanded),
-                timeBudget: config.durationMinutes * 60,
+                timeBudget: budget,
                 restSeconds: config.restSeconds
             )
         }
@@ -60,9 +61,10 @@ nonisolated struct SmartWorkoutGenerator: Sendable {
             let sets = randomSets(3...4)
             let reps = randomReps(8...15)
             let rest = restSeconds ?? randomRest([30, 45, 60, 90])
-            let estDuration = sets * 30 + (sets - 1) * rest
+            let estimator = WorkoutDurationEstimator()
+            let estDuration = estimator.seconds(sets: sets, reps: reps, restSeconds: rest)
 
-            guard totalSeconds + estDuration <= timeBudget || items.isEmpty else {
+            guard estDuration > 0, estDuration <= timeBudget - totalSeconds else {
                 continue
             }
 

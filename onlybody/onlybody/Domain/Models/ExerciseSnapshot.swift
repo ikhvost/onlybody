@@ -37,6 +37,12 @@ nonisolated struct ExerciseSnapshot: Identifiable, Sendable, Equatable {
         filter == "All" || primaryMuscles.contains(filter) || (filter == "Full Body" && muscleProfile.isFullBody)
     }
 
+    func matchesEquipmentFilter(_ filter: String?) -> Bool {
+        guard let filter else { return true }
+        if filter == "None", equipment.isEmpty { return true }
+        return equipment.contains(filter)
+    }
+
     private static func expandedLegacyGroups(_ groups: [String]) -> [String] {
         groups.flatMap { $0 == "Arms" ? ["Biceps", "Triceps", "Forearms"] : [$0] }
     }

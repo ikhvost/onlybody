@@ -18,6 +18,9 @@ final class ActiveWorkoutViewModel {
     private let sessionID = UUID()
     private var elapsedTask: Task<Void, Never>?
     private var rows: [WorkoutSetID: WorkoutSetDraft] = [:]
+    private var previousPerformances: [String: [SessionItemSnapshot]] = [:]
+    private var previousOccurrence: [UUID: Int] = [:]
+    private(set) var historyErrorMessage: String?
     private var revealedWeightExercises: Set<UUID> = []
 
     let workoutId: UUID
@@ -58,7 +61,11 @@ final class ActiveWorkoutViewModel {
     var hasInvalidNumbers: Bool { rows.values.contains { $0.invalidReps || $0.invalidWeight } }
     var canClose: Bool { saveState == .saved || saveState == .noCompletedSets }
     var canEdit: Bool { !isComplete && !isDiscarded && saveState == .idle }
-    var showsWeight: Bool { alwaysShowsWeight || viewedItemID.map { revealedWeightExercises.contains($0) } == true }
+    var showsWeight: Bool {
+        if alwaysShowsWeight || viewedItemID.map({ revealedWeightExercises.contains($0) }) == true { return true }
+        guard let previous = currentItem.flatMap({ previousPerformance(for: $0) }) else { return false }
+        return previous.setWeightsKg?.contains(where: { $0 > 0 }) == true || (previous.weightKg ?? 0) > 0
+    }
     var isRestActive: Bool { restTimer.isActive }
     var remainingRestSeconds: Int { restTimer.remainingSeconds }
     func extendRest() { restTimer.add(seconds: 15) }
@@ -98,8 +105,15 @@ final class ActiveWorkoutViewModel {
             }
             workoutName = workout.name
             items = workout.items.sorted { $0.order < $1.order }
+            var occurrences: [String: Int] = [:]
+            for item in items {
+                let name = item.exercise?.name ?? ""
+                previousOccurrence[item.id] = occurrences[name, default: 0]
+                occurrences[name, default: 0] += 1
+            }
             guard !items.isEmpty else { errorMessage = String(localized: .uiWorkoutHasNoExercises); return }
             viewedItemID = items.first?.id
+            await loadPreviousPerformances()
             hasLoaded = true
         } catch { errorMessage = String(localized: .uiCouldNotLoadWorkout) }
     }
@@ -128,7 +142,29 @@ final class ActiveWorkoutViewModel {
     func resume() { if let currentItemID { showExercise(currentItemID) } }
 
     func row(_ id: WorkoutSetID) -> WorkoutSetDraft {
-        rows[id] ?? WorkoutSetDraft(reps: items.first { $0.id == id.itemID }?.targetReps ?? 0)
+        if let edited = rows[id] { return edited }
+        guard let item = items.first(where: { $0.id == id.itemID }) else { return WorkoutSetDraft(reps: 0) }
+        guard let previous = previousPerformance(for: item), !previous.setReps.isEmpty else {
+            return WorkoutSetDraft(reps: item.targetReps)
+        }
+        let index = min(max(0, id.index), previous.setReps.count - 1)
+        return WorkoutSetDraft(reps: previous.setReps[index], weightKg: previous.weightForSet(at: index) ?? previous.weightKg ?? 0)
+    }
+
+    /// Retrying history loading changes only untouched rows; edits and completion stay in `rows`.
+    func loadPreviousPerformances() async {
+        do {
+            previousPerformances = LatestExercisePerformances().items(in: try await sessionsRepository.allSessions())
+            historyErrorMessage = nil
+        } catch {
+            historyErrorMessage = String(localized: .uiCouldNotLoadExerciseHistory)
+        }
+    }
+
+    private func previousPerformance(for item: WorkoutItemSnapshot) -> SessionItemSnapshot? {
+        guard let name = item.exercise?.name, let previous = previousPerformances[name], !previous.isEmpty else { return nil }
+        let occurrence = previousOccurrence[item.id] ?? 0
+        return previous[min(occurrence, previous.count - 1)]
     }
 
     func repsText(for id: WorkoutSetID) -> String { row(id).repsInput ?? String(row(id).reps) }
@@ -196,6 +232,7 @@ final class ActiveWorkoutViewModel {
     func replaceExercise(_ id: UUID, with exercise: ExerciseSnapshot) {
         guard canReplace(id), !hasInvalidNumbers, let index = items.firstIndex(where: { $0.id == id }) else { return }
         items[index].exercise = exercise
+        previousOccurrence[id] = 0
         rows = rows.filter { $0.key.itemID != id }
         revealedWeightExercises.remove(id)
     }

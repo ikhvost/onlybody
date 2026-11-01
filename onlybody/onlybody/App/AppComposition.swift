@@ -18,6 +18,9 @@ struct AppComposition {
 
     func train() -> TrainViewModel { TrainViewModel(workouts: workouts, appName: configuration.displayName) }
     func log() -> LogViewModel { LogViewModel(sessions: sessions) }
+    func sessionDetail(_ session: SessionSnapshot) -> SessionDetailViewModel {
+        SessionDetailViewModel(session: session, preferences: preferences)
+    }
     func library() -> LibraryViewModel { LibraryViewModel(exercises: exercises) }
     func settings() -> SettingsViewModel {
         SettingsViewModel(

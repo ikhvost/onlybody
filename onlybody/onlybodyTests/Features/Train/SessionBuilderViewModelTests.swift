@@ -278,9 +278,9 @@ struct SessionBuilderViewModelTests {
 
         let exercise = ExerciseSnapshot()
         viewModel.addMovement(exercise)
-        // 3 sets × 30s + 2 rests × 45s = 90 + 90 = 180s
-        #expect(viewModel.estimatedDurationSeconds == 180)
-        #expect(viewModel.estimatedDurationMinutes == 3)
+        // 3 * (12 * 3 + 45) = 243 seconds.
+        #expect(viewModel.estimatedDurationSeconds == 243)
+        #expect(viewModel.estimatedDurationMinutes == 5)
     }
 
     @Test
@@ -297,9 +297,9 @@ struct SessionBuilderViewModelTests {
         let id = viewModel.movements[0].id
 
         viewModel.setSets(5, forMovement: id)
-        // 5 sets × 30s + 4 rests × 45s = 150 + 180 = 330s
-        #expect(viewModel.estimatedDurationSeconds == 330)
-        #expect(viewModel.estimatedDurationMinutes == 6)
+        // 5 * (12 * 3 + 45) = 405 seconds.
+        #expect(viewModel.estimatedDurationSeconds == 405)
+        #expect(viewModel.estimatedDurationMinutes == 7)
     }
 
     @Test
@@ -316,9 +316,9 @@ struct SessionBuilderViewModelTests {
         let id = viewModel.movements[0].id
 
         viewModel.setRest(60, forMovement: id)
-        // 3 sets × 30s + 2 rests × 60s = 90 + 120 = 210s
-        #expect(viewModel.estimatedDurationSeconds == 210)
-        #expect(viewModel.estimatedDurationMinutes == 4)
+        // 3 * (12 * 3 + 60) = 288 seconds.
+        #expect(viewModel.estimatedDurationSeconds == 288)
+        #expect(viewModel.estimatedDurationMinutes == 5)
     }
 
     @Test
@@ -333,16 +333,16 @@ struct SessionBuilderViewModelTests {
         var pushUps = ExerciseSnapshot()
         pushUps.name = "Push-Ups"
         viewModel.addMovement(pushUps)
-        // 3 × 30 + 2 × 45 = 180
+        // 3 * (12 * 3 + 45) = 243
 
         var pullUps = ExerciseSnapshot()
         pullUps.name = "Pull-Ups"
         viewModel.addMovement(pullUps)
-        // 3 × 30 + 2 × 45 = 180
+        // 3 * (12 * 3 + 45) = 243
 
-        // Total: 180 + 180 = 360s = 6 min
-        #expect(viewModel.estimatedDurationSeconds == 360)
-        #expect(viewModel.estimatedDurationMinutes == 6)
+        // Total: 486 seconds, rounded up to nine minutes.
+        #expect(viewModel.estimatedDurationSeconds == 486)
+        #expect(viewModel.estimatedDurationMinutes == 9)
     }
 
     // MARK: - Save (Create)

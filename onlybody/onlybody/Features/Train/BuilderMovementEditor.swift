@@ -30,6 +30,7 @@ struct BuilderMovementEditor: View {
             Button(String(localized: .uiCancel), role: .cancel) {}
         }
         .interactiveDismissDisabled(viewModel.hasInvalidNumbers)
+        .onDisappear { viewModel.applySmartTimeBudget() }
         .foregroundStyle(Theme.text).background(Theme.bg).preferredColorScheme(.dark)
     }
 }

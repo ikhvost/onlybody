@@ -18,7 +18,9 @@ final class ExerciseHistoryViewModel {
         self.preferences = preferences
     }
 
-    func weightText(kilograms: Double) -> String { preferences.weightUnit.formatted(kilograms: kilograms) }
+    func weightText(kilograms: Double?) -> String {
+        kilograms.map { preferences.weightUnit.formatted(kilograms: $0) } ?? "—"
+    }
 
     func load() async {
         guard !isLoading else { return }

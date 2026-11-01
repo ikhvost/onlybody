@@ -3,18 +3,14 @@ import SwiftUI
 
 struct SessionDetailView: View {
     @Environment(\.dismiss) private var dismiss
-    let session: SessionSnapshot
-
-    private var sortedItems: [SessionItemSnapshot] {
-        (session.items).sorted { $0.order < $1.order }
-    }
+    @State var viewModel: SessionDetailViewModel
 
     var body: some View {
         ZStack {
             Theme.bg.ignoresSafeArea()
 
             VStack(spacing: Theme.space0) {
-                NavBarView(title: session.workoutName) {
+                NavBarView(title: viewModel.session.workoutName) {
                     Button {
                         dismiss()
                     } label: {
@@ -33,12 +29,12 @@ struct SessionDetailView: View {
 
                 ScrollView {
                     VStack(alignment: .leading, spacing: Theme.space0) {
-                        MonoLabel(text: formattedDate(session.date), size: Theme.typeMeta, color: Theme.text3, tracking: 1.0)
+                        MonoLabel(text: viewModel.formattedDate, size: Theme.typeMeta, color: Theme.text3, tracking: 1.0)
                             .padding(.bottom, Theme.space6)
 
                         HStack(spacing: Theme.space10) {
                             HStack(spacing: Theme.space3) {
-                                Text(Duration.seconds(session.durationSeconds).formatted(.time(pattern: .minuteSecond)))
+                                Text(Duration.seconds(viewModel.session.durationSeconds).formatted(.time(pattern: .minuteSecond)))
                                     .font(Theme.fontMono(Theme.type24, .medium))
                                     .foregroundStyle(Theme.accent)
                                 Text(.uiMin)
@@ -54,10 +50,10 @@ struct SessionDetailView: View {
                             .frame(height: 1)
                             .padding(.bottom, Theme.space16)
 
-                        ForEach(sortedItems.enumerated(), id: \.element.id) { index, item in
+                        ForEach(viewModel.items.enumerated(), id: \.element.id) { index, item in
                             SessionItemRow(
                                 item: item,
-                                isLast: index == sortedItems.count - 1
+                                isLast: index == viewModel.items.count - 1, weightText: viewModel.weightText
                             )
                         }
                     }
@@ -72,15 +68,6 @@ struct SessionDetailView: View {
         .toolbar(.hidden, for: .navigationBar)
     }
 
-    private func formattedDate(_ date: Date) -> String {
-        date.formatted(
-            .dateTime
-                .weekday(.wide)
-                .month(.wide)
-                .day()
-                .locale(.current)
-        )
-    }
 }
 
 #if DEBUG
@@ -107,7 +94,7 @@ struct SessionDetailView: View {
 
     session.items = [item1, item2]
 
-    return SessionDetailView(session: session)
+    return SessionDetailView(viewModel: SessionDetailViewModel(session: session))
         .preferredColorScheme(.dark)
 }
 #endif

@@ -2,7 +2,8 @@ import SwiftUI
 
 struct ExerciseFilterSheet: View {
     @Binding var muscle: String
-    @Binding var difficulty: ExerciseDifficulty?
+    @Binding var equipment: String?
+    let equipmentOptions: [String]
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -16,16 +17,16 @@ struct ExerciseFilterSheet: View {
                             .accessibilityIdentifier("filter.\(filter)")
                     }
                 }
-                Text(.uiAllLevels).font(Theme.fontSans(Theme.typeCard, .semibold))
+                Text(.uiEquipment).font(Theme.fontSans(Theme.typeCard, .semibold))
                 FlowLayout(spacing: Theme.space8) {
-                    ChipView(label: String(localized: .uiAllLevels), isActive: difficulty == nil) { difficulty = nil }
-                        .accessibilityIdentifier("difficulty.all")
-                    ForEach(ExerciseDifficulty.allCases, id: \.self) { level in
-                        ChipView(label: level.label, isActive: difficulty == level) { difficulty = level }
-                            .accessibilityIdentifier("difficulty.\(level.rawValue)")
+                    ChipView(label: CatalogLocalization.label("All"), isActive: equipment == nil) { equipment = nil }
+                        .accessibilityIdentifier("equipment.all")
+                    ForEach(equipmentOptions, id: \.self) { option in
+                        ChipView(label: CatalogLocalization.label(option), isActive: equipment == option) { equipment = option }
+                            .accessibilityIdentifier("equipment.\(option)")
                     }
                 }
-                GhostButton(title: String(localized: .uiDesignClearFilters)) { muscle = "All"; difficulty = nil }
+                GhostButton(title: String(localized: .uiDesignClearFilters)) { muscle = "All"; equipment = nil }
                     .accessibilityIdentifier("filters.clear")
             }.padding(Theme.horizontalPadding)
         }.scrollIndicators(.hidden)

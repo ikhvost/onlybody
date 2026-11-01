@@ -56,6 +56,7 @@ struct ActiveWorkoutContentView: View {
             }.scrollIndicators(.hidden).scrollDismissesKeyboard(.interactively)
         }
         .background(KeyboardOutsideTapBridge(isEnabled: focusedField != nil, onDismiss: dismissKeyboard).allowsHitTesting(false))
+        .background(BackActionSwipeBridge(isEnabled: !viewModel.hasInvalidNumbers, onBack: viewModel.showList).allowsHitTesting(false))
         .onChange(of: focusedField) { old, new in
             if case .weight(let id)? = old { viewModel.endWeightEditing(id) }
             if case .weight(let id)? = new { viewModel.beginWeightEditing(id) }

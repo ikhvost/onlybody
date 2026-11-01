@@ -57,7 +57,7 @@ struct GymCatalogTests {
         library.searchText = "extension"
         #expect(library.filteredExercises.map(\.name) == ["Leg Extension"])
         library.selectedFilter = "Back"
-        library.selectedDifficulty = .advanced
+        library.selectedEquipment = "Pull-up Bar"
         library.searchText = "wEiGhTeD"
         #expect(Set(library.filteredExercises.map(\.name)) == ["Weighted Pull-Ups", "Weighted Chin-Ups"])
         let exercise = try #require(catalog.first { $0.name == "Weighted Dips" })

@@ -18,7 +18,6 @@ struct LibraryExerciseRow: View {
                         color: Theme.text3,
                         tracking: 0.3
                     )
-                    ExerciseDifficultyBadge(difficulty: exercise.difficulty)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 

@@ -45,15 +45,9 @@ final class SessionBuilderViewModel {
     }
 
     var estimatedDurationSeconds: Int {
-        movements.reduce(0) { total, movement in
-            let sets = max(0, movement.sets)
-            let work = sets.multipliedReportingOverflow(by: 30)
-            let rest = max(0, sets - 1).multipliedReportingOverflow(by: movement.restSeconds)
-            guard !work.overflow, !rest.overflow else { return Int.max }
-            let exercise = work.partialValue.addingReportingOverflow(rest.partialValue)
-            guard !exercise.overflow else { return Int.max }
-            let sum = total.addingReportingOverflow(exercise.partialValue)
-            return sum.overflow ? Int.max : sum.partialValue
+        let estimator = WorkoutDurationEstimator()
+        return movements.reduce(0) { total, movement in
+            estimator.adding(estimator.seconds(sets: movement.sets, reps: movement.reps, restSeconds: movement.restSeconds), to: total)
         }
     }
 
@@ -122,7 +116,7 @@ final class SessionBuilderViewModel {
     }
 
     func setDurationMinutes(_ value: Int) {
-        guard WorkoutTimingOptions.durations.contains(value) else { return }
+        guard mode == .smart, WorkoutTimingOptions.durations.contains(value) else { return }
         durationMinutes = value
         refreshSmartMovements()
     }
@@ -233,6 +227,7 @@ final class SessionBuilderViewModel {
             }
 
             refreshSmartMovements()
+            applySmartTimeBudget()
             if mode == .smart && movements.isEmpty {
                 errorMessage = String(localized: .uiNoExercisesMatchTryDifferentMuscleGroups)
                 return false
@@ -249,7 +244,7 @@ final class SessionBuilderViewModel {
                 ? String(localized: .uiMySession)
                 : name.trimmingCharacters(in: .whitespacesAndNewlines)
             workout.mode = mode.rawValue
-            workout.durationMinutes = durationMinutes
+            workout.durationMinutes = mode == .smart ? durationMinutes : nil
             workout.restSeconds = restSeconds
             workout.scheduledDays = scheduledDays
             workout.targetMuscleGroups = targetMuscleGroups
@@ -281,13 +276,33 @@ final class SessionBuilderViewModel {
         guard !isPopulating, mode == .smart, !targetMuscleGroups.isEmpty, !allExercises.isEmpty else { return }
         let config = SmartWorkoutConfiguration(targetMuscleGroups: targetMuscleGroups,
                                                durationMinutes: durationMinutes, restSeconds: restSeconds)
-        guard generatedConfiguration != config || movements.isEmpty else { return }
+        guard generatedConfiguration != config || movements.isEmpty else {
+            applySmartTimeBudget()
+            return
+        }
         movements = smartGenerator.generate(config: config, from: allExercises).map {
             MovementConfig(exercise: $0.exercise, sets: $0.sets, reps: $0.reps, restSeconds: $0.restSeconds)
         }
         generatedConfiguration = config
         numberInputs = [:]
         numberErrors = []
+    }
+
+    /// Keeps complete exercises, preserving their IDs and edited parameters within the budget.
+    func applySmartTimeBudget() {
+        guard mode == .smart else { return }
+        let estimator = WorkoutDurationEstimator()
+        let budget = estimator.budget(minutes: durationMinutes)
+        var total = 0
+        movements = movements.filter { movement in
+            let seconds = estimator.seconds(sets: movement.sets, reps: movement.reps, restSeconds: movement.restSeconds)
+            guard seconds <= budget - total else { return false }
+            total += seconds
+            return true
+        }
+        let remaining = Set(movements.map { $0.id.uuidString })
+        numberInputs = numberInputs.filter { remaining.contains(String($0.key.prefix(36))) }
+        numberErrors = numberErrors.filter { remaining.contains(String($0.prefix(36))) }
     }
 
     private func populateFrom(_ workout: WorkoutSnapshot) {

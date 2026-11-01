@@ -15,7 +15,8 @@ struct ExercisePickerView: View {
                 }.accessibilityLabel(String(localized: .uiBack)).accessibilityIdentifier("exercisePicker.close")
             }
             ExerciseCatalogControls(search: $viewModel.searchText, muscle: $viewModel.selectedFilter,
-                                    difficulty: $viewModel.selectedDifficulty, searchFocus: $isSearchFocused, searchIdentifier: "exercisePicker.search")
+                                    equipment: $viewModel.selectedEquipment, equipmentOptions: viewModel.equipmentOptions,
+                                    searchFocus: $isSearchFocused, searchIdentifier: "exercisePicker.search")
             if viewModel.filteredExercises.isEmpty {
                 Text(.uiNoMovementsFound).font(Theme.fontSans(Theme.typeBody)).foregroundStyle(Theme.text2)
                 GhostButton(title: String(localized: .uiDesignClearFilters), action: viewModel.clearFilters)
@@ -32,5 +33,6 @@ struct ExercisePickerView: View {
             }
         }
         .background(Theme.bg).foregroundStyle(Theme.text).preferredColorScheme(.dark)
+        .background(BackActionSwipeBridge(onBack: { dismiss() }).allowsHitTesting(false))
     }
 }

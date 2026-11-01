@@ -9,7 +9,11 @@ final class LibraryViewModel {
     var allExercises: [ExerciseSnapshot] = []
     var searchText = ""
     var selectedFilter = "All"
-    var selectedDifficulty: ExerciseDifficulty?
+    var selectedEquipment: String?
+    var equipmentOptions: [String] {
+        Set(allExercises.flatMap { $0.equipment.isEmpty ? ["None"] : $0.equipment })
+            .sorted { CatalogLocalization.label($0).localizedStandardCompare(CatalogLocalization.label($1)) == .orderedAscending }
+    }
     var isLoading = false
     var errorMessage: String?
 
@@ -18,7 +22,7 @@ final class LibraryViewModel {
     var filteredExercises: [ExerciseSnapshot] {
         allExercises.filter {
             $0.matchesMuscleFilter(selectedFilter) &&
-            (selectedDifficulty == nil || $0.difficulty == selectedDifficulty) &&
+            $0.matchesEquipmentFilter(selectedEquipment) &&
             $0.matchesSearch(searchText)
         }
     }
@@ -27,16 +31,7 @@ final class LibraryViewModel {
         filteredExercises.sorted { $0.displayName.localizedStandardCompare($1.displayName) == .orderedAscending }
     }
 
-    func clearFilters() { selectedFilter = "All"; selectedDifficulty = nil; searchText = "" }
-
-    var sections: [LibraryDifficultySection] {
-        let filtered = filteredExercises
-        return ExerciseDifficulty.allCases.compactMap { level in
-            let matches = filtered.filter { $0.difficulty == level }
-                .sorted { $0.displayName.localizedStandardCompare($1.displayName) == .orderedAscending }
-            return matches.isEmpty ? nil : LibraryDifficultySection(difficulty: level, exercises: matches)
-        }
-    }
+    func clearFilters() { selectedFilter = "All"; selectedEquipment = nil; searchText = "" }
 
     init(exercises: any ExerciseRepository) {
         self.exercisesRepository = exercises

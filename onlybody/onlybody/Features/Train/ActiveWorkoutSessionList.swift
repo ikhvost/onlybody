@@ -57,6 +57,7 @@ struct ActiveWorkoutSessionList: View {
                     .accessibilityIdentifier("active.end").padding(Theme.cardInset).background(Theme.bg)
             }
         }
+        .background(BackActionSwipeBridge(isEnabled: !viewModel.hasStarted, onBack: onClose).allowsHitTesting(false))
         .sheet(item: $replacementItem) { item in
             ActiveWorkoutReplacementView(viewModel: viewModel, itemID: item.id)
                 .presentationDetents([.large]).presentationDragIndicator(.hidden)

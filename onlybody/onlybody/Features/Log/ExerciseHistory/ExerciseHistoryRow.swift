@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ExerciseHistoryRow: View {
     let entry: ExerciseHistoryEntry
-    let weightText: (Double) -> String
+    let weightText: (Double?) -> String
 
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.space12) {
@@ -24,7 +24,7 @@ struct ExerciseHistoryRow: View {
                             Spacer()
                             Text(String(localized: .uiRepsCount(item.setReps[index])))
                                 .foregroundStyle(Theme.text)
-                            Text("· \(weightText(item.weightForSet(at: index) ?? 0))")
+                            Text("· \(weightText(item.weightForSet(at: index)))")
                                 .foregroundStyle(Theme.accent)
                         }
                         .accessibilityElement(children: .combine)

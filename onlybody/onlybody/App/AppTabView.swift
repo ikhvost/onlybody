@@ -26,7 +26,7 @@ struct AppTabView: View {
             ZStack {
                 TrainRootView(composition: composition, path: $trainPath, onSessionSaved: { historyRevision += 1 })
                     .modifier(TabVisibility(tab: .train, selectedTab: selectedTab, width: pageWidth, drag: dragOffset))
-                LogRootView(viewModel: composition.log(), path: $logPath, revision: historyRevision)
+                LogRootView(viewModel: composition.log(), path: $logPath, revision: historyRevision, makeDetail: composition.sessionDetail)
                     .modifier(TabVisibility(tab: .log, selectedTab: selectedTab, width: pageWidth, drag: dragOffset))
                 LibraryRootView(composition: composition, path: $libraryPath)
                     .modifier(TabVisibility(tab: .library, selectedTab: selectedTab, width: pageWidth, drag: dragOffset))

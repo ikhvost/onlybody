@@ -4,6 +4,7 @@ struct LogRootView: View {
     @State var viewModel: LogViewModel
     @Binding var path: [UUID]
     let revision: Int
+    let makeDetail: (SessionSnapshot) -> SessionDetailViewModel
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -11,7 +12,7 @@ struct LogRootView: View {
                 .toolbar(.hidden, for: .navigationBar)
                 .navigationDestination(for: UUID.self) { id in
                     if let session = viewModel.sessions.first(where: { $0.id == id }) {
-                        SessionDetailView(session: session)
+                        SessionDetailView(viewModel: makeDetail(session))
                     } else {
                         MonoLabel(text: String(localized: .uiSessionUnavailable), size: Theme.type10, color: Theme.text2)
                     }

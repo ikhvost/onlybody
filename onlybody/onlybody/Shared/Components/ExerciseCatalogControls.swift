@@ -3,11 +3,12 @@ import SwiftUI
 struct ExerciseCatalogControls: View {
     @Binding var search: String
     @Binding var muscle: String
-    @Binding var difficulty: ExerciseDifficulty?
+    @Binding var equipment: String?
+    let equipmentOptions: [String]
     var searchFocus: FocusState<Bool>.Binding
     var searchIdentifier = "library.search"
     @State private var showingFilters = false
-    private var count: Int { (muscle == "All" ? 0 : 1) + (difficulty == nil ? 0 : 1) }
+    private var count: Int { (muscle == "All" ? 0 : 1) + (equipment == nil ? 0 : 1) }
 
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.space12) {
@@ -30,7 +31,7 @@ struct ExerciseCatalogControls: View {
             }
             .foregroundStyle(Theme.text).accessibilityIdentifier("catalog.filters")
             if count > 0 {
-                Text([muscle == "All" ? "" : CatalogLocalization.label(muscle), difficulty?.label ?? ""]
+                Text([muscle == "All" ? "" : CatalogLocalization.label(muscle), equipment.map { CatalogLocalization.label($0) } ?? ""]
                     .filter { !$0.isEmpty }.joined(separator: " · "))
                     .font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.text2)
             }
@@ -41,7 +42,7 @@ struct ExerciseCatalogControls: View {
         }.allowsHitTesting(false))
         .onDisappear { searchFocus.wrappedValue = false }
         .sheet(isPresented: $showingFilters) {
-            ExerciseFilterSheet(muscle: $muscle, difficulty: $difficulty)
+            ExerciseFilterSheet(muscle: $muscle, equipment: $equipment, equipmentOptions: equipmentOptions)
                 .presentationDetents([.large]).presentationDragIndicator(.visible)
         }
     }

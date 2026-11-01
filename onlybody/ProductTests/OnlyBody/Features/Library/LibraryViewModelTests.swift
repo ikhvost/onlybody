@@ -3,40 +3,34 @@ import Testing
 
 @MainActor
 struct LibraryViewModelTests {
-    @Test func difficultySectionsCombineWithMuscleAndSearchFilters() async {
+    @Test func equipmentCombinesWithMuscleAndSearchFilters() async {
         let repository = MockExerciseRepository()
-        repository.stubbedAllExercises = ["Archer Push-Ups", "Wall Push-Ups", "Standard Push-Ups"].map { name in
-            var exercise = ExerciseSnapshot()
-            exercise.name = name
-            exercise.primaryMuscle = "Chest"
-            return exercise
-        }
-        let viewModel = LibraryViewModel(exercises: repository)
-        await viewModel.load()
-        #expect(viewModel.sections.map(\.difficulty) == [.beginner, .intermediate, .advanced])
-        #expect(viewModel.sections.flatMap(\.exercises).count == 3)
-        viewModel.selectedDifficulty = .beginner
-        viewModel.selectedFilter = "Chest"
-        viewModel.searchText = "wall"
-        #expect(viewModel.filteredExercises.map(\.name) == ["Wall Push-Ups"])
-        #expect(viewModel.sections.map(\.difficulty) == [.beginner])
-        viewModel.selectedFilter = "Back"
-        #expect(viewModel.sections.isEmpty)
-        viewModel.selectedDifficulty = nil
-        viewModel.selectedFilter = "All"
-        viewModel.searchText = ""
-        #expect(viewModel.sections.count == 3)
+        repository.stubbedAllExercises = [
+            ExerciseSnapshot(name: "Fixture press", primaryMuscle: "Chest", equipment: ["Dumbbells"]),
+            ExerciseSnapshot(name: "Fixture push-up", primaryMuscle: "Chest", equipment: ["None"]),
+            ExerciseSnapshot(name: "Fixture row", primaryMuscle: "Back", equipment: ["Dumbbells"])
+        ]
+        let model = LibraryViewModel(exercises: repository)
+        await model.load()
+        model.selectedEquipment = "Dumbbells"
+        model.selectedFilter = "Chest"
+        model.searchText = "press"
+        #expect(model.filteredExercises.map(\.name) == ["Fixture press"])
+        model.selectedFilter = "Core"
+        #expect(model.filteredExercises.isEmpty)
+        model.clearFilters()
+        #expect(model.displayedExercises.count == 3)
+        #expect(Set(model.equipmentOptions) == ["None", "Dumbbells"])
     }
 
-    @Test func legacyUnknownExercisesStayVisibleInUnratedSection() async {
+    @Test func unknownExercisesWithoutEquipmentStayVisible() async {
         let repository = MockExerciseRepository()
-        var exercise = ExerciseSnapshot()
-        exercise.name = "Legacy custom movement"
+        let exercise = ExerciseSnapshot(name: "Legacy custom movement")
         repository.stubbedAllExercises = [exercise]
-        let viewModel = LibraryViewModel(exercises: repository)
-        await viewModel.load()
-        #expect(viewModel.sections.map(\.difficulty) == [.unrated])
-        #expect(viewModel.sections.first?.exercises == [exercise])
+        let model = LibraryViewModel(exercises: repository)
+        await model.load()
+        model.selectedEquipment = "None"
+        #expect(model.filteredExercises == [exercise])
     }
 
     @Test

@@ -8,12 +8,38 @@ import Testing
 
 @MainActor
 struct WorkoutTimingTests {
+    @Test func returningToSmartModeReappliesItsBudgetToManualEdits() {
+        let exercise = ExerciseSnapshot(name: "Fixture chest", primaryMuscle: "Chest")
+        let workout = WorkoutSnapshot(mode: "manual", targetMuscleGroups: ["Chest"], durationMinutes: 15,
+                                      items: (0..<8).map { WorkoutItemSnapshot(order: $0, exercise: exercise) })
+        let model = SessionBuilderViewModel(workouts: MockWorkoutRepository(), exercises: MockExerciseRepository(), workout: workout)
+        model.allExercises = [exercise]
+        model.mode = .smart
+        #expect(model.estimatedDurationSeconds <= 15 * 60)
+        #expect(model.movements.count == 3)
+    }
+
+    @Test func savingSmartEditsKeepsOnlyExercisesWithinTheBudget() async throws {
+        let exercise = ExerciseSnapshot(name: "Fixture chest", primaryMuscle: "Chest")
+        let items = (0..<3).map { WorkoutItemSnapshot(order: $0, exercise: exercise) }
+        let workout = WorkoutSnapshot(mode: "smart", targetMuscleGroups: ["Chest"], durationMinutes: 15, items: items)
+        let repository = MockWorkoutRepository()
+        let model = SessionBuilderViewModel(workouts: repository, exercises: MockExerciseRepository(), workout: workout)
+        model.setSets(10, forMovement: items[0].id)
+        #expect(await model.save())
+        let saved = try #require(repository.savedWorkouts.last)
+        #expect(saved.items.map(\.id) == [items[0].id])
+        #expect(saved.items.first?.sets == 10)
+        #expect(model.estimatedDurationSeconds == 810)
+        #expect(model.estimatedDurationSeconds <= 15 * 60)
+    }
+
     @Test func selectionDirtiesDraftAndAppliesToExistingAndNewMovements() async throws {
         let repository = MockWorkoutRepository()
         let model = SessionBuilderViewModel(workouts: repository, exercises: MockExerciseRepository())
         #expect(!model.hasUnsavedChanges)
         model.setDurationMinutes(35)
-        #expect(model.hasUnsavedChanges)
+        #expect(!model.hasUnsavedChanges)
         model.addMovement(ExerciseSnapshot(name: "Squats"))
         model.setDefaultRestSeconds(90)
         model.addMovement(ExerciseSnapshot(name: "Push-Ups"))
@@ -21,17 +47,17 @@ struct WorkoutTimingTests {
         #expect(await model.save())
         #expect(!model.hasUnsavedChanges)
         let saved = try #require(repository.savedWorkouts.first)
-        #expect(saved.durationMinutes == 35)
+        #expect(saved.durationMinutes == nil)
         #expect(saved.restSeconds == 90)
         let edit = SessionBuilderViewModel(workouts: repository, exercises: MockExerciseRepository(), workout: saved)
-        #expect(edit.durationMinutes == 35)
+        #expect(edit.durationMinutes == 30)
         #expect(edit.restSeconds == 90)
         #expect(!edit.hasUnsavedChanges)
         edit.setDurationMinutes(45)
         edit.setDefaultRestSeconds(60)
         #expect(await edit.save())
         #expect(repository.savedWorkouts.last?.id == saved.id)
-        #expect(repository.savedWorkouts.last?.durationMinutes == 45)
+        #expect(repository.savedWorkouts.last?.durationMinutes == nil)
         #expect(repository.savedWorkouts.last?.items.map(\.restSeconds) == [60, 60])
     }
 
@@ -62,11 +88,11 @@ struct WorkoutTimingTests {
         model.setDefaultRestSeconds(90)
         #expect(await model.save())
         let short = try #require(repository.savedWorkouts.last)
-        #expect(short.items.count == 3) // 270 seconds per exercise; 900-second budget.
+        #expect(short.items.count == 2) // 360 seconds per exercise; 900-second budget.
         #expect(short.items.allSatisfy { $0.restSeconds == 90 })
         model.setDurationMinutes(60)
         #expect(await model.save())
-        #expect(repository.savedWorkouts.last?.items.count == 13)
+        #expect(repository.savedWorkouts.last?.items.count == 10)
     }
 
     @Test func editingSmartNamePreservesExistingSetsAndIndividualRests() async throws {

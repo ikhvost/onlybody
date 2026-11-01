@@ -7,19 +7,21 @@ struct BuilderTiming: View {
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.space10) {
             HStack(spacing: Theme.space12) {
-                Button { selectedField = .duration } label: {
-                    VStack(alignment: .leading, spacing: Theme.space6) {
-                        MonoLabel(text: String(localized: .uiDuration), size: Theme.typeMeta, color: Theme.text2)
-                        Text(String(localized: .uiMinutesCount(viewModel.durationMinutes)))
-                            .font(Theme.fontMono(Theme.type18, .medium))
-                            .foregroundStyle(Theme.accent)
+                if viewModel.mode == .smart {
+                    Button { selectedField = .duration } label: {
+                        VStack(alignment: .leading, spacing: Theme.space6) {
+                            MonoLabel(text: String(localized: .uiDuration), size: Theme.typeMeta, color: Theme.text2)
+                            Text(String(localized: .uiMinutesCount(viewModel.durationMinutes)))
+                                .font(Theme.fontMono(Theme.type18, .medium))
+                                .foregroundStyle(Theme.accent)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(Theme.space14)
+                        .background(Theme.surface, in: .rect(cornerRadius: Theme.cornerRadius))
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(Theme.space14)
-                    .background(Theme.surface, in: .rect(cornerRadius: Theme.cornerRadius))
+                    .accessibilityLabel(String(localized: .uiWorkoutDuration(viewModel.durationMinutes)))
+                    .accessibilityIdentifier("builder.duration")
                 }
-                .accessibilityLabel(String(localized: .uiWorkoutDuration(viewModel.durationMinutes)))
-                .accessibilityIdentifier("builder.duration")
                 Button { selectedField = .rest } label: {
                     VStack(alignment: .leading, spacing: Theme.space6) {
                         MonoLabel(text: String(localized: .uiSetRest), size: Theme.typeMeta, color: Theme.text2)
@@ -38,11 +40,11 @@ struct BuilderTiming: View {
             }
             .buttonStyle(PressableButtonStyle(animates: false))
             .disabled(viewModel.isSaving)
-            Text(viewModel.mode == .smart
-                 ? String(localized: .uiSmartSelectionUsesThisTimeBudgetChangingSetRestApplies)
-                 : String(localized: .uiDurationIsYourTargetTheEstimateBelowFollowsYourSets))
-                .font(Theme.fontSans(Theme.typeMeta))
-                .foregroundStyle(Theme.text2)
+            if viewModel.mode == .smart {
+                Text(.uiSmartTimeBudgetHint)
+                    .font(Theme.fontSans(Theme.typeMeta))
+                    .foregroundStyle(Theme.text2)
+            }
         }
         .padding(.horizontal, Theme.horizontalPadding)
         .padding(.top, Theme.space14)
