@@ -19,7 +19,7 @@ for product in ('OnlyBody', 'OnlyWeights'):
     assert info['UILaunchStoryboardName'] == 'LaunchScreen', product
     stores = list(bundle.rglob('*.store'))
     assert len(stores) == 1, stores
-    expected = ROOT / f'onlybody/Products/{product}/Resources/SeedStore/default.store'
+    expected = ROOT / f'Apps/iOS/Products/{product}/Resources/SeedStore/default.store'
     assert stores[0].read_bytes() == expected.read_bytes(), product
     assert not list(bundle.rglob('*.store-wal')) and not list(bundle.rglob('*.store-shm')), product
     assert not list(bundle.rglob('SeedData.json')), product

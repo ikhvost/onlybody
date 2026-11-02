@@ -8,14 +8,14 @@ struct RenderBrandAssets {
     @MainActor
     static func main() throws {
         let root = URL(filePath: FileManager.default.currentDirectoryPath)
-        let resources = root.appending(path: "onlybody/onlybody/Resources")
+        let resources = root.appending(path: "Apps/iOS/Sources/Resources")
         let font = resources.appending(path: "Fonts/DMSans-Variable.ttf")
         guard CTFontManagerRegisterFontsForURL(font as CFURL, .process, nil) else {
             fatalError("Could not register the bundled DM Sans font")
         }
         let product = CommandLine.arguments.dropFirst().first ?? "OnlyBody"
         guard ["OnlyBody", "OnlyWeights"].contains(product) else { fatalError("Unknown product: \(product)") }
-        let assets = root.appending(path: "onlybody/Products/\(product)/Resources/Assets.xcassets")
+        let assets = root.appending(path: "Apps/iOS/Products/\(product)/Resources/Assets.xcassets")
         if product == "OnlyWeights" {
             try renderBrand(OWMarkView(size: Theme.brandIconMarkSize),
                             launchMark: OWMarkView(size: Theme.brandLaunchMarkSize), assets: assets)

@@ -1,0 +1,32 @@
+{
+  "configurations": [
+    {
+      "id": "D74A6947-28A4-4F45-84F5-5A43530D1D26",
+      "name": "Default",
+      "options": {}
+    }
+  ],
+  "defaultOptions": {
+    "targetForVariableExpansion": {
+      "containerPath": "container:Apps.xcodeproj",
+      "identifier": "7C7A14EF195721CF74823827",
+      "name": "onlyweights"
+    }
+  },
+  "testTargets": [
+    {
+      "target": {
+        "containerPath": "container:Apps.xcodeproj",
+        "identifier": "F90F9696F0AA53FBAD3A0A73",
+        "name": "onlyweightsUITests"
+      },
+      "parallelizable": false,
+      "selectedTests": [
+        "NativeDesignReviewTests",
+        "ReleasePreparationTests",
+        "StoreScreenshotTests"
+      ]
+    }
+  ],
+  "version": 1
+}

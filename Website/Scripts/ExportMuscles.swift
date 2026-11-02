@@ -7,7 +7,7 @@ struct ExportMuscles {
     @MainActor static func main() throws {
         let root = URL(filePath: CommandLine.arguments[1])
         let output = root.appending(path: "Website/dist/assets/muscles")
-        let asset = root.appending(path: "onlybody/onlybody/Resources/Assets.xcassets/MuscleAnatomy.imageset/muscle-anatomy.png")
+        let asset = root.appending(path: "Apps/iOS/Sources/Resources/Assets.xcassets/MuscleAnatomy.imageset/muscle-anatomy.png")
         guard let bitmap = NSImage(contentsOf: asset) else { throw CocoaError(.fileReadCorruptFile) }
         let examples: [(String, String, String)] = [
             ("Scripts/StoreGenerator/SeedData.json", "Standard Push-Ups", "push-ups"),

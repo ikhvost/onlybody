@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 site_root="$(cd "$(dirname "$0")/../.." && pwd)"
-source_root="$site_root/onlybody/onlybody"
+source_root="$site_root/Apps/iOS/Sources"
 mkdir -p "$site_root/Website/dist/assets/muscles"
 render_dir="$(mktemp -d /tmp/onlybody-site-muscles.XXXXXX)"
 trap 'rm -rf "$render_dir"' EXIT

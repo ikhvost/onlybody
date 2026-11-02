@@ -1,9 +1,9 @@
 included:
-  - onlybody/onlybody
-  - onlybody/Products
-  - onlybody/ProductTests
-  - onlybody/onlybodyTests
-  - onlybody/onlybodyUITests
+  - Apps/iOS/Sources
+  - Apps/iOS/Products
+  - Apps/iOS/ProductTests
+  - Apps/iOS/Tests
+  - Apps/iOS/UITests
   - Scripts/StoreGenerator/Sources
 excluded:
   - Scripts/StoreGenerator/.build

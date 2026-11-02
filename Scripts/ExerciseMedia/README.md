@@ -34,7 +34,7 @@ Use through the official player follows [YouTube Terms of Service](https://www.y
 python3 Scripts/ExerciseMedia/generate.py \
   --seed Scripts/StoreGenerator/OnlyWeights/SeedData.json \
   --catalog Scripts/ExerciseMedia/onlyweights.json \
-  --output onlybody/Products/OnlyWeights/Catalog/ExerciseDemonstrationCatalog.swift \
+  --output Apps/iOS/Products/OnlyWeights/Catalog/ExerciseDemonstrationCatalog.swift \
   --allow-missing
 ```
 

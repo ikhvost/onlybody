@@ -1,0 +1,47 @@
+import XCTest
+
+/// Real simulator captures: SwiftUI ScrollViews, native controls, and process-level language selection.
+@MainActor
+final class NativeDesignReviewTests: XCTestCase {
+    func testNativeScreenMatrix() {
+        continueAfterFailure = false
+        for (language, locale) in [("uk", "uk_UA"), ("en", "en_US"), ("pl", "pl_PL"), ("de", "de_DE"), ("fr", "fr_FR")] {
+            let app = XCUIApplication()
+            app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", locale]
+            app.launchEnvironment["ONLYBODY_DESIGN_REVIEW"] = "1"
+            app.launchEnvironment["ONLYBODY_UI_STORE"] = UUID().uuidString
+            app.launch()
+            for index in 0..<20 {
+                let counter = app.staticTexts["designReview.index"]
+                if !counter.exists || counter.label != String(index) {
+                    let expected = NSPredicate(format: "label == %@", String(index))
+                    expectation(for: expected, evaluatedWith: counter)
+                    waitForExpectations(timeout: 10)
+                }
+                autoreleasepool {
+                    let screenshot = XCTAttachment(screenshot: app.screenshot())
+                    screenshot.name = "v003-\(JourneyProduct.name)-\(Int(app.frame.width))-\(language)-\(index)"
+                    screenshot.lifetime = .keepAlways
+                    add(screenshot)
+                }
+                advance(app, from: index)
+            }
+            app.terminate()
+        }
+    }
+    private func advance(_ app: XCUIApplication, from index: Int) {
+        let counter = app.staticTexts["designReview.index"]
+        let next = NSPredicate(format: "label == %@", String((index + 1) % 20))
+        let expected = String((index + 1) % 20)
+        for _ in 0..<3 {
+            if counter.label == expected { return }
+            app.buttons["designReview.next"].tap()
+            if XCTWaiter.wait(for: [XCTNSPredicateExpectation(predicate: next, object: counter)], timeout: 5) == .completed { return }
+            let actual = counter.label
+            if actual == expected { return }
+            XCTAssertEqual(actual, String(index), "Gallery must advance one state at a time")
+        }
+        XCTFail("Gallery did not advance after bounded retries: \(index)")
+    }
+
+}

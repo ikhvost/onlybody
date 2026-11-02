@@ -14,16 +14,16 @@ For OnlyBody, run from the repository root:
 python3 Scripts/StoreGenerator/generate-difficulties.py
 python3 Scripts/StoreGenerator/generate-muscles.py
 python3 Scripts/ExerciseMedia/generate.py
-swift run --package-path Scripts/StoreGenerator StoreGenerator onlybody/Products/OnlyBody/Resources/SeedStore/default.store Scripts/StoreGenerator/SeedData.json
+swift run --package-path Scripts/StoreGenerator StoreGenerator Apps/iOS/Products/OnlyBody/Resources/SeedStore/default.store Scripts/StoreGenerator/SeedData.json
 ```
 
 From the repository root, regenerate OnlyWeights metadata and seed with:
 
 ```sh
-python3 Scripts/StoreGenerator/generate-difficulties.py --seed Scripts/StoreGenerator/OnlyWeights/SeedData.json --output onlybody/Products/OnlyWeights/Catalog/ExerciseDifficultyCatalog.swift
-python3 Scripts/StoreGenerator/generate-muscles.py --seed Scripts/StoreGenerator/OnlyWeights/SeedData.json --output onlybody/Products/OnlyWeights/Catalog/ExerciseMuscleCatalog.swift
-python3 Scripts/ExerciseMedia/generate.py --seed Scripts/StoreGenerator/OnlyWeights/SeedData.json --catalog Scripts/ExerciseMedia/onlyweights.json --output onlybody/Products/OnlyWeights/Catalog/ExerciseDemonstrationCatalog.swift --allow-missing
-swift run --package-path Scripts/StoreGenerator StoreGenerator onlybody/Products/OnlyWeights/Resources/SeedStore/default.store Scripts/StoreGenerator/OnlyWeights/SeedData.json
+python3 Scripts/StoreGenerator/generate-difficulties.py --seed Scripts/StoreGenerator/OnlyWeights/SeedData.json --output Apps/iOS/Products/OnlyWeights/Catalog/ExerciseDifficultyCatalog.swift
+python3 Scripts/StoreGenerator/generate-muscles.py --seed Scripts/StoreGenerator/OnlyWeights/SeedData.json --output Apps/iOS/Products/OnlyWeights/Catalog/ExerciseMuscleCatalog.swift
+python3 Scripts/ExerciseMedia/generate.py --seed Scripts/StoreGenerator/OnlyWeights/SeedData.json --catalog Scripts/ExerciseMedia/onlyweights.json --output Apps/iOS/Products/OnlyWeights/Catalog/ExerciseDemonstrationCatalog.swift --allow-missing
+swift run --package-path Scripts/StoreGenerator StoreGenerator Apps/iOS/Products/OnlyWeights/Resources/SeedStore/default.store Scripts/StoreGenerator/OnlyWeights/SeedData.json
 python3 Scripts/Validation/check-catalogs.py
 ```
 
@@ -32,3 +32,7 @@ Without arguments, the metadata scripts still target OnlyBody. OnlyBody continue
 For validation, generate to a new `/tmp/*.store` path. Only replace a shipping seed for an intentional catalog update. Generation refuses stores containing workouts or sessions. WAL/SHM sidecars must not be committed or bundled.
 
 Complete the [video checklist](../ExerciseMedia/CHECKLIST.md) before media changes. Run `Scripts/validate.sh` for both schemes after catalog changes; automated checks do not complete content review.
+
+## Stable exercise keys
+
+Exercise `name` values are persisted keys. `CatalogKeys.json` registers them separately for OnlyBody and OnlyWeights. Add a new key explicitly when adding a new exercise; keep every existing key unchanged. A canonical rename/removal requires separate compatibility work. For display-only renaming, edit translations instead. Generators do not rewrite this registry. Run `python3 Scripts/Validation/check-catalogs.py` after changes.

@@ -92,14 +92,14 @@ echo "Release artifacts: $output"
 } > "$output/build-info.txt"
 
 ALLOW_OLDER_XCODE=0 VALIDATION_OUTPUT="$output/Validation" \
-    bash Scripts/validate.sh 2>&1 | tee "$output/validation.log"
+    bash Scripts/validate.sh full 2>&1 | tee "$output/validation.log"
 
 signing_options=()
 if [[ "${ALLOW_PROVISIONING_UPDATES:-0}" == 1 ]]; then
     signing_options+=(-allowProvisioningUpdates)
 fi
 xcodebuild archive \
-    -project onlybody/onlybody.xcodeproj -scheme "$product" \
+    -project Apps/iOS/Apps.xcodeproj -scheme "$product" \
     -configuration Release -destination 'generic/platform=iOS' \
     -archivePath "$archive" -derivedDataPath "$output/DerivedData" \
     -resultBundlePath "$output/Archive.xcresult" \

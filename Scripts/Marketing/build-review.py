@@ -59,7 +59,7 @@ for manifest in sorted(artifacts.glob('*/iPhone/*/manifest.json')):
                       'file': image.name, 'path': image.relative_to(review).as_posix(),
                       'width': shot['width'], 'height': shot['height']})
 settings = {}
-for line in (root / 'onlybody/Configuration/App.xcconfig').read_text().splitlines():
+for line in (root / 'Apps/iOS/Configuration/App.xcconfig').read_text().splitlines():
     if '=' in line and not line.lstrip().startswith('//'):
         key, value = line.split('=', 1)
         settings[key.strip()] = value.strip()

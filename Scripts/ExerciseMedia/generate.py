@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
-TARGET = ROOT / 'onlybody/Products/OnlyBody/Catalog/ExerciseDemonstrationCatalog.swift'
+TARGET = ROOT / 'Apps/iOS/Products/OnlyBody/Catalog/ExerciseDemonstrationCatalog.swift'
 
 
 def render(catalog_path, seed_path, require_complete):

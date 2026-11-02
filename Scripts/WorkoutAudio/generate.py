@@ -5,7 +5,7 @@ from pathlib import Path
 import struct
 import wave
 
-OUTPUT = Path(__file__).resolve().parents[2] / 'onlybody/onlybody/Resources/Sounds/rest-complete.wav'
+OUTPUT = Path(__file__).resolve().parents[2] / 'Apps/iOS/Sources/Resources/Sounds/rest-complete.wav'
 SAMPLE_RATE = 44100
 DURATION = 1.0
 FREQUENCY = 1000.0

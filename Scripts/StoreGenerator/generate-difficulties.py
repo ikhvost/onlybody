@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--seed', type=Path, default=ROOT / 'Scripts/StoreGenerator/SeedData.json')
-parser.add_argument('--output', type=Path, default=ROOT / 'onlybody/Products/OnlyBody/Catalog/ExerciseDifficultyCatalog.swift')
+parser.add_argument('--output', type=Path, default=ROOT / 'Apps/iOS/Products/OnlyBody/Catalog/ExerciseDifficultyCatalog.swift')
 parser.add_argument('--check', action='store_true')
 args = parser.parse_args()
 TARGET = args.output

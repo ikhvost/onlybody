@@ -4,7 +4,7 @@ Library movement details use one generated anatomical reference with front and b
 
 ## Reference and rendering
 
-- Image: `onlybody/onlybody/Resources/Assets.xcassets/MuscleAnatomy.imageset/muscle-anatomy.png`.
+- Image: `Apps/iOS/Sources/Resources/Assets.xcassets/MuscleAnatomy.imageset/muscle-anatomy.png`.
 - Generated with the built-in ImageGen tool on 2026-10-24. Original prompt: `generation-prompt.txt`. No third-party anatomy artwork is included.
 - PNG: 1254 × 1254, transparent, unchanged from the generated output.
 - SHA-256: `1d29d5095cad9500dfd1e652605fc817aab836acd4f492ab2bce5617a9af716b`.

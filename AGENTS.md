@@ -61,7 +61,7 @@ struct PreviewWorkoutRepository: WorkoutRepository {
 
 ### Project structure
 
-The source root is `onlybody/onlybody/`; source and test groups are filesystem-synchronized.
+The repository root is `onlybody`; `Apps/`, `Website/`, `Scripts/` and `Design/` are sibling directories; the Xcode project is `Apps/iOS/Apps.xcodeproj`. The source root is `Apps/iOS/Sources/`; source and test groups are filesystem-synchronized.
 New files need no project edits. New targets do require project configuration.
 
 - `App/`: composition root, `AppComposition`, custom tab shell and per-tab navigation roots.
@@ -74,13 +74,15 @@ New files need no project edits. New targets do require project configuration.
 - `Core/Persistence/Repositories/`: SwiftData writes in private contexts, autosave off, one save with rollback per aggregate.
 - `Features/{Train,Log,Library}/`: screens, ViewModels and feature-local components, one type per file.
 - `Shared/{Theme,Icons,Components,Preview}/`: visual primitives, tokens and no-op preview repositories.
-- `onlybody/Products/{OnlyBody,OnlyWeights}/`: target-specific generated catalogs, equipment lists, seed SQLite and brand assets. Shared source stays in `onlybody/onlybody/`; do not duplicate features.
-- `onlybody/Configuration/`: shared App.xcconfig and product identity settings.
-- `onlybody/ProductTests/{OnlyBody,OnlyWeights}/`: product-specific Swift Testing suites.
+- `Apps/iOS/Products/{OnlyBody,OnlyWeights}/`: target-specific generated catalogs, equipment lists, seed SQLite and brand assets. Shared source stays in `Apps/iOS/Sources/`; do not duplicate features.
+- `Apps/iOS/Configuration/`: shared App.xcconfig and product identity settings.
+- `Apps/iOS/ProductTests/{OnlyBody,OnlyWeights}/`: product-specific Swift Testing suites.
 - Shared source and shared tests are filesystem-synchronized members of both corresponding targets. AppConfiguration selects product defaults at the composition boundary; views receive data via ViewModels.
-- `onlybody/onlybodyTests/`: Swift Testing unit and integration suites and mocks.
-- `onlybody/onlybodyUITests/`: XCTest UI automation only, using real persistence in an isolated test store.
-- `Scripts/validate.sh`: lint, boundary checks, tests, Release build and temporary seed generation.
+- `Apps/iOS/Tests/`: Swift Testing unit and integration suites and mocks.
+- `Apps/iOS/UITests/`: XCTest UI automation only, using real persistence in an isolated test store.
+- `Scripts/validate.sh quick`: lint, validator regression tests, boundary/catalog/localization checks and unit/integration tests for both products.
+- `Scripts/validate.sh full` (the default): additionally runs functional UI tests, Release builds, bundle checks and temporary seed generation.
+- `Apps/iOS/Configuration/TestPlans/`: each scheme defaults to Functional; Visual capture suites run only when explicitly requested. Neither validation mode selects Visual.
 
 
 ---
@@ -182,10 +184,10 @@ enum AppTab: String, CaseIterable { case train, log, library }
 - Relationships must be optional when the related object may be deleted independently.
 - Use `@Relationship(deleteRule: .cascade)` when a parent owns its children (e.g. `Workout.items`, `Session.items`). Use `@Relationship(deleteRule: .nullify)` for cross-references where the related object may be deleted independently (e.g. `WorkoutItem.workout` inverse).
 
-- **Seed data**: Each exercise catalog is shipped as a pre-populated SQLite store in `onlybody/Products/<Product>/Resources/SeedStore/default.store`, copied to Documents on first launch. No runtime JSON parsing or bulk inserts. When exercises change, regenerate with:
+- **Seed data**: Each exercise catalog is shipped as a pre-populated SQLite store in `Apps/iOS/Products/<Product>/Resources/SeedStore/default.store`, copied to Documents on first launch. No runtime JSON parsing or bulk inserts. When exercises change, regenerate with:
   ```bash
   swift run --package-path Scripts/StoreGenerator StoreGenerator \
-    onlybody/Products/OnlyBody/Resources/SeedStore/default.store \
+    Apps/iOS/Products/OnlyBody/Resources/SeedStore/default.store \
     Scripts/StoreGenerator/SeedData.json
   ```
 
@@ -195,14 +197,17 @@ enum AppTab: String, CaseIterable { case train, log, library }
 - Common features, persistence entities and Theme remain shared. Never create permanent product Git branches or copy screens.
 - OnlyBody authoring inputs remain `Scripts/StoreGenerator/SeedData.json` and `Scripts/ExerciseMedia/catalog.json`. OnlyWeights uses `Scripts/StoreGenerator/OnlyWeights/SeedData.json` and `Scripts/ExerciseMedia/onlyweights.json`.
 - Metadata generators accept `--seed` and `--output`; media additionally accepts `--catalog` and `--allow-missing` for OnlyWeights. Keep full video coverage required for OnlyBody.
-- Run `python3 Scripts/Validation/check-catalogs.py` and the full `Scripts/validate.sh` for both products. Generate icons with `bash Scripts/AppIcon/generate.sh OnlyBody` or `OnlyWeights`.
+- Run `python3 Scripts/Validation/check-catalogs.py` and `Scripts/validate.sh full` for both products before completing product changes. Use `quick` during iteration. Generate icons with `bash Scripts/AppIcon/generate.sh OnlyBody` or `OnlyWeights`.
 - Do not regenerate OnlyBody's seed or rename existing exercises for a branding/build-structure change. Existing database path and model identities must remain stable.
 - Build settings exclude SQLite WAL/SHM sidecars from both app bundles.
+- Canonical exercise names are stable persisted keys, recorded in `Scripts/StoreGenerator/CatalogKeys.json`. The registry is append-only: add new keys explicitly; generators never rewrite it. Renaming/removing an existing key requires separate compatibility work. Change user-visible wording through translations.
+- Each product provides `ExerciseLocalizationCatalog`; shared `CatalogLocalization` delegates exercise lookups to that table. Shared labels and `Localizable.xcstrings` remain common.
+- Product compilation conditions in shared app sources are permitted only in `App/AppConfiguration.swift` and `Shared/Preview/NativeDesignReviewFixture.swift`. Tests may conditionally import the product module. Inject product policies at the composition boundary.
 
 ## Release preparation
 
 - Use `Scripts/Release/prepare.sh <onlybody|onlyweights> <version> <build>` for release archives. Set `DESTINATION` to an installed iOS Simulator destination; for example `DESTINATION='platform=iOS Simulator,name=iPhone 17 Pro' Scripts/Release/prepare.sh onlybody 1.2.0 42`.
-- The script runs the full `Scripts/validate.sh` for both products, then creates a signed Release device archive for the selected scheme and verifies its identity, version, provisioning profile and signature. Do not bypass validation or substitute a simulator Release build for a distribution archive.
+- The script explicitly runs `Scripts/validate.sh full` for both products, then creates a signed Release device archive for the selected scheme and verifies its identity, version, provisioning profile and signature. Do not bypass validation or substitute a simulator Release build for a distribution archive.
 - Use the exact Xcode version in `.xcode-version`. Release preparation does not accept `ALLOW_OLDER_XCODE`. Supply a three-component marketing version and a positive integer build number (1–9999); choose a new build number for each upload. Version overrides belong to the archive command, not edits to shared `App.xcconfig` just to prepare an archive.
 - Signing requires the configured team's signing identity and provisioning profile. Set `ALLOW_PROVISIONING_UPDATES=1` only when Xcode should manage provisioning using its authenticated account. Never commit signing credentials.
 - Keep archives and logs in the default gitignored `Release/` directory or a new `RELEASE_OUTPUT` directory. Preserve failure diagnostics; only a successful run writes `PREPARED`. Report actual validation/archive results and any blockers, never infer success from the existence of a partial archive.
@@ -225,7 +230,7 @@ enum AppTab: String, CaseIterable { case train, log, library }
 
 ## Testing
 
-Framework: **Swift Testing** (`@Test`, `#expect`) for unit and integration tests. **XCTest + XCUIAutomation is allowed only in `onlybodyUITests` / `onlyweightsUITests`**, as explicitly approved for the five E2E journeys.
+Framework: **Swift Testing** (`@Test`, `#expect`) for unit and integration tests. **XCTest + XCUIAutomation is allowed only in `Apps/iOS/UITests/`**, compiled by `onlybodyUITests` / `onlyweightsUITests`. Functional coverage includes the five E2E journeys, localization smoke and control hit areas. Visual capture suites are opt-in.
 
 ```swift
 @MainActor
@@ -240,10 +245,11 @@ struct FooViewModelTests {
 ```
 
 - Unit-test all Services (pure logic, no dependencies).
-- Unit-test all ViewModels using mock repository protocols. Mocks live in `onlybodyTests/Support/` (`MockWorkoutRepository`, `MockExerciseRepository`, `MockSessionRepository`). Each mock has a `shouldThrow` flag and records writes for assertion. Timer tests inject `ManualWorkoutTimeSource`; do not wait for wall-clock seconds.
+- Unit-test all ViewModels using mock repository protocols. Mocks live in `Apps/iOS/Tests/Support/` (`MockWorkoutRepository`, `MockExerciseRepository`, `MockSessionRepository`). Each mock has a `shouldThrow` flag and records writes for assertion. Timer tests inject `ManualWorkoutTimeSource`; do not wait for wall-clock seconds.
 - Integration-test repositories with in-memory `ModelContainer` (`ModelConfiguration(isStoredInMemoryOnly: true)`).
 - Maintain the same five E2E journeys for both schemes: create/relaunch, edit, complete/history, early finish, navigation. Use Debug-only UUID-isolated file stores and real repositories, accessibility identifiers and bounded waits.
-- SwiftUI Previews for view iteration.
+- SwiftUI Previews and the HTML reference for view iteration. Ordinary successful functional tests do not explicitly capture screenshots; retain failure screenshots and Xcode diagnostics.
+- Use the Visual test plan only for requested store/release screenshots or the native design matrix; select the required suite with `-only-testing`. See README for commands. This does not replace mandatory media-review or release evidence.
 
 ## Code Quality
 
