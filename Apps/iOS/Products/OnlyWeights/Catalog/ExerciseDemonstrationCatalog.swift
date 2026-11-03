@@ -4,23 +4,23 @@ nonisolated enum ExerciseDemonstrationCatalog {
     static let all: [ExerciseDemonstration] = [
         ExerciseDemonstration(
             id: "barbell-bench-press", exerciseName: "Barbell Bench Press",
-            videoID: "CjHIKDQ4RQo", author: "PureGym", startSeconds: 0
+            videoID: "CayG6UYqL8g", author: "National Academy of Sports Medicine (NASM)", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "incline-dumbbell-press", exerciseName: "Incline Dumbbell Press",
-            videoID: "oZVCBM9f8Eo", author: "PureGym", startSeconds: 0
+            videoID: "jMQA3XtJSgo", author: "OPEX Fitness", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "lat-pulldown", exerciseName: "Lat Pulldown",
-            videoID: "JGeRYIZdojU", author: "PureGym", startSeconds: 0
+            videoID: "lueEJGjTuPQ", author: "Bodybuilding.com", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "seated-cable-row", exerciseName: "Seated Cable Row",
-            videoID: "lJoozxC0Rns", author: "PureGym", startSeconds: 0
+            videoID: "xQNrFHEMhI4", author: "Bodybuilding.com", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "dumbbell-shoulder-press", exerciseName: "Dumbbell Shoulder Press",
-            videoID: "aI2hGzsAMXs", author: "PureGym", startSeconds: 0
+            videoID: "MMjBnEBnZKM", author: "National Academy of Sports Medicine (NASM)", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "dumbbell-lateral-raise", exerciseName: "Dumbbell Lateral Raise",
@@ -28,19 +28,19 @@ nonisolated enum ExerciseDemonstrationCatalog {
         ),
         ExerciseDemonstration(
             id: "cable-face-pull", exerciseName: "Cable Face Pull",
-            videoID: "0Po47vvj9g4", author: "PureGym", startSeconds: 0
+            videoID: "eTCBSFlCJ_s", author: "National Academy of Sports Medicine (NASM)", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "dumbbell-curl", exerciseName: "Dumbbell Curl",
-            videoID: "MtXdEcW3Eog", author: "PureGym", startSeconds: 0
+            videoID: "3OZ2MT_5r3Q", author: "Bodybuilding.com", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "cable-triceps-pushdown", exerciseName: "Cable Triceps Pushdown",
-            videoID: "LXkCrxn3caQ", author: "PureGym", startSeconds: 0
+            videoID: "HIKzvHkibWc", author: "Bodybuilding.com", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "barbell-back-squat", exerciseName: "Barbell Back Squat",
-            videoID: "rrJIyZGlK8c", author: "PureGym", startSeconds: 0
+            videoID: "Akd5xmZlsvg", author: "Catalyst Athletics", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "leg-press", exerciseName: "Leg Press",
@@ -48,7 +48,7 @@ nonisolated enum ExerciseDemonstrationCatalog {
         ),
         ExerciseDemonstration(
             id: "barbell-romanian-deadlift", exerciseName: "Barbell Romanian Deadlift",
-            videoID: "zU-f6DMCdAI", author: "PureGym", startSeconds: 0
+            videoID: "bT5OOBgY4bc", author: "OPEX Fitness", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "leg-extension", exerciseName: "Leg Extension",
@@ -68,15 +68,15 @@ nonisolated enum ExerciseDemonstrationCatalog {
         ),
         ExerciseDemonstration(
             id: "incline-barbell-bench-press", exerciseName: "Incline Barbell Bench Press",
-            videoID: "2jFFCy8JBU8", author: "PureGym", startSeconds: 0
+            videoID: "8YgkJN0gmNM", author: "Bodybuilding.com", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "dumbbell-bench-press", exerciseName: "Dumbbell Bench Press",
-            videoID: "AduT4Eq-iP0", author: "PureGym", startSeconds: 0
+            videoID: "ZaDlbm8E8Tg", author: "OPEX Fitness", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "dumbbell-fly", exerciseName: "Dumbbell Fly",
-            videoID: "Nhvz9EzdJ4U", author: "PureGym", startSeconds: 0
+            videoID: "Z5tiomY67Mk", author: "OPEX Fitness", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "cable-chest-fly", exerciseName: "Cable Chest Fly",
@@ -96,11 +96,11 @@ nonisolated enum ExerciseDemonstrationCatalog {
         ),
         ExerciseDemonstration(
             id: "one-arm-dumbbell-row", exerciseName: "One-Arm Dumbbell Row",
-            videoID: "ZRSGpBUVcNw", author: "PureGym", startSeconds: 0
+            videoID: "pYcpY20QaE8", author: "ScottHermanFitness", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "chest-supported-dumbbell-row", exerciseName: "Chest-Supported Dumbbell Row",
-            videoID: "Nx0TzjgsI-0", author: "PureGym", startSeconds: 0
+            videoID: "0-DXJiceG-0", author: "OPEX Fitness", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "straight-arm-cable-pulldown", exerciseName: "Straight-Arm Cable Pulldown",
@@ -116,7 +116,7 @@ nonisolated enum ExerciseDemonstrationCatalog {
         ),
         ExerciseDemonstration(
             id: "barbell-overhead-press", exerciseName: "Barbell Overhead Press",
-            videoID: "Y0Bxr57uPbk", author: "PureGym", startSeconds: 0
+            videoID: "_cfNP_VXs_U", author: "Catalyst Athletics", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "arnold-press", exerciseName: "Arnold Press",
@@ -132,7 +132,7 @@ nonisolated enum ExerciseDemonstrationCatalog {
         ),
         ExerciseDemonstration(
             id: "barbell-curl", exerciseName: "Barbell Curl",
-            videoID: "N5x5M1x1Gd0", author: "PureGym", startSeconds: 0
+            videoID: "pQfJR-sSIvA", author: "National Academy of Sports Medicine (NASM)", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "ez-bar-curl", exerciseName: "EZ-Bar Curl",
@@ -140,7 +140,7 @@ nonisolated enum ExerciseDemonstrationCatalog {
         ),
         ExerciseDemonstration(
             id: "hammer-curl", exerciseName: "Hammer Curl",
-            videoID: "B4RznoFvTl4", author: "PureGym", startSeconds: 0
+            videoID: "zC3nLlEvin4", author: "ScottHermanFitness", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "incline-dumbbell-curl", exerciseName: "Incline Dumbbell Curl",
@@ -160,7 +160,7 @@ nonisolated enum ExerciseDemonstrationCatalog {
         ),
         ExerciseDemonstration(
             id: "close-grip-barbell-bench-press", exerciseName: "Close-Grip Barbell Bench Press",
-            videoID: "DzA2xZhDGeo", author: "PureGym", startSeconds: 0
+            videoID: "OYoc93qAAEY", author: "Bodybuilding.com", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "weighted-dips", exerciseName: "Weighted Dips",
@@ -168,7 +168,7 @@ nonisolated enum ExerciseDemonstrationCatalog {
         ),
         ExerciseDemonstration(
             id: "barbell-front-squat", exerciseName: "Barbell Front Squat",
-            videoID: "Q1Ypb8ZNzI4", author: "PureGym", startSeconds: 0
+            videoID: "Q1R0_CbgHpc", author: "Catalyst Athletics", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "barbell-deadlift", exerciseName: "Barbell Deadlift",
@@ -184,7 +184,7 @@ nonisolated enum ExerciseDemonstrationCatalog {
         ),
         ExerciseDemonstration(
             id: "dumbbell-bulgarian-split-squat", exerciseName: "Dumbbell Bulgarian Split Squat",
-            videoID: "TEXl2b3__S4", author: "PureGym", startSeconds: 0
+            videoID: "hbw7hdyOpq0", author: "National Academy of Sports Medicine (NASM)", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "dumbbell-reverse-lunge", exerciseName: "Dumbbell Reverse Lunge",
@@ -192,11 +192,11 @@ nonisolated enum ExerciseDemonstrationCatalog {
         ),
         ExerciseDemonstration(
             id: "dumbbell-walking-lunge", exerciseName: "Dumbbell Walking Lunge",
-            videoID: "mAgbXQdd4LM", author: "PureGym", startSeconds: 0
+            videoID: "8fZxWTiIJWo", author: "OPEX Fitness", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "dumbbell-step-up", exerciseName: "Dumbbell Step-Up",
-            videoID: "DxUNi119Qzs", author: "PureGym", startSeconds: 0
+            videoID: "Zp7RG4jFScw", author: "OPEX Fitness", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "dumbbell-romanian-deadlift", exerciseName: "Dumbbell Romanian Deadlift",
@@ -212,7 +212,7 @@ nonisolated enum ExerciseDemonstrationCatalog {
         ),
         ExerciseDemonstration(
             id: "lying-leg-curl", exerciseName: "Lying Leg Curl",
-            videoID: "SbSNUXPRkc8", author: "PureGym", startSeconds: 0
+            videoID: "jxctD6fL_FQ", author: "Bodybuilding.com", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "hip-abduction-machine", exerciseName: "Hip Abduction Machine",
@@ -236,7 +236,7 @@ nonisolated enum ExerciseDemonstrationCatalog {
         ),
         ExerciseDemonstration(
             id: "ab-wheel-rollout", exerciseName: "Ab Wheel Rollout",
-            videoID: "SBO5aFR09D4", author: "PureGym", startSeconds: 0
+            videoID: "4HZCJLM5wBk", author: "OPEX Fitness", startSeconds: 0
         ),
         ExerciseDemonstration(
             id: "cable-woodchop", exerciseName: "Cable Woodchop",
