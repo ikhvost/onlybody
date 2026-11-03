@@ -7,7 +7,8 @@ const report={date:new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Warsa
 (async()=>{
  const browser=await chromium.launch({channel:'chrome'}),page=await browser.newPage();
  page.on('pageerror',error=>report.issues.push(error.message));
- const remoteMedia=[];
+ const remoteMedia=[],popups=[];
+ page.on('popup',popup=>popups.push(popup.url()));
  page.on('request',request=>{if(/youtube|googlevideo|ytimg|doubleclick/.test(new URL(request.url()).hostname))remoteMedia.push(request.url())});
  const act=value=>page.evaluate(value=>mock.act(value),value);
  const data=()=>page.evaluate(()=>mock.state());
@@ -88,7 +89,10 @@ const report={date:new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Warsa
    assert.equal(await page.locator('.video-disclosure').getAttribute('open'),null);
    assert.equal(await page.locator('.legal-links a').count(),2);
    assert.equal(await page.locator('.youtube-link').count(),1);
-   assert.equal(await page.locator('.consent-card > .youtube-link.primary').count(),1);
+   assert.equal(await page.locator('.consent-card > button.permission-button').count(),1);
+   assert.ok(await page.locator('.consent-card > button.permission-button').isVisible());
+   if(language==='en')assert.equal(await page.locator('.permission-button').innerText(),'Watch Video');
+   assert.equal(await page.locator('.consent-card > .youtube-link').count(),0);
    assert.match(await page.locator('.youtube-link').getAttribute('href'),/^https:\/\/www\.youtube\.com\/watch\?v=/);
    assert.equal(await page.locator('.youtube-link').getAttribute('target'),'_blank');
    assert.ok(await page.locator('.author').innerText());
@@ -102,7 +106,6 @@ const report={date:new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Warsa
    assert.equal(await page.locator('[data-action="videoPermission"]').count(),0);
    assert.ok(await page.locator('.youtube-link').isVisible());
    await go(product,language,width,'movement');
-   await page.locator('.video-disclosure summary').click();
    await page.locator('[data-action="videoPermission"]').click();
    await page.locator('[data-action="allowTracking"]').click();
    assert.equal((await data()).tracking,'authorized');
@@ -114,9 +117,10 @@ const report={date:new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Warsa
    assert.equal(await page.locator('.player-placeholder').count(),0);
    report.videoCases++;
   }
+  assert.deepEqual(popups,[],'Watch Video must not open another tab');
   assert.deepEqual(remoteMedia,[],'Mock must not contact YouTube or Google media services');
   if (!process.env.DESIGN_VIDEO_ONLY) report.flows.push('Search/menu icon centering; separate guide/add targets; direct and modal return preserves query, filters, scroll and focus; keyboard add exactly once');
-  report.flows.push('Single primary Watch on YouTube link with original destination; optional in-app permission inside details; video above equipment; expandable disclosure and legal/author links; simulated allow/deny/withdraw; mock player at least 200 × 200; no remote media requests');
+  report.flows.push('Primary Watch Video button starts the existing in-app permission/player flow without opening tabs; external alternative inside details or denied fallback; video above equipment; expandable disclosure and legal/author links; simulated allow/deny/withdraw; mock player at least 200 × 200; no remote media requests');
   assert.deepEqual(report.issues,[]);report.status='PASS';
  }catch(error){report.status='FAIL';report.issues.push(error.stack);process.exitCode=1}
  finally{fs.writeFileSync(process.env.DESIGN_REPORT || path.join(output,'guide-verification.json'),JSON.stringify(report,null,2)+'\n');await browser.close();console.log(JSON.stringify(report,null,2))}

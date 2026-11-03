@@ -11,7 +11,7 @@
       'Videos von YouTube. Google verarbeitet Geräte- und Wiedergabedaten und kann Cookies für Wiedergabe, Analysen und Werbung verwenden.',
       'Vidéos YouTube. Google traite les données de l’appareil et de visionnage et peut utiliser des cookies pour la lecture, les analyses et la publicité.'
     ],
-    setup: ['Дивитися тут','Watch in app','Oglądaj w aplikacji','In der App ansehen','Regarder dans l’application'],
+    watch: ['Дивитися відео','Watch Video','Obejrzyj film','Video ansehen','Voir la vidéo'],
     privacy: ['Конфіденційність Google','Google Privacy','Prywatność Google','Google-Datenschutz','Confidentialité Google'],
     terms: ['Умови YouTube','YouTube Terms','Warunki YouTube','YouTube-Bedingungen','Conditions YouTube'],
     details: ['Про дані та дозволи','About data and permissions','Dane i uprawnienia','Daten und Berechtigungen','Données et autorisations'],
@@ -39,10 +39,9 @@
       const denied = state().tracking === 'denied';
       const disclosure = card.querySelector('p').innerHTML;
       const legal = `<div class="legal-links"><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">${E(text('privacy'))}</a><a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener">${E(text('terms'))}</a></div>`;
-      card.innerHTML = `<strong>${E(text('title'))}</strong><p>${E(text(denied?'external':'summary'))}</p><details class="video-disclosure"><summary>${E(text('details'))}</summary><p>${disclosure}</p><p>${tr('uiYouCanTurnVideosOffInSettings')}</p>${denied?'':btn(E(text('setup')),'videoPermission','secondary in-app-video')}</details>${legal}`;
-      youtube.classList.add('primary','permission-button');
-      youtube.removeAttribute('style');
-      card.querySelector('.video-disclosure').before(youtube);
+      card.innerHTML = `<strong>${E(text('title'))}</strong><p>${E(text(denied?'external':'summary'))}</p>${denied?'':btn(E(text('watch')),'videoPermission','primary permission-button')}<details class="video-disclosure"><summary>${E(text('details'))}</summary><p>${disclosure}</p><p>${tr('uiYouCanTurnVideosOffInSettings')}</p></details>${legal}`;
+      // Keep external playback only as an explicitly labelled alternative.
+      if (!denied) card.querySelector('.video-disclosure').append(youtube);
     }
     return template.innerHTML;
   };
