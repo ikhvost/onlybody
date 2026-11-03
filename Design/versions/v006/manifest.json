@@ -65,5 +65,6 @@
   "controlsVerification": "controls-verification.json",
   "guideVerification": "guide-verification.json",
   "videoCtaVerification": "player-only-verification.json",
-  "pickerRefinementVerification": "picker-refinement-verification.json"
+  "pickerRefinementVerification": "picker-refinement-verification.json",
+  "settingsRefinementVerification": "settings-refinement-verification.json"
 }

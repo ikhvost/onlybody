@@ -7,7 +7,7 @@
     watch: ['Дивитися відео','Watch Video','Obejrzyj film','Video ansehen','Voir la vidéo']
   };
   const text = key => copy[key][['uk','en','pl','de','fr'].indexOf(language)];
-  const previousRows = catalogRows, previousMovement = movementView, previousAction = action;
+  const previousRows = catalogRows, previousMovement = movementView, previousSettings = settingsView, previousAction = action;
   let pickerReturn = null;
 
   catalogRows = picker => {
@@ -30,6 +30,13 @@
     }
     youtube?.remove();
     template.content.querySelector('[data-action="videoPlay"]')?.setAttribute('aria-label',text('watch'));
+    return template.innerHTML;
+  };
+
+  settingsView = () => {
+    const template = document.createElement('template');
+    template.innerHTML = previousSettings();
+    template.content.querySelector('.youtube-settings')?.closest('.settings-section')?.remove();
     return template.innerHTML;
   };
 
