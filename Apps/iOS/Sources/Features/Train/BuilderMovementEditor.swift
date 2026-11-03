@@ -5,12 +5,20 @@ struct BuilderMovementEditor: View {
     let movementID: UUID
     @Environment(\.dismiss) private var dismiss
     @State private var confirmRemoval = false
+    @State private var original: MovementConfig?
+    @State private var committed = false
 
     var body: some View {
         ScrollView {
             if let movement = viewModel.movements.first(where: { $0.id == movementID }) {
                 VStack(alignment: .leading, spacing: Theme.space16) {
-                    Text(movement.exercise.displayName).font(Theme.fontSans(Theme.typeExercise, .bold))
+                    HStack(alignment: .top) {
+                        Text(movement.exercise.displayName).font(Theme.fontSans(Theme.typeExercise, .bold))
+                        Spacer(minLength: Theme.space8)
+                        Button { dismiss() } label: { CloseIcon().frame(width: Theme.touchSize, height: Theme.touchSize) }
+                            .buttonStyle(NavigationControlStyle()).accessibilityLabel(String(localized: .uiCancel))
+                            .accessibilityIdentifier("builder.movement.cancel")
+                    }
                     ForEach(["Sets", "Reps", "Rest"], id: \.self) { field in
                         BuilderMovementNumber(viewModel: viewModel, movement: movement, field: field)
                     }
@@ -22,15 +30,18 @@ struct BuilderMovementEditor: View {
         }
         .scrollIndicators(.hidden).scrollDismissesKeyboard(.interactively)
         .safeAreaInset(edge: .bottom) {
-            PrimaryButton(title: String(localized: .uiDone), action: { dismiss() }, disabled: viewModel.hasInvalidNumbers)
+            PrimaryButton(title: String(localized: .uiDone), action: { committed = true; dismiss() }, disabled: viewModel.hasInvalidNumbers)
                 .accessibilityIdentifier("builder.movement.done").padding(Theme.cardInset).background(Theme.bg)
         }
         .alert(String(localized: .uiDesignRemoveQuestion), isPresented: $confirmRemoval) {
-            Button(String(localized: .uiDesignRemoveExercise), role: .destructive) { viewModel.removeMovement(movementID); dismiss() }
+            Button(String(localized: .uiDesignRemoveExercise), role: .destructive) { committed = true; viewModel.removeMovement(movementID); dismiss() }
             Button(String(localized: .uiCancel), role: .cancel) {}
         }
         .interactiveDismissDisabled(viewModel.hasInvalidNumbers)
-        .onDisappear { viewModel.applySmartTimeBudget() }
+        .onAppear { if original == nil { original = viewModel.movements.first(where: { $0.id == movementID }) } }
+        .onDisappear {
+            if committed { viewModel.applySmartTimeBudget() } else if let original { viewModel.restoreMovement(original) }
+        }
         .foregroundStyle(Theme.text).background(Theme.bg).preferredColorScheme(.dark)
     }
 }

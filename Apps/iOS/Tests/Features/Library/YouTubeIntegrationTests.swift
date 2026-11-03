@@ -29,6 +29,26 @@ struct YouTubeIntegrationTests {
         #expect(document.html.contains("\"autoplay\":0"))
     }
 
+    @Test func openingAGuidePreparesPlaybackWithoutPermissionOrAutoplay() throws {
+        let demonstration = ExerciseDemonstration(
+            id: "test", exerciseName: "Test", videoID: "Yw9RPfBRjx0", author: "Test author", startSeconds: 0
+        )
+        let model = MovementDetailViewModel(
+            exercise: ExerciseSnapshot(name: "Test"), demonstration: demonstration,
+            bundleIdentifier: try #require(Bundle.main.bundleIdentifier), network: ManualNetworkAvailabilitySource()
+        )
+        model.prepareDemonstration()
+        let session = try #require(model.playerSessionID)
+        #expect(model.demonstrationState == .loading)
+        model.receivePlayerEvent(.ready, sessionID: session)
+        #expect(model.demonstrationState == .ready)
+        #expect(Bundle.main.object(forInfoDictionaryKey: "NSUserTrackingUsageDescription") == nil)
+        model.setPlayerActive(false)
+        #expect(model.demonstrationState == .paused)
+        model.closeDemonstration()
+        #expect(model.playerSessionID == nil)
+    }
+
     @Test func playerMeetsMinimumViewportDimensions() {
         #expect(Theme.demonstrationMinimumWidth >= 200)
         #expect(Theme.demonstrationHeight >= 200)

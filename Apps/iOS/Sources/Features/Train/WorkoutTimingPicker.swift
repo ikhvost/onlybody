@@ -12,12 +12,12 @@ struct WorkoutTimingPicker: View {
         VStack(spacing: Theme.space12) {
             HStack {
                 Button(String(localized: .uiCancel)) { dismiss() }
-                    .foregroundStyle(Theme.text2)
+                    .foregroundStyle(Theme.text2).frame(minWidth: Theme.touchSize, minHeight: Theme.touchSize)
                 Spacer()
                 Text(title).foregroundStyle(Theme.text)
                 Spacer()
                 Button(String(localized: .uiDone)) { onSelect(selection); dismiss() }
-                    .foregroundStyle(Theme.accent)
+                    .foregroundStyle(Theme.accent).frame(minWidth: Theme.touchSize, minHeight: Theme.touchSize)
                     .accessibilityIdentifier("timing.done")
             }
             .font(Theme.fontSans(Theme.type15, .semibold))

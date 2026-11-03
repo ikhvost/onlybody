@@ -11,11 +11,7 @@ struct GhostButton: View {
                 .foregroundStyle(Theme.text2)
                 .padding(.horizontal, Theme.space15)
                 .frame(minHeight: Theme.buttonHeight)
-                .overlay {
-                    RoundedRectangle(cornerRadius: Theme.buttonRadius)
-                        .stroke(Theme.border2, lineWidth: 1)
-                }
-                .clipShape(.rect(cornerRadius: Theme.buttonRadius))
+                .background(Theme.surface2, in: .capsule)
         }
         .buttonStyle(PressableButtonStyle())
     }

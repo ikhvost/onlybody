@@ -9,48 +9,7 @@ final class MovementDetailViewModel {
     private let usesLocalPlayer: Bool
     private let network: any NetworkAvailabilitySource
     private var hasNetwork = true
-    private let youtubeConsent: YouTubeConsent
-    private let trackingAuthorization: any TrackingAuthorizationSource
-    private(set) var trackingPermission: TrackingPermission
-    private(set) var isRequestingVideoPermission = false
-    private var sessionConsentRevision: UUID?
-
-    var needsYouTubeConsent: Bool { allowsVideoLoading && !youtubeConsent.isAllowed }
-    var needsVideoPermission: Bool {
-        allowsVideoLoading && (needsYouTubeConsent || trackingPermission != .authorized)
-    }
-    var canRequestVideoPermission: Bool {
-        trackingPermission == .notDetermined || trackingPermission == .authorized
-    }
-    var externalVideoURL: URL? { demonstration?.watchURL }
-    var consentRevision: UUID { youtubeConsent.revision }
-    var playerSessionID: UUID? {
-        guard !needsVideoPermission, sessionConsentRevision == consentRevision else { return nil }
-        return preparedSessionID
-    }
-
-    func enableYouTubePlayback() async {
-        guard !isRequestingVideoPermission, isPlayerActive, demonstration != nil else { return }
-        isRequestingVideoPermission = true
-        defer { isRequestingVideoPermission = false }
-        youtubeConsent.allow()
-        let revision = consentRevision
-        trackingPermission = await trackingAuthorization.request()
-        guard !Task.isCancelled, isPlayerActive, consentRevision == revision, youtubeConsent.isAllowed else { return }
-        refreshYouTubeConsent()
-        prepareDemonstration()
-    }
-
-    func allowYouTube() {
-        youtubeConsent.allow()
-        refreshYouTubeConsent()
-    }
-
-    func refreshYouTubeConsent() {
-        guard needsVideoPermission || sessionConsentRevision != consentRevision else { return }
-        closeDemonstration()
-        prepareDemonstration()
-    }
+    var playerSessionID: UUID? { preparedSessionID }
 
     let demonstration: ExerciseDemonstration?
     let playerDocument: YouTubeEmbedDocument?
@@ -90,13 +49,8 @@ final class MovementDetailViewModel {
         allowsVideoLoading: Bool = true,
         localPlayerDocument: YouTubeEmbedDocument? = nil,
         network: any NetworkAvailabilitySource = SystemNetworkAvailabilitySource(),
-        timeSource: any WorkoutTimeSource = SystemWorkoutTimeSource(),
-        youtubeConsent: YouTubeConsent = YouTubeConsent(),
-        trackingAuthorization: any TrackingAuthorizationSource = SystemTrackingAuthorizationSource()
+        timeSource: any WorkoutTimeSource = SystemWorkoutTimeSource()
     ) {
-        self.youtubeConsent = youtubeConsent
-        self.trackingAuthorization = trackingAuthorization
-        trackingPermission = trackingAuthorization.status
         self.exercise = exercise
         self.demonstration = demonstration
         usesLocalPlayer = localPlayerDocument != nil
@@ -109,12 +63,11 @@ final class MovementDetailViewModel {
     }
 
     func loadDemonstration() {
-        guard !needsVideoPermission, isPlayerActive, let demonstration else { return }
+        guard isPlayerActive, let demonstration else { return }
         guard hasNetwork else {
             demonstrationState = .offline
             return
         }
-        sessionConsentRevision = consentRevision
         guard allowsVideoLoading else {
             if usesLocalPlayer { preparedSessionID = UUID() }
             demonstrationState = .ready
@@ -141,10 +94,6 @@ final class MovementDetailViewModel {
             guard !Task.isCancelled else { return }
             let wasAvailable = hasNetwork
             hasNetwork = available
-            guard !needsVideoPermission else {
-                closeDemonstration()
-                continue
-            }
             if !available {
                 preparedSessionID = nil
                 playerTimeoutID = nil
@@ -190,8 +139,6 @@ final class MovementDetailViewModel {
     func setPlayerActive(_ active: Bool) {
         isPlayerActive = active
         guard !active else {
-            trackingPermission = trackingAuthorization.status
-            refreshYouTubeConsent()
             prepareDemonstration()
             return
         }
@@ -207,7 +154,6 @@ final class MovementDetailViewModel {
     func closeDemonstration() {
         preparedSessionID = nil
         playerTimeoutID = nil
-        sessionConsentRevision = nil
         demonstrationState = .idle
     }
 

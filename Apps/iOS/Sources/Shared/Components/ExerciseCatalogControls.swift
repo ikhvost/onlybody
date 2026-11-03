@@ -12,24 +12,34 @@ struct ExerciseCatalogControls: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.space12) {
-            HStack(spacing: Theme.space12) {
-                SearchIcon(color: Theme.text2)
-                TextField(String(localized: .uiSearch), text: $search, prompt: Text(.uiSearch).foregroundStyle(Theme.text3))
-                    .font(Theme.fontSans(Theme.typeBody)).foregroundStyle(Theme.text)
-                    .textInputAutocapitalization(.never).autocorrectionDisabled()
-                    .accessibilityIdentifier(searchIdentifier)
-                    .focused(searchFocus).submitLabel(.done)
-                    .onSubmit { searchFocus.wrappedValue = false }
+            HStack(spacing: Theme.space8) {
+                HStack(spacing: Theme.space10) {
+                    SearchIcon(color: Theme.text2)
+                    TextField(String(localized: .uiSearch), text: $search, prompt: Text(.uiSearch).foregroundStyle(Theme.text3))
+                        .font(Theme.fontSans(Theme.typeBody)).foregroundStyle(Theme.text)
+                        .textInputAutocapitalization(.never).autocorrectionDisabled()
+                        .accessibilityIdentifier(searchIdentifier)
+                        .focused(searchFocus).submitLabel(.done)
+                        .onSubmit { searchFocus.wrappedValue = false }
+                }
+                .padding(.horizontal, Theme.cardInset).frame(minHeight: Theme.buttonHeight)
+                .background(Theme.surface, in: .rect(cornerRadius: Theme.buttonRadius))
+                Button { searchFocus.wrappedValue = false; showingFilters = true } label: {
+                    FilterIcon(color: count > 0 ? Theme.accent : Theme.text)
+                        .frame(width: Theme.buttonHeight, height: Theme.buttonHeight)
+                        .background(Theme.surface2, in: .rect(cornerRadius: Theme.buttonRadius))
+                        .overlay(alignment: .topTrailing) {
+                            if count > 0 {
+                                Text(count, format: .number).font(Theme.fontSans(Theme.type12, .semibold))
+                                    .foregroundStyle(Theme.accentDark).padding(.horizontal, Theme.space6)
+                                    .background(Theme.accent, in: .capsule).accessibilityHidden(true)
+                            }
+                        }
+                }
+                .accessibilityLabel(String(localized: .uiDesignFilters))
+                .accessibilityValue(count.formatted())
+                .accessibilityIdentifier("catalog.filters")
             }
-            .padding(Theme.cardInset).frame(minHeight: Theme.buttonHeight)
-            .background(Theme.surface, in: .rect(cornerRadius: Theme.buttonRadius))
-            Button { searchFocus.wrappedValue = false; showingFilters = true } label: {
-                HStack {
-                    Text(.uiDesignFilters)
-                    Text(count, format: .number).font(Theme.fontMono(Theme.typeBody))
-                }.font(Theme.fontSans(Theme.typeBody)).frame(minHeight: Theme.touchSize)
-            }
-            .foregroundStyle(Theme.text).accessibilityIdentifier("catalog.filters")
             if count > 0 {
                 Text([muscle == "All" ? "" : CatalogLocalization.label(muscle), equipment.map { CatalogLocalization.label($0) } ?? ""]
                     .filter { !$0.isEmpty }.joined(separator: " · "))

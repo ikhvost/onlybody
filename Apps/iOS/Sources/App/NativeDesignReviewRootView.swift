@@ -28,6 +28,9 @@ struct NativeDesignReviewRootView: View {
             }
         }
         .font(Theme.fontSans(Theme.typeBody)).foregroundStyle(Theme.text).background(Theme.bg).preferredColorScheme(.dark)
+        .transaction { transaction in
+            if Theme.previewReducesMaterials { transaction.animation = nil; transaction.disablesAnimations = true }
+        }
         .task { fixture = await NativeDesignReviewFixture() }
         .onDisappear { fixture?.active.cleanup() }
     }

@@ -32,7 +32,12 @@ final class ControlAccessibilityTests: XCTestCase {
                 assertHitArea(app.buttons["builder.back"], minimum: 44)
                 assertHitArea(app.buttons["builder.add"], minimum: 44)
                 assertHitArea(app.buttons["builder.options"], minimum: 44)
-                assertHitArea(app.buttons["builder.save"], minimum: 56)
+                assertHitArea(app.buttons["builder.save"], minimum: 52)
+            }
+            if index == 6 {
+                assertHitArea(app.buttons["catalog.filters"], minimum: 44)
+                assertHitArea(app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "exercise.pick.")).firstMatch, minimum: 44)
+                assertHitArea(app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "exercise.guide.")).firstMatch, minimum: 44)
             }
             if index == 7 {
                 assertHitArea(app.buttons["active.set.0.done"], minimum: 48)

@@ -41,11 +41,10 @@ struct ActiveWorkoutSetRow: View {
                 viewModel.toggleSet(setID)
             } label: {
                 CheckIcon(color: viewModel.row(setID).isDone ? Theme.accentDark : Theme.text3)
-                    .opacity(viewModel.row(setID).isDone ? 1 : 0)
                     .frame(width: Theme.stepSize, height: Theme.stepSize)
                     .background(viewModel.row(setID).isDone ? Theme.accent : Theme.surface2,
-                                in: .rect(cornerRadius: Theme.buttonRadius))
-                    .overlay { RoundedRectangle(cornerRadius: Theme.buttonRadius).stroke(Theme.border2) }
+                                in: .circle)
+                    .overlay { Circle().stroke(Theme.border2) }
             }
             .accessibilityLabel(String(localized: viewModel.row(setID).isDone ? .uiWorkoutUncheckSet : .uiWorkoutCheckSet)
                                 + " \(setID.index + 1)")

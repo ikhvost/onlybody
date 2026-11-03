@@ -2,6 +2,7 @@ import SwiftUI
 
 struct BuilderMovements: View {
     @Bindable var viewModel: SessionBuilderViewModel
+    let makeMovement: (ExerciseSnapshot) -> MovementDetailViewModel
     @Binding var isShowingExercisePicker: Bool
     @Binding var dragLocation: CGPoint?
 
@@ -16,17 +17,17 @@ struct BuilderMovements: View {
                         isShowingExercisePicker = true
                     } label: {
                         HStack(spacing: Theme.space5) {
-                            PlusIcon(color: Theme.accentDark, size: Theme.typeMeta)
+                            PlusIcon(color: Theme.text, size: Theme.typeMeta)
                             Text(.uiAdd)
                                 .font(Theme.fontSans(Theme.typeMeta, .bold))
-                                .foregroundStyle(Theme.accentDark)
+                                .foregroundStyle(Theme.text)
                         }
                         .padding(.horizontal, Theme.space12)
                         .padding(.vertical, Theme.space5)
                         .frame(minHeight: Theme.touchSize)
                         .contentShape(.rect)
-                        .background(Theme.accent)
-                        .clipShape(.rect(cornerRadius: Theme.chipCornerRadius))
+                        .background(Theme.surface2)
+                        .clipShape(.capsule)
                     }
                     .buttonStyle(PressableButtonStyle(animates: false))
                     .accessibilityIdentifier("builder.add")
@@ -56,7 +57,7 @@ struct BuilderMovements: View {
                     ExerciseReorderStack(items: viewModel.movements, spacing: Theme.space6,
                                          isEnabled: !viewModel.hasInvalidNumbers && !viewModel.isSaving,
                                          dragLocation: $dragLocation, onMove: viewModel.moveMovement) { movement, handle in
-                        BuilderMovementCard(viewModel: viewModel, movement: movement, reorderHandle: handle)
+                        BuilderMovementCard(viewModel: viewModel, makeMovement: makeMovement, movement: movement, reorderHandle: handle)
                     }
                     .padding(.horizontal, Theme.horizontalPadding)
                 }

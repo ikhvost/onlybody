@@ -9,7 +9,6 @@ struct BodyweightApp: App {
     let exercises: any ExerciseRepository
     let workouts: any WorkoutRepository
     let sessions: any SessionRepository
-    let youtubeConsent: YouTubeConsent
     let preferences: WorkoutPreferences
     let reminders: WorkoutReminderCoordinator
 
@@ -20,7 +19,6 @@ struct BodyweightApp: App {
             exercises = PreviewExerciseRepository()
             workouts = PreviewWorkoutRepository()
             sessions = PreviewSessionRepository()
-            youtubeConsent = YouTubeConsent()
             preferences = WorkoutPreferences()
             reminders = WorkoutReminderCoordinator(
                 preferences: preferences, workouts: workouts, notifications: PreviewWorkoutNotificationClient()
@@ -35,7 +33,6 @@ struct BodyweightApp: App {
         #else
         let preferenceNamespace: String? = nil
         #endif
-        youtubeConsent = YouTubeConsentStore(namespace: preferenceNamespace).makeConsent()
         preferences = WorkoutPreferencesStore(namespace: preferenceNamespace).makePreferences()
 
         do {
@@ -81,7 +78,7 @@ struct BodyweightApp: App {
         WindowGroup {
             AppContentView(composition: AppComposition(
                 configuration: configuration, exercises: exercises, workouts: workouts,
-                sessions: sessions, preferences: preferences, reminders: reminders, youtubeConsent: youtubeConsent
+                sessions: sessions, preferences: preferences, reminders: reminders
             ))
             .task { await reminders.refresh() }
             .onChange(of: scenePhase) { _, phase in

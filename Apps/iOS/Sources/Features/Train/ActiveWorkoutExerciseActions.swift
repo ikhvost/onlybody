@@ -13,9 +13,8 @@ struct ActiveWorkoutExerciseActions: View {
                     LibraryIcon(color: Theme.accent, size: Theme.type18)
                     Text(.uiGuide)
                 }
-                .frame(maxWidth: .infinity, minHeight: Theme.space48)
-                .background(Theme.surface2)
-                .clipShape(.rect(cornerRadius: Theme.cornerRadius))
+                .frame(minHeight: Theme.touchSize)
+                .padding(.horizontal, Theme.space8)
             }
             .disabled(!canShowGuide)
             .accessibilityLabel(String(localized: .uiOpenExerciseGuide))
@@ -26,9 +25,8 @@ struct ActiveWorkoutExerciseActions: View {
                     LogIcon(color: Theme.accent, size: Theme.type18)
                     Text(.uiHistory)
                 }
-                .frame(maxWidth: .infinity, minHeight: Theme.space48)
-                .background(Theme.surface2)
-                .clipShape(.rect(cornerRadius: Theme.cornerRadius))
+                .frame(minHeight: Theme.touchSize)
+                .padding(.horizontal, Theme.space8)
             }
             .disabled(!canShowHistory)
             .accessibilityLabel(String(localized: .uiShowExerciseHistory))

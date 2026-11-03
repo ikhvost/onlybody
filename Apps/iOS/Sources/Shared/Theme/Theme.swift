@@ -1,18 +1,32 @@
 import SwiftUI
 
 enum Theme {
-    static let typeBody: CGFloat = 18
+    /// Only the isolated DEBUG gallery can force solid surfaces for visual review.
+    static var previewReducesMaterials: Bool {
+        #if DEBUG
+        let environment = ProcessInfo.processInfo.environment
+        return environment["ONLYBODY_DESIGN_REVIEW"] == "1"
+            && environment["ONLYBODY_UI_STORE"].flatMap(UUID.init(uuidString:)) != nil
+            && environment["ONLYBODY_REDUCED_MATERIALS"] == "1"
+        #else
+        return false
+        #endif
+    }
+
+    static let typeBody: CGFloat = 17
     static let typeMeta: CGFloat = 15
     static let typeCard: CGFloat = 20
-    static let typeHeading: CGFloat = 32
+    static let typeHeading: CGFloat = 34
     static let typeExercise: CGFloat = 28
     static let typeNumber: CGFloat = 40
     static let typeTimer: CGFloat = 80
+    static let bottomNavigationHeight: CGFloat = 64
+    static let glassTint = Color.white.opacity(0.04)
     static let touchSize: CGFloat = 44
     static let stepSize: CGFloat = 48
-    static let buttonHeight: CGFloat = 56
+    static let buttonHeight: CGFloat = 52
     static let completeHeight: CGFloat = 64
-    static let buttonRadius: CGFloat = 12
+    static let buttonRadius: CGFloat = 14
     static let cardInset: CGFloat = 16
     static let sectionGap: CGFloat = 24
     static let timingPickerHeight: CGFloat = 340
@@ -49,19 +63,19 @@ enum Theme {
     static let accent = Color(red: 232 / 255, green: 162 / 255, blue: 58 / 255)
     static let accentDim = Color(red: 232 / 255, green: 162 / 255, blue: 58 / 255, opacity: 0.13)
     static let accentDark = Color(red: 12 / 255, green: 12 / 255, blue: 11 / 255)
-    static let bg = Color(red: 16 / 255, green: 17 / 255, blue: 15 / 255)
-    static let surface = Color(red: 27 / 255, green: 29 / 255, blue: 25 / 255)
-    static let surface2 = Color(red: 36 / 255, green: 39 / 255, blue: 32 / 255)
-    static let border = Color(red: 255 / 255, green: 250 / 255, blue: 230 / 255, opacity: 0.07)
-    static let border2 = Color(red: 255 / 255, green: 250 / 255, blue: 230 / 255, opacity: 0.13)
-    static let text = Color(red: 245 / 255, green: 240 / 255, blue: 232 / 255)
-    static let text2 = Color(red: 185 / 255, green: 182 / 255, blue: 174 / 255)
-    static let text3 = Color(red: 150 / 255, green: 147 / 255, blue: 139 / 255)
-    static let iconDim = Color(red: 150 / 255, green: 147 / 255, blue: 139 / 255)
-    static let danger = Color(red: 255 / 255, green: 150 / 255, blue: 137 / 255)
+    static let bg = Color(red: 11 / 255, green: 11 / 255, blue: 13 / 255)
+    static let surface = Color(red: 28 / 255, green: 28 / 255, blue: 30 / 255)
+    static let surface2 = Color(red: 44 / 255, green: 44 / 255, blue: 46 / 255)
+    static let border = Color.white.opacity(0.08)
+    static let border2 = Color(red: 119 / 255, green: 119 / 255, blue: 128 / 255)
+    static let text = Color(red: 245 / 255, green: 245 / 255, blue: 247 / 255)
+    static let text2 = Color(red: 195 / 255, green: 195 / 255, blue: 202 / 255)
+    static let text3 = Color(red: 164 / 255, green: 164 / 255, blue: 173 / 255)
+    static let iconDim = Color(red: 164 / 255, green: 164 / 255, blue: 173 / 255)
+    static let danger = Color(red: 255 / 255, green: 156 / 255, blue: 148 / 255)
 
     static let horizontalPadding: CGFloat = 20
-    static let cornerRadius: CGFloat = 16
+    static let cornerRadius: CGFloat = 24
     static let chipCornerRadius: CGFloat = 12
     static let typographyScale: CGFloat = 1
     static let demonstrationMinimumWidth: CGFloat = 200
@@ -72,11 +86,11 @@ enum Theme {
     static let muscleLegendMarkerSize: CGFloat = 8
 
     static func fontSans(_ size: CGFloat, _ weight: Font.Weight = .regular) -> Font {
-        .custom("DM Sans", size: size).weight(weight)
+        .system(size: size, weight: weight)
     }
 
     static func fontMono(_ size: CGFloat, _ weight: Font.Weight = .regular) -> Font {
-        .custom("DM Mono", size: size).weight(weight)
+        .system(size: size, weight: weight).monospacedDigit()
     }
 
     // Fixed metrics shared by screen components.

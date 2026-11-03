@@ -3,7 +3,7 @@ import XCTest
 /// Exercises the shipping UI and repositories against a private, seeded file store.
 @MainActor
 final class WorkoutJourneyTests: XCTestCase {
-    private var app: XCUIApplication!
+    private(set) var app: XCUIApplication!
 
     override func setUp() async throws {
         await MainActor.run {
@@ -77,6 +77,7 @@ final class WorkoutJourneyTests: XCTestCase {
         verifyEditorReordering()
         tap("builder.save")
         tap("workout.start.E2E Workout")
+        tap("active.exercise.0.menu")
         tap("active.exercise.0.replace")
         let replacementSearch = app.textFields["exercisePicker.search"]
         XCTAssertTrue(replacementSearch.waitForExistence(timeout: 10))
@@ -84,16 +85,21 @@ final class WorkoutJourneyTests: XCTestCase {
         replacementSearch.typeText(JourneyProduct.libraryExercise)
         tap("exercise.pick.\(JourneyProduct.libraryExercise)")
         verifySessionDragReordering()
+        tap("active.exercise.0.menu")
         tap("active.exercise.0.down")
         XCTAssertTrue(app.buttons["active.exercise.1"].label.contains(JourneyProduct.libraryExercise))
+        tap("active.exercise.1.menu")
         tap("active.exercise.1.up")
         XCTAssertTrue(app.buttons["active.exercise.0"].label.contains(JourneyProduct.libraryExercise))
+        tap("active.exercise.0.menu")
         tap("active.exercise.0.down")
         XCTAssertTrue(app.buttons["active.exercise.1"].label.contains(JourneyProduct.libraryExercise))
         tap("active.start")
         tap("active.set.0.done")
         tap("active.list")
+        tap("active.exercise.0.menu")
         XCTAssertFalse(app.buttons["active.exercise.0.replace"].isEnabled)
+        tap("active.exercise.0.close")
         tap("active.exercise.0")
         setValue("125", field: "reps", index: 0)
         tap("active.list")
@@ -223,6 +229,10 @@ final class WorkoutJourneyTests: XCTestCase {
         verifyTabSwipesAndDraftProtection()
         tap("tab.library")
         tap("catalog.filters")
+        tap("filter.Chest")
+        tap("filters.close")
+        XCTAssertEqual(app.buttons["catalog.filters"].value as? String, "0")
+        tap("catalog.filters")
         tap("equipment.\(JourneyProduct.libraryEquipment)")
         tap("filters.done")
         XCTAssertFalse(app.descendants(matching: .any)["difficulty.intermediate"].exists)
@@ -255,7 +265,7 @@ final class WorkoutJourneyTests: XCTestCase {
             add(viewport)
             XCTAssertFalse(app.buttons["demonstration.load"].exists)
             XCTAssertTrue(app.staticTexts["demonstration.author"].exists)
-            XCTAssertTrue(app.buttons["demonstration.openYouTube"].exists)
+            XCTAssertFalse(app.buttons["demonstration.openYouTube"].exists)
             XCTAssertGreaterThan(app.webViews.count, 0, "The player uses local HTML and must not contact YouTube")
             let play = app.buttons["Play demonstration"].firstMatch
             XCTAssertTrue(play.waitForExistence(timeout: 10))
@@ -566,6 +576,11 @@ final class WorkoutJourneyTests: XCTestCase {
         search.typeText(JourneyProduct.exercise)
         dismissKeyboardOutside(search)
         XCTAssertEqual(search.value as? String, JourneyProduct.exercise)
+        tap("exercise.guide.\(JourneyProduct.exercise)")
+        XCTAssertTrue(app.buttons["movement.back"].waitForExistence(timeout: 10))
+        XCTAssertFalse(app.buttons["demonstration.openYouTube"].exists)
+        tap("movement.back")
+        XCTAssertEqual(search.value as? String, JourneyProduct.exercise)
         let exercise = app.buttons["exercise.pick.\(JourneyProduct.exercise)"]
         // Fixture uses the catalog's exact display name.
         XCTAssertTrue(exercise.waitForExistence(timeout: 10))
@@ -582,44 +597,6 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertTrue(total.waitForExistence(timeout: 10), app.debugDescription)
         XCTAssertEqual(total.label, "Total reps: \(reps)")
         XCTAssertEqual(app.staticTexts["session.set.0.0"].label, "Set 1 · Reps: \(firstSetReps ?? reps)")
-    }
-
-    private func verifyEditorReordering() {
-        let rows = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "builder.movement."))
-        let first = rows.element(boundBy: 0)
-        let second = rows.element(boundBy: 1)
-        let firstID = first.identifier
-        let secondID = second.identifier
-        let down = firstID.replacing("builder.movement.", with: "builder.order.") + ".down"
-        let up = firstID.replacing("builder.movement.", with: "builder.order.") + ".up"
-        tap(down)
-        XCTAssertGreaterThan(app.buttons[firstID].frame.midY, app.buttons[secondID].frame.midY)
-        tap(up)
-        XCTAssertLessThan(app.buttons[firstID].frame.midY, app.buttons[secondID].frame.midY)
-        let firstHandle = firstID.replacing("builder.movement.", with: "builder.drag.")
-        let secondHandle = secondID.replacing("builder.movement.", with: "builder.drag.")
-        dragExercise(firstHandle, to: secondHandle, extraDistance: 30)
-        XCTAssertGreaterThan(app.buttons[firstID].frame.midY, app.buttons[secondID].frame.midY)
-        dragExercise(firstHandle, to: secondHandle, extraDistance: -30)
-        XCTAssertLessThan(app.buttons[firstID].frame.midY, app.buttons[secondID].frame.midY)
-    }
-
-    private func verifySessionDragReordering() {
-        dragExercise("active.exercise.0.drag", to: "active.exercise.1.drag", extraDistance: 30)
-        XCTAssertTrue(app.buttons["active.exercise.1"].label.contains(JourneyProduct.libraryExercise))
-        dragExercise("active.exercise.1.drag", to: "active.exercise.0.drag", extraDistance: -30)
-        XCTAssertTrue(app.buttons["active.exercise.0"].label.contains(JourneyProduct.libraryExercise))
-    }
-
-    private func dragExercise(_ sourceID: String, to targetID: String, extraDistance: CGFloat) {
-        let source = app.descendants(matching: .any).matching(identifier: sourceID).firstMatch
-        let target = app.descendants(matching: .any).matching(identifier: targetID).firstMatch
-        XCTAssertTrue(source.waitForExistence(timeout: 5))
-        XCTAssertTrue(target.waitForExistence(timeout: 5))
-        let destination = target.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
-            .withOffset(CGVector(dx: 0, dy: extraDistance))
-        source.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
-            .press(forDuration: 0.7, thenDragTo: destination, withVelocity: XCUIGestureVelocity(rawValue: 120), thenHoldForDuration: 1)
     }
 
     private func verifyLibraryOutsideDismissal() {
@@ -694,7 +671,7 @@ final class WorkoutJourneyTests: XCTestCase {
         }
     }
 
-    private func tap(_ identifier: String) {
+    func tap(_ identifier: String) {
         if identifier == "active.end", !app.buttons[identifier].exists { tap("active.list") }
         let alertButton = app.alerts.buttons[identifier]
         if alertButton.exists { alertButton.tap(); return }

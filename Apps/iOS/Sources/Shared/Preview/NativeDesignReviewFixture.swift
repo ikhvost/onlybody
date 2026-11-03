@@ -75,14 +75,15 @@ struct NativeDesignReviewFixture {
         case 1: TrainView(viewModel: emptyTrain, showSettings: {}, showMusclePicker: {}, showSessionBuilder: { _ in }, onStartWorkout: { _ in })
         case 2: WorkoutCreationView(onManual: {}, onSmart: {})
         case 3: MusclePickerView(viewModel: MusclePickerViewModel(), onBuild: { _ in }, onSkip: {})
-        default: SessionBuilderView(viewModel: builder)
+        default: SessionBuilderView(viewModel: builder, makeMovement: { MovementDetailViewModel(exercise: $0, allowsVideoLoading: false) })
         }
     }
 
     @ViewBuilder private func activeScreen(_ index: Int) -> some View {
         switch index {
         case 5: BuilderMovementEditor(viewModel: builder, movementID: builder.movements.first?.id ?? UUID())
-        case 6: ExercisePickerView(viewModel: ExercisePickerViewModel(exercises: [exercise]), onAdd: { _ in })
+        case 6: ExercisePickerView(viewModel: ExercisePickerViewModel(exercises: [exercise]),
+                                   makeMovement: { MovementDetailViewModel(exercise: $0, allowsVideoLoading: false) }, onAdd: { _ in })
         case 7: ActiveWorkoutContentView(viewModel: active, onGuide: {}, onHistory: {})
         case 8: ActiveWorkoutContentView(viewModel: active, onGuide: {}, onHistory: {})
                 .onAppear { active.restTimer.start(seconds: 35) }
@@ -103,10 +104,12 @@ struct NativeDesignReviewFixture {
 
     @ViewBuilder private func informationScreen(_ index: Int) -> some View {
         switch index {
-        case 15: MovementDetailView(viewModel: MovementDetailViewModel(exercise: exercise, allowsVideoLoading: false))
+        case 15: MovementDetailView(viewModel: MovementDetailViewModel(exercise: exercise,
+                demonstration: ExerciseDemonstrationCatalog.demonstration(for: exercise.name), allowsVideoLoading: false))
         case 16: SettingsView(viewModel: settings, onNotifications: {})
         case 17: NotificationsView(viewModel: notifications)
-        case 18: ActiveWorkoutSessionList(viewModel: active, onClose: {}, onEnd: {})
+        case 18: ActiveWorkoutSessionList(viewModel: active,
+                                          makeMovement: { MovementDetailViewModel(exercise: $0, allowsVideoLoading: false) }, onClose: {}, onEnd: {})
         default: ExerciseFilterSheet(muscle: .constant("Chest"), equipment: .constant("None"), equipmentOptions: ["None", "Dumbbells"])
         }
     }

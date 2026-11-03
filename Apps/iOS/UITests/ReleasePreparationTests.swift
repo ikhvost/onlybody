@@ -28,6 +28,7 @@ final class ReleasePreparationTests: XCTestCase {
         app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", locale]
         app.launchEnvironment["ONLYBODY_UI_FIXTURE"] = "catalog"
         app.launchEnvironment["ONLYBODY_UI_STORE"] = UUID().uuidString
+        app.launchEnvironment["ONLYBODY_DEMONSTRATION_FIXTURE"] = "ready"
         app.launchEnvironment["ONLYBODY_NOTIFICATION_FIXTURE"] = "authorized"
         XCUIDevice.shared.orientation = .portrait
         app.launch()
@@ -95,12 +96,9 @@ final class ReleasePreparationTests: XCTestCase {
         search.typeText(JourneyProduct.libraryExercise)
         tap("library.exercise.\(JourneyProduct.libraryExercise)", in: app)
         XCTAssertTrue(app.descendants(matching: .any)["movement.muscleDiagram"].waitForExistence(timeout: 10))
-        XCTAssertEqual(app.webViews.count, 0, "Fresh installs must not load YouTube before permission")
         capture("06-exercise-guide", app: app)
-        let permission = app.buttons["demonstration.openYouTube"]
-        for _ in 0..<5 where !permission.isHittable { app.swipeUp() }
-        XCTAssertTrue(permission.isHittable)
-        capture("qa-youtube-permission", app: app)
+        XCTAssertFalse(app.buttons["demonstration.openYouTube"].exists)
+
         if UIDevice.current.userInterfaceIdiom == .pad {
             XCUIDevice.shared.orientation = .landscapeLeft
             waitForLandscape(in: app)
@@ -110,7 +108,7 @@ final class ReleasePreparationTests: XCTestCase {
         tap("movement.back", in: app)
         tap("tab.train", in: app)
         tap("train.settings", in: app)
-        XCTAssertTrue(app.descendants(matching: .any)["settings.youtubeConsent"].waitForExistence(timeout: 10))
+        XCTAssertFalse(app.descendants(matching: .any)["settings.youtubeConsent"].exists)
         capture("qa-settings", app: app)
     }
 

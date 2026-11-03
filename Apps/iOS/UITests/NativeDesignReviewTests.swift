@@ -6,28 +6,39 @@ final class NativeDesignReviewTests: XCTestCase {
     func testNativeScreenMatrix() {
         continueAfterFailure = false
         for (language, locale) in [("uk", "uk_UA"), ("en", "en_US"), ("pl", "pl_PL"), ("de", "de_DE"), ("fr", "fr_FR")] {
-            let app = XCUIApplication()
-            app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", locale]
-            app.launchEnvironment["ONLYBODY_DESIGN_REVIEW"] = "1"
-            app.launchEnvironment["ONLYBODY_UI_STORE"] = UUID().uuidString
-            app.launch()
-            for index in 0..<20 {
-                let counter = app.staticTexts["designReview.index"]
-                if !counter.exists || counter.label != String(index) {
-                    let expected = NSPredicate(format: "label == %@", String(index))
-                    expectation(for: expected, evaluatedWith: counter)
-                    waitForExpectations(timeout: 10)
-                }
-                autoreleasepool {
-                    let screenshot = XCTAttachment(screenshot: app.screenshot())
-                    screenshot.name = "v003-\(JourneyProduct.name)-\(Int(app.frame.width))-\(language)-\(index)"
-                    screenshot.lifetime = .keepAlways
-                    add(screenshot)
-                }
-                advance(app, from: index)
-            }
-            app.terminate()
+            capture(language: language, locale: locale)
         }
+    }
+
+    func testReducedMaterials() {
+        continueAfterFailure = false
+        capture(language: "en", locale: "en_US", reduced: true)
+    }
+
+    private func capture(language: String, locale: String, reduced: Bool = false) {
+        let app = XCUIApplication()
+        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", locale]
+        app.launchEnvironment["ONLYBODY_DESIGN_REVIEW"] = "1"
+        app.launchEnvironment["ONLYBODY_UI_STORE"] = UUID().uuidString
+        app.launchEnvironment["ONLYBODY_REDUCED_MATERIALS"] = reduced ? "1" : "0"
+        app.launch()
+        for index in 0..<20 {
+            let counter = app.staticTexts["designReview.index"]
+            if !counter.exists || counter.label != String(index) {
+                let expected = NSPredicate(format: "label == %@", String(index))
+                expectation(for: expected, evaluatedWith: counter)
+                waitForExpectations(timeout: 10)
+            }
+            autoreleasepool {
+                let screenshot = XCTAttachment(screenshot: app.screenshot())
+                let mode = reduced ? "solid" : "glass"
+                screenshot.name = "v006-\(JourneyProduct.name)-\(Int(app.frame.width))-\(language)-\(mode)-\(index)"
+                screenshot.lifetime = .keepAlways
+                add(screenshot)
+            }
+            advance(app, from: index)
+        }
+        app.terminate()
     }
     private func advance(_ app: XCUIApplication, from index: Int) {
         let counter = app.staticTexts["designReview.index"]

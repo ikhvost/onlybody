@@ -9,6 +9,19 @@ import Testing
 @MainActor
 struct SessionBuilderViewModelTests {
 
+    @Test func cancellingMovementEditsRestoresValuesAndClearsInvalidInput() throws {
+        let model = SessionBuilderViewModel(workouts: MockWorkoutRepository(), exercises: MockExerciseRepository())
+        model.addMovement(ExerciseSnapshot(name: "Push-Ups"))
+        let original = try #require(model.movements.first)
+        model.enterNumber("8", field: "Sets", id: original.id)
+        model.enterNumber("", field: "Reps", id: original.id)
+        #expect(model.hasInvalidNumbers)
+        model.restoreMovement(original)
+        #expect(model.movements.first?.sets == original.sets)
+        #expect(model.numberText("Reps", movement: original) == String(original.reps))
+        #expect(!model.hasInvalidNumbers)
+    }
+
     // MARK: - Add Movement
 
     @Test

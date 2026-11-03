@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>YouTube may link device and viewing data with activity from other apps and websites to measure advertising. Your workouts stay on this device.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>ITSAppUsesNonExemptEncryption</key>

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SessionBuilderView: View {
     @State var viewModel: SessionBuilderViewModel
+    let makeMovement: (ExerciseSnapshot) -> MovementDetailViewModel
 
     var onSaved: (() -> Void)?
     var onDeleted: (() -> Void)?
@@ -28,7 +29,7 @@ struct SessionBuilderView: View {
                             .frame(width: Theme.touchSize, height: Theme.touchSize)
                             .contentShape(.rect)
                     }
-                    .buttonStyle(PressableButtonStyle(animates: false))
+                    .buttonStyle(NavigationControlStyle())
                     .accessibilityLabel(String(localized: .uiBack))
                     .accessibilityIdentifier("builder.back")
                     .disabled(viewModel.isSaving)
@@ -45,7 +46,8 @@ struct SessionBuilderView: View {
                                 .foregroundStyle(Theme.accent)
                         }
                         BuilderSmartInfo(viewModel: viewModel)
-                        BuilderMovements(viewModel: viewModel, isShowingExercisePicker: $isShowingExercisePicker, dragLocation: $dragLocation)
+                        BuilderMovements(viewModel: viewModel, makeMovement: makeMovement,
+                                         isShowingExercisePicker: $isShowingExercisePicker, dragLocation: $dragLocation)
                         DisclosureGroup {
                             BuilderDays(viewModel: viewModel)
                         } label: {
@@ -84,7 +86,7 @@ struct SessionBuilderView: View {
         }
         .sheet(isPresented: $isShowingExercisePicker) {
             ExercisePickerView(
-                viewModel: ExercisePickerViewModel(exercises: viewModel.allExercises)
+                viewModel: ExercisePickerViewModel(exercises: viewModel.allExercises), makeMovement: makeMovement
             ) { exercise in
                 viewModel.addMovement(exercise)
             }
@@ -175,7 +177,7 @@ struct SessionBuilderView: View {
         targetMuscleGroups: []
     )
 
-    return SessionBuilderView(viewModel: viewModel)
+    return SessionBuilderView(viewModel: viewModel, makeMovement: { MovementDetailViewModel(exercise: $0, allowsVideoLoading: false) })
         .preferredColorScheme(.dark)
 }
 #endif

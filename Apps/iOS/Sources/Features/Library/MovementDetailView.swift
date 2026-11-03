@@ -14,16 +14,11 @@ struct MovementDetailView: View {
                     Button {
                         dismiss()
                     } label: {
-                        HStack(spacing: Theme.space4) {
-                            ChevronIcon(isBack: true, color: Theme.accent, size: Theme.type16, inset: 8)
-                                .frame(width: Theme.touchSize, height: Theme.touchSize)
-                                .contentShape(.rect)
-                            Text(.uiBack)
-                                .font(Theme.fontSans(Theme.type15, .semibold))
-                                .foregroundStyle(Theme.accent)
-                        }
+                        ChevronIcon(isBack: true, color: Theme.text, size: Theme.type20)
+                            .frame(width: Theme.touchSize, height: Theme.touchSize)
+                            .contentShape(.rect)
                     }
-                    .buttonStyle(PressableButtonStyle(animates: false))
+                    .buttonStyle(NavigationControlStyle())
                     .accessibilityLabel(backLabel)
                     .accessibilityIdentifier("movement.back")
                 }
@@ -32,11 +27,13 @@ struct MovementDetailView: View {
                     VStack(alignment: .leading, spacing: Theme.space16) {
                         VStack(alignment: .leading, spacing: Theme.space4) {
                             Text(viewModel.exercise.displayName)
-                                .font(Theme.fontSans(Theme.type28, .heavy))
+                                .font(Theme.fontSans(Theme.typeHeading, .bold))
                                 .tracking(-0.8)
                                 .foregroundStyle(Theme.text)
 
                         }
+
+                        MovementDemonstrationView(viewModel: viewModel)
 
                         Rectangle()
                             .fill(Theme.border)
@@ -86,12 +83,6 @@ struct MovementDetailView: View {
 
                             MovementMuscleDiagramView(viewModel: viewModel)
                         }
-
-                        Rectangle()
-                            .fill(Theme.border)
-                            .frame(height: 1)
-
-                        MovementDemonstrationView(viewModel: viewModel)
 
                     }
                     .padding(.horizontal, Theme.horizontalPadding)

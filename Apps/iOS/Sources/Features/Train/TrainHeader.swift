@@ -9,7 +9,7 @@ struct TrainHeader: View {
     var body: some View {
         HStack(alignment: .bottom, spacing: Theme.space8) {
             VStack(alignment: .leading, spacing: Theme.space3) {
-                MonoLabel(text: appName + " · " + dateDisplay, size: Theme.typeMeta, color: Theme.text3, tracking: 1.2)
+                MonoLabel(text: appName, size: Theme.typeMeta, color: Theme.text3, tracking: 1.2)
                 Text(.uiDesignTrain)
                     .font(Theme.fontSans(Theme.typeHeading, .heavy))
                     .tracking(-1)
@@ -25,20 +25,15 @@ struct TrainHeader: View {
             }
             .accessibilityLabel(String(localized: .uiSettings))
             .accessibilityIdentifier("train.settings")
-            .buttonStyle(PressableButtonStyle())
+            .buttonStyle(NavigationControlStyle())
 
             Button {
                 onCreateTap()
             } label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: Theme.cornerRadius)
-                        .fill(Theme.accent)
-                        .frame(width: Theme.headerActionSize, height: Theme.headerActionSize)
-
-                    PlusIcon(color: Theme.accentDark, size: Theme.type15)
-                }
+                PlusIcon(color: Theme.accentDark, size: Theme.type20)
                 .frame(width: Theme.space44, height: Theme.space44)
-                .contentShape(.rect)
+                .background(Theme.accent, in: .circle)
+                .contentShape(.circle)
             }
             .accessibilityLabel(String(localized: .uiCreateWorkout))
             .accessibilityIdentifier("workout.create")

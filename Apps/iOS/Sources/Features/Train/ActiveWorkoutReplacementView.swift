@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ActiveWorkoutReplacementView: View {
     let viewModel: ActiveWorkoutViewModel
+    let makeMovement: (ExerciseSnapshot) -> MovementDetailViewModel
     let itemID: UUID
     @State private var isReady = false
     @Environment(\.dismiss) private var dismiss
@@ -15,7 +16,7 @@ struct ActiveWorkoutReplacementView: View {
                 GhostButton(title: String(localized: .uiRetry)) { Task { await viewModel.loadReplacementExercises() } }
                 GhostButton(title: String(localized: .uiCancel)) { dismiss() }
             } else {
-                ExercisePickerView(viewModel: ExercisePickerViewModel(exercises: viewModel.allExercises),
+                ExercisePickerView(viewModel: ExercisePickerViewModel(exercises: viewModel.allExercises), makeMovement: makeMovement,
                                    title: String(localized: .uiWorkoutReplace)) { exercise in
                     viewModel.replaceExercise(itemID, with: exercise)
                 }

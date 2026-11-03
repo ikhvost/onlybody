@@ -21,7 +21,7 @@ struct MusclePickerView: View {
                             .frame(width: Theme.touchSize, height: Theme.touchSize)
                             .contentShape(.rect)
                     }
-                    .buttonStyle(PressableButtonStyle(animates: false))
+                    .buttonStyle(NavigationControlStyle())
                     .accessibilityLabel(String(localized: .uiBack))
                     .accessibilityIdentifier("picker.back")
                 }

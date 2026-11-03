@@ -15,16 +15,20 @@ struct CompactRestTimerView: View {
                 Spacer(minLength: Theme.space0)
                 Button("+" + String(localized: .uiSecondsCount(15))) { viewModel.extendRest() }
                     .frame(minWidth: Theme.touchSize, minHeight: Theme.touchSize)
+                    .padding(.horizontal, Theme.space12).background(Theme.glassTint, in: .capsule)
                     .accessibilityIdentifier("rest.add")
                 Button(String(localized: .uiSkipRest)) { viewModel.skipRest() }
                     .frame(minWidth: Theme.touchSize, minHeight: Theme.touchSize)
+                    .padding(.horizontal, Theme.space12).background(Theme.glassTint, in: .capsule)
                     .accessibilityIdentifier("rest.skip")
             }
             .font(Theme.fontSans(Theme.typeMeta))
             .buttonStyle(.plain)
             .frame(minHeight: Theme.completeHeight)
             .padding(.horizontal, Theme.horizontalPadding)
-            .background(Theme.surface2)
+            .modifier(GlassSurface(shape: RoundedRectangle(cornerRadius: Theme.cornerRadius)))
+            .padding(.horizontal, Theme.horizontalPadding)
+            .padding(.vertical, Theme.space8)
         }
     }
 }

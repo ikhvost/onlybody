@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ActiveWorkoutView: View {
     @State var viewModel: ActiveWorkoutViewModel
+    let makeMovement: (ExerciseSnapshot) -> MovementDetailViewModel
     let onEnd: () -> Void
     let onGuide: (ExerciseSnapshot) -> Void
     let onHistory: (String) -> Void
@@ -30,7 +31,7 @@ struct ActiveWorkoutView: View {
                 )
             } else if !viewModel.items.isEmpty {
                 if viewModel.showsExerciseList {
-                    ActiveWorkoutSessionList(viewModel: viewModel, onClose: onEnd, onEnd: { showEndPrompt = true })
+                    ActiveWorkoutSessionList(viewModel: viewModel, makeMovement: makeMovement, onClose: onEnd, onEnd: { showEndPrompt = true })
                 } else {
                     ActiveWorkoutContentView(
                         viewModel: viewModel,
@@ -88,6 +89,7 @@ struct ActiveWorkoutView: View {
             sessions: PreviewSessionRepository(),
             workoutId: workout.id
         ),
+        makeMovement: { MovementDetailViewModel(exercise: $0, allowsVideoLoading: false) },
         onEnd: {},
         onGuide: { _ in },
         onHistory: { _ in }

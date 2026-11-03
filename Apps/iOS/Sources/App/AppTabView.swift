@@ -42,6 +42,8 @@ struct AppTabView: View {
                 onDrag: updateDrag,
                 onEnd: finishDrag
             ).allowsHitTesting(false))
+        }
+        .safeAreaInset(edge: .bottom, spacing: Theme.space0) {
             if showsBottomNav {
                 BottomNav(selectedTab: selectedTab, setTab: settle(on:))
             }

@@ -1,6 +1,6 @@
 import XCTest
 
-/// Focused language selection, translated search and consent UI checks in isolated app stores.
+/// Focused language selection, translated search and settings UI checks in isolated app stores.
 @MainActor
 final class LocalizationSmokeTests: XCTestCase {
     func testSupportedLanguages() {
@@ -17,6 +17,7 @@ final class LocalizationSmokeTests: XCTestCase {
             app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", locale]
             app.launchEnvironment["ONLYBODY_UI_FIXTURE"] = "catalog"
             app.launchEnvironment["ONLYBODY_UI_STORE"] = UUID().uuidString
+            app.launchEnvironment["ONLYBODY_DEMONSTRATION_FIXTURE"] = "ready"
             app.launchEnvironment["ONLYBODY_NOTIFICATION_FIXTURE"] = "authorized"
             app.launch()
             defer {
@@ -52,7 +53,7 @@ final class LocalizationSmokeTests: XCTestCase {
             tap("movement.back", in: app)
             tap("tab.train", in: app)
             tap("train.settings", in: app)
-            XCTAssertTrue(app.descendants(matching: .any)["settings.youtubeConsent"].waitForExistence(timeout: 10))
+            XCTAssertFalse(app.descendants(matching: .any)["settings.youtubeConsent"].exists)
         }
     }
 

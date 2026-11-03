@@ -22,6 +22,7 @@ final class StoreScreenshotTests: XCTestCase {
         app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", locale]
         app.launchEnvironment["ONLYBODY_UI_FIXTURE"] = "catalog"
         app.launchEnvironment["ONLYBODY_UI_STORE"] = UUID().uuidString
+        app.launchEnvironment["ONLYBODY_DEMONSTRATION_FIXTURE"] = "ready"
         app.launchEnvironment["ONLYBODY_NOTIFICATION_FIXTURE"] = "authorized"
         app.launchEnvironment["ONLYBODY_SCREENSHOT_FIXTURE"] = "populated"
         app.launchEnvironment["ONLYBODY_SCREENSHOT_LANGUAGE"] = language
@@ -61,9 +62,7 @@ final class StoreScreenshotTests: XCTestCase {
         search.tap()
         search.typeText(JourneyProduct.libraryExercise)
         tap("library.exercise.\(JourneyProduct.libraryExercise)", in: app)
-        let permission = app.buttons["demonstration.openYouTube"]
-        XCTAssertTrue(permission.waitForExistence(timeout: 10))
-        capture("qa-youtube-permission", language: language)
+        XCTAssertFalse(app.buttons["demonstration.openYouTube"].exists)
         XCTAssertEqual(app.webViews.count, 0, "Screenshots must not enable third-party connections")
         let diagram = app.descendants(matching: .any)["movement.muscleDiagram"]
         XCTAssertTrue(diagram.waitForExistence(timeout: 10))

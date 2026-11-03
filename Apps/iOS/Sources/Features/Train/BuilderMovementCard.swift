@@ -2,6 +2,7 @@ import SwiftUI
 
 struct BuilderMovementCard: View {
     let viewModel: SessionBuilderViewModel
+    let makeMovement: (ExerciseSnapshot) -> MovementDetailViewModel
     let movement: MovementConfig
     let reorderHandle: ExerciseReorderHandle
     @State private var showingEditor = false
@@ -13,19 +14,19 @@ struct BuilderMovementCard: View {
                 reorderHandle.accessibilityIdentifier("builder.drag.\(movement.id)")
                 Button { showingEditor = true } label: {
                     VStack(alignment: .leading, spacing: Theme.space8) {
-                        Text(movement.exercise.displayName).font(Theme.fontSans(Theme.typeCard, .bold)).foregroundStyle(Theme.text)
+                        Text(movement.exercise.displayName).font(Theme.fontSans(Theme.typeBody, .semibold)).foregroundStyle(Theme.text)
                         Text(String(localized: .uiMovementSummary(movement.sets, movement.reps, movement.restSeconds)))
-                            .font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.text2)
+                            .font(Theme.fontSans(Theme.type13)).foregroundStyle(Theme.text2)
                     }.frame(maxWidth: .infinity, minHeight: Theme.touchSize, alignment: .leading)
                 }
                 .accessibilityIdentifier("builder.movement.\(movement.id)")
-            }
-            if let index = viewModel.movements.firstIndex(where: { $0.id == movement.id }) {
-                ExerciseOrderActions(canMoveUp: index > 0, canMoveDown: index + 1 < viewModel.movements.count,
-                                     identifierPrefix: "builder.order.\(movement.id)",
-                                     onUp: { viewModel.moveMovement(movement.id, to: viewModel.movements[index - 1].id) },
-                                     onDown: { viewModel.moveMovement(movement.id, to: viewModel.movements[index + 1].id) },
-                                     onReplace: { showingReplacement = true })
+                if let index = viewModel.movements.firstIndex(where: { $0.id == movement.id }) {
+                    ExerciseOrderActions(canMoveUp: index > 0, canMoveDown: index + 1 < viewModel.movements.count,
+                                         identifierPrefix: "builder.order.\(movement.id)", title: movement.exercise.displayName,
+                                         onUp: { viewModel.moveMovement(movement.id, to: viewModel.movements[index - 1].id) },
+                                         onDown: { viewModel.moveMovement(movement.id, to: viewModel.movements[index + 1].id) },
+                                         onReplace: { showingReplacement = true })
+                }
             }
         }
         .padding(Theme.cardInset).background(Theme.surface, in: .rect(cornerRadius: Theme.cornerRadius))
@@ -35,7 +36,7 @@ struct BuilderMovementCard: View {
                 .presentationDetents([.large]).presentationDragIndicator(.visible)
         }
         .sheet(isPresented: $showingReplacement) {
-            ExercisePickerView(viewModel: ExercisePickerViewModel(exercises: viewModel.allExercises),
+            ExercisePickerView(viewModel: ExercisePickerViewModel(exercises: viewModel.allExercises), makeMovement: makeMovement,
                                title: String(localized: .uiWorkoutReplace)) { exercise in
                 viewModel.replaceMovement(movement.id, with: exercise)
             }.presentationDetents([.large]).presentationDragIndicator(.hidden)

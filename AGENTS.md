@@ -98,10 +98,10 @@ Key constants:
 - `Theme.text`, `Theme.text2`, `Theme.text3`
 - `Theme.border`, `Theme.border2`
 - `Theme.danger`, `Theme.iconDim`
-- `Theme.fontSans(_ size: CGFloat, _ weight: Font.Weight)` — DM Sans
-- `Theme.fontMono(_ size: CGFloat, _ weight: Font.Weight)` — DM Mono
+- `Theme.fontSans(_ size: CGFloat, _ weight: Font.Weight)` — system font, fixed size
+- `Theme.fontMono(_ size: CGFloat, _ weight: Font.Weight)` — system font with monospaced digits, fixed size
 - `Theme.horizontalPadding` — 20
-- `Theme.cornerRadius` — 16
+- `Theme.cornerRadius` — 24
 - `Theme.chipCornerRadius` — 12
 
 ---

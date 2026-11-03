@@ -16,9 +16,11 @@ Complete [CHECKLIST.md](CHECKLIST.md) and save dated evidence first. Then edit `
 
 ## Player behavior
 
+As explicitly requested on 2026-11-03, the app-level video-consent screen, ATT request and YouTube settings section have been removed. This implementation decision does not establish that all consent/tracking obligations are resolved. The website was left unchanged at the user’s request; policy wording still needs to be reconciled before release. See the [local integration checklist](Reviews/2026-11-03/native-v006-integration.json).
+
 Opening Library details immediately prepares a fresh, nonpersistent WKWebView with YouTube's own Play button; there is no Load Video step. Playback requires the user's gesture in the standard player. A system network-path monitor replaces the player with a simple offline placeholder when connectivity is lost, and prepares it again without autoplay when connectivity returns. The embed preserves YouTube controls, branding and fullscreen. It uses a 240-point-high viewport, a minimum width of 200 points, inline playback and the lowercase bundle identifier as HTTPS base URL and origin. No custom content overlays the player.
 
-Backgrounding pauses and suspends media. Returning permits manual playback without issuing a play command. If the app becomes inactive while loading, the unfinished player is discarded and is prepared again on return. Leaving details destroys the player. Load and buffering deadlines are 20 seconds; failures replace the player with a message and Retry while retaining the author, external link and exercise details. A retry creates a new session; stale callbacks cannot alter it.
+Backgrounding pauses and suspends media. Returning permits manual playback without issuing a play command. If the app becomes inactive while loading, the unfinished player is discarded and is prepared again on return. Leaving details destroys the player. Load and buffering deadlines are 20 seconds; failures replace the player with a message and Retry while retaining the author and exercise details. The app has no separate Watch on YouTube button; links inside the official player remain intact. A retry creates a new session; stale callbacks cannot alter it.
 
 Previews use static states and disable network loading. Automated tests exercise state transitions, connectivity and the Library UI without YouTube access. UI tests explicitly inject a static ready preview through a Debug-only fixture gated by an isolated test-store UUID. Production always creates the real player.
 

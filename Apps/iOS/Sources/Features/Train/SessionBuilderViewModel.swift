@@ -136,6 +136,14 @@ final class SessionBuilderViewModel {
         numberErrors = numberErrors.filter { !$0.hasPrefix(id.uuidString) }
     }
 
+    /// Cancelling a movement sheet discards its numeric edits, including invalid input.
+    func restoreMovement(_ original: MovementConfig) {
+        guard let index = movements.firstIndex(where: { $0.id == original.id }) else { return }
+        movements[index] = original
+        numberInputs = numberInputs.filter { !$0.key.hasPrefix(original.id.uuidString) }
+        numberErrors = numberErrors.filter { !$0.hasPrefix(original.id.uuidString) }
+    }
+
     func moveMovement(_ id: UUID, to targetID: UUID) {
         guard !isSaving, !hasInvalidNumbers, let from = movements.firstIndex(where: { $0.id == id }),
               let to = movements.firstIndex(where: { $0.id == targetID }), from != to else { return }

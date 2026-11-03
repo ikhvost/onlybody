@@ -10,6 +10,7 @@ struct ActiveWorkoutRootView: View {
         NavigationStack(path: $path) {
             ActiveWorkoutView(
                 viewModel: viewModel,
+                makeMovement: composition.movement,
                 onEnd: onEnd,
                 onGuide: { path.append(.guide(exerciseID: $0.id)) },
                 onHistory: { path.append(.history(exerciseName: $0)) }

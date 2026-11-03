@@ -53,6 +53,7 @@ struct TrainRootView: View {
                 case .sessionBuilder(let id, let targets):
                     SessionBuilderView(
                         viewModel: composition.builder(workout: nil, targets: targets, workoutID: id),
+                        makeMovement: composition.movement,
                         onSaved: {
                             if path.contains(where: { if case .overview = $0 { return true }; return false }) {
                                 path.removeLast()

@@ -18,7 +18,7 @@ struct SettingsView: View {
                             .frame(width: Theme.space44, height: Theme.space44)
                             .contentShape(.rect)
                     }
-                    .buttonStyle(PressableButtonStyle(animates: false))
+                    .buttonStyle(NavigationControlStyle())
                     .accessibilityLabel(String(localized: .uiBackToTraining))
                     .accessibilityIdentifier("settings.back")
                 } trailing: {
@@ -35,10 +35,6 @@ struct SettingsView: View {
                             SettingsNotificationsLink(action: onNotifications)
                             Rectangle().fill(Theme.border).frame(height: Theme.dividerThickness)
                             SettingsWeightUnitPicker(viewModel: viewModel)
-                        }
-
-                        SettingsSection(title: "YouTube") {
-                            SettingsYouTubeConsentView(viewModel: viewModel)
                         }
 
                         SettingsSection(title: String(localized: .uiSupport)) {

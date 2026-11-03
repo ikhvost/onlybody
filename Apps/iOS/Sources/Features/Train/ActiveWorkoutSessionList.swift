@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ActiveWorkoutSessionList: View {
     let viewModel: ActiveWorkoutViewModel
+    let makeMovement: (ExerciseSnapshot) -> MovementDetailViewModel
     let onClose: () -> Void
     let onEnd: () -> Void
     @State private var dragLocation: CGPoint?
@@ -9,7 +10,7 @@ struct ActiveWorkoutSessionList: View {
 
     var body: some View {
         VStack(spacing: Theme.space0) {
-            NavBarView(title: String(localized: .uiWorkoutToday)) {
+            NavBarView {
                 if !viewModel.hasStarted {
                     Button(action: onClose) {
                         ChevronIcon(isBack: true).frame(width: Theme.touchSize, height: Theme.touchSize)
@@ -21,7 +22,7 @@ struct ActiveWorkoutSessionList: View {
                 }
                 .font(Theme.fontSans(Theme.typeMeta, .bold)).foregroundStyle(Theme.accentDark)
                 .padding(.horizontal, Theme.space12).frame(minHeight: Theme.touchSize)
-                .background(Theme.accent, in: .rect(cornerRadius: Theme.buttonRadius))
+                .background(Theme.accent, in: .capsule)
                 .disabled(viewModel.allSetsCompleted || viewModel.hasInvalidNumbers)
                 .accessibilityIdentifier(viewModel.hasStarted ? "active.resume" : "active.start")
             }
@@ -33,8 +34,9 @@ struct ActiveWorkoutSessionList: View {
             CompactRestTimerView(viewModel: viewModel)
             ScrollView {
                 VStack(alignment: .leading, spacing: Theme.space12) {
-                    Text(viewModel.workoutName).font(Theme.fontSans(Theme.typeExercise, .bold))
-                    Text(.uiWorkoutSessionOnly).font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.text2)
+                    Text(.uiWorkoutToday).font(Theme.fontSans(Theme.type13)).foregroundStyle(Theme.text2)
+                    Text(viewModel.workoutName).font(Theme.fontSans(Theme.typeHeading, .bold))
+                    Text(.uiWorkoutSessionOnly).font(Theme.fontSans(Theme.type13)).foregroundStyle(Theme.text2)
                     if viewModel.allSetsCompleted {
                         Text(.uiWorkoutReady).foregroundStyle(Theme.accent)
                             .padding(Theme.cardInset).background(Theme.accentDim, in: .rect(cornerRadius: Theme.cornerRadius))
@@ -59,7 +61,7 @@ struct ActiveWorkoutSessionList: View {
         }
         .background(BackActionSwipeBridge(isEnabled: !viewModel.hasStarted, onBack: onClose).allowsHitTesting(false))
         .sheet(item: $replacementItem) { item in
-            ActiveWorkoutReplacementView(viewModel: viewModel, itemID: item.id)
+            ActiveWorkoutReplacementView(viewModel: viewModel, makeMovement: makeMovement, itemID: item.id)
                 .presentationDetents([.large]).presentationDragIndicator(.hidden)
         }
     }

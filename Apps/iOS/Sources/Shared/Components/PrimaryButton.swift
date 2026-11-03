@@ -15,7 +15,7 @@ struct PrimaryButton: View {
                 .frame(minHeight: minimumHeight)
                 .padding(.horizontal, Theme.cardInset)
                 .background(disabled ? Theme.surface2 : Theme.accent)
-                .clipShape(.rect(cornerRadius: Theme.buttonRadius))
+                .clipShape(.capsule)
         }
         .disabled(disabled)
         .buttonStyle(PressableButtonStyle())

@@ -1366,356 +1366,6 @@
         }
       }
     },
-    "uiWatchExerciseVideos": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Watch exercise videos"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Відео вправ"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Filmy z ćwiczeniami"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Übungsvideos ansehen"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Voir les vidéos d’exercices"
-          }
-        }
-      }
-    },
-    "uiYoutubeGoogleUsesDeviceAndViewingDataAndCookiesFor": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "YouTube (Google) uses device and viewing data and cookies for playback, measurement and non-personalized ads."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "YouTube (Google) використовує дані пристрою й переглядів та cookies для відтворення, вимірювання й неперсоналізованої реклами."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "YouTube (Google) używa danych urządzenia i oglądania oraz plików cookie do odtwarzania, pomiarów i reklam niespersonalizowanych."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "YouTube (Google) verwendet Geräte- und Wiedergabedaten sowie Cookies für die Wiedergabe, Messungen und nicht personalisierte Werbung."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "YouTube (Google) utilise les données de l’appareil et de visionnage ainsi que des cookies pour la lecture, les mesures et les publicités non personnalisées."
-          }
-        }
-      }
-    },
-    "uiYouCanTurnVideosOffInSettings": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "You can turn videos off in Settings."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Відео можна вимкнути в налаштуваннях."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Filmy możesz wyłączyć w ustawieniach."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Du kannst Videos in den Einstellungen deaktivieren."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vous pouvez désactiver les vidéos dans les réglages."
-          }
-        }
-      }
-    },
-    "uiAllowYoutubeVideos": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Allow YouTube videos"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Дозволити відео YouTube"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zezwól na filmy YouTube"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "YouTube-Videos erlauben"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Autoriser les vidéos YouTube"
-          }
-        }
-      }
-    },
-    "uiYoutubeVideosAllowed": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "In-app video consent saved"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Згоду на вбудовані відео збережено"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zapisano zgodę na filmy w aplikacji"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Einwilligung für Videos in der App gespeichert"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Consentement aux vidéos intégrées enregistré"
-          }
-        }
-      }
-    },
-    "uiYoutubeVideosOff": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "YouTube videos off"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Відео YouTube вимкнені"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Filmy YouTube wyłączone"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "YouTube-Videos deaktiviert"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vidéos YouTube désactivées"
-          }
-        }
-      }
-    },
-    "uiWithdrawYoutubePermission": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Withdraw YouTube permission"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Відкликати дозвіл YouTube"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cofnij zgodę na YouTube"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "YouTube-Einwilligung widerrufen"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Retirer l’autorisation YouTube"
-          }
-        }
-      }
-    },
-    "uiYouCanAllowVideosAgainFromAnyExerciseWithA": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "You can allow videos again from any exercise with a demonstration."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Відео можна знову дозволити на сторінці вправи з демонстрацією."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Możesz ponownie zezwolić na filmy na stronie ćwiczenia z demonstracją."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Du kannst Videos bei jeder Übung mit einer Demonstration wieder erlauben."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vous pouvez à nouveau autoriser les vidéos depuis un exercice avec démonstration."
-          }
-        }
-      }
-    },
-    "uiGoogleProcessesTechnicalDataAndVideoActivityForPlaybackSecurity": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Google processes technical data and video activity for playback, security, analytics and advertising. The in-app player also requires system tracking permission. You can always open videos on YouTube instead."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Google обробляє технічні дані та активність перегляду для відтворення, безпеки, аналітики й реклами. Вбудований плеєр також потребує системного дозволу на відстеження. Натомість ви завжди можете відкрити відео на YouTube."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Google przetwarza dane techniczne i aktywność oglądania na potrzeby odtwarzania, bezpieczeństwa, analityki i reklam. Odtwarzacz w aplikacji wymaga również systemowej zgody na śledzenie. Zawsze możesz otworzyć film w YouTube."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Google verarbeitet technische Daten und Videoaktivitäten für Wiedergabe, Sicherheit, Analysen und Werbung. Der Player in der App benötigt auch die Systemberechtigung für Tracking. Du kannst Videos jederzeit stattdessen auf YouTube öffnen."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Google traite les données techniques et l’activité vidéo pour la lecture, la sécurité, les analyses et la publicité. Le lecteur intégré nécessite aussi l’autorisation système de suivi. Vous pouvez toujours ouvrir les vidéos sur YouTube."
-          }
-        }
-      }
-    },
-    "uiGooglePrivacyPolicyHttpsPoliciesGoogleComPrivacyYoutubeTerms": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "[Google Privacy Policy](https://policies.google.com/privacy) · [YouTube Terms](https://www.youtube.com/t/terms)"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "[Політика конфіденційності Google](https://policies.google.com/privacy) · [Умови YouTube](https://www.youtube.com/t/terms)"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "[Polityka prywatności Google](https://policies.google.com/privacy) · [Warunki YouTube](https://www.youtube.com/t/terms)"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "[Google-Datenschutzerklärung](https://policies.google.com/privacy) · [YouTube-Nutzungsbedingungen](https://www.youtube.com/t/terms)"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "[Confidentialité Google](https://policies.google.com/privacy) · [Conditions YouTube](https://www.youtube.com/t/terms)"
-          }
-        }
-      }
-    },
     "uiLoadingVideo": {
       "extractionState": "manual",
       "localizations": {
@@ -1967,31 +1617,31 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "This video is unavailable here. Try again or open it on YouTube."
+            "value": "This video is unavailable. Try again later."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Це відео тут недоступне. Спробуйте ще раз або відкрийте його на YouTube."
+            "value": "Це відео недоступне. Спробуйте пізніше."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ten film jest tutaj niedostępny. Spróbuj ponownie lub otwórz go w YouTube."
+            "value": "Ten film jest niedostępny. Spróbuj ponownie później."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dieses Video ist hier nicht verfügbar. Versuche es erneut oder öffne es auf YouTube."
+            "value": "Dieses Video ist nicht verfügbar. Versuche es später erneut."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cette vidéo est indisponible ici. Réessayez ou ouvrez-la sur YouTube."
+            "value": "Cette vidéo est indisponible. Réessayez plus tard."
           }
         }
       }
@@ -2002,31 +1652,31 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The video player could not start. Try again or open it on YouTube."
+            "value": "The video could not load. Try again."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Не вдалося запустити плеєр. Спробуйте ще раз або відкрийте відео на YouTube."
+            "value": "Не вдалося завантажити відео. Спробуйте ще раз."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nie udało się uruchomić odtwarzacza. Spróbuj ponownie lub otwórz film w YouTube."
+            "value": "Nie udało się wczytać filmu. Spróbuj ponownie."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Der Videoplayer konnte nicht gestartet werden. Versuche es erneut oder öffne das Video auf YouTube."
+            "value": "Das Video konnte nicht geladen werden. Versuche es erneut."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Impossible de démarrer le lecteur. Réessayez ou ouvrez la vidéo sur YouTube."
+            "value": "La vidéo n’a pas pu être chargée. Réessayez."
           }
         }
       }
@@ -13612,146 +13262,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vous avez un entraînement prévu aujourd’hui."
-          }
-        }
-      }
-    },
-    "uiWatchOnYoutube": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Watch on YouTube"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Дивитися на YouTube"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oglądaj w YouTube"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auf YouTube ansehen"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Voir sur YouTube"
-          }
-        }
-      }
-    },
-    "uiContinueToVideoPermission": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Continue"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Продовжити"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dalej"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Weiter"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Continuer"
-          }
-        }
-      }
-    },
-    "uiYoutubeTrackingExplanation": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "YouTube (Google) processes device and viewing data for playback, security, analytics and advertising, and may link it with activity from other apps and websites to measure ads. Continue to review the system permission, or watch on YouTube below without enabling the in-app player."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "YouTube (Google) обробляє дані пристрою та переглядів для відтворення, безпеки, аналітики й реклами та може пов’язувати їх з активністю в інших застосунках і на сайтах для вимірювання реклами. Продовжте, щоб переглянути системний запит дозволу, або дивіться на YouTube за кнопкою нижче без увімкнення вбудованого плеєра."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "YouTube (Google) przetwarza dane urządzenia i oglądania na potrzeby odtwarzania, bezpieczeństwa, analityki i reklam. Może łączyć je z aktywnością w innych aplikacjach i witrynach w celu pomiaru reklam. Przejdź dalej, aby zobaczyć systemowe pytanie o zgodę, lub obejrzyj film w YouTube poniżej bez włączania odtwarzacza w aplikacji."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "YouTube (Google) verarbeitet Geräte- und Wiedergabedaten für Wiedergabe, Sicherheit, Analysen und Werbung und kann sie zur Werbemessung mit Aktivitäten in anderen Apps und auf Websites verknüpfen. Fahre fort, um die Systemabfrage anzuzeigen, oder sieh das Video unten auf YouTube an, ohne den Player in der App zu aktivieren."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "YouTube (Google) traite les données de l’appareil et de visionnage pour la lecture, la sécurité, les analyses et la publicité, et peut les associer à l’activité dans d’autres apps et sites pour mesurer les publicités. Continuez pour consulter la demande système, ou regardez la vidéo sur YouTube ci-dessous sans activer le lecteur intégré."
-          }
-        }
-      }
-    },
-    "uiYoutubeExternalPlayback": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Watch this demonstration on YouTube using the button below. The in-app player is off. Your exercises and workouts remain available."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Дивіться цю демонстрацію на YouTube за кнопкою нижче. Вбудований плеєр вимкнений. Вправи та тренування залишаються доступними."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Obejrzyj demonstrację w YouTube za pomocą przycisku poniżej. Odtwarzacz w aplikacji jest wyłączony. Ćwiczenia i treningi pozostają dostępne."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sieh diese Übung über die Schaltfläche unten auf YouTube an. Der Player in der App ist deaktiviert. Übungen und Workouts bleiben verfügbar."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Regardez cette démonstration sur YouTube avec le bouton ci-dessous. Le lecteur intégré est désactivé. Vos exercices et séances restent disponibles."
           }
         }
       }

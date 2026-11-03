@@ -10,13 +10,7 @@ struct MovementDemonstrationView: View {
             MonoLabel(text: String(localized: .uiDemonstration), size: Theme.typeMeta, tracking: 0.8)
 
             if let demonstration = viewModel.demonstration {
-                if viewModel.needsVideoPermission {
-                    YouTubeConsentView(
-                        canRequestPermission: viewModel.canRequestVideoPermission,
-                        isRequestingPermission: viewModel.isRequestingVideoPermission,
-                        onAllow: { Task { await viewModel.enableYouTubePlayback() } }
-                    )
-                } else if viewModel.isPlayerActive,
+                if viewModel.isPlayerActive,
                           let sessionID = viewModel.playerSessionID, let document = viewModel.playerDocument {
                     YouTubePlayerView(
                         document: document,
@@ -41,14 +35,6 @@ struct MovementDemonstrationView: View {
                     DemonstrationPlaceholderView(state: viewModel.demonstrationState, onRetry: viewModel.loadDemonstration)
                 }
 
-                if let url = viewModel.externalVideoURL {
-                    Button(String(localized: .uiWatchOnYoutube)) { openURL(url) }
-                        .font(Theme.fontSans(Theme.typeMeta, .semibold))
-                        .foregroundStyle(Theme.accent)
-                        .frame(minHeight: Theme.space44)
-                        .accessibilityIdentifier("demonstration.openYouTube")
-                }
-
                 Text(String(localized: .uiVideoBy(demonstration.author)))
                     .font(Theme.fontSans(Theme.typeMeta))
                     .foregroundStyle(Theme.text2)
@@ -66,7 +52,6 @@ struct MovementDemonstrationView: View {
                 await viewModel.waitForPlayerTimeout(timeoutID)
             }
         }
-        .onChange(of: viewModel.consentRevision) { _, _ in viewModel.refreshYouTubeConsent() }
         .onAppear { viewModel.setPlayerActive(scenePhase == .active) }
         .onChange(of: scenePhase) { _, phase in viewModel.setPlayerActive(phase == .active) }
         .onDisappear {
