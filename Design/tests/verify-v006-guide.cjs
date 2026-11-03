@@ -97,30 +97,33 @@ const report={date:new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Warsa
    assert.equal(await page.locator('.youtube-link').getAttribute('target'),'_blank');
    assert.ok(await page.locator('.author').innerText());
    if(language==='en'&&width===393)await capture(product,'guide-video-first');
+   assert.equal(await page.locator('.legal-links a').first().isVisible(),false);
    await page.locator('.video-disclosure summary').click();
-   assert.ok(await page.locator('.video-disclosure p').first().isVisible());
-   await page.locator('[data-action="videoPermission"]').click();
-   await page.locator('[data-action="denyTracking"]').click();
-   assert.equal((await data()).tracking,'denied');
-   assert.equal(await page.locator('.player-placeholder').count(),0);
-   assert.equal(await page.locator('[data-action="videoPermission"]').count(),0);
-   assert.ok(await page.locator('.youtube-link').isVisible());
-   await go(product,language,width,'movement');
-   await page.locator('[data-action="videoPermission"]').click();
-   await page.locator('[data-action="allowTracking"]').click();
-   assert.equal((await data()).tracking,'authorized');
-   const player=await page.locator('.player-placeholder').boundingBox();
-   assert.ok(player.width>=200&&player.height>=200);
-   await page.locator('[data-action="videoPlay"]').click();
-   assert.equal((await data()).overlay.kind,'alert');
-   await act('closeOverlay');await act('withdrawVideo');
-   assert.equal(await page.locator('.player-placeholder').count(),0);
+   assert.ok(await page.locator('.video-disclosure .legal-links a').first().isVisible());
+   await page.locator('.video-disclosure summary').click();
+   // One click enables only the video preference, without asking for or granting ATT.
+   for (const tracking of ['notDetermined','denied','authorized']) {
+    await page.evaluate(tracking=>{mock.state().tracking=tracking;mock.state().videoConsent=false;mock.render()},tracking);
+    await page.locator('[data-action="videoPermission"]').click();
+    assert.equal((await data()).tracking,tracking);
+    assert.equal((await data()).videoConsent,true);
+    assert.equal((await data()).overlay,null);
+    assert.equal((await data()).route,'movement');
+    assert.equal(await page.locator('[data-action="allowTracking"], [data-action="denyTracking"]').count(),0);
+    const player=await page.locator('.player-placeholder').boundingBox();
+    assert.ok(player.width>=200&&player.height>=200);
+    assert.equal(await page.locator('.consent-card').count(),0);
+    await act('withdrawVideo');
+    assert.equal((await data()).videoConsent,false);
+    assert.equal((await data()).tracking,tracking);
+    assert.equal(await page.locator('.player-placeholder').count(),0);
+   }
    report.videoCases++;
   }
   assert.deepEqual(popups,[],'Watch Video must not open another tab');
   assert.deepEqual(remoteMedia,[],'Mock must not contact YouTube or Google media services');
   if (!process.env.DESIGN_VIDEO_ONLY) report.flows.push('Search/menu icon centering; separate guide/add targets; direct and modal return preserves query, filters, scroll and focus; keyboard add exactly once');
-  report.flows.push('Primary Watch Video button starts the existing in-app permission/player flow without opening tabs; external alternative inside details or denied fallback; video above equipment; expandable disclosure and legal/author links; simulated allow/deny/withdraw; mock player at least 200 × 200; no remote media requests');
+  report.flows.push('Watch Video directly enables the mock player; no ATT alert, no tracking-state changes, no new tabs; all three ATT states and consent withdrawal; legal links hidden inside disclosure and available when expanded; mock player at least 200 × 200; no remote media requests');
   assert.deepEqual(report.issues,[]);report.status='PASS';
  }catch(error){report.status='FAIL';report.issues.push(error.stack);process.exitCode=1}
  finally{fs.writeFileSync(process.env.DESIGN_REPORT || path.join(output,'guide-verification.json'),JSON.stringify(report,null,2)+'\n');await browser.close();console.log(JSON.stringify(report,null,2))}

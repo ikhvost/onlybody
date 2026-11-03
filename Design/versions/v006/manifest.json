@@ -6,7 +6,7 @@
   "status": "ready-for-review",
   "nativeChanges": false,
   "fixtureRevision": "7e0647e",
-  "behaviorSource": "v005 with distinct picker guide/add actions and retained picker return context",
+  "behaviorSource": "v005 with separate picker guide/add actions and a network-free preview of independent video consent",
   "products": [
     "OnlyBody",
     "OnlyWeights"
@@ -64,6 +64,6 @@
   "approvalScope": "User requested centered search/menu icons, separate picker actions, video-first guide and simpler disclosure; native implementation is separate",
   "controlsVerification": "controls-verification.json",
   "guideVerification": "guide-verification.json",
-  "videoCtaVerification": "watch-video-verification.json",
+  "videoCtaVerification": "direct-video-verification.json",
   "pickerRefinementVerification": "picker-refinement-verification.json"
 }

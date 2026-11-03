@@ -5,17 +5,16 @@
     add: ['Додати вправу','Add exercise','Dodaj ćwiczenie','Übung hinzufügen','Ajouter l’exercice'],
     title: ['Як виконувати вправу','See how it’s done','Jak wykonać ćwiczenie','So geht die Übung','Comment faire le mouvement'],
     summary: [
-      'Відео з YouTube. Google обробляє дані пристрою й переглядів та може використовувати cookies для відтворення, аналітики й реклами.',
-      'Videos from YouTube. Google processes device and viewing data and may use cookies for playback, analytics and ads.',
-      'Filmy z YouTube. Google przetwarza dane urządzenia i oglądania oraz może używać cookies do odtwarzania, analityki i reklam.',
-      'Videos von YouTube. Google verarbeitet Geräte- und Wiedergabedaten und kann Cookies für Wiedergabe, Analysen und Werbung verwenden.',
-      'Vidéos YouTube. Google traite les données de l’appareil et de visionnage et peut utiliser des cookies pour la lecture, les analyses et la publicité.'
+      'Натискаючи «Дивитися відео», ви дозволяєте завантаження відео YouTube. Google обробляє дані пристрою й переглядів та може використовувати cookies для відтворення, аналітики й реклами.',
+      'Tap Watch Video to allow YouTube videos to load. Google processes device and viewing data and may use cookies for playback, analytics and ads.',
+      'Klikając „Obejrzyj film”, zezwalasz na ładowanie filmów YouTube. Google przetwarza dane urządzenia i oglądania oraz może używać cookies do odtwarzania, analityki i reklam.',
+      'Mit „Video ansehen“ erlaubst du das Laden von YouTube-Videos. Google verarbeitet Geräte- und Wiedergabedaten und kann Cookies für Wiedergabe, Analysen und Werbung verwenden.',
+      'En appuyant sur « Voir la vidéo », vous autorisez le chargement des vidéos YouTube. Google traite les données de l’appareil et de visionnage et peut utiliser des cookies pour la lecture, les analyses et la publicité.'
     ],
     watch: ['Дивитися відео','Watch Video','Obejrzyj film','Video ansehen','Voir la vidéo'],
     privacy: ['Конфіденційність Google','Google Privacy','Prywatność Google','Google-Datenschutz','Confidentialité Google'],
     terms: ['Умови YouTube','YouTube Terms','Warunki YouTube','YouTube-Bedingungen','Conditions YouTube'],
-    details: ['Про дані та дозволи','About data and permissions','Dane i uprawnienia','Daten und Berechtigungen','Données et autorisations'],
-    external: ['Відстеження вимкнено. Відео можна відкрити на YouTube за посиланням нижче.','Tracking is off. You can watch on YouTube using the link below.','Śledzenie jest wyłączone. Film możesz obejrzeć w YouTube przez link poniżej.','Tracking ist deaktiviert. Über den Link unten kannst du das Video auf YouTube ansehen.','Le suivi est désactivé. Regardez la vidéo sur YouTube grâce au lien ci-dessous.']
+    details: ['Про дані та дозволи','About data and permissions','Dane i uprawnienia','Daten und Berechtigungen','Données et autorisations']
   };
   const text = key => copy[key][['uk','en','pl','de','fr'].indexOf(language)];
   const previousRows = catalogRows, previousMovement = movementView, previousAction = action;
@@ -35,19 +34,27 @@
     template.innerHTML = previousMovement();
     const card = template.content.querySelector('.consent-card');
     const youtube = template.content.querySelector('.youtube-link');
-    if (card && youtube) {
-      const denied = state().tracking === 'denied';
-      const disclosure = card.querySelector('p').innerHTML;
+    if (card && state().videoConsent) {
+      // This is a network-free preview. Video consent never changes ATT state.
+      card.outerHTML = `<div class="player-placeholder">${btn(icon('play',24),'videoPlay','play')}<span>YouTube · HTML-мок</span></div>`;
+    } else if (card && youtube) {
       const legal = `<div class="legal-links"><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">${E(text('privacy'))}</a><a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener">${E(text('terms'))}</a></div>`;
-      card.innerHTML = `<strong>${E(text('title'))}</strong><p>${E(text(denied?'external':'summary'))}</p>${denied?'':btn(E(text('watch')),'videoPermission','primary permission-button')}<details class="video-disclosure"><summary>${E(text('details'))}</summary><p>${disclosure}</p><p>${tr('uiYouCanTurnVideosOffInSettings')}</p></details>${legal}`;
-      // Keep external playback only as an explicitly labelled alternative.
-      if (!denied) card.querySelector('.video-disclosure').append(youtube);
+      card.innerHTML = `<strong>${E(text('title'))}</strong><p>${E(text('summary'))}</p>${btn(E(text('watch')),'videoPermission','primary permission-button')}<details class="video-disclosure"><summary>${E(text('details'))}</summary><p>${tr('uiYouCanTurnVideosOffInSettings')}</p>${legal}</details>`;
+      card.querySelector('.video-disclosure').append(youtube);
     }
+    template.content.querySelector('[data-action="videoPlay"]')?.setAttribute('aria-label',text('watch'));
     return template.innerHTML;
   };
 
   action = value => {
     const s = state(), [name,index] = value.split(':');
+    if (name === 'videoPermission') {
+      if (s.route !== 'movement' || !video(s.exerciseName)) return;
+      s.videoConsent = true;
+      render(true);
+      document.querySelector('[data-action="videoPlay"]')?.focus({preventScroll:true});
+      return;
+    }
     if (name === 'pickerGuide') {
       if (s.overlay?.kind !== 'exercisePicker' && s.route !== 'exercisePicker') return;
       if (!D.products[product].exercises[Number(index)]) return;
