@@ -90,7 +90,7 @@
 
   document.addEventListener('pointerdown', event => {
     const handle = event.target.closest('[data-drag]');
-    if (!handle || event.button !== 0 || !event.isPrimary) return;
+    if (!handle || handle.disabled || event.button !== 0 || !event.isPrimary) return;
     const [scope, from] = handle.dataset.drag.split(':');
     pending = { card: handle.closest('[data-key]'), pointerId: event.pointerId, scope, from: Number(from), x: event.clientX, y: event.clientY };
     pending.timer = setTimeout(lift, 250);
@@ -112,5 +112,18 @@
   document.addEventListener('keydown', event => { if (event.key === 'Escape') finish(false); });
   window.addEventListener('blur', () => finish(false));
   document.addEventListener('dragstart', event => { if (event.target.closest('[data-drag]')) event.preventDefault(); });
+  // Browser keyboard equivalent of the native adjustable reorder handle.
+  document.addEventListener('keydown', event => {
+    const handle = event.target.closest('[data-drag]');
+    if (!handle || handle.disabled || drag || !['ArrowUp','ArrowDown'].includes(event.key)) return;
+    event.preventDefault();
+    const [scope,index] = handle.dataset.drag.split(':');
+    const key = handle.closest('[data-key]').dataset.key;
+    const list = scope === 'builder' ? state().builder.items : state().active.workout.items;
+    const delta = event.key === 'ArrowDown' ? 1 : -1;
+    if (Number(index) + delta < 0 || Number(index) + delta >= list.length) return;
+    action(`moveItem:${scope}:${index}:${delta}`);
+    document.querySelector(`[data-key="${key}"] [data-drag]`)?.focus({preventScroll:true});
+  });
   window.v006Reorder = { measure, animate, isDragging: () => !!drag };
 })();

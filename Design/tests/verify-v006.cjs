@@ -25,12 +25,13 @@ async function audit(page, label) {
   const issues = await page.evaluate(() => {
     const problems = [];
     const device = document.querySelector('.device').getBoundingClientRect();
-    for (const control of document.querySelectorAll('.search-box,.item-more,.picker-add')) {
+    for (const control of document.querySelectorAll('.search-box,.item-replace,.picker-add')) {
       const bounds = control.getBoundingClientRect(), icon = control.querySelector('.icon')?.getBoundingClientRect();
       if (!bounds.width || !icon) continue;
       if (Math.abs(bounds.top + bounds.bottom - icon.top - icon.bottom) > 1) problems.push(`${control.className}: icon not vertically centered`);
       if (!control.matches('.search-box') && Math.abs(bounds.left + bounds.right - icon.left - icon.right) > 1) problems.push(`${control.className}: icon not horizontally centered`);
-      if (Math.abs(icon.width - 22) > 0.1 || Math.abs(icon.height - 22) > 0.1) problems.push(`${control.className}: icon size`);
+      const iconSize = control.matches('.item-replace') ? 24 : 22;
+      if (Math.abs(icon.width - iconSize) > 0.1 || Math.abs(icon.height - iconSize) > 0.1) problems.push(`${control.className}: icon size`);
     }
     for (const el of document.querySelectorAll('#app *, #overlay *')) {
       const rect = el.getBoundingClientRect(), style = getComputedStyle(el);
@@ -223,7 +224,7 @@ function contrast(foreground, background) {
   } catch (error) { report.status='FAIL';report.issues.push(error.stack); }
   finally {
     await browser.close();
-    fs.writeFileSync(path.join(output,'verification.json'),JSON.stringify(report,null,2)+'\n');
+    fs.writeFileSync(process.env.DESIGN_REPORT || path.join(output,'native-sync-verification.json'),JSON.stringify(report,null,2)+'\n');
     console.log(JSON.stringify(report,null,2));
     if (report.status!=='PASS') process.exitCode=1;
   }

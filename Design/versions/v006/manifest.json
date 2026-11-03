@@ -3,10 +3,10 @@
   "parent": "v005",
   "date": "2026-11-03",
   "title": "Вибір вправ і відео",
-  "status": "ready-for-review",
+  "status": "native-follow-up-synchronized",
   "nativeChanges": false,
   "fixtureRevision": "7e0647e",
-  "behaviorSource": "v005 with separate picker guide/add actions and a network-free ready-player preview; native consent unchanged",
+  "behaviorSource": "v006 picker/video preview with native direct replacement, adjustable reorder and exercise-card layout from 7a4b5c7",
   "products": [
     "OnlyBody",
     "OnlyWeights"
@@ -61,10 +61,14 @@
     "no-blur"
   ],
   "screenshotStorage": "local-only, gitignored",
-  "approvalScope": "User requested centered search/menu icons, separate picker actions, video-first guide and simpler disclosure; native implementation is separate",
+  "approvalScope": "User requested synchronizing both design prototypes with current app changes; direct exercise replacement and card layout matched to native 7a4b5c7",
   "controlsVerification": "controls-verification.json",
   "guideVerification": "guide-verification.json",
   "videoCtaVerification": "player-only-verification.json",
   "pickerRefinementVerification": "picker-refinement-verification.json",
-  "settingsRefinementVerification": "settings-refinement-verification.json"
+  "settingsRefinementVerification": "settings-refinement-verification.json",
+  "nativeSourceRevision": "7a4b5c7",
+  "nativeSyncVerification": "native-sync-verification.json",
+  "nativeSyncControlsVerification": "native-sync-controls-verification.json",
+  "nativeSyncBehaviorVerification": "native-sync-behavior-verification.json"
 }
