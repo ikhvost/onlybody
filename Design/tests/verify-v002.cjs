@@ -8,7 +8,7 @@ const root=path.resolve(__dirname,'..');
 const origin=process.env.DESIGN_URL||'http://127.0.0.1:8772';
 const routes=['train','train-empty','musclePicker','builder','exercisePicker','active','rest','complete','exerciseHistory','log','session','library','movement','settings','notifications','creation','statistics','workout'];
 const products=['OnlyBody','OnlyWeights'],languages=['uk','en','pl','de','fr'];
-const report={date:'2026-10-31',scope:'HTML prototype / desktop Chromium; no native or physical-device validation',matrix:0,flows:[],issues:[],screenshots:[],physicalPhone:'UNCONFIRMED',nativeAccessibility:'UNCONFIRMED'};
+const report={date:process.env.DESIGN_REVIEW_DATE||'2026-10-31',scope:'HTML prototype / desktop Chromium; no native or physical-device validation',matrix:0,flows:[],issues:[],screenshots:[],physicalPhone:'UNCONFIRMED',nativeAccessibility:'UNCONFIRMED'};
 function contrastChecks(){
  function luminance(hex){const c=hex.match(/../g).map(x=>parseInt(x,16)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);return c[0]*.2126+c[1]*.7152+c[2]*.0722}
  const pairs=[];for(const foreground of ['F5F0E8','B9B6AE','96938B','E8A23A','FF9689'])for(const background of ['10110F','1B1D19','242720']){const [a,b]=[luminance(foreground),luminance(background)].sort((a,b)=>a-b),ratio=(b+.05)/(a+.05);assert.ok(ratio>=4.5,foreground+'/'+background);pairs.push({foreground,background,ratio:Number(ratio.toFixed(2))})}report.contrast=pairs;

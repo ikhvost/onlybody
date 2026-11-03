@@ -6,6 +6,7 @@ const params = new URLSearchParams(location.search);
 for(const id of ['version','product','language','size','scenario','zoom','compare-base']) if(params.has(id)&&[...get(id).options].some(o=>o.value===params.get(id))) get(id).value=params.get(id);
 if(screens.some(([id])=>id===params.get('screen'))) selected=params.get('screen');
 get('compare').checked=params.get('compare')==='true';
+for (const id of ['reduce-motion','reduce-transparency']) get(id).checked=params.get(id)==='true';
 function redraw(){
   const baseline=get('version').value==='v000';
   get('compare').disabled=baseline;
@@ -15,17 +16,21 @@ function redraw(){
   if(compare||baseline)get('size').value='440';
   const width=compare||baseline?440:Number(get('size').value),height={375:812,393:852,440:956}[width];
   const chosen=get('version').value;
+  for (const id of ['reduce-motion','reduce-transparency']) {
+    get(id).disabled=chosen!=='v004';
+    get(id).title='Демонстраційний режим v004';
+  }
   if(get('compare-base').value===chosen)get('compare-base').value='v000';
   get('compare-base').disabled=!compare;
   const comparisonBase=get('compare-base').value===chosen?'v000':get('compare-base').value;
   const versions=compare?[comparisonBase,chosen]:[chosen];
   get('title').textContent=screens.find(([id])=>id===selected)[1];
-  document.querySelector('.status').textContent=baseline&&!compare?'v000 · Зафіксована база':chosen==='v003'?'v003 · Нова пропозиція':chosen==='v002'?'v002 · Погоджено':`${chosen} · Попередня пропозиція`;
+  document.querySelector('.status').textContent=baseline&&!compare?'v000 · Зафіксована база':chosen==='v004'?'v004 · Liquid Glass':chosen==='v003'?'v003 · Поточна база':chosen==='v002'?'v002 · Погоджено':`${chosen} · Попередня пропозиція`;
   get('screens').innerHTML=screens.map(([id,label],i)=>`<button data-route="${id}" class="${id===selected?'selected':''}" ${id===selected?'aria-current="page"':''}><span>${String(i+1).padStart(2,'0')}</span>${label}</button>`).join('');
-  const args=new URLSearchParams({product:get('product').value,language:get('language').value,screen:selected,scenario:get('scenario').value,live:String(get('live').checked)});
-  get('stage').innerHTML=versions.map(v=>`<section class="preview"><h3>${v==='v000'?'v000 · Початковий стан':v==='v001'?'v001 · М’який спортивний':v==='v002'?'v002 · Огляд тренування':'v003 · Вільне тренування'}<span>${width} × ${height}</span></h3><div class="frame-space"><iframe title="${v} ${get('product').value}" src="runner.html?${args}&version=${v}" width="${width}" height="${height}"></iframe></div></section>`).join('');
+  const args=new URLSearchParams({product:get('product').value,language:get('language').value,screen:selected,scenario:get('scenario').value,live:String(get('live').checked),'reduce-motion':String(get('reduce-motion').checked),'reduce-transparency':String(get('reduce-transparency').checked)});
+  get('stage').innerHTML=versions.map(v=>`<section class="preview"><h3>${v==='v000'?'v000 · Початковий стан':v==='v001'?'v001 · М’який спортивний':v==='v002'?'v002 · Огляд тренування':v==='v003'?'v003 · Вільне тренування':'v004 · Liquid Glass'}<span>${width} × ${height}</span></h3><div class="frame-space"><iframe title="${v} ${get('product').value}" src="runner.html?${args}&version=${v}" width="${width}" height="${height}"></iframe></div></section>`).join('');
   get('phone-link').href=`runner.html?${args}&version=${get('version').value}`;
-  const url=new URLSearchParams({version:get('version').value,product:get('product').value,language:get('language').value,size:get('size').value,screen:selected,scenario:get('scenario').value,zoom:get('zoom').value,compare:String(compare),'compare-base':get('compare-base').value});
+  const url=new URLSearchParams({version:get('version').value,product:get('product').value,language:get('language').value,size:get('size').value,screen:selected,scenario:get('scenario').value,zoom:get('zoom').value,compare:String(compare),'compare-base':get('compare-base').value,'reduce-motion':String(get('reduce-motion').checked),'reduce-transparency':String(get('reduce-transparency').checked)});
   history.replaceState(null,'','?'+url);
   fit();
 }
@@ -37,7 +42,7 @@ function fit(){
  get('scale-note').textContent=`${Math.round(scale*100)}% · ${get('compare').checked?'Порівняння на 440 pt':'1 CSS px = 1 pt до масштабування'}`;
 }
 get('screens').addEventListener('click',e=>{const b=e.target.closest('[data-route]');if(b){selected=b.dataset.route;redraw()}});
-for(const id of ['version','product','language','size','compare','scenario','compare-base']) get(id).addEventListener('change',redraw);
+for(const id of ['version','product','language','size','compare','scenario','compare-base','reduce-motion','reduce-transparency']) get(id).addEventListener('change',redraw);
 get('zoom').addEventListener('change',fit);
 get('reset').addEventListener('click',redraw);
 get('live').addEventListener('change',()=>{for(const f of document.querySelectorAll('iframe'))f.contentWindow.postMessage({type:'clock',live:get('live').checked},location.origin)});

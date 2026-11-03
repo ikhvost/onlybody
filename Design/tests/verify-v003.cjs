@@ -1,9 +1,12 @@
 const {chromium}=require('playwright');
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const root=path.resolve(__dirname,'..'),origin=process.env.DESIGN_URL||'http://127.0.0.1:8772';
-const report={date:'2026-11-01',scope:'Desktop Chromium HTML prototype; native parity with d812d78',nativeKeyboard:'UNCONFIRMED',sourceRevision:'d812d78',flows:[],matrix:0,issues:[],physicalIPhone:'UNCONFIRMED',nativeVoiceOver:'UNCONFIRMED'};
+const version=process.env.DESIGN_VERSION||'v003';
+assert.ok(['v003','v004'].includes(version));
+const reportPath=process.env.DESIGN_REPORT||path.join(root,`versions/${version}/verification.json`);
+const report={version,date:process.env.DESIGN_REVIEW_DATE||'2026-11-01',scope:'Desktop Chromium HTML prototype; native parity with d812d78',nativeKeyboard:'UNCONFIRMED',sourceRevision:'d812d78',flows:[],matrix:0,issues:[],physicalIPhone:'UNCONFIRMED',nativeVoiceOver:'UNCONFIRMED'};
 (async()=>{const browser=await chromium.launch({channel:'chrome',headless:true,args:['--no-sandbox']});const page=await browser.newPage();page.on('pageerror',e=>report.issues.push(e.message));
-const go=async(product='OnlyWeights',screen='train',language='uk',width=393,scenario='standard')=>{await page.setViewportSize({width,height:{375:812,393:852,440:956}[width]});await page.goto(`${origin}/runner.html?version=v003&product=${product}&screen=${screen}&language=${language}&scenario=${scenario}`);await page.waitForFunction(()=>window.mock);await page.evaluate(()=>window.v003Ready)};
+const go=async(product='OnlyWeights',screen='train',language='uk',width=393,scenario='standard')=>{await page.setViewportSize({width,height:{375:812,393:852,440:956}[width]});await page.goto(`${origin}/runner.html?version=${version}&product=${product}&screen=${screen}&language=${language}&scenario=${scenario}`);await page.waitForFunction(()=>window.mock);await page.evaluate(v=>window[v+'Ready'],version)};
 const act=async v=>page.evaluate(v=>mock.act(v),v),data=async()=>page.evaluate(()=>mock.state());
 const holdDrag=async(scope,from,to,inspect=async()=>{})=>{
  const handle=page.locator(`[data-drag="${scope}:${from}"]`),card=page.locator(`[data-scope="${scope}"][data-item="${from}"]`),target=page.locator(`[data-scope="${scope}"][data-item="${to}"]`);
@@ -126,7 +129,7 @@ try{
  }
  for(const product of ['OnlyBody','OnlyWeights'])for(const language of ['uk','en','pl','de','fr'])for(const width of [375,393,440])for(const screen of ['workout','active','rest','builder','library','exercisePicker','movement','session','exerciseHistory']){
  await go(product,screen,language,width,'long');const issues=await page.evaluate(()=>{const limit=document.querySelector('.device').getBoundingClientRect();return [...document.querySelectorAll('#app *,#overlay *')].flatMap(el=>{const r=el.getBoundingClientRect();if(!r.width||!r.height)return [];if(r.left<limit.left-1||r.right>limit.right+1)return [el.className+' overflow'];if(el.matches('button,input')&&!el.disabled&&(r.width<43.9||r.height<43.9))return [el.className+' small target'];return []})});assert.deepEqual(issues,[],[product,language,width,screen].join('/'));report.matrix++;
- if(width===393&&language==='uk'){const dir=path.join(root,'versions/v003/screenshots',product);fs.mkdirSync(dir,{recursive:true});await page.screenshot({path:path.join(dir,screen+'.png')})}
+ if(width===393&&language==='uk'){const dir=path.join(root,`versions/${version}/screenshots`,product);fs.mkdirSync(dir,{recursive:true});await page.screenshot({path:path.join(dir,screen+'.png')})}
  }
  // Real Chromium touch events, cancel, edge autoscroll and Reduce Motion.
  await go('OnlyWeights','workout');const touch=await page.context().newCDPSession(page);
@@ -146,9 +149,9 @@ try{
   await go(product,panel==='smart'?'builder':'workout',language,width,'long');
   if(panel==='smart'){await act('mode:smart')}else{await act('replaceItem:session:0');if(panel==='filters')await act('replacementFilters')}
   const issues=await page.evaluate(()=>{const bounds=document.querySelector('.device').getBoundingClientRect();return [...document.querySelectorAll('#app *,#overlay *')].flatMap(el=>{const r=el.getBoundingClientRect();if(!r.width||!r.height)return [];if(r.left<bounds.left-1||r.right>bounds.right+1)return [el.className+' overflow'];if(el.matches('button,input')&&!el.disabled&&(r.width<43.9||r.height<43.9))return [el.className+' small target'];return []})});assert.deepEqual(issues,[],[product,language,width,panel].join('/'));report.matrix++;
-  if(width===393&&language==='uk'){const dir=path.join(root,'versions/v003/screenshots',product);await page.screenshot({path:path.join(dir,panel+'.png')})}
+  if(width===393&&language==='uk'){const dir=path.join(root,`versions/${version}/screenshots`,product);await page.screenshot({path:path.join(dir,panel+'.png')})}
  }
- await page.setViewportSize({width:1440,height:1100});await page.goto(origin+'/?version=v003&compare=true&compare-base=v002&screen=active');await page.waitForFunction(()=>[...document.querySelectorAll('iframe')].every(f=>f.contentWindow.mock));assert.equal(await page.locator('iframe').count(),2);report.flows.push('v002 / v003 comparison');
+ await page.setViewportSize({width:1440,height:1100});await page.goto(origin+`/?version=${version}&compare=true&compare-base=v002&screen=active`);await page.waitForFunction(()=>[...document.querySelectorAll('iframe')].every(f=>f.contentWindow.mock));assert.equal(await page.locator('iframe').count(),2);report.flows.push(`v002 / ${version} comparison`);
  report.status=report.issues.length?'FAIL':'PASS';
-}catch(e){report.status='FAIL';report.issues.push(e.stack)}finally{await browser.close();fs.writeFileSync(path.join(root,'versions/v003/verification.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));if(report.status!=='PASS')process.exitCode=1}
+}catch(e){report.status='FAIL';report.issues.push(e.stack)}finally{await browser.close();fs.writeFileSync(reportPath,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));if(report.status!=='PASS')process.exitCode=1}
 })();
