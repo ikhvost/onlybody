@@ -1,0 +1,119 @@
+{
+  "date": "2026-11-03",
+  "scope": "v005 desktop Chrome; browser approximation of Liquid Glass",
+  "matrix": 540,
+  "panels": 120,
+  "flows": [
+    "OnlyBody: click create, edit, complete, history; nested navigation has no tab bar",
+    "OnlyWeights: click create, edit, complete, history; nested navigation has no tab bar",
+    "normal material/motion mode: root, timer, library, sheet",
+    "reduce-motion material/motion mode: root, timer, library, sheet",
+    "reduce-transparency material/motion mode: root, timer, library, sheet",
+    "no-blur material/motion mode: root, timer, library, sheet",
+    "Contrast: solid surfaces, primary button and bounded white backdrop under glass; keyboard focus visible",
+    "Studio defaults, v004/v005 comparison, preference URL round-trip"
+  ],
+  "issues": [],
+  "physicalIPhone": "UNCONFIRMED",
+  "nativeVoiceOver": "UNCONFIRMED",
+  "nativeLiquidGlass": "NOT_TESTED",
+  "frozenFiles": 54,
+  "contrast": [
+    {
+      "text": "text",
+      "background": "bg",
+      "ratio": 18.06
+    },
+    {
+      "text": "text",
+      "background": "surface",
+      "ratio": 15.63
+    },
+    {
+      "text": "text",
+      "background": "surface2",
+      "ratio": 12.8
+    },
+    {
+      "text": "text2",
+      "background": "bg",
+      "ratio": 11.22
+    },
+    {
+      "text": "text2",
+      "background": "surface",
+      "ratio": 9.71
+    },
+    {
+      "text": "text2",
+      "background": "surface2",
+      "ratio": 7.95
+    },
+    {
+      "text": "text3",
+      "background": "bg",
+      "ratio": 7.95
+    },
+    {
+      "text": "text3",
+      "background": "surface",
+      "ratio": 6.88
+    },
+    {
+      "text": "text3",
+      "background": "surface2",
+      "ratio": 5.64
+    },
+    {
+      "text": "accent",
+      "background": "bg",
+      "ratio": 9.05
+    },
+    {
+      "text": "accent",
+      "background": "surface",
+      "ratio": 7.83
+    },
+    {
+      "text": "accent",
+      "background": "surface2",
+      "ratio": 6.41
+    },
+    {
+      "text": "danger",
+      "background": "bg",
+      "ratio": 9.77
+    },
+    {
+      "text": "danger",
+      "background": "surface",
+      "ratio": 8.45
+    },
+    {
+      "text": "danger",
+      "background": "surface2",
+      "ratio": 6.93
+    },
+    {
+      "text": "text",
+      "background": "glass over white",
+      "ratio": 9.49
+    },
+    {
+      "text": "text2",
+      "background": "glass over white",
+      "ratio": 5.89
+    },
+    {
+      "text": "accent",
+      "background": "glass over white",
+      "ratio": 4.75
+    },
+    {
+      "text": "bg",
+      "background": "accent",
+      "ratio": 9.05
+    }
+  ],
+  "status": "PASS"
+}

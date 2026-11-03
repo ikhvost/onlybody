@@ -191,7 +191,7 @@ function contrast(foreground, background) {
     report.flows.push('Contrast: solid surfaces, primary button and bounded white backdrop under glass; keyboard focus visible');
 
     await page.setViewportSize({width:1440,height:1100});
-    await page.goto(origin);
+    await page.goto(origin+'/?version=v005&compare-base=v004');
     assert.equal(await page.locator('#version').inputValue(),'v005');
     assert.equal(await page.locator('#compare-base').inputValue(),'v004');
     await page.locator('#compare').check();
@@ -216,7 +216,7 @@ function contrast(foreground, background) {
   } catch (error) { report.status='FAIL';report.issues.push(error.stack); }
   finally {
     await browser.close();
-    fs.writeFileSync(path.join(output,'verification.json'),JSON.stringify(report,null,2)+'\n');
+    fs.writeFileSync(process.env.DESIGN_REPORT || path.join(output,'verification.json'),JSON.stringify(report,null,2)+'\n');
     console.log(JSON.stringify(report,null,2));
     if (report.status!=='PASS') process.exitCode=1;
   }

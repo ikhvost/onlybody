@@ -1,0 +1,12 @@
+{
+  "date": "2026-11-03",
+  "scope": "v006 browser picker and video presentation; no real video playback or system permission",
+  "pickerCases": 60,
+  "videoCases": 30,
+  "flows": [
+    "Search/menu icon centering; separate guide/add targets; direct and modal return preserves query, filters, scroll and focus; keyboard add exactly once",
+    "Video above equipment; expandable disclosure and legal/author links; simulated allow/deny/withdraw; mock player at least 200 × 200; no remote media requests"
+  ],
+  "issues": [],
+  "status": "PASS"
+}

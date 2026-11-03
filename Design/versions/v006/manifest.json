@@ -1,0 +1,67 @@
+{
+  "version": "v006",
+  "parent": "v005",
+  "date": "2026-11-03",
+  "title": "Вибір вправ і відео",
+  "status": "ready-for-review",
+  "nativeChanges": false,
+  "fixtureRevision": "7e0647e",
+  "behaviorSource": "v005 with distinct picker guide/add actions and retained picker return context",
+  "products": [
+    "OnlyBody",
+    "OnlyWeights"
+  ],
+  "languages": [
+    "uk",
+    "en",
+    "pl",
+    "de",
+    "fr"
+  ],
+  "viewports": [
+    [
+      375,
+      812
+    ],
+    [
+      393,
+      852
+    ],
+    [
+      440,
+      956
+    ]
+  ],
+  "screens": 18,
+  "comparisonViewport": [
+    440,
+    956
+  ],
+  "screenshotViewport": [
+    393,
+    852
+  ],
+  "defaultClock": "frozen",
+  "appearance": "dark",
+  "font": "system Apple stack with system sans-serif fallback",
+  "entry": "../../runner.html?version=v006",
+  "decisions": "DECISIONS.md",
+  "tokens": "TOKENS.md",
+  "verification": "verification.json",
+  "behaviorVerification": "behavior-verification.json",
+  "regressionReports": [
+    "v005-regression.json"
+  ],
+  "frozenSourceChecksums": "baseline-checksums.json",
+  "previewPreferences": [
+    "reduce-motion",
+    "reduce-transparency"
+  ],
+  "qaPreferences": [
+    "no-blur"
+  ],
+  "screenshotStorage": "local-only, gitignored",
+  "approvalScope": "User requested centered search/menu icons, separate picker actions, video-first guide and simpler disclosure; native implementation is separate",
+  "controlsVerification": "controls-verification.json",
+  "guideVerification": "guide-verification.json"
+}

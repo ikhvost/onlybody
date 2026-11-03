@@ -2,7 +2,7 @@ const {chromium}=require('playwright');
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const root=path.resolve(__dirname,'..'),origin=process.env.DESIGN_URL||'http://127.0.0.1:8772';
 const version=process.env.DESIGN_VERSION||'v003';
-assert.ok(['v003','v004','v005'].includes(version));
+assert.ok(['v003','v004','v005','v006'].includes(version));
 const reportPath=process.env.DESIGN_REPORT||path.join(root,`versions/${version}/verification.json`);
 const report={version,date:process.env.DESIGN_REVIEW_DATE||'2026-11-01',scope:'Desktop Chromium HTML prototype; native parity with d812d78',nativeKeyboard:'UNCONFIRMED',sourceRevision:'d812d78',flows:[],matrix:0,issues:[],physicalIPhone:'UNCONFIRMED',nativeVoiceOver:'UNCONFIRMED'};
 (async()=>{const browser=await chromium.launch({channel:'chrome',headless:true,args:['--no-sandbox']});const page=await browser.newPage();page.on('pageerror',e=>report.issues.push(e.message));
@@ -30,7 +30,7 @@ try{
  await act('sessionList');await act('viewItem:'+second.uid);await act('activeGuide');await act('back');assert.equal((await data()).active.currentId,first.uid);await act('activeHistory');await act('back');
  await act('toggleSet:'+second.rows[0].id);assert.equal((await data()).active.currentId,first.uid);assert.equal((await data()).active.viewId,second.uid);assert.equal((await data()).active.restRemaining,second.rest);
  await act('showRowWeight');const weight=page.locator(`[data-row="${second.rows[0].id}"][data-field="weight"]`);await weight.fill('27,5');await weight.dispatchEvent('change');a=(await data()).active;assert.equal(a.workout.items[1].rows[0].weight,27.5);assert.equal(a.restRemaining,second.rest);
- await act('sessionList');if(version==='v005'){await page.locator('[data-action^="itemActions:session:"]').nth(1).click();assert.equal(await page.locator('[data-action="menuReplace"]').isDisabled(),true);await act('closeItemActions')}else assert.equal(await page.locator('[data-action="replaceItem:session:1"]').isDisabled(),true);await act('moveItem:session:1:-1');a=(await data()).active;assert.equal(a.currentId,first.uid);assert.equal(a.workout.items[0].rows[0].weight,27.5);
+ await act('sessionList');if(['v005','v006'].includes(version)){await page.locator('[data-action^="itemActions:session:"]').nth(1).click();assert.equal(await page.locator('[data-action="menuReplace"]').isDisabled(),true);await act('closeItemActions')}else assert.equal(await page.locator('[data-action="replaceItem:session:1"]').isDisabled(),true);await act('moveItem:session:1:-1');a=(await data()).active;assert.equal(a.currentId,first.uid);assert.equal(a.workout.items[0].rows[0].weight,27.5);
  await act('viewItem:'+second.uid);await act('toggleSet:'+second.rows[0].id);assert.equal((await data()).active.workout.items[0].rows[0].weight,27.5);await act('toggleSet:'+second.rows[0].id);
  await act('viewItem:'+first.uid);for(const r of first.rows)await act('toggleSet:'+r.id);a=(await data()).active;assert.notEqual(a.currentId,first.uid);
  // Complete every remaining row via arbitrary exercise navigation.
@@ -99,9 +99,9 @@ try{
   // Every visible back affordance shares the same edge-swipe behavior.
   await go(product,'workout');await swipeBack(true);assert.equal((await data()).route,'workout');await swipeBack();assert.equal((await data()).route,'train');
   await act('start:'+template.id);await act('beginSession');await swipeBack();assert.equal((await data()).route,'workout');assert.equal((await data()).active.started,true);await swipeBack();assert.equal((await data()).route,'workout');await act('resumeSession');await act('activeGuide');await swipeBack();assert.equal((await data()).route,'active');
-  await go(product,'builder');await act('pickExercise');if(version==='v005'){await swipeBack();assert.equal((await data()).overlay.kind,'exercisePicker');await page.locator('#overlay [data-navigation="close"]').click()}else await swipeBack();assert.equal((await data()).overlay,null);await swipeBack();assert.equal((await data()).route,'train');
-  await go(product,'workout');await act('replaceItem:session:0');if(version==='v005'){await swipeBack();assert.equal((await data()).overlay.kind,'replacement');await page.locator('#overlay [data-navigation="close"]').click()}else await swipeBack();assert.equal((await data()).overlay,null);
-  report.flows.push(product+(version==='v005'?': edge back in exercise, draft, guide and builder; Close dismisses picker/replacement; swipes do not select rows or dismiss active session':': edge back in exercise, draft, guide, builder, picker and replacement; vertical movement and active list cannot dismiss session'));
+  await go(product,'builder');await act('pickExercise');if(['v005','v006'].includes(version)){await swipeBack();assert.equal((await data()).overlay.kind,'exercisePicker');await page.locator('#overlay [data-navigation="close"]').click()}else await swipeBack();assert.equal((await data()).overlay,null);await swipeBack();assert.equal((await data()).route,'train');
+  await go(product,'workout');await act('replaceItem:session:0');if(['v005','v006'].includes(version)){await swipeBack();assert.equal((await data()).overlay.kind,'replacement');await page.locator('#overlay [data-navigation="close"]').click()}else await swipeBack();assert.equal((await data()).overlay,null);
+  report.flows.push(product+(['v005','v006'].includes(version)?': edge back in exercise, draft, guide and builder; Close dismisses picker/replacement; swipes do not select rows or dismiss active session':': edge back in exercise, draft, guide, builder, picker and replacement; vertical movement and active list cannot dismiss session'));
 
   // Verify lift, intermediate positions and neighbor gap before committing on both screens.
   for(const scope of ['builder','session']){
