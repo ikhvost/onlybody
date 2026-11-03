@@ -1,0 +1,66 @@
+{
+  "version": "v005",
+  "parent": "v004",
+  "date": "2026-11-03",
+  "title": "Уточнене керування",
+  "status": "ready-for-review",
+  "nativeChanges": false,
+  "fixtureRevision": "7e0647e",
+  "behaviorSource": "v004 with explicit navigation/dismissal semantics and exercise action menus",
+  "products": [
+    "OnlyBody",
+    "OnlyWeights"
+  ],
+  "languages": [
+    "uk",
+    "en",
+    "pl",
+    "de",
+    "fr"
+  ],
+  "viewports": [
+    [
+      375,
+      812
+    ],
+    [
+      393,
+      852
+    ],
+    [
+      440,
+      956
+    ]
+  ],
+  "screens": 18,
+  "comparisonViewport": [
+    440,
+    956
+  ],
+  "screenshotViewport": [
+    393,
+    852
+  ],
+  "defaultClock": "frozen",
+  "appearance": "dark",
+  "font": "system Apple stack with system sans-serif fallback",
+  "entry": "../../runner.html?version=v005",
+  "decisions": "DECISIONS.md",
+  "tokens": "TOKENS.md",
+  "verification": "verification.json",
+  "behaviorVerification": "behavior-verification.json",
+  "regressionReports": [
+    "v004-regression.json"
+  ],
+  "frozenSourceChecksums": "baseline-checksums.json",
+  "previewPreferences": [
+    "reduce-motion",
+    "reduce-transparency"
+  ],
+  "qaPreferences": [
+    "no-blur"
+  ],
+  "screenshotStorage": "local-only, gitignored",
+  "approvalScope": "User requested the six reviewed refinements; rendered v005 ready for review; native implementation is separate",
+  "controlsVerification": "controls-verification.json"
+}

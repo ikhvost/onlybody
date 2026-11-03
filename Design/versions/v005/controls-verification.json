@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-03",
+  "scope": "v005 browser control semantics, not native accessibility",
+  "menus": 60,
+  "timingPanels": 30,
+  "flows": [
+    "OnlyBody: icon-only back; keyboard menu, Escape, focus return, stable-identity move, replacement, boundary controls",
+    "OnlyBody: filter cancel/apply/Escape, nonzero badge, chips, nested Back returns to replacement",
+    "OnlyBody: numeric panel cancel/apply/invalid Escape, timing rollback preserves builder and dirty state",
+    "OnlyBody: visible completion glyph, pressed semantics, completed replacement lock, pre-start controls disabled",
+    "OnlyWeights: icon-only back; keyboard menu, Escape, focus return, stable-identity move, replacement, boundary controls",
+    "OnlyWeights: filter cancel/apply/Escape, nonzero badge, chips, nested Back returns to replacement",
+    "OnlyWeights: numeric panel cancel/apply/invalid Escape, timing rollback preserves builder and dirty state",
+    "OnlyWeights: visible completion glyph, pressed semantics, completed replacement lock, pre-start controls disabled"
+  ],
+  "issues": [],
+  "status": "PASS"
+}

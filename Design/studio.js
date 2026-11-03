@@ -17,18 +17,18 @@ function redraw(){
   const width=compare||baseline?440:Number(get('size').value),height={375:812,393:852,440:956}[width];
   const chosen=get('version').value;
   for (const id of ['reduce-motion','reduce-transparency']) {
-    get(id).disabled=chosen!=='v004';
-    get(id).title='Демонстраційний режим v004';
+    get(id).disabled=!['v004','v005'].includes(chosen);
+    get(id).title='Демонстраційний режим v004 / v005';
   }
   if(get('compare-base').value===chosen)get('compare-base').value='v000';
   get('compare-base').disabled=!compare;
   const comparisonBase=get('compare-base').value===chosen?'v000':get('compare-base').value;
   const versions=compare?[comparisonBase,chosen]:[chosen];
   get('title').textContent=screens.find(([id])=>id===selected)[1];
-  document.querySelector('.status').textContent=baseline&&!compare?'v000 · Зафіксована база':chosen==='v004'?'v004 · Liquid Glass':chosen==='v003'?'v003 · Поточна база':chosen==='v002'?'v002 · Погоджено':`${chosen} · Попередня пропозиція`;
+  document.querySelector('.status').textContent=baseline&&!compare?'v000 · Зафіксована база':chosen==='v005'?'v005 · Уточнене керування':chosen==='v004'?'v004 · Liquid Glass':chosen==='v003'?'v003 · Поточна база':chosen==='v002'?'v002 · Погоджено':`${chosen} · Попередня пропозиція`;
   get('screens').innerHTML=screens.map(([id,label],i)=>`<button data-route="${id}" class="${id===selected?'selected':''}" ${id===selected?'aria-current="page"':''}><span>${String(i+1).padStart(2,'0')}</span>${label}</button>`).join('');
   const args=new URLSearchParams({product:get('product').value,language:get('language').value,screen:selected,scenario:get('scenario').value,live:String(get('live').checked),'reduce-motion':String(get('reduce-motion').checked),'reduce-transparency':String(get('reduce-transparency').checked)});
-  get('stage').innerHTML=versions.map(v=>`<section class="preview"><h3>${v==='v000'?'v000 · Початковий стан':v==='v001'?'v001 · М’який спортивний':v==='v002'?'v002 · Огляд тренування':v==='v003'?'v003 · Вільне тренування':'v004 · Liquid Glass'}<span>${width} × ${height}</span></h3><div class="frame-space"><iframe title="${v} ${get('product').value}" src="runner.html?${args}&version=${v}" width="${width}" height="${height}"></iframe></div></section>`).join('');
+  get('stage').innerHTML=versions.map(v=>`<section class="preview"><h3>${v==='v000'?'v000 · Початковий стан':v==='v001'?'v001 · М’який спортивний':v==='v002'?'v002 · Огляд тренування':v==='v003'?'v003 · Вільне тренування':v==='v004'?'v004 · Liquid Glass':'v005 · Уточнене керування'}<span>${width} × ${height}</span></h3><div class="frame-space"><iframe title="${v} ${get('product').value}" src="runner.html?${args}&version=${v}" width="${width}" height="${height}"></iframe></div></section>`).join('');
   get('phone-link').href=`runner.html?${args}&version=${get('version').value}`;
   const url=new URLSearchParams({version:get('version').value,product:get('product').value,language:get('language').value,size:get('size').value,screen:selected,scenario:get('scenario').value,zoom:get('zoom').value,compare:String(compare),'compare-base':get('compare-base').value,'reduce-motion':String(get('reduce-motion').checked),'reduce-transparency':String(get('reduce-transparency').checked)});
   history.replaceState(null,'','?'+url);
