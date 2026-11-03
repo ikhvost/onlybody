@@ -138,6 +138,7 @@ details p{padding-top:15px;color:var(--muted);font-size:16px;max-width:680px}
 .legal-nav a:hover{color:var(--accent)}
 .legal-nav .eyebrow{margin-bottom:16px}
 .legal-body{max-width:72ch;overflow-wrap:anywhere;min-width:0;font-size:16px;line-height:1.85}
+.legal-body>p{margin-bottom:32px}
 .legal-body section{margin-bottom:45px}
 .legal-body [id]{scroll-margin-top:30px}
 .legal-body li+li{margin-top:10px}
