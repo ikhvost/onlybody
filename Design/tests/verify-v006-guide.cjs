@@ -88,13 +88,11 @@ const report={date:new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Warsa
    assert.ok(await page.locator('.consent-card').evaluate(el=>el.getBoundingClientRect().top<document.querySelector('.equipment').getBoundingClientRect().top));
    assert.equal(await page.locator('.video-disclosure').getAttribute('open'),null);
    assert.equal(await page.locator('.legal-links a').count(),2);
-   assert.equal(await page.locator('.youtube-link').count(),1);
+   assert.equal(await page.locator('.youtube-link').count(),0);
    assert.equal(await page.locator('.consent-card > button.permission-button').count(),1);
    assert.ok(await page.locator('.consent-card > button.permission-button').isVisible());
    if(language==='en')assert.equal(await page.locator('.permission-button').innerText(),'Watch Video');
    assert.equal(await page.locator('.consent-card > .youtube-link').count(),0);
-   assert.match(await page.locator('.youtube-link').getAttribute('href'),/^https:\/\/www\.youtube\.com\/watch\?v=/);
-   assert.equal(await page.locator('.youtube-link').getAttribute('target'),'_blank');
    assert.ok(await page.locator('.author').innerText());
    if(language==='en'&&width===393)await capture(product,'guide-video-first');
    assert.equal(await page.locator('.legal-links a').first().isVisible(),false);
@@ -113,6 +111,11 @@ const report={date:new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Warsa
     const player=await page.locator('.player-placeholder').boundingBox();
     assert.ok(player.width>=200&&player.height>=200);
     assert.equal(await page.locator('.consent-card').count(),0);
+    assert.equal(await page.locator('a[href*="youtube.com/watch"]').count(),0);
+    await page.locator('[data-action="videoPlay"]').click();
+    assert.equal(await page.locator('.alert-card a').count(),0);
+    assert.ok(!(await page.locator('.alert-card').innerText()).includes('Watch on YouTube'));
+    await act('closeOverlay');
     await act('withdrawVideo');
     assert.equal((await data()).videoConsent,false);
     assert.equal((await data()).tracking,tracking);
@@ -123,7 +126,7 @@ const report={date:new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Warsa
   assert.deepEqual(popups,[],'Watch Video must not open another tab');
   assert.deepEqual(remoteMedia,[],'Mock must not contact YouTube or Google media services');
   if (!process.env.DESIGN_VIDEO_ONLY) report.flows.push('Search/menu icon centering; separate guide/add targets; direct and modal return preserves query, filters, scroll and focus; keyboard add exactly once');
-  report.flows.push('Watch Video directly enables the mock player; no ATT alert, no tracking-state changes, no new tabs; all three ATT states and consent withdrawal; legal links hidden inside disclosure and available when expanded; mock player at least 200 × 200; no remote media requests');
+  report.flows.push('No external Watch on YouTube link before or after consent; Watch Video directly enables the mock player; no ATT alert, no tracking-state changes, no new tabs; all three ATT states and consent withdrawal; legal links hidden inside disclosure and available when expanded; mock player at least 200 × 200; no remote media requests');
   assert.deepEqual(report.issues,[]);report.status='PASS';
  }catch(error){report.status='FAIL';report.issues.push(error.stack);process.exitCode=1}
  finally{fs.writeFileSync(process.env.DESIGN_REPORT || path.join(output,'guide-verification.json'),JSON.stringify(report,null,2)+'\n');await browser.close();console.log(JSON.stringify(report,null,2))}

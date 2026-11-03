@@ -64,6 +64,6 @@
   "approvalScope": "User requested centered search/menu icons, separate picker actions, video-first guide and simpler disclosure; native implementation is separate",
   "controlsVerification": "controls-verification.json",
   "guideVerification": "guide-verification.json",
-  "videoCtaVerification": "direct-video-verification.json",
+  "videoCtaVerification": "no-external-video-verification.json",
   "pickerRefinementVerification": "picker-refinement-verification.json"
 }

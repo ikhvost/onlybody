@@ -11,6 +11,7 @@
       'Mit „Video ansehen“ erlaubst du das Laden von YouTube-Videos. Google verarbeitet Geräte- und Wiedergabedaten und kann Cookies für Wiedergabe, Analysen und Werbung verwenden.',
       'En appuyant sur « Voir la vidéo », vous autorisez le chargement des vidéos YouTube. Google traite les données de l’appareil et de visionnage et peut utiliser des cookies pour la lecture, les analyses et la publicité.'
     ],
+    preview: ['Цей HTML-прототип показує інтерфейс плеєра; реальне відтворення відео тут не підключене.','This HTML prototype previews the player interface; actual video playback is not connected.','Ten prototyp HTML pokazuje interfejs odtwarzacza; rzeczywiste odtwarzanie nie jest podłączone.','Dieser HTML-Prototyp zeigt die Player-Oberfläche; die Videowiedergabe ist hier nicht angebunden.','Ce prototype HTML présente l’interface du lecteur ; la lecture vidéo réelle n’est pas connectée.'],
     watch: ['Дивитися відео','Watch Video','Obejrzyj film','Video ansehen','Voir la vidéo'],
     privacy: ['Конфіденційність Google','Google Privacy','Prywatność Google','Google-Datenschutz','Confidentialité Google'],
     terms: ['Умови YouTube','YouTube Terms','Warunki YouTube','YouTube-Bedingungen','Conditions YouTube'],
@@ -37,17 +38,21 @@
     if (card && state().videoConsent) {
       // This is a network-free preview. Video consent never changes ATT state.
       card.outerHTML = `<div class="player-placeholder">${btn(icon('play',24),'videoPlay','play')}<span>YouTube · HTML-мок</span></div>`;
-    } else if (card && youtube) {
+    } else if (card) {
       const legal = `<div class="legal-links"><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">${E(text('privacy'))}</a><a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener">${E(text('terms'))}</a></div>`;
       card.innerHTML = `<strong>${E(text('title'))}</strong><p>${E(text('summary'))}</p>${btn(E(text('watch')),'videoPermission','primary permission-button')}<details class="video-disclosure"><summary>${E(text('details'))}</summary><p>${tr('uiYouCanTurnVideosOffInSettings')}</p>${legal}</details>`;
-      card.querySelector('.video-disclosure').append(youtube);
     }
+    youtube?.remove();
     template.content.querySelector('[data-action="videoPlay"]')?.setAttribute('aria-label',text('watch'));
     return template.innerHTML;
   };
 
   action = value => {
     const s = state(), [name,index] = value.split(':');
+    if (name === 'videoPlay') {
+      alertOverlay('YouTube · HTML-мок',text('preview'),[{label:t('uiOkUppercase'),action:'closeOverlay'}]);
+      return;
+    }
     if (name === 'videoPermission') {
       if (s.route !== 'movement' || !video(s.exerciseName)) return;
       s.videoConsent = true;
