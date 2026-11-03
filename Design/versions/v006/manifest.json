@@ -63,5 +63,7 @@
   "screenshotStorage": "local-only, gitignored",
   "approvalScope": "User requested centered search/menu icons, separate picker actions, video-first guide and simpler disclosure; native implementation is separate",
   "controlsVerification": "controls-verification.json",
-  "guideVerification": "guide-verification.json"
+  "guideVerification": "guide-verification.json",
+  "videoCtaVerification": "video-cta-verification.json",
+  "pickerRefinementVerification": "picker-refinement-verification.json"
 }

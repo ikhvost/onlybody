@@ -222,10 +222,9 @@
 .device .search-box input { min-width: 0; }
 .device .picker-row { padding: 0 var(--inset); gap: var(--space-s); }
 .device .picker-guide { display: flex; align-items: center; gap: var(--space-s); text-align: left; flex: 1; min-width: 0; align-self: stretch; padding: var(--card-inset) 0; }
-.device .picker-guide > .icon { flex-shrink: 0; }
 .device .picker-add { display: grid; place-items: center; flex: 0 0 var(--touch); width: var(--touch); height: var(--touch); padding: 0; border-radius: var(--button-radius); color: var(--accent); background: var(--accent-dim); }
 .device .picker-add > .icon { width: var(--control-icon); height: var(--control-icon); color: inherit; }
-.device .consent-card .permission-button { width: 100%; padding: var(--space-m); color: var(--bg); margin-block: var(--space-m); }
+.device .consent-card .permission-button { display: flex; align-items: center; justify-content: center; text-align: center; text-decoration: none; width: 100%; padding: var(--space-m); color: var(--bg); margin-block: var(--space-m); }
 .device .video-disclosure summary { display: flex; align-items: center; gap: var(--space-s); min-height: var(--touch); cursor: pointer; color: var(--text2); font-size: var(--type-meta); }
 .device .video-disclosure summary::before { content: '+'; font-size: var(--type-card); }
 .device .video-disclosure[open] summary::before { content: '−'; }

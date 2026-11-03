@@ -11,8 +11,7 @@
       'Videos von YouTube. Google verarbeitet Geräte- und Wiedergabedaten und kann Cookies für Wiedergabe, Analysen und Werbung verwenden.',
       'Vidéos YouTube. Google traite les données de l’appareil et de visionnage et peut utiliser des cookies pour la lecture, les analyses et la publicité.'
     ],
-    next: ['Далі ви оберете дозвіл на відстеження.','Choose your tracking permission next.','Następnie wybierzesz zgodę na śledzenie.','Anschließend entscheidest du über die Tracking-Erlaubnis.','Vous choisirez ensuite votre autorisation de suivi.'],
-    setup: ['Налаштувати відео','Set up videos','Skonfiguruj filmy','Videos einrichten','Configurer les vidéos'],
+    setup: ['Дивитися тут','Watch in app','Oglądaj w aplikacji','In der App ansehen','Regarder dans l’application'],
     privacy: ['Конфіденційність Google','Google Privacy','Prywatność Google','Google-Datenschutz','Confidentialité Google'],
     terms: ['Умови YouTube','YouTube Terms','Warunki YouTube','YouTube-Bedingungen','Conditions YouTube'],
     details: ['Про дані та дозволи','About data and permissions','Dane i uprawnienia','Daten und Berechtigungen','Données et autorisations'],
@@ -26,7 +25,7 @@
     if (!picker || !filtered(true).length) return previousRows(picker);
     return filtered(true).map(ex => {
       const index = D.products[product].exercises.indexOf(ex);
-      const description = `<div class="grow"><strong>${E(exName(ex))}</strong><span class="meta">${E(label(ex.primaryMuscle)+' · '+ex.equipment.map(label).join(', '))}</span></div>${icon('chevron',20)}`;
+      const description = `<div class="grow"><strong>${E(exName(ex))}</strong><span class="meta">${E(label(ex.primaryMuscle)+' · '+ex.equipment.map(label).join(', '))}</span></div>`;
       return `<div class="exercise-row picker-row">${btn(description,`pickerGuide:${index}`,'picker-guide')}${btn(icon('plus',22),`addExercise:${index}`,'picker-add',`aria-label="${E(text('add')+': '+exName(ex))}"`)}</div>`;
     }).join('');
   };
@@ -35,11 +34,15 @@
     const template = document.createElement('template');
     template.innerHTML = previousMovement();
     const card = template.content.querySelector('.consent-card');
-    if (card) {
+    const youtube = template.content.querySelector('.youtube-link');
+    if (card && youtube) {
       const denied = state().tracking === 'denied';
       const disclosure = card.querySelector('p').innerHTML;
       const legal = `<div class="legal-links"><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">${E(text('privacy'))}</a><a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener">${E(text('terms'))}</a></div>`;
-      card.innerHTML = `<strong>${E(text('title'))}</strong><p>${E(text(denied?'external':'summary'))}</p>${denied?'':`<p class="small-copy">${E(text('next'))}</p>${btn(E(text('setup')),'videoPermission','primary permission-button')}`}<details class="video-disclosure"><summary>${E(text('details'))}</summary><p>${disclosure}</p><p>${tr('uiYouCanTurnVideosOffInSettings')}</p></details>${legal}`;
+      card.innerHTML = `<strong>${E(text('title'))}</strong><p>${E(text(denied?'external':'summary'))}</p><details class="video-disclosure"><summary>${E(text('details'))}</summary><p>${disclosure}</p><p>${tr('uiYouCanTurnVideosOffInSettings')}</p>${denied?'':btn(E(text('setup')),'videoPermission','secondary in-app-video')}</details>${legal}`;
+      youtube.classList.add('primary','permission-button');
+      youtube.removeAttribute('style');
+      card.querySelector('.video-disclosure').before(youtube);
     }
     return template.innerHTML;
   };

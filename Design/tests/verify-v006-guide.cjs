@@ -29,6 +29,7 @@ const report={date:new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Warsa
  }
  try{
   for(const product of ['OnlyBody','OnlyWeights'])for(const language of ['uk','en','pl','de','fr'])for(const width of [375,393,440]){
+   if (!process.env.DESIGN_VIDEO_ONLY) {
    await go(product,language,width,'library');await centered('.search-box');
    await go(product,language,width,'workout');await act('replaceItem:session:0');await centered('.replacement-controls .search-box');
    for(const modal of [false,true]){
@@ -78,11 +79,18 @@ const report={date:new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Warsa
     assert.equal((await data()).overlay,null);
     report.pickerCases++;
    }
+   }
    await go(product,language,width,'movement');
    assert.equal(await page.locator('.consent-card').count(),1);
+   const geometry=await page.locator('.consent-card').evaluate(card=>[...card.querySelectorAll('*')].flatMap(el=>{const r=el.getBoundingClientRect();return r.width&&r.height&&(r.left<0||r.right>innerWidth||(el.matches('a,button,summary')&&(r.width<44||r.height<44)))?[el.className]:[]}));
+   assert.deepEqual(geometry,[]);
    assert.ok(await page.locator('.consent-card').evaluate(el=>el.getBoundingClientRect().top<document.querySelector('.equipment').getBoundingClientRect().top));
    assert.equal(await page.locator('.video-disclosure').getAttribute('open'),null);
    assert.equal(await page.locator('.legal-links a').count(),2);
+   assert.equal(await page.locator('.youtube-link').count(),1);
+   assert.equal(await page.locator('.consent-card > .youtube-link.primary').count(),1);
+   assert.match(await page.locator('.youtube-link').getAttribute('href'),/^https:\/\/www\.youtube\.com\/watch\?v=/);
+   assert.equal(await page.locator('.youtube-link').getAttribute('target'),'_blank');
    assert.ok(await page.locator('.author').innerText());
    if(language==='en'&&width===393)await capture(product,'guide-video-first');
    await page.locator('.video-disclosure summary').click();
@@ -94,6 +102,7 @@ const report={date:new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Warsa
    assert.equal(await page.locator('[data-action="videoPermission"]').count(),0);
    assert.ok(await page.locator('.youtube-link').isVisible());
    await go(product,language,width,'movement');
+   await page.locator('.video-disclosure summary').click();
    await page.locator('[data-action="videoPermission"]').click();
    await page.locator('[data-action="allowTracking"]').click();
    assert.equal((await data()).tracking,'authorized');
@@ -106,8 +115,9 @@ const report={date:new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Warsa
    report.videoCases++;
   }
   assert.deepEqual(remoteMedia,[],'Mock must not contact YouTube or Google media services');
-  report.flows.push('Search/menu icon centering; separate guide/add targets; direct and modal return preserves query, filters, scroll and focus; keyboard add exactly once','Video above equipment; expandable disclosure and legal/author links; simulated allow/deny/withdraw; mock player at least 200 × 200; no remote media requests');
+  if (!process.env.DESIGN_VIDEO_ONLY) report.flows.push('Search/menu icon centering; separate guide/add targets; direct and modal return preserves query, filters, scroll and focus; keyboard add exactly once');
+  report.flows.push('Single primary Watch on YouTube link with original destination; optional in-app permission inside details; video above equipment; expandable disclosure and legal/author links; simulated allow/deny/withdraw; mock player at least 200 × 200; no remote media requests');
   assert.deepEqual(report.issues,[]);report.status='PASS';
  }catch(error){report.status='FAIL';report.issues.push(error.stack);process.exitCode=1}
- finally{fs.writeFileSync(path.join(output,'guide-verification.json'),JSON.stringify(report,null,2)+'\n');await browser.close();console.log(JSON.stringify(report,null,2))}
+ finally{fs.writeFileSync(process.env.DESIGN_REPORT || path.join(output,'guide-verification.json'),JSON.stringify(report,null,2)+'\n');await browser.close();console.log(JSON.stringify(report,null,2))}
 })();
