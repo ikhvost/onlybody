@@ -1,0 +1,11 @@
+{
+  "date": "2026-11-03",
+  "scope": "v006 browser picker and video presentation; no real video playback or system permission",
+  "pickerCases": 0,
+  "videoCases": 30,
+  "flows": [
+    "Ready player immediately visible; no consent card or external link; all six consent/tracking combinations preserved; Play remains a network-free prototype; author retained; player at least 200 × 200 and Play at least 44 × 44; no media requests or new tabs"
+  ],
+  "issues": [],
+  "status": "PASS"
+}

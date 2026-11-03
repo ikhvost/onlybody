@@ -82,51 +82,35 @@ const report={date:new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Warsa
    }
    }
    await go(product,language,width,'movement');
-   assert.equal(await page.locator('.consent-card').count(),1);
-   const geometry=await page.locator('.consent-card').evaluate(card=>[...card.querySelectorAll('*')].flatMap(el=>{const r=el.getBoundingClientRect();return r.width&&r.height&&(r.left<0||r.right>innerWidth||(el.matches('a,button,summary')&&(r.width<44||r.height<44)))?[el.className]:[]}));
-   assert.deepEqual(geometry,[]);
-   assert.ok(await page.locator('.consent-card').evaluate(el=>el.getBoundingClientRect().top<document.querySelector('.equipment').getBoundingClientRect().top));
-   assert.equal(await page.locator('.video-disclosure').getAttribute('open'),null);
-   assert.equal(await page.locator('.legal-links a').count(),2);
+   assert.equal(await page.locator('.consent-card,.video-disclosure,.permission-button').count(),0);
    assert.equal(await page.locator('.youtube-link').count(),0);
-   assert.equal(await page.locator('.consent-card > button.permission-button').count(),1);
-   assert.ok(await page.locator('.consent-card > button.permission-button').isVisible());
-   if(language==='en')assert.equal(await page.locator('.permission-button').innerText(),'Watch Video');
-   assert.equal(await page.locator('.consent-card > .youtube-link').count(),0);
    assert.ok(await page.locator('.author').innerText());
+   assert.ok(await page.locator('.player-placeholder').evaluate(el=>el.getBoundingClientRect().top<document.querySelector('.equipment').getBoundingClientRect().top));
    if(language==='en'&&width===393)await capture(product,'guide-video-first');
-   assert.equal(await page.locator('.legal-links a').first().isVisible(),false);
-   await page.locator('.video-disclosure summary').click();
-   assert.ok(await page.locator('.video-disclosure .legal-links a').first().isVisible());
-   await page.locator('.video-disclosure summary').click();
-   // One click enables only the video preference, without asking for or granting ATT.
-   for (const tracking of ['notDetermined','denied','authorized']) {
-    await page.evaluate(tracking=>{mock.state().tracking=tracking;mock.state().videoConsent=false;mock.render()},tracking);
-    await page.locator('[data-action="videoPermission"]').click();
-    assert.equal((await data()).tracking,tracking);
-    assert.equal((await data()).videoConsent,true);
-    assert.equal((await data()).overlay,null);
-    assert.equal((await data()).route,'movement');
-    assert.equal(await page.locator('[data-action="allowTracking"], [data-action="denyTracking"]').count(),0);
+   // This gallery preview must not grant or revoke either native consent preference.
+   for (const tracking of ['notDetermined','denied','authorized']) for (const consent of [false,true]) {
+    await page.evaluate(({tracking,consent})=>{mock.state().tracking=tracking;mock.state().videoConsent=consent;mock.render()},{tracking,consent});
     const player=await page.locator('.player-placeholder').boundingBox();
     assert.ok(player.width>=200&&player.height>=200);
-    assert.equal(await page.locator('.consent-card').count(),0);
-    assert.equal(await page.locator('a[href*="youtube.com/watch"]').count(),0);
-    await page.locator('[data-action="videoPlay"]').click();
-    assert.equal(await page.locator('.alert-card a').count(),0);
-    assert.ok(!(await page.locator('.alert-card').innerText()).includes('Watch on YouTube'));
-    await act('closeOverlay');
-    await act('withdrawVideo');
-    assert.equal((await data()).videoConsent,false);
+    assert.ok(player.x>=0&&player.x+player.width<=width);
+    assert.equal(await page.locator('.consent-card,[data-action="videoPermission"]').count(),0);
+    const button=await page.locator('[data-action="videoPlay"]').boundingBox();
+    assert.ok(button.width>=44&&button.height>=44);
     assert.equal((await data()).tracking,tracking);
-    assert.equal(await page.locator('.player-placeholder').count(),0);
+    assert.equal((await data()).videoConsent,consent);
+    await page.locator('[data-action="videoPlay"]').click();
+    assert.equal(await page.locator('[data-action="allowTracking"], [data-action="denyTracking"]').count(),0);
+    assert.equal(await page.locator('a[href*="youtube.com/watch"]').count(),0);
+    await act('closeOverlay');
+    assert.equal((await data()).tracking,tracking);
+    assert.equal((await data()).videoConsent,consent);
    }
    report.videoCases++;
   }
   assert.deepEqual(popups,[],'Watch Video must not open another tab');
   assert.deepEqual(remoteMedia,[],'Mock must not contact YouTube or Google media services');
   if (!process.env.DESIGN_VIDEO_ONLY) report.flows.push('Search/menu icon centering; separate guide/add targets; direct and modal return preserves query, filters, scroll and focus; keyboard add exactly once');
-  report.flows.push('No external Watch on YouTube link before or after consent; Watch Video directly enables the mock player; no ATT alert, no tracking-state changes, no new tabs; all three ATT states and consent withdrawal; legal links hidden inside disclosure and available when expanded; mock player at least 200 × 200; no remote media requests');
+  report.flows.push('Ready player immediately visible; no consent card or external link; all six consent/tracking combinations preserved; Play remains a network-free prototype; author retained; player at least 200 × 200 and Play at least 44 × 44; no media requests or new tabs');
   assert.deepEqual(report.issues,[]);report.status='PASS';
  }catch(error){report.status='FAIL';report.issues.push(error.stack);process.exitCode=1}
  finally{fs.writeFileSync(process.env.DESIGN_REPORT || path.join(output,'guide-verification.json'),JSON.stringify(report,null,2)+'\n');await browser.close();console.log(JSON.stringify(report,null,2))}
