@@ -3,6 +3,11 @@ import XCTest
 /// Captures actual screens with fictional history in a fresh, isolated store per language.
 @MainActor
 final class StoreScreenshotTests: XCTestCase {
+    func testWebsiteScreenshots() {
+        continueAfterFailure = false
+        captureScenario(language: "en", locale: "en_US", workout: "Upper Body")
+    }
+
     func testPopulatedScreenshots() {
         continueAfterFailure = false
         let languages = [
@@ -27,6 +32,7 @@ final class StoreScreenshotTests: XCTestCase {
         app.launchEnvironment["ONLYBODY_SCREENSHOT_FIXTURE"] = "populated"
         app.launchEnvironment["ONLYBODY_SCREENSHOT_LANGUAGE"] = language
         XCUIDevice.shared.orientation = .portrait
+        XCUIDevice.shared.press(.home)
         app.launch()
         defer { app.terminate() }
         XCTAssertTrue(app.buttons["workout.start.\(workout)"].waitForExistence(timeout: 10))
@@ -40,6 +46,7 @@ final class StoreScreenshotTests: XCTestCase {
         tap("workout.start.\(workout)", in: app)
         tap("active.start", in: app)
         tap("active.set.0.done", in: app)
+        capture("07-rest-timer", language: language)
         tap("rest.skip", in: app)
         capture("03-active-workout", language: language)
         tap("active.list", in: app)

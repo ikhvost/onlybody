@@ -14,24 +14,58 @@ Keep `<!--email_off-->` comments around email links: the site's CSP blocks Cloud
 
 ## Assets
 
-Screenshots are real app UI with demonstration data, captured in iPhone 17 / iOS 26.4.1 Simulator on 2026-10-26, not physical-device tests. Capture replacements in English with `en_US` and these Debug fixtures:
+Screenshots are real app UI with demonstration data, captured in iPhone 17 Pro Max / iOS 26.4.1 Simulator on 2026-11-03, not physical-device tests. The English-only Visual scenario uses `en_US` and these Debug fixtures:
 
 ```text
 ONLYBODY_UI_FIXTURE=catalog
 ONLYBODY_UI_STORE=<fresh UUID per app>
 ONLYBODY_DEMONSTRATION_FIXTURE=ready
 ONLYBODY_NOTIFICATION_FIXTURE=authorized
+ONLYBODY_SCREENSHOT_FIXTURE=populated
+ONLYBODY_SCREENSHOT_LANGUAGE=en
 ```
 
-Existing JPEGs are 804 × 1748, converted from 1206 × 2622 PNGs at quality 87. The phone frame is CSS. Demo sessions use 3 sets, 12 reps and 45-second rests; their short logged durations are not actual workouts. The video fixture does not contact YouTube.
+Run each product serially on the same simulator:
 
-Muscle maps use the app's own anatomy image, renderer and seed metadata. Regenerate the three maps used by the homepage with:
+```sh
+xcodebuild test -project Apps/iOS/Apps.xcodeproj -scheme onlybody \
+  -testPlan Visual \
+  -only-testing:onlybodyUITests/StoreScreenshotTests/testWebsiteScreenshots \
+  -destination 'platform=iOS Simulator,name=iPhone 17 Pro Max,OS=26.4.1' \
+  -parallel-testing-enabled NO \
+  -resultBundlePath Release/Website-OnlyBody.xcresult
+# Repeat with scheme onlyweights, target onlyweightsUITests and a different result path.
+xcrun xcresulttool export attachments --path Release/Website-OnlyBody.xcresult \
+  --output-path Release/Website-OnlyBody-attachments
+```
+
+Use the attachment manifest to select train, workout builder, rest timer and exercise library from OnlyBody, and active workout and training log from OnlyWeights. The scenario returns to the Home screen before launch so screenshots do not carry a return-to-other-app status-bar link.
+
+The six JPEGs are 880 × 1912, converted from 1320 × 2868 PNGs with `sips -Z 1912 -s format jpeg -s formatOptions 87 INPUT --out OUTPUT`. Their combined size is about 882 KiB. The phone frame is CSS; screenshots retain the full app viewport. Demo workouts and history are fictional, not actual training records. The video fixture does not contact YouTube.
+
+The push-up muscle map uses the app's own anatomy image, renderer and seed metadata. Regenerate it with:
 
 ```sh
 bash Website/Scripts/export-muscles.sh
 ```
 
 Only referenced screenshots and maps are retained in `dist/assets`.
+
+## Website design refresh — 3 November 2026
+
+Aligned the website with native v006: neutral dark surfaces, system typography, gold actions, rounded panels and a floating glass header. The homepage introduces both products, shows planning, sets/rest, history and exercise discovery, and finishes with a short privacy explanation and native HTML FAQ. The two hero screenshots remain fully visible. Updated catalog counts to 65/62 and removed obsolete difficulty-filter descriptions. No scripts, third-party fonts, tracking or embedded videos were added. Privacy and Terms text is unchanged by this design revision; their shared stylesheet was refreshed.
+
+Validation:
+
+- `StoreScreenshotTests/testWebsiteScreenshots` passed for both schemes (45.7 s / 46.0 s), producing seven native captures each. Six selected captures are used by the homepage.
+- `swiftlint lint --strict --no-cache --quiet` and `git diff --check` passed.
+- `bash Website/Scripts/export-muscles.sh` completed with the current native renderer; the regenerated push-up map was visually reviewed.
+- All four HTML documents have balanced tags and unique IDs; all 75 local links, assets and fragment references resolve.
+- Browser layout checks at 375, 393, 768, 1024 and 1440 px found no horizontal overflow on the homepage. Privacy, Terms and 404 also passed at 393 and 1440 px.
+- Visually reviewed the homepage hero, product cards, planning, rest/history, exercise library/map and FAQ; verified section links, FAQ expansion, visible keyboard focus and all images loading. Browser console contained no warnings or errors. Shared legal layouts were checked separately.
+- Reduced-motion, reduced-transparency and no-blur styles are included and source-reviewed; OS accessibility preferences were not changed for this review.
+
+Local, gitignored results and browser captures are in `Release/Artifacts/2026-11-03-website/`; final native result bundles use the `*-CleanScreens.xcresult` names. Shipping app source is unchanged. This revision does not deploy the website or verify public hosting.
 
 ## Before release
 

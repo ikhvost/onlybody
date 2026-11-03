@@ -10,9 +10,7 @@ struct ExportMuscles {
         let asset = root.appending(path: "Apps/iOS/Sources/Resources/Assets.xcassets/MuscleAnatomy.imageset/muscle-anatomy.png")
         guard let bitmap = NSImage(contentsOf: asset) else { throw CocoaError(.fileReadCorruptFile) }
         let examples: [(String, String, String)] = [
-            ("Scripts/StoreGenerator/SeedData.json", "Standard Push-Ups", "push-ups"),
-            ("Scripts/StoreGenerator/SeedData.json", "Squats", "squats"),
-            ("Scripts/StoreGenerator/SeedData.json", "Chin-Ups", "chin-ups")
+            ("Scripts/StoreGenerator/SeedData.json", "Standard Push-Ups", "push-ups")
         ]
         for (catalog, name, slug) in examples {
             let data = try Data(contentsOf: root.appending(path: catalog))
