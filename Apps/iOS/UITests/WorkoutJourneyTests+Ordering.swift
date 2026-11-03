@@ -8,14 +8,6 @@ extension WorkoutJourneyTests {
         let second = rows.element(boundBy: 1)
         let firstID = first.identifier
         let secondID = second.identifier
-        let down = firstID.replacing("builder.movement.", with: "builder.order.") + ".down"
-        let up = firstID.replacing("builder.movement.", with: "builder.order.") + ".up"
-        tap(firstID.replacing("builder.movement.", with: "builder.order.") + ".menu")
-        tap(down)
-        assertRowOrder(firstID, secondID, firstBelow: true)
-        tap(firstID.replacing("builder.movement.", with: "builder.order.") + ".menu")
-        tap(up)
-        assertRowOrder(firstID, secondID, firstBelow: false)
         let firstHandle = firstID.replacing("builder.movement.", with: "builder.drag.")
         let secondHandle = secondID.replacing("builder.movement.", with: "builder.drag.")
         dragExercise(firstHandle, to: secondHandle, extraDistance: 30)
@@ -25,7 +17,7 @@ extension WorkoutJourneyTests {
     }
 
     private func assertRowOrder(_ firstID: String, _ secondID: String, firstBelow: Bool) {
-        // Menu actions run after sheet dismissal, then the rows animate into place.
+        // Wait for the dragged rows to settle into their new positions.
         let settled = NSPredicate { [self] _, _ in
             let firstY = app.buttons[firstID].frame.midY
             let secondY = app.buttons[secondID].frame.midY
@@ -33,6 +25,23 @@ extension WorkoutJourneyTests {
         }
         expectation(for: settled, evaluatedWith: app)
         waitForExpectations(timeout: 5)
+    }
+
+    func verifyEditorReplacement() {
+        let first = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "builder.movement.")).element(boundBy: 0)
+        let firstID = first.identifier
+        let replaceID = firstID.replacing("builder.movement.", with: "builder.replace.")
+        for exercise in [JourneyProduct.libraryExercise, JourneyProduct.exercise] {
+            tap(replaceID)
+            let search = app.textFields["exercisePicker.search"]
+            XCTAssertTrue(search.waitForExistence(timeout: 10), "Replace must open the picker directly")
+            search.tap()
+            search.typeText(exercise)
+            tap("exercise.pick.\(exercise)")
+            XCTAssertTrue(app.buttons[firstID].waitForExistence(timeout: 10))
+            XCTAssertTrue(app.buttons[firstID].label.contains(exercise))
+            XCTAssertTrue(app.staticTexts["Sets: 1 · Reps: 130 · Rest: 45 sec"].exists)
+        }
     }
 
     func verifySessionDragReordering() {

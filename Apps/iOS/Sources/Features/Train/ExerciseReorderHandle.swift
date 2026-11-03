@@ -1,10 +1,12 @@
 import SwiftUI
 
 struct ExerciseReorderHandle: View {
+    let position: Int
     let onLift: () -> Void
     let onDrag: (CGPoint, CGPoint) -> Void
     let onEnd: () -> Void
     let onCancel: () -> Void
+    let onAdjust: (AccessibilityAdjustmentDirection) -> Void
     @GestureState private var isTouching = false
 
     var body: some View {
@@ -13,6 +15,8 @@ struct ExerciseReorderHandle: View {
             .contentShape(.rect)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel(String(localized: .uiWorkoutReorder))
+            .accessibilityValue(Text(position, format: .number))
+            .accessibilityAdjustableAction(onAdjust)
             .gesture(
                 LongPressGesture(minimumDuration: Theme.exerciseLiftDelay)
                     .sequenced(before: DragGesture(minimumDistance: 0, coordinateSpace: .global))

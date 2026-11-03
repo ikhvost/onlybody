@@ -33,6 +33,7 @@ final class ControlAccessibilityTests: XCTestCase {
                 assertHitArea(app.buttons["builder.add"], minimum: 44)
                 assertHitArea(app.buttons["builder.options"], minimum: 44)
                 assertHitArea(app.buttons["builder.save"], minimum: 52)
+                assertHitArea(app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "builder.replace.")).firstMatch, minimum: 44)
             }
             if index == 6 {
                 assertHitArea(app.buttons["catalog.filters"], minimum: 44)

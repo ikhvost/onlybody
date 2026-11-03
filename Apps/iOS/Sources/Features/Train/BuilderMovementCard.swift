@@ -20,12 +20,8 @@ struct BuilderMovementCard: View {
                     }.frame(maxWidth: .infinity, minHeight: Theme.touchSize, alignment: .leading)
                 }
                 .accessibilityIdentifier("builder.movement.\(movement.id)")
-                if let index = viewModel.movements.firstIndex(where: { $0.id == movement.id }) {
-                    ExerciseOrderActions(canMoveUp: index > 0, canMoveDown: index + 1 < viewModel.movements.count,
-                                         identifierPrefix: "builder.order.\(movement.id)", title: movement.exercise.displayName,
-                                         onUp: { viewModel.moveMovement(movement.id, to: viewModel.movements[index - 1].id) },
-                                         onDown: { viewModel.moveMovement(movement.id, to: viewModel.movements[index + 1].id) },
-                                         onReplace: { showingReplacement = true })
+                ExerciseReplaceButton(identifier: "builder.replace.\(movement.id)") {
+                    showingReplacement = true
                 }
             }
         }

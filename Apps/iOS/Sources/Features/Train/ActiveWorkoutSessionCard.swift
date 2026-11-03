@@ -24,11 +24,8 @@ struct ActiveWorkoutSessionCard: View {
                 }
                 .buttonStyle(PressableButtonStyle(animates: false))
                 .accessibilityIdentifier("active.exercise.\(index)")
-                ExerciseOrderActions(canMoveUp: index > 0, canMoveDown: index + 1 < viewModel.items.count,
-                                     canReplace: viewModel.canReplace(item.id), identifierPrefix: "active.exercise.\(index)",
-                                     title: CatalogLocalization.exercise(item.exercise?.name ?? ""),
-                                     onUp: { viewModel.moveExercise(item.id, to: viewModel.items[index - 1].id) },
-                                     onDown: { viewModel.moveExercise(item.id, to: viewModel.items[index + 1].id) }, onReplace: onReplace)
+                ExerciseReplaceButton(canReplace: viewModel.canReplace(item.id),
+                                      identifier: "active.exercise.\(index).replace", onReplace: onReplace)
             }
         }
         .padding(Theme.cardInset)

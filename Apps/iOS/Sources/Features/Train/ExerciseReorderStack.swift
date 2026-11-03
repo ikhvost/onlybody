@@ -13,10 +13,11 @@ struct ExerciseReorderStack<Item: Identifiable, Content: View>: View where Item.
 
     var body: some View {
         VStack(spacing: spacing) {
-            ForEach(items) { item in
+            ForEach(items.enumerated(), id: \.element.id) { index, item in
                 let isLifted = drag.liftedID == item.id
                 ZStack {
                     content(item, ExerciseReorderHandle(
+                        position: index + 1,
                         onLift: { if isEnabled { drag.lift(item.id) } },
                         onDrag: { start, location in
                             guard isEnabled else { return }
@@ -24,7 +25,8 @@ struct ExerciseReorderStack<Item: Identifiable, Content: View>: View where Item.
                             dragLocation = location
                         },
                         onEnd: finish,
-                        onCancel: cancel
+                        onCancel: cancel,
+                        onAdjust: { adjust(item.id, direction: $0) }
                     ))
                     .overlay {
                         RoundedRectangle(cornerRadius: Theme.cornerRadius)
@@ -49,6 +51,18 @@ struct ExerciseReorderStack<Item: Identifiable, Content: View>: View where Item.
         .onChange(of: isEnabled) { _, enabled in if !enabled { cancel() } }
         .onChange(of: items.map(\.id)) { _, _ in cancel() }
         .onDisappear(perform: cancel)
+    }
+
+    private func adjust(_ id: UUID, direction: AccessibilityAdjustmentDirection) {
+        guard isEnabled, let index = items.firstIndex(where: { $0.id == id }) else { return }
+        switch direction {
+        case .increment:
+            if index + 1 < items.count { onMove(id, items[index + 1].id) }
+        case .decrement:
+            if index > 0 { onMove(id, items[index - 1].id) }
+        @unknown default:
+            break
+        }
     }
 
     private func finish() {
