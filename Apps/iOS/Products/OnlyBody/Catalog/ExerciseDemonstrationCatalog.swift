@@ -261,6 +261,142 @@ nonisolated enum ExerciseDemonstrationCatalog {
         ExerciseDemonstration(
             id: "bent-knee-calf-raises", exerciseName: "Bent-Knee Calf Raises",
             videoID: "-KZ0TJydf8M", author: "Rx Rehab", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "wide-push-ups", exerciseName: "Wide Push-Ups",
+            videoID: "UFa702F5WnY", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "hand-release-push-ups", exerciseName: "Hand-Release Push-Ups",
+            videoID: "qYlo-awExLE", author: "FITBODY with Julie Lohre", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "ring-push-ups", exerciseName: "Ring Push-Ups",
+            videoID: "7FRwuB1_l7U", author: "Andrew Alinda", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "bar-bodyweight-triceps-extensions", exerciseName: "Bar Bodyweight Triceps Extensions",
+            videoID: "8jQ4TsXJI_s", author: "Ashton Fitness", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "neutral-grip-pull-ups", exerciseName: "Neutral-Grip Pull-Ups",
+            videoID: "ayvVeCtp83Q", author: "JustCalisthenics", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "bent-knee-inverted-rows", exerciseName: "Bent-Knee Inverted Rows",
+            videoID: "bicxvRa8Di0", author: "Shubhag Rao", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "feet-elevated-inverted-rows", exerciseName: "Feet-Elevated Inverted Rows",
+            videoID: "oSCqGIPwBKI", author: "Christian Lawal - Mind & Body Coach", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "ring-rows", exerciseName: "Ring Rows",
+            videoID: "VQn3aGSUorc", author: "Leon Thorley", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "ring-biceps-curls", exerciseName: "Ring Biceps Curls",
+            videoID: "dcRGddB4C-g", author: "Ian Acosta", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "bodyweight-box-squats", exerciseName: "Bodyweight Box Squats",
+            videoID: "7LpLZOdz68A", author: "Physio Plus Fitness", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "heel-elevated-squats", exerciseName: "Heel-Elevated Squats",
+            videoID: "4_UY8xtPpY0", author: "FITASTIC", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "walking-lunges", exerciseName: "Walking Lunges",
+            videoID: "Pbmj6xPo-Hw", author: "Buff Dudes Workouts", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "front-foot-elevated-split-squats", exerciseName: "Front-Foot-Elevated Split Squats",
+            videoID: "UbIGj-t-YKo", author: "CheapWorkouts", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "lateral-step-ups", exerciseName: "Lateral Step-Ups",
+            videoID: "baKJg6iQ_Ww", author: "PureGym", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "bodyweight-good-mornings", exerciseName: "Bodyweight Good Mornings",
+            videoID: "61zbhuRiwQg", author: "Horton Barbell", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "skater-squats", exerciseName: "Skater Squats",
+            videoID: "YO-247pOeIc", author: "[P]rehab", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "reverse-nordic-curls", exerciseName: "Reverse Nordic Curls",
+            videoID: "DmiMI62lmWM", author: "QED Fitness", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "bodyweight-hip-thrusts", exerciseName: "Bodyweight Hip Thrusts",
+            videoID: "O_6at5HGc3g", author: "Lean Physique Lab", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "long-lever-glute-bridge", exerciseName: "Long-Lever Glute Bridge",
+            videoID: "V2LqK2X9Kj0", author: "Movement Upgraded", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "single-leg-sliding-leg-curls", exerciseName: "Single-Leg Sliding Leg Curls",
+            videoID: "LZMCkwmkoj0", author: "Core Blend Training", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "hand-assisted-nordic-curls", exerciseName: "Hand-Assisted Nordic Curls",
+            videoID: "WhQ-nV-dT0Q", author: "The Sustainable Training Method", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "suspension-hamstring-curls", exerciseName: "Suspension Hamstring Curls",
+            videoID: "Mjsws0TEZSE", author: "The Red Delta Project", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "short-lever-copenhagen-plank", exerciseName: "Short-Lever Copenhagen Plank",
+            videoID: "bU8aazv5voo", author: "Runna", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "single-leg-calf-raises-on-a-step", exerciseName: "Single-Leg Calf Raises on a Step",
+            videoID: "d6Cv1qKF_Jk", author: "AskDoctorJo", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "wall-tibialis-raises", exerciseName: "Wall Tibialis Raises",
+            videoID: "VzIcGAgBiaM", author: "The Barefoot Sprinter", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "crunches", exerciseName: "Crunches",
+            videoID: "McwAT4O3DDk", author: "SWR Sport", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "lying-leg-raises", exerciseName: "Lying Leg Raises",
+            videoID: "Wp4BlxcFTkE", author: "LivestrongWoman", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "knee-side-plank", exerciseName: "Knee Side Plank",
+            videoID: "uTUlAq_6-RI", author: "HolaDoctor", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "side-plank-hip-lifts", exerciseName: "Side Plank Hip Lifts",
+            videoID: "4RTpYx-b9kA", author: "Brian Syuki", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "kneeling-plank", exerciseName: "Kneeling Plank",
+            videoID: "UOXuHkBfDhU", author: "Rehab My Patient", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "plank-shoulder-taps", exerciseName: "Plank Shoulder Taps",
+            videoID: "gKA5LBy7WAI", author: "Wellen", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "plank-up-downs", exerciseName: "Plank Up-Downs",
+            videoID: "3Wn0-JyAZm8", author: "Urbacise", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "hollow-body-rocks", exerciseName: "Hollow Body Rocks",
+            videoID: "HPnFTmjjDDA", author: "Howcast", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "reverse-plank", exerciseName: "Reverse Plank",
+            videoID: "bnu5b61vqGQ", author: "Well+Good", startSeconds: 0
         )
     ]
 

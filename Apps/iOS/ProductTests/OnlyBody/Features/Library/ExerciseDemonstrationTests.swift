@@ -5,7 +5,7 @@ import Testing
 struct ExerciseDemonstrationTests {
     @Test func catalogHasUniqueStableKeysAndValidYouTubeLinks() throws {
         let all = ExerciseDemonstrationCatalog.all
-        #expect(all.count == 65)
+        #expect(all.count == 99)
         #expect(Set(all.map(\.id)).count == all.count)
         #expect(Set(all.map(\.exerciseName)).count == all.count)
         for demonstration in all {

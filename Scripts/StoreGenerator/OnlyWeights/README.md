@@ -1,10 +1,10 @@
 # OnlyWeights exercise catalog
 
-The release contains **62 exercises**: the original 16 names plus 46 gym movements. Names are compatibility keys and must not be renamed without an alias migration. Metadata and the bundled seed are generated from `SeedData.json`; no JSON is loaded at runtime.
+The catalog contains **105 exercises**, including 43 additions selected for distinct movement patterns, progressions or equipment options. Names are compatibility keys and must not be renamed without an alias migration. Metadata and the bundled seed are generated from `SeedData.json`; no JSON is loaded at runtime.
 
 ## Editorial conventions
 
-- Difficulty describes coordination, support and technique complexity, not a prescribed load: 32 beginner, 21 intermediate and 9 advanced entries. Existing levels are preserved.
+- Difficulty describes coordination, support and technique complexity, not a prescribed load: 49 beginner, 43 intermediate and 13 advanced entries. Existing levels are preserved.
 - Muscle groups are qualitative selections in the shared coarse taxonomy, not activation percentages or an exhaustive list of stabilizers. The primary filtering group is one of the highlighted primary groups.
 - Weighted Pull-Ups use a pronated grip; Weighted Chin-Ups use a supinated grip. Weighted Dips use parallel bars. These three variants use a dip belt and weight plates.
 - Dumbbell Shoulder Press and Dumbbell Reverse Fly are standing variants. Arnold Press is seated on an upright adjustable bench. Ab Wheel Rollout starts from the knees. Cable Woodchop is standing high-to-low. Single-leg exercises use the named dumbbell load, not bodyweight-only footage.

@@ -37,7 +37,7 @@ struct ExerciseCatalogUpgradeTests {
 
         let repository = SwiftDataExerciseRepository(context: ModelContext(container), catalog: catalog)
         let all = try await repository.allExercises()
-        #expect(all.count == 65)
+        #expect(all.count == 99)
         #expect(all.first { $0.name == "Squats" }?.id == existing.id)
         #expect(all.first { $0.name == "Squats" }?.difficulty == .beginner)
         #expect(try context.fetchCount(FetchDescriptor<Exercise>()) == 1)

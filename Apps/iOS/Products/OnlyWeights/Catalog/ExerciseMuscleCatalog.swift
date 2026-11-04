@@ -250,5 +250,177 @@ nonisolated enum ExerciseMuscleCatalog {
             primary: ["Shoulders", "Back"],
             secondary: ["Biceps", "Forearms", "Core"],
             isFullBody: false),
+        "Dumbbell Floor Press": ExerciseMuscleProfile(
+            primary: ["Chest", "Triceps"],
+            secondary: ["Shoulders"],
+            isFullBody: false),
+        "Decline Barbell Bench Press": ExerciseMuscleProfile(
+            primary: ["Chest", "Triceps"],
+            secondary: ["Shoulders"],
+            isFullBody: false),
+        "Incline Dumbbell Fly": ExerciseMuscleProfile(
+            primary: ["Chest"],
+            secondary: ["Shoulders"],
+            isFullBody: false),
+        "Low-to-High Cable Fly": ExerciseMuscleProfile(
+            primary: ["Chest"],
+            secondary: ["Shoulders", "Core"],
+            isFullBody: false),
+        "Smith Machine Incline Bench Press": ExerciseMuscleProfile(
+            primary: ["Chest", "Triceps"],
+            secondary: ["Shoulders"],
+            isFullBody: false),
+        "Neutral-Grip Lat Pulldown": ExerciseMuscleProfile(
+            primary: ["Back", "Biceps"],
+            secondary: ["Forearms"],
+            isFullBody: false),
+        "Single-Arm Cable Lat Pulldown": ExerciseMuscleProfile(
+            primary: ["Back", "Biceps"],
+            secondary: ["Core", "Forearms"],
+            isFullBody: false),
+        "Single-Arm Cable Row": ExerciseMuscleProfile(
+            primary: ["Back", "Biceps"],
+            secondary: ["Core", "Shoulders", "Forearms"],
+            isFullBody: false),
+        "Landmine Row": ExerciseMuscleProfile(
+            primary: ["Back"],
+            secondary: ["Biceps", "Shoulders", "Forearms", "Core"],
+            isFullBody: false),
+        "Machine-Assisted Pull-Ups": ExerciseMuscleProfile(
+            primary: ["Back", "Biceps"],
+            secondary: ["Forearms"],
+            isFullBody: false),
+        "Dumbbell Pullover": ExerciseMuscleProfile(
+            primary: ["Back", "Chest"],
+            secondary: ["Triceps", "Core"],
+            isFullBody: false),
+        "Weighted 45-Degree Back Extension": ExerciseMuscleProfile(
+            primary: ["Hamstrings", "Glutes", "Back"],
+            secondary: ["Core"],
+            isFullBody: false),
+        "Machine Shoulder Press": ExerciseMuscleProfile(
+            primary: ["Shoulders", "Triceps"],
+            secondary: ["Core"],
+            isFullBody: false),
+        "Half-Kneeling Landmine Press": ExerciseMuscleProfile(
+            primary: ["Shoulders", "Triceps"],
+            secondary: ["Chest", "Core"],
+            isFullBody: false),
+        "Reverse Pec Deck": ExerciseMuscleProfile(
+            primary: ["Shoulders", "Back"],
+            secondary: [],
+            isFullBody: false),
+        "EZ-Bar Preacher Curl": ExerciseMuscleProfile(
+            primary: ["Biceps"],
+            secondary: ["Forearms"],
+            isFullBody: false),
+        "Concentration Curl": ExerciseMuscleProfile(
+            primary: ["Biceps"],
+            secondary: ["Forearms"],
+            isFullBody: false),
+        "Reverse EZ-Bar Curl": ExerciseMuscleProfile(
+            primary: ["Forearms", "Biceps"],
+            secondary: [],
+            isFullBody: false),
+        "Two-Hand Dumbbell Overhead Triceps Extension": ExerciseMuscleProfile(
+            primary: ["Triceps"],
+            secondary: ["Shoulders", "Core"],
+            isFullBody: false),
+        "Machine-Assisted Dips": ExerciseMuscleProfile(
+            primary: ["Triceps", "Chest"],
+            secondary: ["Shoulders"],
+            isFullBody: false),
+        "Double-Dumbbell Front Squat": ExerciseMuscleProfile(
+            primary: ["Quads", "Glutes"],
+            secondary: ["Core", "Back"],
+            isFullBody: false),
+        "Dumbbell Split Squat": ExerciseMuscleProfile(
+            primary: ["Quads", "Glutes"],
+            secondary: ["Adductors", "Core"],
+            isFullBody: false),
+        "Dumbbell Lateral Lunge": ExerciseMuscleProfile(
+            primary: ["Quads", "Glutes", "Adductors"],
+            secondary: ["Core"],
+            isFullBody: false),
+        "Smith Machine Squat": ExerciseMuscleProfile(
+            primary: ["Quads", "Glutes"],
+            secondary: ["Adductors", "Core"],
+            isFullBody: false),
+        "Belt Squat": ExerciseMuscleProfile(
+            primary: ["Quads", "Glutes"],
+            secondary: ["Adductors", "Hamstrings"],
+            isFullBody: false),
+        "Pendulum Squat": ExerciseMuscleProfile(
+            primary: ["Quads", "Glutes"],
+            secondary: ["Adductors"],
+            isFullBody: false),
+        "Single-Leg Press": ExerciseMuscleProfile(
+            primary: ["Quads", "Glutes"],
+            secondary: ["Adductors", "Hamstrings"],
+            isFullBody: false),
+        "Trap Bar Deadlift": ExerciseMuscleProfile(
+            primary: ["Glutes", "Quads", "Hamstrings"],
+            secondary: ["Back", "Forearms", "Core"],
+            isFullBody: false),
+        "Single-Leg Dumbbell Romanian Deadlift": ExerciseMuscleProfile(
+            primary: ["Hamstrings", "Glutes"],
+            secondary: ["Core", "Adductors", "Forearms"],
+            isFullBody: false),
+        "Barbell Good Morning": ExerciseMuscleProfile(
+            primary: ["Hamstrings", "Glutes", "Back"],
+            secondary: ["Core"],
+            isFullBody: false),
+        "Cable Glute Kickback": ExerciseMuscleProfile(
+            primary: ["Glutes"],
+            secondary: ["Core", "Hamstrings"],
+            isFullBody: false),
+        "Dumbbell Hip Thrust": ExerciseMuscleProfile(
+            primary: ["Glutes"],
+            secondary: ["Hamstrings", "Core"],
+            isFullBody: false),
+        "Hip Thrust Machine": ExerciseMuscleProfile(
+            primary: ["Glutes"],
+            secondary: ["Hamstrings", "Core"],
+            isFullBody: false),
+        "Single-Leg Seated Leg Curl": ExerciseMuscleProfile(
+            primary: ["Hamstrings"],
+            secondary: ["Calves"],
+            isFullBody: false),
+        "Glute-Ham Raise": ExerciseMuscleProfile(
+            primary: ["Hamstrings", "Glutes"],
+            secondary: ["Calves", "Core"],
+            isFullBody: false),
+        "Leg Press Calf Raise": ExerciseMuscleProfile(
+            primary: ["Calves"],
+            secondary: [],
+            isFullBody: false),
+        "Single-Leg Dumbbell Calf Raise": ExerciseMuscleProfile(
+            primary: ["Calves"],
+            secondary: ["Core", "Forearms"],
+            isFullBody: false),
+        "Dumbbell Shrug": ExerciseMuscleProfile(
+            primary: ["Shoulders"],
+            secondary: ["Forearms"],
+            isFullBody: false),
+        "Dumbbell Farmer Carry": ExerciseMuscleProfile(
+            primary: ["Forearms", "Shoulders", "Core"],
+            secondary: ["Back", "Glutes", "Quads"],
+            isFullBody: true),
+        "Pallof Press": ExerciseMuscleProfile(
+            primary: ["Core"],
+            secondary: ["Shoulders", "Glutes"],
+            isFullBody: false),
+        "Weighted Crunch": ExerciseMuscleProfile(
+            primary: ["Core"],
+            secondary: [],
+            isFullBody: false),
+        "Captain Chair Knee Raise": ExerciseMuscleProfile(
+            primary: ["Hip Flexors", "Core"],
+            secondary: ["Shoulders"],
+            isFullBody: false),
+        "Dumbbell Suitcase Carry": ExerciseMuscleProfile(
+            primary: ["Core", "Forearms"],
+            secondary: ["Shoulders", "Glutes", "Quads"],
+            isFullBody: true),
     ]
 }

@@ -618,5 +618,435 @@
     "reviewStatus": "browser-embed-and-visual-sample",
     "reviewedOn": "2026-11-01",
     "reviewReference": "Reviews/2026-11-01/REPORT.md"
+  },
+  {
+    "key": "dumbbell-floor-press",
+    "exerciseName": "Dumbbell Floor Press",
+    "videoID": "maCG2yJl34o",
+    "author": "Colossus Fitness",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "decline-barbell-bench-press",
+    "exerciseName": "Decline Barbell Bench Press",
+    "videoID": "ifWEwZDWMAw",
+    "author": "MyTrainingPRO",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "incline-dumbbell-fly",
+    "exerciseName": "Incline Dumbbell Fly",
+    "videoID": "ajdFwa-qM98",
+    "author": "Howcast",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "low-to-high-cable-fly",
+    "exerciseName": "Low-to-High Cable Fly",
+    "videoID": "eQ_NBB6OBH4",
+    "author": "ScottHermanFitness",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "smith-machine-incline-bench-press",
+    "exerciseName": "Smith Machine Incline Bench Press",
+    "videoID": "boiOppJzKzQ",
+    "author": "Travis Tarrant",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "neutral-grip-lat-pulldown",
+    "exerciseName": "Neutral-Grip Lat Pulldown",
+    "videoID": "4y-GyEQ74Hk",
+    "author": "BEN MIGHTY",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "single-arm-cable-lat-pulldown",
+    "exerciseName": "Single-Arm Cable Lat Pulldown",
+    "videoID": "fHQ5Yrc5Sds",
+    "author": "Train With Cuz",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "single-arm-cable-row",
+    "exerciseName": "Single-Arm Cable Row",
+    "videoID": "di6xdmulLJc",
+    "author": "OriGym",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "landmine-row",
+    "exerciseName": "Landmine Row",
+    "videoID": "kgqJ_VCfeJI",
+    "author": "Onnit",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "machine-assisted-pull-ups",
+    "exerciseName": "Machine-Assisted Pull-Ups",
+    "videoID": "lgE47t3dr2Q",
+    "author": "Zonapablo",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "dumbbell-pullover",
+    "exerciseName": "Dumbbell Pullover",
+    "videoID": "jCV5t9Cy4hI",
+    "author": "Buff Dudes Workouts",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "weighted-45-degree-back-extension",
+    "exerciseName": "Weighted 45-Degree Back Extension",
+    "videoID": "2abwVvEU-NU",
+    "author": "ThriveTraining",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "machine-shoulder-press",
+    "exerciseName": "Machine Shoulder Press",
+    "videoID": "Gkk-6q7Rq-s",
+    "author": "Andrew Kwong (DeltaBolic)",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "half-kneeling-landmine-press",
+    "exerciseName": "Half-Kneeling Landmine Press",
+    "videoID": "bL87S-S4dKk",
+    "author": "Gerardi Performance",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "reverse-pec-deck",
+    "exerciseName": "Reverse Pec Deck",
+    "videoID": "Z84HkxGCBqQ",
+    "author": "Lyle McDonald",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "ez-bar-preacher-curl",
+    "exerciseName": "EZ-Bar Preacher Curl",
+    "videoID": "SO7b4TGoAPY",
+    "author": "Vinny Tran",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "concentration-curl",
+    "exerciseName": "Concentration Curl",
+    "videoID": "0AUGkch3tzc",
+    "author": "Howcast",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "reverse-ez-bar-curl",
+    "exerciseName": "Reverse EZ-Bar Curl",
+    "videoID": "O2nSoaUSGUQ",
+    "author": "OPEX Fitness",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "two-hand-dumbbell-overhead-triceps-extension",
+    "exerciseName": "Two-Hand Dumbbell Overhead Triceps Extension",
+    "videoID": "m4ujXuSuQ0I",
+    "author": "MyTraining App",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "machine-assisted-dips",
+    "exerciseName": "Machine-Assisted Dips",
+    "videoID": "sdp7ya_G52I",
+    "author": "Ruth Maleski",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "double-dumbbell-front-squat",
+    "exerciseName": "Double-Dumbbell Front Squat",
+    "videoID": "YF3FAHS2j1M",
+    "author": "BuiltLean®",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "dumbbell-split-squat",
+    "exerciseName": "Dumbbell Split Squat",
+    "videoID": "YEH854PGpqE",
+    "author": "Winning Strength",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "dumbbell-lateral-lunge",
+    "exerciseName": "Dumbbell Lateral Lunge",
+    "videoID": "lrhTa-GqCPY",
+    "author": "Rehab My Patient",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "smith-machine-squat",
+    "exerciseName": "Smith Machine Squat",
+    "videoID": "iAcRGCsG_PY",
+    "author": "Travis Tarrant",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "belt-squat",
+    "exerciseName": "Belt Squat",
+    "videoID": "FCIZZvIM-I0",
+    "author": "Nexus Performance Australia",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "pendulum-squat",
+    "exerciseName": "Pendulum Squat",
+    "videoID": "RE9k04SVWOo",
+    "author": "Julian Execution",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "single-leg-press",
+    "exerciseName": "Single-Leg Press",
+    "videoID": "gICYf0sOwYI",
+    "author": "James Harrison",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "trap-bar-deadlift",
+    "exerciseName": "Trap Bar Deadlift",
+    "videoID": "dfYIApfWS5o",
+    "author": "Horton Barbell",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "single-leg-dumbbell-romanian-deadlift",
+    "exerciseName": "Single-Leg Dumbbell Romanian Deadlift",
+    "videoID": "iS7atZhcRnw",
+    "author": "Dr. Jacob Goodin",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "barbell-good-morning",
+    "exerciseName": "Barbell Good Morning",
+    "videoID": "ivfRflssBW0",
+    "author": "Brussels Barbell",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "cable-glute-kickback",
+    "exerciseName": "Cable Glute Kickback",
+    "videoID": "5jJNfIlKTmg",
+    "author": "Colossus Fitness",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "dumbbell-hip-thrust",
+    "exerciseName": "Dumbbell Hip Thrust",
+    "videoID": "29OfN4ztW_g",
+    "author": "Mike | J2FIT Strength & Conditioning",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "hip-thrust-machine",
+    "exerciseName": "Hip Thrust Machine",
+    "videoID": "wcJpAwLBniI",
+    "author": "Keren Zumba",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "single-leg-seated-leg-curl",
+    "exerciseName": "Single-Leg Seated Leg Curl",
+    "videoID": "PXNJ71rksvU",
+    "author": "National Academy of Sports Medicine (NASM)",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "glute-ham-raise",
+    "exerciseName": "Glute-Ham Raise",
+    "videoID": "blX1If7ScxY",
+    "author": "TylerPath",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "leg-press-calf-raise",
+    "exerciseName": "Leg Press Calf Raise",
+    "videoID": "OMUvfMZOcSA",
+    "author": "Travis Tarrant",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "single-leg-dumbbell-calf-raise",
+    "exerciseName": "Single-Leg Dumbbell Calf Raise",
+    "videoID": "RodSTSylf94",
+    "author": "Live Lean TV Daily Exercises",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "dumbbell-shrug",
+    "exerciseName": "Dumbbell Shrug",
+    "videoID": "uQsgj51WtTo",
+    "author": "OriGym",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "dumbbell-farmer-carry",
+    "exerciseName": "Dumbbell Farmer Carry",
+    "videoID": "7mzKcADa46c",
+    "author": "Lift With Michelle - Exercise Form Tutorials",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "pallof-press",
+    "exerciseName": "Pallof Press",
+    "videoID": "nB4QoM4eFfU",
+    "author": "Travis Tarrant",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "weighted-crunch",
+    "exerciseName": "Weighted Crunch",
+    "videoID": "it2Lu0OZZco",
+    "author": "Travis Tarrant",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "captain-chair-knee-raise",
+    "exerciseName": "Captain Chair Knee Raise",
+    "videoID": "7KDDZtaUaxw",
+    "author": "Live Lean TV Daily Exercises",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
+  },
+  {
+    "key": "dumbbell-suitcase-carry",
+    "exerciseName": "Dumbbell Suitcase Carry",
+    "videoID": "OkE7zNxstwE",
+    "author": "Tinsley Performance",
+    "startSeconds": 0,
+    "reviewStatus": "partial-review-user-deferred",
+    "reviewedOn": "2026-11-04",
+    "reviewReference": "Reviews/2026-11-04/REPORT.md"
   }
 ]

@@ -34,9 +34,9 @@ struct GymCatalogTests {
         let seed = try #require(Bundle.main.url(forResource: "default", withExtension: "store"))
         let original = try Data(contentsOf: seed)
         let exercises = try BundledExerciseCatalog.load(from: seed)
-        #expect(exercises.count == 62)
-        #expect(Set(exercises.map(\.id)).count == 62)
-        #expect(Set(exercises.map(\.name)).count == 62)
+        #expect(exercises.count == 105)
+        #expect(Set(exercises.map(\.id)).count == 105)
+        #expect(Set(exercises.map(\.name)).count == 105)
         #expect(try Data(contentsOf: seed) == original)
         #expect(Set(exercises.map(\.name)) == Set(ExerciseDifficultyCatalog.levels.keys))
         #expect(Set(exercises.map(\.name)) == Set(ExerciseMuscleCatalog.profiles.keys))
@@ -70,14 +70,17 @@ struct GymCatalogTests {
         let library = LibraryViewModel(exercises: SwiftDataExerciseRepository(context: context, catalog: catalog))
         await library.load()
         #expect(library.errorMessage == nil)
-        #expect(library.allExercises.count == 62)
+        #expect(library.allExercises.count == 105)
         #expect(try context.fetchCount(FetchDescriptor<Workout>()) == 0)
         #expect(try context.fetchCount(FetchDescriptor<Session>()) == 0)
         library.selectedFilter = "Quads"
         #expect(Set(library.filteredExercises.map(\.name)) == [
             "Barbell Back Squat", "Leg Press", "Leg Extension", "Barbell Front Squat", "Sumo Barbell Deadlift",
             "Dumbbell Goblet Squat", "Dumbbell Bulgarian Split Squat", "Dumbbell Reverse Lunge",
-            "Dumbbell Walking Lunge", "Dumbbell Step-Up", "Hack Squat"
+            "Dumbbell Walking Lunge", "Dumbbell Step-Up", "Hack Squat",
+            "Double-Dumbbell Front Squat", "Dumbbell Split Squat", "Dumbbell Lateral Lunge",
+            "Smith Machine Squat", "Belt Squat", "Pendulum Squat",
+            "Single-Leg Press", "Trap Bar Deadlift"
         ])
         library.searchText = "extension"
         #expect(library.filteredExercises.map(\.name) == ["Leg Extension"])
@@ -116,8 +119,8 @@ struct GymCatalogTests {
         let seed = try #require(Bundle.main.url(forResource: "default", withExtension: "store"))
         let exercises = try BundledExerciseCatalog.load(from: seed)
         let demonstrations = ExerciseDemonstrationCatalog.all
-        #expect(demonstrations.count == 62)
-        #expect(Set(demonstrations.map(\.id)).count == 62)
+        #expect(demonstrations.count == 105)
+        #expect(Set(demonstrations.map(\.id)).count == 105)
         #expect(Set(demonstrations.map(\.exerciseName)) == Set(exercises.map(\.name)))
         #expect(demonstrations.allSatisfy { $0.isValid })
         let composition = AppComposition(

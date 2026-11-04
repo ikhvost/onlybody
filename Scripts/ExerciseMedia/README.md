@@ -1,6 +1,6 @@
 # Exercise demonstration catalog
 
-All 65 OnlyBody seed exercises use the official YouTube IFrame player. Only IDs, author names and start offsets ship in the app; no video files are copied. The compiled catalog has stable media keys independent of seed UUIDs. Exercise name matching is exact.
+All 99 OnlyBody seed exercises use the official YouTube IFrame player. Only IDs, author names and start offsets ship in the app; no video files are copied. The compiled catalog has stable media keys independent of seed UUIDs. Exercise name matching is exact.
 
 ## Content review
 
@@ -8,7 +8,7 @@ All 65 OnlyBody seed exercises use the official YouTube IFrame player. Only IDs,
 
 **Before adding or replacing any video in either app, complete [CHECKLIST.md](CHECKLIST.md).** It covers provenance, license evidence, physical-iPhone playback, player requirements, privacy and App Review evidence. Store dated results and screenshots in `Reviews/`; cite them in the change description. Do not equate catalog validation or browser playback with full approval.
 
-The [2026-10-24 checklist audit](Reviews/2026-10-24/REPORT.md) records all 65 OnlyBody entries, live Share → Embed evidence and remaining gaps. OnlyWeights includes 60 videos in Debug and Release at the user’s explicit request on 2026-10-25; remaining review checks are deferred. Its expanded 60-exercise library has a [candidate register and partial review](Reviews/2026-10-25/REPORT.md), with per-video description/Embed evidence and explicit outstanding checks. The production media catalog records their status as `partial-review-user-deferred`, not completed review.
+The [2026-10-24 checklist audit](Reviews/2026-10-24/REPORT.md) records all 65 OnlyBody entries, live Share → Embed evidence and remaining gaps. OnlyWeights first included 60 videos in Debug and Release at the user’s explicit request on 2026-10-25. That expansion has a [candidate register and partial review](Reviews/2026-10-25/REPORT.md), with per-video description/Embed evidence and explicit outstanding checks. The media catalog records their status as `partial-review-user-deferred`, not completed review.
 
 ## Updating content
 
@@ -28,11 +28,13 @@ Previews use static states and disable network loading. Automated tests exercise
 
 Use through the official player follows [YouTube Terms of Service](https://www.youtube.com/t/terms); the selection does not assert that the underlying videos have open-content licences. Preserve the [required minimum player functionality and client identity](https://developers.google.com/youtube/terms/required-minimum-functionality). State and error handling follow the [IFrame Player API](https://developers.google.com/youtube/iframe_api_reference) and [player parameters](https://developers.google.com/youtube/player_parameters).
 
-## OnlyWeights media catalog
+## Catalog changes
 
-`onlyweights.json` generates all 62 demonstrations for both Debug and Release, using the existing official player, author caption and error handling. There is no separate Debug candidate array, runtime JSON loading or persistence change. The original 60 entries were introduced with `partial-review-user-deferred` following the user's 2026-10-25 decision. Machine Row and Barbell Upright Row were added on 2026-11-01 with `browser-embed-and-visual-sample` and a [dated partial review](Reviews/2026-11-01/REPORT.md): expanded descriptions, channel provenance, Share → Embed and visual browser samples were inspected. Their license labels, full audiovisual review and physical-iPhone playback remain unconfirmed; no new user deferral or completed review is claimed.
+`onlyweights.json` generates all 105 demonstrations for both Debug and Release, using the existing official player, author caption and error handling. There is no separate Debug candidate array, runtime JSON loading or persistence change. The original 60 entries were introduced with `partial-review-user-deferred` following the user's 2026-10-25 decision. Machine Row and Barbell Upright Row were added on 2026-11-01 with `browser-embed-and-visual-sample` and a [dated partial review](Reviews/2026-11-01/REPORT.md): expanded descriptions, channel provenance, Share → Embed and visual browser samples were inspected. Their license labels, full audiovisual review and physical-iPhone playback remain unconfirmed; no new user deferral or completed review is claimed.
 
-On 2026-11-03, at the user's request, 25 PureGym demonstrations were replaced with OPEX Fitness (8), Bodybuilding.com (7), NASM (5), Catalyst Athletics (3) and ScottHermanFitness (2). PureGym now supplies 21 of the 62 videos. The [dated local review](Reviews/2026-11-03/REPORT.md) retains the previous mappings, exact new titles/channel URLs, per-video checklist records and screenshots of descriptions, visual playback samples and Share → Embed. These 25 entries use `browser-embed-and-visual-sample`; explicit license labels, complete audiovisual review and physical-iPhone playback remain unconfirmed. The catalog now contains 27 browser-sample entries and 35 entries retaining the earlier deferred-review status. Stable exercise keys/names, zero start offsets, seed stores and the OnlyBody catalog are unchanged.
+On 2026-11-03, at the user's request, 25 PureGym demonstrations were replaced with OPEX Fitness (8), Bodybuilding.com (7), NASM (5), Catalyst Athletics (3) and ScottHermanFitness (2). PureGym supplied 21 of 62 videos after that review. The [dated local review](Reviews/2026-11-03/REPORT.md) retains the previous mappings, exact new titles/channel URLs, per-video checklist records and screenshots of descriptions, visual playback samples and Share → Embed. These 25 entries use `browser-embed-and-visual-sample`; explicit license labels, complete audiovisual review and physical-iPhone playback remain unconfirmed. At that point the catalog contained 27 browser-sample entries and 35 entries with the earlier deferred-review status.
+
+On 2026-11-04, OnlyBody gained 34 exercises and OnlyWeights gained 43. All 77 final videos passed Share → Embed and started in the official player in a local browser test. Three candidates returned error 150 and were replaced before integration. The new entries use the partial review status. License labels, complete playback with sound, per-video screenshots and playback in the apps on a physical iPhone remain open. The largest channel share is 11 of 99 in OnlyBody and 21 of 105 in OnlyWeights. [Local review and playback evidence](Reviews/2026-11-04/REPORT.md).
 
 ```bash
 python3 Scripts/ExerciseMedia/generate.py \

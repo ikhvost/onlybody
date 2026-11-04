@@ -1175,5 +1175,602 @@
     "primaryMuscles": [
       "Calves"
     ]
+  },
+  {
+    "name": "Wide Push-Ups",
+    "primaryMuscle": "Chest",
+    "primaryMuscles": [
+      "Chest",
+      "Triceps"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Hand-Release Push-Ups",
+    "primaryMuscle": "Chest",
+    "primaryMuscles": [
+      "Chest",
+      "Triceps"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Ring Push-Ups",
+    "primaryMuscle": "Chest",
+    "primaryMuscles": [
+      "Chest",
+      "Triceps"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "equipment": [
+      "Gymnastic Rings"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "advanced",
+    "isFullBody": false
+  },
+  {
+    "name": "Bar Bodyweight Triceps Extensions",
+    "primaryMuscle": "Triceps",
+    "primaryMuscles": [
+      "Triceps"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "equipment": [
+      "Low Bar"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Neutral-Grip Pull-Ups",
+    "primaryMuscle": "Back",
+    "primaryMuscles": [
+      "Back",
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Forearms",
+      "Core"
+    ],
+    "equipment": [
+      "Neutral-Grip Pull-up Bar"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Bent-Knee Inverted Rows",
+    "primaryMuscle": "Back",
+    "primaryMuscles": [
+      "Back",
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Forearms"
+    ],
+    "equipment": [
+      "Low Bar"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Feet-Elevated Inverted Rows",
+    "primaryMuscle": "Back",
+    "primaryMuscles": [
+      "Back",
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Core",
+      "Forearms"
+    ],
+    "equipment": [
+      "Low Bar",
+      "Elevated Surface"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "advanced",
+    "isFullBody": false
+  },
+  {
+    "name": "Ring Rows",
+    "primaryMuscle": "Back",
+    "primaryMuscles": [
+      "Back",
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Core",
+      "Forearms"
+    ],
+    "equipment": [
+      "Gymnastic Rings"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Ring Biceps Curls",
+    "primaryMuscle": "Biceps",
+    "primaryMuscles": [
+      "Biceps"
+    ],
+    "secondaryMuscles": [
+      "Forearms",
+      "Shoulders",
+      "Core"
+    ],
+    "equipment": [
+      "Gymnastic Rings"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Bodyweight Box Squats",
+    "primaryMuscle": "Quads",
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Core"
+    ],
+    "equipment": [
+      "Elevated Surface"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Heel-Elevated Squats",
+    "primaryMuscle": "Quads",
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Core"
+    ],
+    "equipment": [
+      "Elevated Surface"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Walking Lunges",
+    "primaryMuscle": "Quads",
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Adductors",
+      "Core",
+      "Calves"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Front-Foot-Elevated Split Squats",
+    "primaryMuscle": "Quads",
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Adductors",
+      "Core"
+    ],
+    "equipment": [
+      "Elevated Surface"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Lateral Step-Ups",
+    "primaryMuscle": "Quads",
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Adductors",
+      "Calves",
+      "Core"
+    ],
+    "equipment": [
+      "Elevated Surface"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Bodyweight Good Mornings",
+    "primaryMuscle": "Hamstrings",
+    "primaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Back",
+      "Core"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Skater Squats",
+    "primaryMuscle": "Quads",
+    "primaryMuscles": [
+      "Quads",
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Adductors",
+      "Core"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "advanced",
+    "isFullBody": false
+  },
+  {
+    "name": "Reverse Nordic Curls",
+    "primaryMuscle": "Quads",
+    "primaryMuscles": [
+      "Quads"
+    ],
+    "secondaryMuscles": [
+      "Core",
+      "Glutes"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "advanced",
+    "isFullBody": false
+  },
+  {
+    "name": "Bodyweight Hip Thrusts",
+    "primaryMuscle": "Glutes",
+    "primaryMuscles": [
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Hamstrings",
+      "Core"
+    ],
+    "equipment": [
+      "Elevated Surface"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Long-Lever Glute Bridge",
+    "primaryMuscle": "Hamstrings",
+    "primaryMuscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Core"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Single-Leg Sliding Leg Curls",
+    "primaryMuscle": "Hamstrings",
+    "primaryMuscles": [
+      "Hamstrings"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Core"
+    ],
+    "equipment": [
+      "Exercise Sliders"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "advanced",
+    "isFullBody": false
+  },
+  {
+    "name": "Hand-Assisted Nordic Curls",
+    "primaryMuscle": "Hamstrings",
+    "primaryMuscles": [
+      "Hamstrings"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Core"
+    ],
+    "equipment": [
+      "Fixed Ankle Support"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "advanced",
+    "isFullBody": false
+  },
+  {
+    "name": "Suspension Hamstring Curls",
+    "primaryMuscle": "Hamstrings",
+    "primaryMuscles": [
+      "Hamstrings"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Core"
+    ],
+    "equipment": [
+      "Suspension Trainer"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Short-Lever Copenhagen Plank",
+    "primaryMuscle": "Adductors",
+    "primaryMuscles": [
+      "Adductors",
+      "Core"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Glutes"
+    ],
+    "equipment": [
+      "Elevated Surface"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Single-Leg Calf Raises on a Step",
+    "primaryMuscle": "Calves",
+    "primaryMuscles": [
+      "Calves"
+    ],
+    "secondaryMuscles": [
+      "Core"
+    ],
+    "equipment": [
+      "Elevated Surface",
+      "Stable Support"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Wall Tibialis Raises",
+    "primaryMuscle": "Calves",
+    "primaryMuscles": [
+      "Calves"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "Wall"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Crunches",
+    "primaryMuscle": "Core",
+    "primaryMuscles": [
+      "Core"
+    ],
+    "secondaryMuscles": [],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Lying Leg Raises",
+    "primaryMuscle": "Hip Flexors",
+    "primaryMuscles": [
+      "Hip Flexors",
+      "Core"
+    ],
+    "secondaryMuscles": [
+      "Quads"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Knee Side Plank",
+    "primaryMuscle": "Core",
+    "primaryMuscles": [
+      "Core"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Glutes"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Side Plank Hip Lifts",
+    "primaryMuscle": "Core",
+    "primaryMuscles": [
+      "Core"
+    ],
+    "secondaryMuscles": [
+      "Glutes",
+      "Shoulders"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Kneeling Plank",
+    "primaryMuscle": "Core",
+    "primaryMuscles": [
+      "Core"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Serratus"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "beginner",
+    "isFullBody": false
+  },
+  {
+    "name": "Plank Shoulder Taps",
+    "primaryMuscle": "Core",
+    "primaryMuscles": [
+      "Core"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Serratus",
+      "Triceps"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Plank Up-Downs",
+    "primaryMuscle": "Core",
+    "primaryMuscles": [
+      "Core",
+      "Triceps"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Serratus",
+      "Chest"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
+  },
+  {
+    "name": "Hollow Body Rocks",
+    "primaryMuscle": "Core",
+    "primaryMuscles": [
+      "Core",
+      "Hip Flexors"
+    ],
+    "secondaryMuscles": [
+      "Quads"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "advanced",
+    "isFullBody": false
+  },
+  {
+    "name": "Reverse Plank",
+    "primaryMuscle": "Core",
+    "primaryMuscles": [
+      "Core",
+      "Glutes"
+    ],
+    "secondaryMuscles": [
+      "Shoulders",
+      "Triceps",
+      "Hamstrings"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "intermediate",
+    "isFullBody": false
   }
 ]

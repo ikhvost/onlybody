@@ -9,7 +9,7 @@ struct BundledExerciseCatalogTests {
         let seed = try #require(Bundle.main.url(forResource: "default", withExtension: "store"))
         let original = try Data(contentsOf: seed)
         let catalog = try BundledExerciseCatalog.load(from: seed)
-        #expect(catalog.count == 65)
+        #expect(catalog.count == 99)
         #expect(try Data(contentsOf: seed) == original)
         #expect(Set(catalog.map(\.name)) == Set(ExerciseDifficultyCatalog.levels.keys))
     }
@@ -33,7 +33,7 @@ struct BundledExerciseCatalogTests {
 
         #expect(viewModel.errorMessage == nil)
         let exercises = viewModel.allExercises
-        #expect(exercises.count == 65)
+        #expect(exercises.count == 99)
         #expect(Set(exercises.map(\.id)).count == exercises.count)
         #expect(Set(exercises.map(\.name)).count == exercises.count)
         #expect(Set(exercises.map(\.name)) == Set(ExerciseDemonstrationCatalog.all.map(\.exerciseName)))
@@ -69,14 +69,14 @@ struct BundledExerciseCatalogTests {
         }
 
         viewModel.selectedFilter = "Back"
-        #expect(viewModel.filteredExercises.count == 11)
+        #expect(viewModel.filteredExercises.count == 15)
         #expect(viewModel.filteredExercises.filter { $0.equipment == ["None"] }.count == 4)
         viewModel.searchText = "snow"
         #expect(viewModel.filteredExercises.map(\.name) == ["Reverse Snow Angels"])
         viewModel.searchText = ""
         viewModel.selectedFilter = "Core"
-        #expect(viewModel.filteredExercises.count == 11)
+        #expect(viewModel.filteredExercises.count == 21)
         viewModel.selectedFilter = "All"
-        #expect(viewModel.filteredExercises.count == 65)
+        #expect(viewModel.filteredExercises.count == 99)
     }
 }

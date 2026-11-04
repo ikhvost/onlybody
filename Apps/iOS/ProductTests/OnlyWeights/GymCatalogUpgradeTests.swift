@@ -12,7 +12,31 @@ struct GymCatalogUpgradeTests {
         "Leg Extension", "Seated Leg Curl", "Standing Calf Raise", "Cable Crunch"
     ]
 
-    @Test(arguments: [16, 60])
+    private let previousCatalogNames = [
+        "Barbell Bench Press", "Incline Dumbbell Press", "Lat Pulldown",
+        "Seated Cable Row", "Dumbbell Shoulder Press", "Dumbbell Lateral Raise",
+        "Cable Face Pull", "Dumbbell Curl", "Cable Triceps Pushdown",
+        "Barbell Back Squat", "Leg Press", "Barbell Romanian Deadlift",
+        "Leg Extension", "Seated Leg Curl", "Standing Calf Raise",
+        "Cable Crunch", "Incline Barbell Bench Press", "Dumbbell Bench Press",
+        "Dumbbell Fly", "Cable Chest Fly", "Machine Chest Press",
+        "Pec Deck Fly", "Barbell Bent-Over Row", "One-Arm Dumbbell Row",
+        "Chest-Supported Dumbbell Row", "Straight-Arm Cable Pulldown", "Weighted Pull-Ups",
+        "Weighted Chin-Ups", "Barbell Overhead Press", "Arnold Press",
+        "Cable Lateral Raise", "Dumbbell Reverse Fly", "Barbell Curl",
+        "EZ-Bar Curl", "Hammer Curl", "Incline Dumbbell Curl",
+        "Cable Curl", "Overhead Cable Triceps Extension", "EZ-Bar Skull Crusher",
+        "Close-Grip Barbell Bench Press", "Weighted Dips", "Barbell Front Squat",
+        "Barbell Deadlift", "Sumo Barbell Deadlift", "Dumbbell Goblet Squat",
+        "Dumbbell Bulgarian Split Squat", "Dumbbell Reverse Lunge", "Dumbbell Walking Lunge",
+        "Dumbbell Step-Up", "Dumbbell Romanian Deadlift", "Barbell Hip Thrust",
+        "Hack Squat", "Lying Leg Curl", "Hip Abduction Machine",
+        "Hip Adduction Machine", "Seated Calf Raise", "Hanging Knee Raise",
+        "Hanging Leg Raise", "Ab Wheel Rollout", "Cable Woodchop",
+        "Machine Row", "Barbell Upright Row"
+    ]
+
+    @Test(arguments: [16, 60, 62])
     func expandingLibraryPreservesStoredIDsWorkoutsAndHistoryAcrossReopen(originalCount: Int) async throws {
         let directory = URL.temporaryDirectory.appending(path: UUID().uuidString)
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
@@ -20,9 +44,16 @@ struct GymCatalogUpgradeTests {
         let url = directory.appending(path: "default.store")
         let seed = try #require(Bundle.main.url(forResource: "default", withExtension: "store"))
         let catalog = try BundledExerciseCatalog.load(from: seed)
-        let storedNames = originalCount == 16 ? originalNames : catalog.map(\.name).filter {
-            $0 != "Machine Row" && $0 != "Barbell Upright Row"
+        let storedNames: [String]
+        switch originalCount {
+        case 16:
+            storedNames = originalNames
+        case 60:
+            storedNames = previousCatalogNames.filter { $0 != "Machine Row" && $0 != "Barbell Upright Row" }
+        default:
+            storedNames = previousCatalogNames
         }
+        try #require(storedNames.count == originalCount)
         let original = try storedNames.map { name in
             var exercise = try #require(catalog.first { $0.name == name })
             exercise.id = UUID()
@@ -40,7 +71,7 @@ struct GymCatalogUpgradeTests {
         let container = try openStore(at: url)
         let exercises = SwiftDataExerciseRepository(context: ModelContext(container), catalog: catalog)
         let merged = try await exercises.allExercises()
-        #expect(merged.count == 62)
+        #expect(merged.count == 105)
         for entry in original {
             #expect(merged.first { $0.name == entry.name }?.id == entry.id)
         }
@@ -50,8 +81,9 @@ struct GymCatalogUpgradeTests {
         let preserved = try #require(try await workouts.workout(by: oldWorkout.id))
         #expect(preserved.items.first?.id == oldWorkout.items.first?.id)
         #expect(preserved.items.first?.exercise?.id == bench.id)
-        let added = try #require(merged.first { $0.name == "Machine Row" })
-        let newWorkout = WorkoutSnapshot(name: "Machine row routine", items: [WorkoutItemSnapshot(exercise: added)])
+        let addedName = originalCount == 62 ? "Trap Bar Deadlift" : "Machine Row"
+        let added = try #require(merged.first { $0.name == addedName })
+        let newWorkout = WorkoutSnapshot(name: "New exercise routine", items: [WorkoutItemSnapshot(exercise: added)])
         try await workouts.save(newWorkout)
         #expect(try ModelContext(container).fetchCount(FetchDescriptor<Exercise>()) == originalCount + 1)
 
@@ -63,7 +95,7 @@ struct GymCatalogUpgradeTests {
         #expect(try await sessions.allSessions() == [history])
         let reopenedExercises = SwiftDataExerciseRepository(context: ModelContext(reopened), catalog: catalog)
         let reopenedLibrary = try await reopenedExercises.allExercises()
-        #expect(reopenedLibrary.count == 62)
+        #expect(reopenedLibrary.count == 105)
         #expect(reopenedLibrary.first { $0.name == added.name }?.id == added.id)
         for entry in original {
             #expect(reopenedLibrary.first { $0.name == entry.name }?.id == entry.id)

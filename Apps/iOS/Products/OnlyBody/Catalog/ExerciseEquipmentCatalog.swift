@@ -9,6 +9,10 @@ nonisolated enum ExerciseEquipmentCatalog {
         "Dip Bar",
         "Low Bar",
         "Towel",
-        "Fixed Ankle Support"
+        "Fixed Ankle Support",
+        "Exercise Sliders",
+        "Gymnastic Rings",
+        "Neutral-Grip Pull-up Bar",
+        "Suspension Trainer",
     ]
 }

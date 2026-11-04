@@ -262,5 +262,141 @@ nonisolated enum ExerciseMuscleCatalog {
             primary: ["Calves"],
             secondary: [],
             isFullBody: false),
+        "Wide Push-Ups": ExerciseMuscleProfile(
+            primary: ["Chest", "Triceps"],
+            secondary: ["Shoulders", "Core"],
+            isFullBody: false),
+        "Hand-Release Push-Ups": ExerciseMuscleProfile(
+            primary: ["Chest", "Triceps"],
+            secondary: ["Shoulders", "Core"],
+            isFullBody: false),
+        "Ring Push-Ups": ExerciseMuscleProfile(
+            primary: ["Chest", "Triceps"],
+            secondary: ["Shoulders", "Core"],
+            isFullBody: false),
+        "Bar Bodyweight Triceps Extensions": ExerciseMuscleProfile(
+            primary: ["Triceps"],
+            secondary: ["Shoulders", "Core"],
+            isFullBody: false),
+        "Neutral-Grip Pull-Ups": ExerciseMuscleProfile(
+            primary: ["Back", "Biceps"],
+            secondary: ["Forearms", "Core"],
+            isFullBody: false),
+        "Bent-Knee Inverted Rows": ExerciseMuscleProfile(
+            primary: ["Back", "Biceps"],
+            secondary: ["Shoulders", "Forearms"],
+            isFullBody: false),
+        "Feet-Elevated Inverted Rows": ExerciseMuscleProfile(
+            primary: ["Back", "Biceps"],
+            secondary: ["Shoulders", "Core", "Forearms"],
+            isFullBody: false),
+        "Ring Rows": ExerciseMuscleProfile(
+            primary: ["Back", "Biceps"],
+            secondary: ["Shoulders", "Core", "Forearms"],
+            isFullBody: false),
+        "Ring Biceps Curls": ExerciseMuscleProfile(
+            primary: ["Biceps"],
+            secondary: ["Forearms", "Shoulders", "Core"],
+            isFullBody: false),
+        "Bodyweight Box Squats": ExerciseMuscleProfile(
+            primary: ["Quads", "Glutes"],
+            secondary: ["Hamstrings", "Core"],
+            isFullBody: false),
+        "Heel-Elevated Squats": ExerciseMuscleProfile(
+            primary: ["Quads", "Glutes"],
+            secondary: ["Core"],
+            isFullBody: false),
+        "Walking Lunges": ExerciseMuscleProfile(
+            primary: ["Quads", "Glutes"],
+            secondary: ["Adductors", "Core", "Calves"],
+            isFullBody: false),
+        "Front-Foot-Elevated Split Squats": ExerciseMuscleProfile(
+            primary: ["Quads", "Glutes"],
+            secondary: ["Adductors", "Core"],
+            isFullBody: false),
+        "Lateral Step-Ups": ExerciseMuscleProfile(
+            primary: ["Quads", "Glutes"],
+            secondary: ["Adductors", "Calves", "Core"],
+            isFullBody: false),
+        "Bodyweight Good Mornings": ExerciseMuscleProfile(
+            primary: ["Hamstrings", "Glutes"],
+            secondary: ["Back", "Core"],
+            isFullBody: false),
+        "Skater Squats": ExerciseMuscleProfile(
+            primary: ["Quads", "Glutes"],
+            secondary: ["Adductors", "Core"],
+            isFullBody: false),
+        "Reverse Nordic Curls": ExerciseMuscleProfile(
+            primary: ["Quads"],
+            secondary: ["Core", "Glutes"],
+            isFullBody: false),
+        "Bodyweight Hip Thrusts": ExerciseMuscleProfile(
+            primary: ["Glutes"],
+            secondary: ["Hamstrings", "Core"],
+            isFullBody: false),
+        "Long-Lever Glute Bridge": ExerciseMuscleProfile(
+            primary: ["Hamstrings", "Glutes"],
+            secondary: ["Core"],
+            isFullBody: false),
+        "Single-Leg Sliding Leg Curls": ExerciseMuscleProfile(
+            primary: ["Hamstrings"],
+            secondary: ["Glutes", "Core"],
+            isFullBody: false),
+        "Hand-Assisted Nordic Curls": ExerciseMuscleProfile(
+            primary: ["Hamstrings"],
+            secondary: ["Glutes", "Core"],
+            isFullBody: false),
+        "Suspension Hamstring Curls": ExerciseMuscleProfile(
+            primary: ["Hamstrings"],
+            secondary: ["Glutes", "Core"],
+            isFullBody: false),
+        "Short-Lever Copenhagen Plank": ExerciseMuscleProfile(
+            primary: ["Adductors", "Core"],
+            secondary: ["Shoulders", "Glutes"],
+            isFullBody: false),
+        "Single-Leg Calf Raises on a Step": ExerciseMuscleProfile(
+            primary: ["Calves"],
+            secondary: ["Core"],
+            isFullBody: false),
+        "Wall Tibialis Raises": ExerciseMuscleProfile(
+            primary: ["Calves"],
+            secondary: [],
+            isFullBody: false),
+        "Crunches": ExerciseMuscleProfile(
+            primary: ["Core"],
+            secondary: [],
+            isFullBody: false),
+        "Lying Leg Raises": ExerciseMuscleProfile(
+            primary: ["Hip Flexors", "Core"],
+            secondary: ["Quads"],
+            isFullBody: false),
+        "Knee Side Plank": ExerciseMuscleProfile(
+            primary: ["Core"],
+            secondary: ["Shoulders", "Glutes"],
+            isFullBody: false),
+        "Side Plank Hip Lifts": ExerciseMuscleProfile(
+            primary: ["Core"],
+            secondary: ["Glutes", "Shoulders"],
+            isFullBody: false),
+        "Kneeling Plank": ExerciseMuscleProfile(
+            primary: ["Core"],
+            secondary: ["Shoulders", "Serratus"],
+            isFullBody: false),
+        "Plank Shoulder Taps": ExerciseMuscleProfile(
+            primary: ["Core"],
+            secondary: ["Shoulders", "Serratus", "Triceps"],
+            isFullBody: false),
+        "Plank Up-Downs": ExerciseMuscleProfile(
+            primary: ["Core", "Triceps"],
+            secondary: ["Shoulders", "Serratus", "Chest"],
+            isFullBody: false),
+        "Hollow Body Rocks": ExerciseMuscleProfile(
+            primary: ["Core", "Hip Flexors"],
+            secondary: ["Quads"],
+            isFullBody: false),
+        "Reverse Plank": ExerciseMuscleProfile(
+            primary: ["Core", "Glutes"],
+            secondary: ["Shoulders", "Triceps", "Hamstrings"],
+            isFullBody: false),
     ]
 }
