@@ -64,7 +64,7 @@ struct PreviewWorkoutRepository: WorkoutRepository {
 The repository root is `onlybody`; `Apps/`, `Website/`, `Scripts/` and `Design/` are sibling directories; the Xcode project is `Apps/iOS/Apps.xcodeproj`. The source root is `Apps/iOS/Sources/`; source and test groups are filesystem-synchronized.
 New files need no project edits. New targets do require project configuration.
 
-- `App/`: composition root, `AppComposition`, custom tab shell and per-tab navigation roots.
+- `App/`: composition root, `AppComposition`, system tab shell and per-tab navigation roots.
 - `Domain/Models/`: detached `Sendable` value snapshots; never import SwiftData or SwiftUI.
 - `Domain/Repositories/`: `@MainActor` async protocols accepting/returning snapshots.
 - `Domain/Services/`: pure business logic and observable timers with injected time.
@@ -108,19 +108,18 @@ Key constants:
 
 ## Navigation
 
-Custom tab navigation — do **NOT** use SwiftUI `TabView` or the `Tab` API.
+System tab navigation uses SwiftUI `TabView(selection:)` with the `Tab` API and separate navigation stacks.
 
 ```swift
-enum AppTab: String, CaseIterable { case train, log, library }
+enum AppTab: Hashable { case train, log, library }
 
-@MainActor @Observable final class AppTabViewModel {
-    var selectedTab: AppTab = .train
-}
+// AppTabView owns the selected tab and each tab's navigation path.
+@State private var selectedTab: AppTab = .train
 ```
 
-- `AppTabView` manages `selectedTab` and renders the custom `BottomNav`
+- `AppTabView` manages `selectedTab` and renders the system Liquid Glass tab bar. No custom horizontal swipe between tabs.
 - Each tab owns its own `NavigationStack` with `navigationDestination(for:)`
-- `BottomNav` hides when a sub-screen is pushed (track navigation depth per tab)
+- The system tab bar hides when a sub-screen is pushed using toolbar visibility (track navigation depth per tab). It does not minimize on scroll.
 - `ActiveWorkoutView` is presented via `fullScreenCover` — prevents accidental back-navigation during a workout
 - No `NavigationLink` — use `navigationDestination(for:)` exclusively
 
@@ -157,11 +156,11 @@ enum AppTab: String, CaseIterable { case train, log, library }
 - Hide indicators: `.scrollIndicators(.hidden)`.
 - Use `ScrollPosition` and `defaultScrollAnchor` over `ScrollViewReader`.
 - No UIKit colors in SwiftUI.
-- **Font sizes:** OnlyBody uses a custom fixed typography scale in `Theme.swift`. Use `Theme.fontSans` and `Theme.fontMono` — NOT Dynamic Type text styles (`.title`, `.body`, etc.).
+- **Font sizes:** OnlyBody uses a custom fixed typography scale in `Theme.swift`. Use `Theme.fontSans` and `Theme.fontMono` — NOT Dynamic Type text styles (`.title`, `.body`, etc.). System tab bar labels retain system typography.
 - **Spacing/padding:** Always use `Theme` spacing constants. Do not call `.padding()` without a value — always reference `Theme.horizontalPadding` or an explicit `Theme` constant.
-- **Tab navigation:** Do NOT use SwiftUI `Tab` API or `tabItem()`. Use `AppTabView` with `AppTab` enum. See Navigation section.
+- **Tab navigation:** Use `TabView` and `Tab` in `AppTabView` with the `AppTab` enum. See Navigation section.
 - Button with image must include text: `Button("Label", systemImage: "icon", action: ...)` — but prefer custom icon views over SF Symbols.
-- **Icons:** Custom icons live in `Shared/Icons/` — one file per icon (e.g. `TrainIcon.swift`, `ChevronIcon.swift`). Each is a `Canvas`-based `View`. Do NOT use SF Symbols. Shared config lives in `AppIcons.swift` (`viewport: CGFloat = 24`, `stroke: StrokeStyle`). Canonical pattern:
+- **Icons:** Custom icons live in `Shared/Icons/` — one file per icon (e.g. `TrainIcon.swift`, `ChevronIcon.swift`). Each is a `Canvas`-based `View`. SF Symbols are permitted for the system tab bar; retain custom icons inside feature screens. Shared config lives in `AppIcons.swift` (`viewport: CGFloat = 24`, `stroke: StrokeStyle`). Canonical pattern:
   ```swift
   struct FooIcon: View {
       var color: Color = Theme.text

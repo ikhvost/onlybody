@@ -7,15 +7,6 @@ import Testing
 
 @MainActor
 struct NavigationGestureTests {
-    @Test func tabOrderDoesNotWrap() {
-        #expect(AppTab.train.adjacent(forward: false) == nil)
-        #expect(AppTab.train.adjacent(forward: true) == .log)
-        #expect(AppTab.log.adjacent(forward: true) == .library)
-        #expect(AppTab.log.adjacent(forward: false) == .train)
-        #expect(AppTab.library.adjacent(forward: false) == .log)
-        #expect(AppTab.library.adjacent(forward: true) == nil)
-    }
-
     @Test func failedSaveRetainsDirtyDraftAndSuccessfulSaveClearsIt() async {
         let repo = MockWorkoutRepository()
         let vm = SessionBuilderViewModel(workouts: repo, exercises: MockExerciseRepository())
@@ -27,15 +18,6 @@ struct NavigationGestureTests {
         repo.shouldThrow = false
         #expect(await vm.save())
         #expect(!vm.hasUnsavedChanges)
-    }
-
-    @Test func swipeThresholdsRejectVerticalShortAndReversedGestures() {
-        let limits = Theme.tabSwipeThresholds
-        #expect(TabSwipeDecision.accepts(horizontal: -90, vertical: 10, velocity: -100, thresholds: limits))
-        #expect(TabSwipeDecision.accepts(horizontal: 25, vertical: 5, velocity: 600, thresholds: limits))
-        #expect(!TabSwipeDecision.accepts(horizontal: 15, vertical: 0, velocity: 900, thresholds: limits))
-        #expect(!TabSwipeDecision.accepts(horizontal: 90, vertical: 80, velocity: 900, thresholds: limits))
-        #expect(!TabSwipeDecision.accepts(horizontal: 25, vertical: 0, velocity: -600, thresholds: limits))
     }
 
     @Test func draftChangesAndRestorationAreDetectedWithoutCatalogLoading() async {

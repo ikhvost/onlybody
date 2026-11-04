@@ -18,7 +18,7 @@ struct MovementDetailView: View {
                             .frame(width: Theme.touchSize, height: Theme.touchSize)
                             .contentShape(.rect)
                     }
-                    .buttonStyle(NavigationControlStyle())
+                    .buttonStyle(.glass).buttonBorderShape(.circle)
                     .accessibilityLabel(backLabel)
                     .accessibilityIdentifier("movement.back")
                 }

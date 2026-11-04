@@ -20,7 +20,6 @@ enum Theme {
     static let typeExercise: CGFloat = 28
     static let typeNumber: CGFloat = 40
     static let typeTimer: CGFloat = 80
-    static let bottomNavigationHeight: CGFloat = 64
     static let glassTint = Color.white.opacity(0.04)
     static let touchSize: CGFloat = 44
     static let stepSize: CGFloat = 48
@@ -47,8 +46,6 @@ enum Theme {
     static let backSwipeCompletion: CGFloat = 0.4
     static let backSwipeSpeed: CGFloat = 500
     static let swipeDirectionRatio: Double = 1.5
-    static let tabSwipeThresholds = TabSwipeThresholds(minimum: 16, distance: 72, fastDistance: 24, speed: 500, ratio: swipeDirectionRatio)
-    static let tabTransitionDuration: Double = 0.25
     static let exerciseReorderDuration: Double = 0.35
     static let exerciseLiftDelay: Double = 0.25
     static let exerciseLiftDuration: Double = 0.18

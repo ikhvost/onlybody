@@ -8,6 +8,5 @@ swiftc -parse-as-library \
     Apps/iOS/Sources/App/OBMarkView.swift \
     Apps/iOS/Sources/App/OWMarkView.swift \
     Apps/iOS/Sources/Shared/Theme/Theme.swift \
-    Apps/iOS/Sources/Shared/Navigation/TabSwipeThresholds.swift \
     -o "$output/render"
 "$output/render" "${1:-OnlyBody}"

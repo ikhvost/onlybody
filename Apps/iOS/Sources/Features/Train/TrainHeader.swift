@@ -20,24 +20,27 @@ struct TrainHeader: View {
 
             Button(action: onSettingsTap) {
                 SettingsIcon(color: Theme.text2, size: Theme.type20)
-                    .frame(width: Theme.space44, height: Theme.space44)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .contentShape(.rect)
             }
             .accessibilityLabel(String(localized: .uiSettings))
             .accessibilityIdentifier("train.settings")
-            .buttonStyle(NavigationControlStyle())
+            .buttonStyle(.glass).buttonBorderShape(.circle)
+            .frame(width: Theme.touchSize, height: Theme.touchSize)
 
             Button {
                 onCreateTap()
             } label: {
                 PlusIcon(color: Theme.accentDark, size: Theme.type20)
-                .frame(width: Theme.space44, height: Theme.space44)
-                .background(Theme.accent, in: .circle)
-                .contentShape(.circle)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .contentShape(.circle)
             }
             .accessibilityLabel(String(localized: .uiCreateWorkout))
             .accessibilityIdentifier("workout.create")
-            .buttonStyle(PressableButtonStyle())
+            .buttonStyle(.glassProminent)
+            .buttonBorderShape(.circle)
+            .frame(width: Theme.touchSize, height: Theme.touchSize)
+            .tint(Theme.accent)
         }
         .padding(.horizontal, Theme.horizontalPadding)
         .padding(.top, Theme.space16)

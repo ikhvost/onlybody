@@ -16,7 +16,7 @@ struct BuilderMovementEditor: View {
                         Text(movement.exercise.displayName).font(Theme.fontSans(Theme.typeExercise, .bold))
                         Spacer(minLength: Theme.space8)
                         Button { dismiss() } label: { CloseIcon().frame(width: Theme.touchSize, height: Theme.touchSize) }
-                            .buttonStyle(NavigationControlStyle()).accessibilityLabel(String(localized: .uiCancel))
+                            .buttonStyle(.glass).buttonBorderShape(.circle).accessibilityLabel(String(localized: .uiCancel))
                             .accessibilityIdentifier("builder.movement.cancel")
                     }
                     ForEach(["Sets", "Reps", "Rest"], id: \.self) { field in
@@ -30,8 +30,8 @@ struct BuilderMovementEditor: View {
         }
         .scrollIndicators(.hidden).scrollDismissesKeyboard(.interactively)
         .safeAreaInset(edge: .bottom) {
-            PrimaryButton(title: String(localized: .uiDone), action: { committed = true; dismiss() }, disabled: viewModel.hasInvalidNumbers)
-                .accessibilityIdentifier("builder.movement.done").padding(Theme.cardInset).background(Theme.bg)
+            GlassActionButton(title: String(localized: .uiDone), action: { committed = true; dismiss() }, disabled: viewModel.hasInvalidNumbers)
+                .accessibilityIdentifier("builder.movement.done").padding(Theme.cardInset)
         }
         .alert(String(localized: .uiDesignRemoveQuestion), isPresented: $confirmRemoval) {
             Button(String(localized: .uiDesignRemoveExercise), role: .destructive) { committed = true; viewModel.removeMovement(movementID); dismiss() }

@@ -17,7 +17,7 @@ struct ExerciseHistoryView: View {
                             .contentShape(.rect)
                         .frame(minHeight: Theme.space44)
                     }
-                    .buttonStyle(NavigationControlStyle())
+                    .buttonStyle(.glass).buttonBorderShape(.circle)
                     .accessibilityLabel(String(localized: .uiBackToWorkout))
                     .accessibilityIdentifier("exerciseHistory.back")
                 }

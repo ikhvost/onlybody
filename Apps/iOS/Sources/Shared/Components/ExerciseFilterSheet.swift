@@ -23,7 +23,7 @@ struct ExerciseFilterSheet: View {
                     Text(.uiDesignFilters).font(Theme.fontSans(Theme.typeHeading, .bold))
                     Spacer()
                     Button { dismiss() } label: { CloseIcon().frame(width: Theme.touchSize, height: Theme.touchSize) }
-                        .buttonStyle(NavigationControlStyle()).accessibilityLabel(String(localized: .uiCancel))
+                        .buttonStyle(.glass).buttonBorderShape(.circle).accessibilityLabel(String(localized: .uiCancel))
                         .accessibilityIdentifier("filters.close")
                 }
                 Text(.uiPrimaryMuscles).font(Theme.fontSans(Theme.typeCard, .semibold))

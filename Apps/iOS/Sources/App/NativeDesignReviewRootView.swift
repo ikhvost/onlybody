@@ -14,9 +14,10 @@ struct NativeDesignReviewRootView: View {
     var body: some View {
         VStack(spacing: Theme.space0) {
             if let fixture {
-                fixture.screen(index).id(index).frame(maxWidth: .infinity, maxHeight: .infinity)
                 if [0, 1, 12, 14].contains(index) {
-                    BottomNav(selectedTab: index == 12 ? .log : index == 14 ? .library : .train, setTab: { _ in })
+                    NativeDesignReviewTabView(fixture: fixture, index: index).id(index)
+                } else {
+                    fixture.screen(index).id(index).frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
                 HStack {
                     Text(String(index)).accessibilityIdentifier("designReview.index")

@@ -8,7 +8,6 @@ trap 'rm -rf "$render_dir"' EXIT
 swiftc -module-cache-path "$render_dir/cache" -parse-as-library -o "$render_dir/export" \
   "$site_root/Website/Scripts/ExportMuscles.swift" \
   "$source_root/Shared/Theme/Theme.swift" \
-  "$source_root/Shared/Navigation/TabSwipeThresholds.swift" \
   "$source_root/Domain/Catalog/MuscleGroup.swift" \
   "$source_root/Domain/Models/MuscleDiagram.swift" \
   "$source_root/Features/Library/MuscleAnatomyView.swift" \

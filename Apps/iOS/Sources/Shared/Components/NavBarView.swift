@@ -18,7 +18,7 @@ struct NavBarView<Leading: View, Trailing: View>: View {
     var body: some View {
         HStack(spacing: Theme.space10) {
             leading
-                .buttonStyle(NavigationControlStyle())
+                .buttonStyle(.glass).buttonBorderShape(.circle)
                 .frame(minWidth: Theme.touchSize, minHeight: Theme.touchSize)
                 .fixedSize(horizontal: true, vertical: false)
 

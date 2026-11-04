@@ -29,7 +29,7 @@ struct SessionBuilderView: View {
                             .frame(width: Theme.touchSize, height: Theme.touchSize)
                             .contentShape(.rect)
                     }
-                    .buttonStyle(NavigationControlStyle())
+                    .buttonStyle(.glass).buttonBorderShape(.circle)
                     .accessibilityLabel(String(localized: .uiBack))
                     .accessibilityIdentifier("builder.back")
                     .disabled(viewModel.isSaving)
@@ -78,9 +78,9 @@ struct SessionBuilderView: View {
                 .modifier(ExerciseReorderAutoScroll(location: $dragLocation))
                 .scrollDismissesKeyboard(.interactively)
                 .safeAreaInset(edge: .bottom, spacing: Theme.space0) {
-                    PrimaryButton(title: viewModel.isSaving ? String(localized: .uiDesignSaving) : String(localized: .uiSave),
+                    GlassActionButton(title: viewModel.isSaving ? String(localized: .uiDesignSaving) : String(localized: .uiSave),
                                   action: handleSave, disabled: viewModel.isLoading || viewModel.isSaving || viewModel.hasInvalidNumbers)
-                        .accessibilityIdentifier("builder.save").padding(Theme.cardInset).background(Theme.bg)
+                        .accessibilityIdentifier("builder.save").padding(Theme.cardInset)
                 }
             }
         }

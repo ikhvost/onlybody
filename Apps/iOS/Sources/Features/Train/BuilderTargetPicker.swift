@@ -22,8 +22,8 @@ struct BuilderTargetPicker: View {
             }.padding(Theme.horizontalPadding)
         }
         .safeAreaInset(edge: .bottom) {
-            PrimaryButton(title: String(localized: .uiDone), action: { dismiss() }, disabled: viewModel.targetMuscleGroups.isEmpty)
-                .padding(Theme.cardInset).background(Theme.bg)
+            GlassActionButton(title: String(localized: .uiDone), action: { dismiss() }, disabled: viewModel.targetMuscleGroups.isEmpty)
+                .padding(Theme.cardInset)
         }
         .foregroundStyle(Theme.text).background(Theme.bg).preferredColorScheme(.dark)
     }
