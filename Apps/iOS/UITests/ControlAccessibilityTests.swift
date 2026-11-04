@@ -30,8 +30,13 @@ final class ControlAccessibilityTests: XCTestCase {
             }
             if index == 4 {
                 assertHitArea(app.buttons["builder.back"], minimum: 44)
+                let title = app.staticTexts["navigation.title"]
+                XCTAssertTrue(title.exists)
+                XCTAssertEqual(title.frame.midX, app.frame.midX, accuracy: 1)
+                XCTAssertFalse(app.buttons["builder.mode.smart"].exists)
+                XCTAssertFalse(app.buttons["builder.mode.manual"].exists)
                 assertHitArea(app.buttons["builder.add"], minimum: 44)
-                assertHitArea(app.buttons["builder.options"], minimum: 44)
+                assertHitArea(app.buttons["builder.rest"], minimum: 44)
                 assertHitArea(app.buttons["builder.save"], minimum: 52)
                 assertHitArea(app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "builder.replace.")).firstMatch, minimum: 44)
             }

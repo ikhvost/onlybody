@@ -7,7 +7,7 @@ struct BuilderModeButton: View {
 
     var body: some View {
         Button {
-            viewModel.mode = mode
+            viewModel.setMode(mode)
         } label: {
             Text(label)
                 .font(Theme.fontSans(Theme.typeMeta, .semibold))

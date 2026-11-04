@@ -374,7 +374,7 @@ struct SessionBuilderViewModelTests {
         exercise.primaryMuscle = "Chest"
 
         viewModel.name = "Full Body"
-        viewModel.mode = .manual
+        viewModel.setMode(.manual)
         viewModel.addMovement(exercise)
         viewModel.toggleDay("Mon")
         viewModel.toggleDay("Wed")
@@ -509,7 +509,7 @@ struct SessionBuilderViewModelTests {
         var newExercise = ExerciseSnapshot()
         newExercise.name = "Push-Ups"
         viewModel.name = "Updated Name"
-        viewModel.mode = .manual
+        viewModel.setMode(.manual)
         viewModel.scheduledDays = []
         viewModel.movements = []
         viewModel.addMovement(newExercise)
@@ -524,7 +524,7 @@ struct SessionBuilderViewModelTests {
         let savedWorkout = workoutRepo.savedWorkouts.first!
         #expect(savedWorkout.id == existing.id)
         #expect(savedWorkout.name == "Updated Name")
-        #expect(savedWorkout.mode == WorkoutMode.manual.rawValue)
+        #expect(savedWorkout.mode == WorkoutMode.smart.rawValue)
         #expect(savedWorkout.scheduledDays == ["Fri"])
         #expect(savedWorkout.items.count == 1)
         #expect(savedWorkout.items.first?.exercise?.name == "Push-Ups")
@@ -668,7 +668,7 @@ struct SessionBuilderViewModelTests {
         )
 
         viewModel.allExercises = [exercise]
-        viewModel.mode = .manual
+        viewModel.setMode(.manual)
         viewModel.addMovement(exercise)
 
         let success = await viewModel.save()

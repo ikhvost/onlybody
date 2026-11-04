@@ -38,7 +38,9 @@ struct SessionBuilderView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: Theme.space0) {
                         BuilderName(viewModel: viewModel)
-                        BuilderStyle(viewModel: viewModel)
+                        if !viewModel.isEditMode {
+                            BuilderStyle(viewModel: viewModel)
+                        }
                         if viewModel.mode == .smart {
                             BuilderTargets(viewModel: viewModel)
                             Button(String(localized: .uiSelectMuscleGroups)) { showTargets = true }
@@ -48,20 +50,8 @@ struct SessionBuilderView: View {
                         BuilderSmartInfo(viewModel: viewModel)
                         BuilderMovements(viewModel: viewModel, makeMovement: makeMovement,
                                          isShowingExercisePicker: $isShowingExercisePicker, dragLocation: $dragLocation)
-                        DisclosureGroup {
-                            BuilderDays(viewModel: viewModel)
-                        } label: {
-                            Text(.uiDesignSchedule).frame(maxWidth: .infinity, minHeight: Theme.touchSize, alignment: .leading)
-                        }
-                        .font(Theme.fontSans(Theme.typeBody)).padding(Theme.horizontalPadding)
-                        DisclosureGroup {
-                            BuilderTiming(viewModel: viewModel)
-                        } label: {
-                            Text(.uiDesignOptions)
-                                .frame(maxWidth: .infinity, minHeight: Theme.touchSize, alignment: .leading)
-                                .accessibilityIdentifier("builder.options")
-                        }
-                        .font(Theme.fontSans(Theme.typeBody)).padding(Theme.horizontalPadding)
+                        BuilderDays(viewModel: viewModel)
+                        BuilderTiming(viewModel: viewModel)
                         BuilderDuration(viewModel: viewModel)
                         if viewModel.isEditMode {
                             Button(String(localized: .uiDeleteWorkout), role: .destructive) { showDeletePrompt = true }

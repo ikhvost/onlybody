@@ -56,6 +56,8 @@ final class WorkoutJourneyTests: XCTestCase {
     func testEditSurvivesRelaunch() {
         createWorkout()
         tap("workout.edit.E2E Workout")
+        XCTAssertFalse(app.buttons["builder.mode.smart"].exists)
+        XCTAssertFalse(app.buttons["builder.mode.manual"].exists)
         tap("stepper.Reps.increase")
         let reps = app.textFields["stepper.Reps.value"]
         reps.coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.5)).tap()
@@ -532,7 +534,9 @@ final class WorkoutJourneyTests: XCTestCase {
             app.pickerWheels.firstMatch.adjust(toPickerWheelValue: rest)
             tap("timing.done")
         }
-        if duration != nil || rest != nil { tap("builder.options") }
+        if duration != nil || rest != nil {
+            for _ in 0..<6 where !name.isHittable { app.swipeDown() }
+        }
         for _ in sets..<3 { tap("stepper.Sets.decrease") }
         tap("builder.save")
         XCTAssertTrue(app.buttons["workout.start.E2E Workout"].waitForExistence(timeout: 10))
@@ -545,7 +549,6 @@ final class WorkoutJourneyTests: XCTestCase {
 
     private func showTimingOptions() {
         let rest = app.buttons["builder.rest"]
-        if !rest.exists { tap("builder.options") }
         for _ in 0..<6 where !rest.exists || !rest.isHittable { app.swipeUp() }
         XCTAssertTrue(rest.exists || rest.waitForExistence(timeout: 10), app.debugDescription)
     }

@@ -10,11 +10,13 @@ import Testing
 struct WorkoutTimingTests {
     @Test func returningToSmartModeReappliesItsBudgetToManualEdits() {
         let exercise = ExerciseSnapshot(name: "Fixture chest", primaryMuscle: "Chest")
-        let workout = WorkoutSnapshot(mode: "manual", targetMuscleGroups: ["Chest"], durationMinutes: 15,
-                                      items: (0..<8).map { WorkoutItemSnapshot(order: $0, exercise: exercise) })
-        let model = SessionBuilderViewModel(workouts: MockWorkoutRepository(), exercises: MockExerciseRepository(), workout: workout)
+        let model = SessionBuilderViewModel(workouts: MockWorkoutRepository(), exercises: MockExerciseRepository(),
+                                            targetMuscleGroups: ["Chest"])
         model.allExercises = [exercise]
-        model.mode = .smart
+        model.setDurationMinutes(15)
+        model.setMode(.manual)
+        model.movements = (0..<8).map { _ in MovementConfig(exercise: exercise) }
+        model.setMode(.smart)
         #expect(model.estimatedDurationSeconds <= 15 * 60)
         #expect(model.movements.count == 3)
     }

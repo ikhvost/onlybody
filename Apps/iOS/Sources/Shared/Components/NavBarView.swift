@@ -16,8 +16,8 @@ struct NavBarView<Leading: View, Trailing: View>: View {
     }
 
     var body: some View {
-        HStack(spacing: Theme.space10) {
-            leading
+        CenteredNavigationLayout(spacing: Theme.space10) {
+            ZStack { leading }
                 .buttonStyle(.glass).buttonBorderShape(.circle)
                 .frame(minWidth: Theme.touchSize, minHeight: Theme.touchSize)
                 .fixedSize(horizontal: true, vertical: false)
@@ -27,13 +27,15 @@ struct NavBarView<Leading: View, Trailing: View>: View {
                     .font(Theme.fontSans(Theme.typeCard, .bold))
                     .tracking(-0.2)
                     .foregroundStyle(Theme.text)
+                    .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity)
+                    .accessibilityIdentifier("navigation.title")
             } else {
                 Spacer(minLength: Theme.space0)
             }
 
-            trailing
+            ZStack { trailing }
                 .fixedSize(horizontal: true, vertical: false)
         }
         .padding(.horizontal, Theme.horizontalPadding)

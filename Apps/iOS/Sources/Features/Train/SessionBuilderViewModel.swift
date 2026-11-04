@@ -26,7 +26,7 @@ final class SessionBuilderViewModel {
     var numberErrors: Set<String> = []
     var hasInvalidNumbers: Bool { !numberErrors.isEmpty }
     var name: String = ""
-    var mode: WorkoutMode = .smart { didSet { refreshSmartMovements() } }
+    private(set) var mode: WorkoutMode = .smart { didSet { refreshSmartMovements() } }
     var targetMuscleGroups: [String] = [] { didSet { refreshSmartMovements() } }
     var movements: [MovementConfig] = []
     var scheduledDays: [String] = []
@@ -108,6 +108,11 @@ final class SessionBuilderViewModel {
         } catch {
             errorMessage = String(localized: .uiCouldNotLoadExercises)
         }
+    }
+
+    func setMode(_ mode: WorkoutMode) {
+        guard !isEditMode, !isSaving else { return }
+        self.mode = mode
     }
 
     func addMovement(_ exercise: ExerciseSnapshot) {
@@ -230,7 +235,7 @@ final class SessionBuilderViewModel {
         defer { isSaving = false }
 
         do {
-            if mode == .smart && targetMuscleGroups.isEmpty {
+            if !isEditMode && mode == .smart && targetMuscleGroups.isEmpty {
                 mode = .manual
             }
 
