@@ -1,0 +1,63 @@
+{
+  "version": "v007",
+  "parent": "v006",
+  "date": "2026-11-05",
+  "title": "Нативний Liquid Glass",
+  "status": "native-synchronized",
+  "nativeChanges": false,
+  "fixtureRevision": "7e0647e",
+  "behaviorSource": "Shared SwiftUI implementation: system tabs, selected glass controls, immutable workout mode while editing, expanded schedule and timing, centered headers",
+  "products": [
+    "OnlyBody",
+    "OnlyWeights"
+  ],
+  "languages": [
+    "uk",
+    "en",
+    "pl",
+    "de",
+    "fr"
+  ],
+  "viewports": [
+    [
+      375,
+      812
+    ],
+    [
+      393,
+      852
+    ],
+    [
+      440,
+      956
+    ]
+  ],
+  "screens": 18,
+  "comparisonViewport": [
+    440,
+    956
+  ],
+  "screenshotViewport": [
+    393,
+    852
+  ],
+  "defaultClock": "frozen",
+  "appearance": "dark",
+  "font": "system Apple stack with system sans-serif fallback",
+  "entry": "../../runner.html?version=v007",
+  "decisions": "DECISIONS.md",
+  "tokens": "TOKENS.md",
+  "frozenSourceChecksums": "baseline-checksums.json",
+  "previewPreferences": [
+    "reduce-motion",
+    "reduce-transparency"
+  ],
+  "qaPreferences": [
+    "no-blur"
+  ],
+  "screenshotStorage": "local-only, gitignored",
+  "approvalScope": "User requested a new design version matching the current physical-iPhone build",
+  "nativeSourceRevision": "85aaed377696911817992571f3f6f396576e7bf4",
+  "verification": "verification.json",
+  "nativeVerification": "NATIVE.md"
+}

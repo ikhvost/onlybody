@@ -196,3 +196,10 @@ Release-збірки Simulator, перевірка обох app bundles, арх�
 Артефакти: `Release/Artifacts/2026-11-03-direct-replace/`. Повна перевірка запускається через `DESTINATION='platform=iOS Simulator,name=iPhone 17 Pro,OS=26.4.1' VALIDATION_OUTPUT="$PWD/Release/Artifacts/2026-11-03-direct-replace/full" Scripts/validate.sh full`; DerivedData повторно використовує попередній локальний кеш. Перша невдала компіляція збережена в `failed-compile/`: спільний ключ налаштувань `uiDesignOptions` відновлено, видалено лише два невикористані переклади переміщення.
 
 Фінальний повний прогін завершився з exit 0: OnlyBody — 264 тести логіки та інтеграцій у 57 suites, OnlyWeights — 245 у 53; по 7 функціональних UI-тестів без помилок. Release-збірки Simulator, перевірки обох bundles, каталогів і 431 ресурсу п’ятьма мовами — PASS. SwiftLint — 0 порушень у 327 файлах. Тимчасові seed stores згенеровано на 65 / 62 вправи. Журнал: `Release/Artifacts/2026-11-03-direct-replace/validation.log`; xcresult — у `full/`. Ручний аудит VoiceOver і візуальне приймання цієї зміни на фізичному iPhone не виконувалися.
+
+
+## 5 листопада 2026 — Liquid Glass і спрощення редактора, v007
+
+Спільні зміни OnlyBody / OnlyWeights: системний таббар і вибрані скляні кнопки (`e48a02e`), незмінний тип збереженого тренування, відкриті розклад і параметри, центровані заголовки (`85aaed3`). Клікабельний дизайн зафіксовано окремою [v007](versions/v007/DECISIONS.md); v006 збережено без змін.
+
+Quick і full — PASS для обох продуктів: 509 тестів логіки / інтеграцій, по 7 функціональних UI-тестів, Release Simulator, bundles, каталоги й тимчасові seed stores. Підписані Debug-збірки обох застосунків встановлено та запущено на фізичному iPhone 15 Pro (iOS 27.2). Детальні межі фізичної та візуальної перевірки — [NATIVE.md](versions/v007/NATIVE.md). Локальні журнали: `Release/Artifacts/2026-11-05-liquid-editor/`.
