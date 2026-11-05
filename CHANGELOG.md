@@ -1,7 +1,53 @@
 # Changelog
 
 Changes for OnlyBody and OnlyWeights, newest version first. Record the app version,
-build number and user-facing changes for each update.
+build number when assigned and user-facing changes for each update.
+
+## 2.0.0 — Source checkpoint
+
+### Added
+
+- Workout overview with scheduled days, exercises in training order, planned set
+  counts, and a breakdown and map of the muscles trained. Edit or start a workout
+  directly from the overview.
+- An exercise list before and during a workout, with editable reps and weight for
+  each set, including completed sets. A compact rest timer stays visible while
+  browsing the list or logging results.
+- Drag to reorder exercises in the workout editor and during a session. Replace
+  an exercise directly from its card. Changes made during a session stay in that
+  session.
+- 34 new OnlyBody exercises (65 → 99) and 45 new OnlyWeights exercises (60 → 105),
+  with localized names, muscle and equipment details, and video demonstrations.
+  OnlyWeights also updated 25 existing demonstrations.
+- An App Store review link in Settings for each app.
+
+### Improved
+
+- System Liquid Glass tab navigation and controls, centered navigation titles,
+  and larger touch targets across both apps.
+- A streamlined workout editor with separate manual and automatic creation
+  options, quicker access to exercise selection, and protection against losing
+  unsaved edits. Each workout keeps its original style when edited.
+- Equipment filters in the exercise library and picker, plus clearer exercise
+  terminology across English, Ukrainian, Polish, German, and French.
+- Direct access to the embedded YouTube player from exercise details, with retry
+  and recovery after a lost connection. The separate in-app video consent screen
+  and tracking authorization prompt were removed.
+
+### Fixed
+
+- Exercise defaults use the latest completed performance, and workout history
+  displays the actual reps and weight for each completed set.
+- Workout duration estimates and automatic exercise selection better account for
+  time spent training and resting.
+- Improved numeric keyboard dismissal and entry of weights starting at zero.
+
+### Preparation record
+
+- `v2.0.0` marks this source checkpoint. The App Store build number is pending.
+- Video review remains partial. See the [media review status](Scripts/ExerciseMedia/README.md)
+  for the completed browser checks and outstanding physical-iPhone playback and
+  content review.
 
 ## 1.0 — Build 2
 
