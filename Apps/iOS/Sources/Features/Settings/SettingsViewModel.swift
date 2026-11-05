@@ -7,6 +7,7 @@ import Observation
 final class SettingsViewModel {
     let appName: String
     let version: String
+    let appStoreReviewURL: URL?
     let privacyPolicyURL = URL(string: "https://onlybody.app/privacy/")
     let termsOfUseURL = URL(string: "https://onlybody.app/terms/")
     private let preferences: WorkoutPreferences
@@ -31,10 +32,14 @@ final class SettingsViewModel {
     }
 
     init(
-        appName: String, version: String, preferences: WorkoutPreferences = WorkoutPreferences()
+        appName: String,
+        version: String,
+        appStoreReviewURL: URL? = nil,
+        preferences: WorkoutPreferences = WorkoutPreferences()
     ) {
         self.appName = appName
         self.version = version
+        self.appStoreReviewURL = appStoreReviewURL
         self.preferences = preferences
     }
 }

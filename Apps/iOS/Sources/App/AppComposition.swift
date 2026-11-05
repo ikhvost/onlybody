@@ -25,6 +25,7 @@ struct AppComposition {
         SettingsViewModel(
             appName: configuration.displayName,
             version: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "—",
+            appStoreReviewURL: configuration.appStoreReviewURL,
             preferences: preferences
         )
     }

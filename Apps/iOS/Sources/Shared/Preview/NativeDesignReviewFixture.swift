@@ -46,7 +46,10 @@ struct NativeDesignReviewFixture {
         log = LogViewModel(sessions: sessions, now: { date })
         overview = WorkoutOverviewViewModel(workoutID: workout.id, workouts: workouts)
         history = ExerciseHistoryViewModel(exerciseName: name, sessions: sessions)
-        settings = SettingsViewModel(appName: AppConfiguration.current.displayName, version: "Preview", preferences: preferences)
+        settings = SettingsViewModel(
+            appName: AppConfiguration.current.displayName, version: "Preview",
+            appStoreReviewURL: AppConfiguration.current.appStoreReviewURL, preferences: preferences
+        )
         let reminders = WorkoutReminderCoordinator(preferences: preferences, workouts: workouts, notifications: PreviewWorkoutNotificationClient())
         notifications = NotificationsViewModel(preferences: preferences, reminders: reminders)
         await train.load()

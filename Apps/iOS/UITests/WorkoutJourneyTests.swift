@@ -214,6 +214,13 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertFalse(app.staticTexts["Set 2 · Reps: 12"].exists)
     }
 
+    func testSettingsShowsRateApp() {
+        tap("train.settings")
+        let rateApp = app.buttons["settings.rate"]
+        XCTAssertTrue(rateApp.waitForExistence(timeout: 10))
+        XCTAssertTrue(rateApp.isEnabled)
+    }
+
     func testNavigationAndFullscreenWorkout() {
         app.terminate()
         app.launchEnvironment["ONLYBODY_DEMONSTRATION_FIXTURE"] = "web"
@@ -307,7 +314,6 @@ final class WorkoutJourneyTests: XCTestCase {
         verifyTimerSoundPreference()
         verifyNotificationPreferences()
         verifyWeightUnitPreference()
-        XCTAssertFalse(app.buttons["settings.rate"].exists)
         XCTAssertTrue(app.buttons["settings.feedback"].isEnabled)
         XCTAssertTrue(app.buttons["settings.privacy"].isEnabled)
         XCTAssertTrue(app.buttons["settings.terms"].isEnabled)

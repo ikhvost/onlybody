@@ -1,3 +1,4 @@
+import Foundation
 import Testing
 #if ONLYWEIGHTS
 @testable import onlyweights
@@ -7,7 +8,7 @@ import Testing
 
 @MainActor
 struct ProductConfigurationTests {
-    @Test func compositionPassesBrandToTrainScreen() {
+    @Test func compositionPassesProductConfigurationToScreens() {
         for configuration in [AppConfiguration.onlyBody, .onlyWeights] {
             let composition = AppComposition(
                 configuration: configuration, exercises: MockExerciseRepository(),
@@ -17,6 +18,7 @@ struct ProductConfigurationTests {
                 )
             )
             #expect(composition.train().appName == configuration.displayName)
+            #expect(composition.settings().appStoreReviewURL == configuration.appStoreReviewURL)
         }
     }
 
@@ -24,9 +26,11 @@ struct ProductConfigurationTests {
         #if ONLYWEIGHTS
         #expect(AppConfiguration.current.displayName == "OnlyWeights")
         #expect(AppConfiguration.current.workoutFallback == .matchingCatalog)
+        #expect(AppConfiguration.current.appStoreReviewURL?.absoluteString == "https://apps.apple.com/app/id6827693301?action=write-review")
         #else
         #expect(AppConfiguration.current.displayName == "OnlyBody")
         #expect(AppConfiguration.current.workoutFallback == .bodyweight)
+        #expect(AppConfiguration.current.appStoreReviewURL?.absoluteString == "https://apps.apple.com/app/id6827692702?action=write-review")
         #endif
     }
 

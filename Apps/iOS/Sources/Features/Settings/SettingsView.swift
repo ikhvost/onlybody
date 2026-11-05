@@ -44,6 +44,13 @@ struct SettingsView: View {
                                 destination: viewModel.feedbackURL,
                                 destinationDescription: String(localized: .uiOpensEmailApp)
                             )
+                            Rectangle().fill(Theme.border).frame(height: Theme.dividerThickness)
+                            SettingsRow(
+                                title: String(localized: .uiRateApp),
+                                identifier: "settings.rate",
+                                destination: viewModel.appStoreReviewURL,
+                                destinationDescription: String(localized: .uiOpensAppStore)
+                            )
                         }
 
                         SettingsSection(title: String(localized: .uiLegal)) {
@@ -86,12 +93,22 @@ struct SettingsView: View {
 
 #if DEBUG
 #Preview("Settings — OnlyBody") {
-    SettingsView(viewModel: SettingsViewModel(appName: "OnlyBody", version: "1.0"), onNotifications: {})
-        .preferredColorScheme(.dark)
+    SettingsView(
+        viewModel: SettingsViewModel(
+            appName: "OnlyBody", version: "1.0", appStoreReviewURL: AppConfiguration.onlyBody.appStoreReviewURL
+        ),
+        onNotifications: {}
+    )
+    .preferredColorScheme(.dark)
 }
 
 #Preview("Settings — OnlyWeights") {
-    SettingsView(viewModel: SettingsViewModel(appName: "OnlyWeights", version: "1.0"), onNotifications: {})
-        .preferredColorScheme(.dark)
+    SettingsView(
+        viewModel: SettingsViewModel(
+            appName: "OnlyWeights", version: "1.0", appStoreReviewURL: AppConfiguration.onlyWeights.appStoreReviewURL
+        ),
+        onNotifications: {}
+    )
+    .preferredColorScheme(.dark)
 }
 #endif
