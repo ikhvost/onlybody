@@ -13,8 +13,6 @@ struct WorkoutModeEditingTests {
         let workout = WorkoutSnapshot(mode: mode.rawValue, items: [WorkoutItemSnapshot(exercise: ExerciseSnapshot())])
         let model = SessionBuilderViewModel(workouts: repository, exercises: MockExerciseRepository(), workout: workout)
 
-        model.setMode(mode == .manual ? .smart : .manual)
-
         #expect(model.mode == mode)
         #expect(!model.hasUnsavedChanges)
         model.name = "Updated workout"
@@ -25,16 +23,14 @@ struct WorkoutModeEditingTests {
     }
 
     @Test(arguments: [WorkoutMode.manual, .smart])
-    func loadingByIDKeepsModeLocked(_ mode: WorkoutMode) async {
+    func loadingByIDRestoresMode(_ mode: WorkoutMode) async {
         let repository = MockWorkoutRepository()
         let workout = WorkoutSnapshot(mode: mode.rawValue)
         repository.stubbedWorkouts = [workout]
         let model = SessionBuilderViewModel(workouts: repository, exercises: MockExerciseRepository(), workoutID: workout.id)
 
-        model.setMode(.smart)
         #expect(!model.hasUnsavedChanges)
         await model.loadExercises()
-        model.setMode(mode == .manual ? .smart : .manual)
 
         #expect(model.mode == mode)
         #expect(!model.hasUnsavedChanges)

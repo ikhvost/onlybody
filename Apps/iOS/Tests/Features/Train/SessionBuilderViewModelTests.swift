@@ -374,7 +374,6 @@ struct SessionBuilderViewModelTests {
         exercise.primaryMuscle = "Chest"
 
         viewModel.name = "Full Body"
-        viewModel.setMode(.manual)
         viewModel.addMovement(exercise)
         viewModel.toggleDay("Mon")
         viewModel.toggleDay("Wed")
@@ -509,7 +508,6 @@ struct SessionBuilderViewModelTests {
         var newExercise = ExerciseSnapshot()
         newExercise.name = "Push-Ups"
         viewModel.name = "Updated Name"
-        viewModel.setMode(.manual)
         viewModel.scheduledDays = []
         viewModel.movements = []
         viewModel.addMovement(newExercise)
@@ -653,7 +651,21 @@ struct SessionBuilderViewModelTests {
     }
 
     @Test
-    func smartSavePreservesManualModeWhenNoTargets() async {
+    func smartSaveRejectsClearedTargetsWithoutChangingMode() async {
+        let repository = MockWorkoutRepository()
+        let model = SessionBuilderViewModel(
+            workouts: repository, exercises: MockExerciseRepository(), targetMuscleGroups: ["Chest"]
+        )
+        model.addMovement(ExerciseSnapshot(name: "Push-Ups", primaryMuscle: "Chest"))
+        model.targetMuscleGroups = []
+
+        #expect(await !model.save())
+        #expect(model.mode == .smart)
+        #expect(repository.savedWorkouts.isEmpty)
+    }
+
+    @Test
+    func manualSavePreservesModeWhenNoTargets() async {
         let workoutRepo = MockWorkoutRepository()
         let exerciseRepo = MockExerciseRepository()
 
@@ -668,7 +680,6 @@ struct SessionBuilderViewModelTests {
         )
 
         viewModel.allExercises = [exercise]
-        viewModel.setMode(.manual)
         viewModel.addMovement(exercise)
 
         let success = await viewModel.save()

@@ -38,9 +38,6 @@ struct SessionBuilderView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: Theme.space0) {
                         BuilderName(viewModel: viewModel)
-                        if !viewModel.isEditMode {
-                            BuilderStyle(viewModel: viewModel)
-                        }
                         if viewModel.mode == .smart {
                             BuilderTargets(viewModel: viewModel)
                             Button(String(localized: .uiSelectMuscleGroups)) { showTargets = true }

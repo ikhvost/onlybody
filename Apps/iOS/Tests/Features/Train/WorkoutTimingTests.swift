@@ -8,19 +8,6 @@ import Testing
 
 @MainActor
 struct WorkoutTimingTests {
-    @Test func returningToSmartModeReappliesItsBudgetToManualEdits() {
-        let exercise = ExerciseSnapshot(name: "Fixture chest", primaryMuscle: "Chest")
-        let model = SessionBuilderViewModel(workouts: MockWorkoutRepository(), exercises: MockExerciseRepository(),
-                                            targetMuscleGroups: ["Chest"])
-        model.allExercises = [exercise]
-        model.setDurationMinutes(15)
-        model.setMode(.manual)
-        model.movements = (0..<8).map { _ in MovementConfig(exercise: exercise) }
-        model.setMode(.smart)
-        #expect(model.estimatedDurationSeconds <= 15 * 60)
-        #expect(model.movements.count == 3)
-    }
-
     @Test func savingSmartEditsKeepsOnlyExercisesWithinTheBudget() async throws {
         let exercise = ExerciseSnapshot(name: "Fixture chest", primaryMuscle: "Chest")
         let items = (0..<3).map { WorkoutItemSnapshot(order: $0, exercise: exercise) }

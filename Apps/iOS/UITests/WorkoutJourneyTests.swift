@@ -526,6 +526,8 @@ final class WorkoutJourneyTests: XCTestCase {
         selectExercise()
         let name = app.textFields["builder.name"]
         XCTAssertTrue(name.waitForExistence(timeout: 10))
+        XCTAssertFalse(app.buttons["builder.mode.smart"].exists)
+        XCTAssertFalse(app.buttons["builder.mode.manual"].exists)
         name.tap()
         name.typeText("E2E Workout")
         dismissKeyboardOutside(name)
@@ -566,6 +568,8 @@ final class WorkoutJourneyTests: XCTestCase {
         tap("picker.build")
         let name = app.textFields["builder.name"]
         XCTAssertTrue(name.waitForExistence(timeout: 10))
+        XCTAssertFalse(app.buttons["builder.mode.smart"].exists)
+        XCTAssertFalse(app.buttons["builder.mode.manual"].exists)
         name.tap()
         name.typeText("Smart Budget")
         dismissKeyboardOutside(name)
