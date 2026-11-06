@@ -1,5 +1,6 @@
 /* Review copy; columns: Ukrainian, English, Polish, German, French. */
 window.SMART_COPY = {
+ edit: window.DESIGN_COPY.edit,
  retry:['Повторити','Retry','Ponów','Erneut versuchen','Réessayer'],
  storageError:['Не вдалося зберегти демоваріант у браузері.','Could not save the demo in this browser.','Nie udało się zapisać demonstracji w przeglądarce.','Die Demo konnte nicht im Browser gespeichert werden.','Impossible d’enregistrer la démo dans ce navigateur.'],
  estimate:['Орієнтовно, хв','Estimated minutes','Szacowane minuty','Geschätzte Minuten','Minutes estimées'],

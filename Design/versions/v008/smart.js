@@ -158,7 +158,7 @@
   window.v008SmartHomeWorkout = () => {
     if(new URLSearchParams(location.search).get('scenario')==='empty')return null;
     const c=model().config;
-    return {days:c.days,renderCard:scheduled=>`<article class="workout-card smart-home-card"><p class="eyebrow">SMART SELECTION</p>${btn(`<div class="grow"><h2>${E(configName(c))}</h2><span class="meta">${E(t('uiMinutesCount',c.minutes))} · ${text(c.level)}</span></div>${icon('chevron',20)}`,'smartOpen','workout-open')}<div class="card-actions">${button('settings','smartEdit')}${button('start','smartOpen',scheduled?'primary':'secondary')}</div></article>`};
+    return {days:c.days,renderCard:scheduled=>`<article class="workout-card smart-home-card"><p class="eyebrow">SMART SELECTION</p>${btn(`<div class="grow"><h2>${E(configName(c))}</h2><span class="meta">${E(t('uiMinutesCount',c.minutes))} · ${text(c.level)}</span></div>${icon('chevron',20)}`,'smartOpen','workout-open')}<div class="card-actions">${button('edit','smartEdit')}${button('start','smartOpen',scheduled?'primary':'secondary')}</div></article>`};
   };
   settingsView = () => { const template=document.createElement('template');template.innerHTML=old.settingsView();template.content.querySelector('[data-action="feedback"]').insertAdjacentHTML('afterend',btn(`<span>${text('rate')}</span>${icon('chevron',16)}`,'smartRate','settings-row'));return template.innerHTML; };
   musclePicker = () => {
