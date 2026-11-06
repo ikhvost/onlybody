@@ -1,5 +1,5 @@
 'use strict';
-const screens = [['train','Головний екран'],['train-empty','Порожній стан'],['musclePicker','Вибір м’язів'],['builder','Редактор тренування'],['exercisePicker','Додати вправу'],['active','Активне тренування'],['rest','Відпочинок'],['complete','Завершення'],['exerciseHistory','Історія вправи'],['log','Журнал'],['session','Деталі заняття'],['library','Бібліотека'],['movement','Деталі вправи'],['settings','Налаштування'],['notifications','Нагадування'],['creation','Спосіб створення'],['statistics','Статистика'],['workout','Огляд тренування']];
+const screens = [['train','Головний екран'],['train-empty','Порожній стан'],['musclePicker','Вибір м’язів'],['builder','Редактор тренування'],['exercisePicker','Додати вправу'],['active','Активне тренування'],['rest','Відпочинок'],['complete','Завершення'],['exerciseHistory','Історія вправи'],['log','Журнал'],['session','Деталі заняття'],['library','Бібліотека'],['movement','Деталі вправи'],['settings','Налаштування'],['notifications','Нагадування'],['creation','Спосіб створення'],['statistics','Статистика'],['workout','Огляд тренування'],['smartSetup','Smart · Час і рівень'],['smartOptions','Smart · Обладнання й обмеження'],['smartToday','Smart · Сьогоднішнє заняття']];
 const get = id => document.getElementById(id);
 let selected = 'train';
 const params = new URLSearchParams(location.search);
@@ -16,8 +16,10 @@ function redraw(){
   if(compare||baseline)get('size').value='440';
   const width=compare||baseline?440:Number(get('size').value),height={375:812,393:852,440:956}[width];
   const chosen=get('version').value;
+  get('next-day').disabled=chosen!=='v008';
+  if(chosen==='v008'&&get('scenario').value==='smart-gap')selected='smartToday';
   for (const id of ['reduce-motion','reduce-transparency']) {
-    get(id).disabled=!['v004','v005','v006','v007'].includes(chosen);
+    get(id).disabled=!['v004','v005','v006','v007','v008'].includes(chosen);
     get(id).title='Демонстраційний режим v004 / v005 / v006 / v007';
   }
   if(get('compare-base').value===chosen)get('compare-base').value='v000';
@@ -25,10 +27,10 @@ function redraw(){
   const comparisonBase=get('compare-base').value===chosen?'v000':get('compare-base').value;
   const versions=compare?[comparisonBase,chosen]:[chosen];
   get('title').textContent=screens.find(([id])=>id===selected)[1];
-  document.querySelector('.status').textContent=baseline&&!compare?'v000 · Зафіксована база':chosen==='v007'?'v007 · Нативний Liquid Glass':chosen==='v006'?'v006 · Синхронізовано з апкою':chosen==='v005'?'v005 · Уточнене керування':chosen==='v004'?'v004 · Liquid Glass':chosen==='v003'?'v003 · Поточна база':chosen==='v002'?'v002 · Погоджено':`${chosen} · Попередня пропозиція`;
+  document.querySelector('.status').textContent=baseline&&!compare?'v000 · Зафіксована база':chosen==='v008'?'v008 · На рев’ю':chosen==='v007'?'v007 · Нативний Liquid Glass':chosen==='v006'?'v006 · Синхронізовано з апкою':chosen==='v005'?'v005 · Уточнене керування':chosen==='v004'?'v004 · Liquid Glass':chosen==='v003'?'v003 · Поточна база':chosen==='v002'?'v002 · Погоджено':`${chosen} · Попередня пропозиція`;
   get('screens').innerHTML=screens.map(([id,label],i)=>`<button data-route="${id}" class="${id===selected?'selected':''}" ${id===selected?'aria-current="page"':''}><span>${String(i+1).padStart(2,'0')}</span>${label}</button>`).join('');
   const args=new URLSearchParams({product:get('product').value,language:get('language').value,screen:selected,scenario:get('scenario').value,live:String(get('live').checked),'reduce-motion':String(get('reduce-motion').checked),'reduce-transparency':String(get('reduce-transparency').checked)});
-  get('stage').innerHTML=versions.map(v=>`<section class="preview"><h3>${v==='v000'?'v000 · Початковий стан':v==='v001'?'v001 · М’який спортивний':v==='v002'?'v002 · Огляд тренування':v==='v003'?'v003 · Вільне тренування':v==='v004'?'v004 · Liquid Glass':v==='v005'?'v005 · Уточнене керування':v==='v006'?'v006 · Синхронізовано з апкою':'v007 · Нативний Liquid Glass'}<span>${width} × ${height}</span></h3><div class="frame-space"><iframe title="${v} ${get('product').value}" src="runner.html?${args}&version=${v}" width="${width}" height="${height}"></iframe></div></section>`).join('');
+  get('stage').innerHTML=versions.map(v=>`<section class="preview"><h3>${v==='v000'?'v000 · Початковий стан':v==='v001'?'v001 · М’який спортивний':v==='v002'?'v002 · Огляд тренування':v==='v003'?'v003 · Вільне тренування':v==='v004'?'v004 · Liquid Glass':v==='v005'?'v005 · Уточнене керування':v==='v006'?'v006 · Синхронізовано з апкою':v==='v007'?'v007 · Нативний Liquid Glass':'v008 · Smart Selection'}<span>${width} × ${height}</span></h3><div class="frame-space"><iframe title="${v} ${get('product').value}" src="runner.html?${args}&version=${v}" width="${width}" height="${height}"></iframe></div></section>`).join('');
   get('phone-link').href=`runner.html?${args}&version=${get('version').value}`;
   const url=new URLSearchParams({version:get('version').value,product:get('product').value,language:get('language').value,size:get('size').value,screen:selected,scenario:get('scenario').value,zoom:get('zoom').value,compare:String(compare),'compare-base':get('compare-base').value,'reduce-motion':String(get('reduce-motion').checked),'reduce-transparency':String(get('reduce-transparency').checked)});
   history.replaceState(null,'','?'+url);
@@ -44,7 +46,8 @@ function fit(){
 get('screens').addEventListener('click',e=>{const b=e.target.closest('[data-route]');if(b){selected=b.dataset.route;redraw()}});
 for(const id of ['version','product','language','size','compare','scenario','compare-base','reduce-motion','reduce-transparency']) get(id).addEventListener('change',redraw);
 get('zoom').addEventListener('change',fit);
-get('reset').addEventListener('click',redraw);
+get('next-day').addEventListener('click',()=>{for(const frame of document.querySelectorAll('iframe'))frame.contentWindow.postMessage({type:'smartNextDay'},location.origin)});
+get('reset').addEventListener('click',()=>{for(const key of Object.keys(localStorage))if(key.startsWith('only-smart-v008:'))localStorage.removeItem(key);redraw()});
 get('live').addEventListener('change',()=>{for(const f of document.querySelectorAll('iframe'))f.contentWindow.postMessage({type:'clock',live:get('live').checked},location.origin)});
 addEventListener('resize',fit);
 redraw();
