@@ -236,12 +236,13 @@
       case 'smartSchedule':schedule();return;
       case 'smartDay':s.scheduleDraft.days=toggle(s.scheduleDraft.days,p[0]);s.scheduleDraft.name=$('#smart-name').value;renderSchedule();return;
       case 'smartScheduleApply':config().name=$('#smart-name').value.trim();config().days=[...s.scheduleDraft.days];if(!s.smartDraft)persist();dismiss();break;
+      case 'smartResetDay':model().offset=0;invalidate();persist();break;
       case 'smartNextDay':model().offset++;invalidate();persist();break;
       case 'smartRate':window.open(`https://apps.apple.com/app/id${product==='OnlyBody'?'6827692702':'6827693301'}?action=write-review`,'_blank','noopener');return;
     }
     render(s.route===previousRoute);
   };
-  addEventListener('message',event=>{if(event.origin===location.origin&&event.source===parent&&event.data?.type==='smartNextDay')action('smartNextDay');});
+  addEventListener('message',event=>{if(event.origin===location.origin&&event.source===parent&&['smartNextDay','smartResetDay'].includes(event.data?.type))action(event.data.type);});
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&state().overlay?.kind==='smart'){event.preventDefault();dismiss();render();}},true);
   // Read-only QA surface; changing the day uses the same visible demo action.
   window.smartDemo={config:()=>clone(config()),plan:()=>clone(plan()),model:()=>clone(model())};

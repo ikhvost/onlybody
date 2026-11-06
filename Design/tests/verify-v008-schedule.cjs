@@ -37,10 +37,15 @@ const output=path.resolve(__dirname,'../versions/v008');
    await act('smartOpen');await act('smartSchedule');
    for(const day of ['Mon','Wed','Fri','Sat'])await act('smartDay:'+day);
    await act('smartScheduleApply');await act('smartExit');assert.notEqual(await group(),'Today');assert.equal(await page.locator('.rest-day').count(),1);
+   // Returning to today preserves the user's saved workout preferences.
+   const savedConfig=await page.evaluate(()=>smartDemo.config());
+   await act('smartResetDay');
+   assert.equal(await page.evaluate(()=>smartDemo.model().offset),0);
+   assert.deepEqual(await page.evaluate(()=>smartDemo.config()),savedConfig);
    // Explicit empty fixtures still hide the Smart demo.
    await page.goto(`${origin}/runner.html?version=v008&product=${product}&language=en&screen=train&scenario=empty`);await page.evaluate(()=>v008Ready);
    assert.equal(await page.locator('.smart-home-card').count(),0);assert.equal(await page.locator('.empty-state').count(),1);
-   report.products.push({product,status:'PASS',checks:['scheduled Today','unscheduled Other','same day for manual and Smart','schedule edit and reload','Smart-only Today','rest-day placeholder','empty scenario']});
+   report.products.push({product,status:'PASS',checks:['scheduled Today','unscheduled Other','same day for manual and Smart','schedule edit and reload','Smart-only Today','rest-day placeholder','reset demo date preserves settings','empty scenario']});
    await page.close();
   }
   assert.deepEqual(report.issues,[]);report.status='PASS';
