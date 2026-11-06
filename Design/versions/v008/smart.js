@@ -157,7 +157,7 @@
   train = empty => {
     const html=old.train(empty);if(empty||new URLSearchParams(location.search).get('scenario')==='empty')return html;
     const template=document.createElement('template');template.innerHTML=html;const c=model().config;
-    template.content.querySelector('.home-content').insertAdjacentHTML('afterbegin',`<article class="workout-card smart-home-card"><p class="eyebrow">SMART SELECTION</p>${btn(`<div class="grow"><h2>${E(configName(c))}</h2><span class="meta">${E(t('uiMinutesCount',c.minutes))} · ${text(c.level)}</span></div>${icon('chevron',20)}`,'smartOpen','workout-open')}<div class="card-actions">${button('settings','smartEdit')}${button('today','smartOpen','primary')}</div></article>`);return template.innerHTML;
+    template.content.querySelector('.home-content').insertAdjacentHTML('afterbegin',`<article class="workout-card smart-home-card"><p class="eyebrow">SMART SELECTION</p>${btn(`<div class="grow"><h2>${E(configName(c))}</h2><span class="meta">${E(t('uiMinutesCount',c.minutes))} · ${text(c.level)}</span></div>${icon('chevron',20)}`,'smartOpen','workout-open')}<div class="card-actions">${button('settings','smartEdit')}${button('start','smartOpen','primary')}</div></article>`);return template.innerHTML;
   };
   settingsView = () => { const template=document.createElement('template');template.innerHTML=old.settingsView();template.content.querySelector('[data-action="feedback"]').insertAdjacentHTML('afterend',btn(`<span>${text('rate')}</span>${icon('chevron',16)}`,'smartRate','settings-row'));return template.innerHTML; };
   musclePicker = () => {
