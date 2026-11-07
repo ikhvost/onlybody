@@ -11,6 +11,9 @@ final class WorkoutPreferences {
         }
     }
 
+    var smartLevel: ExerciseDifficulty { didSet { saveSmartLevel(smartLevel) } }
+    private let saveSmartLevel: @MainActor (ExerciseDifficulty) -> Void
+
     private let saveTimerSound: @MainActor (Bool) -> Void
     private let saveRemindersEnabled: @MainActor (Bool) -> Void
     private let saveReminderTime: @MainActor (WorkoutReminderTime) -> Void
@@ -45,7 +48,9 @@ final class WorkoutPreferences {
         saveRemindersEnabled: @escaping @MainActor (Bool) -> Void = { _ in },
         saveReminderTime: @escaping @MainActor (WorkoutReminderTime) -> Void = { _ in },
         weightUnit: WeightUnit = .kilograms,
-        saveWeightUnit: @escaping @MainActor (WeightUnit) -> Void = { _ in }
+        saveWeightUnit: @escaping @MainActor (WeightUnit) -> Void = { _ in },
+        smartLevel: ExerciseDifficulty = .beginner,
+        saveSmartLevel: @escaping @MainActor (ExerciseDifficulty) -> Void = { _ in }
     ) {
         self.isTimerSoundEnabled = isTimerSoundEnabled
         self.saveTimerSound = saveTimerSound
@@ -53,6 +58,8 @@ final class WorkoutPreferences {
         self.workoutReminderTime = workoutReminderTime
         self.saveRemindersEnabled = saveRemindersEnabled
         self.saveReminderTime = saveReminderTime
+        self.smartLevel = smartLevel
+        self.saveSmartLevel = saveSmartLevel
         self.weightUnit = weightUnit
         self.saveWeightUnit = saveWeightUnit
     }

@@ -10,6 +10,7 @@ struct AppComposition {
     let sessions: any SessionRepository
     let preferences: WorkoutPreferences
     let reminders: WorkoutReminderCoordinator
+    let smartVariants: any SmartDailyVariantRepository
 
     func overview(workoutID: UUID) -> WorkoutOverviewViewModel {
         WorkoutOverviewViewModel(workoutID: workoutID, workouts: workouts)
@@ -42,11 +43,16 @@ struct AppComposition {
             return await UIApplication.shared.open(url)
         })
     }
-    func active(workoutID: UUID) -> ActiveWorkoutViewModel {
+    func smart(workoutID: UUID?, targets: [String] = [], opensPreview: Bool = false) -> SmartSelectionViewModel {
+        SmartSelectionViewModel(workouts: workouts, exercises: exercises, variants: smartVariants, preferences: preferences,
+            workoutID: workoutID, targets: targets, equipmentMode: configuration.smartEquipmentMode, opensPreview: opensPreview,
+            onScheduleChanged: { await reminders.refresh() })
+    }
+    func active(workoutID: UUID, reviewedWorkout: WorkoutSnapshot? = nil) -> ActiveWorkoutViewModel {
         let cue = WorkoutCuePlayer()
         return ActiveWorkoutViewModel(
             workouts: workouts, sessions: sessions, workoutId: workoutID, exercises: exercises,
-            preferences: preferences, alwaysShowsWeight: configuration.alwaysShowsWeight,
+            preferences: preferences, alwaysShowsWeight: configuration.alwaysShowsWeight, reviewedWorkout: reviewedWorkout,
             playRestCue: { cue.play() }, stopRestCue: { cue.stop() }
         )
     }

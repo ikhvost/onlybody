@@ -6,6 +6,7 @@ nonisolated struct AppConfiguration: Sendable {
     var alwaysShowsWeight = false
     let workoutFallback: WorkoutFallbackPolicy
     let appStoreReviewURL: URL?
+    var smartEquipmentMode: SmartEquipmentMode = .confirmed
 
     static let onlyBody = AppConfiguration(
         displayName: "OnlyBody",
@@ -16,7 +17,8 @@ nonisolated struct AppConfiguration: Sendable {
         displayName: "OnlyWeights",
         alwaysShowsWeight: true,
         workoutFallback: .matchingCatalog,
-        appStoreReviewURL: URL(string: "https://apps.apple.com/app/id6827693301?action=write-review")
+        appStoreReviewURL: URL(string: "https://apps.apple.com/app/id6827693301?action=write-review"),
+        smartEquipmentMode: .standardGym
     )
 
     static var current: AppConfiguration {

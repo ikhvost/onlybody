@@ -79,9 +79,10 @@ final class ActiveWorkoutViewModel {
         workouts: any WorkoutRepository, sessions: any SessionRepository, workoutId: UUID,
         exercises: (any ExerciseRepository)? = nil,
         time: any WorkoutTimeSource = SystemWorkoutTimeSource(), preferences: WorkoutPreferences = WorkoutPreferences(),
-        alwaysShowsWeight: Bool = false, playRestCue: @escaping @MainActor () -> Void = {},
+        alwaysShowsWeight: Bool = false, reviewedWorkout: WorkoutSnapshot? = nil, playRestCue: @escaping @MainActor () -> Void = {},
         stopRestCue: @escaping @MainActor () -> Void = {}
     ) {
+        self.reviewedWorkout = reviewedWorkout
         self.workoutsRepository = workouts
         self.sessionsRepository = sessions
         self.exercisesRepository = exercises
@@ -93,13 +94,17 @@ final class ActiveWorkoutViewModel {
         self.stopRestCue = stopRestCue
     }
 
+    private let reviewedWorkout: WorkoutSnapshot?
+    var smartConfiguration: SmartWorkoutConfiguration? { reviewedWorkout?.smartSettings?.configuration }
+
     func load() async {
         guard !isLoading, !hasLoaded else { return }
         isLoading = true
         errorMessage = nil
         defer { isLoading = false }
         do {
-            guard let workout = try await workoutsRepository.workout(by: workoutId) else {
+            let storedWorkout = reviewedWorkout == nil ? try await workoutsRepository.workout(by: workoutId) : nil
+            guard let workout = reviewedWorkout ?? storedWorkout else {
                 errorMessage = String(localized: .uiWorkoutNotFound)
                 return
             }
@@ -115,6 +120,7 @@ final class ActiveWorkoutViewModel {
             viewedItemID = items.first?.id
             await loadPreviousPerformances()
             hasLoaded = true
+            if reviewedWorkout != nil { beginSession() }
         } catch { errorMessage = String(localized: .uiCouldNotLoadWorkout) }
     }
 
@@ -144,6 +150,7 @@ final class ActiveWorkoutViewModel {
     func row(_ id: WorkoutSetID) -> WorkoutSetDraft {
         if let edited = rows[id] { return edited }
         guard let item = items.first(where: { $0.id == id.itemID }) else { return WorkoutSetDraft(reps: 0) }
+        if smartConfiguration != nil { return WorkoutSetDraft(reps: item.targetReps) }
         guard let previous = previousPerformance(for: item), !previous.setReps.isEmpty else {
             return WorkoutSetDraft(reps: item.targetReps)
         }
@@ -229,12 +236,30 @@ final class ActiveWorkoutViewModel {
         for index in items.indices { items[index].order = index }
     }
 
-    func replaceExercise(_ id: UUID, with exercise: ExerciseSnapshot) {
+    func replaceExercise(_ id: UUID, with exercise: ExerciseSnapshot, confirmingLoads: Bool = false) {
+        if let smartConfiguration, !SmartSelectionGenerator().isEligible(
+            exercise, configuration: smartConfiguration, ignoringLoads: confirmingLoads) { return }
         guard canReplace(id), !hasInvalidNumbers, let index = items.firstIndex(where: { $0.id == id }) else { return }
         items[index].exercise = exercise
         previousOccurrence[id] = 0
         rows = rows.filter { $0.key.itemID != id }
         revealedWeightExercises.remove(id)
+    }
+
+    /// Explicit future-only edit. The active list and completed sets remain untouched.
+    func excludeFromFuture(_ exercise: ExerciseSnapshot) async -> Bool {
+        do {
+            guard var workout = try await workoutsRepository.workout(by: workoutId), var settings = workout.smartSettings else {
+                replacementError = String(localized: .uiWorkoutNotFound)
+                return false
+            }
+            settings.configuration.excludedExercises.insert(exercise.name)
+            settings.mainExerciseNames.removeAll { $0 == exercise.name }
+            settings.revision = UUID()
+            workout.smartSettings = settings
+            try await workoutsRepository.save(workout)
+            return true
+        } catch { replacementError = String(localized: .uiCouldNotSaveSession); return false }
     }
 
     func loadReplacementExercises() async {

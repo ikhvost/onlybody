@@ -114,7 +114,8 @@ struct GymCatalogUpgradeTests {
 
     private func openStore(at url: URL) throws -> ModelContainer {
         try ModelContainer(
-            for: Exercise.self, Workout.self, WorkoutItem.self, Session.self, SessionItem.self,
+            for: Exercise.self, Workout.self, WorkoutItem.self,
+            SmartWorkoutSettingsRecord.self, SmartDailyVariantRecord.self, Session.self, SessionItem.self,
             configurations: ModelConfiguration(url: url)
         )
     }

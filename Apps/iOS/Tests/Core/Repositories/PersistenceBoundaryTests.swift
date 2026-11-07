@@ -11,7 +11,8 @@ import Testing
 struct PersistenceBoundaryTests {
     private func container(url: URL? = nil) throws -> ModelContainer {
         let config = url.map { ModelConfiguration(url: $0) } ?? ModelConfiguration(isStoredInMemoryOnly: true)
-        return try ModelContainer(for: Exercise.self, Workout.self, WorkoutItem.self, Session.self, SessionItem.self,
+        return try ModelContainer(for: Exercise.self, Workout.self, WorkoutItem.self,
+            SmartWorkoutSettingsRecord.self, SmartDailyVariantRecord.self, Session.self, SessionItem.self,
                                   configurations: config)
     }
 

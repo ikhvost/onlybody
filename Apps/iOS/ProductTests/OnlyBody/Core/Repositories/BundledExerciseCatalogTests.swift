@@ -23,7 +23,8 @@ struct BundledExerciseCatalogTests {
         let url = directory.appending(path: "default.store")
         try FileManager.default.copyItem(at: seed, to: url)
         let container = try ModelContainer(
-            for: Exercise.self, Workout.self, WorkoutItem.self, Session.self, SessionItem.self,
+            for: Exercise.self, Workout.self, WorkoutItem.self,
+            SmartWorkoutSettingsRecord.self, SmartDailyVariantRecord.self, Session.self, SessionItem.self,
             configurations: ModelConfiguration(url: url)
         )
         let context = ModelContext(container)

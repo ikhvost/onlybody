@@ -22,15 +22,7 @@ struct SessionBuilderView: View {
 
             VStack(spacing: Theme.space0) {
                 NavBarView(title: viewModel.isEditMode ? String(localized: .uiEditSession) : String(localized: .uiNewSession)) {
-                    Button {
-                        requestBack()
-                    } label: {
-                        ChevronIcon(isBack: true, color: Theme.text, size: Theme.type18, inset: 8)
-                            .frame(width: Theme.touchSize, height: Theme.touchSize)
-                            .contentShape(.rect)
-                    }
-                    .buttonStyle(.glass).buttonBorderShape(.circle)
-                    .accessibilityLabel(String(localized: .uiBack))
+                    NavigationBackButton(action: requestBack)
                     .accessibilityIdentifier("builder.back")
                     .disabled(viewModel.isSaving)
                 }

@@ -13,9 +13,7 @@ struct ExercisePickerView: View {
         NavigationStack(path: $path) {
             VStack(spacing: Theme.space0) {
                 NavBarView(title: title) {
-                    Button { dismiss() } label: {
-                        CloseIcon().frame(width: Theme.touchSize, height: Theme.touchSize)
-                    }.accessibilityLabel(String(localized: .uiCancel)).accessibilityIdentifier("exercisePicker.close")
+                    NavigationCloseButton { dismiss() }.accessibilityIdentifier("exercisePicker.close")
                 }
                 ExerciseCatalogControls(search: $viewModel.searchText, muscle: $viewModel.selectedFilter,
                                         equipment: $viewModel.selectedEquipment, equipmentOptions: viewModel.equipmentOptions,

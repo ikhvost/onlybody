@@ -1,7 +1,7 @@
 import Foundation
 
 /// A detached value that never exposes a persistence context.
-nonisolated struct WorkoutItemSnapshot: Identifiable, Sendable, Equatable {
+nonisolated struct WorkoutItemSnapshot: Identifiable, Sendable, Equatable, Codable {
     var id: UUID = UUID()
     var order: Int = 0
     var sets: Int = 3

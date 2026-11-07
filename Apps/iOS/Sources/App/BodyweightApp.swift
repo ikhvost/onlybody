@@ -9,6 +9,7 @@ struct BodyweightApp: App {
     let exercises: any ExerciseRepository
     let workouts: any WorkoutRepository
     let sessions: any SessionRepository
+    let smartVariants: any SmartDailyVariantRepository
     let preferences: WorkoutPreferences
     let reminders: WorkoutReminderCoordinator
 
@@ -19,6 +20,7 @@ struct BodyweightApp: App {
             exercises = PreviewExerciseRepository()
             workouts = PreviewWorkoutRepository()
             sessions = PreviewSessionRepository()
+            smartVariants = PreviewSmartDailyVariantRepository()
             preferences = WorkoutPreferences()
             reminders = WorkoutReminderCoordinator(
                 preferences: preferences, workouts: workouts, notifications: PreviewWorkoutNotificationClient()
@@ -49,6 +51,7 @@ struct BodyweightApp: App {
             let config = ModelConfiguration(url: storeURL)
             let storeContainer = try ModelContainer(
                 for: Exercise.self, Workout.self, WorkoutItem.self, Session.self, SessionItem.self,
+                SmartWorkoutSettingsRecord.self, SmartDailyVariantRecord.self,
                 configurations: config
             )
             #if DEBUG
@@ -58,6 +61,7 @@ struct BodyweightApp: App {
             exercises = SwiftDataExerciseRepository(context: ModelContext(storeContainer), catalog: catalog)
             workouts = SwiftDataWorkoutRepository(context: ModelContext(storeContainer), catalog: catalog)
             sessions = SwiftDataSessionRepository(context: ModelContext(storeContainer))
+            smartVariants = SwiftDataSmartDailyVariantRepository(context: ModelContext(storeContainer))
             let notificationClient: any WorkoutNotificationClient
             #if DEBUG
             if preferenceNamespace != nil && ProcessInfo.processInfo.environment["ONLYBODY_NOTIFICATION_FIXTURE"] == "authorized" {
@@ -78,7 +82,7 @@ struct BodyweightApp: App {
         WindowGroup {
             AppContentView(composition: AppComposition(
                 configuration: configuration, exercises: exercises, workouts: workouts,
-                sessions: sessions, preferences: preferences, reminders: reminders
+                sessions: sessions, preferences: preferences, reminders: reminders, smartVariants: smartVariants
             ))
             .task { await reminders.refresh() }
             .onChange(of: scenePhase) { _, phase in

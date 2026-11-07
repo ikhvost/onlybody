@@ -1,7 +1,7 @@
 import Foundation
 
 /// A detached value that never exposes a persistence context.
-nonisolated struct ExerciseSnapshot: Identifiable, Sendable, Equatable {
+nonisolated struct ExerciseSnapshot: Identifiable, Sendable, Equatable, Codable {
     var id: UUID = UUID()
     var name: String = ""
     var primaryMuscle: String = ""
@@ -46,6 +46,8 @@ nonisolated struct ExerciseSnapshot: Identifiable, Sendable, Equatable {
     private static func expandedLegacyGroups(_ groups: [String]) -> [String] {
         groups.flatMap { $0 == "Arms" ? ["Biceps", "Triceps", "Forearms"] : [$0] }
     }
+
+    var smartMetadata: SmartExerciseMetadata? { SmartExerciseProfiles.entries[name] }
 
     var difficulty: ExerciseDifficulty { ExerciseDifficultyCatalog.levels[name] ?? .unrated }
 

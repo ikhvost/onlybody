@@ -564,28 +564,29 @@ final class WorkoutJourneyTests: XCTestCase {
     private func verifySmartTimeBudget() {
         tap("workout.create")
         tap("creation.smart")
-        tap("picker.muscle.Chest")
-        tap("picker.build")
-        let name = app.textFields["builder.name"]
+        tap("smart.duration.15")
+        let target = app.buttons["smart.target.Chest"]
+        for _ in 0..<5 where !target.isHittable { app.swipeUp() }
+        tap("smart.target.Chest")
+        let name = app.textFields["smart.name"]
+        for _ in 0..<8 where !name.isHittable { app.swipeUp() }
         XCTAssertTrue(name.waitForExistence(timeout: 10))
-        XCTAssertFalse(app.buttons["builder.mode.smart"].exists)
-        XCTAssertFalse(app.buttons["builder.mode.manual"].exists)
         name.tap()
         name.typeText("Smart Budget")
-        dismissKeyboardOutside(name)
-        showTimingOptions()
-        tap("builder.duration")
-        app.pickerWheels.firstMatch.adjust(toPickerWheelValue: "60 min")
-        tap("timing.done")
-        let rows = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "builder.movement."))
-        let longCount = rows.count
-        tap("builder.duration")
-        app.pickerWheels.firstMatch.adjust(toPickerWheelValue: "15 min")
-        tap("timing.done")
-        XCTAssertGreaterThan(rows.count, 0)
-        XCTAssertLessThan(rows.count, longCount)
-        tap("builder.save")
+        app.swipeDown()
+        tap("smart.continue")
+        tap("smart.preview")
+        XCTAssertTrue(app.buttons["smart.save"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["smart.save"].isEnabled)
+        tap("smart.save")
         XCTAssertTrue(app.buttons["workout.start.Smart Budget"].waitForExistence(timeout: 10))
+        app.terminate()
+        app.launch()
+        tap("workout.start.Smart Budget")
+        XCTAssertTrue(app.buttons["smart.start"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["smart.start"].isEnabled)
+        tap("smart.start")
+        XCTAssertTrue(app.buttons["active.set.0.done"].waitForExistence(timeout: 10))
     }
 
     private func selectExercise() {

@@ -11,7 +11,8 @@ import Testing
 struct SwiftDataExerciseRepositoryTests {
     @Test func metadataUpdatesPreserveStoredIdentityAndHistoryWithoutDuplicates() async throws {
         let container = try ModelContainer(
-            for: Exercise.self, Workout.self, WorkoutItem.self, Session.self, SessionItem.self,
+            for: Exercise.self, Workout.self, WorkoutItem.self,
+            SmartWorkoutSettingsRecord.self, SmartDailyVariantRecord.self, Session.self, SessionItem.self,
             configurations: ModelConfiguration(isStoredInMemoryOnly: true)
         )
         let original = ExerciseSnapshot(name: "Stable fixture movement", primaryMuscle: "Chest", equipment: ["None"])
@@ -53,7 +54,7 @@ struct SwiftDataExerciseRepositoryTests {
         let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(
             for: Exercise.self,
-            Workout.self,
+            Workout.self, SmartWorkoutSettingsRecord.self, SmartDailyVariantRecord.self,
             WorkoutItem.self,
             configurations: configuration
         )

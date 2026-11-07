@@ -62,7 +62,8 @@ struct GymCatalogTests {
         let url = directory.appending(path: "default.store")
         try FileManager.default.copyItem(at: seed, to: url)
         let container = try ModelContainer(
-            for: Exercise.self, Workout.self, WorkoutItem.self, Session.self, SessionItem.self,
+            for: Exercise.self, Workout.self, WorkoutItem.self,
+            SmartWorkoutSettingsRecord.self, SmartDailyVariantRecord.self, Session.self, SessionItem.self,
             configurations: ModelConfiguration(url: url)
         )
         let context = ModelContext(container)
@@ -93,7 +94,8 @@ struct GymCatalogTests {
         let workouts = SwiftDataWorkoutRepository(context: ModelContext(container), catalog: catalog)
         try await workouts.save(workout)
         let reopened = try ModelContainer(
-            for: Exercise.self, Workout.self, WorkoutItem.self, Session.self, SessionItem.self,
+            for: Exercise.self, Workout.self, WorkoutItem.self,
+            SmartWorkoutSettingsRecord.self, SmartDailyVariantRecord.self, Session.self, SessionItem.self,
             configurations: ModelConfiguration(url: url)
         )
         let repository = SwiftDataWorkoutRepository(context: ModelContext(reopened), catalog: catalog)
@@ -107,7 +109,7 @@ struct GymCatalogTests {
             workouts: MockWorkoutRepository(), sessions: MockSessionRepository(), preferences: WorkoutPreferences(),
             reminders: WorkoutReminderCoordinator(
                 preferences: WorkoutPreferences(), workouts: MockWorkoutRepository(), notifications: MockWorkoutNotificationClient()
-            )
+            ), smartVariants: MockSmartDailyVariantRepository()
         )
         let model = composition.movement(exercise)
         model.loadDemonstration()
@@ -128,7 +130,7 @@ struct GymCatalogTests {
             workouts: MockWorkoutRepository(), sessions: MockSessionRepository(), preferences: WorkoutPreferences(),
             reminders: WorkoutReminderCoordinator(
                 preferences: WorkoutPreferences(), workouts: MockWorkoutRepository(), notifications: MockWorkoutNotificationClient()
-            )
+            ), smartVariants: MockSmartDailyVariantRepository()
         )
         for exercise in exercises {
             let model = composition.movement(exercise)

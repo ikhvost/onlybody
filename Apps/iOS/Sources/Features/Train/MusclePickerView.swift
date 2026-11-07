@@ -14,15 +14,7 @@ struct MusclePickerView: View {
 
             VStack(spacing: Theme.space0) {
                 NavBarView(title: String(localized: .uiNewSession)) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        ChevronIcon(isBack: true, color: Theme.text, size: Theme.type18, inset: 8)
-                            .frame(width: Theme.touchSize, height: Theme.touchSize)
-                            .contentShape(.rect)
-                    }
-                    .buttonStyle(.glass).buttonBorderShape(.circle)
-                    .accessibilityLabel(String(localized: .uiBack))
+                    NavigationBackButton { dismiss() }
                     .accessibilityIdentifier("picker.back")
                 }
 
