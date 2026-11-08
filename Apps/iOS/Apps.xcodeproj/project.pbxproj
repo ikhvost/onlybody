@@ -6,6 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		AE710000000000000000001C /* WorkoutActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7100000000000000000001 /* WorkoutActivityAttributes.swift */; };
+		AE710000000000000000001D /* WorkoutActivityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7100000000000000000002 /* WorkoutActivityState.swift */; };
+		AE710000000000000000001E /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7100000000000000000003 /* Theme.swift */; };
+		AE710000000000000000001F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = AE7100000000000000000004 /* Localizable.xcstrings */; };
+		AE710000000000000000001A /* onlybodyWorkoutActivity.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AE7100000000000000000011 /* onlybodyWorkoutActivity.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AE710000000000000000003C /* WorkoutActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7100000000000000000001 /* WorkoutActivityAttributes.swift */; };
+		AE710000000000000000003D /* WorkoutActivityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7100000000000000000002 /* WorkoutActivityState.swift */; };
+		AE710000000000000000003E /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7100000000000000000003 /* Theme.swift */; };
+		AE710000000000000000003F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = AE7100000000000000000004 /* Localizable.xcstrings */; };
+		AE710000000000000000003A /* onlyweightsWorkoutActivity.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AE7100000000000000000031 /* onlyweightsWorkoutActivity.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		D2B8B7A3CF94635D48172803 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -21,7 +34,46 @@
 			remoteGlobalIDString = DFA38F9C2FA5365800489D14;
 			remoteInfo = onlybody;
 		};
+		AE7100000000000000000016 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DFA38F952FA5365800489D14 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AE7100000000000000000010;
+			remoteInfo = onlybodyWorkoutActivity;
+		};
+		AE7100000000000000000036 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DFA38F952FA5365800489D14 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AE7100000000000000000030;
+			remoteInfo = onlyweightsWorkoutActivity;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AE7100000000000000000014 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				AE710000000000000000001A /* onlybodyWorkoutActivity.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AE7100000000000000000034 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				AE710000000000000000003A /* onlyweightsWorkoutActivity.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0CFF6C2D6E4D0A0D8910D30F /* Configuration/App.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Configuration/App.xcconfig; sourceTree = "<group>"; };
@@ -33,6 +85,13 @@
 		DFA38F9D2FA5365800489D14 /* onlybody.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = onlybody.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFA38FAC2FA5365900489D14 /* onlybodyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = onlybodyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFA38FAC2FA5365900489D14 /* onlybodyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = onlybodyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE7100000000000000000001 /* WorkoutActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Core/LiveActivity/WorkoutActivityAttributes.swift; sourceTree = SOURCE_ROOT; };
+		AE7100000000000000000002 /* WorkoutActivityState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Domain/Models/WorkoutActivityState.swift; sourceTree = SOURCE_ROOT; };
+		AE7100000000000000000003 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/Shared/Theme/Theme.swift; sourceTree = SOURCE_ROOT; };
+		AE7100000000000000000004 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Sources/Localizable.xcstrings; sourceTree = SOURCE_ROOT; };
+		AE7100000000000000000005 /* Configuration/WorkoutActivity.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Configuration/WorkoutActivity.xcconfig; sourceTree = SOURCE_ROOT; };
+		AE7100000000000000000011 /* onlybodyWorkoutActivity.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = onlybodyWorkoutActivity.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE7100000000000000000031 /* onlyweightsWorkoutActivity.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = onlyweightsWorkoutActivity.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +134,11 @@
 		FF10898F8AAF68A8088E0EE5 /* Products/OnlyBody */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Products/OnlyBody;
+			sourceTree = "<group>";
+		};
+		AE7100000000000000000006 /* WorkoutActivity */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = WorkoutActivity;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -122,6 +186,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AE710000000000000000001B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AE710000000000000000003B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -129,6 +207,9 @@
 			isa = PBXGroup;
 			children = (
 				DFA38F9F2FA5365800489D14 /* Sources */,
+				AE7100000000000000000006 /* WorkoutActivity */,
+				AE7100000000000000000007 /* Workout Activity Shared Files */,
+				AE7100000000000000000005 /* Configuration/WorkoutActivity.xcconfig */,
 				46F086E526154F47957EC70A /* Test Plans */,
 				DFA38FAF2FA5365900489D14 /* Tests */,
 				EFA38FAF2FA5365900489D14 /* UITests */,
@@ -147,13 +228,26 @@
 			isa = PBXGroup;
 			children = (
 				DFA38F9D2FA5365800489D14 /* onlybody.app */,
+				AE7100000000000000000011 /* onlybodyWorkoutActivity.appex */,
 				DFA38FAC2FA5365900489D14 /* onlybodyTests.xctest */,
 				EFA38FAC2FA5365900489D14 /* onlybodyUITests.xctest */,
 				701285F8BE344726E8A0F585 /* onlyweights.app */,
+				AE7100000000000000000031 /* onlyweightsWorkoutActivity.appex */,
 				7D3302DBAAFF1CC101A5044A /* onlyweightsTests.xctest */,
 				B5C080E90ACA443F44987935 /* onlyweightsUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		AE7100000000000000000007 /* Workout Activity Shared Files */ = {
+			isa = PBXGroup;
+			children = (
+				AE7100000000000000000001 /* WorkoutActivityAttributes.swift */,
+				AE7100000000000000000002 /* WorkoutActivityState.swift */,
+				AE7100000000000000000003 /* Theme.swift */,
+				AE7100000000000000000004 /* Localizable.xcstrings */,
+			);
+			name = "Workout Activity Shared Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,10 +260,12 @@
 				053D829510F9D05123A74FFF /* Sources */,
 				D0D6D32AC2608A808260319B /* Frameworks */,
 				D2E974798E9B5163D38463F2 /* Resources */,
+				AE7100000000000000000034 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				AE7100000000000000000035 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				A43AD269E009247E34702988 /* Products/OnlyWeights */,
@@ -213,10 +309,12 @@
 				DFA38F992FA5365800489D14 /* Sources */,
 				DFA38F9A2FA5365800489D14 /* Frameworks */,
 				DFA38F9B2FA5365800489D14 /* Resources */,
+				AE7100000000000000000014 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				AE7100000000000000000015 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				DFA38F9F2FA5365800489D14 /* Sources */,
@@ -299,6 +397,50 @@
 			productReference = B5C080E90ACA443F44987935 /* onlyweightsUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		AE7100000000000000000010 /* onlybodyWorkoutActivity */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AE7100000000000000000017 /* Build configuration list for PBXNativeTarget "onlybodyWorkoutActivity" */;
+			buildPhases = (
+				AE7100000000000000000012 /* Sources */,
+				AE710000000000000000001B /* Frameworks */,
+				AE7100000000000000000013 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				AE7100000000000000000006 /* WorkoutActivity */,
+			);
+			name = onlybodyWorkoutActivity;
+			packageProductDependencies = (
+			);
+			productName = onlybodyWorkoutActivity;
+			productReference = AE7100000000000000000011 /* onlybodyWorkoutActivity.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		AE7100000000000000000030 /* onlyweightsWorkoutActivity */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AE7100000000000000000037 /* Build configuration list for PBXNativeTarget "onlyweightsWorkoutActivity" */;
+			buildPhases = (
+				AE7100000000000000000032 /* Sources */,
+				AE710000000000000000003B /* Frameworks */,
+				AE7100000000000000000033 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				AE7100000000000000000006 /* WorkoutActivity */,
+			);
+			name = onlyweightsWorkoutActivity;
+			packageProductDependencies = (
+			);
+			productName = onlyweightsWorkoutActivity;
+			productReference = AE7100000000000000000031 /* onlyweightsWorkoutActivity.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -348,9 +490,11 @@
 			projectRoot = "";
 			targets = (
 				DFA38F9C2FA5365800489D14 /* onlybody */,
+				AE7100000000000000000010 /* onlybodyWorkoutActivity */,
 				DFA38FAB2FA5365900489D14 /* onlybodyTests */,
 				EFA38FAB2FA5365900489D14 /* onlybodyUITests */,
 				7C7A14EF195721CF74823827 /* onlyweights */,
+				AE7100000000000000000030 /* onlyweightsWorkoutActivity */,
 				CA5E2F864252512C5CC5F1FE /* onlyweightsTests */,
 				F90F9696F0AA53FBAD3A0A73 /* onlyweightsUITests */,
 			);
@@ -400,6 +544,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AE7100000000000000000013 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE710000000000000000001F /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AE7100000000000000000033 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE710000000000000000003F /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -445,6 +605,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AE7100000000000000000012 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE710000000000000000001C /* WorkoutActivityAttributes.swift in Sources */,
+				AE710000000000000000001D /* WorkoutActivityState.swift in Sources */,
+				AE710000000000000000001E /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AE7100000000000000000032 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE710000000000000000003C /* WorkoutActivityAttributes.swift in Sources */,
+				AE710000000000000000003D /* WorkoutActivityState.swift in Sources */,
+				AE710000000000000000003E /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -467,6 +647,16 @@
 			isa = PBXTargetDependency;
 			target = DFA38F9C2FA5365800489D14 /* onlybody */;
 			targetProxy = DFA38FAD2FA5365900489D14 /* PBXContainerItemProxy */;
+		};
+		AE7100000000000000000015 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AE7100000000000000000010 /* onlybodyWorkoutActivity */;
+			targetProxy = AE7100000000000000000016 /* PBXContainerItemProxy */;
+		};
+		AE7100000000000000000035 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AE7100000000000000000030 /* onlyweightsWorkoutActivity */;
+			targetProxy = AE7100000000000000000036 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -806,6 +996,38 @@
 			};
 			name = Release;
 		};
+		AE7100000000000000000018 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE7100000000000000000005 /* Configuration/WorkoutActivity.xcconfig */;
+			buildSettings = {
+				WORKOUT_ACTIVITY_PRODUCT = onlybody;
+			};
+			name = Debug;
+		};
+		AE7100000000000000000019 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE7100000000000000000005 /* Configuration/WorkoutActivity.xcconfig */;
+			buildSettings = {
+				WORKOUT_ACTIVITY_PRODUCT = onlybody;
+			};
+			name = Release;
+		};
+		AE7100000000000000000038 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE7100000000000000000005 /* Configuration/WorkoutActivity.xcconfig */;
+			buildSettings = {
+				WORKOUT_ACTIVITY_PRODUCT = onlyweights;
+			};
+			name = Debug;
+		};
+		AE7100000000000000000039 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE7100000000000000000005 /* Configuration/WorkoutActivity.xcconfig */;
+			buildSettings = {
+				WORKOUT_ACTIVITY_PRODUCT = onlyweights;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -868,6 +1090,24 @@
 			buildConfigurations = (
 				EFA38FC42FA5365900489D14 /* Debug */,
 				EFA38FC52FA5365900489D14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AE7100000000000000000017 /* Build configuration list for PBXNativeTarget "onlybodyWorkoutActivity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE7100000000000000000018 /* Debug */,
+				AE7100000000000000000019 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AE7100000000000000000037 /* Build configuration list for PBXNativeTarget "onlyweightsWorkoutActivity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE7100000000000000000038 /* Debug */,
+				AE7100000000000000000039 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

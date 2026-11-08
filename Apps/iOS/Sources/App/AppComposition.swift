@@ -10,6 +10,9 @@ struct AppComposition {
     let sessions: any SessionRepository
     let preferences: WorkoutPreferences
     let reminders: WorkoutReminderCoordinator
+    var restAlerts: WorkoutRestAlerts?
+    var restNotifications: (any WorkoutRestNotificationClient)?
+    var liveActivity: (any WorkoutLiveActivity)?
 
     func overview(workoutID: UUID) -> WorkoutOverviewViewModel {
         WorkoutOverviewViewModel(workoutID: workoutID, workouts: workouts)
@@ -26,7 +29,12 @@ struct AppComposition {
             appName: configuration.displayName,
             version: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "—",
             appStoreReviewURL: configuration.appStoreReviewURL,
-            preferences: preferences
+            preferences: preferences,
+            restAlertAuthorization: { await restNotifications?.restAlertAuthorization() ?? .notDetermined },
+            openNotificationSettings: {
+                guard let url = URL(string: UIApplication.openNotificationSettingsURLString) else { return }
+                await UIApplication.shared.open(url)
+            }
         )
     }
     func builder(workout: WorkoutSnapshot?, targets: [String], workoutID: UUID? = nil) -> SessionBuilderViewModel {
@@ -43,11 +51,10 @@ struct AppComposition {
         })
     }
     func active(workoutID: UUID) -> ActiveWorkoutViewModel {
-        let cue = WorkoutCuePlayer()
-        return ActiveWorkoutViewModel(
+        ActiveWorkoutViewModel(
             workouts: workouts, sessions: sessions, workoutId: workoutID, exercises: exercises,
             preferences: preferences, alwaysShowsWeight: configuration.alwaysShowsWeight,
-            playRestCue: { cue.play() }, stopRestCue: { cue.stop() }
+            restAlerts: restAlerts, liveActivity: liveActivity
         )
     }
     func exerciseHistory(exerciseName: String) -> ExerciseHistoryViewModel {

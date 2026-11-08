@@ -11,6 +11,9 @@ struct BodyweightApp: App {
     let sessions: any SessionRepository
     let preferences: WorkoutPreferences
     let reminders: WorkoutReminderCoordinator
+    let systemNotifications: SystemWorkoutNotificationClient?
+    let restAlerts: WorkoutRestAlerts?
+    let liveActivity: SystemWorkoutLiveActivity?
 
     init() {
         #if DEBUG
@@ -20,6 +23,9 @@ struct BodyweightApp: App {
             workouts = PreviewWorkoutRepository()
             sessions = PreviewSessionRepository()
             preferences = WorkoutPreferences()
+            systemNotifications = nil
+            restAlerts = nil
+            liveActivity = nil
             reminders = WorkoutReminderCoordinator(
                 preferences: preferences, workouts: workouts, notifications: PreviewWorkoutNotificationClient()
             )
@@ -58,17 +64,31 @@ struct BodyweightApp: App {
             exercises = SwiftDataExerciseRepository(context: ModelContext(storeContainer), catalog: catalog)
             workouts = SwiftDataWorkoutRepository(context: ModelContext(storeContainer), catalog: catalog)
             sessions = SwiftDataSessionRepository(context: ModelContext(storeContainer))
-            let notificationClient: any WorkoutNotificationClient
+            let system = SystemWorkoutNotificationClient()
             #if DEBUG
-            if preferenceNamespace != nil && ProcessInfo.processInfo.environment["ONLYBODY_NOTIFICATION_FIXTURE"] == "authorized" {
-                notificationClient = PreviewWorkoutNotificationClient()
-            } else {
-                notificationClient = SystemWorkoutNotificationClient()
-            }
+            let isolatedUITest = preferenceNamespace != nil
+            let useReminderFixture = isolatedUITest && ProcessInfo.processInfo.environment["ONLYBODY_NOTIFICATION_FIXTURE"] == "authorized"
+            let notificationClient: any WorkoutNotificationClient = useReminderFixture ? PreviewWorkoutNotificationClient() : system
             #else
-            notificationClient = SystemWorkoutNotificationClient()
+            let isolatedUITest = false
+            let notificationClient: any WorkoutNotificationClient = system
             #endif
+            systemNotifications = isolatedUITest ? nil : system
             reminders = WorkoutReminderCoordinator(preferences: preferences, workouts: workouts, notifications: notificationClient)
+            let cue = WorkoutCuePlayer()
+            let preferences = preferences
+            let alerts = WorkoutRestAlerts(
+                notifications: systemNotifications,
+                isEnabled: { preferences.isTimerSoundEnabled },
+                isForeground: { UIApplication.shared.applicationState == .active },
+                playCue: { cue.play() }, stopCue: { cue.stop() }
+            )
+            restAlerts = alerts
+            system.restAlerts = alerts
+            liveActivity = isolatedUITest ? nil : SystemWorkoutLiveActivity()
+            if let systemNotifications {
+                Task { await systemNotifications.removeAbandonedRestAlerts() }
+            }
         } catch {
             fatalError("ModelContainer failed: \(error)")
         }
@@ -78,7 +98,8 @@ struct BodyweightApp: App {
         WindowGroup {
             AppContentView(composition: AppComposition(
                 configuration: configuration, exercises: exercises, workouts: workouts,
-                sessions: sessions, preferences: preferences, reminders: reminders
+                sessions: sessions, preferences: preferences, reminders: reminders,
+                restAlerts: restAlerts, restNotifications: systemNotifications, liveActivity: liveActivity
             ))
             .task { await reminders.refresh() }
             .onChange(of: scenePhase) { _, phase in
@@ -89,6 +110,9 @@ struct BodyweightApp: App {
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.significantTimeChangeNotification)) { _ in
                 Task { await reminders.refresh() }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+                restAlerts?.enterForeground()
             }
         }
     }

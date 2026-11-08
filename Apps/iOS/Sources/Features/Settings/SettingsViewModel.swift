@@ -11,6 +11,9 @@ final class SettingsViewModel {
     let privacyPolicyURL = URL(string: "https://onlybody.app/privacy/")
     let termsOfUseURL = URL(string: "https://onlybody.app/terms/")
     private let preferences: WorkoutPreferences
+    private let restAlertAuthorization: @MainActor () async -> ReminderAuthorization
+    private let openNotificationSettings: @MainActor () async -> Void
+    private var restAlertsUnavailable = false
     let weightUnits = WeightUnit.allCases
 
     var feedbackURL: URL? {
@@ -31,15 +34,27 @@ final class SettingsViewModel {
         set { preferences.isTimerSoundEnabled = newValue }
     }
 
+    var showsRestAlertSettings: Bool { isTimerSoundEnabled && restAlertsUnavailable }
+
+    func refreshRestAlertStatus() async {
+        restAlertsUnavailable = await restAlertAuthorization() == .denied
+    }
+
+    func showNotificationSettings() async { await openNotificationSettings() }
+
     init(
         appName: String,
         version: String,
         appStoreReviewURL: URL? = nil,
-        preferences: WorkoutPreferences = WorkoutPreferences()
+        preferences: WorkoutPreferences = WorkoutPreferences(),
+        restAlertAuthorization: @escaping @MainActor () async -> ReminderAuthorization = { .notDetermined },
+        openNotificationSettings: @escaping @MainActor () async -> Void = {}
     ) {
         self.appName = appName
         self.version = version
         self.appStoreReviewURL = appStoreReviewURL
         self.preferences = preferences
+        self.restAlertAuthorization = restAlertAuthorization
+        self.openNotificationSettings = openNotificationSettings
     }
 }

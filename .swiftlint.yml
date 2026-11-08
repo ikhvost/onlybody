@@ -1,5 +1,6 @@
 included:
   - Apps/iOS/Sources
+  - Apps/iOS/WorkoutActivity
   - Apps/iOS/Products
   - Apps/iOS/ProductTests
   - Apps/iOS/Tests

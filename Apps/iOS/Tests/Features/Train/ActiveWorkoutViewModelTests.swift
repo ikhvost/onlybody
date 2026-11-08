@@ -81,7 +81,7 @@ struct ActiveWorkoutViewModelTests {
         vm.toggleSet(key)
         #expect(vm.canReplace(first))
         #expect(vm.row(key).weightKg == 30)
-        #expect(vm.restTimer.remainingSeconds == 45)
+        #expect(!vm.restTimer.isActive)
         vm.toggleSet(key)
         await vm.endSession()
         #expect(sessions.savedSessions.first?.items.last?.setReps == [9])

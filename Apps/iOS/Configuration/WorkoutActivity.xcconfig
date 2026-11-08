@@ -1,0 +1,8 @@
+#include "App.xcconfig"
+PRODUCT_BUNDLE_IDENTIFIER = ikhvost.$(WORKOUT_ACTIVITY_PRODUCT).WorkoutActivity
+INFOPLIST_FILE = Configuration/WorkoutActivity-Info.plist
+LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks @executable_path/../../Frameworks
+ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME =
+ASSETCATALOG_COMPILER_APPICON_NAME =
+APPLICATION_EXTENSION_API_ONLY = YES
+SKIP_INSTALL = YES

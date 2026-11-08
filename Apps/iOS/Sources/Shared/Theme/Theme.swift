@@ -40,6 +40,8 @@ enum Theme {
 
     static let activityCellHeight: CGFloat = 9
     static let activityCellCornerRadius: CGFloat = 1
+    static let activityCountdownWidth: CGFloat = 100
+    static let activityCountdownMinimumScale: CGFloat = 0.75
     static let backSwipeStartWidth: CGFloat = 80
     static let backSwipeDuration: Double = 0.3
     static let backSwipeParallax: CGFloat = 0.25
@@ -115,6 +117,7 @@ enum Theme {
     static let space22: CGFloat = 22
     static let space24: CGFloat = 24
     static let space28: CGFloat = 28
+    static let space36: CGFloat = 36
     static let space44: CGFloat = 44
     static let space48: CGFloat = 48
     static let type9: CGFloat = 9

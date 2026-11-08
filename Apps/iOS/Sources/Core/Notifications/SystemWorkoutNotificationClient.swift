@@ -1,9 +1,11 @@
 import UserNotifications
 
-/// Owns only the seven weekly workout reminders; never removes another feature's requests.
+/// Routes both kinds of workout notifications through the app's single system delegate.
 @MainActor
-final class SystemWorkoutNotificationClient: NSObject, WorkoutNotificationClient, UNUserNotificationCenterDelegate {
+final class SystemWorkoutNotificationClient: NSObject, WorkoutNotificationClient, WorkoutRestNotificationClient,
+    UNUserNotificationCenterDelegate {
     private let center: UNUserNotificationCenter
+    weak var restAlerts: WorkoutRestAlerts?
 
     init(center: UNUserNotificationCenter = .current()) {
         self.center = center
@@ -33,6 +35,46 @@ final class SystemWorkoutNotificationClient: NSObject, WorkoutNotificationClient
         try await center.add(Self.notificationRequest(for: request))
     }
 
+    func restAlertAuthorization() async -> ReminderAuthorization {
+        let settings = await center.notificationSettings()
+        switch settings.authorizationStatus {
+        case .notDetermined: return .notDetermined
+        case .authorized, .ephemeral: return settings.soundSetting == .enabled ? .authorized : .denied
+        default: return .denied
+        }
+    }
+
+    func scheduleRestAlert(id: String, deadline: Date) async throws -> Bool {
+        guard let request = Self.restNotificationRequest(id: id, deadline: deadline, now: .now) else { return false }
+        try await center.add(request)
+        return true
+    }
+
+    func removeRestAlert(id: String) {
+        center.removePendingNotificationRequests(withIdentifiers: [id])
+        center.removeDeliveredNotifications(withIdentifiers: [id])
+    }
+
+    func removeAbandonedRestAlerts() async {
+        let pending = await center.pendingNotificationRequests().map(\.identifier)
+        let delivered = await center.deliveredNotifications().map(\.request.identifier)
+        for id in Set(pending + delivered)
+            where id.hasPrefix(WorkoutRestAlerts.requestPrefix) && id != restAlerts?.notificationID {
+            removeRestAlert(id: id)
+        }
+    }
+
+    static func restNotificationRequest(id: String, deadline: Date, now: Date) -> UNNotificationRequest? {
+        let interval = deadline.timeIntervalSince(now)
+        guard interval > 0 else { return nil }
+        let content = UNMutableNotificationContent()
+        content.title = String(localized: .uiRestFinished)
+        content.body = String(localized: .uiTimeForNextSet)
+        content.sound = UNNotificationSound(named: UNNotificationSoundName("rest-complete.wav"))
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
+        return UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+    }
+
     static func notificationRequest(for request: WorkoutReminderRequest) -> UNNotificationRequest {
         let content = UNMutableNotificationContent()
         content.title = WorkoutReminderRequest.title
@@ -51,7 +93,12 @@ final class SystemWorkoutNotificationClient: NSObject, WorkoutNotificationClient
     nonisolated func userNotificationCenter(
         _ center: UNUserNotificationCenter, willPresent notification: UNNotification
     ) async -> UNNotificationPresentationOptions {
-        guard WorkoutReminderRequest.identifiers.contains(notification.request.identifier) else { return [] }
-        return [.banner, .list, .sound]
+        let id = notification.request.identifier
+        if WorkoutReminderRequest.identifiers.contains(id) { return [.banner, .list, .sound] }
+        return await shouldPresentRestAlert(id: id) ? [.banner, .list, .sound] : []
+    }
+
+    private func shouldPresentRestAlert(id: String) -> Bool {
+        restAlerts?.shouldPresentNotification(id: id) == true
     }
 }

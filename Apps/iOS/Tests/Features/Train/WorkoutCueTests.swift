@@ -16,7 +16,8 @@ struct WorkoutCueTests {
         var cues = 0
         let model = ActiveWorkoutViewModel(
             workouts: workouts, sessions: MockSessionRepository(), workoutId: workout.id, time: time,
-            preferences: preferences, playRestCue: { cues += 1 }
+            preferences: preferences,
+            restAlerts: WorkoutRestAlerts(time: time, isEnabled: { preferences.isTimerSoundEnabled }, playCue: { cues += 1 })
         )
         await model.load()
         model.beginSession()
@@ -52,7 +53,7 @@ struct WorkoutCueTests {
         var cues = 0
         let model = ActiveWorkoutViewModel(
             workouts: workouts, sessions: MockSessionRepository(), workoutId: workout.id, time: time,
-            playRestCue: { cues += 1 }
+            restAlerts: WorkoutRestAlerts(time: time, isEnabled: { true }, playCue: { cues += 1 })
         )
         await model.load()
         model.beginSession()
@@ -78,7 +79,7 @@ struct WorkoutCueTests {
         var stops = 0
         let model = ActiveWorkoutViewModel(
             workouts: workouts, sessions: MockSessionRepository(), workoutId: workout.id, time: time,
-            playRestCue: { cues += 1 }, stopRestCue: { stops += 1 }
+            restAlerts: WorkoutRestAlerts(time: time, isEnabled: { true }, playCue: { cues += 1 }, stopCue: { stops += 1 })
         )
         await model.load()
         model.beginSession()
@@ -86,7 +87,7 @@ struct WorkoutCueTests {
         await time.waitForSleepers(2)
         stops = 0
         switch action {
-        case "skip": model.restTimer.skip()
+        case "skip": model.skipRest()
         case "cleanup": model.cleanup()
         case "discard": model.discardSession()
         default: await model.endSession()
@@ -95,7 +96,7 @@ struct WorkoutCueTests {
         for _ in 0..<100 { await Task.yield() }
         #expect(cues == 0)
         #expect(!model.restTimer.isActive)
-        if action != "skip" { #expect(stops == 1) }
+        #expect(stops == 1)
         model.cleanup()
     }
 }
