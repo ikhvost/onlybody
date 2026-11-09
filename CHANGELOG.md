@@ -3,7 +3,7 @@
 Changes for OnlyBody and OnlyWeights, newest version first. Record the app version,
 build number when assigned and user-facing changes for each update.
 
-## 2.1.0 — Build 4
+## 2.1.0 — Build 5
 
 - Follow an active workout and its rest countdown on the Lock Screen and in the
   Dynamic Island on supported iPhones.

@@ -1000,6 +1000,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AE7100000000000000000005 /* Configuration/WorkoutActivity.xcconfig */;
 			buildSettings = {
+				APP_DISPLAY_NAME = OnlyBody;
 				WORKOUT_ACTIVITY_PRODUCT = onlybody;
 			};
 			name = Debug;
@@ -1008,6 +1009,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AE7100000000000000000005 /* Configuration/WorkoutActivity.xcconfig */;
 			buildSettings = {
+				APP_DISPLAY_NAME = OnlyBody;
 				WORKOUT_ACTIVITY_PRODUCT = onlybody;
 			};
 			name = Release;
@@ -1016,6 +1018,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AE7100000000000000000005 /* Configuration/WorkoutActivity.xcconfig */;
 			buildSettings = {
+				APP_DISPLAY_NAME = OnlyWeights;
 				WORKOUT_ACTIVITY_PRODUCT = onlyweights;
 			};
 			name = Debug;
@@ -1024,6 +1027,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AE7100000000000000000005 /* Configuration/WorkoutActivity.xcconfig */;
 			buildSettings = {
+				APP_DISPLAY_NAME = OnlyWeights;
 				WORKOUT_ACTIVITY_PRODUCT = onlyweights;
 			};
 			name = Release;

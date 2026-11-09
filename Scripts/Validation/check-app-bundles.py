@@ -22,6 +22,7 @@ for product in ('OnlyBody', 'OnlyWeights'):
     assert [extension.name for extension in extensions] == [f'{product.lower()}WorkoutActivity.appex'], extensions
     extension_info = plistlib.loads((extensions[0] / 'Info.plist').read_bytes())
     assert extension_info['CFBundleIdentifier'] == f'{info["CFBundleIdentifier"]}.WorkoutActivity', product
+    assert extension_info.get('CFBundleDisplayName') == product, f'{product}: invalid Live Activity display name'
     assert extension_info['NSExtension']['NSExtensionPointIdentifier'] == 'com.apple.widgetkit-extension', product
     for key in ('CFBundleShortVersionString', 'CFBundleVersion'):
         assert extension_info[key] == info[key], (product, key)
