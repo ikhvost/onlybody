@@ -31,7 +31,7 @@ struct TrainRootView: View {
                 switch route {
                 case .smart(let id, let targets, let opensPreview):
                     SmartSelectionView(viewModel: composition.smart(workoutID: id, targets: targets, opensPreview: opensPreview),
-                        onSaved: { path = [] }, onStart: { workout in
+                        makeMovement: composition.movement, onSaved: { path = [] }, onStart: { workout in
                             path = []
                             activeWorkout = composition.active(workoutID: workout.id, reviewedWorkout: workout)
                         })

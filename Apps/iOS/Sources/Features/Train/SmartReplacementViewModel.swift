@@ -17,6 +17,8 @@ final class SmartReplacementViewModel {
         self.catalog = catalog
     }
 
+    var hasEquipment: Bool { item.exercise?.equipment.contains(where: { $0 != "None" }) == true }
+
     var alternatives: [ExerciseSnapshot] {
         let generator = SmartSelectionGenerator()
         let usedFamilies = Set(items.filter { $0.id != item.id }.compactMap { $0.exercise?.smartMetadata?.family })

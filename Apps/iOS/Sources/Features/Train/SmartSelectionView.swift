@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SmartSelectionView: View {
     @State var viewModel: SmartSelectionViewModel
+    let makeMovement: (ExerciseSnapshot) -> MovementDetailViewModel
     let onSaved: () -> Void
     let onStart: (WorkoutSnapshot) -> Void
     @Environment(\.dismiss) private var dismiss
@@ -9,15 +10,16 @@ struct SmartSelectionView: View {
     @State private var confirmDiscard = false
     @State private var confirmDelete = false
     @State private var dragLocation: CGPoint?
+    @State private var editingItem: WorkoutItemSnapshot?
     @State private var replacement: WorkoutItemSnapshot?
 
     var body: some View {
         VStack(spacing: Theme.space0) {
-            NavBarView(title: String(localized: .smartSmart)) {
+            NavBarView(title: viewModel.stage == .preview ? String(localized: .uiDesignOverview) : String(localized: .smartSmart)) {
                 NavigationBackButton(action: requestBack).accessibilityIdentifier("smart.back")
             } trailing: {
                 if viewModel.stage == .preview {
-                    Button(String(localized: .uiDesignEdit)) { viewModel.edit() }
+                    Button(String(localized: .smartSettings)) { viewModel.edit() }
                         .frame(minWidth: Theme.touchSize, minHeight: Theme.touchSize).accessibilityIdentifier("smart.edit")
                 }
             }
@@ -30,7 +32,9 @@ struct SmartSelectionView: View {
                     switch viewModel.stage {
                     case .setup: SmartSetupView(viewModel: viewModel)
                     case .conditions: SmartConditionsView(viewModel: viewModel)
-                    case .preview: SmartDailyPreviewView(viewModel: viewModel, dragLocation: $dragLocation, onReplace: { replacement = $0 })
+                    case .preview:
+                        SmartDailyPreviewView(viewModel: viewModel, dragLocation: $dragLocation,
+                                              onEdit: { editingItem = $0 }, onReplace: { replacement = $0 })
                     }
                     if viewModel.isExisting, viewModel.stage == .setup {
                         Button(String(localized: .uiDeleteWorkout), role: .destructive) { confirmDelete = true }
@@ -75,7 +79,7 @@ struct SmartSelectionView: View {
         .onChange(of: scenePhase) { _, phase in if phase == .active { Task { await viewModel.refreshDay() } } }
         .background {
             if viewModel.hasPreviousStep {
-                BackActionSwipeBridge(isEnabled: !viewModel.isBusy && replacement == nil, onBack: requestBack).allowsHitTesting(false)
+                BackActionSwipeBridge(isEnabled: !viewModel.isBusy && replacement == nil && editingItem == nil, onBack: requestBack).allowsHitTesting(false)
             } else {
                 BackSwipeBridge {
                     guard !viewModel.isBusy else { return false }
@@ -97,13 +101,20 @@ struct SmartSelectionView: View {
         .sheet(item: $replacement) { item in
             SmartReplacementView(viewModel: SmartReplacementViewModel(
                 item: item, items: viewModel.variant?.items ?? [], configuration: viewModel.configuration, catalog: viewModel.catalog),
-                onReplace: { exercise in
+                makeMovement: makeMovement, onReplace: { exercise in
                     Task { await viewModel.replace(item.id, with: exercise) }
                 },
                 onExclude: {
                     guard let exercise = item.exercise else { return false }
                     return await viewModel.exclude(exercise)
                 })
+                .presentationDetents([.large]).presentationDragIndicator(.hidden)
+        }
+        .sheet(item: $editingItem) { item in
+            SmartMovementEditor(viewModel: SmartMovementEditorViewModel(item: item), onSave: { edited in
+                await viewModel.updateMovement(edited)
+            })
+                .presentationDetents([.large]).presentationDragIndicator(.visible)
         }
     }
 
@@ -119,6 +130,6 @@ struct SmartSelectionView: View {
     SmartSelectionView(viewModel: SmartSelectionViewModel(workouts: PreviewWorkoutRepository(),
         exercises: PreviewExerciseRepository(exercises: [ExerciseSnapshot(name: "Push-Ups", primaryMuscle: "Chest", equipment: ["None"])]),
         variants: PreviewSmartDailyVariantRepository(), preferences: WorkoutPreferences(), targets: ["Chest"]),
-        onSaved: {}, onStart: { _ in }).preferredColorScheme(.dark)
+        makeMovement: { MovementDetailViewModel(exercise: $0, allowsVideoLoading: false) }, onSaved: {}, onStart: { _ in }).preferredColorScheme(.dark)
 }
 #endif

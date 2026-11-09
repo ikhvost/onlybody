@@ -8,6 +8,21 @@ import Testing
 
 @MainActor
 struct ExercisePickerViewModelTests {
+    @Test func clearingFiltersDoesNotBroadenTheSuppliedSmartAlternatives() {
+        let alternatives = [ExerciseSnapshot(name: "Push-Ups", primaryMuscle: "Chest", equipment: ["None"])]
+        let model = ExercisePickerViewModel(exercises: alternatives)
+        #expect(!model.hasActiveFilters)
+        model.searchText = "missing exercise"
+        #expect(model.filteredExercises.isEmpty)
+        #expect(model.hasActiveFilters)
+        model.clearFilters()
+        #expect(!model.hasActiveFilters)
+        #expect(model.filteredExercises == alternatives)
+        model.exercises = []
+        #expect(model.filteredExercises.isEmpty)
+        #expect(!model.hasActiveFilters)
+    }
+
     @Test func equipmentFilterCombinesWithSearchAndMuscleAndResets() {
         let model = ExercisePickerViewModel(exercises: [
             ExerciseSnapshot(name: "Fixture dumbbell press", primaryMuscle: "Chest", equipment: ["Dumbbells", "Bench"]),

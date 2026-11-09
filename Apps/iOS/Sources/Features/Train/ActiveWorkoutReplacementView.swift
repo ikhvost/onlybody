@@ -17,7 +17,7 @@ struct ActiveWorkoutReplacementView: View {
                 GhostButton(title: String(localized: .uiCancel)) { dismiss() }
             } else if let configuration = viewModel.smartConfiguration, let item = viewModel.items.first(where: { $0.id == itemID }) {
                 SmartReplacementView(viewModel: SmartReplacementViewModel(item: item, items: viewModel.items,
-                    configuration: configuration, catalog: viewModel.allExercises),
+                    configuration: configuration, catalog: viewModel.allExercises), makeMovement: makeMovement,
                     onReplace: { exercise in viewModel.replaceExercise(itemID, with: exercise) },
                     onExclude: {
                         guard let exercise = item.exercise else { return false }

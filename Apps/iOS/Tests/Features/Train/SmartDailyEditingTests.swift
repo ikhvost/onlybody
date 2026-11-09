@@ -78,6 +78,44 @@ struct SmartDailyEditingTests {
         active.cleanup()
     }
 
+    @Test func prescriptionEditsPersistOnlyTodayAndReassessTheBudget() async throws {
+        let workouts = MockWorkoutRepository()
+        let variants = MockSmartDailyVariantRepository()
+        let repository = try exercises()
+        let model = SmartSelectionViewModel(workouts: workouts, exercises: repository, variants: variants,
+            preferences: WorkoutPreferences(), targets: ["Full Body"], equipmentMode: .standardGym)
+        await model.load()
+        await model.preview()
+        await model.acceptShortPlan()
+        let saved = try #require(await model.save())
+        workouts.stubbedWorkouts = [saved]
+        let configuration = model.configuration
+        var item = try #require(model.variant?.items.first)
+        let original = item
+        item.sets += 1
+        #expect(await model.updateMovement(item))
+        #expect(model.variant?.items.first?.sets == item.sets)
+        #expect(model.variant?.acceptedShortPlan == nil)
+        #expect(model.configuration == configuration)
+        #expect(workouts.stubbedWorkouts.first?.items.first == original)
+        let reopened = SmartSelectionViewModel(workouts: workouts, exercises: repository, variants: variants,
+            preferences: WorkoutPreferences(), workoutID: saved.id, opensPreview: true)
+        await reopened.load()
+        #expect(reopened.variant?.items == model.variant?.items)
+        let beforeFailure = model.variant
+        variants.shouldThrow = true
+        item.sets += 1
+        #expect(await model.updateMovement(item) == false)
+        #expect(model.variant == beforeFailure)
+        variants.shouldThrow = false
+        item.sets = Int(Int32.max)
+        item.targetReps = Int(Int32.max)
+        #expect(await model.updateMovement(item))
+        #expect(model.assessment.gaps.contains("time"))
+        #expect(!model.canStart)
+        #expect(model.estimatedMinutes > configuration.durationMinutes)
+    }
+
     @Test func cachedLegacyPlanIsRecheckedWithoutReplacingItsItems() async throws {
         let repository = try exercises()
         let first = try #require(repository.stubbedAllExercises.first { $0.smartMetadata != nil })

@@ -49,7 +49,14 @@ final class SmartSelectionViewModel {
     }
     var targets: [String] { ExerciseCatalog.sessionTargets }
     var equipment: [String] { Array(Set(catalog.flatMap(\.equipment))).filter { $0 != "None" }.sorted() }
-    var estimatedMinutes: Int { (assessment.estimatedSeconds + 59) / 60 }
+    var estimatedMinutes: Int {
+        let seconds = assessment.estimatedSeconds
+        return seconds / 60 + (seconds % 60 == 0 ? 0 : 1)
+    }
+    var displayName: String {
+        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? String(localized: .smartSmart) : trimmed
+    }
     var dayLabel: String { (variant?.createdAt ?? now()).formatted(date: .abbreviated, time: .omitted) }
     var gaps: [String] {
         if configuration.targetMuscleGroups.isEmpty { return [String(localized: .uiSelectMuscleGroups)] }
@@ -236,6 +243,23 @@ final class SmartSelectionViewModel {
         daily.items[index].exercise = exercise
         daily.acceptedShortPlan = nil
         await updateDaily(daily)
+    }
+
+    /// Commits only the current day's prescription; future generation settings remain unchanged.
+    func updateMovement(_ item: WorkoutItemSnapshot) async -> Bool {
+        guard !isBusy, var daily = variant,
+              let index = daily.items.firstIndex(where: { $0.id == item.id }),
+              item.sets >= 1, item.sets <= Int(Int32.max),
+              item.targetReps >= 1, item.targetReps <= Int(Int32.max),
+              item.restSeconds >= 0, item.restSeconds <= Int(Int32.max) else { return false }
+        guard daily.items[index].sets != item.sets || daily.items[index].targetReps != item.targetReps
+                || daily.items[index].restSeconds != item.restSeconds else { return true }
+        daily.items[index].sets = item.sets
+        daily.items[index].targetReps = item.targetReps
+        daily.items[index].restSeconds = item.restSeconds
+        daily.acceptedShortPlan = nil
+        await updateDaily(daily)
+        return errorMessage == nil
     }
 
     func moveMovement(_ id: UUID, to targetID: UUID) async {

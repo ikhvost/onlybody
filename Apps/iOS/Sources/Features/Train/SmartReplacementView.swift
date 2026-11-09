@@ -2,6 +2,8 @@ import SwiftUI
 
 struct SmartReplacementView: View {
     @State var viewModel: SmartReplacementViewModel
+    @State private var picker: ExercisePickerViewModel
+    let makeMovement: (ExerciseSnapshot) -> MovementDetailViewModel
     let onReplace: (ExerciseSnapshot) -> Void
     let onExclude: () async -> Bool
     @Environment(\.dismiss) private var dismiss
@@ -9,63 +11,49 @@ struct SmartReplacementView: View {
     @State private var isSaving = false
     @State private var saveFailed = false
 
+    init(viewModel: SmartReplacementViewModel, makeMovement: @escaping (ExerciseSnapshot) -> MovementDetailViewModel,
+         onReplace: @escaping (ExerciseSnapshot) -> Void, onExclude: @escaping () async -> Bool) {
+        _viewModel = State(initialValue: viewModel)
+        _picker = State(initialValue: ExercisePickerViewModel(exercises: viewModel.alternatives))
+        self.makeMovement = makeMovement
+        self.onReplace = onReplace
+        self.onExclude = onExclude
+    }
+
     var body: some View {
-        VStack(spacing: Theme.space0) {
-            NavBarView(title: String(localized: .smartReplace)) {
-                if viewModel.equipmentUnavailable == nil {
-                    NavigationCloseButton { dismiss() }.accessibilityIdentifier("smartReplacement.close")
-                } else {
-                    NavigationBackButton(action: requestBack).accessibilityIdentifier("smartReplacement.back")
+        ExercisePickerView(viewModel: picker, makeMovement: makeMovement, title: String(localized: .uiWorkoutReplace),
+                           emptyMessage: viewModel.alternatives.isEmpty
+                            ? String(localized: .smartNoAlternatives) : String(localized: .uiNoMovementsFound),
+                           isDismissDisabled: isSaving || confirmExclusion, options: {
+            VStack(alignment: .leading, spacing: Theme.space8) {
+                if saveFailed { Text(.uiCouldNotSaveSession).foregroundStyle(Theme.danger) }
+                HStack(spacing: Theme.space12) {
+                    Text(.smartLocal).font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.text2)
+                    Spacer(minLength: Theme.space0)
+                    Menu(String(localized: .smartSettings)) {
+                        if viewModel.hasEquipment {
+                            Toggle(String(localized: .smartUnavailable), isOn: Binding(
+                                get: { viewModel.equipmentUnavailable == true },
+                                set: { viewModel.equipmentUnavailable = $0 }))
+                        }
+                        Button(String(localized: .smartPermanent), role: .destructive) { confirmExclusion = true }
+                    }.frame(minWidth: Theme.touchSize, minHeight: Theme.touchSize)
+                        .accessibilityIdentifier("smartReplacement.options")
+                }
+            }.padding(.horizontal, Theme.horizontalPadding)
+        }, onAdd: onReplace)
+        .disabled(isSaving)
+        .interactiveDismissDisabled(isSaving)
+        .onChange(of: viewModel.equipmentUnavailable) { _, _ in picker.exercises = viewModel.alternatives }
+        .alert(String(localized: .smartPermanent), isPresented: $confirmExclusion) {
+            Button(String(localized: .smartExclude), role: .destructive) {
+                Task {
+                    isSaving = true
+                    if await onExclude() { dismiss() } else { saveFailed = true }
+                    isSaving = false
                 }
             }
-            ScrollView {
-                VStack(alignment: .leading, spacing: Theme.sectionGap) {
-                    if saveFailed { Text(.uiCouldNotSaveSession).foregroundStyle(Theme.danger) }
-                    if viewModel.equipmentUnavailable == nil {
-                        Text(.smartReason).font(Theme.fontSans(Theme.typeCard, .bold))
-                        GhostButton(title: String(localized: .smartUnavailable)) { viewModel.equipmentUnavailable = true }
-                        GhostButton(title: String(localized: .smartAnother)) { viewModel.equipmentUnavailable = false }
-                            .accessibilityIdentifier("smartReplacement.another")
-                    } else {
-                        Text(.smartLocal).foregroundStyle(Theme.text2)
-                        if viewModel.alternatives.isEmpty { Text(.smartNoAlternatives) }
-                        ForEach(viewModel.alternatives) { exercise in
-                            Button {
-                                onReplace(exercise)
-                                dismiss()
-                            } label: {
-                                VStack(alignment: .leading, spacing: Theme.space8) {
-                                    Text(exercise.displayName)
-
-                                }.frame(maxWidth: .infinity, minHeight: Theme.touchSize, alignment: .leading)
-                            }
-                        }
-                    }
-                    Button(String(localized: .smartPermanent), role: .destructive) { confirmExclusion = true }
-                        .frame(minWidth: Theme.touchSize, minHeight: Theme.touchSize)
-                }.padding(Theme.horizontalPadding)
-            }.scrollIndicators(.hidden)
-        }.disabled(isSaving).font(Theme.fontSans(Theme.typeBody)).foregroundStyle(Theme.text).tint(Theme.accent).background(Theme.bg)
-            .background(BackActionSwipeBridge(isEnabled: !isSaving && !confirmExclusion,
-                                              onBack: requestBack).allowsHitTesting(false))
-            .interactiveDismissDisabled(isSaving)
-            .alert(String(localized: .smartPermanent), isPresented: $confirmExclusion) {
-                Button(String(localized: .smartExclude), role: .destructive) {
-                    Task {
-                        isSaving = true
-                        if await onExclude() { dismiss() } else { saveFailed = true }
-                        isSaving = false
-                    }
-                }
-                Button(String(localized: .uiCancel), role: .cancel) {}
-            } message: { Text(.smartPermanentHint) }
+            Button(String(localized: .uiCancel), role: .cancel) {}
+        } message: { Text(.smartPermanentHint) }
     }
-
-    private func requestBack() {
-        guard !isSaving else { return }
-        if viewModel.equipmentUnavailable != nil {
-            viewModel.equipmentUnavailable = nil
-        } else { dismiss() }
-    }
-
 }

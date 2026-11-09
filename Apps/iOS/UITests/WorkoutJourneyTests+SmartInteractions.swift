@@ -73,6 +73,48 @@ extension WorkoutJourneyTests {
         XCTAssertTrue(hip.isSelected)
     }
 
+    func testSmartMovementEditingUsesDraftAndPreservesDailyValues() {
+        tap("workout.create")
+        tap("creation.smart")
+        let target = app.buttons["smart.target.Chest"]
+        for _ in 0..<5 where !target.isHittable { app.swipeUp() }
+        tap("smart.target.Chest")
+        let name = app.textFields["smart.name"]
+        for _ in 0..<5 where !name.isHittable { app.swipeUp() }
+        name.tap()
+        name.typeText("Smart Edit")
+        tap("smart.continue")
+        tap("smart.preview")
+        XCTAssertTrue(app.staticTexts["smart.preview.name"].waitForExistence(timeout: 10))
+        XCTAssertEqual(app.staticTexts["smart.preview.name"].label, "Smart Edit")
+        let movement = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "smart.movement.")).firstMatch
+        for _ in 0..<5 where !movement.isHittable { app.swipeUp() }
+        XCTAssertTrue(movement.isHittable)
+        let movementID = movement.identifier
+        movement.tap()
+        let reps = app.textFields["stepper.Reps.value"]
+        XCTAssertTrue(reps.waitForExistence(timeout: 5))
+        let original = reps.value as? String
+        tap("stepper.Reps.decrease")
+        tap("smart.movement.cancel")
+        tap(movementID)
+        XCTAssertTrue(reps.waitForExistence(timeout: 5))
+        XCTAssertEqual(reps.value as? String, original)
+        tap("stepper.Reps.decrease")
+        let edited = reps.value as? String
+        tap("smart.movement.done")
+        if app.buttons["smart.acceptShortPlan"].exists { tap("smart.acceptShortPlan") }
+        tap("smart.save")
+        app.terminate()
+        app.launch()
+        tap("workout.start.Smart Edit")
+        let reopened = app.buttons[movementID]
+        for _ in 0..<5 where !reopened.isHittable { app.swipeUp() }
+        tap(movementID)
+        XCTAssertTrue(reps.waitForExistence(timeout: 5))
+        XCTAssertEqual(reps.value as? String, edited)
+    }
+
     func testSmartTargetsAreExclusiveAndLimitedToThree() {
         tap("workout.create")
         tap("creation.smart")
@@ -139,13 +181,15 @@ extension WorkoutJourneyTests {
         for _ in 0..<5 where !replace.isHittable { app.swipeUp() }
         XCTAssertTrue(replace.isHittable)
         replace.tap()
-        tap("smartReplacement.another")
-        XCTAssertTrue(app.buttons["smartReplacement.back"].waitForExistence(timeout: 5))
-        smartSwipeBack()
-        XCTAssertTrue(app.buttons["smartReplacement.another"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.textFields["exercisePicker.search"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["exercisePicker.close"].exists)
+        if app.staticTexts["exercisePicker.empty"].exists {
+            XCTAssertFalse(app.buttons["exercisePicker.clearFilters"].exists)
+        }
+        XCTAssertFalse(app.buttons["smartReplacement.another"].exists)
         smartSwipeBack()
         XCTAssertTrue(app.buttons["smart.save"].waitForExistence(timeout: 5))
-        XCTAssertFalse(app.buttons["smartReplacement.close"].exists)
+        XCTAssertFalse(app.buttons["exercisePicker.close"].exists)
     }
 
     private func smartSwipeBack() {

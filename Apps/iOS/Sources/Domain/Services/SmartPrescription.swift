@@ -19,17 +19,25 @@ nonisolated struct SmartPrescription: Sendable {
 
     func seconds(_ movement: GeneratedMovement) -> Int {
         guard let metadata = movement.exercise.smartMetadata else { return 0 }
-        let repetitions = movement.reps * metadata.repetitionRule.multiplier * metadata.repetitionSeconds
-        return metadata.setupSeconds + metadata.transitionSeconds + movement.sets * (repetitions + movement.restSeconds)
+        let repetitions = multiplied(multiplied(movement.reps, by: metadata.repetitionRule.multiplier), by: metadata.repetitionSeconds)
+        let perSet = WorkoutDurationEstimator().adding(movement.restSeconds, to: repetitions)
+        let work = multiplied(movement.sets, by: perSet)
+        return WorkoutDurationEstimator().adding(metadata.setupSeconds + metadata.transitionSeconds, to: work)
     }
 
     func seconds(_ items: [WorkoutItemSnapshot]) -> Int {
         let total = items.reduce(0) { total, item in
             guard let exercise = item.exercise else { return total }
-            return total + seconds(GeneratedMovement(exercise: exercise, sets: item.sets,
-                                                     reps: item.targetReps, restSeconds: item.restSeconds))
+            let duration = seconds(GeneratedMovement(exercise: exercise, sets: item.sets,
+                                                    reps: item.targetReps, restSeconds: item.restSeconds))
+            return WorkoutDurationEstimator().adding(duration, to: total)
         }
         return max(0, total - (items.last?.restSeconds ?? 0))
+    }
+
+    private func multiplied(_ value: Int, by multiplier: Int) -> Int {
+        let result = value.multipliedReportingOverflow(by: multiplier)
+        return result.overflow ? Int.max : result.partialValue
     }
 
     func totalSeconds(_ movements: [GeneratedMovement]) -> Int {
