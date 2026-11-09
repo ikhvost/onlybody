@@ -3,6 +3,16 @@
 Changes for OnlyBody and OnlyWeights, newest version first. Record the app version,
 build number when assigned and user-facing changes for each update.
 
+## 2.1.0 — Build 4
+
+- Follow an active workout and its rest countdown on the Lock Screen and in the
+  Dynamic Island on supported iPhones.
+- With rest timer sound enabled and notification permission granted, get an
+  alert when rest ends, even with the screen locked.
+
+[App Store release notes in five languages](Assets/Marketing/Releases/2.1.0/README.md)
+apply to both apps.
+
 ## 2.0.0 — Source checkpoint
 
 ### Added
