@@ -18,7 +18,7 @@ struct ActiveWorkoutReplacementView: View {
             } else if let configuration = viewModel.smartConfiguration, let item = viewModel.items.first(where: { $0.id == itemID }) {
                 SmartReplacementView(viewModel: SmartReplacementViewModel(item: item, items: viewModel.items,
                     configuration: configuration, catalog: viewModel.allExercises),
-                    onReplace: { exercise, confirmed in viewModel.replaceExercise(itemID, with: exercise, confirmingLoads: confirmed) },
+                    onReplace: { exercise in viewModel.replaceExercise(itemID, with: exercise) },
                     onExclude: {
                         guard let exercise = item.exercise else { return false }
                         return await viewModel.excludeFromFuture(exercise)

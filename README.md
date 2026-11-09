@@ -21,6 +21,14 @@ Coding, architecture, navigation and testing rules live in [AGENTS.md](AGENTS.md
 
 Bundle IDs: `ikhvost.onlybody` and `ikhvost.onlyweights`. Both apps use `Documents/default.store` in separate sandboxes. Preserve existing model identities and user stores.
 
+## Smart Selection
+
+Smart accepts one preset (`Full Body`, `Upper`, or `Lower`) or up to three individual muscle groups. Invalid older selections must be corrected explicitly; opening a saved workout never truncates its targets or replaces its reviewed exercise order.
+
+The generator keeps level, equipment, region and exercise exclusions strict. Coverage uses primary muscles rather than a required Main/Additional role or movement pattern. Upper/Lower need two exercises covering two regional muscle groups; Full Body needs three exercises covering upper body, lower body and core. Individual targets each need coverage, including single-exercise plans for a single muscle group.
+
+Selection varies exercise combinations and sets within level bounds to aim for 90–100% of the requested duration. Estimates include transitions and rests except the final session rest. A covered but shorter plan requires explicit acceptance; inadequate coverage blocks saving and starting. Day-specific replacement, drag ordering and shorter-plan acceptance persist in the existing daily payload. Replacement and changes to the final rest reassess acceptance. Future exclusion remains a separate action.
+
 ## Validation
 
 Run from the repository root:

@@ -251,9 +251,9 @@ final class ActiveWorkoutViewModel {
         for index in items.indices { items[index].order = index }
     }
 
-    func replaceExercise(_ id: UUID, with exercise: ExerciseSnapshot, confirmingLoads: Bool = false) {
+    func replaceExercise(_ id: UUID, with exercise: ExerciseSnapshot) {
         if let smartConfiguration, !SmartSelectionGenerator().isEligible(
-            exercise, configuration: smartConfiguration, ignoringLoads: confirmingLoads) { return }
+            exercise, configuration: smartConfiguration) { return }
         guard canReplace(id), !hasInvalidNumbers, let index = items.firstIndex(where: { $0.id == id }) else { return }
         items[index].exercise = exercise
         previousOccurrence[id] = 0

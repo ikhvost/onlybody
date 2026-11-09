@@ -27,8 +27,13 @@ struct SmartSetupView: View {
                 ForEach(viewModel.targets, id: \.self) { target in
                     ChipView(label: CatalogLocalization.label(target), isActive: viewModel.configuration.targetMuscleGroups.contains(target)) {
                         viewModel.toggleTarget(target)
-                    }.accessibilityIdentifier("smart.target.\(target)")
+                    }.disabled(!viewModel.canToggleTarget(target))
+                        .accessibilityIdentifier("smart.target.\(target)")
                 }
+            }
+            Text(.smartTargetRule).font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.text2)
+            if !viewModel.configuration.targetMuscleGroups.isEmpty, !viewModel.hasValidTargets {
+                Text(.smartInvalidTargets).font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.danger)
             }
             Text(.smartSchedule).font(Theme.fontSans(Theme.typeCard, .semibold)).accessibilityIdentifier("smart.name.label")
             WorkoutNameField(name: $viewModel.name, identifier: "smart.name")

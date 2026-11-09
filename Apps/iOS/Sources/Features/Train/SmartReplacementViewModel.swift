@@ -9,8 +9,6 @@ final class SmartReplacementViewModel {
     private let configuration: SmartWorkoutConfiguration
     private let catalog: [ExerciseSnapshot]
     var equipmentUnavailable: Bool?
-    var showsConflicts = false
-    var pendingConflict: ExerciseSnapshot?
 
     init(item: WorkoutItemSnapshot, items: [WorkoutItemSnapshot], configuration: SmartWorkoutConfiguration, catalog: [ExerciseSnapshot]) {
         self.item = item
@@ -25,21 +23,13 @@ final class SmartReplacementViewModel {
         let missing = Set(item.exercise?.equipment.filter { $0 != "None" } ?? [])
         return catalog.filter { exercise in
             guard exercise.name != item.exercise?.name,
-                  generator.isEligible(exercise, configuration: configuration, ignoringLoads: showsConflicts),
+                  generator.isEligible(exercise, configuration: configuration, ignoringLoads: false),
                   let metadata = exercise.smartMetadata, !usedFamilies.contains(metadata.family) else { return false }
             if equipmentUnavailable == true, !missing.isDisjoint(with: exercise.equipment) { return false }
-            // Keep the role and movement need of the replaced slot.
-            return metadata.role == item.exercise?.smartMetadata?.role
-                && metadata.movement == item.exercise?.smartMetadata?.movement
+            let targets = SmartTargetPolicy().muscles(for: configuration.targetMuscleGroups)
+            return !Set(exercise.primaryMuscles).isDisjoint(with: targets)
                 && !Set(exercise.primaryMuscles).isDisjoint(with: item.exercise?.primaryMuscles ?? [])
         }.sorted { $0.displayName.localizedStandardCompare($1.displayName) == .orderedAscending }
     }
 
-    func conflicts(_ exercise: ExerciseSnapshot) -> [ExerciseLoad] {
-        SmartSelectionGenerator().conflicts(exercise, configuration: configuration)
-    }
-    var conflictMessage: String {
-        guard let pendingConflict else { return "" }
-        return conflicts(pendingConflict).map(\.label).joined(separator: " · ") + "\n" + String(localized: .smartConflictHint)
-    }
 }

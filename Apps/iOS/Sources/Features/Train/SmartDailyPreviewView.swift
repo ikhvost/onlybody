@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SmartDailyPreviewView: View {
     let viewModel: SmartSelectionViewModel
+    @Binding var dragLocation: CGPoint?
     let onReplace: (WorkoutItemSnapshot) -> Void
 
     var body: some View {
@@ -12,7 +13,7 @@ struct SmartDailyPreviewView: View {
                 Text(viewModel.configuration.level.label)
                 Spacer()
                 Text(.smartEstimate)
-                Text(viewModel.estimatedMinutes, format: .number)
+                Text(.uiMinutesCount(viewModel.estimatedMinutes))
             }.font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.accent)
             HStack {
                 Text(.smartBudget)
@@ -27,9 +28,18 @@ struct SmartDailyPreviewView: View {
                     GhostButton(title: String(localized: .smartChange)) { viewModel.edit() }
                 }.padding(Theme.cardInset).background(Theme.accentDim, in: .rect(cornerRadius: Theme.cornerRadius))
             }
-            ForEach(viewModel.variant?.items ?? []) { item in
-                SmartMovementCard(item: item, onReplace: { onReplace(item) })
+            if viewModel.assessment.status == .shorter {
+                Text(.smartShortPlanHint).font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.text2)
+            }
+            ExerciseReorderStack(items: viewModel.variant?.items ?? [], spacing: Theme.space6,
+                                 isEnabled: !viewModel.isBusy, dragLocation: $dragLocation,
+                                 onMove: move) { item, handle in
+                SmartMovementCard(item: item, reorderHandle: handle, onReplace: { onReplace(item) })
             }
         }
+    }
+
+    private func move(_ source: UUID, _ target: UUID) {
+        Task { await viewModel.moveMovement(source, to: target) }
     }
 }

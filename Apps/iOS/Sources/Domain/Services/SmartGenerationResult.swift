@@ -4,7 +4,9 @@ nonisolated struct SmartGenerationResult: Sendable {
     var movements: [GeneratedMovement] = []
     var estimatedSeconds: Int = 0
     var uncoveredNeeds: [String] = []
-    var canStart: Bool { !movements.isEmpty && uncoveredNeeds.isEmpty }
+    var status: SmartPlanStatus = .unavailable
+
+    var canStart: Bool { status == .complete }
 
     var items: [WorkoutItemSnapshot] {
         movements.enumerated().map { index, movement in

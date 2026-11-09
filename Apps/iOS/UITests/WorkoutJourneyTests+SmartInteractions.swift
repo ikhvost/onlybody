@@ -57,6 +57,7 @@ extension WorkoutJourneyTests {
         XCTAssertTrue(app.buttons["smart.preview"].waitForExistence(timeout: 5))
         tap("smart.preview")
         verifySmartReplacementBack()
+        if app.buttons["smart.acceptShortPlan"].exists { tap("smart.acceptShortPlan") }
         tap("smart.save")
         tap("workout.start.Smart Interactions")
         XCTAssertTrue(app.buttons["smart.start"].waitForExistence(timeout: 5))
@@ -70,6 +71,67 @@ extension WorkoutJourneyTests {
         tap("smart.continue")
         XCTAssertTrue(foot.isSelected)
         XCTAssertTrue(hip.isSelected)
+    }
+
+    func testSmartTargetsAreExclusiveAndLimitedToThree() {
+        tap("workout.create")
+        tap("creation.smart")
+        for name in ["Chest", "Back", "Shoulders"] {
+            let chip = app.buttons["smart.target.\(name)"]
+            for _ in 0..<5 where !chip.isHittable { app.swipeUp() }
+            tap("smart.target.\(name)")
+        }
+        XCTAssertFalse(app.buttons["smart.target.Biceps"].isEnabled)
+        XCTAssertTrue(app.buttons["smart.target.Chest"].isEnabled)
+        let fullBody = app.buttons["smart.target.Full Body"]
+        for _ in 0..<5 where !fullBody.isHittable { app.swipeUp() }
+        tap("smart.target.Full Body")
+        XCTAssertTrue(fullBody.isSelected)
+        XCTAssertFalse(app.buttons["smart.target.Chest"].isSelected)
+        let chest = app.buttons["smart.target.Chest"]
+        for _ in 0..<5 where !chest.isHittable { app.swipeDown() }
+        tap("smart.target.Chest")
+        XCTAssertTrue(chest.isSelected)
+        XCTAssertFalse(fullBody.isSelected)
+        XCTAssertTrue(app.buttons["smart.target.Biceps"].isEnabled)
+    }
+
+    func testSmartDailyReorderingSurvivesReopening() {
+        tap("workout.create")
+        tap("creation.smart")
+        let fullBody = app.buttons["smart.target.Full Body"]
+        for _ in 0..<5 where !fullBody.isHittable { app.swipeUp() }
+        tap("smart.target.Full Body")
+        let name = app.textFields["smart.name"]
+        for _ in 0..<5 where !name.isHittable { app.swipeUp() }
+        name.tap()
+        name.typeText("Smart Order")
+        tap("smart.continue")
+        tap("smart.preview")
+        let handles = app.descendants(matching: .any).matching(NSPredicate(format: "identifier BEGINSWITH %@", "smart.drag."))
+        let first = handles.element(boundBy: 0)
+        let second = handles.element(boundBy: 1)
+        XCTAssertTrue(second.waitForExistence(timeout: 10))
+        for _ in 0..<5 where !second.isHittable { app.swipeUp() }
+        let firstID = first.identifier
+        let secondID = second.identifier
+        let destination = second.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).withOffset(CGVector(dx: 0, dy: 20))
+        first.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+            .press(forDuration: 0.7, thenDragTo: destination, withVelocity: .slow, thenHoldForDuration: 1)
+        let reordered = NSPredicate { [self] _, _ in
+            app.descendants(matching: .any).matching(identifier: firstID).firstMatch.frame.midY
+                > app.descendants(matching: .any).matching(identifier: secondID).firstMatch.frame.midY
+        }
+        expectation(for: reordered, evaluatedWith: app)
+        waitForExpectations(timeout: 5)
+        if app.buttons["smart.acceptShortPlan"].exists { tap("smart.acceptShortPlan") }
+        tap("smart.save")
+        tap("workout.start.Smart Order")
+        XCTAssertTrue(app.buttons["smart.start"].waitForExistence(timeout: 10))
+        XCTAssertEqual(handles.element(boundBy: 0).identifier, secondID)
+        XCTAssertEqual(handles.element(boundBy: 1).identifier, firstID)
+        XCTAssertFalse(app.staticTexts["Main"].exists)
+        XCTAssertFalse(app.staticTexts["Additional"].exists)
     }
 
     private func verifySmartReplacementBack() {

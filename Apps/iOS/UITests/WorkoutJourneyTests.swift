@@ -577,6 +577,10 @@ final class WorkoutJourneyTests: XCTestCase {
         tap("smart.continue")
         tap("smart.preview")
         XCTAssertTrue(app.buttons["smart.save"].waitForExistence(timeout: 10))
+        if app.buttons["smart.acceptShortPlan"].exists {
+            XCTAssertFalse(app.buttons["smart.save"].isEnabled)
+            tap("smart.acceptShortPlan")
+        }
         XCTAssertTrue(app.buttons["smart.save"].isEnabled)
         tap("smart.save")
         XCTAssertTrue(app.buttons["workout.start.Smart Budget"].waitForExistence(timeout: 10))

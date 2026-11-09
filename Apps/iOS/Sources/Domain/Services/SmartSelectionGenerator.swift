@@ -9,41 +9,29 @@ nonisolated struct SmartSelectionGenerator: Sendable {
 
     func plan(configuration: SmartWorkoutConfiguration, from exercises: [ExerciseSnapshot],
               context: SmartGenerationContext = SmartGenerationContext()) -> SmartGenerationResult {
-        let candidates = exercises.filter { isEligible($0, configuration: configuration) }
-        let needs = requirements(configuration.targetMuscleGroups)
-        let targets = expandedTargets(configuration.targetMuscleGroups)
-        let prescription = SmartPrescription()
-        let budget = max(0, min(configuration.durationMinutes, 120)) * 60
-        var selected: [GeneratedMovement] = []
-        var families: Set<String> = []
-        for need in needs {
-            guard !selected.contains(where: { covers($0.exercise, need: need) }) else { continue }
-            let matches = candidates.filter { exercise in
-                covers(exercise, need: need) && !families.contains(exercise.smartMetadata?.family ?? "")
-            }.sorted { precedes($0, $1, context: context) }
-            if let exercise = matches.first, let metadata = exercise.smartMetadata {
-                selected.append(prescription.movement(exercise, level: configuration.level))
-                families.insert(metadata.family)
-            }
+        let policy = SmartTargetPolicy()
+        guard policy.isValid(configuration.targetMuscleGroups) else {
+            return SmartGenerationResult(uncoveredNeeds: ["selection"])
         }
-        // Preserve movement coverage before using spare time for additional work.
-        trimToBudget(&selected, budget: budget)
-        let accessories = candidates.filter {
-            $0.smartMetadata?.role == .accessory && !Set($0.primaryMuscles).isDisjoint(with: targets)
+        let targets = policy.muscles(for: configuration.targetMuscleGroups)
+        let candidates = exercises.filter {
+            isEligible($0, configuration: configuration) && !Set($0.primaryMuscles).isDisjoint(with: targets)
         }.sorted { precedes($0, $1, context: context) }
-        for exercise in accessories {
-            guard let metadata = exercise.smartMetadata, !families.contains(metadata.family) else { continue }
-            var movement = prescription.movement(exercise, level: configuration.level)
-            let remaining = budget - selected.reduce(0) { $0 + prescription.seconds($1) }
-            while movement.sets > 1, prescription.seconds(movement) > remaining { movement.sets -= 1 }
-            guard prescription.seconds(movement) <= remaining else { continue }
-            selected.append(movement)
-            families.insert(metadata.family)
+        let required = coverage(configuration: configuration, candidates: candidates, anchors: context.mainExerciseNames)
+        let requiredNames = Set(required.map(\.exercise.name))
+        let fillingCandidates = candidates.filter {
+            context.mainExerciseNames.isEmpty || $0.smartMetadata?.role != .main || requiredNames.contains($0.name)
         }
-        selected.sort { ($0.exercise.smartMetadata?.role == .main ? 0 : 1) < ($1.exercise.smartMetadata?.role == .main ? 0 : 1) }
-        return SmartGenerationResult(movements: selected,
-                                     estimatedSeconds: selected.reduce(0) { $0 + prescription.seconds($1) },
-                                     uncoveredNeeds: needs.filter { need in !selected.contains { covers($0.exercise, need: need) } })
+        let movements = SmartDurationFiller().fill(required: required, candidates: fillingCandidates,
+                                                  configuration: configuration, fixedNames: Set(context.mainExerciseNames))
+            .sorted { precedes($0.exercise, $1.exercise, context: context) }
+        let items = movements.enumerated().map {
+            WorkoutItemSnapshot(order: $0.offset, sets: $0.element.sets, targetReps: $0.element.reps,
+                                restSeconds: $0.element.restSeconds, exercise: $0.element.exercise)
+        }
+        let assessment = SmartPlanAssessment(configuration: configuration, items: items)
+        return SmartGenerationResult(movements: movements, estimatedSeconds: assessment.estimatedSeconds,
+                                     uncoveredNeeds: assessment.gaps, status: assessment.status)
     }
 
     func isEligible(_ exercise: ExerciseSnapshot, configuration: SmartWorkoutConfiguration, ignoringLoads: Bool = false) -> Bool {
@@ -64,26 +52,57 @@ nonisolated struct SmartSelectionGenerator: Sendable {
     }
 
     func uncoveredNeeds(configuration: SmartWorkoutConfiguration, items: [WorkoutItemSnapshot]) -> [String] {
-        requirements(configuration.targetMuscleGroups).filter { need in
-            !items.contains { item in item.exercise.map { covers($0, need: need) } ?? false }
-        }
+        SmartTargetPolicy().gaps(targets: configuration.targetMuscleGroups, exercises: items.compactMap(\.exercise))
     }
 
-    private func trimToBudget(_ items: inout [GeneratedMovement], budget: Int) {
+    /// At most three exercises are needed to establish the requested coverage. Keep several
+    /// alternatives so an expensive first match cannot crowd another requested muscle out.
+    private func coverage(configuration: SmartWorkoutConfiguration, candidates: [ExerciseSnapshot], anchors: [String]) -> [GeneratedMovement] {
+        let policy = SmartTargetPolicy()
         let prescription = SmartPrescription()
-        for role in [SmartExerciseRole.accessory, .main] {
-            for index in items.indices.reversed() where items[index].exercise.smartMetadata?.role == role {
-                let minimum = role == .main ? 2 : 1
-                while items[index].sets > minimum, items.reduce(0, { $0 + prescription.seconds($1) }) > budget {
-                    items[index].sets -= 1
-                }
+        let budget = max(0, min(configuration.durationMinutes, 120)) * 60
+        var initial = candidates.indices.filter { anchors.contains(candidates[$0].name) }
+        let movements = candidates.map { exercise in
+            var movement = prescription.movement(exercise, level: configuration.level)
+            movement.sets = prescription.setRange(level: configuration.level).lowerBound
+            return movement
+        }
+        if prescription.totalSeconds(initial.map { movements[$0] }) > budget { initial = [] }
+        var frontier = [initial]
+        var best = initial
+        func gaps(_ indices: [Int]) -> Int {
+            policy.gaps(targets: configuration.targetMuscleGroups, exercises: indices.map { candidates[$0] }).count
+        }
+        if gaps(initial) == 0 { return initial.map { movements[$0] } }
+        for _ in 0..<3 {
+            var next = expandedCoverage(frontier, candidates: candidates, movements: movements, budget: budget)
+            next.sort {
+                let firstGaps = gaps($0), secondGaps = gaps($1)
+                if firstGaps != secondGaps { return firstGaps < secondGaps }
+                return $0.lexicographicallyPrecedes($1)
+            }
+            guard let first = next.first else { break }
+            if gaps(first) < gaps(best) { best = first }
+            if gaps(first) == 0 { return first.map { movements[$0] } }
+            frontier = Array(next.prefix(64))
+        }
+        return best.map { movements[$0] }
+    }
+
+    private func expandedCoverage(_ frontier: [[Int]], candidates: [ExerciseSnapshot],
+                                  movements: [GeneratedMovement], budget: Int) -> [[Int]] {
+        let prescription = SmartPrescription()
+        var next: [[Int]] = []
+        for indices in frontier {
+            let families = Set(indices.compactMap { candidates[$0].smartMetadata?.family })
+            for index in candidates.indices where index > (indices.last ?? -1) {
+                guard !families.contains(candidates[index].smartMetadata?.family ?? "") else { continue }
+                let choice = indices + [index]
+                guard prescription.totalSeconds(choice.map { movements[$0] }) <= budget else { continue }
+                next.append(choice)
             }
         }
-        while items.reduce(0, { $0 + prescription.seconds($1) }) > budget, !items.isEmpty {
-            if let index = items.lastIndex(where: { $0.exercise.smartMetadata?.role == .accessory }) {
-                items.remove(at: index)
-            } else { items.removeLast() }
-        }
+        return next
     }
 
     private func precedes(_ first: ExerciseSnapshot, _ second: ExerciseSnapshot, context: SmartGenerationContext) -> Bool {
@@ -105,39 +124,4 @@ nonisolated struct SmartSelectionGenerator: Sendable {
         return firstScore == secondScore ? first.name < second.name : firstScore < secondScore
     }
 
-    private func covers(_ exercise: ExerciseSnapshot, need: String) -> Bool {
-        if need.hasPrefix("movement:") {
-            let movement = String(need.dropFirst("movement:".count))
-            guard exercise.smartMetadata?.movement.rawValue == movement else { return false }
-            return movement == "core" || exercise.smartMetadata?.role == .main
-        }
-        return exercise.primaryMuscles.contains(need)
-    }
-
-    private func requirements(_ groups: [String]) -> [String] {
-        var needs: [String] = []
-        for group in groups {
-            switch group {
-            case "Full Body": needs += ["movement:push", "movement:pull", "movement:squat", "movement:hinge", "movement:core"]
-            case "Upper": needs += ["movement:push", "movement:pull"]
-            case "Lower": needs += ["movement:squat", "movement:hinge"]
-            case "Arms": needs += ["Biceps", "Triceps", "Forearms"]
-            default: needs.append(group)
-            }
-        }
-        var seen: Set<String> = []
-        return needs.filter { seen.insert($0).inserted }
-    }
-
-    private func expandedTargets(_ groups: [String]) -> Set<String> {
-        Set(groups.flatMap { group -> [String] in
-            switch group {
-            case "Full Body": ExerciseCatalog.allMuscles
-            case "Upper": ExerciseCatalog.upperMuscles
-            case "Lower": ExerciseCatalog.lowerMuscles
-            case "Arms": ["Biceps", "Triceps", "Forearms"]
-            default: [group]
-            }
-        })
-    }
 }

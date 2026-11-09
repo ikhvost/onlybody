@@ -16,14 +16,14 @@ final class MusclePickerViewModel {
     }
 
     var canBuild: Bool {
-        !selectedMuscles.isEmpty
+        SmartTargetPolicy().isValid(selectedMuscles)
+    }
+
+    func canToggle(_ muscle: String) -> Bool {
+        SmartTargetPolicy().canToggle(muscle, in: selectedMuscles)
     }
 
     func toggle(_ muscle: String) {
-        if let index = selectedMuscles.firstIndex(of: muscle) {
-            selectedMuscles.remove(at: index)
-        } else {
-            selectedMuscles.append(muscle)
-        }
+        selectedMuscles = SmartTargetPolicy().toggling(muscle, in: selectedMuscles)
     }
 }

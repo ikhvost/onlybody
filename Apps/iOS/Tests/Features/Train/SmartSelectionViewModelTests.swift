@@ -22,6 +22,7 @@ struct SmartSelectionViewModelTests {
         #expect(model.configuration.excludedRegions == [.knee])
         model.toggleRegion(.hip)
         await model.preview()
+        await model.acceptShortPlan()
         let saved = try #require(await model.save())
         workouts.stubbedWorkouts = [saved]
         let reopened = SmartSelectionViewModel(workouts: workouts, exercises: repository, variants: variants,
@@ -32,12 +33,14 @@ struct SmartSelectionViewModelTests {
         #expect(reopened.variant == model.variant)
         reopened.toggleRegion(.hip)
         await reopened.preview()
+        await reopened.acceptShortPlan()
         #expect(reopened.variant?.settingsRevision != model.variant?.settingsRevision)
         reopened.removeLegacyLoad(.jumping)
         #expect(reopened.configuration.excludedRegions == [.knee])
         #expect(reopened.configuration.excludedLoads.isEmpty)
         reopened.toggleRegion(.shoulder)
         await reopened.preview()
+        await reopened.acceptShortPlan()
         #expect(!reopened.canStart)
         #expect(!reopened.gaps.isEmpty)
         #expect(await reopened.save() == nil)
@@ -65,9 +68,11 @@ struct SmartSelectionViewModelTests {
         #expect(viewModel.hasUnsavedChanges)
         viewModel.showConditions()
         await viewModel.preview()
+        await viewModel.acceptShortPlan()
         await viewModel.goBack()
         #expect(viewModel.stage == .conditions)
         await viewModel.preview()
+        await viewModel.acceptShortPlan()
         viewModel.edit()
         #expect(viewModel.hasPreviousStep)
         await viewModel.goBack()
@@ -83,6 +88,7 @@ struct SmartSelectionViewModelTests {
             preferences: WorkoutPreferences(), targets: ["Chest"], equipmentMode: .standardGym)
         await creator.load()
         await creator.preview()
+        await creator.acceptShortPlan()
         let saved = try #require(await creator.save())
         workouts.stubbedWorkouts = [saved]
         let reopened = SmartSelectionViewModel(workouts: workouts, exercises: repository, variants: variants,
@@ -118,6 +124,7 @@ struct SmartSelectionViewModelTests {
         viewModel.configuration.level = .advanced
         viewModel.scheduledDays = ["Mon"]
         await viewModel.preview()
+        await viewModel.acceptShortPlan()
         let reviewed = try #require(viewModel.variant)
         let saved = try #require(await viewModel.save())
         #expect(saved.items == reviewed.items)
@@ -141,6 +148,7 @@ struct SmartSelectionViewModelTests {
         await viewModel.load()
         viewModel.configuration.level = .advanced
         await viewModel.preview()
+        await viewModel.acceptShortPlan()
         let saved = try #require(await viewModel.save())
         let item = try #require(saved.items.first)
         let replacements = SmartReplacementViewModel(item: item, items: saved.items,
@@ -149,6 +157,7 @@ struct SmartSelectionViewModelTests {
         let replacement = try #require(replacements.alternatives.first)
         await viewModel.replace(item.id, with: replacement)
         #expect(variants.writes.last?.items.first?.exercise?.name == replacement.name)
+        await viewModel.acceptShortPlan()
         let replaced = try #require(await viewModel.save())
         #expect(replaced.smartSettings?.mainExerciseNames == saved.smartSettings?.mainExerciseNames)
         #expect(replaced.items.first?.exercise?.name == replacement.name)
@@ -164,6 +173,7 @@ struct SmartSelectionViewModelTests {
         await viewModel.load()
         viewModel.configuration.level = .advanced
         await viewModel.preview()
+        await viewModel.acceptShortPlan()
         workouts.shouldThrow = true
         #expect(await viewModel.save() == nil)
         #expect(viewModel.errorMessage != nil)
@@ -177,9 +187,11 @@ struct SmartSelectionViewModelTests {
             preferences: WorkoutPreferences(), targets: ["Chest"], equipmentMode: .standardGym)
         await viewModel.load()
         await viewModel.preview()
+        await viewModel.acceptShortPlan()
         let first = try #require(viewModel.variant)
         viewModel.configuration.excludedExercises = Set(viewModel.catalog.map(\.name))
         await viewModel.preview()
+        await viewModel.acceptShortPlan()
         #expect(viewModel.variant?.settingsRevision != first.settingsRevision)
         #expect(!viewModel.canStart)
         #expect(await viewModel.save() == nil)

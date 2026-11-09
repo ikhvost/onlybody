@@ -8,6 +8,7 @@ struct SmartSelectionView: View {
     @Environment(\.scenePhase) private var scenePhase
     @State private var confirmDiscard = false
     @State private var confirmDelete = false
+    @State private var dragLocation: CGPoint?
     @State private var replacement: WorkoutItemSnapshot?
 
     var body: some View {
@@ -29,7 +30,7 @@ struct SmartSelectionView: View {
                     switch viewModel.stage {
                     case .setup: SmartSetupView(viewModel: viewModel)
                     case .conditions: SmartConditionsView(viewModel: viewModel)
-                    case .preview: SmartDailyPreviewView(viewModel: viewModel, onReplace: { replacement = $0 })
+                    case .preview: SmartDailyPreviewView(viewModel: viewModel, dragLocation: $dragLocation, onReplace: { replacement = $0 })
                     }
                     if viewModel.isExisting, viewModel.stage == .setup {
                         Button(String(localized: .uiDeleteWorkout), role: .destructive) { confirmDelete = true }
@@ -37,17 +38,23 @@ struct SmartSelectionView: View {
                     }
                 }.padding(Theme.horizontalPadding)
             }.scrollIndicators(.hidden).scrollDismissesKeyboard(.interactively)
+                .modifier(ExerciseReorderAutoScroll(location: $dragLocation))
                 .safeAreaInset(edge: .bottom, spacing: Theme.space0) {
                     VStack(spacing: Theme.space8) {
                         switch viewModel.stage {
                         case .setup:
                             GlassActionButton(title: String(localized: .smartNext), action: { viewModel.showConditions() },
-                                              disabled: viewModel.configuration.targetMuscleGroups.isEmpty || viewModel.isBusy)
+                                              disabled: !viewModel.hasValidTargets || viewModel.isBusy)
                                 .accessibilityIdentifier("smart.continue")
                         case .conditions:
                             GlassActionButton(title: String(localized: .smartPreview), action: { Task { await viewModel.preview() } },
                                               disabled: viewModel.isBusy).accessibilityIdentifier("smart.preview")
                         case .preview:
+                            if viewModel.needsShortPlanAcceptance {
+                                GhostButton(title: String(localized: .smartAcceptShortPlan)) {
+                                    Task { await viewModel.acceptShortPlan() }
+                                }.accessibilityIdentifier("smart.acceptShortPlan")
+                            }
                             HStack(spacing: Theme.space12) {
                                 GhostButton(title: String(localized: .uiSave)) {
                                     Task { if await viewModel.save() != nil { onSaved() } }
@@ -90,8 +97,8 @@ struct SmartSelectionView: View {
         .sheet(item: $replacement) { item in
             SmartReplacementView(viewModel: SmartReplacementViewModel(
                 item: item, items: viewModel.variant?.items ?? [], configuration: viewModel.configuration, catalog: viewModel.catalog),
-                onReplace: { exercise, confirmed in
-                    Task { await viewModel.replace(item.id, with: exercise, confirmingLoads: confirmed) }
+                onReplace: { exercise in
+                    Task { await viewModel.replace(item.id, with: exercise) }
                 },
                 onExclude: {
                     guard let exercise = item.exercise else { return false }

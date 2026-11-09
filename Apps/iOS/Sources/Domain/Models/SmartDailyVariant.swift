@@ -9,6 +9,7 @@ nonisolated struct SmartDailyVariant: Codable, Equatable, Sendable, Identifiable
     var estimatedSeconds: Int
     var uncoveredNeeds: [String]
     var createdAt: Date
+    var acceptedShortPlan: Bool?
 
     var id: String { "\(workoutID.uuidString)|\(localDay)|\(settingsRevision.uuidString)" }
 }

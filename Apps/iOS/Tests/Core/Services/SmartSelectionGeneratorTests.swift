@@ -67,7 +67,7 @@ struct SmartSelectionGeneratorTests {
         let result = SmartSelectionGenerator().plan(configuration: configuration, from: exercises)
         #expect(result.movements.isEmpty)
         #expect(!result.canStart)
-        #expect(result.uncoveredNeeds.count == 5)
+        #expect(Set(result.uncoveredNeeds) == ["Upper", "Lower", "Core", "variety"])
     }
 
     @Test func unilateralTimeIncludesBothSidesAndClockUsesLocalCivilDate() throws {

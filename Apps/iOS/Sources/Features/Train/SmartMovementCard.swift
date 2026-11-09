@@ -2,23 +2,23 @@ import SwiftUI
 
 struct SmartMovementCard: View {
     let item: WorkoutItemSnapshot
+    let reorderHandle: ExerciseReorderHandle
     let onReplace: () -> Void
+
     var body: some View {
-        VStack(alignment: .leading, spacing: Theme.space12) {
-            Text(item.exercise?.smartMetadata?.role == .main ? String(localized: .smartMain) : String(localized: .smartAccessory))
-                .font(Theme.fontMono(Theme.typeMeta, .semibold)).foregroundStyle(Theme.accent)
-            Text(CatalogLocalization.exercise(item.exercise?.name ?? ""))
-                .font(Theme.fontSans(Theme.typeCard, .bold))
-            Text(item.exercise?.primaryMuscles.map { CatalogLocalization.label($0) }.joined(separator: " · ") ?? "")
-                .font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.text2)
-            Text(.uiMovementSummary(item.sets, item.targetReps, item.restSeconds))
-                .font(Theme.fontMono(Theme.typeBody))
-            if let rule = item.exercise?.smartMetadata?.repetitionRule, rule != .total {
-                Text(rule.label).font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.text2)
-            }
-            GhostButton(title: String(localized: .smartReplace), action: onReplace)
-                .accessibilityIdentifier("smart.replace.\(item.id)")
-        }.frame(maxWidth: .infinity, alignment: .leading)
-            .padding(Theme.cardInset).background(Theme.surface, in: .rect(cornerRadius: Theme.cornerRadius))
+        HStack(spacing: Theme.space8) {
+            reorderHandle.accessibilityIdentifier("smart.drag.\(item.id)")
+            VStack(alignment: .leading, spacing: Theme.space8) {
+                Text(CatalogLocalization.exercise(item.exercise?.name ?? ""))
+                    .font(Theme.fontSans(Theme.typeBody, .semibold))
+                Text(.uiMovementSummary(item.sets, item.targetReps, item.restSeconds))
+                    .font(Theme.fontSans(Theme.type13)).foregroundStyle(Theme.text2)
+                if let rule = item.exercise?.smartMetadata?.repetitionRule, rule != .total {
+                    Text(rule.label).font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.text2)
+                }
+            }.frame(maxWidth: .infinity, alignment: .leading)
+            ExerciseReplaceButton(identifier: "smart.replace.\(item.id)", onReplace: onReplace)
+        }
+        .padding(Theme.cardInset).background(Theme.surface, in: .rect(cornerRadius: Theme.cornerRadius))
     }
 }

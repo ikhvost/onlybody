@@ -28,14 +28,32 @@ final class SmartSelectionViewModel {
     private(set) var isBusy = false
     var errorMessage: String?
     var isExisting: Bool { requestedID != nil || template.smartSettings != nil }
-    var canStart: Bool { variant?.uncoveredNeeds.isEmpty == true && variant?.items.isEmpty == false && !isBusy }
+    var assessment: SmartPlanAssessment {
+        let currentItems = (variant?.items ?? []).map { item in
+            var checked = item
+            checked.exercise = catalog.first { $0.name == item.exercise?.name }
+            return checked
+        }
+        return SmartPlanAssessment(configuration: configuration, items: currentItems)
+    }
+    var canStart: Bool {
+        !isBusy && settings?.configuration == configuration
+            && variant?.localDay == SmartPlanningClock().localDay(at: now())
+            && assessment.status != .unavailable
+            && (assessment.status == .complete || variant?.acceptedShortPlan == true)
+    }
+    var needsShortPlanAcceptance: Bool { assessment.status == .shorter && variant?.acceptedShortPlan != true }
+    var hasValidTargets: Bool { SmartTargetPolicy().isValid(configuration.targetMuscleGroups) }
+    func canToggleTarget(_ target: String) -> Bool {
+        SmartTargetPolicy().canToggle(target, in: configuration.targetMuscleGroups)
+    }
     var targets: [String] { ExerciseCatalog.sessionTargets }
     var equipment: [String] { Array(Set(catalog.flatMap(\.equipment))).filter { $0 != "None" }.sorted() }
-    var estimatedMinutes: Int { ((variant?.estimatedSeconds ?? 0) + 59) / 60 }
+    var estimatedMinutes: Int { (assessment.estimatedSeconds + 59) / 60 }
     var dayLabel: String { (variant?.createdAt ?? now()).formatted(date: .abbreviated, time: .omitted) }
     var gaps: [String] {
         if configuration.targetMuscleGroups.isEmpty { return [String(localized: .uiSelectMuscleGroups)] }
-        return (variant?.uncoveredNeeds ?? []).map(SmartNeedLabel.label)
+        return assessment.gaps.map(SmartNeedLabel.label)
     }
 
     private var draft: SmartSelectionDraft {
@@ -120,9 +138,7 @@ final class SmartSelectionViewModel {
     }
 
     func toggleTarget(_ target: String) {
-        if configuration.targetMuscleGroups.contains(target) {
-            configuration.targetMuscleGroups.removeAll { $0 == target }
-        } else { configuration.targetMuscleGroups.append(target) }
+        configuration.targetMuscleGroups = SmartTargetPolicy().toggling(target, in: configuration.targetMuscleGroups)
     }
 
     func toggleEquipment(_ value: String) {
@@ -151,6 +167,7 @@ final class SmartSelectionViewModel {
             if next.configuration != configuration {
                 next.configuration = configuration
                 next.revision = UUID()
+                next.mainExerciseNames = []
             }
             let daily: SmartDailyVariant
             if let variant, variant.settingsRevision == next.revision, variant.localDay == SmartPlanningClock().localDay(at: now()) {
@@ -181,7 +198,9 @@ final class SmartSelectionViewModel {
     }
 
     func save() async -> WorkoutSnapshot? {
-        guard canStart, let settings, let variant, settings.configuration == configuration else { return nil }
+        guard canStart, let settings, var variant, settings.configuration == configuration else { return nil }
+        variant.estimatedSeconds = assessment.estimatedSeconds
+        variant.uncoveredNeeds = assessment.gaps
         isBusy = true
         errorMessage = nil
         defer { isBusy = false }
@@ -198,6 +217,7 @@ final class SmartSelectionViewModel {
             try await workouts.save(saved)
             try await variants.save(variant)
             template = saved
+            self.variant = variant
             self.settings = settings
             savedDraft = draft
             preferences.smartLevel = configuration.level
@@ -209,19 +229,43 @@ final class SmartSelectionViewModel {
         }
     }
 
-    func replace(_ itemID: UUID, with exercise: ExerciseSnapshot, confirmingLoads: Bool = false) async {
+    func replace(_ itemID: UUID, with exercise: ExerciseSnapshot) async {
         guard !isBusy, var daily = variant,
               let index = daily.items.firstIndex(where: { $0.id == itemID }),
-              SmartSelectionGenerator().isEligible(exercise, configuration: configuration, ignoringLoads: confirmingLoads) else { return }
+              SmartSelectionGenerator().isEligible(exercise, configuration: configuration) else { return }
         daily.items[index].exercise = exercise
-        daily.estimatedSeconds = SmartPrescription().seconds(daily.items)
-        daily.uncoveredNeeds = SmartSelectionGenerator().uncoveredNeeds(configuration: configuration, items: daily.items)
-        if daily.estimatedSeconds > configuration.durationMinutes * 60 { daily.uncoveredNeeds.append("time") }
+        daily.acceptedShortPlan = nil
+        await updateDaily(daily)
+    }
+
+    func moveMovement(_ id: UUID, to targetID: UUID) async {
+        guard !isBusy, var daily = variant,
+              let from = daily.items.firstIndex(where: { $0.id == id }),
+              let to = daily.items.firstIndex(where: { $0.id == targetID }), from != to else { return }
+        daily.items.insert(daily.items.remove(at: from), at: to)
+        for index in daily.items.indices { daily.items[index].order = index }
+        // The final rest changes when the last exercise changes, so reassess time acceptance.
+        if SmartPrescription().seconds(daily.items) != assessment.estimatedSeconds { daily.acceptedShortPlan = nil }
+        await updateDaily(daily)
+    }
+
+    func acceptShortPlan() async {
+        guard !isBusy, needsShortPlanAcceptance, var daily = variant else { return }
+        daily.acceptedShortPlan = true
+        await updateDaily(daily)
+    }
+
+    private func updateDaily(_ daily: SmartDailyVariant) async {
+        var updated = daily
+        let checked = SmartPlanAssessment(configuration: configuration, items: updated.items)
+        updated.estimatedSeconds = checked.estimatedSeconds
+        updated.uncoveredNeeds = checked.gaps
         isBusy = true
+        errorMessage = nil
         defer { isBusy = false }
         do {
-            if template.smartSettings?.revision == daily.settingsRevision { try await variants.save(daily) }
-            variant = daily
+            if template.smartSettings?.revision == updated.settingsRevision { try await variants.save(updated) }
+            variant = updated
         } catch { errorMessage = String(localized: .uiCouldNotSaveSession) }
     }
 

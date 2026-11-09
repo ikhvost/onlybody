@@ -18627,31 +18627,31 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Орієнтовно, хв"
+            "value": "Орієнтовно"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Estimated minutes"
+            "value": "Estimated"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Szacowane minuty"
+            "value": "Szacowany czas"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Geschätzte Minuten"
+            "value": "Geschätzt"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Minutes estimées"
+            "value": "Durée estimée"
           }
         }
       }
@@ -18869,34 +18869,34 @@
     "smartTimeHint": {
       "extractionState": "manual",
       "localizations": {
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Приблизний час підходів, відпочинку й переходів. Розминка — самостійно, поза цим часом."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Approximate time for sets, rest and transitions. Warm up separately, outside this time."
+            "value": "Smart aims for 90–100% of this time, including rests and transitions. Shorter plans need your confirmation."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Smart прагне заповнити 90–100% цього часу з відпочинком і переходами. Коротші плани потребують твого підтвердження."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Przybliżony czas serii, odpoczynku i przejść. Rozgrzewka osobno, poza tym czasem."
+            "value": "Smart dąży do 90–100% tego czasu, wliczając odpoczynek i przejścia. Krótsze plany wymagają potwierdzenia."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ungefähre Zeit für Sätze, Pausen und Wechsel. Separat aufwärmen, außerhalb dieser Zeit."
+            "value": "Smart strebt 90–100 % dieser Zeit inklusive Pausen und Wechseln an. Kürzere Pläne musst du bestätigen."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Durée estimée des séries, repos et transitions. Échauffement séparé, hors de cette durée."
+            "value": "Smart vise 90 à 100 % de cette durée, repos et transitions compris. Les plans plus courts nécessitent votre confirmation."
           }
         }
       }
@@ -20097,31 +20097,31 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Основні вправи залишаються. Допоміжні можуть змінюватися наступного дня."
+            "value": "Переставляй або замінюй вправи на сьогодні. Наступного дня Smart може оновити план."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Main exercises stay. Accessories may change on the next day."
+            "value": "Reorder or replace exercises for today. Smart may update your plan on the next day."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Główne ćwiczenia pozostają. Dodatkowe mogą zmienić się kolejnego dnia."
+            "value": "Zmień kolejność lub zamień ćwiczenia na dziś. Następnego dnia Smart może zaktualizować plan."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hauptübungen bleiben. Zusatzübungen können sich am nächsten Tag ändern."
+            "value": "Ordne Übungen für heute neu an oder ersetze sie. Am nächsten Tag kann Smart den Plan aktualisieren."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Les exercices principaux restent. Les compléments peuvent changer le lendemain."
+            "value": "Réorganisez ou remplacez les exercices du jour. Smart peut actualiser le plan le lendemain."
           }
         }
       }
@@ -20304,34 +20304,34 @@
     "smartGapHint": {
       "extractionState": "manual",
       "localizations": {
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Зміни час або умови, щоб скласти повне тренування. Обмеження залишаються чинними."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Change the time or preferences to complete the workout. Exclusions stay in force."
+            "value": "Your current choices do not provide enough suitable exercises for these targets. Change the targets, equipment or restrictions to build a plan."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "За поточного вибору недостатньо відповідних вправ для цих цілей. Зміни цілі, обладнання або обмеження, щоб скласти план."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zmień czas lub preferencje, aby uzupełnić trening. Wykluczenia nadal obowiązują."
+            "value": "Obecne ustawienia nie zapewniają wystarczającej liczby odpowiednich ćwiczeń. Zmień cele, sprzęt lub ograniczenia, aby utworzyć plan."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ändere Zeit oder Vorgaben für ein vollständiges Training. Ausschlüsse bleiben aktiv."
+            "value": "Mit dieser Auswahl gibt es nicht genügend passende Übungen für diese Ziele. Ändere Ziele, Ausrüstung oder Einschränkungen, um einen Plan zu erstellen."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Modifiez la durée ou les préférences pour compléter la séance. Les exclusions restent actives."
+            "value": "Vos choix actuels ne permettent pas de trouver assez d’exercices adaptés à ces objectifs. Modifiez les objectifs, l’équipement ou les restrictions pour créer un plan."
           }
         }
       }
@@ -21662,6 +21662,216 @@
           "stringUnit": {
             "state": "translated",
             "value": "Exclut les appuis sur les paumes, la prise de charges ou en suspension et les mouvements de poignet contre résistance."
+          }
+        }
+      }
+    },
+    "smartTargetRule": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose one preset or up to three individual muscle groups."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вибери один набір або до трьох окремих груп м’язів."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wybierz jeden zestaw lub maksymalnie trzy osobne grupy mięśni."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wähle eine Vorgabe oder bis zu drei einzelne Muskelgruppen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez un ensemble ou jusqu’à trois groupes musculaires distincts."
+          }
+        }
+      }
+    },
+    "smartInvalidTargets": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose one preset or up to three individual muscle groups to continue."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Щоб продовжити, вибери один набір або до трьох окремих груп м’язів."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aby kontynuować, wybierz jeden zestaw lub maksymalnie trzy osobne grupy mięśni."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wähle zum Fortfahren eine Vorgabe oder bis zu drei einzelne Muskelgruppen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour continuer, choisissez un ensemble ou jusqu’à trois groupes musculaires distincts."
+          }
+        }
+      }
+    },
+    "smartInsufficientVariety": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not enough different exercises to cover this training area."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Недостатньо різних вправ для охоплення вибраної частини тіла."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Za mało różnych ćwiczeń na wybraną część ciała."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht genügend unterschiedliche Übungen für diesen Körperbereich."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pas assez d’exercices différents pour couvrir cette zone du corps."
+          }
+        }
+      }
+    },
+    "smartConstraintMismatch": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Some exercises no longer match your level, equipment or restrictions."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Деякі вправи більше не відповідають рівню, обладнанню або обмеженням."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niektóre ćwiczenia nie pasują już do poziomu, sprzętu lub ograniczeń."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einige Übungen passen nicht mehr zu deinem Niveau, deiner Ausrüstung oder deinen Einschränkungen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Certains exercices ne correspondent plus à votre niveau, équipement ou restrictions."
+          }
+        }
+      }
+    },
+    "smartAcceptShortPlan": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use shorter plan"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Використати коротший план"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Użyj krótszego planu"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kürzeren Plan verwenden"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utiliser le plan plus court"
+          }
+        }
+      }
+    },
+    "smartShortPlanHint": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This plan covers your targets but is shorter than requested. Review the estimated time and choose whether to use it."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Цей план охоплює вибрані цілі, але коротший за запитаний час. Переглянь тривалість і виріши, чи використовувати його."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ten plan obejmuje wybrane cele, ale jest krótszy niż zaplanowano. Sprawdź czas i zdecyduj, czy go użyć."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dieser Plan deckt deine Ziele ab, ist aber kürzer als gewünscht. Prüfe die geschätzte Dauer und entscheide, ob du ihn nutzen möchtest."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce plan couvre vos objectifs, mais il est plus court que prévu. Vérifiez la durée estimée et choisissez de l’utiliser ou non."
           }
         }
       }

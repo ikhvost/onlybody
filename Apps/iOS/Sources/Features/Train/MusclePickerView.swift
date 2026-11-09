@@ -37,9 +37,14 @@ struct MusclePickerView: View {
                                 ) {
                                     viewModel.toggle(muscle)
                                 }
+                                .disabled(!viewModel.canToggle(muscle))
                                 .accessibilityIdentifier("picker.muscle.\(muscle)")
                             }
                         }
+
+                        Text(.smartTargetRule)
+                            .font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.text2)
+                            .padding(.top, Theme.space12)
 
                         if !viewModel.selectedMuscles.isEmpty {
                             Text(viewModel.selectionSummary)
