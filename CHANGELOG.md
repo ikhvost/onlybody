@@ -3,30 +3,6 @@
 Changes for OnlyBody and OnlyWeights, newest version first. Record the app version,
 build number when assigned and user-facing changes for each update.
 
-## 2.1.0 — Build 4
-
-### Added
-
-- Smart Selection builds a workout for your available time, training level,
-  target muscles and equipment. Choose the body areas and exercises you want
-  to leave out, and save the setup to reuse on scheduled days.
-- Preview the day's workout before starting. Reorder or replace exercises and
-  adjust sets, reps, weight and rest without changing the saved setup.
-- See the active workout and rest countdown on the Lock Screen and in the
-  Dynamic Island on supported iPhones. Enable rest alerts in Settings to get
-  notified when it's time for the next set, even with the screen locked.
-
-### Improved
-
-- Smart workouts appear alongside scheduled sessions under Today. The overview
-  shows the estimated duration and muscles trained, and tells you when your
-  selections only allow a shorter workout.
-- Use the same exercise cards and replacement picker before and during Smart
-  workouts, with replacement options that account for your workout settings.
-
-[App Store release notes in five languages](Assets/Marketing/Releases/2.1.0/README.md)
-apply to both apps.
-
 ## 2.0.0 — Source checkpoint
 
 ### Added
