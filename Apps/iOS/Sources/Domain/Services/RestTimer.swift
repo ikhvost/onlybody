@@ -9,8 +9,8 @@ final class RestTimer {
     private(set) var nextExerciseName = ""
 
     private let time: any WorkoutTimeSource
-    private let onFinished: @MainActor () -> Void
-    private var deadline: Date?
+    @ObservationIgnored var onFinished: @MainActor () -> Void
+    private(set) var deadline: Date?
     private var task: Task<Void, Never>?
 
     init(time: any WorkoutTimeSource = SystemWorkoutTimeSource(), onFinished: @escaping @MainActor () -> Void = {}) {
@@ -28,23 +28,28 @@ final class RestTimer {
         task = Task { [weak self, time] in
             while !Task.isCancelled {
                 do { try await time.sleep(for: .seconds(1)) } catch { return }
-                guard !Task.isCancelled, let self, let deadline = self.deadline else { return }
-                remainingSeconds = max(0, Int(ceil(deadline.timeIntervalSince(time.now))))
-                if remainingSeconds == 0 {
-                    isActive = false
-                    task = nil
-                    onFinished()
-                    return
-                }
+                guard !Task.isCancelled, let self else { return }
+                synchronize()
             }
         }
     }
 
     /// Extends the actual deadline, including elapsed time since the last tick.
     func add(seconds: Int) {
-        guard isActive, seconds > 0, let deadline else { return }
-        self.deadline = deadline.addingTimeInterval(TimeInterval(seconds))
-        remainingSeconds = max(0, Int(ceil((self.deadline ?? deadline).timeIntervalSince(time.now))))
+        synchronize()
+        guard seconds > 0, let deadline else { return }
+        let extended = deadline.addingTimeInterval(TimeInterval(seconds))
+        self.deadline = extended
+        remainingSeconds = max(0, Int(ceil(extended.timeIntervalSince(time.now))))
+    }
+
+    /// Reconciles the display after suspension and finishes the current rest at most once.
+    func synchronize() {
+        guard let deadline else { return }
+        remainingSeconds = max(0, Int(ceil(deadline.timeIntervalSince(time.now))))
+        guard remainingSeconds == 0 else { return }
+        skip()
+        onFinished()
     }
 
     func skip() {

@@ -178,6 +178,7 @@ enum AppTab: Hashable { case train, log, library }
 
 ## SwiftData Instructions
 
+- **App Store data safety:** If a proposed database change could cause data loss, corruption, or compatibility issues for existing users, explain the risks and the proposed migration and verification plan to the project owner, and get explicit approval before implementing the change.
 - On-device only — `@Attribute(.unique)` is safe and should be used.
 - All model properties must have default values OR be optional.
 - Relationships must be optional when the related object may be deleted independently.

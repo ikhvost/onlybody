@@ -4,6 +4,7 @@ struct SettingsView: View {
     @Bindable var viewModel: SettingsViewModel
     let onNotifications: () -> Void
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         ZStack {
@@ -31,6 +32,18 @@ struct SettingsView: View {
                     VStack(alignment: .leading, spacing: Theme.space28) {
                         SettingsSection(title: String(localized: .uiTraining)) {
                             SettingsSoundToggle(isEnabled: $viewModel.isTimerSoundEnabled)
+                            if viewModel.showsRestAlertSettings {
+                                Button {
+                                    Task { await viewModel.showNotificationSettings() }
+                                } label: {
+                                    Text(.uiEnableLockScreenRestSound)
+                                        .font(Theme.fontSans(Theme.typeMeta))
+                                        .foregroundStyle(Theme.accent)
+                                        .frame(minHeight: Theme.touchSize)
+                                }
+                                .buttonStyle(.plain)
+                                .padding(.horizontal, Theme.cardInset)
+                            }
                             Rectangle().fill(Theme.border).frame(height: Theme.dividerThickness)
                             SettingsNotificationsLink(action: onNotifications)
                             Rectangle().fill(Theme.border).frame(height: Theme.dividerThickness)
@@ -88,6 +101,9 @@ struct SettingsView: View {
         }
         .background(BackSwipeBridge().allowsHitTesting(false))
         .toolbar(.hidden, for: .navigationBar)
+        .task(id: scenePhase) {
+            if scenePhase == .active { await viewModel.refreshRestAlertStatus() }
+        }
     }
 }
 

@@ -10,7 +10,10 @@ final class ActiveWorkoutViewModel {
     private let preferences: WorkoutPreferences
     private let alwaysShowsWeight: Bool
     private let time: any WorkoutTimeSource
-    private let stopRestCue: @MainActor () -> Void
+    private let restAlerts: WorkoutRestAlerts
+    private let liveActivity: (any WorkoutLiveActivity)?
+    private var restOrigin: WorkoutSetID?
+    private var restStartedAt: Date?
     private var startedAt: Date?
     private var finishedAt: Date?
     private var hasLoaded = false
@@ -48,10 +51,7 @@ final class ActiveWorkoutViewModel {
     var currentTargetReps: Int { currentItem?.targetReps ?? 0 }
     var currentSetIndex: Int {
         guard let item = currentItem else { return 0 }
-        var index = 0
-        let completed = Set(rows.filter { $0.key.itemID == item.id && $0.value.isDone }.map { $0.key.index })
-        while completed.contains(index) { index += 1 }
-        return min(index, max(0, item.sets - 1))
+        return firstIncompleteSet(for: item) ?? max(0, item.sets - 1)
     }
     var currentKey: WorkoutSetID { WorkoutSetID(itemID: viewedItemID ?? workoutId, index: currentSetIndex) }
     var completedSets: [WorkoutSetID: Int] { rows.filter { $0.value.isDone }.mapValues(\.reps) }
@@ -68,8 +68,19 @@ final class ActiveWorkoutViewModel {
     }
     var isRestActive: Bool { restTimer.isActive }
     var remainingRestSeconds: Int { restTimer.remainingSeconds }
-    func extendRest() { restTimer.add(seconds: 15) }
-    func skipRest() { stopRestCue(); restTimer.skip() }
+    func extendRest() {
+        restTimer.add(seconds: 15)
+        guard let deadline = restTimer.deadline else { return }
+        restAlerts.setDeadline(deadline)
+        publishActivity()
+    }
+
+    func skipRest() {
+        cancelRest()
+        publishActivity()
+    }
+
+    func synchronizeRest() { restTimer.synchronize() }
     var weightUnitSymbol: String { preferences.weightUnit.rawValue }
     var currentWeight: Double { row(currentKey).weightKg }
     var displayedWeight: Double { preferences.weightUnit.value(fromKilograms: currentWeight) }
@@ -79,8 +90,8 @@ final class ActiveWorkoutViewModel {
         workouts: any WorkoutRepository, sessions: any SessionRepository, workoutId: UUID,
         exercises: (any ExerciseRepository)? = nil,
         time: any WorkoutTimeSource = SystemWorkoutTimeSource(), preferences: WorkoutPreferences = WorkoutPreferences(),
-        alwaysShowsWeight: Bool = false, reviewedWorkout: WorkoutSnapshot? = nil, playRestCue: @escaping @MainActor () -> Void = {},
-        stopRestCue: @escaping @MainActor () -> Void = {}
+        alwaysShowsWeight: Bool = false, reviewedWorkout: WorkoutSnapshot? = nil,
+        restAlerts: WorkoutRestAlerts? = nil, liveActivity: (any WorkoutLiveActivity)? = nil
     ) {
         self.reviewedWorkout = reviewedWorkout
         self.workoutsRepository = workouts
@@ -90,8 +101,10 @@ final class ActiveWorkoutViewModel {
         self.time = time
         self.preferences = preferences
         self.alwaysShowsWeight = alwaysShowsWeight
-        self.restTimer = RestTimer(time: time) { if preferences.isTimerSoundEnabled { playRestCue() } }
-        self.stopRestCue = stopRestCue
+        self.restAlerts = restAlerts ?? WorkoutRestAlerts(time: time, isEnabled: { preferences.isTimerSoundEnabled })
+        self.liveActivity = liveActivity
+        self.restTimer = RestTimer(time: time)
+        restTimer.onFinished = { [weak self] in self?.restDidFinish() }
     }
 
     private let reviewedWorkout: WorkoutSnapshot?
@@ -132,6 +145,8 @@ final class ActiveWorkoutViewModel {
         showsExerciseList = false
         startedAt = time.now
         startElapsedTimer()
+        liveActivity?.start(sessionID: sessionID, workoutName: workoutName, state: activityState())
+        restAlerts.prepare()
     }
 
     func showExercise(_ id: UUID) {
@@ -244,6 +259,7 @@ final class ActiveWorkoutViewModel {
         previousOccurrence[id] = 0
         rows = rows.filter { $0.key.itemID != id }
         revealedWeightExercises.remove(id)
+        publishActivity()
     }
 
     /// Explicit future-only edit. The active list and completed sets remain untouched.
@@ -277,12 +293,58 @@ final class ActiveWorkoutViewModel {
         draft.isDone.toggle()
         rows[id] = draft
         if draft.isDone {
-            stopRestCue()
-            restTimer.start(seconds: item.restSeconds)
             if currentItemID == id.itemID, completedCount(for: item.id) == item.sets { advance(after: item.id) }
+            if allSetsCompleted {
+                cancelRest()
+                showsExerciseList = true
+            } else {
+                startRest(after: id, seconds: item.restSeconds)
+            }
+        } else if restOrigin == id {
+            cancelRest()
         }
         if currentItemID == nil, !allSetsCompleted { currentItemID = items.first { completedCount(for: $0.id) < $0.sets }?.id }
-        if allSetsCompleted { showsExerciseList = true }
+        publishActivity()
+    }
+
+    private func startRest(after id: WorkoutSetID, seconds: Int) {
+        restTimer.start(seconds: seconds)
+        restOrigin = restTimer.isActive ? id : nil
+        restStartedAt = restTimer.deadline?.addingTimeInterval(-TimeInterval(seconds))
+        restAlerts.setDeadline(restTimer.deadline)
+    }
+
+    private func cancelRest() {
+        restTimer.skip()
+        restOrigin = nil
+        restStartedAt = nil
+        restAlerts.setDeadline(nil)
+    }
+
+    private func restDidFinish() {
+        restStartedAt = nil
+        restAlerts.restDidFinish()
+        publishActivity()
+    }
+
+    private func firstIncompleteSet(for item: WorkoutItemSnapshot) -> Int? {
+        guard item.sets > 0 else { return nil }
+        return (0..<item.sets).first { rows[WorkoutSetID(itemID: item.id, index: $0)]?.isDone != true }
+    }
+
+    private func activityState() -> WorkoutActivityState {
+        let item = items.first { $0.id == currentItemID }
+        let setNumber = item.flatMap { firstIncompleteSet(for: $0) }.map { $0 + 1 }
+        let name = item?.exercise.map { String($0.displayName.prefix(100)) }
+        return WorkoutActivityState(
+            exerciseName: name, setNumber: setNumber, totalSets: item?.sets, allSetsCompleted: allSetsCompleted,
+            restStartedAt: restStartedAt, restDeadline: restTimer.deadline
+        )
+    }
+
+    private func publishActivity() {
+        guard hasStarted, canEdit, let liveActivity else { return }
+        liveActivity.update(activityState())
     }
 
     private func advance(after id: UUID) {
@@ -307,9 +369,11 @@ final class ActiveWorkoutViewModel {
     }
 
     func cleanup() {
-        stopRestCue()
         elapsedTask?.cancel()
-        restTimer.skip()
+        if hasStarted {
+            cancelRest()
+            liveActivity?.end()
+        }
         // saveTask intentionally not cancelled — in-flight save must complete.
     }
 
@@ -325,10 +389,10 @@ final class ActiveWorkoutViewModel {
 
     func endSession() async {
         guard hasStarted, !items.isEmpty, !isDiscarded, !hasInvalidNumbers else { return }
-        stopRestCue()
         isComplete = true
         finishTiming()
-        restTimer.skip()
+        cancelRest()
+        liveActivity?.end()
         beginSave()
         await saveTask?.value
     }

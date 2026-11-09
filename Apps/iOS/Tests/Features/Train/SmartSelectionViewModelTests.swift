@@ -198,16 +198,26 @@ struct SmartSelectionViewModelTests {
             exerciseName: exercise.name, setReps: [42], weightKg: 55, setWeightsKg: [55])])]
         let time = ManualWorkoutTimeSource()
         time.now = Calendar.current.startOfDay(for: Date()).addingTimeInterval(86_390)
+        let liveActivity = MockWorkoutLiveActivity()
         let active = ActiveWorkoutViewModel(workouts: workouts, sessions: sessions, workoutId: reviewed.id,
-                                            time: time, reviewedWorkout: reviewed)
+                                            time: time, reviewedWorkout: reviewed, liveActivity: liveActivity)
         await active.load()
         #expect(active.items == reviewed.items)
         #expect(active.row(WorkoutSetID(itemID: item.id, index: 0)).weightKg == 0)
         #expect(active.row(WorkoutSetID(itemID: item.id, index: 0)).reps == 8)
-        active.beginSession()
+        #expect(active.hasStarted)
+        #expect(liveActivity.workoutName == reviewed.name)
+        #expect(liveActivity.states.last?.exerciseName == exercise.displayName)
+        #expect(liveActivity.states.last?.setNumber == 1)
+        active.markSetDone()
+        #expect(liveActivity.states.last?.setNumber == 2)
+        #expect(liveActivity.states.last?.restDeadline == time.now.addingTimeInterval(TimeInterval(item.restSeconds)))
         time.advance(seconds: 120)
+        active.synchronizeRest()
         await active.load()
         #expect(active.items == reviewed.items)
+        #expect(liveActivity.states.last?.restDeadline == nil)
         active.cleanup()
+        #expect(liveActivity.hasEnded)
     }
 }

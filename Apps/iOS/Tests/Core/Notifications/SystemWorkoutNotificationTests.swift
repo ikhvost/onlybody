@@ -9,6 +9,22 @@ import Testing
 
 @MainActor
 struct SystemWorkoutNotificationTests {
+    @Test func restAlertUsesOneShotDeadlineAndItsOwnIdentifier() throws {
+        let now = Date(timeIntervalSince1970: 1_700_000_000)
+        let id = WorkoutRestAlerts.requestPrefix + UUID().uuidString
+        let request = try #require(SystemWorkoutNotificationClient.restNotificationRequest(
+            id: id, deadline: now.addingTimeInterval(45), now: now
+        ))
+        let trigger = try #require(request.trigger as? UNTimeIntervalNotificationTrigger)
+        #expect(request.identifier == id)
+        #expect(!WorkoutReminderRequest.identifiers.contains(request.identifier))
+        #expect(!trigger.repeats)
+        #expect(trigger.timeInterval == 45)
+        #expect(request.content.sound == UNNotificationSound(named: UNNotificationSoundName("rest-complete.wav")))
+        #expect(request.content.interruptionLevel == .active)
+        #expect(SystemWorkoutNotificationClient.restNotificationRequest(id: id, deadline: now, now: now) == nil)
+    }
+
     @Test func requestUsesWeeklyLocalTimeAndSystemSoundWithoutBadge() throws {
         let planned = WorkoutReminderRequest(weekday: 7, time: WorkoutReminderTime(minutes: 795))
         let request = SystemWorkoutNotificationClient.notificationRequest(for: planned)

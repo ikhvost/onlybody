@@ -17,6 +17,15 @@ for product in ('OnlyBody', 'OnlyWeights'):
     assert info.get('CFBundlePackageType') == 'APPL', f'{product}: invalid application package type'
     assert info.get('UIDeviceFamily') == [1], f'{product}: release must target iPhone only'
     assert info['UILaunchStoryboardName'] == 'LaunchScreen', product
+    assert info.get('NSSupportsLiveActivities') is True, product
+    extensions = list((bundle / 'PlugIns').glob('*.appex'))
+    assert [extension.name for extension in extensions] == [f'{product.lower()}WorkoutActivity.appex'], extensions
+    extension_info = plistlib.loads((extensions[0] / 'Info.plist').read_bytes())
+    assert extension_info['CFBundleIdentifier'] == f'{info["CFBundleIdentifier"]}.WorkoutActivity', product
+    assert extension_info['NSExtension']['NSExtensionPointIdentifier'] == 'com.apple.widgetkit-extension', product
+    for key in ('CFBundleShortVersionString', 'CFBundleVersion'):
+        assert extension_info[key] == info[key], (product, key)
+    assert (bundle / 'rest-complete.wav').is_file(), product
     stores = list(bundle.rglob('*.store'))
     assert len(stores) == 1, stores
     expected = ROOT / f'Apps/iOS/Products/{product}/Resources/SeedStore/default.store'
@@ -36,5 +45,5 @@ for product in ('OnlyBody', 'OnlyWeights'):
                 f'OnlyWeights: missing Release video {video_id}'
         assert not list(bundle.rglob('onlyweights-candidates.json')), 'Review register must not ship'
         print(f'OnlyWeights: all {len(video_ids)} catalog video IDs are present in Release binaries.')
-    print(f'{product}: bundle identity, icon, launch screen and isolated seed verified.')
+    print(f'{product}: bundle identity, icon, launch screen, Live Activity, rest sound and isolated seed verified.')
 assert icons[0] != icons[1], 'Products must have different icons'

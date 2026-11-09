@@ -1,6 +1,8 @@
 import SwiftUI
+import WidgetKit
 
 struct ActiveWorkoutRootView: View {
+    @Environment(\.scenePhase) private var scenePhase
     let composition: AppComposition
     let viewModel: ActiveWorkoutViewModel
     let onEnd: () -> Void
@@ -28,5 +30,12 @@ struct ActiveWorkoutRootView: View {
             }
         }
         .font(Theme.fontSans(Theme.typeBody))
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active { viewModel.synchronizeRest() }
+        }
+        .onContinueUserActivity(NSUserActivityTypeLiveActivity) { _ in
+            path.removeAll()
+            viewModel.resume()
+        }
     }
 }
