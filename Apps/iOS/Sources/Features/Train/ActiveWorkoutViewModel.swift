@@ -61,6 +61,13 @@ final class ActiveWorkoutViewModel {
     var hasInvalidNumbers: Bool { rows.values.contains { $0.invalidReps || $0.invalidWeight } }
     var canClose: Bool { saveState == .saved || saveState == .noCompletedSets }
     var canEdit: Bool { !isComplete && !isDiscarded && saveState == .idle }
+    var canAddSet: Bool {
+        hasStarted && canEdit && !hasInvalidNumbers && currentSetsTotal > 0 && currentSetsTotal < Int.max
+    }
+    var canRemoveLastSet: Bool {
+        guard hasStarted, canEdit, let item = currentItem, item.sets > 1 else { return false }
+        return !row(WorkoutSetID(itemID: item.id, index: item.sets - 1)).isDone
+    }
     var showsWeight: Bool {
         if alwaysShowsWeight || viewedItemID.map({ revealedWeightExercises.contains($0) }) == true { return true }
         guard let previous = currentItem.flatMap({ previousPerformance(for: $0) }) else { return false }
@@ -241,6 +248,37 @@ final class ActiveWorkoutViewModel {
 
     func revealWeight() { if let viewedItemID { revealedWeightExercises.insert(viewedItemID) } }
 
+    /// Extends only this session, copying committed numbers without completion or input state.
+    @discardableResult
+    func addSet() -> WorkoutSetID? {
+        guard canAddSet, let index = items.firstIndex(where: { $0.id == viewedItemID }) else { return nil }
+        let item = items[index]
+        let previous = row(WorkoutSetID(itemID: item.id, index: item.sets - 1))
+        let added = WorkoutSetID(itemID: item.id, index: item.sets)
+        items[index].sets += 1
+        rows[added] = WorkoutSetDraft(reps: previous.reps, weightKg: previous.weightKg)
+        if currentItemID == nil { currentItemID = item.id }
+        showsExerciseList = false
+        publishActivity()
+        return added
+    }
+
+    /// Never removes a completed row or searches earlier rows for a removable set.
+    func removeLastSet() {
+        guard canRemoveLastSet, let index = items.firstIndex(where: { $0.id == viewedItemID }) else { return }
+        let item = items[index]
+        rows.removeValue(forKey: WorkoutSetID(itemID: item.id, index: item.sets - 1))
+        items[index].sets -= 1
+        if currentItemID == item.id, completedCount(for: item.id) == items[index].sets {
+            advance(after: item.id, keepingViewedExercise: hasInvalidNumbers)
+        }
+        if allSetsCompleted {
+            cancelRest()
+            if !hasInvalidNumbers { showsExerciseList = true }
+        }
+        publishActivity()
+    }
+
     func completedCount(for id: UUID?) -> Int { rows.filter { $0.key.itemID == id && $0.value.isDone }.count }
     func canReplace(_ id: UUID) -> Bool { canEdit && completedCount(for: id) == 0 }
 
@@ -329,11 +367,11 @@ final class ActiveWorkoutViewModel {
         liveActivity.update(activityState())
     }
 
-    private func advance(after id: UUID) {
+    private func advance(after id: UUID, keepingViewedExercise: Bool = false) {
         guard let index = items.firstIndex(where: { $0.id == id }) else { return }
         let order = Array(items.dropFirst(index + 1)) + Array(items.prefix(index))
         currentItemID = order.first { completedCount(for: $0.id) < $0.sets }?.id
-        if let currentItemID { viewedItemID = currentItemID }
+        if let currentItemID, !keepingViewedExercise { viewedItemID = currentItemID }
     }
 
     private func contains(_ id: WorkoutSetID) -> Bool {

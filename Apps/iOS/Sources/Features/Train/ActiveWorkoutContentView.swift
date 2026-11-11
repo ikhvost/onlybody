@@ -5,6 +5,8 @@ struct ActiveWorkoutContentView: View {
     let onGuide: () -> Void
     let onHistory: () -> Void
     @FocusState private var focusedField: WorkoutSetField?
+    @State private var scrollPosition = ScrollPosition(idType: String.self)
+    @State private var pendingAddedSet: WorkoutSetID?
 
     var body: some View {
         VStack(spacing: Theme.space0) {
@@ -52,11 +54,32 @@ struct ActiveWorkoutContentView: View {
                                                 focusedField: $focusedField, onDismissKeyboard: dismissKeyboard)
                         }
                     }
+                    if viewModel.hasStarted {
+                        ActiveWorkoutSetActions(viewModel: viewModel) {
+                            dismissKeyboard()
+                            pendingAddedSet = viewModel.addSet()
+                        } onRemove: {
+                            dismissKeyboard()
+                            pendingAddedSet = nil
+                            viewModel.removeLastSet()
+                        }
+                        .id("active.set.actions")
+                    }
                     if viewModel.hasInvalidNumbers {
                         Text(.uiDesignNumberError).font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.danger)
                     }
-                }.padding(Theme.horizontalPadding)
-            }.scrollIndicators(.hidden).scrollDismissesKeyboard(.interactively)
+                }
+                .scrollTargetLayout()
+                .padding(Theme.horizontalPadding)
+            }
+            .scrollPosition($scrollPosition)
+            .scrollIndicators(.hidden).scrollDismissesKeyboard(.interactively)
+            .onChange(of: viewModel.currentSetsTotal) { old, new in
+                if new > old, pendingAddedSet != nil {
+                    scrollPosition.scrollTo(id: "active.set.actions", anchor: .bottom)
+                }
+                pendingAddedSet = nil
+            }
         }
         .background(KeyboardOutsideTapBridge(isEnabled: focusedField != nil, onDismiss: dismissKeyboard).allowsHitTesting(false))
         .background(BackActionSwipeBridge(isEnabled: !viewModel.hasInvalidNumbers, onBack: viewModel.showList).allowsHitTesting(false))
@@ -66,6 +89,10 @@ struct ActiveWorkoutContentView: View {
         }
         .onDisappear(perform: dismissKeyboard)
         .id(viewModel.viewedItemID)
+        .onChange(of: viewModel.viewedItemID) { _, _ in
+            pendingAddedSet = nil
+            scrollPosition = ScrollPosition(idType: String.self)
+        }
     }
 
     private func dismissKeyboard() {

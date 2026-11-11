@@ -518,7 +518,7 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertFalse(app.buttons["tab.train"].isHittable)
     }
 
-    private func createWorkout(sets: Int = 1, duration: String? = nil, rest: String? = nil) {
+    func createWorkout(sets: Int = 1, duration: String? = nil, rest: String? = nil) {
         tap("workout.create")
         tap("creation.manual")
         selectExercise()
@@ -603,7 +603,7 @@ final class WorkoutJourneyTests: XCTestCase {
         exercise.tap()
     }
 
-    private func verifyHistory(reps: Int, firstSetReps: Int? = nil) {
+    func verifyHistory(reps: Int, firstSetReps: Int? = nil) {
         tap("tab.log")
         let row = app.buttons["session.row"]
         XCTAssertTrue(row.waitForExistence(timeout: 10))
@@ -629,7 +629,7 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertTrue(app.buttons["library.exercise.\(JourneyProduct.libraryExercise)"].exists)
     }
 
-    private func dismissKeyboardOutside(_ field: XCUIElement) {
+    func dismissKeyboardOutside(_ field: XCUIElement) {
         XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 5))
         let target: XCUIElement
         if field.identifier.hasPrefix("active.set.") {
@@ -668,7 +668,7 @@ final class WorkoutJourneyTests: XCTestCase {
         XCTAssertEqual(weight.value as? String, "5")
     }
 
-    private func setValue(_ value: String, field: String, index: Int) {
+    func setValue(_ value: String, field: String, index: Int) {
         if field == "weight", app.buttons["active.addWeight"].exists { tap("active.addWeight") }
         let input = app.textFields["active.set.\(index).\(field)"]
         XCTAssertTrue(input.waitForExistence(timeout: 10))
