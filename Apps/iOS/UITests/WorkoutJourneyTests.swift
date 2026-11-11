@@ -564,28 +564,27 @@ final class WorkoutJourneyTests: XCTestCase {
     private func verifySmartTimeBudget() {
         tap("workout.create")
         tap("creation.smart")
-        tap("picker.muscle.Chest")
-        tap("picker.build")
+        tap("smart.target.Chest")
+        tap("smart.continue")
+        tap("smart.duration.15")
+        tap("smart.preview")
         let name = app.textFields["builder.name"]
         XCTAssertTrue(name.waitForExistence(timeout: 10))
-        XCTAssertFalse(app.buttons["builder.mode.smart"].exists)
-        XCTAssertFalse(app.buttons["builder.mode.manual"].exists)
-        name.tap()
-        name.typeText("Smart Budget")
+        name.coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.5)).tap()
+        let old = name.value as? String ?? ""
+        name.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: old.count) + "Smart Budget")
         dismissKeyboardOutside(name)
-        showTimingOptions()
-        tap("builder.duration")
-        app.pickerWheels.firstMatch.adjust(toPickerWheelValue: "60 min")
-        tap("timing.done")
-        let rows = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "builder.movement."))
-        let longCount = rows.count
-        tap("builder.duration")
-        app.pickerWheels.firstMatch.adjust(toPickerWheelValue: "15 min")
-        tap("timing.done")
-        XCTAssertGreaterThan(rows.count, 0)
-        XCTAssertLessThan(rows.count, longCount)
+        XCTAssertFalse(app.buttons["smart.acceptShortPlan"].exists)
+        XCTAssertTrue(app.buttons["builder.save"].isEnabled)
         tap("builder.save")
         XCTAssertTrue(app.buttons["workout.start.Smart Budget"].waitForExistence(timeout: 10))
+        app.terminate()
+        app.launch()
+        tap("workout.start.Smart Budget")
+        XCTAssertTrue(app.buttons["smart.start"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["smart.start"].isEnabled)
+        tap("smart.start")
+        XCTAssertTrue(app.buttons["active.set.0.done"].waitForExistence(timeout: 10))
     }
 
     private func selectExercise() {
@@ -706,8 +705,15 @@ final class WorkoutJourneyTests: XCTestCase {
             let save = app.buttons["builder.save"]
             let belowEditorFooter = identifier.hasPrefix("builder.") && identifier != "builder.save"
                 && !identifier.hasPrefix("builder.movement.") && save.exists && button.frame.maxY > save.frame.minY
-            if button.isHittable && !belowEditorFooter { break }
-            app.swipeUp()
+            let back = app.buttons["builder.back"]
+            let aboveEditorHeader = identifier.hasPrefix("builder.") && identifier != "builder.back"
+                && back.exists && back.isHittable && button.frame.minY < back.frame.maxY
+            if button.isHittable && !belowEditorFooter && !aboveEditorHeader { break }
+            if aboveEditorHeader {
+                app.swipeDown()
+            } else {
+                app.swipeUp()
+            }
         }
         XCTAssertTrue(button.isHittable, "Not reachable: \(identifier)\n\(app.debugDescription)")
         button.tap()

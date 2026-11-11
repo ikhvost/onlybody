@@ -9,6 +9,7 @@ struct BodyweightApp: App {
     let exercises: any ExerciseRepository
     let workouts: any WorkoutRepository
     let sessions: any SessionRepository
+    let smartVariants: any SmartDailyVariantRepository
     let preferences: WorkoutPreferences
     let reminders: WorkoutReminderCoordinator
     let systemNotifications: SystemWorkoutNotificationClient?
@@ -22,6 +23,7 @@ struct BodyweightApp: App {
             exercises = PreviewExerciseRepository()
             workouts = PreviewWorkoutRepository()
             sessions = PreviewSessionRepository()
+            smartVariants = PreviewSmartDailyVariantRepository()
             preferences = WorkoutPreferences()
             systemNotifications = nil
             restAlerts = nil
@@ -55,6 +57,7 @@ struct BodyweightApp: App {
             let config = ModelConfiguration(url: storeURL)
             let storeContainer = try ModelContainer(
                 for: Exercise.self, Workout.self, WorkoutItem.self, Session.self, SessionItem.self,
+                SmartWorkoutSettingsRecord.self, SmartDailyVariantRecord.self,
                 configurations: config
             )
             #if DEBUG
@@ -64,6 +67,7 @@ struct BodyweightApp: App {
             exercises = SwiftDataExerciseRepository(context: ModelContext(storeContainer), catalog: catalog)
             workouts = SwiftDataWorkoutRepository(context: ModelContext(storeContainer), catalog: catalog)
             sessions = SwiftDataSessionRepository(context: ModelContext(storeContainer))
+            smartVariants = SwiftDataSmartDailyVariantRepository(context: ModelContext(storeContainer))
             let system = SystemWorkoutNotificationClient()
             #if DEBUG
             let isolatedUITest = preferenceNamespace != nil
@@ -98,7 +102,7 @@ struct BodyweightApp: App {
         WindowGroup {
             AppContentView(composition: AppComposition(
                 configuration: configuration, exercises: exercises, workouts: workouts,
-                sessions: sessions, preferences: preferences, reminders: reminders,
+                sessions: sessions, preferences: preferences, reminders: reminders, smartVariants: smartVariants,
                 restAlerts: restAlerts, restNotifications: systemNotifications, liveActivity: liveActivity
             ))
             .task { await reminders.refresh() }

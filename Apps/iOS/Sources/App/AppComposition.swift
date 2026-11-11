@@ -10,6 +10,7 @@ struct AppComposition {
     let sessions: any SessionRepository
     let preferences: WorkoutPreferences
     let reminders: WorkoutReminderCoordinator
+    let smartVariants: any SmartDailyVariantRepository
     var restAlerts: WorkoutRestAlerts?
     var restNotifications: (any WorkoutRestNotificationClient)?
     var liveActivity: (any WorkoutLiveActivity)?
@@ -44,16 +45,24 @@ struct AppComposition {
             onScheduleChanged: { await reminders.refresh() }
         )
     }
+    func dailyBuilder(_ context: SmartEditorContext) -> SessionBuilderViewModel {
+        SessionBuilderViewModel(workouts: workouts, exercises: exercises, smartContext: context,
+                                onScheduleChanged: { await reminders.refresh() })
+    }
     func notifications() -> NotificationsViewModel {
         NotificationsViewModel(preferences: preferences, reminders: reminders, openSystemSettings: {
             guard let url = URL(string: UIApplication.openSettingsURLString) else { return false }
             return await UIApplication.shared.open(url)
         })
     }
-    func active(workoutID: UUID) -> ActiveWorkoutViewModel {
+    func smart(workoutID: UUID?, targets: [String] = [], opensPreview: Bool = false) -> SmartSelectionViewModel {
+        SmartSelectionViewModel(workouts: workouts, exercises: exercises, variants: smartVariants,
+            workoutID: workoutID, targets: targets, equipmentMode: configuration.smartEquipmentMode, opensPreview: opensPreview)
+    }
+    func active(workoutID: UUID, reviewedWorkout: WorkoutSnapshot? = nil) -> ActiveWorkoutViewModel {
         ActiveWorkoutViewModel(
             workouts: workouts, sessions: sessions, workoutId: workoutID, exercises: exercises,
-            preferences: preferences, alwaysShowsWeight: configuration.alwaysShowsWeight,
+            preferences: preferences, alwaysShowsWeight: configuration.alwaysShowsWeight, reviewedWorkout: reviewedWorkout,
             restAlerts: restAlerts, liveActivity: liveActivity
         )
     }

@@ -28,6 +28,7 @@ struct BuilderSmartInfo: View {
         }
     }
     private var smartInfoDescription: String {
+        if viewModel.isDailySmart { return String(localized: .smartDailyHint) }
         if viewModel.targetMuscleGroups.isEmpty {
             return String(localized: .uiSmartDescription)
         }

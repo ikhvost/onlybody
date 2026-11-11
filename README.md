@@ -21,6 +21,16 @@ Coding, architecture, navigation and testing rules live in [AGENTS.md](AGENTS.md
 
 Bundle IDs: `ikhvost.onlybody` and `ikhvost.onlyweights`. Both apps use `Documents/default.store` in separate sandboxes. Preserve existing model identities and user stores.
 
+## Smart Selection
+
+Smart starts with muscle groups, followed by duration, equipment and injury-region restrictions. It accepts one preset (`Full Body`, `Upper`, or `Lower`) or up to three individual muscle groups. The generated daily list opens in the same editor as a manual workout, with guides, adding/removing exercises, unrestricted replacement, ordering and editable sets, reps and rest.
+
+Automatic selection respects equipment, injury regions and legacy load restrictions. Coverage uses primary muscles. Sets range from 2–3; defaults are 3 × 10 with 90 seconds rest for main exercises and 2 × 12 with 60 seconds rest for accessories. There is no difficulty setting or permanent exercise exclusion. The generator still aims for the requested duration and retains its daily variation and main-exercise anchors.
+
+Manual edits apply only to the reviewed day. Any nonempty list with valid numbers can be saved or started, regardless of duration, original targets, equipment or injury restrictions. No short-plan confirmation is required and the editor never trims the list. Opening or editing does not write; Save/Start commits the workout and daily payload atomically. An open editor retains its day across midnight; a fresh opening resolves the new local day. Active sessions use a detached reviewed snapshot.
+
+The SwiftData schema and existing stores remain unchanged. Legacy level, excluded-exercise and acceptance fields are retained for payload compatibility but no longer control behavior. Cached lists, schedule, history and restriction settings remain available.
+
 ## Validation
 
 Run from the repository root:

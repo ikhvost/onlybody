@@ -1,7 +1,7 @@
 import Foundation
 
 /// Relative strength, balance and coordination demands for the named variation.
-nonisolated enum ExerciseDifficulty: String, CaseIterable, Sendable {
+nonisolated enum ExerciseDifficulty: String, CaseIterable, Sendable, Codable {
     case beginner
     case intermediate
     case advanced

@@ -19,6 +19,7 @@ struct PreviewWorkoutRepository: WorkoutRepository {
     func delete(by id: UUID) async throws {}
 
     func save(_ workout: WorkoutSnapshot) async throws {}
+    func save(_ workout: WorkoutSnapshot, dailyVariant: SmartDailyVariant) async throws {}
 
 }
 #endif

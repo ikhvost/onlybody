@@ -30,6 +30,9 @@ struct ActiveWorkoutContentView: View {
                     Text(viewModel.currentTargetReps > 0 ? String(localized: .uiTargetReps(viewModel.currentTargetReps))
                          : String(localized: .uiMaxHold))
                         .font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.text2)
+                    if viewModel.smartConfiguration != nil, let rule = viewModel.currentItem?.exercise?.smartMetadata?.repetitionRule, rule != .total {
+                        Text(rule.label).font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.accent)
+                    }
                     ActiveWorkoutExerciseActions(canShowGuide: viewModel.currentItem?.exercise != nil,
                                                  canShowHistory: !viewModel.currentExerciseName.isEmpty,
                                                  onGuide: onGuide, onHistory: onHistory).disabled(viewModel.hasInvalidNumbers)

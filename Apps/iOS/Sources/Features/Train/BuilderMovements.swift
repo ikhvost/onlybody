@@ -7,12 +7,12 @@ struct BuilderMovements: View {
     @Binding var dragLocation: CGPoint?
 
     var body: some View {
-        if viewModel.mode == .manual || !viewModel.movements.isEmpty {
+        if viewModel.mode == .manual || viewModel.isDailySmart || !viewModel.movements.isEmpty {
             VStack(alignment: .leading, spacing: Theme.space10) {
                 HStack {
                     MonoLabel(text: String(localized: .uiMovements), size: Theme.typeMeta, color: Theme.text2, tracking: 0.5)
                     Spacer()
-                    if viewModel.mode == .manual {
+                    if viewModel.mode == .manual || viewModel.isDailySmart {
                     Button {
                         isShowingExercisePicker = true
                     } label: {

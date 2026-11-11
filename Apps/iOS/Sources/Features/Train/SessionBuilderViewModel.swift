@@ -9,10 +9,20 @@ final class SessionBuilderViewModel {
     private let smartGenerator: SmartWorkoutGenerator
     private let onScheduleChanged: @MainActor () async -> Void
 
+    private var smartContext: SmartEditorContext?
+    var isDailySmart: Bool { smartContext != nil }
+    var canSave: Bool {
+        !isLoading && !isSaving && !hasInvalidNumbers && (!isDailySmart || !movements.isEmpty) && movements.allSatisfy {
+            (1...Int(Int32.max)).contains($0.sets) && (1...Int(Int32.max)).contains($0.reps)
+                && (0...Int(Int32.max)).contains($0.restSeconds)
+        }
+    }
+    var minimumRest: Int { isDailySmart ? 0 : 15 }
+    private(set) var savedWorkout: WorkoutSnapshot?
     private var isPopulating = false
     private var generatedConfiguration: SmartWorkoutConfiguration?
     private var initialDraft: BuilderDraft?
-    var hasUnsavedChanges: Bool { initialDraft != draft }
+    var hasUnsavedChanges: Bool { initialDraft != draft || smartContext?.requiresSave == true }
 
     private var draft: BuilderDraft {
         BuilderDraft(name: name, mode: mode, targets: Set(targetMuscleGroups),
@@ -41,10 +51,11 @@ final class SessionBuilderViewModel {
     let dayNames = Weekdays.shortNames
 
     var isEditMode: Bool {
-        editingWorkout != nil || requestedWorkoutID != nil
+        smartContext?.isExisting ?? (editingWorkout != nil || requestedWorkoutID != nil)
     }
 
     var estimatedDurationSeconds: Int {
+        if isDailySmart { return SmartPrescription().seconds(workoutItems) }
         let estimator = WorkoutDurationEstimator()
         return movements.reduce(0) { total, movement in
             estimator.adding(estimator.seconds(sets: movement.sets, reps: movement.reps, restSeconds: movement.restSeconds), to: total)
@@ -62,6 +73,7 @@ final class SessionBuilderViewModel {
         targetMuscleGroups: [String] = [],
         workoutID: UUID? = nil,
         generator: SmartWorkoutGenerator = SmartWorkoutGenerator(),
+        smartContext: SmartEditorContext? = nil,
         onScheduleChanged: @escaping @MainActor () async -> Void = {}
     ) {
         self.requestedWorkoutID = workoutID
@@ -69,10 +81,11 @@ final class SessionBuilderViewModel {
         self.exercisesRepository = exercises
         self.smartGenerator = generator
         self.onScheduleChanged = onScheduleChanged
-        self.editingWorkout = workout
+        self.smartContext = smartContext
+        self.editingWorkout = smartContext?.workout ?? workout
         self.targetMuscleGroups = targetMuscleGroups
 
-        if let workout {
+        if let workout = smartContext?.workout ?? workout {
             populateFrom(workout)
         } else if !targetMuscleGroups.isEmpty {
             mode = .smart
@@ -114,7 +127,7 @@ final class SessionBuilderViewModel {
     }
 
     func setDurationMinutes(_ value: Int) {
-        guard mode == .smart, WorkoutTimingOptions.durations.contains(value) else { return }
+        guard !isDailySmart, mode == .smart, WorkoutTimingOptions.durations.contains(value) else { return }
         durationMinutes = value
         refreshSmartMovements()
     }
@@ -165,7 +178,7 @@ final class SessionBuilderViewModel {
 
     func setRest(_ value: Int, forMovement id: UUID) {
         guard let index = movements.firstIndex(where: { $0.id == id }) else { return }
-        movements[index].restSeconds = max(15, value)
+        movements[index].restSeconds = max(minimumRest, value)
     }
 
     func numberText(_ field: String, movement: MovementConfig) -> String {
@@ -178,7 +191,7 @@ final class SessionBuilderViewModel {
     func enterNumber(_ text: String, field: String, id: UUID) {
         let key = "\(id).\(field)"
         numberInputs[key] = text
-        guard let value = WorkoutNumberParser().integer(text, minimum: field == "Rest" ? 15 : 1) else {
+        guard let value = WorkoutNumberParser().integer(text, minimum: field == "Rest" ? minimumRest : 1) else {
             numberErrors.insert(key)
             return
         }
@@ -194,7 +207,7 @@ final class SessionBuilderViewModel {
         guard let movement = movements.first(where: { $0.id == id }) else { return }
         let value = field == "Sets" ? movement.sets : field == "Reps" ? movement.reps : movement.restSeconds
         let step = field == "Rest" ? 15 : 1
-        let next = max(field == "Rest" ? 15 : 1, min(Int(Int32.max), value + (increasing ? step : -step)))
+        let next = max(field == "Rest" ? minimumRest : 1, min(Int(Int32.max), value + (increasing ? step : -step)))
         enterNumber(String(next), field: field, id: id)
     }
 
@@ -222,7 +235,7 @@ final class SessionBuilderViewModel {
     }
 
     func save() async -> Bool {
-        guard !isLoading, !isSaving, !hasInvalidNumbers, requestedWorkoutID == nil || editingWorkout != nil else { return false }
+        guard canSave, requestedWorkoutID == nil || editingWorkout != nil else { return false }
         isSaving = true
         errorMessage = nil
         defer { isSaving = false }
@@ -256,20 +269,20 @@ final class SessionBuilderViewModel {
             workout.scheduledDays = scheduledDays
             workout.targetMuscleGroups = targetMuscleGroups
 
-            var newItems: [WorkoutItemSnapshot] = []
-            for (index, movement) in movements.enumerated() {
-                var item = WorkoutItemSnapshot()
-                item.id = movement.id
-                item.order = index
-                item.sets = movement.sets
-                item.targetReps = movement.reps
-                item.restSeconds = movement.restSeconds
-                item.exercise = movement.exercise
-                newItems.append(item)
-            }
-            workout.items = newItems
+            workout.items = workoutItems
 
-            try await workoutsRepository.save(workout)
+            if var context = smartContext {
+                context.variant.items = workout.items
+                context.variant.estimatedSeconds = estimatedDurationSeconds
+                context.variant.uncoveredNeeds = []
+                try await workoutsRepository.save(workout, dailyVariant: context.variant)
+                smartContext = SmartEditorContext(workout: workout, variant: context.variant,
+                                                  isExisting: true, requiresSave: false)
+            } else {
+                try await workoutsRepository.save(workout)
+            }
+            savedWorkout = workout
+            editingWorkout = workout
             initialDraft = draft
             await onScheduleChanged()
             return true
@@ -280,7 +293,7 @@ final class SessionBuilderViewModel {
     }
 
     func refreshSmartMovements() {
-        guard !isPopulating, mode == .smart, !targetMuscleGroups.isEmpty, !allExercises.isEmpty else { return }
+        guard !isDailySmart, !isPopulating, mode == .smart, !targetMuscleGroups.isEmpty, !allExercises.isEmpty else { return }
         let config = SmartWorkoutConfiguration(targetMuscleGroups: targetMuscleGroups,
                                                durationMinutes: durationMinutes, restSeconds: restSeconds)
         guard generatedConfiguration != config || movements.isEmpty else {
@@ -297,7 +310,7 @@ final class SessionBuilderViewModel {
 
     /// Keeps complete exercises, preserving their IDs and edited parameters within the budget.
     func applySmartTimeBudget() {
-        guard mode == .smart else { return }
+        guard !isDailySmart, mode == .smart else { return }
         let estimator = WorkoutDurationEstimator()
         let budget = estimator.budget(minutes: durationMinutes)
         var total = 0
@@ -310,6 +323,13 @@ final class SessionBuilderViewModel {
         let remaining = Set(movements.map { $0.id.uuidString })
         numberInputs = numberInputs.filter { remaining.contains(String($0.key.prefix(36))) }
         numberErrors = numberErrors.filter { remaining.contains(String($0.prefix(36))) }
+    }
+
+    private var workoutItems: [WorkoutItemSnapshot] {
+        movements.enumerated().map { index, movement in
+            WorkoutItemSnapshot(id: movement.id, order: index, sets: movement.sets, targetReps: movement.reps,
+                                restSeconds: movement.restSeconds, exercise: movement.exercise)
+        }
     }
 
     private func populateFrom(_ workout: WorkoutSnapshot) {

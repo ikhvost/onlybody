@@ -13,7 +13,7 @@ struct SwiftDataWorkoutRepositoryTests {
         let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(
             for: Exercise.self,
-            Workout.self,
+            Workout.self, SmartWorkoutSettingsRecord.self, SmartDailyVariantRecord.self,
             WorkoutItem.self,
             configurations: configuration
         )
@@ -46,7 +46,7 @@ struct SwiftDataWorkoutRepositoryTests {
         let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(
             for: Exercise.self,
-            Workout.self,
+            Workout.self, SmartWorkoutSettingsRecord.self, SmartDailyVariantRecord.self,
             WorkoutItem.self,
             configurations: configuration
         )
@@ -100,7 +100,7 @@ struct SwiftDataWorkoutRepositoryTests {
         let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(
             for: Exercise.self,
-            Workout.self,
+            Workout.self, SmartWorkoutSettingsRecord.self, SmartDailyVariantRecord.self,
             WorkoutItem.self,
             configurations: configuration
         )

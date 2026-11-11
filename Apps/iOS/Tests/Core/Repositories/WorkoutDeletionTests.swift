@@ -15,7 +15,8 @@ struct WorkoutDeletionTests {
         defer { try? FileManager.default.removeItem(at: directory) }
         let url = directory.appending(path: "test.store")
         let container = try ModelContainer(
-            for: Exercise.self, Workout.self, WorkoutItem.self, Session.self, SessionItem.self,
+            for: Exercise.self, Workout.self, WorkoutItem.self,
+            SmartWorkoutSettingsRecord.self, SmartDailyVariantRecord.self, Session.self, SessionItem.self,
             configurations: ModelConfiguration(url: url))
         let exercises = SwiftDataExerciseRepository(context: ModelContext(container))
         let workouts = SwiftDataWorkoutRepository(context: ModelContext(container))
@@ -32,7 +33,8 @@ struct WorkoutDeletionTests {
         try await workouts.delete(by: workout.id)
 
         let reopened = try ModelContainer(
-            for: Exercise.self, Workout.self, WorkoutItem.self, Session.self, SessionItem.self,
+            for: Exercise.self, Workout.self, WorkoutItem.self,
+            SmartWorkoutSettingsRecord.self, SmartDailyVariantRecord.self, Session.self, SessionItem.self,
             configurations: ModelConfiguration(url: url))
         let context = ModelContext(reopened)
         #expect(try context.fetchCount(FetchDescriptor<Workout>()) == 0)

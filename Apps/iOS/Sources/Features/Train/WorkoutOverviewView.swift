@@ -22,16 +22,9 @@ struct WorkoutOverviewView: View {
             } else if let workout = viewModel.workout {
                 ScrollView {
                     VStack(alignment: .leading, spacing: Theme.sectionGap) {
-                        Text(workout.name).font(Theme.fontSans(Theme.typeHeading, .bold)).accessibilityIdentifier("overview.name")
-                        Text(workout.scheduledDays.map { CatalogLocalization.label($0) }.joined(separator: " · "))
-                            .foregroundStyle(Theme.text2)
-                        if !viewModel.summary.focus.isEmpty {
-                            VStack(alignment: .leading, spacing: Theme.space8) {
-                                Text(.uiDesignFocus).foregroundStyle(Theme.text2)
-                                Text(viewModel.summary.focus.map { CatalogLocalization.label($0) }.joined(separator: " · "))
-                                    .font(Theme.fontSans(Theme.typeCard, .bold)).foregroundStyle(Theme.accent)
-                            }
-                        }
+                        WorkoutOverviewHeader(name: workout.name,
+                            subtitle: workout.scheduledDays.map { CatalogLocalization.label($0) }.joined(separator: " · "),
+                            focus: viewModel.summary.focus, nameIdentifier: "overview.name")
                         HStack {
                             Text(.uiDesignPlannedSets)
                             Spacer()

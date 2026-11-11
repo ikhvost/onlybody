@@ -7,30 +7,22 @@ struct BuilderMovementCard: View {
     let reorderHandle: ExerciseReorderHandle
     @State private var showingEditor = false
     @State private var showingReplacement = false
+    @State private var original: MovementConfig?
+    @State private var committed = false
 
     var body: some View {
-        VStack(spacing: Theme.space8) {
-            HStack(spacing: Theme.space8) {
-                reorderHandle.accessibilityIdentifier("builder.drag.\(movement.id)")
-                Button { showingEditor = true } label: {
-                    VStack(alignment: .leading, spacing: Theme.space8) {
-                        Text(movement.exercise.displayName).font(Theme.fontSans(Theme.typeBody, .semibold)).foregroundStyle(Theme.text)
-                        Text(String(localized: .uiMovementSummary(movement.sets, movement.reps, movement.restSeconds)))
-                            .font(Theme.fontSans(Theme.type13)).foregroundStyle(Theme.text2)
-                    }.frame(maxWidth: .infinity, minHeight: Theme.touchSize, alignment: .leading)
-                }
-                .accessibilityIdentifier("builder.movement.\(movement.id)")
-                ExerciseReplaceButton(identifier: "builder.replace.\(movement.id)") {
-                    showingReplacement = true
-                }
-            }
-        }
-        .padding(Theme.cardInset).background(Theme.surface, in: .rect(cornerRadius: Theme.cornerRadius))
-        .buttonStyle(PressableButtonStyle(animates: false)).disabled(viewModel.hasInvalidNumbers || viewModel.isSaving)
-        .sheet(isPresented: $showingEditor) {
-            BuilderMovementEditor(viewModel: viewModel, movementID: movement.id)
+        WorkoutMovementCard(name: movement.exercise.displayName, sets: movement.sets, reps: movement.reps,
+                            restSeconds: movement.restSeconds, reorderHandle: reorderHandle,
+                            editIdentifier: "builder.movement.\(movement.id)", dragIdentifier: "builder.drag.\(movement.id)",
+                            replaceIdentifier: "builder.replace.\(movement.id)", onEdit: { original = movement; committed = false; showingEditor = true },
+                            onReplace: { showingReplacement = true })
+        .disabled(viewModel.hasInvalidNumbers || viewModel.isSaving)
+        .sheet(isPresented: $showingEditor, onDismiss: {
+            if committed { viewModel.applySmartTimeBudget() } else if let original { viewModel.restoreMovement(original) }
+        }, content: {
+            BuilderMovementEditor(viewModel: viewModel, movementID: movement.id, makeMovement: makeMovement, onCommit: { committed = true })
                 .presentationDetents([.large]).presentationDragIndicator(.visible)
-        }
+        })
         .sheet(isPresented: $showingReplacement) {
             ExercisePickerView(viewModel: ExercisePickerViewModel(exercises: viewModel.allExercises), makeMovement: makeMovement,
                                title: String(localized: .uiWorkoutReplace)) { exercise in

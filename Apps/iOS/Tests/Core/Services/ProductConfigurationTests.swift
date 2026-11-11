@@ -15,7 +15,7 @@ struct ProductConfigurationTests {
                 workouts: MockWorkoutRepository(), sessions: MockSessionRepository(), preferences: WorkoutPreferences(),
                 reminders: WorkoutReminderCoordinator(
                     preferences: WorkoutPreferences(), workouts: MockWorkoutRepository(), notifications: MockWorkoutNotificationClient()
-                )
+                ), smartVariants: MockSmartDailyVariantRepository()
             )
             #expect(composition.train().appName == configuration.displayName)
             #expect(composition.settings().appStoreReviewURL == configuration.appStoreReviewURL)
@@ -54,7 +54,7 @@ struct ProductConfigurationTests {
             workouts: MockWorkoutRepository(), sessions: MockSessionRepository(), preferences: WorkoutPreferences(),
             reminders: WorkoutReminderCoordinator(
                 preferences: WorkoutPreferences(), workouts: MockWorkoutRepository(), notifications: MockWorkoutNotificationClient()
-            )
+            ), smartVariants: MockSmartDailyVariantRepository()
         )
         let builder = composition.builder(workout: nil, targets: ["Quads"])
         await builder.loadExercises()

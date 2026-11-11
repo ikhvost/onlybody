@@ -90,9 +90,10 @@ final class ActiveWorkoutViewModel {
         workouts: any WorkoutRepository, sessions: any SessionRepository, workoutId: UUID,
         exercises: (any ExerciseRepository)? = nil,
         time: any WorkoutTimeSource = SystemWorkoutTimeSource(), preferences: WorkoutPreferences = WorkoutPreferences(),
-        alwaysShowsWeight: Bool = false, restAlerts: WorkoutRestAlerts? = nil,
-        liveActivity: (any WorkoutLiveActivity)? = nil
+        alwaysShowsWeight: Bool = false, reviewedWorkout: WorkoutSnapshot? = nil,
+        restAlerts: WorkoutRestAlerts? = nil, liveActivity: (any WorkoutLiveActivity)? = nil
     ) {
+        self.reviewedWorkout = reviewedWorkout
         self.workoutsRepository = workouts
         self.sessionsRepository = sessions
         self.exercisesRepository = exercises
@@ -106,13 +107,17 @@ final class ActiveWorkoutViewModel {
         restTimer.onFinished = { [weak self] in self?.restDidFinish() }
     }
 
+    private let reviewedWorkout: WorkoutSnapshot?
+    var smartConfiguration: SmartWorkoutConfiguration? { reviewedWorkout?.smartSettings?.configuration }
+
     func load() async {
         guard !isLoading, !hasLoaded else { return }
         isLoading = true
         errorMessage = nil
         defer { isLoading = false }
         do {
-            guard let workout = try await workoutsRepository.workout(by: workoutId) else {
+            let storedWorkout = reviewedWorkout == nil ? try await workoutsRepository.workout(by: workoutId) : nil
+            guard let workout = reviewedWorkout ?? storedWorkout else {
                 errorMessage = String(localized: .uiWorkoutNotFound)
                 return
             }
@@ -128,6 +133,7 @@ final class ActiveWorkoutViewModel {
             viewedItemID = items.first?.id
             await loadPreviousPerformances()
             hasLoaded = true
+            if reviewedWorkout != nil { beginSession() }
         } catch { errorMessage = String(localized: .uiCouldNotLoadWorkout) }
     }
 
@@ -159,6 +165,7 @@ final class ActiveWorkoutViewModel {
     func row(_ id: WorkoutSetID) -> WorkoutSetDraft {
         if let edited = rows[id] { return edited }
         guard let item = items.first(where: { $0.id == id.itemID }) else { return WorkoutSetDraft(reps: 0) }
+        if smartConfiguration != nil { return WorkoutSetDraft(reps: item.targetReps) }
         guard let previous = previousPerformance(for: item), !previous.setReps.isEmpty else {
             return WorkoutSetDraft(reps: item.targetReps)
         }

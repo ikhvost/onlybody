@@ -42,7 +42,7 @@ final class TrainViewModel {
         )
     }
 
-    init(workouts: any WorkoutRepository, appName: String, now: @escaping () -> Date = Date.init, calendar: Calendar = .current) {
+    init(workouts: any WorkoutRepository, appName: String, now: @escaping () -> Date = Date.init, calendar: Calendar = .autoupdatingCurrent) {
         self.now = now
         self.calendar = calendar
         self.workoutsRepository = workouts

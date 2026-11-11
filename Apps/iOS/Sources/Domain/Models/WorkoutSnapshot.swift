@@ -9,6 +9,7 @@ nonisolated struct WorkoutSnapshot: Identifiable, Sendable, Equatable {
     var scheduledDays: [String] = []
     var durationMinutes: Int?
     var restSeconds: Int?
+    var smartSettings: SmartWorkoutSettings?
     var items: [WorkoutItemSnapshot] = []
 
 }

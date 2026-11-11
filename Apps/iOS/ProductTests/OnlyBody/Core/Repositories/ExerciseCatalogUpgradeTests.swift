@@ -13,7 +13,8 @@ struct ExerciseCatalogUpgradeTests {
         defer { try? FileManager.default.removeItem(at: directory) }
         let storeURL = directory.appending(path: "existing.store")
         let container = try ModelContainer(
-            for: Exercise.self, Workout.self, WorkoutItem.self, Session.self, SessionItem.self,
+            for: Exercise.self, Workout.self, WorkoutItem.self,
+            SmartWorkoutSettingsRecord.self, SmartDailyVariantRecord.self, Session.self, SessionItem.self,
             configurations: ModelConfiguration(url: storeURL)
         )
         let context = ModelContext(container)
@@ -61,7 +62,8 @@ struct ExerciseCatalogUpgradeTests {
         #expect(try ModelContext(container).fetch(FetchDescriptor<Session>()).first?.workoutName == "My completed workout")
 
         let reopened = try ModelContainer(
-            for: Exercise.self, Workout.self, WorkoutItem.self, Session.self, SessionItem.self,
+            for: Exercise.self, Workout.self, WorkoutItem.self,
+            SmartWorkoutSettingsRecord.self, SmartDailyVariantRecord.self, Session.self, SessionItem.self,
             configurations: ModelConfiguration(url: storeURL)
         )
         let reopenedWorkouts = SwiftDataWorkoutRepository(context: ModelContext(reopened), catalog: catalog)
@@ -77,6 +79,7 @@ struct ExerciseCatalogUpgradeTests {
     @Test func failedWorkoutRollsBackOnDemandCatalogInsertion() async throws {
         let container = try ModelContainer(
             for: Exercise.self, Workout.self, WorkoutItem.self,
+            SmartWorkoutSettingsRecord.self, SmartDailyVariantRecord.self,
             configurations: ModelConfiguration(isStoredInMemoryOnly: true)
         )
         var valid = ExerciseSnapshot()

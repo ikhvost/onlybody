@@ -7,7 +7,7 @@ struct BuilderTiming: View {
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.space10) {
             HStack(spacing: Theme.space12) {
-                if viewModel.mode == .smart {
+                if viewModel.mode == .smart && !viewModel.isDailySmart {
                     Button { selectedField = .duration } label: {
                         VStack(alignment: .leading, spacing: Theme.space6) {
                             MonoLabel(text: String(localized: .uiDuration), size: Theme.typeMeta, color: Theme.text2)
@@ -40,7 +40,7 @@ struct BuilderTiming: View {
             }
             .buttonStyle(PressableButtonStyle(animates: false))
             .disabled(viewModel.isSaving)
-            if viewModel.mode == .smart {
+            if viewModel.mode == .smart && !viewModel.isDailySmart {
                 Text(.uiSmartTimeBudgetHint)
                     .font(Theme.fontSans(Theme.typeMeta))
                     .foregroundStyle(Theme.text2)

@@ -15,13 +15,14 @@ final class SwiftDataWorkoutRepository: WorkoutRepository {
 
     func allWorkouts() async throws -> [WorkoutSnapshot] {
         let descriptor = FetchDescriptor<Workout>(sortBy: [SortDescriptor(\Workout.name)])
-        return try context.fetch(descriptor).map { $0.snapshot() }
+        return try context.fetch(descriptor).map { try snapshot($0) }
     }
 
     func workout(by id: UUID) async throws -> WorkoutSnapshot? {
         var descriptor = FetchDescriptor<Workout>(predicate: #Predicate { $0.id == id })
         descriptor.fetchLimit = 1
-        return try context.fetch(descriptor).first?.snapshot()
+        guard let model = try context.fetch(descriptor).first else { return nil }
+        return try snapshot(model)
     }
 
     func delete(by id: UUID) async throws {
@@ -29,6 +30,12 @@ final class SwiftDataWorkoutRepository: WorkoutRepository {
             var descriptor = FetchDescriptor<Workout>(predicate: #Predicate { $0.id == id })
             descriptor.fetchLimit = 1
             guard let model = try context.fetch(descriptor).first else { return }
+            for record in try context.fetch(FetchDescriptor<SmartWorkoutSettingsRecord>(predicate: #Predicate { $0.workoutID == id })) {
+                context.delete(record)
+            }
+            for record in try context.fetch(FetchDescriptor<SmartDailyVariantRecord>(predicate: #Predicate { $0.workoutID == id })) {
+                context.delete(record)
+            }
             context.delete(model)
             try context.save()
         } catch {
@@ -38,12 +45,24 @@ final class SwiftDataWorkoutRepository: WorkoutRepository {
     }
 
     func save(_ value: WorkoutSnapshot) async throws {
+        try saveAggregate(value, dailyVariant: nil)
+    }
+
+    func save(_ value: WorkoutSnapshot, dailyVariant: SmartDailyVariant) async throws {
+        guard dailyVariant.workoutID == value.id, dailyVariant.settingsRevision == value.smartSettings?.revision,
+              dailyVariant.items == value.items else { throw PersistenceError.inconsistentDailyVariant }
+        try saveAggregate(value, dailyVariant: dailyVariant)
+    }
+
+    private func saveAggregate(_ value: WorkoutSnapshot, dailyVariant: SmartDailyVariant?) throws {
         do {
             let id = value.id
             var descriptor = FetchDescriptor<Workout>(predicate: #Predicate { $0.id == id })
             descriptor.fetchLimit = 1
             let model = try context.fetch(descriptor).first ?? Workout()
             if model.modelContext == nil { context.insert(model) }
+            try saveSettings(value.smartSettings, workoutID: value.id)
+            if let dailyVariant { try saveDailyVariant(dailyVariant) }
             model.id = value.id
             model.name = value.name
             model.mode = value.mode
@@ -71,6 +90,45 @@ final class SwiftDataWorkoutRepository: WorkoutRepository {
             context.rollback()
             throw error
         }
+    }
+
+    private func saveDailyVariant(_ variant: SmartDailyVariant) throws {
+        let key = variant.id
+        var descriptor = FetchDescriptor<SmartDailyVariantRecord>(predicate: #Predicate { $0.key == key })
+        descriptor.fetchLimit = 1
+        let record = try context.fetch(descriptor).first ?? SmartDailyVariantRecord()
+        if record.modelContext == nil { context.insert(record) }
+        record.key = key
+        record.workoutID = variant.workoutID
+        record.localDay = variant.localDay
+        record.settingsRevision = variant.settingsRevision
+        record.createdAt = variant.createdAt
+        record.payload = try JSONEncoder().encode(variant)
+    }
+
+    private func snapshot(_ model: Workout) throws -> WorkoutSnapshot {
+        var result = model.snapshot()
+        let id = model.id
+        var descriptor = FetchDescriptor<SmartWorkoutSettingsRecord>(predicate: #Predicate { $0.workoutID == id })
+        descriptor.fetchLimit = 1
+        if let record = try context.fetch(descriptor).first {
+            result.smartSettings = try JSONDecoder().decode(SmartWorkoutSettings.self, from: record.payload)
+        }
+        return result
+    }
+
+    private func saveSettings(_ settings: SmartWorkoutSettings?, workoutID: UUID) throws {
+        var descriptor = FetchDescriptor<SmartWorkoutSettingsRecord>(predicate: #Predicate { $0.workoutID == workoutID })
+        descriptor.fetchLimit = 1
+        let existing = try context.fetch(descriptor).first
+        guard let settings else {
+            if let existing { context.delete(existing) }
+            return
+        }
+        let record = existing ?? SmartWorkoutSettingsRecord()
+        if record.modelContext == nil { context.insert(record) }
+        record.workoutID = workoutID
+        record.payload = try JSONEncoder().encode(settings)
     }
 
     /// Materialize only a selected new catalog entry in the workout's atomic transaction.

@@ -11,7 +11,8 @@ import Testing
 struct ScreenshotStoreFixtureTests {
     @Test func demonstrationHistoryUsesCatalogExercisesAndDoesNotDuplicateOnRelaunch() async throws {
         let store = try ModelContainer(
-            for: Exercise.self, Workout.self, WorkoutItem.self, Session.self, SessionItem.self,
+            for: Exercise.self, Workout.self, WorkoutItem.self,
+            SmartWorkoutSettingsRecord.self, SmartDailyVariantRecord.self, Session.self, SessionItem.self,
             configurations: ModelConfiguration(isStoredInMemoryOnly: true)
         )
         let context = ModelContext(store)
@@ -42,7 +43,8 @@ struct ScreenshotStoreFixtureTests {
 
     @Test func screenshotFixturePreservesExistingWorkouts() throws {
         let store = try ModelContainer(
-            for: Exercise.self, Workout.self, WorkoutItem.self, Session.self, SessionItem.self,
+            for: Exercise.self, Workout.self, WorkoutItem.self,
+            SmartWorkoutSettingsRecord.self, SmartDailyVariantRecord.self, Session.self, SessionItem.self,
             configurations: ModelConfiguration(isStoredInMemoryOnly: true)
         )
         let context = ModelContext(store)
