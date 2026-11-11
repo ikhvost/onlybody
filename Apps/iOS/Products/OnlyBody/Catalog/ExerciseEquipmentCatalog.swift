@@ -14,5 +14,6 @@ nonisolated enum ExerciseEquipmentCatalog {
         "Gymnastic Rings",
         "Neutral-Grip Pull-up Bar",
         "Suspension Trainer",
+        "Ab Wheel",
     ]
 }

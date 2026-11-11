@@ -1772,5 +1772,23 @@
     "frequencyPreference": "normal",
     "difficulty": "intermediate",
     "isFullBody": false
+  },
+  {
+    "name": "Ab Wheel Rollout",
+    "primaryMuscle": "Core",
+    "primaryMuscles": [
+      "Core"
+    ],
+    "secondaryMuscles": [
+      "Serratus",
+      "Shoulders",
+      "Back"
+    ],
+    "equipment": [
+      "Ab Wheel"
+    ],
+    "frequencyPreference": "normal",
+    "difficulty": "advanced",
+    "isFullBody": false
   }
 ]

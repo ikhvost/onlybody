@@ -102,5 +102,6 @@ nonisolated enum ExerciseLocalizationCatalog {
         "Plank Up-Downs": .exercisePlankUpDowns,
         "Hollow Body Rocks": .exerciseHollowBodyRocks,
         "Reverse Plank": .exerciseReversePlank,
+        "Ab Wheel Rollout": .exerciseAbWheelRollout,
     ]
 }

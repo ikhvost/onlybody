@@ -50,7 +50,8 @@ Choose validation by the change:
 | Validation script only | Check shell syntax, run workflow and affected validator tests; use real Xcode commands only for unresolved concerns |
 | Local visual change with no behavior, navigation, accessibility semantics or data changes | Build affected product(s), run SwiftLint and inspect the affected screen in a preview or focused simulator capture |
 | ViewModel, service or repository logic | `quick`; add relevant functional UI journeys for interaction or navigation changes |
-| Catalog, seed, persistence/schema, product identity/build configuration, broad architecture change or release preparation | `full` |
+| New exercises within the existing schema and stable catalog keys | Regenerate metadata and the affected seed, then `quick`; complete the video checklist for added demonstrations |
+| Existing catalog key renames/removals, persistence/schema, product identity/build configuration, broad architecture change or release preparation | `full` |
 
 Both modes run lint, validator/workflow regression tests and catalog/boundary/localization checks for both products. `quick` (the default with no argument) runs unit/integration tests for both products. `full` includes all `quick` checks and adds functional UI tests, Release simulator builds, bundle isolation checks and temporary seed generation. Tests use the Functional plan; visual screenshot sets remain opt-in. `full` is used for higher-risk changes as well as release preparation; it does not create a distribution archive by itself.
 

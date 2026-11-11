@@ -38,14 +38,14 @@ struct ExerciseCatalogUpgradeTests {
 
         let repository = SwiftDataExerciseRepository(context: ModelContext(container), catalog: catalog)
         let all = try await repository.allExercises()
-        #expect(all.count == 99)
+        #expect(all.count == 100)
         #expect(all.first { $0.name == "Squats" }?.id == existing.id)
         #expect(all.first { $0.name == "Squats" }?.difficulty == .beginner)
         #expect(try context.fetchCount(FetchDescriptor<Exercise>()) == 1)
         #expect(workout.items?.first?.exercise?.id == existing.id)
         #expect(try context.fetchCount(FetchDescriptor<Session>()) == 1)
 
-        let newExercise = try #require(all.first { $0.name == "Bird Dog" })
+        let newExercise = try #require(all.first { $0.name == "Ab Wheel Rollout" })
         let workouts = SwiftDataWorkoutRepository(context: ModelContext(container), catalog: catalog)
         var value = WorkoutSnapshot()
         value.name = "With a new movement"

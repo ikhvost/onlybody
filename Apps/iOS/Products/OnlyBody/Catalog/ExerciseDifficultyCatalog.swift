@@ -101,5 +101,6 @@ nonisolated enum ExerciseDifficultyCatalog {
         "Plank Up-Downs": .intermediate,
         "Hollow Body Rocks": .advanced,
         "Reverse Plank": .intermediate,
+        "Ab Wheel Rollout": .advanced,
     ]
 }

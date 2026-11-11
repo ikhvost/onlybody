@@ -397,6 +397,10 @@ nonisolated enum ExerciseDemonstrationCatalog {
         ExerciseDemonstration(
             id: "reverse-plank", exerciseName: "Reverse Plank",
             videoID: "bnu5b61vqGQ", author: "Well+Good", startSeconds: 0
+        ),
+        ExerciseDemonstration(
+            id: "ab-wheel-rollout", exerciseName: "Ab Wheel Rollout",
+            videoID: "4HZCJLM5wBk", author: "OPEX Fitness", startSeconds: 0
         )
     ]
 

@@ -1,6 +1,6 @@
 # Exercise demonstration catalog
 
-All 99 OnlyBody seed exercises use the official YouTube IFrame player. Only IDs, author names and start offsets ship in the app; no video files are copied. The compiled catalog has stable media keys independent of seed UUIDs. Exercise name matching is exact.
+All 100 OnlyBody seed exercises use the official YouTube IFrame player. Only IDs, author names and start offsets ship in the app; no video files are copied. The compiled catalog has stable media keys independent of seed UUIDs. Exercise name matching is exact.
 
 ## Content review
 
@@ -29,6 +29,8 @@ Previews use static states and disable network loading. Automated tests exercise
 Use through the official player follows [YouTube Terms of Service](https://www.youtube.com/t/terms); the selection does not assert that the underlying videos have open-content licences. Preserve the [required minimum player functionality and client identity](https://developers.google.com/youtube/terms/required-minimum-functionality). State and error handling follow the [IFrame Player API](https://developers.google.com/youtube/iframe_api_reference) and [player parameters](https://developers.google.com/youtube/player_parameters).
 
 ## Catalog changes
+
+On 2026-11-11, OnlyBody gained the kneeling Ab Wheel Rollout with the existing OPEX Fitness demonstration from OnlyWeights. The [dated local review](Reviews/2026-11-11/onlybody-ab-wheel-rollout/REPORT.md) records current Share → Embed evidence and browser playback samples. The license label, full audiovisual inspection and physical-iPhone playback remain unconfirmed; its status is `browser-embed-and-visual-sample`. The integration and OnlyWeights catalog are unchanged.
 
 `onlyweights.json` generates all 105 demonstrations for both Debug and Release, using the existing official player, author caption and error handling. There is no separate Debug candidate array, runtime JSON loading or persistence change. The original 60 entries were introduced with `partial-review-user-deferred` following the user's 2026-10-25 decision. Machine Row and Barbell Upright Row were added on 2026-11-01 with `browser-embed-and-visual-sample` and a [dated partial review](Reviews/2026-11-01/REPORT.md): expanded descriptions, channel provenance, Share → Embed and visual browser samples were inspected. Their license labels, full audiovisual review and physical-iPhone playback remain unconfirmed; no new user deferral or completed review is claimed.
 

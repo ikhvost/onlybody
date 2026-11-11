@@ -398,5 +398,9 @@ nonisolated enum ExerciseMuscleCatalog {
             primary: ["Core", "Glutes"],
             secondary: ["Shoulders", "Triceps", "Hamstrings"],
             isFullBody: false),
+        "Ab Wheel Rollout": ExerciseMuscleProfile(
+            primary: ["Core"],
+            secondary: ["Serratus", "Shoulders", "Back"],
+            isFullBody: false),
     ]
 }

@@ -31,7 +31,7 @@ Without arguments, the metadata scripts still target OnlyBody. OnlyBody continue
 
 For validation, generate to a new `/tmp/*.store` path. Only replace a shipping seed for an intentional catalog update. Generation refuses stores containing workouts or sessions. WAL/SHM sidecars must not be committed or bundled.
 
-Complete the [video checklist](../ExerciseMedia/CHECKLIST.md) before media changes. Run `Scripts/validate.sh full` for both schemes after catalog changes; automated checks do not complete content review.
+Complete the [video checklist](../ExerciseMedia/CHECKLIST.md) before media changes. For new exercises within the existing schema and stable keys, regenerate the affected metadata and bundled seed, then run `Scripts/validate.sh quick` for both schemes. Existing key renames/removals and schema changes require `full`; automated checks do not complete content review.
 
 ## Stable exercise keys
 
