@@ -11,7 +11,6 @@
       "Wall"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Chest",
@@ -30,7 +29,6 @@
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Chest",
@@ -49,7 +47,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Chest",
@@ -68,7 +65,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Chest",
@@ -87,7 +83,6 @@
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Chest",
@@ -106,7 +101,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false,
     "primaryMuscles": [
       "Chest",
@@ -123,7 +117,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Back",
@@ -140,7 +133,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Back",
@@ -157,7 +149,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Back",
@@ -176,7 +167,6 @@
       "Low Bar"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Back",
@@ -196,7 +186,6 @@
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Back",
@@ -216,7 +205,6 @@
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Back",
@@ -235,7 +223,6 @@
       "Pull-up Bar"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Back",
@@ -254,7 +241,6 @@
       "Pull-up Bar"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Back",
@@ -273,7 +259,6 @@
       "Pull-up Bar"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false,
     "primaryMuscles": [
       "Back",
@@ -292,7 +277,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Shoulders",
@@ -311,7 +295,6 @@
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false,
     "primaryMuscles": [
       "Shoulders",
@@ -330,7 +313,6 @@
       "Wall"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false,
     "primaryMuscles": [
       "Shoulders",
@@ -348,7 +330,6 @@
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Chest",
@@ -367,7 +348,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Chest",
@@ -384,7 +364,6 @@
       "Dip Bar"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Chest",
@@ -401,7 +380,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Core"
@@ -419,7 +397,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Core"
@@ -437,7 +414,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Core"
@@ -453,7 +429,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Core"
@@ -470,7 +445,6 @@
       "Pull-up Bar"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false,
     "primaryMuscles": [
       "Hip Flexors",
@@ -489,7 +463,6 @@
       "Stable Support"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Quads",
@@ -508,7 +481,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Quads",
@@ -528,7 +500,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Quads",
@@ -548,7 +519,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Quads",
@@ -568,7 +538,6 @@
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Quads",
@@ -588,7 +557,6 @@
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Quads",
@@ -607,7 +575,6 @@
       "Stable Support"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Quads",
@@ -625,7 +592,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Quads",
@@ -645,7 +611,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false,
     "primaryMuscles": [
       "Quads",
@@ -663,7 +628,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Glutes"
@@ -679,7 +643,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Glutes"
@@ -696,7 +659,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Glutes"
@@ -713,7 +675,6 @@
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Glutes"
@@ -731,7 +692,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Hamstrings",
@@ -749,7 +709,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Hamstrings"
@@ -766,7 +725,6 @@
       "Towel"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Hamstrings"
@@ -784,7 +742,6 @@
       "Fixed Ankle Support"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false,
     "primaryMuscles": [
       "Hamstrings"
@@ -798,7 +755,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Calves"
@@ -812,7 +768,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Calves"
@@ -829,7 +784,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": true,
     "primaryMuscles": [
       "Glutes",
@@ -848,7 +802,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": true,
     "primaryMuscles": [
       "Calves",
@@ -869,7 +822,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": true,
     "primaryMuscles": [
       "Hip Flexors",
@@ -889,7 +841,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": true,
     "primaryMuscles": [
       "Quads",
@@ -909,7 +860,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Serratus"
@@ -926,7 +876,6 @@
       "Pull-up Bar"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Back"
@@ -944,7 +893,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Chest",
@@ -962,7 +910,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Core",
@@ -979,7 +926,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Core"
@@ -995,7 +941,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Core"
@@ -1012,7 +957,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Hip Flexors"
@@ -1029,7 +973,6 @@
       "Pull-up Bar"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Hip Flexors",
@@ -1047,7 +990,6 @@
       "Wall"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Quads"
@@ -1064,7 +1006,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Quads",
@@ -1083,7 +1024,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false,
     "primaryMuscles": [
       "Quads",
@@ -1101,7 +1041,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Glutes"
@@ -1117,7 +1056,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Glutes"
@@ -1135,7 +1073,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": true,
     "primaryMuscles": [
       "Core",
@@ -1155,7 +1092,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": true,
     "primaryMuscles": [
       "Hip Flexors",
@@ -1170,7 +1106,6 @@
       "Stable Support"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false,
     "primaryMuscles": [
       "Calves"
@@ -1191,7 +1126,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1209,7 +1143,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1227,7 +1160,6 @@
       "Gymnastic Rings"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false
   },
   {
@@ -1244,7 +1176,6 @@
       "Low Bar"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1262,7 +1193,6 @@
       "Neutral-Grip Pull-up Bar"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1280,7 +1210,6 @@
       "Low Bar"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1300,7 +1229,6 @@
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false
   },
   {
@@ -1319,7 +1247,6 @@
       "Gymnastic Rings"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1337,7 +1264,6 @@
       "Gymnastic Rings"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1355,7 +1281,6 @@
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1372,7 +1297,6 @@
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1391,7 +1315,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1409,7 +1332,6 @@
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1428,7 +1350,6 @@
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1446,7 +1367,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1464,7 +1384,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false
   },
   {
@@ -1481,7 +1400,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false
   },
   {
@@ -1498,7 +1416,6 @@
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1515,7 +1432,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1532,7 +1448,6 @@
       "Exercise Sliders"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false
   },
   {
@@ -1549,7 +1464,6 @@
       "Fixed Ankle Support"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false
   },
   {
@@ -1566,7 +1480,6 @@
       "Suspension Trainer"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1584,7 +1497,6 @@
       "Elevated Surface"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1601,7 +1513,6 @@
       "Stable Support"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1615,7 +1526,6 @@
       "Wall"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1629,7 +1539,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1646,7 +1555,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1663,7 +1571,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1680,7 +1587,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1697,7 +1603,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1715,7 +1620,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1734,7 +1638,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1751,7 +1654,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false
   },
   {
@@ -1770,7 +1672,6 @@
       "None"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1788,7 +1689,6 @@
       "Ab Wheel"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false
   }
 ]

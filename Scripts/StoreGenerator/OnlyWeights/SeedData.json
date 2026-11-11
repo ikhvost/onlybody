@@ -15,7 +15,6 @@
       "Squat Rack"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -33,7 +32,6 @@
       "Incline Bench"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -50,7 +48,6 @@
       "Lat Pulldown Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -68,7 +65,6 @@
       "Cable Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -85,7 +81,6 @@
       "Dumbbells"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -99,7 +94,6 @@
       "Dumbbells"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -116,7 +110,6 @@
       "Cable Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -132,7 +125,6 @@
       "Dumbbells"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -146,7 +138,6 @@
       "Cable Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -165,7 +156,6 @@
       "Squat Rack"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false
   },
   {
@@ -182,7 +172,6 @@
       "Leg Press Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -201,7 +190,6 @@
       "Barbell"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -215,7 +203,6 @@
       "Leg Extension Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -231,7 +218,6 @@
       "Seated Leg Curl Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -245,7 +231,6 @@
       "Standing Calf Raise Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -259,7 +244,6 @@
       "Cable Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -278,7 +262,6 @@
       "Squat Rack"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -296,7 +279,6 @@
       "Flat Bench"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -313,7 +295,6 @@
       "Flat Bench"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -329,7 +310,6 @@
       "Cable Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -346,7 +326,6 @@
       "Chest Press Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -360,7 +339,6 @@
       "Pec Deck Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -379,7 +357,6 @@
       "Barbell"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -398,7 +375,6 @@
       "Flat Bench"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -417,7 +393,6 @@
       "Incline Bench"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -434,7 +409,6 @@
       "Cable Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -454,7 +428,6 @@
       "Weight Plates"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false
   },
   {
@@ -474,7 +447,6 @@
       "Weight Plates"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false
   },
   {
@@ -493,7 +465,6 @@
       "Squat Rack"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -510,7 +481,6 @@
       "Incline Bench"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -524,7 +494,6 @@
       "Cable Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -539,7 +508,6 @@
       "Dumbbells"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -555,7 +523,6 @@
       "Barbell"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -571,7 +538,6 @@
       "EZ-Bar"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -586,7 +552,6 @@
       "Dumbbells"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -603,7 +568,6 @@
       "Incline Bench"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -619,7 +583,6 @@
       "Cable Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -633,7 +596,6 @@
       "Cable Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -648,7 +610,6 @@
       "Flat Bench"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -667,7 +628,6 @@
       "Squat Rack"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -686,7 +646,6 @@
       "Weight Plates"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false
   },
   {
@@ -706,7 +665,6 @@
       "Squat Rack"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false
   },
   {
@@ -726,7 +684,6 @@
       "Barbell"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false
   },
   {
@@ -747,7 +704,6 @@
       "Barbell"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false
   },
   {
@@ -765,7 +721,6 @@
       "Dumbbells"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -784,7 +739,6 @@
       "Flat Bench"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -803,7 +757,6 @@
       "Dumbbells"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -822,7 +775,6 @@
       "Dumbbells"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -841,7 +793,6 @@
       "Step Platform"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -860,7 +811,6 @@
       "Dumbbells"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -878,7 +828,6 @@
       "Flat Bench"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -895,7 +844,6 @@
       "Hack Squat Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -911,7 +859,6 @@
       "Lying Leg Curl Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -925,7 +872,6 @@
       "Hip Abduction Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -939,7 +885,6 @@
       "Hip Adduction Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -953,7 +898,6 @@
       "Seated Calf Raise Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -970,7 +914,6 @@
       "Pull-up Bar"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -987,7 +930,6 @@
       "Pull-up Bar"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false
   },
   {
@@ -1005,7 +947,6 @@
       "Ab Wheel"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false
   },
   {
@@ -1021,7 +962,6 @@
       "Cable Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1039,7 +979,6 @@
       "Seated Row Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1058,7 +997,6 @@
       "Barbell"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1075,7 +1013,6 @@
       "Dumbbells"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1094,7 +1031,6 @@
       "Squat Rack"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1111,7 +1047,6 @@
       "Dumbbells"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1128,7 +1063,6 @@
       "Cable Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1146,7 +1080,6 @@
       "Incline Bench"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1163,7 +1096,6 @@
       "Lat Pulldown Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1181,7 +1113,6 @@
       "Cable Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1200,7 +1131,6 @@
       "Cable Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1221,7 +1151,6 @@
       "Weight Plates"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1238,7 +1167,6 @@
       "Assisted Pull-up and Dip Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1257,7 +1185,6 @@
       "Flat Bench"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1276,7 +1203,6 @@
       "Weight Plates"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1293,7 +1219,6 @@
       "Shoulder Press Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1313,7 +1238,6 @@
       "Weight Plates"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1328,7 +1252,6 @@
       "Reverse Pec Deck Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1345,7 +1268,6 @@
       "Preacher Curl Bench"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1362,7 +1284,6 @@
       "Flat Bench"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1377,7 +1298,6 @@
       "EZ-Bar"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1394,7 +1314,6 @@
       "Dumbbells"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1411,7 +1330,6 @@
       "Assisted Pull-up and Dip Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1429,7 +1347,6 @@
       "Dumbbells"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1447,7 +1364,6 @@
       "Dumbbells"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1465,7 +1381,6 @@
       "Dumbbells"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1483,7 +1398,6 @@
       "Smith Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1501,7 +1415,6 @@
       "Belt Squat Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1518,7 +1431,6 @@
       "Pendulum Squat Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1536,7 +1448,6 @@
       "Leg Press Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1557,7 +1468,6 @@
       "Weight Plates"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false
   },
   {
@@ -1576,7 +1486,6 @@
       "Dumbbells"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false
   },
   {
@@ -1595,7 +1504,6 @@
       "Squat Rack"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false
   },
   {
@@ -1613,7 +1521,6 @@
       "Cable Ankle Strap"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1631,7 +1538,6 @@
       "Flat Bench"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1648,7 +1554,6 @@
       "Hip Thrust Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1664,7 +1569,6 @@
       "Seated Leg Curl Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1682,7 +1586,6 @@
       "Glute-Ham Developer"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "advanced",
     "isFullBody": false
   },
   {
@@ -1696,7 +1599,6 @@
       "Leg Press Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1714,7 +1616,6 @@
       "Step Platform"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1730,7 +1631,6 @@
       "Dumbbells"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1750,7 +1650,6 @@
       "Dumbbells"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": true
   },
   {
@@ -1767,7 +1666,6 @@
       "Cable Machine"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "beginner",
     "isFullBody": false
   },
   {
@@ -1781,7 +1679,6 @@
       "Dumbbells"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1798,7 +1695,6 @@
       "Captain's Chair"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": false
   },
   {
@@ -1817,7 +1713,6 @@
       "Dumbbells"
     ],
     "frequencyPreference": "normal",
-    "difficulty": "intermediate",
     "isFullBody": true
   }
 ]

@@ -6,8 +6,8 @@ nonisolated struct SmartWorkoutConfiguration: Sendable, Equatable, Codable {
     var targetMuscleGroups: [String]
     var durationMinutes: Int
     var restSeconds: Int?
-    // Retained in persisted payloads; automatic selection no longer uses difficulty.
-    var level: ExerciseDifficulty
+    // Preserve the stored JSON value for older app versions; not a selection setting.
+    private var legacyLevel = "beginner"
     var equipmentMode: SmartEquipmentMode
     var availableEquipment: Set<String>
     var excludedLoads: Set<ExerciseLoad>
@@ -16,13 +16,12 @@ nonisolated struct SmartWorkoutConfiguration: Sendable, Equatable, Codable {
     var excludedRegions: Set<SmartBodyRegion>
 
     init(targetMuscleGroups: [String], durationMinutes: Int = 30, restSeconds: Int? = nil,
-         level: ExerciseDifficulty = .beginner, equipmentMode: SmartEquipmentMode = .confirmed,
+         equipmentMode: SmartEquipmentMode = .confirmed,
          availableEquipment: Set<String> = [], excludedLoads: Set<ExerciseLoad> = [], excludedExercises: Set<String> = [],
          excludedRegions: Set<SmartBodyRegion> = []) {
         self.targetMuscleGroups = targetMuscleGroups
         self.durationMinutes = durationMinutes
         self.restSeconds = restSeconds
-        self.level = level
         self.equipmentMode = equipmentMode
         self.availableEquipment = availableEquipment
         self.excludedLoads = excludedLoads
@@ -36,7 +35,7 @@ nonisolated struct SmartWorkoutConfiguration: Sendable, Equatable, Codable {
         targetMuscleGroups = try values.decode([String].self, forKey: .targetMuscleGroups)
         durationMinutes = try values.decode(Int.self, forKey: .durationMinutes)
         restSeconds = try values.decodeIfPresent(Int.self, forKey: .restSeconds)
-        level = try values.decode(ExerciseDifficulty.self, forKey: .level)
+        legacyLevel = try values.decode(String.self, forKey: .legacyLevel)
         equipmentMode = try values.decode(SmartEquipmentMode.self, forKey: .equipmentMode)
         availableEquipment = try values.decode(Set<String>.self, forKey: .availableEquipment)
         excludedLoads = try values.decode(Set<ExerciseLoad>.self, forKey: .excludedLoads)

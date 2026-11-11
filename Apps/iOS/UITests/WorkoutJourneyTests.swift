@@ -237,7 +237,6 @@ final class WorkoutJourneyTests: XCTestCase {
         tap("catalog.filters")
         tap("equipment.\(JourneyProduct.libraryEquipment)")
         tap("filters.done")
-        XCTAssertFalse(app.descendants(matching: .any)["difficulty.intermediate"].exists)
         tap("catalog.filters")
         tap("equipment.all")
         tap("filters.done")
@@ -248,7 +247,6 @@ final class WorkoutJourneyTests: XCTestCase {
         let movement = app.buttons["library.exercise.\(JourneyProduct.libraryExercise)"]
         XCTAssertTrue(movement.waitForExistence(timeout: 10))
         movement.tap()
-        XCTAssertFalse(app.staticTexts["movement.difficulty"].exists)
         XCTAssertFalse(app.buttons["Set frequency to More often"].exists)
         XCTAssertFalse(app.buttons["Set frequency to Less often"].exists)
         XCTAssertFalse(app.buttons["Set frequency to Exclude"].exists)

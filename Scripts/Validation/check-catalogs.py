@@ -26,10 +26,8 @@ def validate(ROOT):
         catalog = ROOT / f'Apps/iOS/Products/{product}/Catalog'
         rows = json.loads(seed.read_text())
         validate_catalog_keys(rows, registry[product], product)
-        for script, output in [('generate-difficulties.py', 'ExerciseDifficultyCatalog.swift'),
-                               ('generate-muscles.py', 'ExerciseMuscleCatalog.swift')]:
-            subprocess.run([sys.executable, str(ROOT / 'Scripts/StoreGenerator' / script),
-                            '--seed', str(seed), '--output', str(catalog / output), '--check'], check=True)
+        subprocess.run([sys.executable, str(ROOT / 'Scripts/StoreGenerator/generate-muscles.py'),
+                        '--seed', str(seed), '--output', str(catalog / 'ExerciseMuscleCatalog.swift'), '--check'], check=True)
         media = ROOT / 'Scripts/ExerciseMedia' / ('catalog.json' if product == 'OnlyBody' else 'onlyweights.json')
         subprocess.run([sys.executable, str(ROOT / 'Scripts/ExerciseMedia/generate.py'),
                         '--seed', str(seed), '--catalog', str(media),

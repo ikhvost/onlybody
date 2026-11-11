@@ -29,7 +29,7 @@ Automatic selection respects equipment, injury regions and legacy load restricti
 
 Manual edits apply only to the reviewed day. Any nonempty list with valid numbers can be saved or started, regardless of duration, original targets, equipment or injury restrictions. No short-plan confirmation is required and the editor never trims the list. Opening or editing does not write; Save/Start commits the workout and daily payload atomically. An open editor retains its day across midnight; a fresh opening resolves the new local day. Active sessions use a detached reviewed snapshot.
 
-The SwiftData schema and existing stores remain unchanged. Legacy level, excluded-exercise and acceptance fields are retained for payload compatibility but no longer control behavior. Cached lists, schedule, history and restriction settings remain available.
+The SwiftData schema and existing stores remain unchanged. Exercise catalogs have no difficulty ratings. Smart configuration retains its legacy `level` JSON string privately for compatibility with stored settings and older app versions; it is not exposed as a selection parameter. Legacy excluded-exercise and acceptance fields also remain for payload compatibility. Cached lists, schedule, history and restriction settings remain available.
 
 ## Validation
 

@@ -26,7 +26,7 @@ struct SmartSchemaUpgradeTests {
         let reopened = try container(url)
         let context = ModelContext(reopened)
         let workout = try #require(try await SwiftDataWorkoutRepository(context: context).workout(by: workoutID))
-        #expect(workout.smartSettings?.configuration.level == .intermediate)
+        #expect(workout.smartSettings?.configuration.durationMinutes == 45)
         #expect(workout.items.count == 1)
         #expect(try context.fetchCount(FetchDescriptor<SmartDailyVariantRecord>()) == 1)
         #expect(try context.fetchCount(FetchDescriptor<SessionItem>()) == 1)
@@ -87,7 +87,7 @@ struct SmartSchemaUpgradeTests {
         #expect(sessions.first?.durationSeconds == 721)
         #expect(sessions.first?.items.first?.setReps == [13, 12])
         #expect(sessions.first?.items.first?.setWeightsKg == [12.5, 15])
-        let settings = SmartWorkoutSettings(configuration: SmartWorkoutConfiguration(targetMuscleGroups: ["Chest"], level: .intermediate))
+        let settings = SmartWorkoutSettings(configuration: SmartWorkoutConfiguration(targetMuscleGroups: ["Chest"], durationMinutes: 45))
         workout.smartSettings = settings
         try await repository.save(workout)
         let variant = SmartDailyVariant(workoutID: workoutID, localDay: "2026-11-6", settingsRevision: settings.revision,
@@ -97,7 +97,7 @@ struct SmartSchemaUpgradeTests {
         #expect(try await daily.variant(workoutID: workoutID, localDay: variant.localDay, settingsRevision: settings.revision) == variant)
         // A failing aggregate write must roll back its settings as well as its items.
         var invalid = workout
-        invalid.smartSettings?.configuration.level = .advanced
+        invalid.smartSettings?.configuration.durationMinutes = 60
         invalid.items = [WorkoutItemSnapshot(exercise: ExerciseSnapshot(name: "unavailable"))]
         await #expect(throws: PersistenceError.self) { try await repository.save(invalid) }
         #expect(try await repository.workout(by: workoutID) == workout)

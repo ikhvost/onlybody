@@ -49,8 +49,6 @@ nonisolated struct ExerciseSnapshot: Identifiable, Sendable, Equatable, Codable 
 
     var smartMetadata: SmartExerciseMetadata? { SmartExerciseProfiles.entries[name] }
 
-    var difficulty: ExerciseDifficulty { ExerciseDifficultyCatalog.levels[name] ?? .unrated }
-
     var equipmentLabel: String {
         equipment.isEmpty ? CatalogLocalization.label("None")
             : equipment.map { CatalogLocalization.label($0) }.joined(separator: ", ")

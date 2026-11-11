@@ -4,14 +4,13 @@ Authoring inputs: `SeedData.json` for OnlyBody and `OnlyWeights/SeedData.json` f
 
 Names are compatibility keys: renaming requires an alias migration. Existing installs merge bundled entries by exact name while preserving stored UUIDs and history. Saving a workout materializes selected new entries atomically; never replace a user's database. Generator models must match the app's persistence schema.
 
-Difficulty is an editorial progression level, not a load prescription. Muscle tags are qualitative primary/supporting roles, not measured activation. See [muscle assumptions](../MuscleDiagrams/muscle-audit.md) and [OnlyWeights variants and references](OnlyWeights/README.md). The legacy `frequencyPreference` field remains for store compatibility; generation ignores saved preferences.
+Muscle tags are qualitative primary/supporting roles, not measured activation. See [muscle assumptions](../MuscleDiagrams/muscle-audit.md) and [OnlyWeights variants and references](OnlyWeights/README.md). The legacy `frequencyPreference` field remains for store compatibility; generation ignores saved preferences.
 
 ## Regeneration
 
 For OnlyBody, run from the repository root:
 
 ```sh
-python3 Scripts/StoreGenerator/generate-difficulties.py
 python3 Scripts/StoreGenerator/generate-muscles.py
 python3 Scripts/ExerciseMedia/generate.py
 swift run --package-path Scripts/StoreGenerator StoreGenerator Apps/iOS/Products/OnlyBody/Resources/SeedStore/default.store Scripts/StoreGenerator/SeedData.json
@@ -20,7 +19,6 @@ swift run --package-path Scripts/StoreGenerator StoreGenerator Apps/iOS/Products
 From the repository root, regenerate OnlyWeights metadata and seed with:
 
 ```sh
-python3 Scripts/StoreGenerator/generate-difficulties.py --seed Scripts/StoreGenerator/OnlyWeights/SeedData.json --output Apps/iOS/Products/OnlyWeights/Catalog/ExerciseDifficultyCatalog.swift
 python3 Scripts/StoreGenerator/generate-muscles.py --seed Scripts/StoreGenerator/OnlyWeights/SeedData.json --output Apps/iOS/Products/OnlyWeights/Catalog/ExerciseMuscleCatalog.swift
 python3 Scripts/ExerciseMedia/generate.py --seed Scripts/StoreGenerator/OnlyWeights/SeedData.json --catalog Scripts/ExerciseMedia/onlyweights.json --output Apps/iOS/Products/OnlyWeights/Catalog/ExerciseDemonstrationCatalog.swift --allow-missing
 swift run --package-path Scripts/StoreGenerator StoreGenerator Apps/iOS/Products/OnlyWeights/Resources/SeedStore/default.store Scripts/StoreGenerator/OnlyWeights/SeedData.json

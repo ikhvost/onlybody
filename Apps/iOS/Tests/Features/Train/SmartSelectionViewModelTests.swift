@@ -81,7 +81,7 @@ struct SmartSelectionViewModelTests {
         let repository = try exercises()
         let first = try #require(repository.stubbedAllExercises.first)
         let settings = SmartWorkoutSettings(configuration: SmartWorkoutConfiguration(
-            targetMuscleGroups: ["Upper", "Chest"], level: .advanced, excludedExercises: [first.name]))
+            targetMuscleGroups: ["Upper", "Chest"], excludedExercises: [first.name]))
         let workout = WorkoutSnapshot(name: "Legacy", smartSettings: settings, items: [WorkoutItemSnapshot(exercise: first)])
         let now = Date()
         let daily = SmartDailyVariant(workoutID: workout.id, localDay: SmartPlanningClock().localDay(at: now),

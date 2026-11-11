@@ -11,7 +11,7 @@ struct BundledExerciseCatalogTests {
         let catalog = try BundledExerciseCatalog.load(from: seed)
         #expect(catalog.count == 100)
         #expect(try Data(contentsOf: seed) == original)
-        #expect(Set(catalog.map(\.name)) == Set(ExerciseDifficultyCatalog.levels.keys))
+        #expect(Set(catalog.map(\.name)) == Set(ExerciseMuscleCatalog.profiles.keys))
     }
 
     @Test func freshInstallationLoadsCuratedCatalogIntoLibrary() async throws {
@@ -45,7 +45,6 @@ struct BundledExerciseCatalogTests {
 
         for exercise in exercises {
             let diagram = MovementDetailViewModel(exercise: exercise).muscleDiagram
-            #expect(exercise.difficulty != .unrated)
             #expect(diagram.hasHighlightedRegions)
             #expect(!diagram.primary.isEmpty)
             #expect(Set(diagram.primary.map(\.rawValue)) == Set(exercise.primaryMuscles))
@@ -58,8 +57,6 @@ struct BundledExerciseCatalogTests {
             #expect(!exercise.equipment.contains("None") || exercise.equipment == ["None"])
             #expect(ExerciseFrequency(rawValue: exercise.frequencyPreference) != nil)
         }
-
-        #expect(Set(ExerciseDifficultyCatalog.levels.keys) == Set(exercises.map(\.name)))
 
         for muscle in ExerciseCatalog.primaryMuscles {
             viewModel.selectedFilter = muscle

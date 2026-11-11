@@ -30,6 +30,34 @@ struct SmartConfigurationCompatibilityTests {
         #expect(try JSONDecoder().decode(SmartWorkoutSettings.self, from: JSONEncoder().encode(old)) == old)
     }
 
+    @Test(arguments: ["beginner", "intermediate", "advanced", "unrated"])
+    func legacyLevelRoundTripsWithoutAffectingSelection(level: String) throws {
+        let configuration = SmartWorkoutConfiguration(targetMuscleGroups: ["Full Body"], equipmentMode: .standardGym)
+        let data = try JSONEncoder().encode(configuration)
+        var payload = try #require(JSONSerialization.jsonObject(with: data) as? [String: Any])
+        // Keep the old wire format as an independently supplied input, not a runtime setting.
+        #expect(payload["level"] as? String == "beginner")
+        payload["level"] = level
+        let legacy = try JSONDecoder().decode(SmartWorkoutConfiguration.self, from: JSONSerialization.data(withJSONObject: payload))
+        let encoded = try #require(JSONSerialization.jsonObject(with: JSONEncoder().encode(legacy)) as? [String: Any])
+        #expect(encoded["level"] as? String == level)
+        #expect(encoded["legacyLevel"] == nil)
+
+        let seed = try #require(Bundle.main.url(forResource: "default", withExtension: "store"))
+        let exercises = try BundledExerciseCatalog.load(from: seed)
+        let generator = SmartSelectionGenerator()
+        let expected = generator.plan(configuration: configuration, from: exercises)
+        let actual = generator.plan(configuration: legacy, from: exercises)
+        #expect(!expected.movements.isEmpty)
+        #expect(actual.movements.map(\.exercise) == expected.movements.map(\.exercise))
+        #expect(actual.movements.map(\.sets) == expected.movements.map(\.sets))
+        #expect(actual.movements.map(\.reps) == expected.movements.map(\.reps))
+        #expect(actual.movements.map(\.restSeconds) == expected.movements.map(\.restSeconds))
+        #expect(actual.status == expected.status)
+        #expect(actual.estimatedSeconds == expected.estimatedSeconds)
+        #expect(actual.uncoveredNeeds == expected.uncoveredNeeds)
+    }
+
     @Test func oldStoredSettingsAcceptMultipleRegionsAndSurviveIndependentReopen() async throws {
         let directory = URL.temporaryDirectory.appending(path: UUID().uuidString)
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
@@ -44,6 +72,10 @@ struct SmartConfigurationCompatibilityTests {
         #expect(actual == expected)
         #expect(actual.smartSettings?.configuration.excludedRegions == [.knee, .hip])
         #expect(actual.smartSettings?.configuration.excludedLoads == [.jumping, .palmSupport])
+        let settings = try #require(actual.smartSettings)
+        let encoded = try #require(JSONSerialization.jsonObject(with: JSONEncoder().encode(settings)) as? [String: Any])
+        let configuration = try #require(encoded["configuration"] as? [String: Any])
+        #expect(configuration["level"] as? String == "intermediate")
     }
 
     @Test func malformedRegionsFailWithoutResettingStoredSettings() async throws {

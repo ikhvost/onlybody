@@ -14,9 +14,9 @@ struct SmartPlanAssessmentTests {
     @Test func broadTargetsNeedVarietyButOneSpecificMuscleDoesNot() throws {
         let first = try #require(try catalog().first { $0.smartMetadata != nil })
         let item = WorkoutItemSnapshot(exercise: first)
-        let broad = SmartWorkoutConfiguration(targetMuscleGroups: ["Upper"], level: .advanced, equipmentMode: .standardGym)
+        let broad = SmartWorkoutConfiguration(targetMuscleGroups: ["Upper"], equipmentMode: .standardGym)
         #expect(SmartPlanAssessment(configuration: broad, items: [item]).status == .unavailable)
-        let specific = SmartWorkoutConfiguration(targetMuscleGroups: [first.primaryMuscles[0]], level: .advanced, equipmentMode: .standardGym)
+        let specific = SmartWorkoutConfiguration(targetMuscleGroups: [first.primaryMuscles[0]], equipmentMode: .standardGym)
         #expect(SmartPlanAssessment(configuration: specific, items: [item]).status == .shorter)
         #expect(SmartPlanAssessment(configuration: broad, items: [item, item]).status == .unavailable)
     }

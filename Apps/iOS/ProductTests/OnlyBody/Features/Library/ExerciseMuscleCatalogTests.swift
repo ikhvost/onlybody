@@ -5,7 +5,6 @@ import Testing
 @MainActor
 struct ExerciseMuscleCatalogTests {
     @Test func everyReleasedExerciseHasValidDisjointRolesAndDrawableRegions() {
-        #expect(Set(ExerciseMuscleCatalog.profiles.keys) == Set(ExerciseDifficultyCatalog.levels.keys))
         #expect(ExerciseMuscleCatalog.profiles.count == 100)
         let allowed = Set(MuscleGroup.allCases.map(\.rawValue))
         for profile in ExerciseMuscleCatalog.profiles.values {

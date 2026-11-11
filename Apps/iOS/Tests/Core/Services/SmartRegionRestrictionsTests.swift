@@ -49,7 +49,7 @@ struct SmartRegionRestrictionsTests {
         let generator = SmartSelectionGenerator()
         for mask in 1..<(1 << regions.count) {
             let selected = Set(regions.enumerated().filter { mask & (1 << $0.offset) != 0 }.map(\.element))
-            let configuration = SmartWorkoutConfiguration(targetMuscleGroups: ["Full Body"], level: .advanced,
+            let configuration = SmartWorkoutConfiguration(targetMuscleGroups: ["Full Body"],
                 equipmentMode: .standardGym, excludedRegions: selected)
             let plan = generator.plan(configuration: configuration, from: exercises)
             for exercise in exercises {

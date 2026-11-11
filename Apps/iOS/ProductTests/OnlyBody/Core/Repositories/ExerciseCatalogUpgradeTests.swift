@@ -40,7 +40,6 @@ struct ExerciseCatalogUpgradeTests {
         let all = try await repository.allExercises()
         #expect(all.count == 100)
         #expect(all.first { $0.name == "Squats" }?.id == existing.id)
-        #expect(all.first { $0.name == "Squats" }?.difficulty == .beginner)
         #expect(try context.fetchCount(FetchDescriptor<Exercise>()) == 1)
         #expect(workout.items?.first?.exercise?.id == existing.id)
         #expect(try context.fetchCount(FetchDescriptor<Session>()) == 1)

@@ -38,11 +38,9 @@ struct GymCatalogTests {
         #expect(Set(exercises.map(\.id)).count == 105)
         #expect(Set(exercises.map(\.name)).count == 105)
         #expect(try Data(contentsOf: seed) == original)
-        #expect(Set(exercises.map(\.name)) == Set(ExerciseDifficultyCatalog.levels.keys))
         #expect(Set(exercises.map(\.name)) == Set(ExerciseMuscleCatalog.profiles.keys))
         #expect(!exercises.contains { $0.name == "Standard Push-Ups" })
         for exercise in exercises {
-            #expect(exercise.difficulty != .unrated)
             #expect(!exercise.equipment.isEmpty)
             #expect(Set(exercise.equipment).isSubset(of: Set(ExerciseCatalog.equipment)))
             #expect(!exercise.primaryMuscles.isEmpty)

@@ -40,7 +40,7 @@ struct SmartDailySaveTests {
         let url = directory.appending(path: "daily.store")
         let exercise = ExerciseSnapshot(name: "Different muscle", primaryMuscle: "Quads")
         let settings = SmartWorkoutSettings(configuration: SmartWorkoutConfiguration(targetMuscleGroups: ["Chest"],
-            level: .advanced, excludedExercises: [exercise.name], excludedRegions: [.knee]))
+            excludedExercises: [exercise.name], excludedRegions: [.knee]))
         let workout = WorkoutSnapshot(name: "Daily", smartSettings: settings, items: [WorkoutItemSnapshot(exercise: exercise)])
         let daily = SmartDailyVariant(workoutID: workout.id, localDay: "2026-11-11", settingsRevision: settings.revision,
             items: workout.items, estimatedSeconds: 100, uncoveredNeeds: [], createdAt: Date())

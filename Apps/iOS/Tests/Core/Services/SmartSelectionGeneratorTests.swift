@@ -21,28 +21,25 @@ struct SmartSelectionGeneratorTests {
             let profile = try #require(exercise.smartMetadata)
             #expect(!profile.family.isEmpty)
             #expect(profile.repetitionSeconds > 0)
-            #expect(exercise.difficulty != .unrated)
         }
     }
 
-    @Test func allLevelsRespectTimeEquipmentLoadsAndPrimaryTargets() throws {
+    @Test func selectionRespectsTimeEquipmentLoadsAndPrimaryTargets() throws {
         let exercises = try catalog()
         let generator = SmartSelectionGenerator()
-        for level in ExerciseDifficulty.ratedLevels {
-            for minutes in [15, 30, 45, 60] {
-                for target in ExerciseCatalog.sessionTargets {
-                    let configuration = SmartWorkoutConfiguration(targetMuscleGroups: [target], durationMinutes: minutes,
-                        level: level, equipmentMode: .confirmed, excludedLoads: [.jumping, .overhead])
-                    let plan = generator.plan(configuration: configuration, from: exercises)
-                    #expect(plan.estimatedSeconds <= minutes * 60)
-                    #expect(Set(plan.movements.compactMap { $0.exercise.smartMetadata?.family }).count == plan.movements.count)
-                    #expect(plan.movements.allSatisfy { generator.isEligible($0.exercise, configuration: configuration) })
-                    if ExerciseCatalog.allMuscles.contains(target) {
-                        #expect(plan.movements.allSatisfy { $0.exercise.primaryMuscles.contains(target) })
-                    }
-                    let roles = plan.movements.map { $0.exercise.smartMetadata?.role == .main ? 0 : 1 }
-                    #expect(roles == roles.sorted())
+        for minutes in [15, 30, 45, 60] {
+            for target in ExerciseCatalog.sessionTargets {
+                let configuration = SmartWorkoutConfiguration(targetMuscleGroups: [target], durationMinutes: minutes,
+                    equipmentMode: .confirmed, excludedLoads: [.jumping, .overhead])
+                let plan = generator.plan(configuration: configuration, from: exercises)
+                #expect(plan.estimatedSeconds <= minutes * 60)
+                #expect(Set(plan.movements.compactMap { $0.exercise.smartMetadata?.family }).count == plan.movements.count)
+                #expect(plan.movements.allSatisfy { generator.isEligible($0.exercise, configuration: configuration) })
+                if ExerciseCatalog.allMuscles.contains(target) {
+                    #expect(plan.movements.allSatisfy { $0.exercise.primaryMuscles.contains(target) })
                 }
+                let roles = plan.movements.map { $0.exercise.smartMetadata?.role == .main ? 0 : 1 }
+                #expect(roles == roles.sorted())
             }
         }
     }
@@ -50,7 +47,7 @@ struct SmartSelectionGeneratorTests {
     @Test func selectionDoesNotDependOnCatalogOrderAndPreservesMainExercises() throws {
         let exercises = try catalog()
         let configuration = SmartWorkoutConfiguration(targetMuscleGroups: ["Full Body"], durationMinutes: 60,
-            level: .advanced, equipmentMode: .standardGym)
+            equipmentMode: .standardGym)
         let generator = SmartSelectionGenerator()
         let first = generator.plan(configuration: configuration, from: exercises)
         let reversed = generator.plan(configuration: configuration, from: exercises.reversed())
@@ -70,7 +67,7 @@ struct SmartSelectionGeneratorTests {
         #expect(Set(result.uncoveredNeeds) == ["Upper", "Lower", "Core", "variety"])
     }
 
-    @Test func prescriptionsUseOneSharedDefaultRegardlessOfExerciseDifficulty() throws {
+    @Test func prescriptionsUseSharedDefaultsForMainAndAccessoryMovements() throws {
         let exercises = try catalog()
         let main = try #require(exercises.first { $0.smartMetadata?.role == .main })
         let accessory = try #require(exercises.first { $0.smartMetadata?.role == .accessory })
