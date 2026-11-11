@@ -15,6 +15,8 @@ struct LogList: View {
                     LogRow(viewModel: viewModel, session: session)
                 }
                 .buttonStyle(PressableButtonStyle())
+                .padding(.horizontal, Theme.horizontalPadding)
+                .padding(.vertical, Theme.space4)
                 .accessibilityLabel("\(session.workoutName), \(viewModel.weekdayText(for: session))")
                 .accessibilityIdentifier("session.row")
             }

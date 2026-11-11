@@ -42,7 +42,32 @@ DESTINATION='platform=iOS Simulator,name=iPhone 17 Pro' Scripts/validate.sh quic
 DESTINATION='platform=iOS Simulator,name=iPhone 17 Pro' Scripts/validate.sh full
 ```
 
-`quick` runs lint, validator regression tests, catalog/boundary/localization checks, and unit/integration tests for both products. `full` (also the default with no argument) adds functional UI tests, Release simulator builds, bundle isolation checks and temporary seed generation. Both modes explicitly select the Functional test plan; neither creates visual screenshot sets. Results go to a unique `/tmp/apps-validation-*` directory; override with `VALIDATION_OUTPUT`. Select another Xcode with `DEVELOPER_DIR` if needed.
+Choose validation by the change:
+
+| Change | Verification |
+| --- | --- |
+| Documentation only | Inspect the diff; no app build or tests |
+| Validation script only | Check shell syntax, run workflow and affected validator tests; use real Xcode commands only for unresolved concerns |
+| Local visual change with no behavior, navigation, accessibility semantics or data changes | Build affected product(s), run SwiftLint and inspect the affected screen in a preview or focused simulator capture |
+| ViewModel, service or repository logic | `quick`; add relevant functional UI journeys for interaction or navigation changes |
+| Catalog, seed, persistence/schema, product identity/build configuration, broad architecture change or release preparation | `full` |
+
+Both modes run lint, validator/workflow regression tests and catalog/boundary/localization checks for both products. `quick` (the default with no argument) runs unit/integration tests for both products. `full` includes all `quick` checks and adds functional UI tests, Release simulator builds, bundle isolation checks and temporary seed generation. Tests use the Functional plan; visual screenshot sets remain opt-in. `full` is used for higher-risk changes as well as release preparation; it does not create a distribution archive by itself.
+
+Builds reuse the gitignored `DerivedData/Validation` directory across both modes, including the StoreGenerator build cache. Override with `VALIDATION_DERIVED_DATA` (an absolute path) when isolation is needed. Each run still writes separate result bundles and generated test stores to a new `/tmp/apps-validation-*` directory; override with `VALIDATION_OUTPUT`, using a new path for each test run. Select another Xcode with `DEVELOPER_DIR` if needed. Reusing the cache avoids unnecessary compilation; it does not skip the selected tests.
+
+Choose one sufficient scope before starting. When `full` is planned, do not also run `quick` for the same source state. Run builds, validation and visual tests using the same cache sequentially. Do not clean the cache or use a fresh DerivedData directory for routine checks. Expand verification only for a new change or unresolved failure. Report completed checks accurately; an interrupted full run does not count as a pass.
+
+For a small visual adjustment, run these commands for each affected product (`onlybody` and `onlyweights` for shared views), then inspect the affected screen:
+
+```sh
+swiftlint lint --strict --no-cache
+xcodebuild build -project Apps/iOS/Apps.xcodeproj -scheme onlybody \
+  -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 17 Pro' \
+  -derivedDataPath "$PWD/DerivedData/Validation" CODE_SIGNING_ALLOWED=NO
+```
+
+There is no separate UI validation mode. Do not run all UI journeys or the entire visual matrix for every small visual adjustment.
 
 Functional UI coverage includes the five workout journeys, language selection/search and control hit areas. Explicit screenshots are retained only for failed functional tests; Xcode's own diagnostics remain enabled. Use SwiftUI previews and the native screen matrix for view iteration.
 

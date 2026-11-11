@@ -5,8 +5,11 @@ struct LogRow: View {
     let session: SessionSnapshot
 
     var body: some View {
-        HStack(spacing: Theme.space10) {
-            LogDateSquare(viewModel: viewModel, session: session)
+        HStack(spacing: Theme.space12) {
+            Text(viewModel.dayText(for: session))
+                .font(Theme.fontMono(Theme.typeCard, .medium))
+                .foregroundStyle(Theme.text)
+                .frame(width: Theme.touchSize)
 
             VStack(alignment: .leading, spacing: Theme.space3) {
                 Text(session.workoutName)
@@ -28,8 +31,12 @@ struct LogRow: View {
 
             ChevronIcon(color: Theme.text3)
         }
-        .padding(.vertical, Theme.space9)
-        .padding(.horizontal, Theme.horizontalPadding)
-        .contentShape(.rect)
+        .padding(Theme.cardInset)
+        .background(Theme.surface, in: .rect(cornerRadius: Theme.cornerRadius))
+        .overlay {
+            RoundedRectangle(cornerRadius: Theme.cornerRadius)
+                .strokeBorder(Theme.border, lineWidth: Theme.dividerThickness)
+        }
+        .contentShape(.rect(cornerRadius: Theme.cornerRadius))
     }
 }

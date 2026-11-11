@@ -82,9 +82,10 @@ New files need no project edits. New targets do require project configuration.
 - Shared source and shared tests are filesystem-synchronized members of both corresponding targets. AppConfiguration selects product defaults at the composition boundary; views receive data via ViewModels.
 - `Apps/iOS/Tests/`: Swift Testing unit and integration suites and mocks.
 - `Apps/iOS/UITests/`: XCTest UI automation only, using real persistence in an isolated test store.
-- `Scripts/validate.sh quick`: lint, validator regression tests, boundary/catalog/localization checks and unit/integration tests for both products.
-- `Scripts/validate.sh full` (the default): additionally runs functional UI tests, Release builds, bundle checks and temporary seed generation.
-- `Apps/iOS/Configuration/TestPlans/`: each scheme defaults to Functional; Visual capture suites run only when explicitly requested. Neither validation mode selects Visual.
+- `Scripts/validate.sh quick` (the default): lint, validator/workflow regression tests, boundary/catalog/localization checks and unit/integration tests for both products.
+- `Scripts/validate.sh full`: additionally runs functional UI tests, Release builds, bundle checks and temporary seed generation; select explicitly.
+- Both modes reuse the gitignored `DerivedData/Validation` build cache (override with `VALIDATION_DERIVED_DATA`, an absolute path). Logs and result bundles remain separate per run in `VALIDATION_OUTPUT` or a new temporary directory.
+- `Apps/iOS/Configuration/TestPlans/`: each scheme defaults to Functional; Visual capture suites run only when explicitly requested. No validation mode selects Visual.
 
 
 ---
@@ -196,7 +197,7 @@ enum AppTab: Hashable { case train, log, library }
 - Common features, persistence entities and Theme remain shared. Never create permanent product Git branches or copy screens.
 - OnlyBody authoring inputs remain `Scripts/StoreGenerator/SeedData.json` and `Scripts/ExerciseMedia/catalog.json`. OnlyWeights uses `Scripts/StoreGenerator/OnlyWeights/SeedData.json` and `Scripts/ExerciseMedia/onlyweights.json`.
 - Metadata generators accept `--seed` and `--output`; media additionally accepts `--catalog` and `--allow-missing` for OnlyWeights. Keep full video coverage required for OnlyBody.
-- Run `python3 Scripts/Validation/check-catalogs.py` and `Scripts/validate.sh full` for both products before completing product changes. Use `quick` during iteration. Generate icons with `bash Scripts/AppIcon/generate.sh OnlyBody` or `OnlyWeights`.
+- Choose validation by the scope and risk of the change (see Testing below); a small UI change does not require `full`. Catalog, seed, persistence/schema, product identity/build configuration and broad architecture changes require `python3 Scripts/Validation/check-catalogs.py` and `Scripts/validate.sh full` for both products. Generate icons with `bash Scripts/AppIcon/generate.sh OnlyBody` or `OnlyWeights`.
 - Do not regenerate OnlyBody's seed or rename existing exercises for a branding/build-structure change. Existing database path and model identities must remain stable.
 - Build settings exclude SQLite WAL/SHM sidecars from both app bundles.
 - Canonical exercise names are stable persisted keys, recorded in `Scripts/StoreGenerator/CatalogKeys.json`. The registry is append-only: add new keys explicitly; generators never rewrite it. Renaming/removing an existing key requires separate compatibility work. Change user-visible wording through translations.
@@ -228,6 +229,17 @@ enum AppTab: Hashable { case train, log, library }
 - Run shared `YouTubeIntegrationTests` for both app schemes after integration changes. OnlyBody additionally retains catalog and playback-state tests; OnlyWeights videos retain partial review status. See [media review status](Scripts/ExerciseMedia/README.md) for the dated local audits.
 
 ## Testing
+
+Choose the smallest meaningful verification scope:
+
+- Documentation-only changes: inspect the diff; no app builds or tests.
+- Validation-script-only changes: check shell syntax and run `Scripts/Validation/test_validation_workflow.py` and the affected validator tests. Do not run app test suites unless an unresolved concern requires verification with real Xcode commands.
+- Local visual changes (colors, spacing, typography, shapes), with no behavior, navigation, accessibility semantics or data changes: build the affected product(s), run SwiftLint and inspect the affected screen using a SwiftUI preview or focused simulator capture. Shared views must build for both products. Reuse `DerivedData/Validation` for these builds. Do not run `quick`, `full` or the entire screen matrix by default.
+- ViewModel, service or repository logic: run `Scripts/validate.sh quick`; add only the relevant functional UI journeys when interaction or navigation changes. Shared behavior must be checked for both products.
+- Catalog, seed, persistence/schema, product identity/build configuration or broad architecture changes: run `Scripts/validate.sh full`. Release preparation always requires `full` as described above. Also run it when explicitly requested.
+- Choose one sufficient verification scope before starting. `full` includes every `quick` check: do not launch `quick` before, during or after a planned `full` run for the same source state. If a new change or failure requires broader checks, expand only as needed and explain the reason. Run builds and tests using the same cache sequentially; do not start overlapping validation or visual-test runs.
+- Keep the build cache between runs; do not use a new DerivedData path or clean the cache for routine checks. Use a separate `VALIDATION_DERIVED_DATA` only for isolation or diagnosing a suspected cache issue. Keep result bundles separate and report the scope actually run.
+- Report the checks actually completed. A deliberately interrupted full run is not a passing full run; do not repeat successful checks without a new change or unresolved concern.
 
 Framework: **Swift Testing** (`@Test`, `#expect`) for unit and integration tests. **XCTest + XCUIAutomation is allowed only in `Apps/iOS/UITests/`**, compiled by `onlybodyUITests` / `onlyweightsUITests`. Functional coverage includes the journeys below, localization smoke and control hit areas.
 
