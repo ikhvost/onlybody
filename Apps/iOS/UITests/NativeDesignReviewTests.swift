@@ -3,6 +3,15 @@ import XCTest
 /// Real simulator captures: SwiftUI ScrollViews, native controls, and process-level language selection.
 @MainActor
 final class NativeDesignReviewTests: XCTestCase {
+    var restoresReduceMotion = false
+
+    override func tearDown() async throws {
+        await MainActor.run {
+            if restoresReduceMotion { setReduceMotion(false) }
+        }
+        try await super.tearDown()
+    }
+
     func testActiveSetControlsOnNarrowScreen() {
         continueAfterFailure = false
         let app = XCUIApplication()
@@ -76,7 +85,7 @@ final class NativeDesignReviewTests: XCTestCase {
         }
         app.terminate()
     }
-    private func advance(_ app: XCUIApplication, from index: Int) {
+    func advance(_ app: XCUIApplication, from index: Int) {
         let counter = app.staticTexts["designReview.index"]
         let next = NSPredicate(format: "label == %@", String((index + 1) % 20))
         let expected = String((index + 1) % 20)

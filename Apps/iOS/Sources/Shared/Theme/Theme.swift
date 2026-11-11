@@ -25,6 +25,7 @@ enum Theme {
     static let stepSize: CGFloat = 48
     static let buttonHeight: CGFloat = 52
     static let disabledControlOpacity: Double = 0.4
+    static let setEditingAnimation: Animation = .easeInOut(duration: 0.25)
     static let completeHeight: CGFloat = 64
     static let buttonRadius: CGFloat = 14
     static let cardInset: CGFloat = 16

@@ -4,9 +4,10 @@ struct ActiveWorkoutContentView: View {
     let viewModel: ActiveWorkoutViewModel
     let onGuide: () -> Void
     let onHistory: () -> Void
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @FocusState private var focusedField: WorkoutSetField?
     @State private var scrollPosition = ScrollPosition(idType: String.self)
-    @State private var pendingAddedSet: WorkoutSetID?
+    @State private var editedItemID: UUID?
 
     var body: some View {
         VStack(spacing: Theme.space0) {
@@ -57,12 +58,9 @@ struct ActiveWorkoutContentView: View {
                     }
                     if viewModel.hasStarted {
                         ActiveWorkoutSetActions(viewModel: viewModel) {
-                            dismissKeyboard()
-                            pendingAddedSet = viewModel.addSet()
+                            updateSets { _ = viewModel.addSet() }
                         } onRemove: {
-                            dismissKeyboard()
-                            pendingAddedSet = nil
-                            viewModel.removeLastSet()
+                            updateSets { viewModel.removeLastSet() }
                         }
                         .id("active.set.actions")
                     }
@@ -75,11 +73,18 @@ struct ActiveWorkoutContentView: View {
             }
             .scrollPosition($scrollPosition)
             .scrollIndicators(.hidden).scrollDismissesKeyboard(.interactively)
-            .onChange(of: viewModel.currentSetsTotal) { old, new in
-                if new > old, pendingAddedSet != nil {
-                    scrollPosition.scrollTo(id: "active.set.actions", anchor: .bottom)
+            .onScrollGeometryChange(for: CGFloat.self) { geometry in
+                geometry.contentSize.height + geometry.contentInsets.top + geometry.contentInsets.bottom - geometry.containerSize.height
+            } action: { _, overflow in
+                guard editedItemID == viewModel.viewedItemID, editedItemID != nil else { return }
+                editedItemID = nil
+                withAnimation(reduceMotion ? nil : Theme.setEditingAnimation) {
+                    if overflow > 0 {
+                        scrollPosition.scrollTo(id: "active.set.actions", anchor: .bottom)
+                    } else {
+                        scrollPosition.scrollTo(edge: .top)
+                    }
                 }
-                pendingAddedSet = nil
             }
         }
         .background(KeyboardOutsideTapBridge(isEnabled: focusedField != nil, onDismiss: dismissKeyboard).allowsHitTesting(false))
@@ -91,9 +96,19 @@ struct ActiveWorkoutContentView: View {
         .onDisappear(perform: dismissKeyboard)
         .id(viewModel.viewedItemID)
         .onChange(of: viewModel.viewedItemID) { _, _ in
-            pendingAddedSet = nil
+            editedItemID = nil
             scrollPosition = ScrollPosition(idType: String.self)
         }
+    }
+
+    private func updateSets(_ update: () -> Void) {
+        dismissKeyboard()
+        let itemID = viewModel.viewedItemID
+        let previousCount = viewModel.currentSetsTotal
+        withAnimation(reduceMotion ? nil : Theme.setEditingAnimation) {
+            update()
+        }
+        editedItemID = viewModel.currentSetsTotal != previousCount ? itemID : nil
     }
 
     private func dismissKeyboard() {
