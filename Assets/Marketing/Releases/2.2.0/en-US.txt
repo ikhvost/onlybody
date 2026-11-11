@@ -1,0 +1,3 @@
+• Smart selection is simpler: choose muscle groups and training preferences, then customize your workout in the regular editor.
+• Freely add, remove, reorder or replace exercises from the full catalog. Adjust sets, reps and rest, and open exercise guides without losing your draft.
+• Keep daily workout variations while saving your changes for today. Your edits stay with the current day, and duration remains an estimate.

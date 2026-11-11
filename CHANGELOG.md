@@ -3,6 +3,35 @@
 Changes for OnlyBody and OnlyWeights, newest version first. Record the app version,
 build number when assigned and user-facing changes for each update.
 
+## 2.2.0 — Build 6
+
+- Simplified Smart selection: choose muscle groups, then duration, equipment and
+  injury restrictions, and open the regular workout editor. Difficulty levels
+  and permanent exercise exclusions are no longer part of Smart selection.
+- Add, remove, reorder or replace today's exercises using the full app catalog,
+  and edit sets, reps and rest. Manual changes are not limited by the automatic
+  selection's muscle, equipment, injury or duration rules.
+- Open exercise guides directly from the editor without losing the draft.
+  Save or start any nonempty workout with valid numeric parameters; duration
+  after editing is an estimate.
+- Keep daily variations and today's saved edits. Unsaved changes require
+  confirmation before being discarded, and an open draft survives midnight.
+- Replace exercises freely during an active workout, while retaining the
+  protection for exercises with completed sets.
+- Preserve existing workouts, history, daily lists and stored preferences
+  without changing the database schema.
+
+[App Store release notes in five languages](Assets/Marketing/Releases/2.2.0/README.md)
+apply to both apps.
+
+### Preparation record
+
+- Version `2.2.0`, build `6`, is assigned to both products. Archive preparation,
+  upload and App Review submission are separate steps.
+- Media review remains partial. The [release checklist review](Scripts/ExerciseMedia/Reviews/2026-11-11/v2.2.0-RELEASE-REVIEW.md)
+  is a local, gitignored record; see the [media review status](Scripts/ExerciseMedia/README.md)
+  for the outstanding content, physical-device and agreement checks.
+
 ## 2.1.0 — Build 5
 
 - Follow an active workout and its rest countdown on the Lock Screen and in the
