@@ -1,7 +1,7 @@
 # OnlyBody & OnlyWeights
 
 Two iOS apps sharing SwiftUI and SwiftData code, with independent on-device stores and no third-party app dependencies.
-The repository folder is `onlybody`; `Apps/iOS` contains both iOS products. `Website`, `Scripts` and `Design` are siblings of `Apps` at the repository root.
+The repository folder is `onlybody`; `Apps/iOS` contains both iOS products. `Website`, `Scripts` and `Assets` are siblings of `Apps` at the repository root.
 
 ## Development
 
@@ -44,7 +44,7 @@ DESTINATION='platform=iOS Simulator,name=iPhone 17 Pro' Scripts/validate.sh full
 
 `quick` runs lint, validator regression tests, catalog/boundary/localization checks, and unit/integration tests for both products. `full` (also the default with no argument) adds functional UI tests, Release simulator builds, bundle isolation checks and temporary seed generation. Both modes explicitly select the Functional test plan; neither creates visual screenshot sets. Results go to a unique `/tmp/apps-validation-*` directory; override with `VALIDATION_OUTPUT`. Select another Xcode with `DEVELOPER_DIR` if needed.
 
-Functional UI coverage includes the five workout journeys, language selection/search and control hit areas. Explicit screenshots are retained only for failed functional tests; Xcode's own diagnostics remain enabled. HTML design references remain in `Design/`.
+Functional UI coverage includes the five workout journeys, language selection/search and control hit areas. Explicit screenshots are retained only for failed functional tests; Xcode's own diagnostics remain enabled. Use SwiftUI previews and the native screen matrix for view iteration.
 
 ### Optional screenshots
 

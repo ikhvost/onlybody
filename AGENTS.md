@@ -38,7 +38,7 @@ View ──reads──> ViewModel (@Observable @MainActor) ──calls──> Re
 
 - **Views** depend only on their ViewModel — never access repositories or services directly. No `@Query`. No `ModelContext`. No SwiftData imports.
 - **ViewModels** depend on repository *protocols* — never on concrete SwiftData types. All screen state and logic. Testable with mock repositories.
-- **Repositories** — protocols (`ExerciseRepository`, `WorkoutRepository`, `SessionRepository`) with `SwiftData*` implementations. Contracts expose only detached snapshots. Save entire workout aggregates atomically; do not introduce a separate `deleteItems` write. Swap implementations without touching views or view models.
+- **Repositories** — protocols (`ExerciseRepository`, `WorkoutRepository`, `SessionRepository`, `SmartDailyVariantRepository`) with `SwiftData*` implementations. Contracts expose only detached snapshots. Save entire workout aggregates atomically; do not introduce a separate `deleteItems` write. Swap implementations without touching views or view models.
 - **Services** — contain logic that doesn't belong in a ViewModel. Prefer pure structs when there is no mutable state across time (`SmartWorkoutGenerator`, `StreakCalculator`). Use `@MainActor @Observable final class` only when the service owns persistent mutable state (`RestTimer` manages countdown state across view renders). No SwiftData imports in services.
 - **Repository injection** — repositories are concrete-typed once at app entry in `BodyweightApp.init()`, then injected into `AppComposition` as protocol types. App-level navigation roots use that factory; feature screens receive ViewModels. ViewModels never see concrete SwiftData types.
 - **No ViewModel-to-ViewModel dependencies.** Pass data through navigation, not shared state.
@@ -46,7 +46,7 @@ View ──reads──> ViewModel (@Observable @MainActor) ──calls──> Re
 
 ### Preview Repositories
 
-`Shared/Preview/` contains `#if DEBUG`-gated structs (`PreviewWorkoutRepository`, `PreviewExerciseRepository`, `PreviewSessionRepository`) that implement each repository protocol with fixed fixture data. Reads return injected arrays; writes are no-ops. Use these in `#Preview` blocks — never create a live `ModelContainer` in previews. The DEBUG app initializer detects `XCODE_RUNNING_FOR_PREVIEWS` and injects preview repositories without opening or copying a store. Inject fixtures into preview repositories so view `.task` loads preserve the data.
+`Shared/Preview/` contains `#if DEBUG`-gated structs (`PreviewWorkoutRepository`, `PreviewExerciseRepository`, `PreviewSessionRepository`, `PreviewSmartDailyVariantRepository`) that implement each repository protocol with fixed fixture data. Reads return injected arrays; writes are no-ops. Use these in `#Preview` blocks — never create a live `ModelContainer` in previews. The DEBUG app initializer detects `XCODE_RUNNING_FOR_PREVIEWS` and injects preview repositories without opening or copying a store. Inject fixtures into preview repositories so view `.task` loads preserve the data.
 
 ```swift
 #if DEBUG
@@ -61,7 +61,7 @@ struct PreviewWorkoutRepository: WorkoutRepository {
 
 ### Project structure
 
-The repository root is `onlybody`; `Apps/`, `Website/`, `Scripts/` and `Design/` are sibling directories; the Xcode project is `Apps/iOS/Apps.xcodeproj`. The source root is `Apps/iOS/Sources/`; source and test groups are filesystem-synchronized.
+The repository root is `onlybody`; `Apps/`, `Website/`, `Scripts/` and `Assets/` are sibling directories; the Xcode project is `Apps/iOS/Apps.xcodeproj`. The source root is `Apps/iOS/Sources/`; source and test groups are filesystem-synchronized.
 New files need no project edits. New targets do require project configuration.
 
 - `App/`: composition root, `AppComposition`, system tab shell and per-tab navigation roots.
@@ -72,7 +72,9 @@ New files need no project edits. New targets do require project configuration.
 - `Core/Persistence/Models/`: unchanged SwiftData entities. Preserve their names and schema for store compatibility.
 - `Core/Persistence/Mapping/`: explicit persistence-to-domain mapping.
 - `Core/Persistence/Repositories/`: SwiftData writes in private contexts, autosave off, one save with rollback per aggregate.
-- `Features/{Train,Log,Library}/`: screens, ViewModels and feature-local components, one type per file.
+- `Features/{Train,Log,Library,Settings}/`: screens, ViewModels and feature-local components.
+- `Core/{Notifications,LiveActivity,Audio,Preferences,Connectivity}/`: system adapters wired at the composition boundary.
+- `Apps/iOS/WorkoutActivity/`: shared Live Activity extension UI for both products.
 - `Shared/{Theme,Icons,Components,Preview}/`: visual primitives, tokens and no-op preview repositories.
 - `Apps/iOS/Products/{OnlyBody,OnlyWeights}/`: target-specific generated catalogs, equipment lists, seed SQLite and brand assets. Shared source stays in `Apps/iOS/Sources/`; do not duplicate features.
 - `Apps/iOS/Configuration/`: shared App.xcconfig and product identity settings.
@@ -143,8 +145,6 @@ enum AppTab: Hashable { case train, log, library }
 
 - Use `foregroundStyle()` over `foregroundColor()`.
 - Use `clipShape(.rect(cornerRadius:))` over `cornerRadius()`.
-- Use `navigationDestination(for:)` with `NavigationStack`. No `NavigationLink`.
-- No `ObservableObject` — `@Observable` classes only.
 - No single-parameter `onChange()`. Use the two-parameter variant.
 - No `onTapGesture()` — use `Button` instead (unless you need tap location).
 - No `UIScreen.main.bounds`.
@@ -158,7 +158,6 @@ enum AppTab: Hashable { case train, log, library }
 - No UIKit colors in SwiftUI.
 - **Font sizes:** OnlyBody uses a custom fixed typography scale in `Theme.swift`. Use `Theme.fontSans` and `Theme.fontMono` — NOT Dynamic Type text styles (`.title`, `.body`, etc.). System tab bar labels retain system typography.
 - **Spacing/padding:** Always use `Theme` spacing constants. Do not call `.padding()` without a value — always reference `Theme.horizontalPadding` or an explicit `Theme` constant.
-- **Tab navigation:** Use `TabView` and `Tab` in `AppTabView` with the `AppTab` enum. See Navigation section.
 - Button with image must include text: `Button("Label", systemImage: "icon", action: ...)` — but prefer custom icon views over SF Symbols.
 - **Icons:** Custom icons live in `Shared/Icons/` — one file per icon (e.g. `TrainIcon.swift`, `ChevronIcon.swift`). Each is a `Canvas`-based `View`. SF Symbols are permitted for the system tab bar; retain custom icons inside feature screens. Shared config lives in `AppIcons.swift` (`viewport: CGFloat = 24`, `stroke: StrokeStyle`). Canonical pattern:
   ```swift
@@ -230,7 +229,7 @@ enum AppTab: Hashable { case train, log, library }
 
 ## Testing
 
-Framework: **Swift Testing** (`@Test`, `#expect`) for unit and integration tests. **XCTest + XCUIAutomation is allowed only in `Apps/iOS/UITests/`**, compiled by `onlybodyUITests` / `onlyweightsUITests`. Functional coverage includes the five E2E journeys, localization smoke and control hit areas. Visual capture suites are opt-in.
+Framework: **Swift Testing** (`@Test`, `#expect`) for unit and integration tests. **XCTest + XCUIAutomation is allowed only in `Apps/iOS/UITests/`**, compiled by `onlybodyUITests` / `onlyweightsUITests`. Functional coverage includes the journeys below, localization smoke and control hit areas.
 
 ```swift
 @MainActor
@@ -248,13 +247,11 @@ struct FooViewModelTests {
 - Unit-test all ViewModels using mock repository protocols. Mocks live in `Apps/iOS/Tests/Support/` (`MockWorkoutRepository`, `MockExerciseRepository`, `MockSessionRepository`). Each mock has a `shouldThrow` flag and records writes for assertion. Timer tests inject `ManualWorkoutTimeSource`; do not wait for wall-clock seconds.
 - Integration-test repositories with in-memory `ModelContainer` (`ModelConfiguration(isStoredInMemoryOnly: true)`).
 - Maintain the same five E2E journeys for both schemes: create/relaunch, edit, complete/history, early finish, navigation. Use Debug-only UUID-isolated file stores and real repositories, accessibility identifiers and bounded waits.
-- SwiftUI Previews and the HTML reference for view iteration. Ordinary successful functional tests do not explicitly capture screenshots; retain failure screenshots and Xcode diagnostics.
+- Use SwiftUI previews and the opt-in native screen matrix for view iteration. Ordinary successful functional tests do not explicitly capture screenshots; retain failure screenshots and Xcode diagnostics.
 - Use the Visual test plan only for requested store/release screenshots or the native design matrix; select the required suite with `-only-testing`. See README for commands. This does not replace mandatory media-review or release evidence.
 
 ## Code Quality
 
-- One type per file — no multiple structs/classes/enums in one file.
-- Feature-based folder organization.
 - Add documentation comments for public interfaces.
 - No secrets in the repository.
 - If the project uses Localizable.xcstrings, use symbol keys accessed via generated symbols like `Text(.helloWorld)`.

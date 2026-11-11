@@ -13,8 +13,6 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>DMSans-Variable.ttf</string>
-		<string>DMMono-Regular.ttf</string>
-		<string>DMMono-Medium.ttf</string>
 	</array>
 	<key>CFBundleDisplayName</key>
 	<string>$(APP_DISPLAY_NAME)</string>

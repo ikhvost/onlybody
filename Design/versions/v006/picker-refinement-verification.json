@@ -1,9 +1,0 @@
-{
-  "scope": "v006 picker chevron removal; desktop Chrome",
-  "cases": [
-    "OnlyBody: no row chevrons; plus retained; guide/back/add work",
-    "OnlyWeights: no row chevrons; plus retained; guide/back/add work"
-  ],
-  "issues": [],
-  "status": "PASS"
-}

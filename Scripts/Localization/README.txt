@@ -21,10 +21,12 @@ names are preserved. Video audio, author/channel names and externally hosted
 policy pages are not translated by this app localization.
 
 When adding a catalog exercise or equipment label, add a stable resource key,
-all five translations, and its entry in CatalogLocalization.swift.
+all five translations, and its entry in the product ExerciseLocalizationCatalog
+for exercises or shared CatalogLocalization for equipment labels.
 Validate with python3 Scripts/Validation/check-localizations.py.
 Focused tests: LocalizationTests, LibraryViewModelTests and
-ExerciseHistoryViewModelTests; LocalizationSmokeTests captures each language.
+ExerciseHistoryViewModelTests; LocalizationSmokeTests checks each language
+without explicitly capturing successful runs. Use the opt-in Visual plan for images.
 Capture localized Store screenshots before upload.
 The localization QA screenshots are verification evidence, not final Store art.
 
