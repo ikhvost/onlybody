@@ -27,8 +27,8 @@ nonisolated struct SmartDurationFiller: Sendable {
                     && (anchor == nil || !fixedNames.contains(anchor?.exercise.name ?? "") || exercise.name == anchor?.exercise.name)
             }
             let options = exercises.flatMap { exercise in
-                prescription.setRange(level: configuration.level).map { sets in
-                    var movement = prescription.movement(exercise, level: configuration.level)
+                prescription.setRange.map { sets in
+                    var movement = prescription.movement(exercise)
                     movement.sets = sets
                     return movement
                 }

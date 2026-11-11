@@ -9,6 +9,8 @@ protocol WorkoutRepository: Sendable {
     func workout(by id: UUID) async throws -> WorkoutSnapshot?
     /// Atomically replaces a workout aggregate by UUID; failure leaves stored data unchanged.
     func save(_ workout: WorkoutSnapshot) async throws
+    /// Atomically saves a reviewed Smart workout and its daily list in one transaction.
+    func save(_ workout: WorkoutSnapshot, dailyVariant: SmartDailyVariant) async throws
     /// Deletes only the template and its owned items; saved sessions and exercises remain intact.
     func delete(by id: UUID) async throws
 }

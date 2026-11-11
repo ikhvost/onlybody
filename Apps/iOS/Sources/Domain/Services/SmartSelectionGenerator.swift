@@ -36,23 +36,11 @@ nonisolated struct SmartSelectionGenerator: Sendable {
 
     func isEligible(_ exercise: ExerciseSnapshot, configuration: SmartWorkoutConfiguration, ignoringLoads: Bool = false) -> Bool {
         guard let metadata = exercise.smartMetadata,
-              SmartRegionRestrictions.allows(exercise.name, excluding: configuration.excludedRegions),
-              let exerciseLevel = ExerciseDifficulty.ratedLevels.firstIndex(of: exercise.difficulty),
-              let maximumLevel = ExerciseDifficulty.ratedLevels.firstIndex(of: configuration.level),
-              exerciseLevel <= maximumLevel, !configuration.excludedExercises.contains(exercise.name) else { return false }
+              SmartRegionRestrictions.allows(exercise.name, excluding: configuration.excludedRegions) else { return false }
         let equipmentMatches = configuration.equipmentMode == .standardGym || exercise.equipment.allSatisfy {
             $0 == "None" || configuration.availableEquipment.contains($0)
         }
         return equipmentMatches && (ignoringLoads || metadata.loads.isDisjoint(with: configuration.excludedLoads))
-    }
-
-    func conflicts(_ exercise: ExerciseSnapshot, configuration: SmartWorkoutConfiguration) -> [ExerciseLoad] {
-        guard let metadata = exercise.smartMetadata else { return [] }
-        return ExerciseLoad.allCases.filter { metadata.loads.contains($0) && configuration.excludedLoads.contains($0) }
-    }
-
-    func uncoveredNeeds(configuration: SmartWorkoutConfiguration, items: [WorkoutItemSnapshot]) -> [String] {
-        SmartTargetPolicy().gaps(targets: configuration.targetMuscleGroups, exercises: items.compactMap(\.exercise))
     }
 
     /// At most three exercises are needed to establish the requested coverage. Keep several
@@ -63,8 +51,8 @@ nonisolated struct SmartSelectionGenerator: Sendable {
         let budget = max(0, min(configuration.durationMinutes, 120)) * 60
         var initial = candidates.indices.filter { anchors.contains(candidates[$0].name) }
         let movements = candidates.map { exercise in
-            var movement = prescription.movement(exercise, level: configuration.level)
-            movement.sets = prescription.setRange(level: configuration.level).lowerBound
+            var movement = prescription.movement(exercise)
+            movement.sets = prescription.setRange.lowerBound
             return movement
         }
         if prescription.totalSeconds(initial.map { movements[$0] }) > budget { initial = [] }

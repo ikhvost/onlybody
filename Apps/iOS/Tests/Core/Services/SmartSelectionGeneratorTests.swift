@@ -61,13 +61,25 @@ struct SmartSelectionGeneratorTests {
         #expect(next.movements.filter { $0.exercise.smartMetadata?.role == .main }.map(\.exercise.name) == anchors)
     }
 
-    @Test func exclusionsNeverFallbackAndMissingNeedsBlockStart() throws {
+    @Test func regionRestrictionsNeverFallbackToExcludedExercises() throws {
         let exercises = try catalog()
-        let configuration = SmartWorkoutConfiguration(targetMuscleGroups: ["Full Body"], excludedExercises: Set(exercises.map(\.name)))
+        let configuration = SmartWorkoutConfiguration(targetMuscleGroups: ["Full Body"], excludedRegions: Set(SmartBodyRegion.allCases))
         let result = SmartSelectionGenerator().plan(configuration: configuration, from: exercises)
         #expect(result.movements.isEmpty)
         #expect(!result.canStart)
         #expect(Set(result.uncoveredNeeds) == ["Upper", "Lower", "Core", "variety"])
+    }
+
+    @Test func prescriptionsUseOneSharedDefaultRegardlessOfExerciseDifficulty() throws {
+        let exercises = try catalog()
+        let main = try #require(exercises.first { $0.smartMetadata?.role == .main })
+        let accessory = try #require(exercises.first { $0.smartMetadata?.role == .accessory })
+        let prescription = SmartPrescription()
+        let first = prescription.movement(main)
+        let second = prescription.movement(accessory)
+        #expect(first.sets == 3 && first.reps == 10 && first.restSeconds == 90)
+        #expect(second.sets == 2 && second.reps == 12 && second.restSeconds == 60)
+        #expect(prescription.setRange == 2...3)
     }
 
     @Test func unilateralTimeIncludesBothSidesAndClockUsesLocalCivilDate() throws {

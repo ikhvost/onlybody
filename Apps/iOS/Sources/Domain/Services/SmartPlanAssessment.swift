@@ -1,6 +1,6 @@
 import Foundation
 
-/// Rechecks generated and manually edited daily plans without changing their exercise order.
+/// Assesses automatic selection quality. Manual editing and launching do not use these constraints.
 nonisolated struct SmartPlanAssessment: Sendable {
     let estimatedSeconds: Int
     let gaps: [String]

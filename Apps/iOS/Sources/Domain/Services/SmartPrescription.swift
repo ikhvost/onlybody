@@ -2,23 +2,18 @@ import Foundation
 
 /// Explicit general-fitness defaults; never assigns weight or shortens rest to fill time.
 nonisolated struct SmartPrescription: Sendable {
-    func setRange(level: ExerciseDifficulty) -> ClosedRange<Int> {
-        switch level {
-        case .advanced: 3...4
-        case .intermediate: 2...4
-        default: 2...3
-        }
-    }
+    let setRange = 2...3
 
-    func movement(_ exercise: ExerciseSnapshot, level: ExerciseDifficulty) -> GeneratedMovement {
+    func movement(_ exercise: ExerciseSnapshot) -> GeneratedMovement {
         let main = exercise.smartMetadata?.role == .main
-        let sets = main ? (level == .advanced ? 4 : 3) : (level == .beginner ? 2 : 3)
-        return GeneratedMovement(exercise: exercise, sets: sets,
-                                 reps: main ? (level == .beginner ? 10 : 8) : 12, restSeconds: main ? 90 : 60)
+        return GeneratedMovement(exercise: exercise, sets: main ? 3 : 2,
+                                 reps: main ? 10 : 12, restSeconds: main ? 90 : 60)
     }
 
     func seconds(_ movement: GeneratedMovement) -> Int {
-        guard let metadata = movement.exercise.smartMetadata else { return 0 }
+        guard let metadata = movement.exercise.smartMetadata else {
+            return WorkoutDurationEstimator().seconds(sets: movement.sets, reps: movement.reps, restSeconds: movement.restSeconds)
+        }
         let repetitions = multiplied(multiplied(movement.reps, by: metadata.repetitionRule.multiplier), by: metadata.repetitionSeconds)
         let perSet = WorkoutDurationEstimator().adding(movement.restSeconds, to: repetitions)
         let work = multiplied(movement.sets, by: perSet)

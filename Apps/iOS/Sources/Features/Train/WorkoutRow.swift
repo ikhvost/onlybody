@@ -17,7 +17,7 @@ struct WorkoutRow: View {
                         }
                         Text(workout.name).font(Theme.fontSans(Theme.typeCard, .bold)).foregroundStyle(Theme.text)
                         if let settings = workout.smartSettings {
-                            Text(String(localized: .uiMinutesCount(settings.configuration.durationMinutes)) + " · " + settings.configuration.level.label)
+                            Text(String(localized: .uiMinutesCount(settings.configuration.durationMinutes)))
                                 .font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.text2)
                         } else {
                             Text(String(localized: .uiWorkoutSummary(

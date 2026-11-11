@@ -45,6 +45,16 @@ final class SwiftDataWorkoutRepository: WorkoutRepository {
     }
 
     func save(_ value: WorkoutSnapshot) async throws {
+        try saveAggregate(value, dailyVariant: nil)
+    }
+
+    func save(_ value: WorkoutSnapshot, dailyVariant: SmartDailyVariant) async throws {
+        guard dailyVariant.workoutID == value.id, dailyVariant.settingsRevision == value.smartSettings?.revision,
+              dailyVariant.items == value.items else { throw PersistenceError.inconsistentDailyVariant }
+        try saveAggregate(value, dailyVariant: dailyVariant)
+    }
+
+    private func saveAggregate(_ value: WorkoutSnapshot, dailyVariant: SmartDailyVariant?) throws {
         do {
             let id = value.id
             var descriptor = FetchDescriptor<Workout>(predicate: #Predicate { $0.id == id })
@@ -52,6 +62,7 @@ final class SwiftDataWorkoutRepository: WorkoutRepository {
             let model = try context.fetch(descriptor).first ?? Workout()
             if model.modelContext == nil { context.insert(model) }
             try saveSettings(value.smartSettings, workoutID: value.id)
+            if let dailyVariant { try saveDailyVariant(dailyVariant) }
             model.id = value.id
             model.name = value.name
             model.mode = value.mode
@@ -79,6 +90,20 @@ final class SwiftDataWorkoutRepository: WorkoutRepository {
             context.rollback()
             throw error
         }
+    }
+
+    private func saveDailyVariant(_ variant: SmartDailyVariant) throws {
+        let key = variant.id
+        var descriptor = FetchDescriptor<SmartDailyVariantRecord>(predicate: #Predicate { $0.key == key })
+        descriptor.fetchLimit = 1
+        let record = try context.fetch(descriptor).first ?? SmartDailyVariantRecord()
+        if record.modelContext == nil { context.insert(record) }
+        record.key = key
+        record.workoutID = variant.workoutID
+        record.localDay = variant.localDay
+        record.settingsRevision = variant.settingsRevision
+        record.createdAt = variant.createdAt
+        record.payload = try JSONEncoder().encode(variant)
     }
 
     private func snapshot(_ model: Workout) throws -> WorkoutSnapshot {

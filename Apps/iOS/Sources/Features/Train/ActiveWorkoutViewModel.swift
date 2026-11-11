@@ -252,30 +252,12 @@ final class ActiveWorkoutViewModel {
     }
 
     func replaceExercise(_ id: UUID, with exercise: ExerciseSnapshot) {
-        if let smartConfiguration, !SmartSelectionGenerator().isEligible(
-            exercise, configuration: smartConfiguration) { return }
         guard canReplace(id), !hasInvalidNumbers, let index = items.firstIndex(where: { $0.id == id }) else { return }
         items[index].exercise = exercise
         previousOccurrence[id] = 0
         rows = rows.filter { $0.key.itemID != id }
         revealedWeightExercises.remove(id)
         publishActivity()
-    }
-
-    /// Explicit future-only edit. The active list and completed sets remain untouched.
-    func excludeFromFuture(_ exercise: ExerciseSnapshot) async -> Bool {
-        do {
-            guard var workout = try await workoutsRepository.workout(by: workoutId), var settings = workout.smartSettings else {
-                replacementError = String(localized: .uiWorkoutNotFound)
-                return false
-            }
-            settings.configuration.excludedExercises.insert(exercise.name)
-            settings.mainExerciseNames.removeAll { $0 == exercise.name }
-            settings.revision = UUID()
-            workout.smartSettings = settings
-            try await workoutsRepository.save(workout)
-            return true
-        } catch { replacementError = String(localized: .uiCouldNotSaveSession); return false }
     }
 
     func loadReplacementExercises() async {

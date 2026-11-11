@@ -12,9 +12,10 @@ struct SmartRegionRestrictionsTests {
         let exercises = try BundledExerciseCatalog.load(from: #require(Bundle.main.url(forResource: "default", withExtension: "store")))
         let configuration = SmartWorkoutConfiguration(targetMuscleGroups: ["Chest"], excludedRegions: [.knee, .hip])
         let plan = SmartSelectionGenerator().plan(configuration: configuration, from: exercises)
-        #expect(plan.movements.isEmpty)
-        #expect(!plan.canStart)
-        #expect(!plan.uncoveredNeeds.isEmpty)
+        #expect(plan.movements.allSatisfy { $0.exercise.equipment.allSatisfy { $0 == "None" } })
+        #expect(plan.movements.allSatisfy {
+            SmartRegionRestrictions.allows($0.exercise.name, excluding: configuration.excludedRegions)
+        })
     }
 
     @Test func everySmartProfileHasExplicitRegionReview() throws {

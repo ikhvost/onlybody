@@ -23,11 +23,13 @@ Bundle IDs: `ikhvost.onlybody` and `ikhvost.onlyweights`. Both apps use `Documen
 
 ## Smart Selection
 
-Smart accepts one preset (`Full Body`, `Upper`, or `Lower`) or up to three individual muscle groups. Invalid older selections must be corrected explicitly; opening a saved workout never truncates its targets or replaces its reviewed exercise order.
+Smart starts with muscle groups, followed by duration, equipment and injury-region restrictions. It accepts one preset (`Full Body`, `Upper`, or `Lower`) or up to three individual muscle groups. The generated daily list opens in the same editor as a manual workout, with guides, adding/removing exercises, unrestricted replacement, ordering and editable sets, reps and rest.
 
-The generator keeps level, equipment, region and exercise exclusions strict. Coverage uses primary muscles rather than a required Main/Additional role or movement pattern. Upper/Lower need two exercises covering two regional muscle groups; Full Body needs three exercises covering upper body, lower body and core. Individual targets each need coverage, including single-exercise plans for a single muscle group.
+Automatic selection respects equipment, injury regions and legacy load restrictions. Coverage uses primary muscles. Sets range from 2–3; defaults are 3 × 10 with 90 seconds rest for main exercises and 2 × 12 with 60 seconds rest for accessories. There is no difficulty setting or permanent exercise exclusion. The generator still aims for the requested duration and retains its daily variation and main-exercise anchors.
 
-Selection varies exercise combinations and sets within level bounds to aim for 90–100% of the requested duration. Estimates include transitions and rests except the final session rest. A covered but shorter plan requires explicit acceptance; inadequate coverage blocks saving and starting. Day-specific replacement, drag ordering and shorter-plan acceptance persist in the existing daily payload. Replacement and changes to the final rest reassess acceptance. Future exclusion remains a separate action.
+Manual edits apply only to the reviewed day. Any nonempty list with valid numbers can be saved or started, regardless of duration, original targets, equipment or injury restrictions. No short-plan confirmation is required and the editor never trims the list. Opening or editing does not write; Save/Start commits the workout and daily payload atomically. An open editor retains its day across midnight; a fresh opening resolves the new local day. Active sessions use a detached reviewed snapshot.
+
+The SwiftData schema and existing stores remain unchanged. Legacy level, excluded-exercise and acceptance fields are retained for payload compatibility but no longer control behavior. Cached lists, schedule, history and restriction settings remain available.
 
 ## Validation
 

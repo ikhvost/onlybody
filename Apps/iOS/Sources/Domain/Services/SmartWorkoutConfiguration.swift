@@ -6,10 +6,12 @@ nonisolated struct SmartWorkoutConfiguration: Sendable, Equatable, Codable {
     var targetMuscleGroups: [String]
     var durationMinutes: Int
     var restSeconds: Int?
+    // Retained in persisted payloads; automatic selection no longer uses difficulty.
     var level: ExerciseDifficulty
     var equipmentMode: SmartEquipmentMode
     var availableEquipment: Set<String>
     var excludedLoads: Set<ExerciseLoad>
+    // Compatibility only: old permanent exclusions no longer affect selection.
     var excludedExercises: Set<String>
     var excludedRegions: Set<SmartBodyRegion>
 

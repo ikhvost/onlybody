@@ -8,44 +8,6 @@ import Testing
 
 @MainActor
 struct SmartSelectionViewModelTests {
-    @Test func multipleProblemsPersistAndChangesInvalidateTheDailyVariant() async throws {
-        let workouts = MockWorkoutRepository()
-        let variants = MockSmartDailyVariantRepository()
-        let repository = try exercises()
-        let model = SmartSelectionViewModel(workouts: workouts, exercises: repository, variants: variants,
-            preferences: WorkoutPreferences(), targets: ["Chest"], equipmentMode: .standardGym)
-        await model.load()
-        model.configuration.excludedLoads = [.jumping]
-        model.toggleRegion(.knee)
-        model.toggleRegion(.hip)
-        model.toggleRegion(.hip)
-        #expect(model.configuration.excludedRegions == [.knee])
-        model.toggleRegion(.hip)
-        await model.preview()
-        await model.acceptShortPlan()
-        let saved = try #require(await model.save())
-        workouts.stubbedWorkouts = [saved]
-        let reopened = SmartSelectionViewModel(workouts: workouts, exercises: repository, variants: variants,
-            preferences: WorkoutPreferences(), workoutID: saved.id, opensPreview: true)
-        await reopened.load()
-        #expect(reopened.configuration.excludedRegions == [.knee, .hip])
-        #expect(reopened.configuration.excludedLoads == [.jumping])
-        #expect(reopened.variant == model.variant)
-        reopened.toggleRegion(.hip)
-        await reopened.preview()
-        await reopened.acceptShortPlan()
-        #expect(reopened.variant?.settingsRevision != model.variant?.settingsRevision)
-        reopened.removeLegacyLoad(.jumping)
-        #expect(reopened.configuration.excludedRegions == [.knee])
-        #expect(reopened.configuration.excludedLoads.isEmpty)
-        reopened.toggleRegion(.shoulder)
-        await reopened.preview()
-        await reopened.acceptShortPlan()
-        #expect(!reopened.canStart)
-        #expect(!reopened.gaps.isEmpty)
-        #expect(await reopened.save() == nil)
-    }
-
     private func exercises() throws -> MockExerciseRepository {
         let repository = MockExerciseRepository()
         repository.stubbedAllExercises = try BundledExerciseCatalog.load(
@@ -53,151 +15,114 @@ struct SmartSelectionViewModelTests {
         return repository
     }
 
-    @Test func backStepsPreserveDraftAndOnlyActualEditsRequireDiscard() async throws {
-        let viewModel = SmartSelectionViewModel(workouts: MockWorkoutRepository(), exercises: try exercises(),
-            variants: MockSmartDailyVariantRepository(), preferences: WorkoutPreferences(), targets: ["Chest"], equipmentMode: .standardGym)
-        await viewModel.load()
-        #expect(!viewModel.hasUnsavedChanges)
-        #expect(!viewModel.hasPreviousStep)
-        viewModel.name = "Keep my draft"
-        viewModel.showConditions()
-        #expect(viewModel.hasPreviousStep)
-        await viewModel.goBack()
-        #expect(viewModel.stage == .setup)
-        #expect(viewModel.name == "Keep my draft")
-        #expect(viewModel.hasUnsavedChanges)
-        viewModel.showConditions()
-        await viewModel.preview()
-        await viewModel.acceptShortPlan()
-        await viewModel.goBack()
-        #expect(viewModel.stage == .conditions)
-        await viewModel.preview()
-        await viewModel.acceptShortPlan()
-        viewModel.edit()
-        #expect(viewModel.hasPreviousStep)
-        await viewModel.goBack()
-        #expect(viewModel.stage == .preview)
-        #expect(viewModel.name == "Keep my draft")
+    @Test func generationAndBackStepsNeverWriteAndRetainRestrictions() async throws {
+        let workouts = MockWorkoutRepository()
+        let variants = MockSmartDailyVariantRepository()
+        let model = SmartSelectionViewModel(workouts: workouts, exercises: try exercises(), variants: variants,
+                                            targets: ["Chest"], equipmentMode: .standardGym)
+        await model.load()
+        #expect(!model.hasUnsavedChanges)
+        model.showConditions()
+        model.toggleRegion(.knee)
+        model.toggleRegion(.hip)
+        model.configuration.excludedLoads = [.jumping]
+        model.goBack()
+        #expect(model.stage == .setup)
+        #expect(model.configuration.excludedRegions == [.knee, .hip])
+        #expect(model.hasUnsavedChanges)
+        model.showConditions()
+        await model.preview()
+        let first = try #require(model.editorContext)
+        #expect(first.workout.smartSettings?.configuration.excludedLoads == [.jumping])
+        #expect(first.requiresSave)
+        #expect(workouts.savedWorkouts.isEmpty)
+        #expect(variants.writes.isEmpty)
+        model.edit()
+        model.toggleRegion(.hip)
+        await model.preview()
+        #expect(model.editorContext?.variant.settingsRevision != first.variant.settingsRevision)
+        #expect(model.editorContext?.workout.smartSettings?.configuration.excludedRegions == [.knee])
     }
 
-    @Test func savedPreviewExitsWithoutDiscardAndEditingReturnsToPreview() async throws {
+    @Test func emptyGenerationStillOpensEditableDraft() async throws {
+        let model = SmartSelectionViewModel(workouts: MockWorkoutRepository(), exercises: try exercises(),
+            variants: MockSmartDailyVariantRepository(), targets: ["Full Body"], equipmentMode: .standardGym)
+        await model.load()
+        model.configuration.excludedRegions = Set(SmartBodyRegion.allCases)
+        await model.preview()
+        #expect(model.stage == .preview)
+        #expect(model.editorContext?.variant.items.isEmpty == true)
+    }
+
+    @Test func openEditorRetainsItsDayButNewOpeningResolvesTheNextDay() async throws {
         let workouts = MockWorkoutRepository()
         let variants = MockSmartDailyVariantRepository()
         let repository = try exercises()
-        let creator = SmartSelectionViewModel(workouts: workouts, exercises: repository, variants: variants,
-            preferences: WorkoutPreferences(), targets: ["Chest"], equipmentMode: .standardGym)
-        await creator.load()
-        await creator.preview()
-        await creator.acceptShortPlan()
-        let saved = try #require(await creator.save())
-        workouts.stubbedWorkouts = [saved]
+        var now = Date(timeIntervalSince1970: 1_762_050_000)
+        let model = SmartSelectionViewModel(workouts: workouts, exercises: repository, variants: variants,
+            targets: ["Full Body"], equipmentMode: .standardGym, now: { now })
+        await model.load()
+        await model.preview()
+        let first = try #require(model.editorContext)
+        workouts.stubbedWorkouts = [first.workout]
+        variants.variants = [first.variant]
+        now = now.addingTimeInterval(86_400)
+        await model.preview()
+        #expect(model.editorContext?.variant == first.variant)
         let reopened = SmartSelectionViewModel(workouts: workouts, exercises: repository, variants: variants,
-            preferences: WorkoutPreferences(), workoutID: saved.id, opensPreview: true)
+            workoutID: first.workout.id, opensPreview: true, now: { now })
         await reopened.load()
-        #expect(!reopened.hasPreviousStep)
-        #expect(!reopened.hasUnsavedChanges)
-        reopened.edit()
-        reopened.name = "Edited name"
-        #expect(reopened.hasPreviousStep)
-        await reopened.goBack()
-        #expect(reopened.stage == .preview)
-        #expect(reopened.hasUnsavedChanges)
-        #expect(reopened.name == "Edited name")
-        reopened.edit()
-        reopened.configuration.targetMuscleGroups = []
-        await reopened.goBack()
-        #expect(reopened.stage == .preview)
-        #expect(!reopened.canStart)
-        #expect(!reopened.gaps.isEmpty)
+        #expect(reopened.editorContext?.variant.localDay != first.variant.localDay)
+        #expect(reopened.editorContext?.workout.smartSettings == first.workout.smartSettings)
+        #expect(variants.writes.isEmpty)
     }
 
-    @Test func savesSettingsAndReviewedVariantThenReopensIdenticalDay() async throws {
-        let workouts = MockWorkoutRepository()
-        let variants = MockSmartDailyVariantRepository()
-        let exercises = try exercises()
-        let preferences = WorkoutPreferences()
+    @Test func cachedLegacyListIsNotRevalidatedOrReplaced() async throws {
+        let repository = try exercises()
+        let first = try #require(repository.stubbedAllExercises.first)
+        let settings = SmartWorkoutSettings(configuration: SmartWorkoutConfiguration(
+            targetMuscleGroups: ["Upper", "Chest"], level: .advanced, excludedExercises: [first.name]))
+        let workout = WorkoutSnapshot(name: "Legacy", smartSettings: settings, items: [WorkoutItemSnapshot(exercise: first)])
         let now = Date()
-        let viewModel = SmartSelectionViewModel(workouts: workouts, exercises: exercises, variants: variants,
-            preferences: preferences, targets: ["Chest"], equipmentMode: .standardGym, now: { now })
-        await viewModel.load()
-        viewModel.name = "Daily chest"
-        viewModel.configuration.level = .advanced
-        viewModel.scheduledDays = ["Mon"]
-        await viewModel.preview()
-        await viewModel.acceptShortPlan()
-        let reviewed = try #require(viewModel.variant)
-        let saved = try #require(await viewModel.save())
-        #expect(saved.items == reviewed.items)
-        #expect(saved.smartSettings?.configuration.level == .advanced)
-        #expect(saved.scheduledDays == ["Mon"])
-        #expect(preferences.smartLevel == .advanced)
-        #expect(variants.writes.last == reviewed)
-        workouts.stubbedWorkouts = [saved]
-        let reopened = SmartSelectionViewModel(workouts: workouts, exercises: exercises, variants: variants,
-            preferences: preferences, workoutID: saved.id, opensPreview: true, now: { now })
-        await reopened.load()
-        #expect(reopened.variant == reviewed)
-        #expect(reopened.canStart)
+        let daily = SmartDailyVariant(workoutID: workout.id, localDay: SmartPlanningClock().localDay(at: now),
+            settingsRevision: settings.revision, items: workout.items, estimatedSeconds: 1800,
+            uncoveredNeeds: ["constraints"], createdAt: now, acceptedShortPlan: false)
+        let variants = MockSmartDailyVariantRepository()
+        variants.variants = [daily]
+        let workouts = MockWorkoutRepository()
+        workouts.stubbedWorkouts = [workout]
+        let model = SmartSelectionViewModel(workouts: workouts, exercises: repository, variants: variants,
+            workoutID: workout.id, opensPreview: true, now: { now })
+        await model.load()
+        let context = try #require(model.editorContext)
+        #expect(context.variant == daily)
+        let editor = SessionBuilderViewModel(workouts: workouts, exercises: repository, smartContext: context)
+        await editor.loadExercises()
+        #expect(editor.canSave)
+        #expect(await editor.save())
+        #expect(workouts.savedWorkouts.last?.items == daily.items)
+        #expect(workouts.savedWorkouts.last?.smartSettings?.configuration == settings.configuration)
     }
 
-    @Test func sessionReplacementPersistsTodayWithoutChangingFutureAnchors() async throws {
+    @Test func failedLoadCanRetryWithoutWriting() async throws {
+        let exercises = try exercises()
         let workouts = MockWorkoutRepository()
         let variants = MockSmartDailyVariantRepository()
-        let viewModel = SmartSelectionViewModel(workouts: workouts, exercises: try exercises(), variants: variants,
-            preferences: WorkoutPreferences(), targets: ["Chest"], equipmentMode: .standardGym)
-        await viewModel.load()
-        viewModel.configuration.level = .advanced
-        await viewModel.preview()
-        await viewModel.acceptShortPlan()
-        let saved = try #require(await viewModel.save())
-        let item = try #require(saved.items.first)
-        let replacements = SmartReplacementViewModel(item: item, items: saved.items,
-            configuration: viewModel.configuration, catalog: viewModel.catalog)
-        replacements.equipmentUnavailable = false
-        let replacement = try #require(replacements.alternatives.first)
-        await viewModel.replace(item.id, with: replacement)
-        #expect(variants.writes.last?.items.first?.exercise?.name == replacement.name)
-        await viewModel.acceptShortPlan()
-        let replaced = try #require(await viewModel.save())
-        #expect(replaced.smartSettings?.mainExerciseNames == saved.smartSettings?.mainExerciseNames)
-        #expect(replaced.items.first?.exercise?.name == replacement.name)
-        await viewModel.exclude(replacement)
-        #expect(workouts.savedWorkouts.last?.smartSettings?.configuration.excludedExercises.contains(replacement.name) == true)
-    }
-
-    @Test func savingFailureKeepsDraftAndDoesNotRememberLevel() async throws {
-        let workouts = MockWorkoutRepository()
-        let preferences = WorkoutPreferences()
-        let viewModel = SmartSelectionViewModel(workouts: workouts, exercises: try exercises(), variants: MockSmartDailyVariantRepository(),
-            preferences: preferences, targets: ["Chest"], equipmentMode: .standardGym)
-        await viewModel.load()
-        viewModel.configuration.level = .advanced
-        await viewModel.preview()
-        await viewModel.acceptShortPlan()
-        workouts.shouldThrow = true
-        #expect(await viewModel.save() == nil)
-        #expect(viewModel.errorMessage != nil)
-        #expect(viewModel.variant != nil)
-        #expect(preferences.smartLevel == .beginner)
-    }
-
-    @Test func changedRevisionRegeneratesAndIncompleteVariantCannotSave() async throws {
-        let workouts = MockWorkoutRepository()
-        let viewModel = SmartSelectionViewModel(workouts: workouts, exercises: try exercises(), variants: MockSmartDailyVariantRepository(),
-            preferences: WorkoutPreferences(), targets: ["Chest"], equipmentMode: .standardGym)
-        await viewModel.load()
-        await viewModel.preview()
-        await viewModel.acceptShortPlan()
-        let first = try #require(viewModel.variant)
-        viewModel.configuration.excludedExercises = Set(viewModel.catalog.map(\.name))
-        await viewModel.preview()
-        await viewModel.acceptShortPlan()
-        #expect(viewModel.variant?.settingsRevision != first.settingsRevision)
-        #expect(!viewModel.canStart)
-        #expect(await viewModel.save() == nil)
+        exercises.shouldThrow = true
+        let model = SmartSelectionViewModel(workouts: workouts, exercises: exercises, variants: variants, targets: ["Chest"])
+        await model.load()
+        #expect(model.errorMessage != nil)
+        #expect(model.editorContext == nil)
+        exercises.shouldThrow = false
+        await model.retry()
+        variants.shouldThrow = true
+        await model.preview()
+        #expect(model.errorMessage != nil)
+        variants.shouldThrow = false
+        await model.retry()
+        #expect(model.editorContext != nil)
         #expect(workouts.savedWorkouts.isEmpty)
     }
-
     @Test func activeSessionUsesDetachedReviewedPlanAndStartsWeightsAtZero() async throws {
         let exercise = try #require(try exercises().stubbedAllExercises.first { $0.smartMetadata != nil })
         let item = WorkoutItemSnapshot(targetReps: 8, exercise: exercise)

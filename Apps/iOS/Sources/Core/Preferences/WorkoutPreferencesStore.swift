@@ -7,12 +7,10 @@ struct WorkoutPreferencesStore {
     private let timerSoundKey: String
     private let remindersEnabledKey: String
     private let reminderTimeKey: String
-    private let smartLevelKey: String
     private let weightUnitKey: String
 
     init(defaults: UserDefaults = .standard, namespace: String? = nil) {
         self.defaults = defaults
-        smartLevelKey = namespace.map { "\($0).smartLevel" } ?? "smartLevel"
         timerSoundKey = namespace.map { "\($0).timerSoundEnabled" } ?? "timerSoundEnabled"
         remindersEnabledKey = namespace.map { "\($0).workoutRemindersEnabled" } ?? "workoutRemindersEnabled"
         reminderTimeKey = namespace.map { "\($0).workoutReminderMinutes" } ?? "workoutReminderMinutes"
@@ -30,9 +28,7 @@ struct WorkoutPreferencesStore {
             saveRemindersEnabled: { defaults.set($0, forKey: remindersEnabledKey) },
             saveReminderTime: { defaults.set($0.minutes, forKey: reminderTimeKey) },
             weightUnit: defaults.string(forKey: weightUnitKey).flatMap(WeightUnit.init(rawValue:)) ?? .kilograms,
-            saveWeightUnit: { defaults.set($0.rawValue, forKey: weightUnitKey) },
-            smartLevel: defaults.string(forKey: smartLevelKey).flatMap(ExerciseDifficulty.init(rawValue:)) ?? .beginner,
-            saveSmartLevel: { defaults.set($0.rawValue, forKey: smartLevelKey) }
+            saveWeightUnit: { defaults.set($0.rawValue, forKey: weightUnitKey) }
         )
     }
 }

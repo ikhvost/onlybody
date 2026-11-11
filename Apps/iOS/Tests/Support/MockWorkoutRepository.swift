@@ -10,6 +10,7 @@ final class MockWorkoutRepository: WorkoutRepository {
     var stubbedWorkouts: [WorkoutSnapshot] = []
     var shouldThrow = false
     var deletedIDs: [UUID] = []
+    var savedVariants: [SmartDailyVariant] = []
     var savedWorkouts: [WorkoutSnapshot] = []
 
     func allWorkouts() async throws -> [WorkoutSnapshot] {
@@ -37,6 +38,11 @@ final class MockWorkoutRepository: WorkoutRepository {
             throw TestError.expectedFailure
         }
         savedWorkouts.append(workout)
+    }
+    func save(_ workout: WorkoutSnapshot, dailyVariant: SmartDailyVariant) async throws {
+        if shouldThrow { throw TestError.expectedFailure }
+        savedWorkouts.append(workout)
+        savedVariants.append(dailyVariant)
     }
 
 }

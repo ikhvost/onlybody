@@ -1,120 +1,105 @@
 import XCTest
 
-/// Regressions for shared controls and step-aware back gestures in Smart Selection.
+/// The same editor, guides and unrestricted catalog are used by manual and daily Smart workouts.
 extension WorkoutJourneyTests {
     func testSmartBackGesturesAndKeyboardDismissal() {
         tap("workout.create")
         tap("creation.smart")
-        XCTAssertTrue(app.buttons["smart.continue"].waitForExistence(timeout: 10))
-        XCTAssertFalse(app.buttons["picker.build"].exists)
-        let target = app.buttons["smart.target.Chest"]
-        for _ in 0..<5 where !target.isHittable { app.swipeUp() }
         tap("smart.target.Chest")
-        let back = app.buttons["smart.back"]
-        XCTAssertTrue(back.waitForExistence(timeout: 10))
-        XCTAssertGreaterThanOrEqual(back.frame.width, 44)
-        XCTAssertGreaterThanOrEqual(back.frame.height, 44)
-        let name = app.textFields["smart.name"]
-        for _ in 0..<8 where !name.isHittable { app.swipeUp() }
-        XCTAssertTrue(name.isHittable)
-        name.tap()
-        name.typeText("Smart Interactions")
-        XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 5))
-        let label = app.staticTexts["smart.name.label"]
-        XCTAssertTrue(label.isHittable)
-        // Blank space beside the label must dismiss the keyboard without activating another control.
-        app.coordinate(withNormalizedOffset: .zero)
-            .withOffset(CGVector(dx: app.frame.width - 22, dy: label.frame.midY)).tap()
-        let hidden = XCTNSPredicateExpectation(predicate: NSPredicate(format: "exists == false"), object: app.keyboards.firstMatch)
-        XCTAssertEqual(XCTWaiter.wait(for: [hidden], timeout: 5), .completed)
+        XCTAssertFalse(app.textFields["builder.name"].exists)
         tap("smart.continue")
-        XCTAssertTrue(app.buttons["smart.preview"].waitForExistence(timeout: 5))
-        let foot = app.buttons["smart.region.foot"]
-        let hip = app.buttons["smart.region.hip"]
         tap("smart.region.foot")
         tap("smart.region.hip")
-        XCTAssertTrue(foot.isSelected)
-        XCTAssertTrue(hip.isSelected)
-        tap("smart.region.hip")
-        XCTAssertTrue(foot.isSelected)
-        XCTAssertFalse(hip.isSelected)
-        tap("smart.region.hip")
         smartSwipeBack()
         XCTAssertTrue(app.buttons["smart.continue"].waitForExistence(timeout: 5))
-        XCTAssertFalse(app.alerts.firstMatch.exists)
         tap("smart.continue")
-        XCTAssertTrue(foot.isSelected)
-        XCTAssertTrue(hip.isSelected)
-        tap("smart.back")
-        XCTAssertTrue(app.buttons["smart.continue"].waitForExistence(timeout: 5))
-        tap("smart.back")
+        XCTAssertTrue(app.buttons["smart.region.foot"].isSelected)
+        XCTAssertTrue(app.buttons["smart.region.hip"].isSelected)
+        tap("smart.preview")
+        nameSmartDraft("Smart Interactions")
+        tap("smart.edit")
         XCTAssertTrue(app.alerts.firstMatch.waitForExistence(timeout: 5))
         tap("Stay")
-        tap("smart.continue")
-        tap("smart.preview")
-        XCTAssertTrue(app.buttons["smart.save"].waitForExistence(timeout: 5))
-        smartSwipeBack()
-        XCTAssertTrue(app.buttons["smart.preview"].waitForExistence(timeout: 5))
-        tap("smart.preview")
-        verifySmartReplacementBack()
-        if app.buttons["smart.acceptShortPlan"].exists { tap("smart.acceptShortPlan") }
-        tap("smart.save")
+        XCTAssertTrue(app.textFields["builder.name"].exists)
+        tap("builder.save")
         tap("workout.start.Smart Interactions")
         XCTAssertTrue(app.buttons["smart.start"].waitForExistence(timeout: 5))
-        // A saved, unchanged preview should pop normally, without a discard confirmation.
         smartSwipeBack()
         XCTAssertTrue(app.buttons["workout.start.Smart Interactions"].waitForExistence(timeout: 5))
         XCTAssertFalse(app.alerts.firstMatch.exists)
         app.terminate()
         app.launch()
         tap("workout.edit.Smart Interactions")
+        tap("smart.edit")
         tap("smart.continue")
-        XCTAssertTrue(foot.isSelected)
-        XCTAssertTrue(hip.isSelected)
+        XCTAssertTrue(app.buttons["smart.region.foot"].isSelected)
+        XCTAssertTrue(app.buttons["smart.region.hip"].isSelected)
     }
 
     func testSmartMovementEditingUsesDraftAndPreservesDailyValues() {
-        tap("workout.create")
-        tap("creation.smart")
-        let target = app.buttons["smart.target.Chest"]
-        for _ in 0..<5 where !target.isHittable { app.swipeUp() }
-        tap("smart.target.Chest")
-        let name = app.textFields["smart.name"]
-        for _ in 0..<5 where !name.isHittable { app.swipeUp() }
-        name.tap()
-        name.typeText("Smart Edit")
-        tap("smart.continue")
-        tap("smart.preview")
-        XCTAssertTrue(app.staticTexts["smart.preview.name"].waitForExistence(timeout: 10))
-        XCTAssertEqual(app.staticTexts["smart.preview.name"].label, "Smart Edit")
-        let movement = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "smart.movement.")).firstMatch
-        for _ in 0..<5 where !movement.isHittable { app.swipeUp() }
-        XCTAssertTrue(movement.isHittable)
+        openSmartDraft(target: "Chest", name: "Smart Edit")
+        let movement = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "builder.movement.")).firstMatch
+        XCTAssertTrue(movement.waitForExistence(timeout: 5))
         let movementID = movement.identifier
-        movement.tap()
+        tap(movementID)
         let reps = app.textFields["stepper.Reps.value"]
         XCTAssertTrue(reps.waitForExistence(timeout: 5))
         let original = reps.value as? String
         tap("stepper.Reps.decrease")
-        tap("smart.movement.cancel")
+        tap("builder.movement.cancel")
         tap(movementID)
         XCTAssertTrue(reps.waitForExistence(timeout: 5))
         XCTAssertEqual(reps.value as? String, original)
         tap("stepper.Reps.decrease")
         let edited = reps.value as? String
-        tap("smart.movement.done")
-        if app.buttons["smart.acceptShortPlan"].exists { tap("smart.acceptShortPlan") }
-        tap("smart.save")
+        tap("builder.movement.guide")
+        XCTAssertTrue(app.buttons["movement.back"].waitForExistence(timeout: 5))
+        tap("movement.back")
+        XCTAssertEqual(reps.value as? String, edited)
+        tap("builder.movement.done")
+        tap("builder.save")
         app.terminate()
         app.launch()
         tap("workout.start.Smart Edit")
-        let reopened = app.buttons[movementID]
-        for _ in 0..<5 where !reopened.isHittable { app.swipeUp() }
         tap(movementID)
         XCTAssertTrue(reps.waitForExistence(timeout: 5))
         XCTAssertEqual(reps.value as? String, edited)
     }
 
+    func testSmartCanReplaceAcrossMusclesAddAndRemoveForToday() {
+        openSmartDraft(target: "Chest", name: "Smart Free")
+        let replace = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "builder.replace.")).firstMatch
+        XCTAssertTrue(replace.waitForExistence(timeout: 5))
+        tap(replace.identifier)
+        let search = app.textFields["exercisePicker.search"]
+        XCTAssertTrue(search.waitForExistence(timeout: 5))
+        XCTAssertEqual(search.value as? String, search.placeholderValue)
+        search.tap()
+        search.typeText(JourneyProduct.libraryExercise)
+        tap("exercise.pick.\(JourneyProduct.libraryExercise)")
+        XCTAssertFalse(app.buttons["smart.acceptShortPlan"].exists)
+        XCTAssertTrue(app.buttons["smart.start"].isEnabled)
+        tap("builder.add")
+        XCTAssertTrue(search.waitForExistence(timeout: 5))
+        search.tap()
+        search.typeText(JourneyProduct.exercise)
+        tap("exercise.pick.\(JourneyProduct.exercise)")
+        let movements = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "builder.movement."))
+        let count = movements.count
+        let added = movements.element(boundBy: count - 1)
+        for _ in 0..<6 where !added.isHittable || added.frame.maxY > app.buttons["builder.save"].frame.minY { app.swipeUp() }
+        tap(added.identifier)
+        tap("builder.movement.remove")
+        XCTAssertTrue(app.alerts.firstMatch.waitForExistence(timeout: 5))
+        app.alerts.buttons["Remove exercise"].tap()
+        XCTAssertTrue(app.buttons["builder.save"].waitForExistence(timeout: 5))
+        XCTAssertEqual(movements.count, count - 1)
+        tap("builder.save")
+        app.terminate()
+        app.launch()
+        tap("workout.start.Smart Free")
+        XCTAssertEqual(movements.count, count - 1)
+    }
     func testSmartTargetsAreExclusiveAndLimitedToThree() {
         tap("workout.create")
         tap("creation.smart")
@@ -139,18 +124,8 @@ extension WorkoutJourneyTests {
     }
 
     func testSmartDailyReorderingSurvivesReopening() {
-        tap("workout.create")
-        tap("creation.smart")
-        let fullBody = app.buttons["smart.target.Full Body"]
-        for _ in 0..<5 where !fullBody.isHittable { app.swipeUp() }
-        tap("smart.target.Full Body")
-        let name = app.textFields["smart.name"]
-        for _ in 0..<5 where !name.isHittable { app.swipeUp() }
-        name.tap()
-        name.typeText("Smart Order")
-        tap("smart.continue")
-        tap("smart.preview")
-        let handles = app.descendants(matching: .any).matching(NSPredicate(format: "identifier BEGINSWITH %@", "smart.drag."))
+        openSmartDraft(target: "Full Body", name: "Smart Order")
+        let handles = app.descendants(matching: .any).matching(NSPredicate(format: "identifier BEGINSWITH %@", "builder.drag."))
         let first = handles.element(boundBy: 0)
         let second = handles.element(boundBy: 1)
         XCTAssertTrue(second.waitForExistence(timeout: 10))
@@ -166,35 +141,39 @@ extension WorkoutJourneyTests {
         }
         expectation(for: reordered, evaluatedWith: app)
         waitForExpectations(timeout: 5)
-        if app.buttons["smart.acceptShortPlan"].exists { tap("smart.acceptShortPlan") }
-        tap("smart.save")
+        tap("builder.save")
         tap("workout.start.Smart Order")
         XCTAssertTrue(app.buttons["smart.start"].waitForExistence(timeout: 10))
         XCTAssertEqual(handles.element(boundBy: 0).identifier, secondID)
         XCTAssertEqual(handles.element(boundBy: 1).identifier, firstID)
-        XCTAssertFalse(app.staticTexts["Main"].exists)
-        XCTAssertFalse(app.staticTexts["Additional"].exists)
     }
 
-    private func verifySmartReplacementBack() {
-        let replace = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "smart.replace.")).firstMatch
-        for _ in 0..<5 where !replace.isHittable { app.swipeUp() }
-        XCTAssertTrue(replace.isHittable)
-        replace.tap()
-        XCTAssertTrue(app.textFields["exercisePicker.search"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.buttons["exercisePicker.close"].exists)
-        if app.staticTexts["exercisePicker.empty"].exists {
-            XCTAssertFalse(app.buttons["exercisePicker.clearFilters"].exists)
-        }
-        XCTAssertFalse(app.buttons["smartReplacement.another"].exists)
-        smartSwipeBack()
-        XCTAssertTrue(app.buttons["smart.save"].waitForExistence(timeout: 5))
-        XCTAssertFalse(app.buttons["exercisePicker.close"].exists)
+    private func openSmartDraft(target: String, name: String) {
+        tap("workout.create")
+        tap("creation.smart")
+        tap("smart.target.\(target)")
+        tap("smart.continue")
+        tap("smart.preview")
+        nameSmartDraft(name)
+    }
+
+    private func nameSmartDraft(_ value: String) {
+        let name = app.textFields["builder.name"]
+        XCTAssertTrue(name.waitForExistence(timeout: 10))
+        name.coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.5)).tap()
+        let old = name.value as? String ?? ""
+        name.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: old.count) + value)
+        let label = app.staticTexts["builder.name.label"]
+        app.coordinate(withNormalizedOffset: .zero)
+            .withOffset(CGVector(dx: app.frame.width - 22, dy: label.frame.midY)).tap()
+        let hidden = XCTNSPredicateExpectation(predicate: NSPredicate(format: "exists == false"), object: app.keyboards.firstMatch)
+        XCTAssertEqual(XCTWaiter.wait(for: [hidden], timeout: 5), .completed)
     }
 
     private func smartSwipeBack() {
-        let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0.5)).withOffset(CGVector(dx: 56, dy: 0))
-        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.88, dy: 0.5))
+        // Start outside reorder handles, whose horizontal drag belongs to exercise reordering.
+        let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0.3)).withOffset(CGVector(dx: 56, dy: 0))
+        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.88, dy: 0.3))
         start.press(forDuration: 0.05, thenDragTo: end)
     }
 }

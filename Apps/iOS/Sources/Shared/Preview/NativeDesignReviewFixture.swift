@@ -84,7 +84,8 @@ struct NativeDesignReviewFixture {
 
     @ViewBuilder private func activeScreen(_ index: Int) -> some View {
         switch index {
-        case 5: BuilderMovementEditor(viewModel: builder, movementID: builder.movements.first?.id ?? UUID())
+        case 5: BuilderMovementEditor(viewModel: builder, movementID: builder.movements.first?.id ?? UUID(),
+                                     makeMovement: { MovementDetailViewModel(exercise: $0, allowsVideoLoading: false) }, onCommit: {})
         case 6: ExercisePickerView(viewModel: ExercisePickerViewModel(exercises: [exercise]),
                                    makeMovement: { MovementDetailViewModel(exercise: $0, allowsVideoLoading: false) }, onAdd: { _ in })
         case 7: ActiveWorkoutContentView(viewModel: active, onGuide: {}, onHistory: {})

@@ -2,134 +2,89 @@ import SwiftUI
 
 struct SmartSelectionView: View {
     @State var viewModel: SmartSelectionViewModel
+    let makeBuilder: (SmartEditorContext) -> SessionBuilderViewModel
     let makeMovement: (ExerciseSnapshot) -> MovementDetailViewModel
     let onSaved: () -> Void
     let onStart: (WorkoutSnapshot) -> Void
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.scenePhase) private var scenePhase
     @State private var confirmDiscard = false
-    @State private var confirmDelete = false
-    @State private var dragLocation: CGPoint?
-    @State private var editingItem: WorkoutItemSnapshot?
-    @State private var replacement: WorkoutItemSnapshot?
 
     var body: some View {
-        VStack(spacing: Theme.space0) {
-            NavBarView(title: viewModel.stage == .preview ? String(localized: .uiDesignOverview) : String(localized: .smartSmart)) {
-                NavigationBackButton(action: requestBack).accessibilityIdentifier("smart.back")
-            } trailing: {
-                if viewModel.stage == .preview {
-                    Button(String(localized: .smartSettings)) { viewModel.edit() }
-                        .frame(minWidth: Theme.touchSize, minHeight: Theme.touchSize).accessibilityIdentifier("smart.edit")
-                }
-            }
-            ScrollView {
-                VStack(alignment: .leading, spacing: Theme.sectionGap) {
-                    if let error = viewModel.errorMessage {
-                        Text(error).foregroundStyle(Theme.danger)
-                        GhostButton(title: String(localized: .uiRetry)) { Task { await viewModel.retry() } }
+        Group {
+            if viewModel.stage == .preview, let context = viewModel.editorContext {
+                let editorBack: (() -> Void)? = context.isExisting ? nil : { viewModel.backFromEditor() }
+                SessionBuilderView(viewModel: makeBuilder(context), makeMovement: makeMovement,
+                                   onSaved: onSaved, onDeleted: onSaved, onStart: onStart,
+                                   onBack: editorBack, onSettings: { viewModel.edit() })
+                    .id(context.id)
+            } else {
+                VStack(spacing: Theme.space0) {
+                    NavBarView(title: String(localized: .smartSmart)) {
+                        NavigationBackButton(action: requestBack).accessibilityIdentifier("smart.back")
                     }
-                    switch viewModel.stage {
-                    case .setup: SmartSetupView(viewModel: viewModel)
-                    case .conditions: SmartConditionsView(viewModel: viewModel)
-                    case .preview:
-                        SmartDailyPreviewView(viewModel: viewModel, dragLocation: $dragLocation,
-                                              onEdit: { editingItem = $0 }, onReplace: { replacement = $0 })
-                    }
-                    if viewModel.isExisting, viewModel.stage == .setup {
-                        Button(String(localized: .uiDeleteWorkout), role: .destructive) { confirmDelete = true }
-                            .frame(minWidth: Theme.touchSize, minHeight: Theme.touchSize).foregroundStyle(Theme.danger)
-                    }
-                }.padding(Theme.horizontalPadding)
-            }.scrollIndicators(.hidden).scrollDismissesKeyboard(.interactively)
-                .modifier(ExerciseReorderAutoScroll(location: $dragLocation))
-                .safeAreaInset(edge: .bottom, spacing: Theme.space0) {
-                    VStack(spacing: Theme.space8) {
-                        switch viewModel.stage {
-                        case .setup:
-                            GlassActionButton(title: String(localized: .smartNext), action: { viewModel.showConditions() },
-                                              disabled: !viewModel.hasValidTargets || viewModel.isBusy)
-                                .accessibilityIdentifier("smart.continue")
-                        case .conditions:
-                            GlassActionButton(title: String(localized: .smartPreview), action: { Task { await viewModel.preview() } },
-                                              disabled: viewModel.isBusy).accessibilityIdentifier("smart.preview")
-                        case .preview:
-                            if viewModel.needsShortPlanAcceptance {
-                                GhostButton(title: String(localized: .smartAcceptShortPlan)) {
-                                    Task { await viewModel.acceptShortPlan() }
-                                }.accessibilityIdentifier("smart.acceptShortPlan")
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: Theme.sectionGap) {
+                            if let error = viewModel.errorMessage {
+                                Text(error).foregroundStyle(Theme.danger)
+                                GhostButton(title: String(localized: .uiRetry)) { Task { await viewModel.retry() } }
                             }
-                            HStack(spacing: Theme.space12) {
-                                GhostButton(title: String(localized: .uiSave)) {
-                                    Task { if await viewModel.save() != nil { onSaved() } }
-                                }.disabled(!viewModel.canStart).accessibilityIdentifier("smart.save")
-                                PrimaryButton(title: String(localized: .uiDesignStart), action: {
-                                    Task { if let workout = await viewModel.save() { onStart(workout) } }
-                                }, disabled: !viewModel.canStart).accessibilityIdentifier("smart.start")
+                            if viewModel.stage == .setup {
+                                SmartSetupView(viewModel: viewModel)
+                            } else {
+                                SmartConditionsView(viewModel: viewModel)
+                            }
+                        }.padding(Theme.horizontalPadding)
+                    }.scrollIndicators(.hidden)
+                        .safeAreaInset(edge: .bottom, spacing: Theme.space0) {
+                            if viewModel.stage == .setup {
+                                GlassActionButton(title: String(localized: .smartNext), action: { viewModel.showConditions() },
+                                                  disabled: !viewModel.hasValidTargets || viewModel.isBusy)
+                                    .accessibilityIdentifier("smart.continue").padding(Theme.cardInset)
+                            } else {
+                                GlassActionButton(title: String(localized: .smartPreview), action: { Task { await viewModel.preview() } },
+                                                  disabled: viewModel.isBusy)
+                                    .accessibilityIdentifier("smart.preview").padding(Theme.cardInset)
                             }
                         }
-                    }.padding(Theme.cardInset)
                 }
+                .disabled(viewModel.isBusy)
+                .overlay { if viewModel.isBusy { ProgressView().tint(Theme.accent) } }
+                .background {
+                    if viewModel.stage == .conditions {
+                        BackActionSwipeBridge(isEnabled: !viewModel.isBusy, onBack: requestBack).allowsHitTesting(false)
+                    } else {
+                        BackSwipeBridge {
+                            guard !viewModel.isBusy else { return false }
+                            if viewModel.hasUnsavedChanges { confirmDiscard = true; return false }
+                            return true
+                        }.allowsHitTesting(false)
+                    }
+                }
+            }
         }
         .font(Theme.fontSans(Theme.typeBody)).foregroundStyle(Theme.text).tint(Theme.accent)
         .background(Theme.bg.ignoresSafeArea()).toolbar(.hidden, for: .navigationBar)
-        .disabled(viewModel.isBusy)
-        .overlay { if viewModel.isBusy { ProgressView().tint(Theme.accent) } }
         .task { await viewModel.load() }
-        .onChange(of: scenePhase) { _, phase in if phase == .active { Task { await viewModel.refreshDay() } } }
-        .background {
-            if viewModel.hasPreviousStep {
-                BackActionSwipeBridge(isEnabled: !viewModel.isBusy && replacement == nil && editingItem == nil, onBack: requestBack).allowsHitTesting(false)
-            } else {
-                BackSwipeBridge {
-                    guard !viewModel.isBusy else { return false }
-                    if viewModel.hasUnsavedChanges { confirmDiscard = true; return false }
-                    return true
-                }.allowsHitTesting(false)
-            }
-        }
         .alert(String(localized: .uiDiscardUnsavedChanges), isPresented: $confirmDiscard) {
             Button(String(localized: .uiDiscardChanges), role: .destructive) { dismiss() }
             Button(String(localized: .uiStay), role: .cancel) {}
-        }
-        .alert(String(localized: .uiDeleteWorkoutMessage4Dbb), isPresented: $confirmDelete) {
-            Button(String(localized: .uiDeleteWorkout), role: .destructive) {
-                Task { if await viewModel.delete() { onSaved() } }
-            }
-            Button(String(localized: .uiCancel), role: .cancel) {}
-        } message: { Text(.uiThisRemovesTheSavedWorkoutTemplateYourTrainingHistoryExercise) }
-        .sheet(item: $replacement) { item in
-            SmartReplacementView(viewModel: SmartReplacementViewModel(
-                item: item, items: viewModel.variant?.items ?? [], configuration: viewModel.configuration, catalog: viewModel.catalog),
-                makeMovement: makeMovement, onReplace: { exercise in
-                    Task { await viewModel.replace(item.id, with: exercise) }
-                },
-                onExclude: {
-                    guard let exercise = item.exercise else { return false }
-                    return await viewModel.exclude(exercise)
-                })
-                .presentationDetents([.large]).presentationDragIndicator(.hidden)
-        }
-        .sheet(item: $editingItem) { item in
-            SmartMovementEditor(viewModel: SmartMovementEditorViewModel(item: item), onSave: { edited in
-                await viewModel.updateMovement(edited)
-            })
-                .presentationDetents([.large]).presentationDragIndicator(.visible)
         }
     }
 
     private func requestBack() {
         guard !viewModel.isBusy else { return }
-        if viewModel.hasPreviousStep { Task { await viewModel.goBack() } } else if viewModel.hasUnsavedChanges { confirmDiscard = true } else { dismiss() }
+        if viewModel.stage == .conditions { viewModel.goBack() } else if viewModel.hasUnsavedChanges {
+            confirmDiscard = true
+        } else { dismiss() }
     }
-
 }
 
 #if DEBUG
 #Preview {
     SmartSelectionView(viewModel: SmartSelectionViewModel(workouts: PreviewWorkoutRepository(),
-        exercises: PreviewExerciseRepository(exercises: [ExerciseSnapshot(name: "Push-Ups", primaryMuscle: "Chest", equipment: ["None"])]),
-        variants: PreviewSmartDailyVariantRepository(), preferences: WorkoutPreferences(), targets: ["Chest"]),
-        makeMovement: { MovementDetailViewModel(exercise: $0, allowsVideoLoading: false) }, onSaved: {}, onStart: { _ in }).preferredColorScheme(.dark)
+        exercises: PreviewExerciseRepository(), variants: PreviewSmartDailyVariantRepository(), targets: ["Chest"]),
+        makeBuilder: { SessionBuilderViewModel(workouts: PreviewWorkoutRepository(), exercises: PreviewExerciseRepository(), smartContext: $0) },
+        makeMovement: { MovementDetailViewModel(exercise: $0, allowsVideoLoading: false) }, onSaved: {}, onStart: { _ in })
+        .preferredColorScheme(.dark)
 }
 #endif

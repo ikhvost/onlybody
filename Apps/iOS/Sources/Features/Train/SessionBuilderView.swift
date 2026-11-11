@@ -6,11 +6,15 @@ struct SessionBuilderView: View {
 
     var onSaved: (() -> Void)?
     var onDeleted: (() -> Void)?
+    var onStart: ((WorkoutSnapshot) -> Void)?
+    var onBack: (() -> Void)?
+    var onSettings: (() -> Void)?
 
     @Environment(\.dismiss) private var dismiss
 
     @State private var openedInitialPicker = false
     @State private var showTargets = false
+    @State private var showSettingsPrompt = false
     @State private var showDeletePrompt = false
     @State private var showDiscardPrompt = false
     @State private var isShowingExercisePicker = false
@@ -25,12 +29,19 @@ struct SessionBuilderView: View {
                     NavigationBackButton(action: requestBack)
                     .accessibilityIdentifier("builder.back")
                     .disabled(viewModel.isSaving)
+                } trailing: {
+                    if let onSettings {
+                        Button(String(localized: .smartSettings)) {
+                            if viewModel.hasUnsavedChanges { showSettingsPrompt = true } else { onSettings() }
+                        }.frame(minHeight: Theme.touchSize).accessibilityIdentifier("smart.edit")
+                            .disabled(viewModel.isSaving)
+                    }
                 }
 
                 ScrollView {
                     VStack(alignment: .leading, spacing: Theme.space0) {
                         BuilderName(viewModel: viewModel)
-                        if viewModel.mode == .smart {
+                        if viewModel.mode == .smart && !viewModel.isDailySmart {
                             BuilderTargets(viewModel: viewModel)
                             Button(String(localized: .uiSelectMuscleGroups)) { showTargets = true }
                                 .frame(minHeight: Theme.touchSize).padding(.horizontal, Theme.horizontalPadding)
@@ -57,9 +68,18 @@ struct SessionBuilderView: View {
                 .modifier(ExerciseReorderAutoScroll(location: $dragLocation))
                 .scrollDismissesKeyboard(.interactively)
                 .safeAreaInset(edge: .bottom, spacing: Theme.space0) {
-                    GlassActionButton(title: viewModel.isSaving ? String(localized: .uiDesignSaving) : String(localized: .uiSave),
-                                  action: handleSave, disabled: viewModel.isLoading || viewModel.isSaving || viewModel.hasInvalidNumbers)
-                        .accessibilityIdentifier("builder.save").padding(Theme.cardInset)
+                    HStack(spacing: Theme.space12) {
+                        if onStart != nil {
+                            GhostButton(title: String(localized: .uiSave)) { handleSave(start: false) }
+                                .disabled(!viewModel.canSave).accessibilityIdentifier("builder.save")
+                            PrimaryButton(title: String(localized: .uiDesignStart), action: { handleSave(start: true) },
+                                          disabled: !viewModel.canSave).accessibilityIdentifier("smart.start")
+                        } else {
+                            GlassActionButton(title: viewModel.isSaving ? String(localized: .uiDesignSaving) : String(localized: .uiSave),
+                                              action: { handleSave(start: false) }, disabled: !viewModel.canSave)
+                                .accessibilityIdentifier("builder.save")
+                        }
+                    }.padding(Theme.cardInset)
                 }
             }
         }
@@ -94,16 +114,23 @@ struct SessionBuilderView: View {
             Text(viewModel.errorMessage ?? "")
         }
         .foregroundStyle(Theme.text)
-        .background(BackSwipeBridge {
-            guard !viewModel.isSaving else { return false }
-            if viewModel.hasUnsavedChanges {
-                showDiscardPrompt = true
-                return false
+        .background {
+            if onBack != nil {
+                BackActionSwipeBridge(isEnabled: !viewModel.isSaving, onBack: requestBack).allowsHitTesting(false)
+            } else {
+                BackSwipeBridge {
+                    guard !viewModel.isSaving else { return false }
+                    if viewModel.hasUnsavedChanges { showDiscardPrompt = true; return false }
+                    return true
+                }.allowsHitTesting(false)
             }
-            return true
-        }.allowsHitTesting(false))
+        }
         .alert(String(localized: .uiDiscardUnsavedChanges), isPresented: $showDiscardPrompt) {
-            Button(String(localized: .uiDiscardChanges), role: .destructive) { dismiss() }
+            Button(String(localized: .uiDiscardChanges), role: .destructive, action: leaveEditor)
+            Button(String(localized: .uiStay), role: .cancel) {}
+        }
+        .alert(String(localized: .uiDiscardUnsavedChanges), isPresented: $showSettingsPrompt) {
+            Button(String(localized: .uiDiscardChanges), role: .destructive) { onSettings?() }
             Button(String(localized: .uiStay), role: .cancel) {}
         }
         .alert(String(localized: .uiDeleteWorkoutMessage4Dbb), isPresented: $showDeletePrompt) {
@@ -123,14 +150,18 @@ struct SessionBuilderView: View {
 
     private func requestBack() {
         guard !viewModel.isSaving else { return }
-        if viewModel.hasUnsavedChanges { showDiscardPrompt = true } else { dismiss() }
+        if viewModel.hasUnsavedChanges { showDiscardPrompt = true } else { leaveEditor() }
     }
 
-    private func handleSave() {
+    private func leaveEditor() {
+        if let onBack { onBack() } else { dismiss() }
+    }
+
+    private func handleSave(start: Bool) {
         Task {
             let success = await viewModel.save()
             if success {
-                if let onSaved { onSaved() } else { dismiss() }
+                if start, let workout = viewModel.savedWorkout { onStart?(workout) } else if let onSaved { onSaved() } else { dismiss() }
             }
         }
     }

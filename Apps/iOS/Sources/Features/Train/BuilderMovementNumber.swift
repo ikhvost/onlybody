@@ -10,9 +10,17 @@ struct BuilderMovementNumber: View {
                            text: Binding(get: { viewModel.numberText(field, movement: movement) },
                                          set: { viewModel.enterNumber($0, field: field, id: movement.id) }),
                            hasError: viewModel.numberHasError(field, id: movement.id),
-                           canDecrease: field == "Sets" ? movement.sets > 1 : field == "Reps" ? movement.reps > 1 : movement.restSeconds > 15,
+                           canDecrease: canDecrease,
                            onDecrease: { viewModel.stepNumber(field, id: movement.id, increasing: false) },
                            onIncrease: { viewModel.stepNumber(field, id: movement.id, increasing: true) })
+    }
+
+    private var canDecrease: Bool {
+        switch field {
+        case "Sets": movement.sets > 1
+        case "Reps": movement.reps > 1
+        default: movement.restSeconds > viewModel.minimumRest
+        }
     }
 
     private var title: String {

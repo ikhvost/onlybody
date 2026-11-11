@@ -7,6 +7,16 @@ struct SmartConditionsView: View {
         VStack(alignment: .leading, spacing: Theme.sectionGap) {
             Text(.smartOptions).font(Theme.fontSans(Theme.typeHeading, .bold))
             Text(.smartOptional).foregroundStyle(Theme.text2)
+            Text(.smartDuration).font(Theme.fontSans(Theme.typeCard, .semibold))
+            FlowLayout(spacing: Theme.space8) {
+                ForEach([15, 30, 45, 60], id: \.self) { minutes in
+                    ChipView(label: String(localized: .uiMinutesCount(minutes)), isActive: viewModel.configuration.durationMinutes == minutes) {
+                        viewModel.configuration.durationMinutes = minutes
+                    }.accessibilityIdentifier("smart.duration.\(minutes)")
+                }
+            }
+            Text(.smartTimeHint).font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.text2)
+
             Text(.smartEquipment).font(Theme.fontSans(Theme.typeCard, .semibold))
             Text(viewModel.offersStandardGym ? String(localized: .smartGymEquipment) : String(localized: .smartBodyEquipment))
                 .font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.text2)
@@ -45,17 +55,6 @@ struct SmartConditionsView: View {
                     ForEach(ExerciseLoad.allCases.filter { viewModel.configuration.excludedLoads.contains($0) }) { load in
                         ChipView(label: load.label, isActive: true) { viewModel.removeLegacyLoad(load) }
                             .accessibilityIdentifier("smart.legacyLoad.\(load.rawValue)")
-                    }
-                }
-            }
-            if !viewModel.configuration.excludedExercises.isEmpty {
-                Text(.smartExcluded).font(Theme.fontSans(Theme.typeCard, .semibold))
-                ForEach(viewModel.configuration.excludedExercises.sorted(), id: \.self) { name in
-                    HStack {
-                        Text(CatalogLocalization.exercise(name))
-                        Spacer()
-                        Button(String(localized: .smartRestore)) { viewModel.configuration.excludedExercises.remove(name) }
-                            .frame(minHeight: Theme.touchSize)
                     }
                 }
             }

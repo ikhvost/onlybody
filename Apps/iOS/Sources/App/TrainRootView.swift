@@ -31,7 +31,7 @@ struct TrainRootView: View {
                 switch route {
                 case .smart(let id, let targets, let opensPreview):
                     SmartSelectionView(viewModel: composition.smart(workoutID: id, targets: targets, opensPreview: opensPreview),
-                        makeMovement: composition.movement, onSaved: { path = [] }, onStart: { workout in
+                        makeBuilder: composition.dailyBuilder, makeMovement: composition.movement, onSaved: { path = [] }, onStart: { workout in
                             path = []
                             activeWorkout = composition.active(workoutID: workout.id, reviewedWorkout: workout)
                         })
@@ -84,7 +84,7 @@ struct TrainRootView: View {
     private func openWorkout(_ id: UUID?, editing: Bool) {
         guard let id else { path.append(.sessionBuilder(workoutID: nil)); return }
         if viewModel.workouts.first(where: { $0.id == id })?.mode == WorkoutMode.smart.rawValue {
-            path.append(.smart(workoutID: id, opensPreview: !editing))
+            path.append(.smart(workoutID: id, opensPreview: true))
         } else if editing { path.append(.sessionBuilder(workoutID: id)) } else { activeWorkout = composition.active(workoutID: id) }
     }
 

@@ -45,6 +45,10 @@ struct AppComposition {
             onScheduleChanged: { await reminders.refresh() }
         )
     }
+    func dailyBuilder(_ context: SmartEditorContext) -> SessionBuilderViewModel {
+        SessionBuilderViewModel(workouts: workouts, exercises: exercises, smartContext: context,
+                                onScheduleChanged: { await reminders.refresh() })
+    }
     func notifications() -> NotificationsViewModel {
         NotificationsViewModel(preferences: preferences, reminders: reminders, openSystemSettings: {
             guard let url = URL(string: UIApplication.openSettingsURLString) else { return false }
@@ -52,9 +56,8 @@ struct AppComposition {
         })
     }
     func smart(workoutID: UUID?, targets: [String] = [], opensPreview: Bool = false) -> SmartSelectionViewModel {
-        SmartSelectionViewModel(workouts: workouts, exercises: exercises, variants: smartVariants, preferences: preferences,
-            workoutID: workoutID, targets: targets, equipmentMode: configuration.smartEquipmentMode, opensPreview: opensPreview,
-            onScheduleChanged: { await reminders.refresh() })
+        SmartSelectionViewModel(workouts: workouts, exercises: exercises, variants: smartVariants,
+            workoutID: workoutID, targets: targets, equipmentMode: configuration.smartEquipmentMode, opensPreview: opensPreview)
     }
     func active(workoutID: UUID, reviewedWorkout: WorkoutSnapshot? = nil) -> ActiveWorkoutViewModel {
         ActiveWorkoutViewModel(

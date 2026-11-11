@@ -27,17 +27,10 @@ struct SmartSelectionQualityTests {
             level: .beginner, equipmentMode: .standardGym, excludedRegions: [.foot])
         let result = SmartSelectionGenerator().plan(configuration: config, from: try catalog())
         #expect(result.movements.allSatisfy { $0.exercise.smartMetadata?.role == .accessory })
-        #if ONLYWEIGHTS
         #expect(result.status != .unavailable)
         #expect(result.movements.count >= 2)
         #expect(result.uncoveredNeeds.isEmpty)
-        #else
-        // The remaining beginner bodyweight options target only Glutes, not two lower-body groups.
-        #expect(result.status == .unavailable)
-        var focused = config
-        focused.targetMuscleGroups = ["Glutes"]
-        #expect(SmartSelectionGenerator().plan(configuration: focused, from: try catalog()).status != .unavailable)
-        #endif
+        #expect(result.movements.allSatisfy { SmartRegionRestrictions.allows($0.exercise.name, excluding: [.foot]) })
     }
 
     @Test func restrictionAndDurationMatrixPreservesCoverageAndSetBounds() throws {
@@ -51,7 +44,7 @@ struct SmartSelectionQualityTests {
                     #expect(result.estimatedSeconds <= minutes * 60)
                     #expect(result.movements.allSatisfy {
                         SmartSelectionGenerator().isEligible($0.exercise, configuration: config)
-                            && SmartPrescription().setRange(level: level).contains($0.sets)
+                            && SmartPrescription().setRange.contains($0.sets)
                     })
                     if result.status != .unavailable {
                         #expect(SmartTargetPolicy().gaps(targets: ["Lower"], exercises: result.movements.map(\.exercise)).isEmpty)
@@ -71,20 +64,19 @@ struct SmartSelectionQualityTests {
         #expect(!result.canStart)
     }
 
-    @Test func excludingAnAnchorStillAllowsAnotherMainExerciseForTheMissingTarget() throws {
+    @Test func legacyLevelsAndExclusionsHaveNoEffectOnGeneration() throws {
         let exercises = try catalog()
         let config = SmartWorkoutConfiguration(targetMuscleGroups: ["Chest", "Back"], durationMinutes: 30,
-            level: .advanced, equipmentMode: .standardGym)
+            equipmentMode: .standardGym)
         let first = SmartSelectionGenerator().plan(configuration: config, from: exercises)
-        let anchors = first.movements.filter { $0.exercise.smartMetadata?.role == .main }.map(\.exercise.name)
-        let chest = first.movements.filter { $0.exercise.primaryMuscles.contains("Chest") }.map(\.exercise.name)
-        var changed = config
-        changed.excludedExercises = Set(chest)
-        let next = SmartSelectionGenerator().plan(configuration: changed, from: exercises,
-            context: SmartGenerationContext(mainExerciseNames: anchors.filter { !chest.contains($0) }))
-        #expect(next.status != .unavailable)
-        #expect(next.movements.contains { $0.exercise.primaryMuscles.contains("Chest") })
-        #expect(!next.movements.contains { chest.contains($0.exercise.name) })
+        var legacy = config
+        legacy.level = .advanced
+        legacy.excludedExercises = Set(exercises.map(\.name))
+        let next = SmartSelectionGenerator().plan(configuration: legacy, from: exercises)
+        #expect(next.movements.map(\.exercise.name) == first.movements.map(\.exercise.name))
+        #expect(next.movements.map(\.sets) == first.movements.map(\.sets))
+        #expect(next.movements.map(\.reps) == first.movements.map(\.reps))
+        #expect(next.movements.map(\.restSeconds) == first.movements.map(\.restSeconds))
     }
 
     @Test func individualTargetsNeverFillTimeWithUnrelatedExercises() throws {

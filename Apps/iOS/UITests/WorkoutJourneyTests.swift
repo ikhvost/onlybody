@@ -564,25 +564,19 @@ final class WorkoutJourneyTests: XCTestCase {
     private func verifySmartTimeBudget() {
         tap("workout.create")
         tap("creation.smart")
-        tap("smart.duration.15")
-        let target = app.buttons["smart.target.Chest"]
-        for _ in 0..<5 where !target.isHittable { app.swipeUp() }
         tap("smart.target.Chest")
-        let name = app.textFields["smart.name"]
-        for _ in 0..<8 where !name.isHittable { app.swipeUp() }
-        XCTAssertTrue(name.waitForExistence(timeout: 10))
-        name.tap()
-        name.typeText("Smart Budget")
-        app.swipeDown()
         tap("smart.continue")
+        tap("smart.duration.15")
         tap("smart.preview")
-        XCTAssertTrue(app.buttons["smart.save"].waitForExistence(timeout: 10))
-        if app.buttons["smart.acceptShortPlan"].exists {
-            XCTAssertFalse(app.buttons["smart.save"].isEnabled)
-            tap("smart.acceptShortPlan")
-        }
-        XCTAssertTrue(app.buttons["smart.save"].isEnabled)
-        tap("smart.save")
+        let name = app.textFields["builder.name"]
+        XCTAssertTrue(name.waitForExistence(timeout: 10))
+        name.coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.5)).tap()
+        let old = name.value as? String ?? ""
+        name.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: old.count) + "Smart Budget")
+        dismissKeyboardOutside(name)
+        XCTAssertFalse(app.buttons["smart.acceptShortPlan"].exists)
+        XCTAssertTrue(app.buttons["builder.save"].isEnabled)
+        tap("builder.save")
         XCTAssertTrue(app.buttons["workout.start.Smart Budget"].waitForExistence(timeout: 10))
         app.terminate()
         app.launch()
@@ -711,8 +705,15 @@ final class WorkoutJourneyTests: XCTestCase {
             let save = app.buttons["builder.save"]
             let belowEditorFooter = identifier.hasPrefix("builder.") && identifier != "builder.save"
                 && !identifier.hasPrefix("builder.movement.") && save.exists && button.frame.maxY > save.frame.minY
-            if button.isHittable && !belowEditorFooter { break }
-            app.swipeUp()
+            let back = app.buttons["builder.back"]
+            let aboveEditorHeader = identifier.hasPrefix("builder.") && identifier != "builder.back"
+                && back.exists && back.isHittable && button.frame.minY < back.frame.maxY
+            if button.isHittable && !belowEditorFooter && !aboveEditorHeader { break }
+            if aboveEditorHeader {
+                app.swipeDown()
+            } else {
+                app.swipeUp()
+            }
         }
         XCTAssertTrue(button.isHittable, "Not reachable: \(identifier)\n\(app.debugDescription)")
         button.tap()
