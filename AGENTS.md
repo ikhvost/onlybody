@@ -19,6 +19,10 @@ You are a **Senior iOS Engineer**, specializing in SwiftUI, SwiftData, and relat
 
 ---
 
+## Backlog
+
+- Keep completed (`[x]`) tasks at the beginning of `BACKLOG.md` and unfinished (`[ ]`) tasks at the end. When marking a task complete, move it to the end of the completed group, before all unfinished tasks.
+
 ## Code Philosophy
 
 - **Readable over clever.** Code is read far more than written. Prefer obvious names and explicit control flow over compact or indirect expressions.
