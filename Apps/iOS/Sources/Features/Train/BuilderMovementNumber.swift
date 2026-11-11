@@ -12,7 +12,11 @@ struct BuilderMovementNumber: View {
                            hasError: viewModel.numberHasError(field, id: movement.id),
                            canDecrease: canDecrease,
                            onDecrease: { viewModel.stepNumber(field, id: movement.id, increasing: false) },
-                           onIncrease: { viewModel.stepNumber(field, id: movement.id, increasing: true) })
+                           onIncrease: { viewModel.stepNumber(field, id: movement.id, increasing: true) },
+                           onEditingChanged: { focused in
+                               guard field == "Reps" else { return }
+                               if focused { viewModel.beginRepsEditing(movement.id) } else { viewModel.endRepsEditing(movement.id) }
+                           })
     }
 
     private var canDecrease: Bool {

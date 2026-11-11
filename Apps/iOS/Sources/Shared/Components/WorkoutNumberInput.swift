@@ -11,6 +11,8 @@ struct WorkoutNumberInput: View {
     let canDecrease: Bool
     let onDecrease: () -> Void
     let onIncrease: () -> Void
+    /// Reports focus transitions so the owning model can manage numeric replacement.
+    var onEditingChanged: (Bool) -> Void = { _ in }
     @FocusState private var focused: Bool
 
     var body: some View {
@@ -18,7 +20,7 @@ struct WorkoutNumberInput: View {
             Text(title).font(Theme.fontSans(Theme.typeMeta)).foregroundStyle(Theme.text2)
                 .accessibilityIdentifier("number.\(identifier).title")
             HStack(spacing: Theme.space12) {
-                Button(action: onDecrease) {
+                Button { dismissKeyboard(); onDecrease() } label: {
                     Text("−").font(Theme.fontSans(Theme.typeCard))
                         .frame(width: Theme.stepSize, height: Theme.stepSize)
                         .background(Theme.surface2, in: .rect(cornerRadius: Theme.buttonRadius))
@@ -26,9 +28,10 @@ struct WorkoutNumberInput: View {
                 .disabled(!canDecrease || hasError).buttonStyle(PressableButtonStyle(animates: false))
                 .accessibilityLabel(String(localized: .uiDecrease(title)))
                 .accessibilityIdentifier("stepper.\(identifier).decrease")
-                TextField(title, text: $text, prompt: Text(title).foregroundStyle(Theme.text3))
+                TextField(title, text: Binding(get: { text }, set: { if focused { text = $0 } }),
+                          prompt: Text(title).foregroundStyle(Theme.text3))
                     .keyboardType(isDecimal ? .decimalPad : .numberPad).focused($focused)
-                    .onSubmit { if !hasError { focused = false } }
+                    .onSubmit { if !hasError { dismissKeyboard() } }
                     .font(Theme.fontMono(Theme.typeNumber, .medium)).multilineTextAlignment(.center)
                     .frame(minHeight: Theme.stepSize)
                     .overlay(alignment: .bottom) {
@@ -36,7 +39,7 @@ struct WorkoutNumberInput: View {
                             .frame(height: Theme.dividerThickness)
                     }
                     .accessibilityLabel(title).accessibilityIdentifier("stepper.\(identifier).value")
-                Button(action: onIncrease) {
+                Button { dismissKeyboard(); onIncrease() } label: {
                     Text("+").font(Theme.fontSans(Theme.typeCard))
                         .frame(width: Theme.stepSize, height: Theme.stepSize)
                         .background(Theme.surface2, in: .rect(cornerRadius: Theme.buttonRadius))
@@ -52,8 +55,14 @@ struct WorkoutNumberInput: View {
         }
         .padding(Theme.cardInset).foregroundStyle(Theme.text)
         .background(Theme.surface, in: .rect(cornerRadius: Theme.cornerRadius))
-        .background(KeyboardOutsideTapBridge(isEnabled: focused) { focused = false }.allowsHitTesting(false))
-        .onChange(of: editingID) { _, _ in focused = false }
-        .onDisappear { focused = false }
+        .background(KeyboardOutsideTapBridge(isEnabled: focused, onDismiss: dismissKeyboard).allowsHitTesting(false))
+        .onChange(of: focused) { _, isFocused in onEditingChanged(isFocused) }
+        .onChange(of: editingID) { _, _ in dismissKeyboard() }
+        .onDisappear(perform: dismissKeyboard)
+    }
+
+    private func dismissKeyboard() {
+        focused = false
+        onEditingChanged(false)
     }
 }

@@ -21,7 +21,10 @@ struct BuilderMovementEditor: View {
                                 .buttonStyle(.glass).buttonBorderShape(.circle).accessibilityLabel(String(localized: .uiCancel))
                                 .accessibilityIdentifier("builder.movement.cancel")
                         }
-                        Button(String(localized: .uiOpenExerciseGuide)) { path.append(movement.exercise.id) }
+                        Button(String(localized: .uiOpenExerciseGuide)) {
+                            viewModel.endNumberEditing()
+                            path.append(movement.exercise.id)
+                        }
                             .frame(minHeight: Theme.touchSize).foregroundStyle(Theme.accent)
                             .accessibilityIdentifier("builder.movement.guide")
                         ForEach(["Sets", "Reps", "Rest"], id: \.self) { field in
@@ -35,7 +38,11 @@ struct BuilderMovementEditor: View {
             }
             .scrollIndicators(.hidden).scrollDismissesKeyboard(.interactively)
             .safeAreaInset(edge: .bottom) {
-                GlassActionButton(title: String(localized: .uiDone), action: { onCommit(); dismiss() }, disabled: viewModel.hasInvalidNumbers)
+                GlassActionButton(title: String(localized: .uiDone), action: {
+                    viewModel.endNumberEditing()
+                    onCommit()
+                    dismiss()
+                }, disabled: viewModel.hasInvalidNumbers)
                     .accessibilityIdentifier("builder.movement.done").padding(Theme.cardInset)
             }
             .alert(String(localized: .uiDesignRemoveQuestion), isPresented: $confirmRemoval) {

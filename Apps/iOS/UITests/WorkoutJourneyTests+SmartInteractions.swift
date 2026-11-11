@@ -45,6 +45,7 @@ extension WorkoutJourneyTests {
         let reps = app.textFields["stepper.Reps.value"]
         XCTAssertTrue(reps.waitForExistence(timeout: 5))
         let original = reps.value as? String
+        verifyRepetitionReplacement(reps)
         tap("stepper.Reps.decrease")
         tap("builder.movement.cancel")
         tap(movementID)

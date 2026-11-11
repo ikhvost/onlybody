@@ -5,7 +5,6 @@ struct WorkoutSetDraft {
     var isDone = false
     var repsInput: String?
     var weightInput: String?
-    var isReplacingInitialZero = false
     var invalidReps = false
     var invalidWeight = false
 }

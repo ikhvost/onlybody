@@ -12,7 +12,10 @@ struct ActiveWorkoutSetRow: View {
                 .font(Theme.fontMono(Theme.typeMeta)).foregroundStyle(Theme.text2)
                 .frame(width: Theme.touchSize)
             TextField(String(localized: .uiReps), text: Binding(
-                get: { viewModel.repsText(for: setID) }, set: { viewModel.enterReps($0, for: setID) }
+                get: { viewModel.repsText(for: setID) }, set: { text in
+                    guard focusedField.wrappedValue == .reps(setID) else { return }
+                    viewModel.enterReps(text, for: setID)
+                }
             ))
             .frame(maxWidth: .infinity, minHeight: Theme.stepSize)
             .background(Theme.surface, in: .rect(cornerRadius: Theme.buttonRadius))

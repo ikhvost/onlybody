@@ -21,6 +21,7 @@ final class ActiveWorkoutViewModel {
     private let sessionID = UUID()
     private var elapsedTask: Task<Void, Never>?
     private var rows: [WorkoutSetID: WorkoutSetDraft] = [:]
+    private var numberEditingOriginals: [WorkoutSetField: WorkoutSetDraft] = [:]
     private var previousPerformances: [String: [SessionItemSnapshot]] = [:]
     private var previousOccurrence: [UUID: Int] = [:]
     private(set) var historyErrorMessage: String?
@@ -157,12 +158,14 @@ final class ActiveWorkoutViewModel {
     }
 
     func showExercise(_ id: UUID) {
+        endNumberEditing()
         guard canEdit, !hasInvalidNumbers, items.contains(where: { $0.id == id }) else { return }
         viewedItemID = id
         showsExerciseList = false
     }
 
     func showList() {
+        endNumberEditing()
         guard !hasInvalidNumbers else { return }
         showsExerciseList = true
     }
@@ -202,23 +205,44 @@ final class ActiveWorkoutViewModel {
             .formatted(.number.precision(.fractionLength(0...2)).grouping(.never))
     }
 
-    /// Replace a pristine zero on focus without changing its committed numeric value.
-    func beginWeightEditing(_ id: WorkoutSetID) {
-        guard canEdit, contains(id) else { return }
+    /// Clears a valid field once per focus session, retaining its exact original value.
+    func beginNumberEditing(_ field: WorkoutSetField) {
+        let id = field.setID
+        guard canEdit, contains(id), numberEditingOriginals[field] == nil else { return }
         var draft = row(id)
-        guard draft.weightKg == 0, !draft.invalidWeight else { return }
-        draft.weightInput = ""
-        draft.isReplacingInitialZero = true
+        numberEditingOriginals[field] = draft
+        switch field {
+        case .reps:
+            if !draft.invalidReps { draft.repsInput = "" }
+        case .weight:
+            if !draft.invalidWeight { draft.weightInput = "" }
+        }
         rows[id] = draft
     }
 
-    /// An untouched zero is restored; a user-cleared invalid value remains editable.
-    func endWeightEditing(_ id: WorkoutSetID) {
-        guard var draft = rows[id], draft.isReplacingInitialZero else { return }
-        draft.isReplacingInitialZero = false
-        draft.weightInput = nil
-        draft.invalidWeight = false
-        rows[id] = draft
+    /// Restores empty input on blur; valid replacements and nonempty errors are retained.
+    func endNumberEditing(_ field: WorkoutSetField) {
+        guard let original = numberEditingOriginals.removeValue(forKey: field),
+              var draft = rows[field.setID] else { return }
+        switch field {
+        case .reps:
+            if draft.repsInput == "" {
+                draft.reps = original.reps
+                draft.repsInput = nil
+                draft.invalidReps = false
+            }
+        case .weight:
+            if draft.weightInput == "" {
+                draft.weightKg = original.weightKg
+                draft.weightInput = nil
+                draft.invalidWeight = false
+            }
+        }
+        rows[field.setID] = draft
+    }
+
+    private func endNumberEditing() {
+        for field in Array(numberEditingOriginals.keys) { endNumberEditing(field) }
     }
 
     func enterReps(_ text: String, for id: WorkoutSetID? = nil) {
@@ -226,7 +250,13 @@ final class ActiveWorkoutViewModel {
         guard canEdit, contains(key) else { return }
         var draft = row(key)
         draft.repsInput = text
-        if let value = WorkoutNumberParser().integer(text, minimum: 0) { draft.reps = value; draft.invalidReps = false } else { draft.invalidReps = true }
+        if text.isEmpty, let original = numberEditingOriginals[.reps(key)] {
+            draft.reps = original.reps
+            draft.invalidReps = false
+        } else if let value = WorkoutNumberParser().integer(text, minimum: 0) {
+            draft.reps = value
+            draft.invalidReps = false
+        } else { draft.invalidReps = true }
         rows[key] = draft
     }
 
@@ -234,11 +264,11 @@ final class ActiveWorkoutViewModel {
         let key = id ?? currentKey
         guard canEdit, contains(key) else { return }
         var draft = row(key)
-        // TextField can echo the programmatic clearing before the first keystroke.
-        if draft.isReplacingInitialZero, text.isEmpty { return }
-        draft.isReplacingInitialZero = false
         draft.weightInput = text
-        if let value = WorkoutNumberParser().weight(text, locale: locale) {
+        if text.isEmpty, let original = numberEditingOriginals[.weight(key)] {
+            draft.weightKg = original.weightKg
+            draft.invalidWeight = false
+        } else if let value = WorkoutNumberParser().weight(text, locale: locale) {
             draft.weightKg = preferences.weightUnit.kilograms(from: value)
             draft.invalidWeight = false
         } else { draft.invalidWeight = true }
@@ -251,6 +281,7 @@ final class ActiveWorkoutViewModel {
     /// Extends only this session, copying committed numbers without completion or input state.
     @discardableResult
     func addSet() -> WorkoutSetID? {
+        endNumberEditing()
         guard canAddSet, let index = items.firstIndex(where: { $0.id == viewedItemID }) else { return nil }
         let item = items[index]
         let previous = row(WorkoutSetID(itemID: item.id, index: item.sets - 1))
@@ -265,6 +296,7 @@ final class ActiveWorkoutViewModel {
 
     /// Never removes a completed row or searches earlier rows for a removable set.
     func removeLastSet() {
+        endNumberEditing()
         guard canRemoveLastSet, let index = items.firstIndex(where: { $0.id == viewedItemID }) else { return }
         let item = items[index]
         rows.removeValue(forKey: WorkoutSetID(itemID: item.id, index: item.sets - 1))
@@ -290,6 +322,7 @@ final class ActiveWorkoutViewModel {
     }
 
     func replaceExercise(_ id: UUID, with exercise: ExerciseSnapshot) {
+        endNumberEditing()
         guard canReplace(id), !hasInvalidNumbers, let index = items.firstIndex(where: { $0.id == id }) else { return }
         items[index].exercise = exercise
         previousOccurrence[id] = 0
@@ -307,6 +340,7 @@ final class ActiveWorkoutViewModel {
     }
 
     func toggleSet(_ id: WorkoutSetID) {
+        endNumberEditing()
         guard hasStarted, canEdit, !hasInvalidNumbers, contains(id),
               let item = items.first(where: { $0.id == id.itemID }) else { return }
         var draft = row(id)
@@ -389,6 +423,7 @@ final class ActiveWorkoutViewModel {
     }
 
     func cleanup() {
+        endNumberEditing()
         elapsedTask?.cancel()
         if hasStarted {
             cancelRest()
@@ -408,6 +443,7 @@ final class ActiveWorkoutViewModel {
     }
 
     func endSession() async {
+        endNumberEditing()
         guard hasStarted, !items.isEmpty, !isDiscarded, !hasInvalidNumbers else { return }
         isComplete = true
         finishTiming()

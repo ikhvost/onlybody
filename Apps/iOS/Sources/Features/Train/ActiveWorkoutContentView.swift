@@ -11,7 +11,7 @@ struct ActiveWorkoutContentView: View {
     var body: some View {
         VStack(spacing: Theme.space0) {
             NavBarView {
-                Button { viewModel.showList() } label: {
+                Button { dismissKeyboard(); viewModel.showList() } label: {
                     ChevronIcon(isBack: true).frame(width: Theme.touchSize, height: Theme.touchSize)
                 }
                 .accessibilityLabel(String(localized: .uiBackToWorkout))
@@ -37,7 +37,8 @@ struct ActiveWorkoutContentView: View {
                     }
                     ActiveWorkoutExerciseActions(canShowGuide: viewModel.currentItem?.exercise != nil,
                                                  canShowHistory: !viewModel.currentExerciseName.isEmpty,
-                                                 onGuide: onGuide, onHistory: onHistory).disabled(viewModel.hasInvalidNumbers)
+                                                 onGuide: { dismissKeyboard(); onGuide() },
+                                                 onHistory: { dismissKeyboard(); onHistory() }).disabled(viewModel.hasInvalidNumbers)
                     if !viewModel.showsWeight {
                         GhostButton(title: String(localized: .uiDesignAddWeight), action: viewModel.revealWeight)
                             .accessibilityIdentifier("active.addWeight")
@@ -84,8 +85,8 @@ struct ActiveWorkoutContentView: View {
         .background(KeyboardOutsideTapBridge(isEnabled: focusedField != nil, onDismiss: dismissKeyboard).allowsHitTesting(false))
         .background(BackActionSwipeBridge(isEnabled: !viewModel.hasInvalidNumbers, onBack: viewModel.showList).allowsHitTesting(false))
         .onChange(of: focusedField) { old, new in
-            if case .weight(let id)? = old { viewModel.endWeightEditing(id) }
-            if case .weight(let id)? = new { viewModel.beginWeightEditing(id) }
+            if let old { viewModel.endNumberEditing(old) }
+            if let new { viewModel.beginNumberEditing(new) }
         }
         .onDisappear(perform: dismissKeyboard)
         .id(viewModel.viewedItemID)
@@ -98,7 +99,7 @@ struct ActiveWorkoutContentView: View {
     private func dismissKeyboard() {
         let previous = focusedField
         focusedField = nil
-        if case .weight(let id)? = previous { viewModel.endWeightEditing(id) }
+        if let previous { viewModel.endNumberEditing(previous) }
     }
 
 }

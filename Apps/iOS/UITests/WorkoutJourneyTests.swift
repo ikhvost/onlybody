@@ -61,9 +61,9 @@ final class WorkoutJourneyTests: XCTestCase {
         tap("stepper.Reps.increase")
         let reps = app.textFields["stepper.Reps.value"]
         reps.coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.5)).tap()
-        reps.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: 2))
+        reps.typeText("0")
         XCTAssertFalse(app.buttons["builder.movement.done"].isEnabled)
-        reps.typeText("130")
+        reps.typeText(XCUIKeyboardKey.delete.rawValue + "130")
         dismissKeyboardOutside(reps)
         XCTAssertTrue(app.buttons["builder.movement.done"].isEnabled)
         tap("builder.save")
@@ -673,8 +673,7 @@ final class WorkoutJourneyTests: XCTestCase {
         let input = app.textFields["active.set.\(index).\(field)"]
         XCTAssertTrue(input.waitForExistence(timeout: 10))
         input.coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.5)).tap()
-        let text = input.value as? String ?? ""
-        input.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: text.count) + value)
+        input.typeText(value)
     }
 
     private func prepareEditor(for identifier: String) {

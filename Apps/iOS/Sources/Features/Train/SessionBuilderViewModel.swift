@@ -34,6 +34,7 @@ final class SessionBuilderViewModel {
 
     var numberInputs: [String: String] = [:]
     var numberErrors: Set<String> = []
+    private var originalEditingReps: [UUID: Int] = [:]
     var hasInvalidNumbers: Bool { !numberErrors.isEmpty }
     var name: String = ""
     private(set) var mode: WorkoutMode = .manual
@@ -142,6 +143,7 @@ final class SessionBuilderViewModel {
     }
 
     func removeMovement(_ id: UUID) {
+        originalEditingReps.removeValue(forKey: id)
         movements.removeAll { $0.id == id }
         numberInputs = numberInputs.filter { !$0.key.hasPrefix(id.uuidString) }
         numberErrors = numberErrors.filter { !$0.hasPrefix(id.uuidString) }
@@ -149,6 +151,7 @@ final class SessionBuilderViewModel {
 
     /// Cancelling a movement sheet discards its numeric edits, including invalid input.
     func restoreMovement(_ original: MovementConfig) {
+        originalEditingReps.removeValue(forKey: original.id)
         guard let index = movements.firstIndex(where: { $0.id == original.id }) else { return }
         movements[index] = original
         numberInputs = numberInputs.filter { !$0.key.hasPrefix(original.id.uuidString) }
@@ -162,6 +165,7 @@ final class SessionBuilderViewModel {
     }
 
     func replaceMovement(_ id: UUID, with exercise: ExerciseSnapshot) {
+        endRepsEditing(id)
         guard !isSaving, !hasInvalidNumbers, let index = movements.firstIndex(where: { $0.id == id }) else { return }
         movements[index].exercise = exercise
     }
@@ -188,9 +192,39 @@ final class SessionBuilderViewModel {
 
     func numberHasError(_ field: String, id: UUID) -> Bool { numberErrors.contains("\(id).\(field)") }
 
+    /// Clears valid repetitions on focus without changing the workout prescription.
+    func beginRepsEditing(_ id: UUID) {
+        guard originalEditingReps[id] == nil, let movement = movements.first(where: { $0.id == id }) else { return }
+        originalEditingReps[id] = movement.reps
+        if !numberHasError("Reps", id: id) { numberInputs["\(id).Reps"] = "" }
+    }
+
+    /// Restores the value from focus entry if repetitions are empty. Repeated calls are harmless.
+    func endRepsEditing(_ id: UUID) {
+        guard let original = originalEditingReps.removeValue(forKey: id),
+              movements.contains(where: { $0.id == id }) else { return }
+        let key = "\(id).Reps"
+        if numberInputs[key] == "" {
+            setReps(original, forMovement: id)
+            numberInputs.removeValue(forKey: key)
+            numberErrors.remove(key)
+        }
+    }
+
+    /// Finalizes numeric input before committing a movement or leaving its editor.
+    func endNumberEditing() {
+        for id in Array(originalEditingReps.keys) { endRepsEditing(id) }
+    }
+
     func enterNumber(_ text: String, field: String, id: UUID) {
+        guard movements.contains(where: { $0.id == id }) else { return }
         let key = "\(id).\(field)"
         numberInputs[key] = text
+        if field == "Reps", text.isEmpty, let original = originalEditingReps[id] {
+            setReps(original, forMovement: id)
+            numberErrors.remove(key)
+            return
+        }
         guard let value = WorkoutNumberParser().integer(text, minimum: field == "Rest" ? minimumRest : 1) else {
             numberErrors.insert(key)
             return
@@ -204,6 +238,7 @@ final class SessionBuilderViewModel {
     }
 
     func stepNumber(_ field: String, id: UUID, increasing: Bool) {
+        endNumberEditing()
         guard let movement = movements.first(where: { $0.id == id }) else { return }
         let value = field == "Sets" ? movement.sets : field == "Reps" ? movement.reps : movement.restSeconds
         let step = field == "Rest" ? 15 : 1
@@ -235,6 +270,7 @@ final class SessionBuilderViewModel {
     }
 
     func save() async -> Bool {
+        endNumberEditing()
         guard canSave, requestedWorkoutID == nil || editingWorkout != nil else { return false }
         isSaving = true
         errorMessage = nil
@@ -306,6 +342,7 @@ final class SessionBuilderViewModel {
         generatedConfiguration = config
         numberInputs = [:]
         numberErrors = []
+        originalEditingReps = [:]
     }
 
     /// Keeps complete exercises, preserving their IDs and edited parameters within the budget.
@@ -321,6 +358,7 @@ final class SessionBuilderViewModel {
             return true
         }
         let remaining = Set(movements.map { $0.id.uuidString })
+        originalEditingReps = originalEditingReps.filter { remaining.contains($0.key.uuidString) }
         numberInputs = numberInputs.filter { remaining.contains(String($0.key.prefix(36))) }
         numberErrors = numberErrors.filter { remaining.contains(String($0.prefix(36))) }
     }
